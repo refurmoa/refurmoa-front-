@@ -1,7 +1,7 @@
 import React from "react";
 import "./Signup.css";
 import { Link } from "react-router-dom";
-import Logo_com from "../images/signup.png";
+import Logo_com from "../../../images/signup.png";
 // id, password, passwordChk(비밀번호확인), name, tel 기본값 호출
 function Signup_complete() {
   // 제출버튼을 누르면 변경된 파라미터 값 전달함(추후 수정 필요)
