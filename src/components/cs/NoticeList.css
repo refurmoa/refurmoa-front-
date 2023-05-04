@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+
+* {
+  margin: 0 auto;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #000000;
+  list-style: none;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+}
+
+.noticelist-table {
+  width: 900px;
+  position: relative;
+  left: 150px;
+  top: 205px;
+  margin: 0 auto;
+  /* text-align: left; */
+  border-spacing: 0;
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+
+  align-items: center;
+
+  color: #000000;
+}
+.noticelist-header {
+  display: flex;
+  align-items: center;
+  font-family: "Noto Sans";
+  font-size: 25px;
+  line-height: 35px;
+  color: #514438;
+  height: 50px;
+  left: 360px;
+  top: 250px;
+  padding: 0;
+  font-weight: bold;
+  border-bottom: 3px solid rgba(185, 168, 154, 0.8);
+}
+.admin-post {
+  position: relative;
+  width: 75px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  font-weight: bold;
+  font-size: 20px;
+  border: 0;
+  margin: 0 0 0px 720px;
+  background-color: transparent;
+  border-radius: 10px;
+  color: #514438;
+}
+.admin-post:hover {
+  background-color: #b9a89a;
+}
+
+.admin-post:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.noticelist-post {
+  padding: 10px 5px;
+  /* text-align: left; */
+  border-bottom: 2px solid rgba(185, 168, 154, 0.3);
+}
+
+.noticelist-post-title {
+  flex: 1;
+  text-align: left;
+}
+
+.noticelist-admin {
+  padding: 10px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.admin-edit {
+  position: relative;
+  width: 75px;
+  height: 40px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  font-size: 20px;
+  border: 0;
+  margin: 0 5px 0px 600px;
+  background-color: transparent;
+  border-radius: 50px;
+  color: #514438;
+}
+.admin-edit:hover {
+  background-color: #ddd;
+}
+
+.admin-edit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.admin-delete {
+  position: relative;
+  width: 75px;
+  height: 40px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  font-size: 20px;
+  border: 0;
+  margin: 0 0 0px 0px;
+  background-color: transparent;
+  border-radius: 50px;
+  color: #514438;
+}
+.admin-delete:hover {
+  background-color: #ddd;
+}
+
+.admin-delete:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.noticelist-post-date {
+  text-align: right;
+  /* margin-left: auto; 요소를 오른쪽에 정렬 */
+  margin-right: 0; /* 오른쪽 간격을 0으로 설정 */
+  white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+}
+.noticelist-pagination {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+  left: 150px;
+  top: 205px;
+  position: relative;
+}
+
+.noticelist-pagination button {
+  background-color: #fff;
+  border: 1px solid transparent;
+  color: rgba(81, 68, 56, 0.7);
+
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 16px;
+  margin: 0 5px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.noticelist-pagination button:hover {
+  background-color: #ddd;
+}
+
+.noticelist-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button:first-child {
+  margin-left: 0;
+}
+
+.pagination button:last-child {
+  margin-right: 0;
+}
