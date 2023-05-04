@@ -2,7 +2,7 @@ import React from "react";
 import "./Signup.css";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import Post from "./Find_address";
+import Post from "./FindAddress";
 import Modal from "react-modal";
 const Signup_input = () => {
   const name = window.sessionStorage.getItem("name");

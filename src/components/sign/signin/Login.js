@@ -1,6 +1,6 @@
 import React from "react";
-import "../Signup/Signup.css";
-import "./login.css";
+import "../signup/Signup.css";
+import "./Login.css";
 import { Link } from "react-router-dom";
 import google from "../images/google.PNG";
 import kakao from "../images/kakao.PNG";
