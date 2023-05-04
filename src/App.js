@@ -5,10 +5,6 @@ import MyPage from "./components/myPage/MyPage";
 function App() {
   return (
     <>
-      <Routes>
-        <Route path="/post" element={<PostPage />} />
-        <Route path="/mypage" element={<MyPage />} />
-      </Routes>
     </>
   )
 
