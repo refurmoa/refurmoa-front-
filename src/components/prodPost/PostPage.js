@@ -7,6 +7,7 @@ import axios from "axios";
 
 const PostPage = () => {
   const memberId = "admin";
+  
   const [prodData, setProdData] = useState();
   // 경매, 즉시구매 저장 변수 all, auction, direct, none
   const [selectedSellType, setSelectedSellType] = useState("all");
