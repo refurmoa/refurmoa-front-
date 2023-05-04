@@ -293,6 +293,7 @@ const Signup_input = () => {
                   name="domain"
                   onChange={onEmailCHK}
                 >
+                  <option value={domain}>직접 입력</option>
                   <option value="naver.com">naver.com</option>
                   <option value="gmail.com">gmail.com</option>
                   <option value="hanmail.net">hanmail.net</option>
