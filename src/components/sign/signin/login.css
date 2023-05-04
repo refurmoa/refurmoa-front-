@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+
+.login_detail {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: #b9a89a;
+}
+.login_detail > a {
+  height: 30px;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 30px;
+  color: #b9a89a;
+  text-decoration-line: none;
+}
+.login_btn {
+  font-family: "Noto Sans KR", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 40px;
+  color: #ffffff;
+  background: #b9a89a;
+  border: 0px;
+  border-radius: 40px;
+  width: 450px;
+  height: 70px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.LG_login_input > tr > td {
+  padding-right: 20px;
+  padding-bottom: 50px;
+  font-size: 25px;
+  line-height: 30px;
+  color: #514438;
+  font-weight: bold;
+  font-family: "Noto Sans KR";
+}
+
+.LG_login_input > tr > td > input {
+  font-size: 20px;
+  width: 200px;
+  height: 30px;
+  border-width: 0;
+}
+
+.LG_login_input :focus {
+  outline: none !important;
+  background: #ffffff;
+}
+.LG_Main_header {
+  text-align: center;
+  font-weight: 600;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  font-size: 35px;
+  line-height: 40px;
+  color: rgba(81, 68, 56, 0.6);
+}
