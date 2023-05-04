@@ -10,7 +10,7 @@ import SignupAccept from "./components/sign/signup/SignupAccept";
 import SignupComplete from "./components/sign/signup/SignupComplete";
 import NoticeView from "./components/cs/NoticeView";
 import NoticeMain from "./components/cs/NoticeMain";
-
+import Alliance from "./components/company/AllianceForm";
 function App() {
   return (
     <>
@@ -25,11 +25,10 @@ function App() {
         <Route path="/signup/5" element={<SignupComplete />} />
         <Route path="/notice" element={<NoticeMain />} />
         <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
+        <Route path="/company" element={<Alliance />} />
       </Routes>
     </>
-  )
-
-  
+  );
 }
 
 export default App;
