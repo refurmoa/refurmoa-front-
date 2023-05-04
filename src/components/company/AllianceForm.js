@@ -3,7 +3,7 @@ import "./AllianceForm.css";
 import "../sign/signup/Signup.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Post from "../sign/signup/Find_address";
+import Post from "../sign/signup/FindAddress";
 import Modal from "react-modal";
 
 const AllianceForm = () => {

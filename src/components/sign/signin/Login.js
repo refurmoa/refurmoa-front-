@@ -2,9 +2,9 @@ import React from "react";
 import "../signup/Signup.css";
 import "./Login.css";
 import { Link } from "react-router-dom";
-import google from "../images/google.PNG";
-import kakao from "../images/kakao.PNG";
-import naver from "../images/naver.PNG";
+import google from "../../../images/google.png";
+import kakao from "../../../images/kakao.png";
+import naver from "../../../images/naver.png";
 import { useRef, useState, useEffect } from "react";
 // id, password, passwordChk(비밀번호확인), name, tel 기본값 호출
 function Signup_main() {
