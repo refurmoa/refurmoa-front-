@@ -48,7 +48,7 @@ const NoticeList = () => {
             <td className="noticelist-header">
               공지사항
               {loginid === "admin" && (
-                <button className="admin-post">등록</button>
+                <button className="admin-post-btn">등록</button>
               )}
             </td>
           </tr>
@@ -72,15 +72,15 @@ const NoticeList = () => {
                       <>
                         <Link
                           to={`/notice/update/${item.noti_num}`}
-                          className="admin-edit"
+                          className="admin-edit-btn"
                         >
                           수정
                         </Link>
-                        <button className="admin-delete">삭제</button>
+                        <button className="admin-delete-btn">삭제</button>
                       </>
                     )}
 
-                    <span className="noticelist-post-date">{item.date}</span>
+                    <div className="noticelist-post-date">{item.date}</div>
                   </span>
                 </td>
               </tr>
