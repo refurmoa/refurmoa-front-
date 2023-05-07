@@ -10,6 +10,7 @@ import NoticeList from "./components/cs/NoticeList";
 import NoticeView from "./components/cs/NoticeView";
 import MyPage from "./components/myPage/MyPage";
 import Alliance from "./components/company/AllianceForm";
+import UserUpdate from "./components/userUpdate/UserUpdate";
 function App() {
   return (
     <>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/notice" element={<NoticeList />} />
         <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage/update" element={<UserUpdate />} />
         <Route path="/partnership" element={<Alliance />} />
       </Routes>
     </>
