@@ -12,6 +12,11 @@ function Signup_main() {
 
   const onClick = () => {
     alert("다음으로 넘어가시겠습니까?");
+    if (id.current.value === "" || password.current.value === "") {
+      alert("정보를 모두 입력하여 주세요!");
+      return false;
+    }
+    document.location.href = "/signup/4";
   };
   const id = useRef();
   const password = useRef();
@@ -57,9 +62,11 @@ function Signup_main() {
               </tr>
             </table>
           </div>
-          <button className="login_btn" onClick={onClick}>
-            LOGIN
-          </button>
+          <Link to="/login">
+            <button className="login_btn" onClick={onClick}>
+              LOGIN
+            </button>
+          </Link>
           <div className="login_detail">
             <a>아이디 찾기</a>&nbsp; |&nbsp;<a>비밀번호 찾기</a>&nbsp; |&nbsp;
             <a href="/">회원가입</a>

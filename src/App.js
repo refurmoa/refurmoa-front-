@@ -25,7 +25,7 @@ function App() {
         <Route path="/notice" element={<NoticeList />} />
         <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/mypage/update" element={<UserUpdate />} />
+        <Route path="/userupdate" element={<UserUpdate />} />
         <Route path="/partnership" element={<Alliance />} />
       </Routes>
     </>
