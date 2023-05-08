@@ -109,7 +109,7 @@ const Signup_input = () => {
 
 
       */
-      document.location.href = "/signup/4";
+      document.location.href = "/signup/3";
     }
     if (!check_pw) {
       alert("비밀번호를 입력해주세요!");
@@ -519,7 +519,7 @@ const Signup_input = () => {
             </tr>
           </table>
         </div>
-        <Link to="/signup/3">
+        <Link to="/signup/2">
           <button className="SU_input_btn" onClick={onClick}>
             다음
           </button>

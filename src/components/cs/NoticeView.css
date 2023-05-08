@@ -17,24 +17,6 @@ body {
   margin: 0 auto;
   padding: 0;
 }
-.post-view-wrapper {
-  width: 90%;
-  margin: 20px 0 0 40px;
-}
-
-.post-view-go-list-btn {
-  position: relative;
-  width: 95px;
-  height: 50px;
-  left: 350px;
-  top: 50px;
-  font-size: 20px;
-  border: 0;
-  padding: 10px;
-  background-color: #514438;
-  border-radius: 10px;
-  color: white;
-}
 
 .noticelist-view-title {
   margin: 10px 0;
@@ -50,24 +32,10 @@ body {
   display: inline-flex;
   text-align: right;
   width: 150px;
-  font-family: "Noto Sans";
-  font-style: normal;
-  /* font-weight: 400; */
   font-size: 20px;
-  color: #666666;
+  color: white;
   line-height: 55px;
 }
-/* .post-view-row-date {
-  
-  align-items: center;
-  justify-content: flex-end;
-  width: 150px;
-  font-family: "Noto Sans";
-  font-style: normal;
-  font-size: 20px;
-  color: #666666;
-  line-height: 55px;
-} */
 
 .noticelist-view-title > label:first-child {
   margin: 10px 0;
@@ -79,16 +47,60 @@ body {
   width: 20%;
 }
 
-.content-box {
+.notice-content-box {
   background-color: #eeeeee;
   width: 800px;
   height: 600px;
-  /* display: flex; */
-  /* justify-content: center; */
-  /* align-items: center; */
   text-align: left;
 }
 
-.content-box p {
+.notice-content-box p {
   font-size: 24px;
+}
+.notice-detail-content {
+  width: 90%;
+  margin: 20px 0 0 40px;
+}
+
+.notice-view-go-list-btn {
+  position: relative;
+  width: 95px;
+  height: 50px;
+  margin: 0 0 0 350px;
+  top: 50px;
+  font-size: 20px;
+  border: 0;
+  padding: 10px;
+  background-color: #514438;
+  border: 2px solid #514438;
+  border-radius: 10px;
+  color: white;
+}
+.notice-detail-edit-btn {
+  position: relative;
+  width: 95px;
+  height: 50px;
+  margin: 0 0 0 10px;
+  top: 50px;
+  font-size: 20px;
+  border: 0;
+  padding: 10px;
+  background-color: white;
+  border: 2px solid #514438;
+  border-radius: 10px;
+  color: #514438;
+}
+.notice-detail-delete-btn {
+  position: relative;
+  width: 95px;
+  height: 50px;
+  margin: 0 0 0 10px;
+  top: 50px;
+  font-size: 20px;
+  border: 0;
+  padding: 10px;
+  background-color: white;
+  border: 2px solid #514438;
+  border-radius: 10px;
+  color: #514438;
 }

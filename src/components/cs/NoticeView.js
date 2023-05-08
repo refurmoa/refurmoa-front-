@@ -4,8 +4,12 @@ import { getPostByNo } from "../../components/cs/Data";
 import "./NoticeView.css";
 import { noticeList } from "../../components/cs/Data";
 import { useNavigate, useParams } from "react-router-dom";
+import naver from "../../images/naver.png";
 
 const NoticeView = () => {
+  //admin 관리자페이지에서 수정,삭제
+  const loginid = "admin";
+
   const noticeid = useParams().noticeid;
   const [dataList, setDataList] = useState([]);
   const navigate = useNavigate();
@@ -47,16 +51,25 @@ const NoticeView = () => {
                 </div>
               </div>
               <div>{item.content}</div>
-              <div className="post-view-wrapper">
-                <div className="content-box">
-                  <label>사진?</label>
+              <div className="notice-detail-content">
+                <div className="notice-content-box">
+                  <label>
+                    {" "}
+                    <img src={naver} alt="naver" />
+                  </label>
                 </div>
                 <button
-                  className="post-view-go-list-btn"
+                  className="notice-view-go-list-btn"
                   onClick={() => navigate(-1)}
                 >
                   목록
                 </button>
+                {loginid === "admin" && (
+                  <>
+                    <button className="notice-detail-edit-btn">수정</button>
+                    <button className="notice-detail-delete-btn">삭제</button>
+                  </>
+                )}
               </div>
             </tr>
           );

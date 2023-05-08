@@ -69,7 +69,7 @@ const Signup_accept = () => {
         console.error(e);
       });
       */
-      document.location.href = "/signup/5";
+      document.location.href = "/signup/4";
     } else {
       alert("필수 정보를 체크해주세요!!");
       return false;
@@ -1076,7 +1076,7 @@ const Signup_accept = () => {
             </tr>
           </table>
         </div>
-        <Link to="/signup/4">
+        <Link to="/signup/3">
           <button className="SU_input_btn" onClick={onClick}>
             회원 가입
           </button>
