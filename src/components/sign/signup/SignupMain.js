@@ -29,7 +29,7 @@ function Signup_main() {
       <wrap>
         <form className="Signup_form">
           <div className="SU_Main_header">회원가입</div>
-          <Link to="/signup/2">
+          <Link to="/signup/1">
             <div>
               <button className="SU_Nomal_btn" onClick={onClick}>
                 일반 회원가입
