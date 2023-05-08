@@ -9,6 +9,8 @@ import PostPage from "./components/prodPost/PostPage";
 import NoticeList from "./components/cs/NoticeList";
 import NoticeView from "./components/cs/NoticeView";
 import MyPage from "./components/myPage/MyPage";
+import MyPagePayment from "./components/myPage/MyPagePayment";
+import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
 import UserUpdate from "./components/userUpdate/UserUpdate";
 function App() {
@@ -25,6 +27,8 @@ function App() {
         <Route path="/notice" element={<NoticeList />} />
         <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
         <Route path="/mypage" element={<MyPage />} />
+        <Route path="/payment" element={<MyPagePayment />} />
+        <Route path="/bidlist" element={<MyPageBidlist />} />
         <Route path="/mypage/update" element={<UserUpdate />} />
         <Route path="/partnership" element={<Alliance />} />
       </Routes>
