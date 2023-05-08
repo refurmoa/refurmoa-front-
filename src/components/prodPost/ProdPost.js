@@ -2,9 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { getDdayArray } from "../shared/sharedFn";
 
 const ProdPost = ({ products }) => {
-  // TODO: staricon만 클릭
   const navigate = useNavigate();
   const [today, setToday] = useState(new Date().getTime()); // 현재날짜(ms) 구하기
 
@@ -22,12 +22,7 @@ const ProdPost = ({ products }) => {
 
   // 남은시간(ms) 계산 후 string로 반환
   const getDdayString = (destination_date_ms) => {
-    const diff = destination_date_ms - today;
-
-    const day = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    const {day, hours, minutes, seconds} = getDdayArray(destination_date_ms);
     const ddayString = `${day === 0 ? `` : `${day}일`} 
                         ${hours === 0 ? `` : `${hours}시간`} 
                         ${minutes === 0 ? `` : `${minutes}분`} 
@@ -89,7 +84,6 @@ const ProdPost = ({ products }) => {
           onClick={() => prodDetailHandler(data.board_num)}
         >
           <ImageBox>
-            {/* <img src={data.main_image} alt="productimage" /> */}
             <img src={`/images/prod/${data.main_image}`} alt="productimage" />
 
             {/* 경매, 즉시구매 글자 렌더링 */}
@@ -278,16 +272,15 @@ const DarkCover = styled.div`
   left: 0px;
 
   span {
-    height: 30px;
     color: rgba(255, 255, 255, 0.6);
 
     font-size: 25px;
-    line-height: 30px;
+    line-height: 300px;
 
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -15px 0 0 -82px;
+    width: 300px;
+    height: 300px;
+    text-align: center;
   }
 `;
 
