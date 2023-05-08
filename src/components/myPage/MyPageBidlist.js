@@ -6,7 +6,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MyPagePayBid.css";
-import prod from "../prodPost/prod.json";
+import prod from "../shared/prod.json";
 import { ProductBidlist } from "./ProductBidlist";
 import axios from "axios";
 
