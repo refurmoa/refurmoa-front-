@@ -18,34 +18,25 @@ body {
   position: relative;
   left: 150px;
   top: 205px;
-  margin: 0 auto;
-  /* text-align: left; */
   border-spacing: 0;
-  font-family: "Noto Sans";
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
   line-height: 30px;
-
   align-items: center;
-
   color: #000000;
 }
 .noticelist-header {
   display: flex;
   align-items: center;
-  font-family: "Noto Sans";
   font-size: 25px;
   line-height: 35px;
   color: #514438;
   height: 50px;
-  left: 360px;
-  top: 250px;
-  padding: 0;
   font-weight: bold;
   border-bottom: 3px solid rgba(185, 168, 154, 0.8);
 }
-.admin-post {
+.admin-post-btn {
   position: relative;
   width: 75px;
   height: 40px;
@@ -56,29 +47,42 @@ body {
   font-weight: bold;
   font-size: 20px;
   border: 0;
-  margin: 0 0 0px 720px;
+  margin: 0 0 0 900px;
   background-color: transparent;
   border-radius: 10px;
   color: #514438;
 }
-.admin-post:hover {
+.admin-post-btn:hover {
   background-color: #b9a89a;
 }
 
-.admin-post:disabled {
+.admin-post-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
 
 .noticelist-post {
+  display: flex;
   padding: 10px 5px;
-  /* text-align: left; */
   border-bottom: 2px solid rgba(185, 168, 154, 0.3);
 }
+.noticelist-post:first-child span {
+  margin: 10px 0;
+  width: 20%;
+}
 
+.noticelist-post:last-child span {
+  margin: 0px 0;
+  width: 70%;
+}
 .noticelist-post-title {
-  flex: 1;
-  text-align: left;
+  margin: 10px 0;
+  display: inline-block;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 35px;
+  white-space: nowrap;
 }
 
 .noticelist-admin {
@@ -87,7 +91,7 @@ body {
   justify-content: space-between;
   align-items: center;
 }
-.admin-edit {
+.admin-edit-btn {
   position: relative;
   width: 75px;
   height: 40px;
@@ -98,20 +102,20 @@ body {
   text-align: right;
   font-size: 20px;
   border: 0;
-  margin: 0 5px 0px 600px;
+  margin: 0 -20px 0px 500px;
   background-color: transparent;
   border-radius: 50px;
   color: #514438;
 }
-.admin-edit:hover {
+.admin-edit-btn:hover {
   background-color: #ddd;
 }
 
-.admin-edit:disabled {
+.admin-edit-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
-.admin-delete {
+.admin-delete-btn {
   position: relative;
   width: 75px;
   height: 40px;
@@ -122,16 +126,16 @@ body {
   text-align: right;
   font-size: 20px;
   border: 0;
-  margin: 0 0 0px 0px;
+  /* margin: 0 0 0 0; */
   background-color: transparent;
   border-radius: 50px;
   color: #514438;
 }
-.admin-delete:hover {
+.admin-delete-btn:hover {
   background-color: #ddd;
 }
 
-.admin-delete:disabled {
+.admin-delete-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
