@@ -1,0 +1,208 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+
+* {
+margin: 0 auto;
+padding: 0;
+font-family: "Noto Sans KR", sans-serif;
+color: #000000;
+list-style: none;
+}
+
+body {
+margin: 0 auto;
+padding: 0;
+}
+
+.top{
+    width: 1200px;
+    height: 200px;
+    display: flex;
+    margin-top: 100px;
+    border-top: 2px solid #B9A89A; 
+    border-bottom: 2px solid #B9A89A; 
+    text-align: center;
+}
+
+.membertop {
+    position: relative;
+    margin: 0;
+}
+
+.membertop img {
+    width: 80px;
+    height: 80px;
+    margin: 25px 110px 0 110px;
+}
+
+.membertext {
+    position: absolute;
+    width: 81px;
+    height: 40px;
+    font-size: 30px;
+    font-weight: 700;
+    color: #514438;
+    margin: 45px 110px 0 110px;
+    line-height: 40px;
+}
+
+.membername {
+    width: 145px;
+    height: 25px;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: #514438;
+    cursor: pointer;
+    margin: 5px 78px 0 78px;
+}
+
+.membertop button { 
+    width: 140px;
+    height: 30px;
+    background: #B9A89A;
+    border-radius: 7px;
+    border-color: #B9A89A;
+    margin: 5px 80px 0 80px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 20px;
+    color: #FFFFFF;
+}
+
+.resttop {
+    position: relative;
+    margin: 0;
+}
+
+.resttext {
+    width: 96px;
+    height: 25px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #514438;
+    line-height: 25px;
+    margin: 48px 103px 12px 101px;
+}
+
+.resttop img {
+    width: 80px;
+    height: 80px;
+    margin: 0 111px 35px 109px;
+}
+
+.restnumber1 {
+    position: absolute;
+    width: 29px;
+    height: 60px;
+    font-size: 50px;
+    font-weight: 700;
+    color: #514438;
+    margin: 7px 136px 0 135px;
+    line-height: 60px;
+}
+
+.restnumber2 {
+    position: absolute;
+    width: 29px;
+    height: 60px;
+    font-size: 50px;
+    font-weight: 700;
+    color: #514438;
+    margin: 5px 121px 0 119px;
+    line-height: 60px;
+}
+
+.borderright {
+    border: 2px solid rgba(185, 168, 154, 0.5);
+    margin: 50px 0 50px 0;
+    height: 100px; 
+  }
+
+.mid {
+    width: 1200px; 
+    display: block; 
+}
+
+.payword {
+    width: 79px;
+    height: 25px;
+    display: inline-block;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+    color: #514438;
+    margin: 40px 40px 0 25px;
+}
+
+.date {
+    width: 150px;
+    height: 30px;
+    background: rgba(185, 168, 154, 0.15);
+    border-color: rgba(185, 168, 154, 0.15);
+    border-radius: 5px;
+    margin: 0 6px;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.searchbox{
+    width: 220px;
+    height: 30px;
+    border: 1px solid #B9A89A;
+    border-radius: 15px;
+    position: absolute;
+    margin: 40px 0 0 456px;
+}
+
+.searchboxbutton{
+    display: inline-block;
+    position: relative;
+    background-image: url(../../../public/images/prod/searchicon.png);
+    border: none;
+    width: 17px;
+    height: 17.13px;
+    cursor: pointer;
+    margin: 46px 0 0 652px;
+}
+
+.flex_wrap {
+    max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(2, 590px);
+    gap: 40px 0px;
+    margin-top: 35px;
+  }
+
+  .radio label {
+    margin: 0 20px 0 10px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 25px;
+    color: rgba(81, 68, 56, 0.8);
+  }
+
+  .radio input {
+    box-sizing: border-box;
+    width: 15px;
+    height: 15px;
+    accent-color: rgba(81, 68, 56, 0.6);
+  }
+
+  .option {
+    width: 85px;
+    height: 25px;
+    color: rgba(81, 68, 56, 0.8);
+    font-size: 15px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 5px;
+  }
+
+  .option option {
+    font-size: 15px;
+    line-height: 25px;
+    align-items: center;
+    color: rgba(81, 68, 56, 0.8);
+  }
+
+  

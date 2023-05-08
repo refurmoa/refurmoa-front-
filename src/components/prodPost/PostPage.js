@@ -7,7 +7,7 @@ import axios from "axios";
 
 const PostPage = () => {
   const memberId = "admin";
-  
+
   const [prodData, setProdData] = useState();
   // 경매, 즉시구매 저장 변수 all, auction, direct, none
   const [selectedSellType, setSelectedSellType] = useState("all");
@@ -27,7 +27,7 @@ const PostPage = () => {
 
   // 경매, 즉시구매 누르면 토글기능
   const sellTypeHandler = (type) => {
-    if(type === "auction") {
+    if (type === "auction") {
       setAuctionState(!auctionState);
     } else if (type === "direct") {
       setDirectState(!directState);
@@ -37,17 +37,17 @@ const PostPage = () => {
   // 카테고리
   const categoryHandler = (category) => {
     setSelectedCategory(category);
-    if(category === "all") {
+    if (category === "all") {
       setApplianceState(false);
       setFurnitureState(false);
-    } else if(category.includes("app")) {
+    } else if (category.includes("app")) {
       setApplianceState(true);
       setFurnitureState(false);
     } else if (category.includes("fur")) {
       setApplianceState(false);
       setFurnitureState(true);
     }
-  }
+  };
 
   // 판매목록 데이터 받아오기
   const getProdData = () => {
@@ -61,22 +61,22 @@ const PostPage = () => {
     // .catch((e) => {
     //   console.error(e);
     // })
-    const data = productlist.prodlist; 
+    const data = productlist.prodlist;
     setProdData(data);
   };
 
   useEffect(() => {
     // 경매, 즉시구매 버튼 누를 때마다 axios로 담아줄 selectedSellType 변수 값 변경
-    if((auctionState === true) & (directState === true)) {
+    if ((auctionState === true) & (directState === true)) {
       setSelectedSellType("all");
-    } else if((auctionState === true) & (directState === false)) {
+    } else if ((auctionState === true) & (directState === false)) {
       setSelectedSellType("auction");
-    } else if((directState === true) & (auctionState === false)) {
+    } else if ((directState === true) & (auctionState === false)) {
       setSelectedSellType("direct");
     } else {
       setSelectedSellType("none");
     }
-  }, [auctionState, directState])
+  }, [auctionState, directState]);
 
   useEffect(() => {
     // 필터조건이 바뀔때마다 데이터에 axios 요청
@@ -86,45 +86,148 @@ const PostPage = () => {
   return (
     <>
       <FilterBox>
-        <TopFilterBox isAdmin={memberId==="admin"}>
+        <TopFilterBox isAdmin={memberId === "admin"}>
           <BuyFilterBox>
-            <SellTypeSpan active={auctionState} onClick={()=>{sellTypeHandler("auction")}}>경매</SellTypeSpan>
-            <SellTypeSpan active={directState} onClick={()=>{sellTypeHandler("direct")}}>즉시구매</SellTypeSpan>
+            <SellTypeSpan
+              active={auctionState}
+              onClick={() => {
+                sellTypeHandler("auction");
+              }}
+            >
+              경매
+            </SellTypeSpan>
+            <SellTypeSpan
+              active={directState}
+              onClick={() => {
+                sellTypeHandler("direct");
+              }}
+            >
+              즉시구매
+            </SellTypeSpan>
           </BuyFilterBox>
           <StateFilterBox>
-            <span><label><input type="checkbox" /> 진행예정</label></span>
-            <span><label><input type="checkbox" /> 진행중</label></span>
-            <span><label><input type="checkbox" /> 종료</label></span>
+            <span>
+              <label>
+                <input type="checkbox" /> 진행예정
+              </label>
+            </span>
+            <span>
+              <label>
+                <input type="checkbox" /> 진행중
+              </label>
+            </span>
+            <span>
+              <label>
+                <input type="checkbox" /> 종료
+              </label>
+            </span>
           </StateFilterBox>
         </TopFilterBox>
         <BottomFilterBox>
           <CategoryFilterBox>
-            <CategorySpan active={!applianceState & !furnitureState} onClick={()=>{categoryHandler("all")}}>전체</CategorySpan>
-            <CategorySpan active={applianceState} onClick={()=>{categoryHandler("appliance")}}>가전</CategorySpan>
-            <CategorySpan active={furnitureState} onClick={()=>{categoryHandler("furniture")}}>가구</CategorySpan>
+            <CategorySpan
+              active={!applianceState & !furnitureState}
+              onClick={() => {
+                categoryHandler("all");
+              }}
+            >
+              전체
+            </CategorySpan>
+            <CategorySpan
+              active={applianceState}
+              onClick={() => {
+                categoryHandler("appliance");
+              }}
+            >
+              가전
+            </CategorySpan>
+            <CategorySpan
+              active={furnitureState}
+              onClick={() => {
+                categoryHandler("furniture");
+              }}
+            >
+              가구
+            </CategorySpan>
             {applianceState && (
               <>
-                <CategoryDetailSpan active={selectedCategory === "appliance"} onClick={()=>{categoryHandler("appliance")}}>가전 전체</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "appkiechen"} onClick={()=>{categoryHandler("appkiechen")}}>주방</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "applife"} onClick={()=>{categoryHandler("applife")}}>생활</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "appelec"} onClick={()=>{categoryHandler("appelec")}}>전자기기</CategoryDetailSpan>
+                <CategoryDetailSpan
+                  active={selectedCategory === "appliance"}
+                  onClick={() => {
+                    categoryHandler("appliance");
+                  }}
+                >
+                  가전 전체
+                </CategoryDetailSpan>
+                <CategoryDetailSpan
+                  active={selectedCategory === "appkiechen"}
+                  onClick={() => {
+                    categoryHandler("appkiechen");
+                  }}
+                >
+                  주방
+                </CategoryDetailSpan>
+                <CategoryDetailSpan
+                  active={selectedCategory === "applife"}
+                  onClick={() => {
+                    categoryHandler("applife");
+                  }}
+                >
+                  생활
+                </CategoryDetailSpan>
+                <CategoryDetailSpan
+                  active={selectedCategory === "appelec"}
+                  onClick={() => {
+                    categoryHandler("appelec");
+                  }}
+                >
+                  전자기기
+                </CategoryDetailSpan>
               </>
             )}
             {furnitureState && (
               <>
-                <CategoryDetailSpan active={selectedCategory === "furniture"} onClick={()=>{categoryHandler("furniture")}}>가구 전체</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "furliving"} onClick={()=>{categoryHandler("furliving")}}>거실/주방</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "furbed"} onClick={()=>{categoryHandler("furbed")}}>침실</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "furoffice"} onClick={()=>{categoryHandler("furoffice")}}>사무실</CategoryDetailSpan>
+                <CategoryDetailSpan
+                  active={selectedCategory === "furniture"}
+                  onClick={() => {
+                    categoryHandler("furniture");
+                  }}
+                >
+                  가구 전체
+                </CategoryDetailSpan>
+                <CategoryDetailSpan
+                  active={selectedCategory === "furliving"}
+                  onClick={() => {
+                    categoryHandler("furliving");
+                  }}
+                >
+                  거실/주방
+                </CategoryDetailSpan>
+                <CategoryDetailSpan
+                  active={selectedCategory === "furbed"}
+                  onClick={() => {
+                    categoryHandler("furbed");
+                  }}
+                >
+                  침실
+                </CategoryDetailSpan>
+                <CategoryDetailSpan
+                  active={selectedCategory === "furoffice"}
+                  onClick={() => {
+                    categoryHandler("furoffice");
+                  }}
+                >
+                  사무실
+                </CategoryDetailSpan>
               </>
             )}
           </CategoryFilterBox>
           <OrderbyFilterBox>
-              <select>
-                <option value="">최신순</option>
-                <option value="">조회순</option>
-                <option value="">마감순</option>
-              </select>
+            <select>
+              <option value="">최신순</option>
+              <option value="">조회순</option>
+              <option value="">마감순</option>
+            </select>
           </OrderbyFilterBox>
         </BottomFilterBox>
       </FilterBox>
@@ -143,13 +246,13 @@ const FilterBox = styled.div`
   /* background-color: aliceblue; */
   margin: 73px auto 50px;
 
-  font-family: 'Noto Sans';
+  font-family: "Noto Sans";
   font-style: normal;
 `;
 
 const TopFilterBox = styled.div`
   display: flex;
-  /* display: ${({isAdmin}) => isAdmin ? "block": "flex"}; */
+  /* display: ${({ isAdmin }) => (isAdmin ? "block" : "flex")}; */
   justify-content: space-between;
   border-bottom: 1px solid #514438;
   height: 41px;
@@ -167,7 +270,14 @@ const BuyFilterBox = styled.div`
 `;
 
 const SellTypeSpan = styled.span`
-  ${({ active }) => active ? css`color: #514438;` : css`color: rgba(81, 68, 56, 0.6);`};
+  ${({ active }) =>
+    active
+      ? css`
+          color: #514438;
+        `
+      : css`
+          color: rgba(81, 68, 56, 0.6);
+        `};
   :hover {
     cursor: pointer;
   }
@@ -204,7 +314,14 @@ const CategoryFilterBox = styled.div`
 `;
 
 const CategorySpan = styled.span`
-  ${({ active }) => active ? css`color: #514438;` : css`color: rgba(81, 68, 56, 0.6);`};
+  ${({ active }) =>
+    active
+      ? css`
+          color: #514438;
+        `
+      : css`
+          color: rgba(81, 68, 56, 0.6);
+        `};
   margin-right: 30px;
   :hover {
     cursor: pointer;
@@ -212,7 +329,14 @@ const CategorySpan = styled.span`
 `;
 
 const CategoryDetailSpan = styled.span`
-  ${({ active }) => active ? css`color: #514438;` : css`color: rgba(81, 68, 56, 0.6);`};
+  ${({ active }) =>
+    active
+      ? css`
+          color: #514438;
+        `
+      : css`
+          color: rgba(81, 68, 56, 0.6);
+        `};
   margin-right: 30px;
   font-weight: 500;
   :hover {
@@ -229,13 +353,13 @@ const OrderbyFilterBox = styled.div`
 
     border: 0px;
     // FIXME: select 화살표 커스텀
-    /* appearance: none; */ 
+    /* appearance: none; */
     /* -webkit-appearance: none; chrome */
     /* -moz-appearance: none; firefox   */
     /* background: url("./arrow.png") no-repeat 97% 50%/15px auto; */
 
     font-size: 20px;
-    font-weight:500;
+    font-weight: 500;
     color: rgba(81, 68, 56, 0.8);
 
     :hover {
@@ -243,7 +367,6 @@ const OrderbyFilterBox = styled.div`
     }
   }
 `;
-
 
 // 상품리스트 박스
 const ProdListBox = styled.div`

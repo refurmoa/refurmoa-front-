@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+
+* {
+margin: 0 auto;
+padding: 0;
+font-family: "Noto Sans KR", sans-serif;
+color: #000000;
+list-style: none;
+}
+
+body {
+margin: 0 auto;
+padding: 0;
+}
+
+.productBid {
+  display: flex;
+  width: 560px;
+}
+
+.imageBid {
+  width: 200px;
+  height: 200px;
+  margin: 0;
+}
+
+.imageBid img {
+  width: 100%;
+  height: 100%;
+}
+
+.com_nameBid {
+  font-size: 15px;
+  line-height: 20px;
+  color: #777777;
+  margin-top: 15px;
+}
+
+.bidselectBid {
+  font-size: 15px;
+  line-height: 25px;
+  color: #777777;
+}
+
+.product_nameBid {
+  font-size: 20px;
+  height: 30px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 340px;
+  white-space: nowrap;
+}
+
+.priceBid {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.priceBidnum {
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 30px;
+}
+
+.priceBidword {
+  font-size: 18px;
+  line-height: 30px;
+  color: #333333;
+  margin-right: 10px;
+}
+
+
+.redcolorBid {
+  color:red;
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.balckcolorBid {
+  font-size: 18px;
+  line-height: 30px;
+}
+
+.clockiconred{
+  display: inline-block;
+  background-image: url(../../../public/images/prod/clockiconred.png);
+  border: none;
+  width: 17px;
+  height: 17px;  
+  cursor: pointer;
+  margin-right: 10px;
+  
+}
+
+.clockiconblack{
+  display: inline-block;
+  background-image: url(../../../public/images/prod/clockiconblack.png);
+  border: none;
+  width: 17px;
+  height: 17px;  
+  cursor: pointer;
+  margin-right: 10px;
+  
+}
+
+.inmargin {
+  margin-left: 20px;
+}
