@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import ProdPost from "./ProdPost";
-import productlist from "./prod.json";
-import filter from "./filter.json";
+import productlist from "../shared/prod.json";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const PostPage = () => {
+  const navigate = useNavigate();
   const memberId = "admin";
   
   const [prodData, setProdData] = useState();
@@ -13,17 +14,19 @@ const PostPage = () => {
   const [selectedSellType, setSelectedSellType] = useState("all");
   // 카테고리 저장 변수
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedSort, setSelectedSort] = useState("view");
+  // 판매상태 저장 변수
+  const [selectedSellStatus, selectedSetSellStatus] = useState("all");
+  // 정렬 상태 변수
+  const [selectedOrderby, setSelectedOrderby] = useState("new");
 
   // 경매, 즉시구매 토글 기능을 위한 상태 변수
   const [auctionState, setAuctionState] = useState(true);
   const [directState, setDirectState] = useState(true);
-
   // 가전, 가구가 true 일때 세부 카테고리 렌더링을 위한 상태 변수
   const [applianceState, setApplianceState] = useState(false);
   const [furnitureState, setFurnitureState] = useState(false);
-
-  // return <ul className="listWrap">{list}</ul>;
+  // 판매상태 체크박스 상태 저장 변수
+  const [sellStatus, setSellStatus] = useState({yet: true, ing: true, end: true});
 
   // 경매, 즉시구매 누르면 토글기능
   const sellTypeHandler = (type) => {
@@ -49,11 +52,23 @@ const PostPage = () => {
     }
   }
 
+  // 판매상태 체크박스
+  const checkboxHandler = (e) => {
+    setSellStatus({...sellStatus, [e.target.value]:e.target.checked});
+  }
+
+  // 정렬 select 박스
+  const orderByHandler = (e) => {
+    setSelectedOrderby(e.target.value);
+  }
+
   // 판매목록 데이터 받아오기
   const getProdData = () => {
-    console.log(selectedSellType);
-    console.log(selectedCategory);
-    // axios.get(`/api/getproducts?selltype=${selectedSellType}&category=${selectedCategory}`)
+    console.log("판매방식 : " + selectedSellType);
+    console.log("카테고리 : " + selectedCategory);
+    console.log("판매상태 : " + selectedSellStatus);
+    console.log("정렬 : " + selectedOrderby);
+    // axios.get(`/api/getproducts?selltype=${selectedSellType}&category=${selectedCategory}&sellstatus=${selectedSellStatus}&orderby=${selectedOrderby}`)
     // .then((res) => {
     //   const { data } = res;
     //   setProdData(data);
@@ -76,27 +91,68 @@ const PostPage = () => {
     } else {
       setSelectedSellType("none");
     }
-  }, [auctionState, directState])
+  }, [auctionState, directState]);
+
+  useEffect(() => {
+  // 판매상태 체크박스에 따라 axios로 담아줄 selectedSellStatus 변수 값 변경
+    if (sellStatus.yet & sellStatus.ing & sellStatus.end) {
+      selectedSetSellStatus("all");
+    } else if (!sellStatus.yet & sellStatus.ing & sellStatus.end) {
+      selectedSetSellStatus("ingnend");
+    } else if (sellStatus.yet & !sellStatus.ing & sellStatus.end) {
+      selectedSetSellStatus("yetnend");
+    } else if (sellStatus.yet & sellStatus.ing & !sellStatus.end) {
+      selectedSetSellStatus("yetning");
+    } else if (sellStatus.yet & !sellStatus.ing & !sellStatus.end) {
+      selectedSetSellStatus("yet");
+    } else if (!sellStatus.yet & sellStatus.ing & !sellStatus.end) {
+      selectedSetSellStatus("ing");
+    } else if (!sellStatus.yet & !sellStatus.ing & sellStatus.end) {
+      selectedSetSellStatus("end");
+    } else {
+      selectedSetSellStatus("none");
+    }
+  }, [sellStatus]);
 
   useEffect(() => {
     // 필터조건이 바뀔때마다 데이터에 axios 요청
     getProdData();
-  }, [selectedSellType, selectedCategory]);
+  }, [selectedSellType, selectedCategory, selectedSellStatus, selectedOrderby]);
 
   return (
     <>
       <FilterBox>
-        <TopFilterBox isAdmin={memberId==="admin"}>
+        {memberId === "admin" ? (
+          <TopFilterBox>
+            <AdminSectionBox>
+              <BuyFilterBox>
+                <SellTypeSpan active={auctionState} onClick={()=>{sellTypeHandler("auction")}}>경매</SellTypeSpan>
+                <SellTypeSpan active={directState} onClick={()=>{sellTypeHandler("direct")}}>즉시구매</SellTypeSpan>
+              </BuyFilterBox>
+              <StateFilterBox>
+                <span><label><input type="checkbox" value="yet" onClick={(e) => {checkboxHandler(e)}} defaultChecked /> 진행예정</label></span>
+                <span><label><input type="checkbox" value="ing" onClick={(e) => {checkboxHandler(e)}} defaultChecked /> 진행중</label></span>
+                <span><label><input type="checkbox" value="end" onClick={(e) => {checkboxHandler(e)}} defaultChecked /> 종료</label></span>
+              </StateFilterBox>
+            </AdminSectionBox>
+            <AdminButtonBox>
+              <AdminProductListBtn onClick={() => {navigate("/prod")}}>상품 목록</AdminProductListBtn>
+              <AdminPostBtn onClick={() => {navigate("/post/write")}}>등록</AdminPostBtn>
+            </AdminButtonBox>
+          </TopFilterBox>
+        ) : (
+          <TopFilterBox>
           <BuyFilterBox>
             <SellTypeSpan active={auctionState} onClick={()=>{sellTypeHandler("auction")}}>경매</SellTypeSpan>
             <SellTypeSpan active={directState} onClick={()=>{sellTypeHandler("direct")}}>즉시구매</SellTypeSpan>
           </BuyFilterBox>
           <StateFilterBox>
-            <span><label><input type="checkbox" /> 진행예정</label></span>
-            <span><label><input type="checkbox" /> 진행중</label></span>
-            <span><label><input type="checkbox" /> 종료</label></span>
+            <span><label><input type="checkbox" value="yet" onClick={(e) => {checkboxHandler(e)}} defaultChecked /> 진행예정</label></span>
+            <span><label><input type="checkbox" value="ing" onClick={(e) => {checkboxHandler(e)}} defaultChecked /> 진행중</label></span>
+            <span><label><input type="checkbox" value="end" onClick={(e) => {checkboxHandler(e)}} defaultChecked /> 종료</label></span>
           </StateFilterBox>
-        </TopFilterBox>
+          </TopFilterBox>
+        )}
         <BottomFilterBox>
           <CategoryFilterBox>
             <CategorySpan active={!applianceState & !furnitureState} onClick={()=>{categoryHandler("all")}}>전체</CategorySpan>
@@ -120,10 +176,10 @@ const PostPage = () => {
             )}
           </CategoryFilterBox>
           <OrderbyFilterBox>
-              <select>
-                <option value="">최신순</option>
-                <option value="">조회순</option>
-                <option value="">마감순</option>
+              <select onChange={(e) => {orderByHandler(e)}}>
+                <option value="new" >최신순</option>
+                <option value="view">조회순</option>
+                <option value="close">마감순</option>
               </select>
           </OrderbyFilterBox>
         </BottomFilterBox>
@@ -149,11 +205,16 @@ const FilterBox = styled.div`
 
 const TopFilterBox = styled.div`
   display: flex;
-  /* display: ${({isAdmin}) => isAdmin ? "block": "flex"}; */
   justify-content: space-between;
   border-bottom: 1px solid #514438;
   height: 41px;
   line-height: 41px;
+`;
+
+const AdminSectionBox = styled.div`
+  margin: 0px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const BuyFilterBox = styled.div`
@@ -174,7 +235,7 @@ const SellTypeSpan = styled.span`
 `;
 
 const StateFilterBox = styled.div`
-  margin-right: 35px;
+  margin:0px 35px 0px 30px;
   font-size: 20px;
   font-weight: 600;
   color: rgba(81, 68, 56, 0.8);
@@ -187,6 +248,41 @@ const StateFilterBox = styled.div`
   span > label:hover {
     cursor: pointer;
   }
+  input {
+    accent-color: rgba(81, 68, 56, 0.6);
+  }
+`;
+
+const AdminButtonBox = styled.div`
+  display: flex;
+  margin: 0px 35px 13px 0px;
+
+  font-family: 'Noto Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+
+  div {
+    border: 2px solid #514438;
+    border-radius: 10px;
+    padding: 0px 20px;
+    height: 35px;
+    line-height: 32px;
+    box-sizing: border-box;
+  }
+  div:hover {
+    cursor: pointer;
+  }
+`;
+
+const AdminProductListBtn = styled.div`
+  color: #514438;
+`;
+
+const AdminPostBtn = styled.div`
+  color: #ffffff;
+  background-color: #514438;
+  margin-left: 15px;
 `;
 
 const BottomFilterBox = styled.div`
@@ -221,11 +317,11 @@ const CategoryDetailSpan = styled.span`
 `;
 
 const OrderbyFilterBox = styled.div`
+  margin-right: 35px;
   select {
     width: 84px;
     height: 25px;
     line-height: 25px;
-    margin-right: 35px;
 
     border: 0px;
     // FIXME: select 화살표 커스텀
