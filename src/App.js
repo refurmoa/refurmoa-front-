@@ -8,11 +8,12 @@ import SignupComplete from "./components/sign/signup/SignupComplete";
 import PostPage from "./components/prodPost/PostPage";
 import NoticeList from "./components/cs/NoticeList";
 import NoticeView from "./components/cs/NoticeView";
+import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
 import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
 import UserUpdate from "./components/userUpdate/UserUpdate";
-import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
+
 function App() {
   return (
     <>
