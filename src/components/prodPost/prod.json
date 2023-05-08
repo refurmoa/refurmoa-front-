@@ -6,7 +6,7 @@
       "sell_type": 1,
       "main_image": "image01.png",
       "start_date": "2023-04-30 15:00:00",
-      "end_date": "2023-05-010 16:00:00",
+      "end_date": "2023-05-05 16:00:00",
       "prod_com": "리바트",
       "prod_name": "스와레 6인 세라믹식탁(5종)",
       "prod_state": 1,
@@ -29,7 +29,7 @@
       "prod_state": 1,
       "bid_count": null, 
       "org_price": 344900,
-      "cur_price": 200000,
+      "cur_price": null,
       "direct_price": 200000,
       "like": 1,
       "read_count": 105
@@ -40,7 +40,7 @@
       "sell_type": 3,
       "main_image": "image03.png",
       "start_date": "2023-04-10 16:00:00",
-      "end_date": "2023-05-07 16:00:00",
+      "end_date": "2023-05-02 16:00:00",
       "prod_com": "인피니처",
       "prod_name": "에스원 컴퓨터책상",
       "prod_state": 1,
@@ -131,7 +131,7 @@
       "prod_state": 1,
       "bid_count": null,
       "org_price": 6344000, 
-      "cur_price": 600000,
+      "cur_price": null,
       "direct_price": 3000000,
       "like": 0,
       "read_count": 109
@@ -148,7 +148,7 @@
       "prod_state": 1,
       "bid_count": null, 
       "org_price": 249000,
-      "cur_price": 600000,
+      "cur_price": null,
       "direct_price": 200000,
       "like": 0,
       "read_count": 106
@@ -182,7 +182,7 @@
       "prod_state": 2,
       "bid_count": null, 
       "org_price": 344900,
-      "cur_price": 600000,
+      "cur_price": null,
       "direct_price": 20000,
       "like": 0,
       "read_count": 103
@@ -267,7 +267,7 @@
       "prod_state": 2,
       "bid_count": null,
       "org_price": 833300,
-      "cur_price": 600000,
+      "cur_price": null,
       "direct_price": 800000,
       "like": 1,
       "read_count": 107
@@ -352,7 +352,7 @@
       "prod_state": 1,
       "bid_count": null,
       "org_price": 825000,
-      "cur_price": 600000,
+      "cur_price": null,
       "direct_price": 780000,
       "like": 1,
       "read_count": 107
@@ -369,7 +369,7 @@
       "prod_state": 2,
       "bid_count": null,
       "org_price": 1131860,
-      "cur_price": 600000,
+      "cur_price": null,
       "direct_price": 900000,
       "like": 0,
       "read_count": 107
@@ -454,7 +454,7 @@
       "prod_state": 2,
       "bid_count": null,
       "org_price": 703980,
-      "cur_price": 600000,
+      "cur_price": null,
       "direct_price": 660000,
       "like": 0,
       "read_count": 107
@@ -471,7 +471,7 @@
       "prod_state": 1,
       "bid_count": null,
       "org_price": 1015200,
-      "cur_price": 600000,
+      "cur_price": null,
       "direct_price": 770000,
       "like": 0,
       "read_count": 107
