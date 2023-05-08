@@ -1,0 +1,314 @@
+/* 판매 상세 페이지 - 상품문의 */
+
+.PI-wrap {
+    width: 1100px;
+    margin: 0 auto;
+}
+
+/* 문의 글 입력 폼 */
+.PI-form_wrap {
+    width: 1100px;
+}
+
+.PI-form {
+    float: left;
+    width: 985px;
+    height: 300px;
+}
+
+.PI-form_title, .PI-form_content {
+    width: 950px;
+    border: 2px solid rgba(185, 168, 154, 0.5);
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 30px;
+}
+
+.PI-form_title {
+    height: 50px;
+    padding: 0 15px;
+    margin-bottom: 15px;
+}
+
+.PI-form_content {
+    height: 180px;
+    resize: none;
+    padding: 10px 15px;
+}
+
+.PI-form_title::placeholder,
+.PI-form_content::placeholder {
+    color: #AAAAAA;
+}
+  
+.PI-form_title:focus,
+.PI-form_content:focus {
+    border-color: #B9A89A;
+    outline: 0;
+}
+
+.PI-form_length {
+    float: left;
+    position: relative;
+    top: -42px;
+    width: 955px;
+    height: 30px;
+    text-align: right;
+    font-size: 17px;
+    line-height: 30px;
+    color: #888888;
+    padding: 0 15px;
+}
+
+.PI-form_btn_wrap {
+    float: right;
+    width: 95px;
+}
+
+.PI-form_btn {
+    width: 95px;
+    height: 50px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #FFFFFF;
+    background-color: #514438;
+    margin-bottom: 10px;
+}
+
+.PI-form_checkbox {
+    height: 30px;
+    margin-left: 7px;
+}
+
+.PI-form_checkbox > input {
+    width: 15px;
+    height: 15px;
+    margin-top: 7.5px;
+}
+
+.PI-form_checkbox > label {
+    height: 30px;
+    font-size: 20px;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+/* 문의 글 목록 */
+.PI-list {
+    clear: both;
+    border-spacing: 0;
+    border-width: 2px 0px 0px;
+    border-style: solid;
+    border-color: rgba(185, 168, 154, 0.3);
+}
+
+.PI-list_line {
+    height: 60px;
+}
+
+.PI-list_line:hover {
+    background-color: rgba(185, 168, 154, 0.05);
+    cursor: pointer;
+}
+
+.PI-list_line_none,
+.PI-reply,
+.PI-reply_admin_red,
+.PI-reply_admin,
+.PI-title,
+.PI-title_lock,
+.PI-date,
+.PI-content-wrap {
+    border-width: 0px 0px 2px;
+    border-style: solid;
+    border-color: rgba(185, 168, 154, 0.3);
+    font-size: 18px;
+    padding: 10px;
+}
+
+.PI-list_line_none {
+    width: 1100px;
+    text-align: center;
+    color: #AAAAAA;
+}
+
+.PI-reply, .PI-reply_admin_red, .PI-reply_admin {
+    width: 110px;
+    color: #666666;
+}
+
+.PI-reply_admin_red, .PI-reply_admin {
+    font-weight: bold;
+}
+
+.PI-reply_admin_red {
+    color: red;
+}
+
+.PI-title, .PI-title_lock {
+    width: 835px;
+}
+
+.PI-title_lock {
+    position: relative;
+    color: #888888;
+}
+
+.PI-lock_icon {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    opacity: 0.35;
+    margin: 5px 0px 5px 10px;
+}
+
+.PI-id_wrap {
+    float: right;
+}
+
+.PI-id {
+    font-size: 16px;
+    color: #555555;
+}
+
+.PI-delete {
+    font-weight: bold;
+    color: #555555;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+.PI-date {
+    width: 95px;
+    text-align: right;
+    color: #AAAAAA;
+}
+
+/* 문의 글 상세 보기 */
+.PI-detail_line {
+    background-color: rgba(204, 204, 204, 0.1);
+}
+
+.PI-content-wrap {
+    padding: 20px 10px 25px;
+}
+
+.PI-content {
+    font-size: 17px;
+    line-height: 25px;
+}
+
+.PI-reply_content_wrap, .PI-reply_form_wrap {
+    margin-top: 20px;
+}
+
+.PI-reply_icon {
+    float: left;
+    width: 21px;
+    height: 30px;
+    border-radius: 3px;
+    font-size: 18px;
+    line-height: 30px;
+    color: #514438;
+    background-color: rgba(185, 168, 154, 0.3);
+    padding-left: 9px;
+}
+
+.PI-reply_content {
+    float: left;
+    width: 910px;
+    font-size: 17px;
+    line-height: 25px;
+    margin: 2px 0px 0px 10px;
+}
+
+/* 문의 댓글 폼 */
+.PI-reply_form_wrap {
+    width: 940px;
+}
+
+.PI-reply_form {
+    float: left;
+    width: 834px;
+    height: 225px;
+}
+
+.PI-reply_form_content {
+    width: 800px;
+    height: 200px;
+    resize: none;
+    border: 2px solid rgba(185, 168, 154, 0.5);
+    border-radius: 10px;
+    font-size: 18px;
+    line-height: 30px;
+    background: #FFFFFF;
+    padding: 10px 15px;
+}
+
+.PI-reply_form_content::placeholder {
+    color: #AAAAAA;
+}
+
+.PI-reply_form_content:focus {
+    border-color: #B9A89A;
+    outline: 0;
+}
+
+.PI-reply_form_length {
+    float: left;
+    position: relative;
+    top: -42px;
+    width: 800px;
+    height: 30px;
+    text-align: right;
+    font-size: 17px;
+    line-height: 30px;
+    color: #888888;
+    padding: 0 15px;
+}
+
+.PI-reply_form_btn {
+    float: right;
+    width: 90px;
+    height: 50px;
+    border-radius: 10px;
+    border-width: 0;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 30px;
+    color: #FFFFFF;
+    background-color: #B9A89A;
+}
+
+/* 페이지 번호 */
+.PI-page {
+    height: 30px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    color: rgba(81, 68, 56, 0.5);
+    margin-top: 50px;
+}
+
+.PI-page_now, .PI-page_prev, .PI-page_next {
+    color: rgba(81, 68, 56, 0.8);
+}
+
+.PI-page_total, .PI-page_prev_gray, .PI-page_next_gray {
+    color: rgba(81, 68, 56, 0.5);
+}
+
+.PI-page_prev, .PI-page_prev_gray {
+    margin-right: 20px;
+}
+
+.PI-page_next, .PI-page_next_gray {
+    margin-left: 20px;
+}
+
+.PI-page_prev, .PI-page_next {
+    cursor: pointer;
+}
