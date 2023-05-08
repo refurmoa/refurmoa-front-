@@ -5,12 +5,16 @@ import SignupPhone from "./components/sign/signup/SignupPhone";
 import SignupInput from "./components/sign/signup/SignupInput";
 import SignupAccept from "./components/sign/signup/SignupAccept";
 import SignupComplete from "./components/sign/signup/SignupComplete";
-import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import PostPage from "./components/prodPost/PostPage";
+import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import NoticeList from "./components/cs/NoticeList";
 import NoticeView from "./components/cs/NoticeView";
-import MyPage from "./components/myPage/MyPage";
+import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
+import MyPagePayment from "./components/myPage/MyPagePayment";
+import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
+import UserUpdate from "./components/userUpdate/UserUpdate";
+
 function App() {
   return (
     <>
@@ -25,7 +29,10 @@ function App() {
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
         <Route path="/notice" element={<NoticeList />} />
         <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
-        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/mypage" element={<MyPageBookmarkList />} />
+        <Route path="/userupdate" element={<UserUpdate />} />
+        <Route path="/payment" element={<MyPagePayment />} />
+        <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
       </Routes>
     </>
