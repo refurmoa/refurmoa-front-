@@ -42,7 +42,7 @@ function Signup_phone() {
 
     window.sessionStorage.setItem("name", name);
     window.sessionStorage.setItem("phone", phone);
-    document.location.href = "/signup/3";
+    document.location.href = "/signup/2";
   };
 
   return (
@@ -104,7 +104,7 @@ function Signup_phone() {
           <br />
           인증 이외의 용도로 이용 또는 저장되지 않습니다.
         </div>
-        <Link to="/signup/2">
+        <Link to="/signup/1">
           <button className="SU_phone_btn" onClick={onClick}>
             다음
           </button>
