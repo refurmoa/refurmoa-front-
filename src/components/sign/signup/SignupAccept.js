@@ -2,16 +2,18 @@ import React from "react";
 import "./Signup.css";
 import { Link, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
-import Text1 from "./SignupAcceptText/text1.json";
-import Text2 from "./SignupAcceptText/text2.json";
-import Text3 from "./SignupAcceptText/text3.json";
-import Text4 from "./SignupAcceptText/text4.json";
+import { noticeList } from "./SignupAcceptText";
 const Signup_accept = () => {
   const [check_ALL, setCheck_ALL] = useState(false);
   const [check_box1, setCheck_box1] = useState(false);
   const [check_box2, setCheck_box2] = useState(false);
   const [check_box3, setCheck_box3] = useState(false);
   const [check_box4, setCheck_box4] = useState(false);
+
+  const text1 = noticeList[0].content;
+  const text2 = noticeList[1].content;
+  const text3 = noticeList[2].content;
+  const text4 = noticeList[3].content;
 
   const onCHKALL = (e) => {
     if (e.target.checked) {
@@ -112,7 +114,7 @@ const Signup_accept = () => {
             </tr>
             <tr>
               <td>
-                <textarea className="accepts">{Text1}</textarea>
+                <textarea className="accepts" value={text1} />
               </td>
             </tr>
 
@@ -129,7 +131,7 @@ const Signup_accept = () => {
             </tr>
             <tr>
               <td>
-                <textarea className="accepts">{Text2}</textarea>
+                <textarea className="accepts" value={text2} />
               </td>
             </tr>
             <tr>
@@ -145,7 +147,7 @@ const Signup_accept = () => {
             </tr>
             <tr>
               <td>
-                <textarea className="accepts">{Text3}</textarea>
+                <textarea className="accepts" value={text3} />
               </td>
             </tr>
             <tr>
@@ -161,7 +163,7 @@ const Signup_accept = () => {
             </tr>
             <tr>
               <td>
-                <textarea className="accepts">{Text4}</textarea>
+                <textarea className="accepts" value={text4}></textarea>
               </td>
             </tr>
           </table>
