@@ -1,0 +1,58 @@
+[
+    {
+        "bid_num": 10,
+        "member_id": "admin1",
+        "bid_price": 505000,
+        "bid_date": "2023-04-20 18:16:50",
+        "bid_auto": 0
+    },
+    {
+        "bid_num": 9,
+        "member_id": "idaafd",
+        "bid_price": 500000,
+        "bid_date": "2023-04-20 18:16:50",
+        "bid_auto": 1
+    },
+    {
+        "bid_num": 8,
+        "member_id": "idabcde",
+        "bid_price": 505000,
+        "bid_date": "2023-04-20 18:16:50",
+        "bid_auto": 0
+    },
+    {
+        "bid_num": 7,
+        "member_id": "idabcdedf",
+        "bid_price": 505000,
+        "bid_date": "2023-04-20 18:16:50",
+        "bid_auto": 0
+    },
+    {
+        "bid_num": 6,
+        "member_id": "idde",
+        "bid_price": 505000,
+        "bid_date": "2023-04-20 18:16:50",
+        "bid_auto": 0
+    },
+    {
+        "bid_num": 5,
+        "member_id": "idabcde",
+        "bid_price": 505000,
+        "bid_date": "2023-04-20 18:16:50",
+        "bid_auto": 0
+    },
+    {
+        "bid_num": 4,
+        "member_id": "idabcde",
+        "bid_price": 505000,
+        "bid_date": "2023-04-20 18:16:50",
+        "bid_auto": 0
+    },
+    {
+        "bid_num": 3,
+        "member_id": "idabcde",
+        "bid_price": 505000,
+        "bid_date": "2023-04-20 18:16:50",
+        "bid_auto": 0
+    }
+]
