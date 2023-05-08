@@ -36,7 +36,7 @@ function Signup_complete() {
           <div className="signup_detail">
             * 회원가입 내역 확인 및 수정은
             <br />
-            <b>마이페이지 > 개인정보수정</b>에서 가능합니다.
+            <b>마이페이지 &gt; 개인정보수정</b>에서 가능합니다.
           </div>
           <Link to="/login">
             <button className="SU_input_btn" onClick={onClick}>

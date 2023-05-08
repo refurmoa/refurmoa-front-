@@ -28,9 +28,9 @@ function App() {
         <Route path="/notice" element={<NoticeList />} />
         <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />
+        <Route path="/userupdate" element={<UserUpdate />} />
         <Route path="/payment" element={<MyPagePayment />} />
-        <Route path="/bidlist" element={<MyPageBidlist />} />
-        <Route path="/mypage/update" element={<UserUpdate />} />
+        <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
       </Routes>
     </>

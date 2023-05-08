@@ -71,7 +71,7 @@ const AllianceForm = () => {
   return (
     <>
       <form className="AF_input_form">
-        <div className="SU_Main_header">회원가입</div>
+        <div className="SU_Main_header">파트너 제휴 신청</div>
         <div className="form_wrap">
           <table className="SU_input_table">
             <tr>
@@ -218,7 +218,7 @@ const AllianceForm = () => {
         </div>
         <Link to="/signup/3">
           <button className="SU_input_btn" onClick={onClick}>
-            신청
+            다음
           </button>
         </Link>
       </form>

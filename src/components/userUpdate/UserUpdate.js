@@ -72,7 +72,7 @@ const User_update = () => {
   };
   /*========================== */
   const onClick = () => {
-    if (check_pw && check_id && check_Email && check_box) {
+    if (check_pw && check_id && check_Email) {
       alert("회원정보를 수정하시겠습니까?");
     }
     if (!check_pw) {
@@ -85,10 +85,6 @@ const User_update = () => {
     }
     if (!check_Email) {
       alert("이메일을 입력해주세요!");
-      return false;
-    }
-    if (!check_box) {
-      alert("개인 정보 동의를 체크해주세요!");
       return false;
     }
     console.log(valid_date);
@@ -297,6 +293,7 @@ const User_update = () => {
                   name="domain"
                   onChange={onEmailCHK}
                 >
+                  <option value={domain}>직접 입력</option>
                   <option value="naver.com">naver.com</option>
                   <option value="gmail.com">gmail.com</option>
                   <option value="hanmail.net">hanmail.net</option>
