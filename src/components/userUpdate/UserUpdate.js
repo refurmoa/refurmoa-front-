@@ -88,7 +88,6 @@ const User_update = () => {
       return false;
     }
     console.log(valid_date);
-    window.sessionStorage.setItem("id", id);
   };
   const onIdCHK = (e) => {
     setId(e.target.value);
@@ -416,8 +415,8 @@ const User_update = () => {
               content: {
                 position: "absolute",
                 top: "40px",
-                width: "680px",
-                height: "700px",
+                width: "800px",
+                height: "740px",
                 left: "40px",
                 right: "40px",
                 bottom: "40px",

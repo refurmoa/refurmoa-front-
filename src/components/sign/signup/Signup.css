@@ -72,8 +72,8 @@
 }
 
 .SU_social_btn > button > a > img {
-  width: 50px;
-  height: 58px;
+  width: 60px;
+  height: 60px;
 }
 .SU_naver {
   float: left;
@@ -86,6 +86,10 @@
 .SU_google {
   background: #ffffff;
   float: right;
+}
+.SU_social_btn > button > a > .SU_kakao_img {
+  padding-top: 5px;
+  border-radius: 80px;
 }
 /*=====================이름/ 휴대폰 인증(Signup_phone)========================== */
 .SU_Phone_form {
@@ -117,7 +121,7 @@
 
 .SU_phone_input > tr > td {
   padding-right: 20px;
-  padding-bottom: 5px;
+  padding-bottom: 25px;
   font-size: 25px;
   line-height: 30px;
   color: #514438;
@@ -461,8 +465,8 @@
   border-radius: 40px;
   width: 450px;
   height: 70px;
-  margin-top: 20px;
-  margin-left: 15%;
+  margin-top: 30px;
+  float: center;
   font-style: normal;
   font-weight: 500;
   font-size: 25px;
