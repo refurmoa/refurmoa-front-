@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import productlist from "../shared/prod.json";
@@ -8,8 +8,33 @@ import { getDdayArray } from "../shared/sharedFn";
 const MyPageBookmarkList = () => {
   const navigate = useNavigate();
   const [bookmarkProd, setBookmarkProd] = useState();
+  const searchRef = useRef();
   const [today, setToday] = useState(new Date().getTime()); // 현재날짜(ms) 구하기
 
+  // 검색기능
+  const searchHandler = () => {
+    // console.log(searchRef.current.value);
+    if (searchRef.current.value === "") {
+      return alert("검색어를 입력해 주세요.");
+    }
+    const searchData = {searchword : searchRef.current.value, id: "userID"}
+    console.log(searchData);
+    // axios.post("/api/searchbookmark", searchData)
+    // .then((res) => {
+    //   console.log(res);
+    // })
+    // .catch((e) => {
+    //   console.error(e);
+    // })
+  }
+  // 엔터키
+  const activeEnter = (e) => {
+    if(e.key === "Enter") {
+      searchHandler();
+    }
+  }
+
+  // 남은시간이 12시간보다 적을 경우
   const lessThanTwelve = (ms) => {
     const diff = ms - today;
     const day = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -48,8 +73,8 @@ const MyPageBookmarkList = () => {
     // const data = {board_num: board_num};
     // axios.post("/api/plusreadcount", data)
     // .then((res) => {
-    //   // console.log(res);
-    //   navigate(`/post/detail/${board_num}`);
+      //   // console.log(res);
+      //   navigate(`/post/detail/${board_num}`);
     // })
     // .catch((e) => {
     //   console.error(e);
@@ -64,6 +89,7 @@ const MyPageBookmarkList = () => {
     // axios.post("/api/likehandle", data)
     // .then((res) => {
     //   console.log(res);
+    //   getBookmarkData();
     // })
     // .catch((e) => {
     //   console.error(e);
@@ -98,9 +124,26 @@ const MyPageBookmarkList = () => {
 
   return (
     <>
+    <MemberGradeMileCouponWrapper>
+      <MemberGradeMileCouponBox>
+        <MemberGradeBox></MemberGradeBox>
+        <VerticalLine></VerticalLine>
+        <MemberMileBox></MemberMileBox>
+        <VerticalLine></VerticalLine>
+        <MemberCouponBox></MemberCouponBox>
+      </MemberGradeMileCouponBox>
+    </MemberGradeMileCouponWrapper>
+    <BookmarkListWrapper>
       <TitleAndSearchBox>
         <TitleBox>찜한 상품</TitleBox>
-        <SearchBox><input type="text" /></SearchBox>
+        <SearchBar>
+          <SearchInput>
+            <input type="text" ref={searchRef} onKeyDown={(e) => {activeEnter(e)}}/>
+          </SearchInput>
+          <SearchImg onClick={() => {searchHandler()}}>
+            <img src={`/images/prod/search.png`} alt="searchicon"/>
+          </SearchImg>
+        </SearchBar>
       </TitleAndSearchBox>
       <BookmarkListBox>  
         {bookmarkProd?.map((data) => (
@@ -240,11 +283,66 @@ const MyPageBookmarkList = () => {
           </ProductBox>
         ))}
       </BookmarkListBox>
+      </BookmarkListWrapper>
     </>
   );
 };
 
 export default MyPageBookmarkList;
+
+// 회원등급 마일리지 쿠폰
+const MemberGradeMileCouponWrapper = styled.div`
+  font-family: 'Noto Sans';
+  font-style: normal;
+  width: 1200px;
+  margin: 0px auto;
+  border-bottom: 2px solid #B9AB9A;
+  box-sizing: border-box;
+`;
+
+const MemberGradeMileCouponBox = styled.div`
+  width: 1050px;
+  height: 210px;
+  margin: 0px auto;
+  display: flex;
+  align-items: center;
+  border: 1px solid #dddddd;
+  box-sizing: border-box;
+`;
+
+const MemberGradeBox = styled.div`
+  border: 1px solid #aaaaaa;
+  width: 250px;
+  height: 130px;
+  margin: 0px 75px 0px 0px;
+`;
+
+const MemberMileBox = styled.div`
+  border: 1px solid #aaaaaa;
+  width: 250px;
+  height: 130px;
+  margin: 0px 75px 0px 75px;
+`;
+
+const MemberCouponBox = styled.div`
+  border: 1px solid #aaaaaa;
+  width: 250px;
+  height: 130px;
+  margin: 0px 0px 0px 75px;
+`;
+
+const VerticalLine = styled.div`
+  margin: 0px;
+  height: 100px;
+  border-right: 2px solid rgba(185, 168, 154, 0.5);
+`;
+
+
+// 찜한상품리스트, 검색창
+const BookmarkListWrapper = styled.div`
+  font-family: 'Noto Sans';
+  font-style: normal;
+`;
 
 const TitleAndSearchBox = styled.div`
   width: 1160px;
@@ -262,15 +360,44 @@ const BookmarkListBox = styled.div`
 const TitleBox = styled.div`
   margin: 0px;
   color: #514438;
-  font-family: 'Noto Sans';
-  font-style: normal;
+  
   font-weight: 700;
   font-size: 20px;
   line-height: 25px;
 `;
 
-const SearchBox = styled.div`
+const SearchBar = styled.div`
   margin: 0px;
+  width: 220px;
+  height: 30px;
+  border: 1px solid #B9A89A;
+  border-radius: 15px;
+  
+  display: flex;
+`;
+
+const SearchInput = styled.div`
+  width: 80%;
+  height: 75%;
+  margin: 1px 5px 0px 15px;
+  input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    color: #B9A89A;
+  }
+  input:focus {
+    outline: none;
+  }
+`;
+
+const SearchImg = styled.div`
+  margin: 5px 10px 0px 0px;
+  cursor: pointer;
+  img {
+    color: #B9A89A;
+  }
 `;
 
 const ProductBox = styled.div`
@@ -280,8 +407,6 @@ const ProductBox = styled.div`
   display: inline-block;
   vertical-align: middle;
 
-  font-family: "Noto Sans";
-  font-style: normal;
   :nth-child(4n) {
     margin-right: 0px;
   }
@@ -327,12 +452,12 @@ const DarkCover = styled.div`
     color: rgba(255, 255, 255, 0.6);
 
     font-size: 25px;
-    line-height: 30px;
+    line-height: 280px;
 
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -15px 0 0 -82px;
+    width: 280px;
+    height: 280px;
+    text-align: center;
   }
 `;
 
@@ -348,8 +473,6 @@ const Auction = styled.div`
   top: 10px;
   right: 10px;
 
-  font-family: "Noto Sans";
-  font-style: normal;
   font-weight: 600;
   font-size: 16px;
 `;
@@ -366,15 +489,11 @@ const DirectBuy = styled.div`
   top: 10px;
   right: 10px;
 
-  font-family: "Noto Sans";
-  font-style: normal;
   font-weight: 600;
   font-size: 16px;
 `;
 
 const DirectAndAuction = styled.div`
-  font-family: "Noto Sans";
-  font-style: normal;
   font-weight: 600;
   font-size: 16px;
 
