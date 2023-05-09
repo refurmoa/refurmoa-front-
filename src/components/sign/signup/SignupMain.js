@@ -49,7 +49,7 @@ function Signup_main() {
             </button>
             <button type="button" className="SU_kakao">
               <a href={kakao_api_url}>
-                <img src={kakao} alt="kakao" />
+                <img src={kakao} alt="kakao" className="SU_kakao_img" />
               </a>
             </button>
 

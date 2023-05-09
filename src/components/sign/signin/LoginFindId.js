@@ -1,25 +1,41 @@
 import React from "react";
-import "../sign/signup/Signup.css";
+import "../signup/Signup.css";
 import { Link } from "react-router-dom";
 
 import { useRef, useState } from "react";
 
-const Update_phone = (props) => {
-  const name = props.name;
-  const setPhone = props.setPhone;
-  const setPhone_Mdoal = props.setPhone_Modal;
-  const certi = useRef();
-
-  const onChangePhone = (e) => {
-    setPhone_Mdoal(false);
+const LoginFindId = (props) => {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [certi, setCerti] = useState("");
+  const setMdoal = props.setModal;
+  const onChangeID = (e) => {
+    setMdoal(false);
   };
+  /*
+  axios
+        .get("/findid", {
+          name: name,
+          phone: phone,
+        })
+        .then((res) => {
+          if (res.data === 1) {
+            alert("{name}님의 ID : {res.data}");
+          } else {
+            alert("해당 정보의 아이디는 존재하지 않습니다! 아이디 입니다!");
+          }
+        })
+        .catch((e) => {
+          console.error(e);
+        });
 
+  */
   return (
     <>
-      <form classname="SU_phone_form">
-        <div className="SU_Main_header">전화 번호 변경</div>
-        <div className="SU_phone_form">
-          <table className="SU_phone_input">
+      <div classname="SU_phone_div">
+        <div className="LG_Find_header">ID 찾기</div>
+        <div className="SU_phone_div">
+          <table className="SU_Find_input">
             <tr>
               <td>이름</td>
               <td>
@@ -28,7 +44,7 @@ const Update_phone = (props) => {
                   name="name"
                   type="text"
                   placeholder="이름"
-                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                 />
                 <hr className="SU_phone_line" />
               </td>
@@ -51,25 +67,27 @@ const Update_phone = (props) => {
             <tr>
               <td>&nbsp;</td>
               <td>
-                <input type="text" placeholder="인증번호 입력" ref={certi} />
+                <input
+                  type="text"
+                  placeholder="인증번호 입력"
+                  onChange={(e) => setCerti(e.target.value)}
+                />
                 <hr className="SU_phone_line" />
               </td>
             </tr>
           </table>
         </div>
-        <div className="signup_information">
+        <div className="signup_indivation">
           본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며,
           <br />
           인증 이외의 용도로 이용 또는 저장되지 않습니다.
         </div>
         <div className="UU_button_div">
-          <button className="UU_input_btn" onClick={onChangePhone}>
-            변경
-          </button>
+          <button className="UU_input_btn">ID 찾기</button>
         </div>
-      </form>
+      </div>
     </>
   );
 };
 
-export default Update_phone;
+export default LoginFindId;
