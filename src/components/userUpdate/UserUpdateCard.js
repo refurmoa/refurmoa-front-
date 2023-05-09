@@ -111,10 +111,11 @@ const Update_card = (props) => {
           </tr>
         </table>
       </div>
-
-      <button className="UU_input_btn" onClick={onChangeCard}>
-        다음
-      </button>
+      <div className="UU_button_div">
+        <button className="UU_input_btn" onClick={onChangeCard}>
+          다음
+        </button>
+      </div>
     </>
   );
 };

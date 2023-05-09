@@ -62,7 +62,7 @@ const Update_phone = (props) => {
           <br />
           인증 이외의 용도로 이용 또는 저장되지 않습니다.
         </div>
-        <div>
+        <div className="UU_button_div">
           <button className="UU_input_btn" onClick={onChangePhone}>
             변경
           </button>
