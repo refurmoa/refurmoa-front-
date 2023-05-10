@@ -44,7 +44,9 @@ export const ProductBidlist = ({ product }) => {
       </image>
       <information className="inmargin">
         {day <= 0 && hour < 0 ? (
-          <div className="balckcolorBid">경매 종료</div>
+          <div className="balckcolorBid">
+            <div className="clockiconblack"></div>경매 종료
+          </div>
         ) : day <= 0 && hour <= 5 ? (
           <div className="redcolorBid">
             <div className="clockiconred"></div>
@@ -72,13 +74,16 @@ export const ProductBidlist = ({ product }) => {
             : "경매참여자 : 0 명"}
         </div>
         <price className="priceBid">
-          <div>
-            <span className="priceBidword">나의 입찰가</span>
-            <span className="priceBidnum"> {product.bid_price}원</span>
-          </div>
-          <div>
-            <span className="priceBidword">현재가</span>
-            <span className="priceBidnum"> {product.cur_price}원</span>
+          <div className="pricewrap">
+            <div></div>
+            <div>
+              <div className="priceBidword">나의 입찰가</div>
+              <div className="priceBidword">현재가</div>
+            </div>
+            <div>
+              <div className="priceBidnum"> {product.bid_price}원</div>
+              <div className="priceBidnum"> {product.cur_price}원</div>
+            </div>
           </div>
         </price>
       </information>

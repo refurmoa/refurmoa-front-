@@ -32,6 +32,7 @@ padding: 0;
     width: 80px;
     height: 80px;
     margin: 25px 110px 0 110px;
+    opacity: 0.5;
 }
 
 .membertext {
@@ -44,6 +45,7 @@ padding: 0;
     margin: 45px 110px 0 110px;
     line-height: 40px;
     cursor: pointer;
+    z-index: 1;
 }
 
 .membername {
@@ -90,6 +92,7 @@ padding: 0;
     width: 80px;
     height: 80px;
     margin: 0 111px 35px 109px;
+    opacity: 0.5;
 }
 
 .restnumber1 {
@@ -101,6 +104,7 @@ padding: 0;
     color: #514438;
     margin: 7px 136px 0 135px;
     line-height: 60px;
+    z-index: 1;
 }
 
 .restnumber2 {
@@ -112,6 +116,7 @@ padding: 0;
     color: #514438;
     margin: 5px 121px 0 119px;
     line-height: 60px;
+    z-index: 1;
 }
 
 .borderright {
@@ -154,8 +159,9 @@ padding: 0;
     border: 1px solid #B9A89A;
     border-radius: 15px;
     position: absolute;
-    margin: 40px 0 0 456px;
-    cursor: pointer;
+    margin: 40px 0 0 445px;
+    padding-left: 15px;
+    cursor: text;
 }
 
 .searchboxbutton{
@@ -170,7 +176,7 @@ padding: 0;
     cursor: pointer;
 }
 
-.flex_wrap {
+    .flex_wrap {
     max-width: 1200px;
     display: grid;
     grid-template-columns: repeat(2, 590px);
@@ -194,11 +200,10 @@ padding: 0;
   }
 
   .option {
-    width: 85px;
-    height: 25px;
+    width: 90px;
+    height: 30px;
     color: rgba(81, 68, 56, 0.8);
-    font-size: 15px;
-    line-height: 25px;
+    font-size: 20px;
     text-align: center;
     border-radius: 5px;
   }

@@ -53,20 +53,6 @@ const MyPage_detail = () => {
       searchRef.current.focus();
       return false;
     }
-
-    // axios
-    //   .post("/insertMember", {
-    //     id: searchRef.current.value,
-    //   })
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setProdData(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // const data = prod.prodlist;
-    // setProdbidlistData(data);
   };
 
   const search_all = () => {
