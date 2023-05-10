@@ -36,7 +36,7 @@ function App() {
         <Route path="/payment" element={<MyPagePayment />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
-        <Route path="/postwrite" element={<PostWrite />} />
+        <Route path="/post/write" element={<PostWrite />} />
       </Routes>
     </>
   );
