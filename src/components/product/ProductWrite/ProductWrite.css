@@ -1,0 +1,343 @@
+.PW_form {
+  margin-top: 80px;
+  width: 1200px;
+  height: 780px;
+  text-align: center;
+}
+
+.PW_header {
+  width: 1200px;
+  height: 60px;
+  border-bottom: 3px solid rgba(185, 168, 154, 0.8);
+}
+.PW_image_file {
+  width: 450px;
+  height: 720px;
+  float: left;
+}
+.PW_product_input {
+  width: 750px;
+  height: 720px;
+  float: right;
+}
+.PW_title {
+  float: left;
+  width: 120px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 40px;
+  color: #514438;
+}
+.PW_button {
+  float: right;
+  width: 200px;
+  height: 50px;
+  margin-bottom: 10px;
+}
+.PW_list_btn {
+  width: 95px;
+  height: 50px;
+  border: 2px solid #514438;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  align-items: center;
+  background-color: #fff;
+  color: #514438;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.PW_wrie_btn {
+  width: 95px;
+  height: 50px;
+  background: #514438;
+  border-radius: 10px;
+  font-size: 20px;
+  line-height: 30px;
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+}
+.PW_partner {
+  width: 400;
+  height: 50px;
+  margin: 30px;
+  margin-left: 15px;
+}
+.PW_partner_serach {
+  border: none;
+  width: 265px;
+  height: 45px;
+  border: 1px solid #514438;
+  border-radius: 5px;
+  float: right;
+}
+.PW_search_logo {
+  margin: 13px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.PW_partner_name {
+  float: left;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 50px;
+  color: #000000;
+  margin-right: 20px;
+}
+.PW_partner_input {
+  margin-left: 5px;
+  border: none;
+  float: left;
+  width: 200px;
+  height: 45px;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+}
+.PW_partner_input::placeholder {
+  padding: 15px;
+}
+.PW_partner_input:focus {
+  outline: none !important;
+}
+.PW_image_input {
+  margin-top: 30px;
+  width: 400px;
+  height: 460px;
+}
+.PW_image_show {
+  width: 400px;
+  height: 400px;
+}
+.PW_main_input > input {
+  margin-top: 25px;
+  float: left;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #000000;
+}
+
+.PW_main_input > ::-webkit-file-upload-button {
+  width: 119px;
+  height: 40px;
+  background: #dddddd;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+  margin-right: 20px;
+  border: none;
+}
+.PW_product_category {
+  margin-top: 30px;
+  width: 700px;
+  height: 50px;
+}
+.PW_product_input_header {
+  width: 100px;
+  float: left;
+  text-align: left;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 50px;
+  color: #000000;
+}
+.PW_product_input_select {
+  width: 600px;
+  height: 50px;
+  float: right;
+}
+.PW_category {
+  width: 210px;
+  height: 45px;
+  float: left;
+  border: 1px solid #514438;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 45px;
+  padding-left: 10px;
+  margin-right: 15px;
+  color: #666666;
+}
+.PW_detail_category {
+  width: 260px;
+  height: 45px;
+  float: left;
+  border: 1px solid #514438;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 45px;
+  padding-left: 10px;
+  margin-right: 15px;
+  color: #666666;
+}
+.PW_produce_code {
+  width: 90px;
+  height: 50px;
+  float: left;
+  background: rgba(185, 185, 185, 0.1);
+  border: none;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+  padding-left: 5px;
+}
+
+.PW_produce_code:focus {
+  outline: none !important;
+}
+.PW_produce_code::placeholder {
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+  color: #666666;
+}
+.PW_product_name {
+  margin-top: 30px;
+  width: 700px;
+  height: 130px;
+}
+.PW_product_name_header {
+  padding-left: 10px;
+  float: left;
+}
+.PW_product_name_input {
+  width: 590px;
+  height: 50px;
+  float: right;
+  display: block;
+  background: rgba(185, 185, 185, 0.1);
+  border: none;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+}
+.PW_product_name_input:focus {
+  outline: none !important;
+}
+.PW_product_name_input::placeholder {
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+  color: #666666;
+}
+.PW_product_price {
+  padding-left: 10px;
+  float: right;
+  width: 590px;
+  height: 50px;
+  background: rgba(185, 185, 185, 0.1);
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+  color: #000000;
+}
+.PW_product_price_input {
+  width: 540px;
+  height: 50px;
+  float: left;
+  display: block;
+  background: rgba(240, 240, 240, 0.1);
+  border: none;
+  margin-bottom: 30px;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+  text-align: right;
+}
+.PW_product_price_input:focus {
+  outline: none !important;
+}
+.PW_product_state {
+  float: left;
+  padding-left: 15px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+  color: #000000;
+}
+
+.PW_state {
+  width: 20px;
+  height: 20px;
+}
+
+.PW_state_other {
+  width: 20px;
+  height: 20px;
+  margin-left: 30px;
+}
+
+.PW_product_defect {
+  float: left;
+  padding: 5px;
+}
+.PW_defect_image {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+}
+.PW_defect_image::-webkit-file-upload-button {
+  width: 119px;
+  height: 40px;
+  background: #dddddd;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #000000;
+  cursor: pointer;
+  margin-right: 20px;
+}
+.PW_defect_content {
+  margin-top: 20px;
+  width: 590px;
+  height: 190px;
+  float: right;
+  margin-right: 30px;
+}
+.PW_defect_content > span {
+  float: right;
+}
+.PW_product_defect_content {
+  width: 590px;
+  height: 150px;
+  float: right;
+  padding-left: 5px;
+  background: rgba(185, 185, 185, 0.1);
+  border: none;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+}
+.PW_product_defect_content:focus {
+  outline: none !important;
+}
+.PW_defect_img {
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+  margin-top: 15px;
+  float: left;
+}

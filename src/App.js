@@ -5,6 +5,7 @@ import SignupPhone from "./components/sign/signup/SignupPhone";
 import SignupInput from "./components/sign/signup/SignupInput";
 import SignupAccept from "./components/sign/signup/SignupAccept";
 import SignupComplete from "./components/sign/signup/SignupComplete";
+import ProductWrite from "./components/product/ProductWrite/ProductWrite";
 import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import NoticeList from "./components/cs/NoticeList";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/signup/2" element={<SignupInput />} />
         <Route path="/signup/3" element={<SignupAccept />} />
         <Route path="/signup/4" element={<SignupComplete />} />
+        <Route path="/prod/write" element={<ProductWrite />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
         <Route path="/notice" element={<NoticeList />} />
