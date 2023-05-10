@@ -15,8 +15,7 @@ import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
 import UserUpdate from "./components/userUpdate/UserUpdate";
-
-import PostWrite from "./components/prodPost/PostWrite/PostWrite";
+import ProductWrite from "./components/product/ProductWrite/ProductWrite";
 function App() {
   return (
     <>
@@ -36,7 +35,7 @@ function App() {
         <Route path="/payment" element={<MyPagePayment />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
-        <Route path="/postwrite" element={<PostWrite />} />
+        <Route path="/product/write" element={<ProductWrite />} />
       </Routes>
     </>
   );

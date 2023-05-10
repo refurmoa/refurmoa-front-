@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import "./PostWrite.css";
+import "./ProductWrite.css";
 import searchIcon from "../../../images/serach.png";
+import alt_img from "../../../images/alt_image.PNG";
 import axios from "axios";
 function PostWrite() {
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
-  let [main_Image, setMainImg] = useState("");
+  let [main_Image, setMainImg] = useState(alt_img);
   const [code, setCode] = useState("");
   const [prod_com, setProd_com] = useState("");
   const [prod_name, setProd_name] = useState("");
