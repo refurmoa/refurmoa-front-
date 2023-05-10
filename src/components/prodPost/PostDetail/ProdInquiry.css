@@ -60,6 +60,15 @@
     padding: 0 15px;
 }
 
+.PI-form_content::-webkit-scrollbar {
+    width: 7px;
+}
+
+.PI-form_content::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background: #D9D9D9;
+}
+
 .PI-form_btn_wrap {
     float: right;
     width: 95px;
@@ -180,6 +189,10 @@
     cursor: pointer;
 }
 
+.PI-delete:hover {
+    color: #888888;
+}
+
 .PI-date {
     width: 95px;
     text-align: right;
@@ -267,6 +280,15 @@
     line-height: 30px;
     color: #888888;
     padding: 0 15px;
+}
+
+.PI-reply_form_content::-webkit-scrollbar {
+    width: 7px;
+}
+
+.PI-reply_form_content::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background: #D9D9D9;
 }
 
 .PI-reply_form_btn {
