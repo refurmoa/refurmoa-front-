@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import productlist from "../shared/prod.json";
 import { getDdayArray } from "../shared/sharedFn";
+import GradeMileCoupon from "./GradeMileCoupon";
 
 const MyPageBookmarkList = () => {
   const navigate = useNavigate();
@@ -124,15 +125,8 @@ const MyPageBookmarkList = () => {
 
   return (
     <>
-    <MemberGradeMileCouponWrapper>
-      <MemberGradeMileCouponBox>
-        <MemberGradeBox></MemberGradeBox>
-        <VerticalLine></VerticalLine>
-        <MemberMileBox></MemberMileBox>
-        <VerticalLine></VerticalLine>
-        <MemberCouponBox></MemberCouponBox>
-      </MemberGradeMileCouponBox>
-    </MemberGradeMileCouponWrapper>
+    {/* 회원등급, 마일리지, 쿠폰 */}
+    <GradeMileCoupon />
     <BookmarkListWrapper>
       <TitleAndSearchBox>
         <TitleBox>찜한 상품</TitleBox>
@@ -289,54 +283,6 @@ const MyPageBookmarkList = () => {
 };
 
 export default MyPageBookmarkList;
-
-// 회원등급 마일리지 쿠폰
-const MemberGradeMileCouponWrapper = styled.div`
-  font-family: 'Noto Sans';
-  font-style: normal;
-  width: 1200px;
-  margin: 0px auto;
-  border-bottom: 2px solid #B9AB9A;
-  box-sizing: border-box;
-`;
-
-const MemberGradeMileCouponBox = styled.div`
-  width: 1050px;
-  height: 210px;
-  margin: 0px auto;
-  display: flex;
-  align-items: center;
-  border: 1px solid #dddddd;
-  box-sizing: border-box;
-`;
-
-const MemberGradeBox = styled.div`
-  border: 1px solid #aaaaaa;
-  width: 250px;
-  height: 130px;
-  margin: 0px 75px 0px 0px;
-`;
-
-const MemberMileBox = styled.div`
-  border: 1px solid #aaaaaa;
-  width: 250px;
-  height: 130px;
-  margin: 0px 75px 0px 75px;
-`;
-
-const MemberCouponBox = styled.div`
-  border: 1px solid #aaaaaa;
-  width: 250px;
-  height: 130px;
-  margin: 0px 0px 0px 75px;
-`;
-
-const VerticalLine = styled.div`
-  margin: 0px;
-  height: 100px;
-  border-right: 2px solid rgba(185, 168, 154, 0.5);
-`;
-
 
 // 찜한상품리스트, 검색창
 const BookmarkListWrapper = styled.div`
