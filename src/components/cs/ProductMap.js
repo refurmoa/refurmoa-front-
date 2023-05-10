@@ -1,11 +1,12 @@
 import { useEffect } from "react";
+import marker from "./marker.json";
 
 const { kakao } = window;
 
-export const KakaoMap = ({ marker }) => {
+export const ProductMap = ({}) => {
   useEffect(() => {
     mapscript();
-  });
+  }, []);
 
   const mapscript = () => {
     let container = document.getElementById("map");
@@ -16,14 +17,18 @@ export const KakaoMap = ({ marker }) => {
     //map
     const map = new kakao.maps.Map(container, options);
 
-    // 마커를 생성합니다
-    new kakao.maps.Marker({
-      //마커가 표시 될 지도
-      map: map,
-      //마커가 표시 될 위치
-      position: new kakao.maps.LatLng(marker.lat, marker.lng),
+    marker.placelist.map((marker) => {
+      // 마커를 생성합니다
+      new kakao.maps.Marker({
+        //마커가 표시 될 지도
+        map: map,
+        //마커가 표시 될 위치
+        position: new kakao.maps.LatLng(marker.lat, marker.lng),
+        //마커에 hover시 나타날 title
+        title: marker.title,
+      });
     });
   };
 
-  return <div id="map" style={{ width: "510px", height: "400px" }}></div>;
+  return <div id="map" style={{ width: "520px", height: "410px" }}></div>;
 };

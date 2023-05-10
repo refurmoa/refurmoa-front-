@@ -14,13 +14,13 @@ export const ProductPayment = ({ product }) => {
     });
   };
 
-  const pay = () => {
-    navigate("/post/pay", { state: { product_code: product.product_code } });
+  const pay = (product_code) => {
+    navigate("/post/pay", { state: { product_code: product_code } });
   };
 
-  const delivery = () => {
+  const delivery = (product_code) => {
     navigate("/payment/detail", {
-      state: { product_code: product.product_code },
+      state: { product_code: product_code },
     });
   };
 
