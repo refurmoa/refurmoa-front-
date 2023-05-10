@@ -35,6 +35,7 @@
   float: right;
   width: 200px;
   height: 50px;
+  margin-right: 30px;
   margin-bottom: 10px;
 }
 .PW_list_btn {
@@ -63,14 +64,14 @@
   cursor: pointer;
 }
 .PW_partner {
-  width: 400;
+  width: 400px;
   height: 50px;
   margin: 30px;
-  margin-left: 15px;
+  margin-left: 20px;
 }
 .PW_partner_serach {
   border: none;
-  width: 265px;
+  width: 260px;
   height: 45px;
   border: 1px solid #514438;
   border-radius: 5px;
@@ -88,32 +89,44 @@
   font-size: 25px;
   line-height: 50px;
   color: #000000;
-  margin-right: 20px;
 }
 .PW_partner_input {
-  margin-left: 5px;
+  padding-left: 15px;
   border: none;
   float: left;
-  width: 200px;
+  width: 190px;
   height: 45px;
   font-weight: 400;
   font-size: 25px;
-  line-height: 50px;
+  line-height: 45px;
 }
-.PW_partner_input::placeholder {
-  padding: 15px;
-}
+
 .PW_partner_input:focus {
   outline: none !important;
 }
 .PW_image_input {
   margin-top: 30px;
+  margin-left: 20px;
   width: 400px;
   height: 460px;
 }
-.PW_image_show {
+.PW_image_none {
   width: 400px;
   height: 400px;
+  line-height: 400px;
+  text-align: center;
+  background: #dddddd;
+  margin: 0 auto;
+}
+.PW_image_show > img {
+  width: 400px;
+  height: 400px;
+}
+.PW_image_none > img {
+  max-width: 100px;
+  max-height: 100px;
+  vertical-align: middle;
+  opacity: 0.3;
 }
 .PW_main_input > input {
   margin-top: 25px;
@@ -133,7 +146,7 @@
   border-radius: 10px;
   font-weight: 600;
   font-size: 20px;
-  line-height: 30px;
+  line-height: 40px;
   text-align: center;
   color: #000000;
   cursor: pointer;
@@ -188,7 +201,7 @@
 .PW_produce_code {
   width: 90px;
   height: 50px;
-  float: left;
+  float: right;
   background: rgba(185, 185, 185, 0.1);
   border: none;
   font-weight: 400;
@@ -275,18 +288,30 @@
 }
 
 .PW_state {
+  line-height: 50px;
+  margin-top: 15px;
   width: 20px;
   height: 20px;
+  accent-color: #514438;
+  float: left;
 }
-
+.PW_product_state > label {
+  margin-left: 15px;
+  width: 50px;
+  float: left;
+}
 .PW_state_other {
+  margin-top: 15px;
   width: 20px;
   height: 20px;
   margin-left: 30px;
+  accent-color: #514438;
+  float: left;
 }
 
 .PW_product_defect {
   float: left;
+  margin-left: 5px;
   padding: 5px;
 }
 .PW_defect_image {
@@ -303,7 +328,7 @@
   border-radius: 10px;
   font-weight: 600;
   font-size: 20px;
-  line-height: 30px;
+  line-height: 40px;
   text-align: center;
   color: #000000;
   cursor: pointer;
@@ -320,24 +345,44 @@
   float: right;
 }
 .PW_product_defect_content {
-  width: 590px;
-  height: 150px;
+  width: 560px;
+  height: 130px;
   float: right;
-  padding-left: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background: rgba(185, 185, 185, 0.1);
   border: none;
   font-weight: 400;
   font-size: 20px;
   line-height: 30px;
   color: #000000;
+  resize: none;
 }
 .PW_product_defect_content:focus {
   outline: none !important;
 }
+
 .PW_defect_img {
   width: 100px;
   height: 100px;
   margin-right: 20px;
   margin-top: 15px;
   float: left;
+}
+.PW_countInput {
+  margin-top: -35px;
+  line-height: 25px;
+  height: 25px;
+  margin-right: 15px;
+  color: #666666;
+}
+.PW_product_defect_content::-webkit-scrollbar {
+  width: 7px;
+}
+
+.PW_product_defect_content::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background: #d9d9d9;
 }

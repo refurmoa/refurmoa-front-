@@ -2,12 +2,12 @@ import React from "react";
 import { useState } from "react";
 import "./ProductWrite.css";
 import searchIcon from "../../../images/serach.png";
-import alt_img from "../../../images/alt_image.PNG";
+import alt_img from "../../../images/alt_image1.png";
 import axios from "axios";
 function PostWrite() {
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
-  let [main_Image, setMainImg] = useState(alt_img);
+  let [main_Image, setMainImg] = useState("");
   const [code, setCode] = useState("");
   const [prod_com, setProd_com] = useState("");
   const [prod_name, setProd_name] = useState("");
@@ -18,6 +18,7 @@ function PostWrite() {
   const [reg_date, setReg_date] = useState("");
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
+  let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
 
@@ -127,8 +128,8 @@ function PostWrite() {
     setOrg_price(str);
   };
   /*===============================================*/
-  /*
-  const onFileUpload = (e) => {
+
+  const Product_write = (e) => {
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     console.log("fileList=>" + listFile);
     listFile.forEach((file) => {
@@ -139,23 +140,27 @@ function PostWrite() {
     if (listFile.length === 0) {
       alert("상품 사진을 하나 이상 등록해 주세요.");
     }
-    var boardNum = 0;
 
-    // 프록시 문제로 URL이 전체 다 작성되어있음.
-    // 동작 안되면 "http://localhost:8080" 부분 제거해 주세요
     axios
-      .post("/upload", {
-        id: sessionStorage.getItem("id"),
-        subject: document.getElementById("title").value,
-        location: document.getElementById("location").value,
-        price: document.getElementById("price").value,
-        content: document.getElementById("content").value,
+      .post("/product/write", {
+        CATEGORY_CODE: cate_code,
+        CATEGORY: cate + code,
+        MAIN_IMAGE: main_Image,
+        PROD_COM: prod_com,
+        PROD_NAME: prod_name,
+        PROD_GRADE: prod_Grade,
+        ORG_PRICE: org_price,
+        GUARANTEE: guarantee,
+        DEFFECT_TEXT: defect_text,
+        DEFFECT_IMAGE1: showImages[0],
+        DEFFECT_IMAGE2: showImages[1],
+        DEFFECT_IMAGE3: showImages[2],
+        REG_DATE: new Date(),
       })
       .then((res) => {
         console.log(res);
         console.log(res.data);
         console.log("upload request");
-        boardNum = res.data;
       })
       .catch((e) => {
         console.error(e);
@@ -169,21 +174,22 @@ function PostWrite() {
             console.log("uploadfile request");
             alert("작성이 완료되었습니다!");
             setFileDataList(res.data);
-            document.location.href = "/home";
           })
           .catch((e) => {
             console.error(e);
           });
       });
   };
-  */
+
   return (
     <div className="PW_form">
       <div className="PW_header">
         <div className="PW_title">상품 등록</div>
         <div className="PW_button">
           <button className="PW_list_btn">목록</button>
-          <button className="PW_wrie_btn">등록</button>
+          <button className="PW_wrie_btn" onClick={Product_write}>
+            등록
+          </button>
         </div>
       </div>
       <div className="PW_image_file">
@@ -199,21 +205,21 @@ function PostWrite() {
           </div>
         </div>
         <div className="PW_image_input">
-          <div className="PW_image_show">
-            {" "}
-            <img
-              alt="메인사진"
-              src={main_Image}
-              className="PW_image_show"
-            ></img>
-          </div>
+          {main_Image === "" ? (
+            <div className="PW_image_none">
+              <img alt="메인사진" src={alt_img} />
+            </div>
+          ) : (
+            <div className="PW_image_show">
+              <img alt="메인사진" src={main_Image} />
+            </div>
+          )}
+
           <div className="PW_main_input">
-            {" "}
             <input
               type="file"
               id="image"
               accept="image/*"
-              multiple
               onChange={setPreviewImg}
             />
           </div>
@@ -297,21 +303,21 @@ function PostWrite() {
               onClick={onCHKS}
               checked={S}
             />
-            &nbsp; S급
+            &nbsp; <label>S급</label>
             <input
               type="checkbox"
               className="PW_state_other"
               onClick={onCHKA}
               checked={A}
             />
-            &nbsp; A급
+            &nbsp; <label>A급</label>
             <input
               type="checkbox"
               className="PW_state_other"
               onClick={onCHKB}
               checked={B}
             />
-            &nbsp; B급
+            &nbsp; <label>B급</label>
           </div>
         </div>
         <div className="PW_product_category">
@@ -323,14 +329,14 @@ function PostWrite() {
               onClick={onExist}
               checked={exist}
             />
-            &nbsp; 있음
+            &nbsp; <label>있음</label>
             <input
               type="checkbox"
               className="PW_state_other"
               onClick={onNotExist}
               checked={notexist}
             />
-            &nbsp; 없음
+            &nbsp;<label>없음</label>
           </div>
         </div>
         <div className="PW_product_category">
@@ -366,7 +372,7 @@ function PostWrite() {
             onChange={onInputHandler}
             maxLength="200"
           />
-          <span>{inputCount}/200</span>
+          <span className="PW_countInput">{inputCount}/200</span>
         </div>
       </div>
     </div>
