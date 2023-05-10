@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
+// 이미지파일 import
+import infoicon from "../../images/info_icon_brown-240.png"
+
 const GradeMileCoupon = () => {
   return (
     <MemberGradeMileCouponWrapper>
@@ -9,7 +12,7 @@ const GradeMileCoupon = () => {
           <GradeTitleAndInfoBox>
             <GradeTitle>회원등급</GradeTitle>
             <GradeInfo>
-              <img src="/images/mypage/info_icon.png" alt="gradeinfo" />
+              <img src={infoicon} alt="gradeinfo" />
             </GradeInfo>
           </GradeTitleAndInfoBox>
           <GradeBox>
@@ -22,7 +25,7 @@ const GradeMileCoupon = () => {
             <MileTitleAndInfoBox>
               <MileTitle>마일리지</MileTitle>
               <MileInfo>
-                <img src="/images/mypage/info_icon.png" alt="gradeinfo" />
+                <img src={infoicon} alt="gradeinfo" />
               </MileInfo>
             </MileTitleAndInfoBox>
             <MileAmount>32,556</MileAmount>
@@ -96,7 +99,12 @@ const GradeTitle = styled.div`
 `;
 
 const GradeInfo = styled.div`
+  height: 25px;
   margin-left: 10px;
+  img {
+    width: 25px;
+    height: 25px;
+  }
 `;
 
 const GradeBox = styled.div``;
@@ -136,7 +144,12 @@ const MileTitle = styled.div`
 `;
 
 const MileInfo = styled.div`
+  height: 25px;
   margin-left: 10px;
+  img {
+    width: 25px;
+    height: 25px;
+  }
 `;
 
 const MileAmount = styled.div`
