@@ -5,8 +5,8 @@ import SignupPhone from "./components/sign/signup/SignupPhone";
 import SignupInput from "./components/sign/signup/SignupInput";
 import SignupAccept from "./components/sign/signup/SignupAccept";
 import SignupComplete from "./components/sign/signup/SignupComplete";
+import ProductWrite from "./components/product/ProductWrite/ProductWrite";
 import PostPage from "./components/prodPost/PostPage";
-
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import NoticeList from "./components/cs/NoticeList";
 import NoticeView from "./components/cs/NoticeView";
@@ -15,7 +15,7 @@ import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
 import UserUpdate from "./components/userUpdate/UserUpdate";
-import ProductWrite from "./components/product/ProductWrite/ProductWrite";
+
 function App() {
   return (
     <>
@@ -26,6 +26,7 @@ function App() {
         <Route path="/signup/2" element={<SignupInput />} />
         <Route path="/signup/3" element={<SignupAccept />} />
         <Route path="/signup/4" element={<SignupComplete />} />
+        <Route path="/prod/write" element={<ProductWrite />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
         <Route path="/notice" element={<NoticeList />} />
@@ -35,7 +36,6 @@ function App() {
         <Route path="/payment" element={<MyPagePayment />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
-        <Route path="/product/write" element={<ProductWrite />} />
       </Routes>
     </>
   );
