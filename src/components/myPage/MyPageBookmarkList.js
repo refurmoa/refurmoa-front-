@@ -4,6 +4,14 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import productlist from "../shared/prod.json";
 import { getDdayArray } from "../shared/sharedFn";
+import GradeMileCoupon from "./GradeMileCoupon";
+
+// 이미지파일 import
+import timeicon from "../../images/time_icon.png";
+import timeredicon from "../../images/time_icon_red.png";
+import star_icon_line from "../../images/star_icon_line-240.png";
+import star_icon_filled from "../../images/star_icon_filled-240.png";
+import searchicon from "../../images/search.png"
 
 const MyPageBookmarkList = () => {
   const navigate = useNavigate();
@@ -124,15 +132,8 @@ const MyPageBookmarkList = () => {
 
   return (
     <>
-    <MemberGradeMileCouponWrapper>
-      <MemberGradeMileCouponBox>
-        <MemberGradeBox></MemberGradeBox>
-        <VerticalLine></VerticalLine>
-        <MemberMileBox></MemberMileBox>
-        <VerticalLine></VerticalLine>
-        <MemberCouponBox></MemberCouponBox>
-      </MemberGradeMileCouponBox>
-    </MemberGradeMileCouponWrapper>
+    {/* 회원등급, 마일리지, 쿠폰 */}
+    <GradeMileCoupon />
     <BookmarkListWrapper>
       <TitleAndSearchBox>
         <TitleBox>찜한 상품</TitleBox>
@@ -141,7 +142,7 @@ const MyPageBookmarkList = () => {
             <input type="text" ref={searchRef} onKeyDown={(e) => {activeEnter(e)}}/>
           </SearchInput>
           <SearchImg onClick={() => {searchHandler()}}>
-            <img src={`/images/prod/search.png`} alt="searchicon"/>
+            <img src={searchicon} alt="searchicon"/>
           </SearchImg>
         </SearchBar>
       </TitleAndSearchBox>
@@ -171,13 +172,13 @@ const MyPageBookmarkList = () => {
                 <StarIcon
                   onClick={(event) => likeHandler(event, data.board_num)}
                 >
-                  <img src="images/prod/star_icon.png" alt="staricon" />
+                  <img src={star_icon_line} alt="staricon" />
                 </StarIcon>
               ) : (
                 <StarIcon
                   onClick={(event) => likeHandler(event, data.board_num)}
                 >
-                  <img src="images/prod/star_icon_filled.png" alt="staricon" />
+                  <img src={star_icon_filled} alt="staricon" />
                 </StarIcon>
               )}
 
@@ -202,7 +203,7 @@ const MyPageBookmarkList = () => {
               (Date.parse(data.end_date) > today) &
               (lessThanTwelve(Date.parse(data.end_date)) !== true) ? (
                 <TimeBox>
-                  <img src="images/prod/time_icon.png" alt="timeicon" />
+                  <img src={timeicon} alt="timeicon" />
                   {getDday(data)}
                 </TimeBox>
               ) : null}
@@ -213,7 +214,7 @@ const MyPageBookmarkList = () => {
               (Date.parse(data.end_date) > today) &
               (lessThanTwelve(Date.parse(data.end_date)) === true) ? (
                 <RedTimeBox>
-                  <img src="images/prod/time_icon_red.png" alt="timeicon" />
+                  <img src={timeredicon} alt="timeicon" />
                   {getDday(data)}
                 </RedTimeBox>
               ) : null}
@@ -221,7 +222,7 @@ const MyPageBookmarkList = () => {
               {/* 경매오픈예정 상품 */}
               {Date.parse(data.start_date) > today && (
                 <TimeBox>
-                  <img src="images/prod/time_icon.png" alt="timeicon" />
+                  <img src={timeicon} alt="timeicon" />
                   {getDday(data)}
                 </TimeBox>
               )}
@@ -234,14 +235,14 @@ const MyPageBookmarkList = () => {
               {/* 판매완료(상품현황: 2) 상품 */}
               {data.prod_state === 2 && (
                 <TimeBox>
-                  <img src="images/prod/time_icon.png" alt="timeicon" />
+                  <img src={timeicon} alt="timeicon" />
                   판매종료
                 </TimeBox>
               )}
               {/* 판매완료(상품현황1이지만 경매종료일 지난) 상품 */}
               {(data.prod_state === 1) & (Date.parse(data.end_date) < today) ? (
                 <TimeBox>
-                  <img src="images/prod/time_icon.png" alt="timeicon" />
+                  <img src={timeicon} alt="timeicon" />
                   판매종료
                 </TimeBox>
               ) : null}
@@ -289,54 +290,6 @@ const MyPageBookmarkList = () => {
 };
 
 export default MyPageBookmarkList;
-
-// 회원등급 마일리지 쿠폰
-const MemberGradeMileCouponWrapper = styled.div`
-  font-family: 'Noto Sans';
-  font-style: normal;
-  width: 1200px;
-  margin: 0px auto;
-  border-bottom: 2px solid #B9AB9A;
-  box-sizing: border-box;
-`;
-
-const MemberGradeMileCouponBox = styled.div`
-  width: 1050px;
-  height: 210px;
-  margin: 0px auto;
-  display: flex;
-  align-items: center;
-  border: 1px solid #dddddd;
-  box-sizing: border-box;
-`;
-
-const MemberGradeBox = styled.div`
-  border: 1px solid #aaaaaa;
-  width: 250px;
-  height: 130px;
-  margin: 0px 75px 0px 0px;
-`;
-
-const MemberMileBox = styled.div`
-  border: 1px solid #aaaaaa;
-  width: 250px;
-  height: 130px;
-  margin: 0px 75px 0px 75px;
-`;
-
-const MemberCouponBox = styled.div`
-  border: 1px solid #aaaaaa;
-  width: 250px;
-  height: 130px;
-  margin: 0px 0px 0px 75px;
-`;
-
-const VerticalLine = styled.div`
-  margin: 0px;
-  height: 100px;
-  border-right: 2px solid rgba(185, 168, 154, 0.5);
-`;
-
 
 // 찜한상품리스트, 검색창
 const BookmarkListWrapper = styled.div`
