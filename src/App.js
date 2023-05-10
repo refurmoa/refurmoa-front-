@@ -33,7 +33,7 @@ function App() {
         <Route path="/cs/as_store" element={<AsStore />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />
         <Route path="/userupdate" element={<UserUpdate />} />
-        <Route path="/payment" element={<MyPagePayment />} />
+        <Route path="/mypage/payment" element={<MyPagePayment />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
       </Routes>
