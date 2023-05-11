@@ -167,7 +167,7 @@ const MyPage_detail = () => {
         </member>
         <line className="borderright"></line>
         <payment className="resttop">
-          <Link to="/payment">
+          <Link to="/mypage/payment">
             <div className="resttext">결제 · 배송</div>
             <div className="restnumber1">2</div>
             {/* <div className="restnumber1">{res1}</div> */}
@@ -204,13 +204,13 @@ const MyPage_detail = () => {
           <label onClick={search_done}>종료</label>
         </radio>
         <select className="option">
-          <option value="3" onClick={search_3}>
+          <option value="3" onChange={search_3}>
             3개월
           </option>
-          <option value="6" onClick={search_6}>
+          <option value="6" onChange={search_6}>
             6개월
           </option>
-          <option value="12" onClick={search_9}>
+          <option value="12" onChange={search_9}>
             12개월
           </option>
         </select>
