@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { getDdayArray } from "../shared/sharedFn";
 
-// 이미지파일 import
+// 이미지파일
 import timeicon from "../../images/time_icon.png";
 import timeredicon from "../../images/time_icon_red.png";
 import star_icon_line from "../../images/star_icon_line-240.png";
@@ -54,7 +54,7 @@ const ProdPost = ({ filter }) => {
     event.stopPropagation(); // 이벤트 버블링 막기
     const data = { board_num: board_num, id: "회원정보" };
     console.log(data);
-    // axios.post("/api/likehandle", data)
+    // axios.post("/api/like", data)
     // .then((res) => {
     //   console.log(res);
     //   getProdData();
