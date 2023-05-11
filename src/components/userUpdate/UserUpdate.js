@@ -88,6 +88,7 @@ const User_update = () => {
       return false;
     }
     console.log(valid_date);
+    window.sessionStorage.setItem("id", id);
   };
   const onIdCHK = (e) => {
     setId(e.target.value);
@@ -168,14 +169,13 @@ const User_update = () => {
                   style={{
                     overlay: {
                       position: "fixed",
-
-                      backgroundColor: "rgba(255, 255, 255, 0.75)",
+                      backgroundColor: "rgba(0, 0, 0, 0.75)",
                     },
                     content: {
                       position: "absolute",
-                      top: "40px",
+                      top: "18%",
                       width: "600px",
-                      height: "500px",
+                      height: "550px",
                       left: "40px",
                       right: "40px",
                       bottom: "40px",
@@ -185,7 +185,7 @@ const User_update = () => {
                       WebkitOverflowScrolling: "touch",
                       borderRadius: "15px",
                       outline: "none",
-                      padding: "20px",
+                      padding: "30px",
                     },
                   }}
                   isOpen={Phone_modal}
@@ -326,12 +326,11 @@ const User_update = () => {
                   style={{
                     overlay: {
                       position: "fixed",
-
-                      backgroundColor: "rgba(255, 255, 255, 0.75)",
+                      backgroundColor: "rgba(0, 0, 0, 0.75)",
                     },
                     content: {
                       position: "absolute",
-                      top: "40px",
+                      top: "25%",
                       width: "450px",
                       height: "430px",
                       left: "40px",
@@ -409,17 +408,16 @@ const User_update = () => {
             style={{
               overlay: {
                 position: "fixed",
-
-                backgroundColor: "rgba(255, 255, 255, 0.75)",
+                backgroundColor: "rgba(0, 0, 0, 0.75)",
               },
               content: {
                 position: "absolute",
-                top: "40px",
+                top: "10%",
                 width: "800px",
                 height: "740px",
                 left: "40px",
                 right: "40px",
-                bottom: "40px",
+
                 border: "1px solid #ccc",
                 background: "#fff",
                 overflow: "auto",
