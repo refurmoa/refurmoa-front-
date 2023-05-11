@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+
+// 더미데이터
 import infodata from "./grademilecoupon.json";
 
-// 이미지파일 import
+// 이미지파일
 import infoicon from "../../images/info_icon_brown-240.png"
 
 const GradeMileCoupon = () => {
@@ -46,8 +48,10 @@ const GradeMileCoupon = () => {
     let history = data.mile.history;
     for (let i=0; i < data.mile.history.length; i++) {
       history[i].point = history[i].point.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      // 양수(+), 음수(-)표시
       if (history[i].point.includes("-")) {
         history[i].point = history[i].point.replace("-", "- ");
+      } else if(history[i].point.includes("+")) {
       } else {
         history[i].point = "+ " + history[i].point;
       }
@@ -72,13 +76,13 @@ const GradeMileCoupon = () => {
     // axios.post("/api/getmembership", id)
     // .then((res) => {
     //   const {data} = res;
-    //   setMembershipInfo(data);
+    //   setMembershipInfo(dataProcess(data));
     // })
     // .catch((e) => {
     //   console.error(e);
     // })
     let data = infodata;
-    console.log(data);
+    // console.log(data);
     setMembershipInfo(dataProcess(data));
   }
 
@@ -97,19 +101,21 @@ const GradeMileCoupon = () => {
             </GradeInfo>
           </GradeTitleAndInfoBox>
           <GradeBox>
-            <Grade>{membershipInfo?.membergrade.grade}</Grade>
+            <Grade grade={membershipInfo?.membergrade.grade}>{membershipInfo?.membergrade.grade}</Grade>
             <GradeBar>
               <GradeInnerBar grade={membershipInfo?.membergrade.grade} persent={membershipInfo?.membergrade.persent} />
             </GradeBar>
             {/* 회원등급이 VVIP이면 다음 등급까지 남은 액수 나타나지 않게 조건부 렌더링 */}
             {/* 등급별 최대 액수 - 현재 구매 액수 계산 후 3자리마다 콤마찍는 정규식 활용 */}
-            {membershipInfo?.membergrade.grade === "VVIP" ? (<></>) : (
+            {membershipInfo?.membergrade.grade === "VVIP" ? (
+              <></>
+            ) : (
               <GradeForNext>{membershipInfo?.membergrade.nextgrade}까지 남은 액수 : {(membershipInfo?.membergrade.max - membershipInfo?.membergrade.amount).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</GradeForNext>
             )}
             
           </GradeBox>
         </MemberGradeBox>
-        <VerticalLine></VerticalLine>
+        <VerticalLine />
         <MemberMileBox>
           <MileTitleAndAmountBox>
             <MileTitleAndInfoBox>
@@ -127,7 +133,7 @@ const GradeMileCoupon = () => {
             </MileDetailBox>
           ))}
         </MemberMileBox>
-        <VerticalLine></VerticalLine>
+        <VerticalLine />
         <MemberCouponBox>
           <CouponTitle>보유중인 쿠폰</CouponTitle>
           {membershipInfo?.coupon.map((data, index) => (
@@ -196,6 +202,7 @@ const GradeInfo = styled.div`
 const GradeBox = styled.div``;
 
 const Grade = styled.div`
+  text-align: ${(props) => props.grade === "VVIP" ? "center" : "left"};
   height: 40px;
   font-weight: 700;
   font-size: 30px;
