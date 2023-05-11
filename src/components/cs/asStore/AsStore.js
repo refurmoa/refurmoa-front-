@@ -3,68 +3,42 @@ import { ProductMap } from "./ProductMap";
 import { Link } from "react-router-dom";
 import markers from "./marker.json";
 import { useEffect, useState } from "react";
-import location_icon from "../../images/location_icon.png";
+import location_icon from "../../../images/location_icon.png";
+import LocationData from "./CountryCity.json";
 
 const AsStore = () => {
   // const [markers, setMarker] = useState();
 
-  // const getMarkerData = () => {
-  //   axios.get(`/api/getMarkerData`)
-  //   .then((res) => {
-  //     const { data } = res;
-  //     setProdData(data);
-  //   })
-  //   .catch((e) => {
-  //     console.error(e);
-  //   })
-  //   const data = markers.placelist;
-  //   setMarker(data);
-  // };
-
-  const countries = [
-    {
-      section: "서울특별시",
-      section_detail: "강동구",
-      latitude: "37.530126",
-      longitude: "127.1237708",
-    },
-    {
-      section: "서울특별시",
-      section_detail: "송파구",
-      latitude: "37.5145636",
-      longitude: "127.1059186",
-    },
-    {
-      section: "서울특별시",
-      section_detail: "강남구",
-      latitude: "37.517305",
-      longitude: "127.047502",
-    },
-    {
-      section: "서울특별시",
-      section_detail: "서초구",
-      latitude: "37.483569",
-      longitude: "127.032598",
-    },
-    {
-      section: "서울특별시",
-      section_detail: "관악구",
-      latitude: "37.4781549",
-      longitude: "126.9514847",
-    },
-  ];
-
-  // const [section, setSection] = useState();
   const [country, setCountry] = useState();
-  const [cities, setCity] = useState([]);
   const [data, setData] = useState([37.624915253753194, 127.15122688059974]);
   function handleCountry(e) {
     setCountry(e.target.value);
-    // setCity(
-    //   countries.find((sub) => sub.section_detail === e.target.value).states
-    // );
-    console.log(country);
   }
+
+  function handleCity(e) {
+    setData([
+      LocationData.countries.find(
+        (sub) => sub.section_detail === e.target.value
+      ).latitude,
+      LocationData.countries.find(
+        (sub) => sub.section_detail === e.target.value
+      ).longitude,
+    ]);
+  }
+
+  const [currLocation, setCurrLocation] = useState({});
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position);
+      const { latitude, longitude } = position.coords;
+      setCurrLocation({ latitude, longitude });
+    });
+  };
 
   return (
     <div>
@@ -75,6 +49,7 @@ const AsStore = () => {
           <img alt="" src={location_icon} />
           서울특별시 서초구
         </div>
+        <p>latitude : {currLocation.latitude}</p>
       </topbar>
       <div className="astopbar"></div>
       <underbar className="asunder">
@@ -99,16 +74,16 @@ const AsStore = () => {
               <option value="" disabled selected>
                 광역시/도
               </option>
-              {countries.map((main) => (
-                <option value={main.section}>{main.section}</option>
+              {LocationData.cities.map((main) => (
+                <option value={main.name}>{main.name}</option>
               ))}
             </select>
-            <select className="asmiddleselect">
+            <select className="asmiddleselect" onChange={handleCity}>
               <option value="" disabled selected>
                 시/군/구
               </option>
-              {countries
-                .filter((li) => li.section === { country } && li.section_detail)
+              {LocationData.countries
+                .filter((li) => li.section === country)
                 .map((sub) => (
                   <option value={sub.section_detail}>
                     {sub.section_detail}
@@ -146,7 +121,11 @@ const AsStore = () => {
         </div>
         {/* 지도 부분 */}
         <div className="asright">
-          <ProductMap markers={markers} data={data} />
+          <ProductMap
+            markers={markers}
+            data={data}
+            currLocation={currLocation}
+          />
         </div>
       </underbar>
     </div>

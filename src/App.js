@@ -9,7 +9,7 @@ import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import NoticeList from "./components/cs/NoticeList";
 import NoticeView from "./components/cs/NoticeView";
-import AsStore from "./components/cs/AsStore copy";
+import AsStore from "./components/cs/asStore/AsStore";
 import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
 import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";

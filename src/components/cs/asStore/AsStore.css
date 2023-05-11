@@ -153,7 +153,7 @@ input::placeholder {
 .asmiddlesearchboxbutton {
     display: inline-block;
     position: relative;
-    background-image: url(../../../public/images/prod/searchicon.png);
+    background-image: url(../../../../public/images/prod/searchicon.png);
     border: none;
     width: 17px;
     height: 17.13px;
