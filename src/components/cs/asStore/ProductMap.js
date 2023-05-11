@@ -8,28 +8,31 @@ export const ProductMap = ({ markers, data, currLocation }) => {
   }, [data]);
 
   const mapscript = () => {
-    const container = document.getElementById("map");
-    const options = {
+    const mapContainer = document.getElementById("map");
+    const mapOptions = {
       center: new kakao.maps.LatLng(data[0], data[1]),
-      level: 7,
+      level: 8,
     };
-    //map
-    const map = new kakao.maps.Map(container, options);
-    const geocoder = new kakao.maps.services.Geocoder();
-    // geocoder.coord2RegionCode(
-    //   currLocation.longitude.getLng(),
-    //   currLocation.latitude.getLat()
-    // );
+    //지도 생성
+    const map = new kakao.maps.Map(mapContainer, mapOptions);
 
     markers.placelist.map((marker) => {
-      // 마커를 생성합니다
-      new kakao.maps.Marker({
-        //마커가 표시 될 지도
-        map: map,
-        //마커가 표시 될 위치
-        position: new kakao.maps.LatLng(marker.lat, marker.lng),
-        //마커에 hover시 나타날 title
-        title: marker.title,
+      const position = new kakao.maps.LatLng(marker.lat, marker.lng);
+
+      const marker1 = new kakao.maps.Marker({
+        position: position,
+        clickable: true,
+      });
+
+      marker1.setMap(map);
+
+      const InfoWindow = new kakao.maps.InfoWindow({
+        content: marker.store_addr,
+        removable: true,
+      });
+
+      kakao.maps.event.addListener(marker1, "click", function () {
+        InfoWindow.open(map, marker1);
       });
     });
   };

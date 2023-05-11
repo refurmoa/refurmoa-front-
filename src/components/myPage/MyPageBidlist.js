@@ -167,7 +167,7 @@ const MyPage_detail = () => {
         </member>
         <line className="borderright"></line>
         <payment className="resttop">
-          <Link to="/payment">
+          <Link to="/mypage/payment">
             <div className="resttext">결제 · 배송</div>
             <div className="restnumber1">2</div>
             {/* <div className="restnumber1">{res1}</div> */}

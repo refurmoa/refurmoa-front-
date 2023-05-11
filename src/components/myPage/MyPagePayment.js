@@ -40,8 +40,6 @@ const MyPage_detail = () => {
   //   .catch((err) => console.log(err));
   //  },[]);
 
-  const navigate = useNavigate();
-
   const day1Ref = useRef();
   const day2Ref = useRef();
   const searchRef = useRef();
