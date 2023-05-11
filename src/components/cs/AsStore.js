@@ -1,8 +1,9 @@
 import "./AsStore.css";
 import { ProductMap } from "./ProductMap";
 import { Link } from "react-router-dom";
-import marker from "./marker.json";
-import { useState } from "react";
+import markers from "./marker.json";
+import { useEffect, useState } from "react";
+import location_icon from "../../images/location_icon.png";
 
 const AsStore = () => {
   const countries = [
@@ -348,18 +349,156 @@ const AsStore = () => {
     },
   ];
 
+  const subcities = [
+    {
+      name: "강남구",
+      states: [37.517305, 127.047502],
+    },
+    {
+      name: "강동구",
+      states: [37.530126, 127.1237708],
+    },
+    {
+      name: "강북구",
+      states: [37.6397819, 127.0256135],
+    },
+    {
+      name: "강서구",
+      states: [37.550937, 126.849642],
+    },
+    {
+      name: "관악구",
+      states: [37.4781549, 126.9514847],
+    },
+    {
+      name: "광진구",
+      states: [37.538617, 127.082375],
+    },
+    {
+      name: "구로구",
+      states: [37.495472, 126.887536],
+    },
+    {
+      name: "금천구",
+      states: [37.4568644, 126.8955105],
+    },
+    {
+      name: "노원구",
+      states: [37.654358, 127.056473],
+    },
+    {
+      name: "도봉구",
+      states: [37.668768, 127.047163],
+    },
+    {
+      name: "동대문구",
+      states: [37.574524, 127.03965],
+    },
+    {
+      name: "동작구",
+      states: [37.51245, 126.9395],
+    },
+    {
+      name: "마포구",
+      states: [37.5663245, 126.901491],
+    },
+    {
+      name: "서대문구",
+      states: [37.579225, 126.9368],
+    },
+    {
+      name: "서초구",
+      states: [37.483569, 127.032598],
+    },
+    {
+      name: "성동구",
+      states: [37.563456, 127.036821],
+    },
+    {
+      name: "성북구",
+      states: [37.5894, 127.016749],
+    },
+    {
+      name: "송파구",
+      states: [37.5145636, 127.1059186],
+    },
+    {
+      name: "양천구",
+      states: [37.517016, 126.866642],
+    },
+    {
+      name: "용산구",
+      states: [37.532527, 126.99049],
+    },
+    {
+      name: "은평구",
+      states: [37.602784, 126.929164],
+    },
+    {
+      name: "종로구",
+      states: [37.5735207, 126.9788345],
+    },
+    {
+      name: "중구",
+      states: [37.563843, 126.997602],
+    },
+    {
+      name: "중랑구",
+      states: [37.6063242, 127.0925842],
+    },
+  ];
+
+  // const [markers, setMarker] = useState();
+
+  // const getMarkerData = () => {
+  //   axios.get(`/api/getMarkerData`)
+  //   .then((res) => {
+  //     const { data } = res;
+  //     setProdData(data);
+  //   })
+  //   .catch((e) => {
+  //     console.error(e);
+  //   })
+  //   const data = markers.placelist;
+  //   setMarker(data);
+  // };
+
   const [country, setCountry] = useState();
   const [cities, setCity] = useState([]);
+  const [data, setData] = useState([37.624915253753194, 127.15122688059974]);
   function handleCountry(e) {
     setCountry(e.target.value);
     setCity(countries.find((sub) => sub.name === e.target.value).states);
   }
+
+  function handleCity(e) {
+    setData(subcities.find((sub) => sub.name === e.target.value).states);
+  }
+
+  const [currLocation, setCurrLocation] = useState({});
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  const getLocation = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position);
+      const { latitude, longitude } = position.coords;
+      setCurrLocation({ latitude, longitude });
+    });
+  };
+
   return (
     <div>
       <topbar className="astop">
         <div className="astoptextL">고객센터</div>
         <div className="astoptextM">A/S 매장 찾기</div>
-        <div className="astoptextR">서울특별시 서초구</div>
+        <div className="astoptextR">
+          <img alt="" src={location_icon} />
+          서울특별시 서초구
+        </div>
+        <p>latitude : {currLocation.latitude}</p>
       </topbar>
       <div className="astopbar"></div>
       <underbar className="asunder">
@@ -388,7 +527,7 @@ const AsStore = () => {
                 <option value={main.name}>{main.name}</option>
               ))}
             </select>
-            <select className="asmiddleselect">
+            <select className="asmiddleselect" onChange={handleCity}>
               <option value="" disabled selected>
                 시/군/구
               </option>
@@ -413,7 +552,7 @@ const AsStore = () => {
             </div>
           </div>
           <div className="asmiddlelistfull">
-            {marker.placelist.map((marker) => (
+            {markers.placelist.map((marker) => (
               <div className="asmiddlelist">
                 <div className="asmiddlelisttop">
                   <div className="aslistname">{marker.store_name}</div>
@@ -427,7 +566,11 @@ const AsStore = () => {
         </div>
         {/* 지도 부분 */}
         <div className="asright">
-          <ProductMap />
+          <ProductMap
+            markers={markers}
+            data={data}
+            currLocation={currLocation}
+          />
         </div>
       </underbar>
     </div>

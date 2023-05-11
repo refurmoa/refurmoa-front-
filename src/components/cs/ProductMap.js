@@ -1,23 +1,27 @@
 import { useEffect } from "react";
-import marker from "./marker.json";
 
 const { kakao } = window;
 
-export const ProductMap = ({}) => {
+export const ProductMap = ({ markers, data, currLocation }) => {
   useEffect(() => {
     mapscript();
-  }, []);
+  }, [data]);
 
   const mapscript = () => {
-    let container = document.getElementById("map");
-    let options = {
-      center: new kakao.maps.LatLng(37.624915253753194, 127.15122688059974),
-      level: 5,
+    const container = document.getElementById("map");
+    const options = {
+      center: new kakao.maps.LatLng(data[0], data[1]),
+      level: 7,
     };
     //map
     const map = new kakao.maps.Map(container, options);
+    const geocoder = new kakao.maps.services.Geocoder();
+    // geocoder.coord2RegionCode(
+    //   currLocation.longitude.getLng(),
+    //   currLocation.latitude.getLat()
+    // );
 
-    marker.placelist.map((marker) => {
+    markers.placelist.map((marker) => {
       // 마커를 생성합니다
       new kakao.maps.Marker({
         //마커가 표시 될 지도
