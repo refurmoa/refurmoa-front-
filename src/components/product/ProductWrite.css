@@ -92,6 +92,7 @@
 }
 .PW_partner_input {
   padding-left: 15px;
+  border-radius: 5px;
   border: none;
   float: left;
   width: 190px;
@@ -385,4 +386,80 @@
 .PW_product_defect_content::-webkit-scrollbar-thumb {
   border-radius: 50px;
   background: #d9d9d9;
+}
+/*===========================================================*/
+.PW_company_div {
+  padding: 20px;
+}
+.PW_company_header {
+  padding: 10px;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 30px;
+  color: #514438;
+  border-bottom: 2px solid rgba(81, 68, 56, 0.7);
+  text-align: center;
+}
+.PW_company_table {
+  padding: 15px;
+}
+
+.PW_company_table th {
+  width: 150px;
+  color: rgba(81, 68, 56, 0.7);
+  padding-bottom: 10px;
+}
+.PW_company_table td {
+  width: 150px;
+  text-align: center;
+  padding: 5px;
+}
+.company-pagination {
+  width: 400px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+
+  position: relative;
+}
+
+.company-pagination button {
+  background-color: #fff;
+  border: 1px solid transparent;
+  color: rgba(81, 68, 56, 0.7);
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 10px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.company-pagination button:hover {
+  background-color: #ddd;
+}
+
+.company-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.company-pagination:first-child {
+  margin-left: 0;
+}
+
+.pagination button:last-child {
+  margin-right: 0;
+}
+.PW_company_choice {
+  width: 50px;
+  height: 30px;
+  border: 1px solid #514438;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 15px;
+  align-items: center;
+  background-color: #fff;
+  color: #514438;
+  cursor: pointer;
 }

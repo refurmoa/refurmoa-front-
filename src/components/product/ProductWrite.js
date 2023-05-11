@@ -4,7 +4,10 @@ import "./ProductWrite.css";
 import searchIcon from "../../../images/serach.png";
 import alt_img from "../../../images/alt_image1.png";
 import axios from "axios";
-function PostWrite() {
+import Modal from "react-modal";
+import FindCompany from "./FindCompany";
+
+function ProductWrite() {
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   let [main_Image, setMainImg] = useState("");
@@ -30,6 +33,20 @@ function PostWrite() {
   const onInputHandler = (e) => {
     setInputCount(e.target.value.length);
   };
+  /*===============================================*/
+  const [searchCompany, setSearchCompany] = useState("");
+
+  const [popup, setPopup] = useState(false);
+  const [modal, setModal] = useState(false);
+  const ChangePopUP = () => {
+    setPopup(true);
+    setModal(true);
+  };
+  const close_modal = () => {
+    setPopup(false);
+    setModal(false);
+  };
+
   /*===============================================*/
   const [S, setS] = useState(false);
   const [A, setA] = useState(false);
@@ -200,8 +217,55 @@ function PostWrite() {
               className="PW_partner_input"
               type="text"
               placeholder="회사명"
+              value={searchCompany}
+              onChange={(e) => setSearchCompany(e.target.value)}
             />
-            <img className="PW_search_logo" src={searchIcon} />
+            <img
+              className="PW_search_logo"
+              src={searchIcon}
+              onClick={ChangePopUP}
+            />
+            <Modal
+              style={{
+                overlay: {
+                  position: "fixed",
+                  backgroundColor: "rgba(0, 0, 0, 0.75)",
+                },
+                content: {
+                  position: "absolute",
+                  top: "15%",
+                  width: "600px",
+                  height: "610px",
+                  left: "40px",
+                  right: "40px",
+                  bottom: "40px",
+                  border: "1px solid #ccc",
+                  background: "#fff",
+                  overflow: "auto",
+                  WebkitOverflowScrolling: "touch",
+                  borderRadius: "10px",
+                  outline: "none",
+                  padding: "20px",
+                },
+              }}
+              isOpen={modal}
+            >
+              <div className="close_modal">
+                <button onClick={close_modal}>
+                  <b>X</b>
+                </button>
+              </div>
+              <div className="PW_company_modal">
+                {popup && (
+                  <FindCompany
+                    searchCompany={searchCompany}
+                    setSearchCompany={setSearchCompany}
+                    setProd_com={setProd_com}
+                    close_modal={close_modal}
+                  ></FindCompany>
+                )}
+              </div>
+            </Modal>
           </div>
         </div>
         <div className="PW_image_input">
@@ -379,4 +443,4 @@ function PostWrite() {
   );
 }
 
-export default PostWrite;
+export default ProductWrite;
