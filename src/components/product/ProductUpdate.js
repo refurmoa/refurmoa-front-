@@ -1,13 +1,16 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./ProductWrite.css";
 import searchIcon from "../../images/serach.png";
-import alt_img from "../../images/picture-icon-240.png";
+import alt_img from "../../images/alt_image1.png";
 import axios from "axios";
 import Modal from "react-modal";
 import FindCompany from "./FindCompany";
 
-function ProductWrite() {
+function ProductUpdate(props) {
+  const product_num = props;
+
+  /*=================샘플 데이터 이미지는 백엔드에서=========================*/
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   let [main_Image, setMainImg] = useState("");
@@ -23,6 +26,60 @@ function ProductWrite() {
   const [showImages, setShowImages] = useState([]);
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
+
+  /*=================샘플 데이터 이미지는 백엔드에서=========================*/
+  const productData = {
+    product_code: "1",
+    com_num: "6",
+    category_code: "SF",
+    category: "funliving",
+    main_image: "",
+    prod_com: "삼성",
+    prod_name: "쇼파",
+    prod_grade: "B",
+    guarantee: false,
+    org_price: "102000",
+    Deffect_text: "모서리 스크래치",
+  };
+  useEffect(() => {
+    /*
+    axios
+      .post("/product/update", {
+        product_code: product_num,
+      })
+      .then((res) => {})
+      .catch((e) => {
+        console.error(e);
+      });
+    */
+
+    if (
+      productData.category === "funliving" ||
+      productData.category === "funbed" ||
+      productData.category === "funoffice"
+    ) {
+      setFuniture(true);
+      setAppliance(false);
+      setCate("funiture");
+    } else {
+      setFuniture(false);
+      setAppliance(true);
+      setCate("appliance");
+    }
+    setCate_code(productData.category);
+    setCode(productData.category_code);
+    setSearchCompany(productData.com_num);
+    setProd_com(productData.prod_com);
+    setProd_name(productData.prod_name);
+    setOrg_price(productData.org_price);
+    if (productData.prod_grade === "S") onCHKS();
+    else if (productData.prod_grade === "A") onCHKA();
+    else if (productData.prod_grade === "B") onCHKB();
+
+    setGuarantee(productData.guarantee);
+    setDefect_text(productData.Deffect_text);
+    setInputCount(productData.Deffect_text.length);
+  }, []);
   /*===============================================*/
 
   const [file, setFile] = useState(null);
@@ -31,6 +88,7 @@ function ProductWrite() {
 
   let [inputCount, setInputCount] = useState(0);
   const onInputHandler = (e) => {
+    setDefect_text(e.target.value);
     setInputCount(e.target.value.length);
   };
   /*===============================================*/
@@ -154,9 +212,9 @@ function ProductWrite() {
     }
 
     axios
-      .post("/product/write", {
-        CATEGORY_CODE: cate_code,
-        CATEGORY: cate + code,
+      .post("/product/update", {
+        CATEGORY_CODE: code,
+        CATEGORY: cate_code,
         MAIN_IMAGE: main_Image,
         PROD_COM: prod_com,
         PROD_NAME: prod_name,
@@ -195,11 +253,11 @@ function ProductWrite() {
   return (
     <div className="PW_form">
       <div className="PW_header">
-        <div className="PW_title">상품 등록</div>
+        <div className="PW_title">상품 수정</div>
         <div className="PW_button">
-          <button className="PW_list_btn">목록</button>
+          <button className="PW_list_btn">취소</button>
           <button className="PW_wrie_btn" onClick={Product_write}>
-            등록
+            수정
           </button>
         </div>
       </div>
@@ -287,7 +345,7 @@ function ProductWrite() {
         <div className="PW_product_category">
           <div className="PW_product_input_header">분류</div>
           <div className="PW_product_input_select">
-            <select className="PW_category" onChange={chageCate}>
+            <select className="PW_category" value={cate} onChange={chageCate}>
               <option>카테고리 선택</option>
               <option value="funiture">가구</option>
               <option value="appliance">가전</option>
@@ -295,6 +353,7 @@ function ProductWrite() {
             <select
               className="PW_detail_category"
               onChange={(e) => setCate_code(e.target.value)}
+              value={cate_code}
             >
               <option>세부 카테고리 선택</option>
               {appliance && (
@@ -316,6 +375,7 @@ function ProductWrite() {
               className="PW_produce_code"
               type="text"
               placeholder="코드"
+              value={code}
               onChange={(e) => setCode(e.target.value)}
             ></input>
           </div>
@@ -328,6 +388,7 @@ function ProductWrite() {
               className="PW_product_name_input"
               type="text"
               placeholder="제품회사명"
+              value={prod_com}
             />
           </div>
           <div>
@@ -336,6 +397,7 @@ function ProductWrite() {
               className="PW_product_name_input"
               type="text"
               placeholder="제품명"
+              value={prod_name}
             />
           </div>
         </div>
@@ -392,7 +454,7 @@ function ProductWrite() {
               type="checkbox"
               className="PW_state_other"
               onClick={onNotExist}
-              checked={guarantee}
+              checked={!guarantee}
             />
             &nbsp;<label>없음</label>
           </div>
@@ -429,6 +491,7 @@ function ProductWrite() {
             placeholder="제품 하자 내용"
             onChange={onInputHandler}
             maxLength="200"
+            value={defect_text}
           />
           <span className="PW_countInput">{inputCount}/200</span>
         </div>
@@ -437,4 +500,4 @@ function ProductWrite() {
   );
 }
 
-export default ProductWrite;
+export default ProductUpdate;
