@@ -2,18 +2,40 @@ import { Link } from "react-router-dom";
 import "./ProductPayment.css";
 import React, { useEffect, useState } from "react";
 import member from "../../images/member.png";
+import { useNavigate } from "react-router-dom";
 
 export const ProductPayment = ({ product }) => {
+  const navigate = useNavigate();
+
+  //props or location 사용
+  const onClick = (product_code) => {
+    navigate(`/post/detail/${product_code}`, {
+      state: { product_code: product_code },
+    });
+  };
+
+  const pay = (product_code) => {
+    navigate("/post/pay", { state: { product_code: product_code } });
+  };
+
+  const delivery = (product_code) => {
+    navigate("/payment/detail", {
+      state: { product_code: product_code },
+    });
+  };
+
   return (
     <div className="productPay">
       <image className="imagePay">
-        <Link to="#">
-          <div className="productcodePay">
-            {product.start_date}
-            {product.board_num}
-          </div>
-          <img src={`/images/prod/${product.main_image}`} alt="productimage" />
-        </Link>
+        <div className="productcodePay">
+          {product.pay_date}
+          {product.product_code}
+        </div>
+        <img
+          src={`/images/prod/${product.main_image}`}
+          alt="productimage"
+          onClick={onClick}
+        />
       </image>
       <information className="marginzero">
         {product.prod_state === 0 ? (
@@ -38,13 +60,15 @@ export const ProductPayment = ({ product }) => {
           </div>
         )}
         <div className="com_namePay">{product.prod_com}</div>
-        <div className="product_namePay">{product.prod_name}</div>
+        <div className="product_namePay" onClick={onClick}>
+          {product.prod_name}
+        </div>
 
         <price className="pricePay">
           {product.prod_state === 2 ? (
-            <div className="redcolormoneyPay">{product.cur_price}원</div>
+            <div className="redcolormoneyPay">{product.prod_price}원</div>
           ) : (
-            <div className="blackcolormoneyPay">{product.cur_price}원</div>
+            <div className="blackcolormoneyPay">{product.prod_price}원</div>
           )}
         </price>
         <div className="mile">
@@ -54,13 +78,13 @@ export const ProductPayment = ({ product }) => {
         <paybutton className="mile">
           {product.prod_state === 1 ? (
             <div>
-              <Link to="/post/pay/${board_num}">
-                <input
-                  className="payButtonPay"
-                  type="button"
-                  value="결제 하기"
-                ></input>
-              </Link>
+              <input
+                className="payButtonPay"
+                type="button"
+                value="결제 하기"
+                onClick={pay}
+              ></input>
+              <productpay product_code={product.product_code}></productpay>
             </div>
           ) : product.prod_state === 2 ? (
             <div>
@@ -74,32 +98,43 @@ export const ProductPayment = ({ product }) => {
                   className="inqButtonPay"
                   type="button"
                   value="배송 조회"
+                  onClick={delivery}
+                  product_code={product.product_code}
                 ></input>
+                <productdetail
+                  product_code={product.product_code}
+                ></productdetail>
               </div>
             </div>
           ) : product.prod_state === 3 ? (
-            <span>
-              <Link to="/payment/detail/${board_num}">
-                <input
-                  className="button_under2"
-                  type="button"
-                  value="결제 상세"
-                ></input>
-              </Link>
+            <div>
               <input
-                className="button_under3"
+                className="cancleButtonPay"
+                type="button"
+                value="결제 상세"
+                onClick={delivery}
+              ></input>
+              <productdetail
+                product_code={product.product_code}
+              ></productdetail>
+              <input
+                className="inqButtonPay"
                 type="button"
                 value="구매 확정"
               ></input>
-            </span>
+            </div>
           ) : (
-            <Link to="/payment/detail/${board_num}">
+            <div>
               <input
-                className="button_under1"
+                className="payButtonPay"
                 type="button"
                 value="결제 상세"
+                onClick={delivery}
               ></input>
-            </Link>
+              <productdetail
+                product_code={product.product_code}
+              ></productdetail>
+            </div>
           )}
         </paybutton>
       </information>

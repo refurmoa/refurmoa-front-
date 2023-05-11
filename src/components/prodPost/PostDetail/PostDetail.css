@@ -64,18 +64,23 @@ body {
     margin-right: 15px;
 }
 
-.PD_update_delete {
+.PD-update_delete {
     float: right;
     height: 25px;
 }
 
-.PD_update_delete > a, .PD_update_delete > span {
-    margin-right: 5px;
+.PD-update_delete > a, .PD-update_delete > span {
+    margin-left: 13px;
     font-weight: bold;
     font-size: 18px;
     line-height: 25px;
     color: #514438;
     cursor: pointer;
+}
+
+.PD-update_delete > a:hover,
+.PD-update_delete > span:hover {
+    color: #B9A89A;
 }
 
 /* 상품 정보 - 이미지 */
@@ -233,7 +238,8 @@ body {
     line-height: 30px;
 }
 
-.PD-timer_num, .PD-timer_text {
+.PD-timer_num, .PD-timer_text,
+.PD-timer_num_red, .PD-timer_text_red {
     float: left;
     font-weight: bold;
     color: #7D9E8C;
@@ -245,17 +251,21 @@ body {
     color: #514438;
 }
 
-.PD-timer_num, .PD-current_price_num {
+.PD-timer_num, .PD-timer_num_red, .PD-current_price_num {
     height: 30px;
     font-size: 30px;
     line-height: 30px;
 }
 
-.PD-timer_text, .PD-current_price_text {
+.PD-timer_text, .PD-timer_text_red, .PD-current_price_text {
     height: 25px;
     font-size: 20px;
     line-height: 25px;
     margin-top: 5px;
+}
+
+.PD-timer_num_red, .PD-timer_text_red {
+    color: red;
 }
 
 .PD-price_info_text .PD-bid_info_icon {
@@ -270,20 +280,31 @@ body {
     line-height: 30px;
 }
 
-.PD-bid_price_0 {
+.PD-bid_price_0, .PD-bid_price_0_gray {
     float: left;
     height: 30px;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: 900;
     color: #999999;
+    background-color: #FFFFFF;
+    border-width: 0px;
 }
 
-.PD-bid_price_0:first-child {
+.PD-bid_price_0:first-child, .PD-bid_price_0_gray:first-child {
     margin-right: 15px;
 }
 
-.PD-bid_price_0:last-child {
+.PD-bid_price_0:last-child, .PD-bid_price_0_gray:last-child {
     margin-left: 15px;
+}
+
+.PD-bid_price_0:hover {
+    color: #514438;
+    cursor: pointer;
+}
+
+.PD-bid_price_0_gray {
+    color: #CCCCCC;
 }
 
 .PD-bid_price_1, .PD-bid_price_3, .PD-bid_price_4 {
@@ -309,6 +330,12 @@ body {
 
 .PD-bid_price_4 {
     color: #AAAAAA;
+}
+
+.PD-bid_price_none {
+    float: left;
+    width: 85px;
+    color: #FFFFFF;
 }
 
 /* 구매/입찰 버튼 */
@@ -355,11 +382,7 @@ body {
 }
 
 .PD-buy_btn_wrap > .PD-buy_btn_filled {
-    margin-bottom: 0px;
-}
-
-.PD-buy_btn_wrap > .PD-buy_btn_line {
-    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .PD-buy_btn_wrap > .PD-buy_btn_line > span {
@@ -535,6 +558,27 @@ body {
 .PD-deffect_image:not(:last-child),
 .PD-deffect_image_wrap > .PD-noImage:not(:last-child) {
     margin-right: 15px;
+}
+
+/* 하자 이미지 모달 창 */
+.PD-deffect_image_modal_wrap {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.PD-deffect_image_modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 50%;
+    max-height: 50%;
+    z-index: 1;
 }
 
 /* 상세정보, 상품문의, 결제 및 배송, 교환환불 */

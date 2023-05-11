@@ -1,15 +1,48 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import productlist from "../shared/prod.json";
 import { getDdayArray } from "../shared/sharedFn";
+import GradeMileCoupon from "./GradeMileCoupon";
+
+// 이미지파일 import
+import timeicon from "../../images/time_icon.png";
+import timeredicon from "../../images/time_icon_red.png";
+import star_icon_line from "../../images/star_icon_line-240.png";
+import star_icon_filled from "../../images/star_icon_filled-240.png";
+import searchicon from "../../images/search.png"
 
 const MyPageBookmarkList = () => {
   const navigate = useNavigate();
   const [bookmarkProd, setBookmarkProd] = useState();
+  const searchRef = useRef();
   const [today, setToday] = useState(new Date().getTime()); // 현재날짜(ms) 구하기
 
+  // 검색기능
+  const searchHandler = () => {
+    // console.log(searchRef.current.value);
+    if (searchRef.current.value === "") {
+      return alert("검색어를 입력해 주세요.");
+    }
+    const searchData = {searchword : searchRef.current.value, id: "userID"}
+    console.log(searchData);
+    // axios.post("/api/searchbookmark", searchData)
+    // .then((res) => {
+    //   console.log(res);
+    // })
+    // .catch((e) => {
+    //   console.error(e);
+    // })
+  }
+  // 엔터키
+  const activeEnter = (e) => {
+    if(e.key === "Enter") {
+      searchHandler();
+    }
+  }
+
+  // 남은시간이 12시간보다 적을 경우
   const lessThanTwelve = (ms) => {
     const diff = ms - today;
     const day = Math.floor(diff / (1000 * 60 * 60 * 24));
@@ -48,8 +81,8 @@ const MyPageBookmarkList = () => {
     // const data = {board_num: board_num};
     // axios.post("/api/plusreadcount", data)
     // .then((res) => {
-    //   // console.log(res);
-    //   navigate(`/post/detail/${board_num}`);
+      //   // console.log(res);
+      //   navigate(`/post/detail/${board_num}`);
     // })
     // .catch((e) => {
     //   console.error(e);
@@ -64,6 +97,7 @@ const MyPageBookmarkList = () => {
     // axios.post("/api/likehandle", data)
     // .then((res) => {
     //   console.log(res);
+    //   getBookmarkData();
     // })
     // .catch((e) => {
     //   console.error(e);
@@ -98,9 +132,19 @@ const MyPageBookmarkList = () => {
 
   return (
     <>
+    {/* 회원등급, 마일리지, 쿠폰 */}
+    <GradeMileCoupon />
+    <BookmarkListWrapper>
       <TitleAndSearchBox>
         <TitleBox>찜한 상품</TitleBox>
-        <SearchBox><input type="text" /></SearchBox>
+        <SearchBar>
+          <SearchInput>
+            <input type="text" ref={searchRef} onKeyDown={(e) => {activeEnter(e)}}/>
+          </SearchInput>
+          <SearchImg onClick={() => {searchHandler()}}>
+            <img src={searchicon} alt="searchicon"/>
+          </SearchImg>
+        </SearchBar>
       </TitleAndSearchBox>
       <BookmarkListBox>  
         {bookmarkProd?.map((data) => (
@@ -128,13 +172,13 @@ const MyPageBookmarkList = () => {
                 <StarIcon
                   onClick={(event) => likeHandler(event, data.board_num)}
                 >
-                  <img src="images/prod/star_icon.png" alt="staricon" />
+                  <img src={star_icon_line} alt="staricon" />
                 </StarIcon>
               ) : (
                 <StarIcon
                   onClick={(event) => likeHandler(event, data.board_num)}
                 >
-                  <img src="images/prod/star_icon_filled.png" alt="staricon" />
+                  <img src={star_icon_filled} alt="staricon" />
                 </StarIcon>
               )}
 
@@ -159,7 +203,7 @@ const MyPageBookmarkList = () => {
               (Date.parse(data.end_date) > today) &
               (lessThanTwelve(Date.parse(data.end_date)) !== true) ? (
                 <TimeBox>
-                  <img src="images/prod/time_icon.png" alt="timeicon" />
+                  <img src={timeicon} alt="timeicon" />
                   {getDday(data)}
                 </TimeBox>
               ) : null}
@@ -170,7 +214,7 @@ const MyPageBookmarkList = () => {
               (Date.parse(data.end_date) > today) &
               (lessThanTwelve(Date.parse(data.end_date)) === true) ? (
                 <RedTimeBox>
-                  <img src="images/prod/time_icon_red.png" alt="timeicon" />
+                  <img src={timeredicon} alt="timeicon" />
                   {getDday(data)}
                 </RedTimeBox>
               ) : null}
@@ -178,7 +222,7 @@ const MyPageBookmarkList = () => {
               {/* 경매오픈예정 상품 */}
               {Date.parse(data.start_date) > today && (
                 <TimeBox>
-                  <img src="images/prod/time_icon.png" alt="timeicon" />
+                  <img src={timeicon} alt="timeicon" />
                   {getDday(data)}
                 </TimeBox>
               )}
@@ -191,14 +235,14 @@ const MyPageBookmarkList = () => {
               {/* 판매완료(상품현황: 2) 상품 */}
               {data.prod_state === 2 && (
                 <TimeBox>
-                  <img src="images/prod/time_icon.png" alt="timeicon" />
+                  <img src={timeicon} alt="timeicon" />
                   판매종료
                 </TimeBox>
               )}
               {/* 판매완료(상품현황1이지만 경매종료일 지난) 상품 */}
               {(data.prod_state === 1) & (Date.parse(data.end_date) < today) ? (
                 <TimeBox>
-                  <img src="images/prod/time_icon.png" alt="timeicon" />
+                  <img src={timeicon} alt="timeicon" />
                   판매종료
                 </TimeBox>
               ) : null}
@@ -240,11 +284,18 @@ const MyPageBookmarkList = () => {
           </ProductBox>
         ))}
       </BookmarkListBox>
+      </BookmarkListWrapper>
     </>
   );
 };
 
 export default MyPageBookmarkList;
+
+// 찜한상품리스트, 검색창
+const BookmarkListWrapper = styled.div`
+  font-family: 'Noto Sans';
+  font-style: normal;
+`;
 
 const TitleAndSearchBox = styled.div`
   width: 1160px;
@@ -262,15 +313,44 @@ const BookmarkListBox = styled.div`
 const TitleBox = styled.div`
   margin: 0px;
   color: #514438;
-  font-family: 'Noto Sans';
-  font-style: normal;
+  
   font-weight: 700;
   font-size: 20px;
   line-height: 25px;
 `;
 
-const SearchBox = styled.div`
+const SearchBar = styled.div`
   margin: 0px;
+  width: 220px;
+  height: 30px;
+  border: 1px solid #B9A89A;
+  border-radius: 15px;
+  
+  display: flex;
+`;
+
+const SearchInput = styled.div`
+  width: 80%;
+  height: 75%;
+  margin: 1px 5px 0px 15px;
+  input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    color: #B9A89A;
+  }
+  input:focus {
+    outline: none;
+  }
+`;
+
+const SearchImg = styled.div`
+  margin: 5px 10px 0px 0px;
+  cursor: pointer;
+  img {
+    color: #B9A89A;
+  }
 `;
 
 const ProductBox = styled.div`
@@ -280,8 +360,6 @@ const ProductBox = styled.div`
   display: inline-block;
   vertical-align: middle;
 
-  font-family: "Noto Sans";
-  font-style: normal;
   :nth-child(4n) {
     margin-right: 0px;
   }
@@ -327,12 +405,12 @@ const DarkCover = styled.div`
     color: rgba(255, 255, 255, 0.6);
 
     font-size: 25px;
-    line-height: 30px;
+    line-height: 280px;
 
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -15px 0 0 -82px;
+    width: 280px;
+    height: 280px;
+    text-align: center;
   }
 `;
 
@@ -348,8 +426,6 @@ const Auction = styled.div`
   top: 10px;
   right: 10px;
 
-  font-family: "Noto Sans";
-  font-style: normal;
   font-weight: 600;
   font-size: 16px;
 `;
@@ -366,15 +442,11 @@ const DirectBuy = styled.div`
   top: 10px;
   right: 10px;
 
-  font-family: "Noto Sans";
-  font-style: normal;
   font-weight: 600;
   font-size: 16px;
 `;
 
 const DirectAndAuction = styled.div`
-  font-family: "Noto Sans";
-  font-style: normal;
   font-weight: 600;
   font-size: 16px;
 

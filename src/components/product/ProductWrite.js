@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import "./ProductWrite.css";
-import searchIcon from "../../../images/serach.png";
-import alt_img from "../../../images/alt_image1.png";
+import searchIcon from "../../images/serach.png";
+import alt_img from "../../images/picture-icon-240.png";
 import axios from "axios";
 import Modal from "react-modal";
 import FindCompany from "./FindCompany";

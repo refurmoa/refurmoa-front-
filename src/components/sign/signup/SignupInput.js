@@ -46,6 +46,7 @@ const Signup_input = () => {
     setPopup(false);
     setModal(false);
   };
+
   /*========================== */
   const IDcheck = () => {
     if (check_id) {
