@@ -9,11 +9,12 @@ import SignupComplete from "./components/sign/signup/SignupComplete";
 import ProductWrite from "./components/product/ProductWrite";
 import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
+import PostPay from "./components/prodPost/PostPay";
 import NoticeList from "./components/cs/NoticeList";
 import NoticeView from "./components/cs/NoticeView";
 import AsStore from "./components/cs/asStore/AsStore";
 import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
-import UserUpdate from "./components/userUpdate/UserUpdate";
+import UserUpdate from "./components/myPage/userUpdate/UserUpdate";
 import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
@@ -31,6 +32,7 @@ function App() {
         <Route path="/prod/write" element={<ProductWrite />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
+        <Route path="/post/pay/:board_num" element={<PostPay />} />
         <Route path="/notice" element={<NoticeList />} />
         <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
         <Route path="/cs/as_store" element={<AsStore />} />
