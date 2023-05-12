@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
 import Login from "./components/sign/signin/Login";
 import SignupMain from "./components/sign/signup/SignupMain";
 import SignupPhone from "./components/sign/signup/SignupPhone";
@@ -9,19 +10,20 @@ import ProductWrite from "./components/product/ProductWrite";
 import ProductUpdate from "./components/product/ProductUpdate";
 import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
+import PostPay from "./components/prodPost/PostPay";
 import NoticeList from "./components/cs/NoticeList";
 import NoticeView from "./components/cs/NoticeView";
 import AsStore from "./components/cs/asStore/AsStore";
 import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
+import UserUpdate from "./components/myPage/userUpdate/UserUpdate";
 import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
-import UserUpdate from "./components/userUpdate/UserUpdate";
 
 function App() {
   return (
-    <>
-      <Routes>
+    <Routes>
+      <Route element={<Layout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignupMain />} />
         <Route path="/signup/1" element={<SignupPhone />} />
@@ -32,6 +34,7 @@ function App() {
         <Route path="/prod/update" element={<ProductUpdate />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
+        <Route path="/post/pay/:board_num" element={<PostPay />} />
         <Route path="/notice" element={<NoticeList />} />
         <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
         <Route path="/cs/as_store" element={<AsStore />} />
@@ -40,8 +43,8 @@ function App() {
         <Route path="/mypage/payment" element={<MyPagePayment />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
-      </Routes>
-    </>
+      </Route>
+    </Routes>
   );
 }
 
