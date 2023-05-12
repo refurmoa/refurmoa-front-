@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import Layout from "./components/Layout/Layout";
 import Login from "./components/sign/signin/Login";
 import SignupMain from "./components/sign/signup/SignupMain";
 import SignupPhone from "./components/sign/signup/SignupPhone";
@@ -19,8 +20,8 @@ import UserUpdate from "./components/userUpdate/UserUpdate";
 
 function App() {
   return (
-    <>
-      <Routes>
+    <Routes>
+      <Route element={<Layout />}>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignupMain />} />
         <Route path="/signup/1" element={<SignupPhone />} />
@@ -38,8 +39,8 @@ function App() {
         <Route path="/mypage/payment" element={<MyPagePayment />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
-      </Routes>
-    </>
+      </Route>
+    </Routes>
   );
 }
 
