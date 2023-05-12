@@ -42,7 +42,7 @@ function Footer() {
         <div className="F-content">
             <div className="F-top">
                 <span className="F-logo_wrap">
-                    <img className="F-logo" alt="로고" src={logo}></img>
+                    <img className="F-logo" alt="로고" src={logo} onClick={() => {navigate(`/`)}}></img>
                 </span>
                 <span className="F-menu">
                     <span className="F-menulist" onClick={() => {openPopup(1)}}>이용약관</span>
