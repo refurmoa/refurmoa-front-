@@ -311,7 +311,7 @@ const User_update = () => {
               <td>주소</td>
               <td>
                 <input
-                  className="address_input"
+                  className="UU_address_input"
                   name="address"
                   type="text"
                   size="100"
