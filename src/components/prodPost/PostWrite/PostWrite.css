@@ -1,0 +1,179 @@
+.PR_title {
+  float: left;
+  width: 200px;
+  margin-bottom: 15px;
+  margin-left: 20px;
+  font-style: normal;
+  text-align: left;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 40px;
+  color: #514438;
+}
+.PR_product_input {
+  width: 750px;
+  height: 1495px;
+  float: right;
+}
+.PR_product_info {
+  width: 700px;
+  height: 40px;
+  margin-top: 30px;
+}
+.PR_product_info_title {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 40px;
+  color: rgba(81, 68, 56, 0.7);
+  float: left;
+}
+.PR_product_info_search {
+  width: 300px;
+  height: 40px;
+  float: right;
+  border: 1px solid #514438;
+  border-radius: 30px;
+}
+.PR_search_input {
+  width: 240px;
+  margin-left: 15px;
+  line-height: 40px;
+  float: left;
+  border-radius: 10px;
+  border: none;
+  font-weight: 400;
+  font-size: 25px;
+}
+.PR_search_input::placeholder {
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 40px;
+}
+.PR_search_input:focus {
+  outline: none !important;
+}
+.PR_search_logo {
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.PR_product_state {
+  margin-left: 25px;
+  float: left;
+  padding-left: 15px;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 50px;
+  color: #000000;
+}
+
+.PR_product_state > label {
+  margin-left: 15px;
+  width: 50px;
+  float: left;
+  text-align: left;
+}
+
+.PR_product_state > .PR_state_other_label {
+  width: 100px;
+}
+.PR_state {
+  line-height: 50px;
+  margin-top: 15px;
+  width: 20px;
+  height: 20px;
+  accent-color: #514438;
+  float: left;
+}
+.PR_state_other {
+  margin-top: 15px;
+  width: 20px;
+  height: 20px;
+  margin-left: 30px;
+  accent-color: #514438;
+  float: left;
+}
+
+.PR_product_input_header {
+  width: 115px;
+  float: left;
+  text-align: left;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 50px;
+  color: #000000;
+}
+.PR_product_price {
+  padding-left: 10px;
+  float: right;
+  width: 540px;
+  height: 50px;
+  background: rgba(185, 185, 185, 0.1);
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+  color: #000000;
+}
+.PR_product_price_input {
+  width: 500px;
+  height: 50px;
+  float: left;
+  display: block;
+  background: rgba(240, 240, 240, 0.1);
+  border: none;
+  margin-bottom: 30px;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 50px;
+  text-align: right;
+}
+.PR_product_price_input:focus {
+  outline: none !important;
+}
+.PR_product_Auction {
+  margin-top: 30px;
+  width: 700px;
+  height: 127px;
+}
+
+.PR_Auction_date {
+  width: 532px;
+  height: 45px;
+  margin-left: 35px;
+  margin-bottom: 35px;
+  float: right;
+  padding-left: 15px;
+  border: 1px solid #514438;
+  border-radius: 5px;
+  font-weight: 400;
+  font-size: 25px;
+  line-height: 45px;
+}
+.PR_defect_image {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+}
+.PR_product_file {
+  float: left;
+  margin-left: 35px;
+}
+.PR_company_table {
+  padding: 15px;
+}
+
+.PR_company_table th {
+  width: 150px;
+  color: rgba(81, 68, 56, 0.7);
+  padding-bottom: 10px;
+}
+.PR_company_table td {
+  width: 150px;
+  text-align: center;
+  padding: 5px;
+}
