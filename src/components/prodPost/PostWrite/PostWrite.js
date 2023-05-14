@@ -73,7 +73,7 @@ function PostWrite(props) {
     imageUrlLists.push(productData.deffect_image2);
     imageUrlLists.push(productData.deffect_image3);
     setShowImages(imageUrlLists);
-
+    setImg_con(true);
     setCate_code(productData.category);
     setCode(productData.category_code);
     setSearchCompany(productData.com_num);
