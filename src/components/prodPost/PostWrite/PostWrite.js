@@ -67,12 +67,19 @@ function PostWrite(props) {
       setAppliance(true);
       setCate("appliance");
     }
+    let imageUrlLists = [];
+    imageUrlLists.push(productData.deffect_image1);
+    imageUrlLists.push(productData.deffect_image2);
+    imageUrlLists.push(productData.deffect_image3);
+    setShowImages(imageUrlLists);
+
     setCate_code(productData.category);
     setCode(productData.category_code);
     setSearchCompany(productData.com_num);
     setProd_com(productData.prod_com);
     setProd_name(productData.prod_name);
     setOrg_price(productData.org_price);
+    setMainImg(productData.image);
     if (productData.prod_grade === "S") onCHKS();
     else if (productData.prod_grade === "A") onCHKA();
     else if (productData.prod_grade === "B") onCHKB();
@@ -417,6 +424,7 @@ function PostWrite(props) {
               <div className="PW_company_modal">
                 {prod_popup && (
                   <FindProduct
+                    setMainImg={setMainImg}
                     searchProduct={searchProduct}
                     setProductname={setProductname}
                     setData={setData}
