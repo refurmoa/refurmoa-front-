@@ -37,6 +37,7 @@ function PostWrite(props) {
   const [reg_date, setReg_date] = useState("");
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
+  const [img_con, setImg_con] = useState(false);
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
@@ -67,12 +68,19 @@ function PostWrite(props) {
       setAppliance(true);
       setCate("appliance");
     }
+    let imageUrlLists = [];
+    imageUrlLists.push(productData.deffect_image1);
+    imageUrlLists.push(productData.deffect_image2);
+    imageUrlLists.push(productData.deffect_image3);
+    setShowImages(imageUrlLists);
+    setImg_con(true);
     setCate_code(productData.category);
     setCode(productData.category_code);
     setSearchCompany(productData.com_num);
     setProd_com(productData.prod_com);
     setProd_name(productData.prod_name);
     setOrg_price(productData.org_price);
+    setMainImg(productData.image);
     if (productData.prod_grade === "S") onCHKS();
     else if (productData.prod_grade === "A") onCHKA();
     else if (productData.prod_grade === "B") onCHKB();
@@ -191,7 +199,7 @@ function PostWrite(props) {
     if (imageUrlLists.length > 3) {
       imageUrlLists = imageUrlLists.slice(0, 3);
     }
-
+    setImg_con(true);
     setShowImages(imageUrlLists);
   };
   const handleDeleteImage = (id) => {
@@ -417,6 +425,7 @@ function PostWrite(props) {
               <div className="PW_company_modal">
                 {prod_popup && (
                   <FindProduct
+                    setMainImg={setMainImg}
                     searchProduct={searchProduct}
                     setProductname={setProductname}
                     setData={setData}
@@ -489,14 +498,16 @@ function PostWrite(props) {
         <div className="PW_product_category">
           <div className="PW_product_input_header">원가</div>
           <div className="PW_product_price">
-            {" "}
-            <input
-              className="PW_product_price_input"
-              type="text"
-              onChange={(e) => onChangeOrg(e)}
-              value={addComma(org_price) || ""}
-            />
-            원
+            <div className="PW_product_price_inside">
+              {" "}
+              <input
+                className="PW_product_price_input"
+                type="text"
+                onChange={(e) => onChangeOrg(e)}
+                value={addComma(org_price) || ""}
+              />
+              &nbsp; 원
+            </div>
           </div>
         </div>
         <div className="PW_product_category">
@@ -546,39 +557,42 @@ function PostWrite(props) {
         </div>
         <div className="PW_product_category">
           <div className="PW_product_input_header">하자정보</div>
-          <div className="PW_product_defect">
-            <input
-              type="file"
-              className="PW_defect_image"
-              id="input-file"
-              accept="image/*"
-              multiple
-              readonly
-              onChange={handleAddImages}
-            />
-
-            {showImages.map((image, id) => (
-              <div key={id}>
-                <img
-                  className="PW_defect_img"
-                  src={image}
-                  alt={`${image}-${id}`}
-                  onClick={() => handleDeleteImage(id)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="PW_defect_content">
-          <textarea
-            className="PW_product_defect_content"
-            type="text"
-            placeholder="제품 하자 내용"
-            onChange={onInputHandler}
-            maxLength="200"
-            value={defect_text}
+          <input
+            type="file"
+            className="PW_defect_image"
+            id="input-file"
+            accept="image/*"
+            multiple
+            readonly
+            onChange={handleAddImages}
           />
-          <span className="PW_countInput">{inputCount}/200</span>
+        </div>
+        <div className="PW_product_defect">
+          {img_con && (
+            <div className="PW_product_imgList">
+              {showImages.map((image, id) => (
+                <div key={id}>
+                  <img
+                    className="PW_defect_img"
+                    src={image}
+                    alt={`${image}-${id}`}
+                    onClick={() => handleDeleteImage(id)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="PW_defect_content">
+            <textarea
+              className="PW_product_defect_content"
+              type="text"
+              placeholder="제품 하자 내용"
+              onChange={onInputHandler}
+              maxLength="200"
+              value={defect_text}
+            />
+            <span className="PW_countInput">{inputCount}/200</span>
+          </div>
         </div>
         <div className="PW_product_category">
           <div className="PR_product_info_title">판매 정보</div>

@@ -80,15 +80,14 @@ function PostAuction(props) {
       </div>
       <div className="PW_product_category">
         <div className="PR_product_input_header">상세정보</div>
-        <div className="PR_product_file">
-          <input
-            type="file"
-            className="PW_defect_image"
-            id="input-file"
-            accept="image/*"
-            readonly
-          />
-        </div>
+
+        <input
+          type="file"
+          className="PR_defect_image"
+          id="input-file"
+          accept="image/*"
+          readonly
+        />
       </div>
     </>
   );

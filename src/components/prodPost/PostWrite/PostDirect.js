@@ -59,7 +59,7 @@ function PostDirect(props) {
         <div className="PR_product_file">
           <input
             type="file"
-            className="PW_defect_image"
+            className="PR_defect_image"
             id="input-file"
             accept="image/*"
             readonly

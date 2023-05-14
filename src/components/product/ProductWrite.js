@@ -21,6 +21,7 @@ function ProductWrite() {
   const [reg_date, setReg_date] = useState("");
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
+  const [img_con, setImg_con] = useState(false);
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
@@ -104,6 +105,7 @@ function ProductWrite() {
       console.log("bbb :" + uploadFile);
       fileList.push(uploadFile); // 배열에 push
     });
+    setImg_con(true);
     setListfile(fileList); // console.log("fileList=>" + fileList);
     reader.readAsDataURL(e.target.files[0]);
   };
@@ -399,38 +401,42 @@ function ProductWrite() {
         </div>
         <div className="PW_product_category">
           <div className="PW_product_input_header">하자정보</div>
-          <div className="PW_product_defect">
-            <input
-              type="file"
-              className="PW_defect_image"
-              id="input-file"
-              accept="image/*"
-              multiple
-              readonly
-              onChange={handleAddImages}
-            />
-
-            {showImages.map((image, id) => (
-              <div key={id}>
-                <img
-                  className="PW_defect_img"
-                  src={image}
-                  alt={`${image}-${id}`}
-                  onClick={() => handleDeleteImage(id)}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="PW_defect_content">
-          <textarea
-            className="PW_product_defect_content"
-            type="text"
-            placeholder="제품 하자 내용"
-            onChange={onInputHandler}
-            maxLength="200"
+          <input
+            type="file"
+            className="PW_defect_image"
+            id="input-file"
+            accept="image/*"
+            multiple
+            readonly
+            onChange={handleAddImages}
           />
-          <span className="PW_countInput">{inputCount}/200</span>
+        </div>
+        <div className="PW_product_defect">
+          {img_con && (
+            <div className="PW_product_imgList">
+              {showImages.map((image, id) => (
+                <div key={id}>
+                  <img
+                    className="PW_defect_img"
+                    src={image}
+                    alt={`${image}-${id}`}
+                    onClick={() => handleDeleteImage(id)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="PW_defect_content">
+            <textarea
+              className="PW_product_defect_content"
+              type="text"
+              placeholder="제품 하자 내용"
+              onChange={onInputHandler}
+              maxLength="200"
+              value={defect_text}
+            />
+            <span className="PW_countInput">{inputCount}/200</span>
+          </div>
         </div>
       </div>
     </div>
