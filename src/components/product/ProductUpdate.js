@@ -24,6 +24,7 @@ function ProductUpdate(props) {
   const [reg_date, setReg_date] = useState("");
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
+
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
 
@@ -172,6 +173,7 @@ function ProductUpdate(props) {
       console.log("bbb :" + uploadFile);
       fileList.push(uploadFile); // 배열에 push
     });
+
     setListfile(fileList); // console.log("fileList=>" + fileList);
     reader.readAsDataURL(e.target.files[0]);
   };
@@ -471,17 +473,18 @@ function ProductUpdate(props) {
         </div>
         <div className="PW_product_category">
           <div className="PW_product_input_header">하자정보</div>
-          <div className="PW_product_defect">
-            <input
-              type="file"
-              className="PW_defect_image"
-              id="input-file"
-              accept="image/*"
-              multiple
-              readonly
-              onChange={handleAddImages}
-            />
-
+          <input
+            type="file"
+            className="PW_defect_image"
+            id="input-file"
+            accept="image/*"
+            multiple
+            readonly
+            onChange={handleAddImages}
+          />
+        </div>
+        <div className="PW_product_defect">
+          <div className="PW_product_imgList">
             {showImages.map((image, id) => (
               <div key={id}>
                 <img
@@ -493,17 +496,18 @@ function ProductUpdate(props) {
               </div>
             ))}
           </div>
-        </div>
-        <div className="PW_defect_content">
-          <textarea
-            className="PW_product_defect_content"
-            type="text"
-            placeholder="제품 하자 내용"
-            onChange={onInputHandler}
-            maxLength="200"
-            value={defect_text}
-          />
-          <span className="PW_countInput">{inputCount}/200</span>
+
+          <div className="PW_defect_content">
+            <textarea
+              className="PW_product_defect_content"
+              type="text"
+              placeholder="제품 하자 내용"
+              onChange={onInputHandler}
+              maxLength="200"
+              value={defect_text}
+            />
+            <span className="PW_countInput">{inputCount}/200</span>
+          </div>
         </div>
       </div>
     </div>
