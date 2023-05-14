@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "./ProductWrite.css";
-import searchIcon from "../../images/serach.png";
+import searchIcon from "../../images/search.png";
 import alt_img from "../../images/alt_image1.png";
 import axios from "axios";
 import Modal from "react-modal";
