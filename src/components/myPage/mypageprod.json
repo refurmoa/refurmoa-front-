@@ -4,7 +4,7 @@
         "product_code": 33425634,
         "main_image": "image01.png",
         "start_date": "2023-04-30 15:00:00",
-        "end_date": "2023-05-05 16:00:00",
+        "end_date": "2023-05-16 16:00:00",
         "prod_com": "리바트",
         "prod_name": "스와레 6인 세라믹식탁(5종)",
         "prod_state": 2,
@@ -19,7 +19,7 @@
         "product_code": 33425634,
         "main_image": "image02.png",
         "start_date": "2023-04-30 15:00:00",
-        "end_date": "2023-05-05 16:00:00",
+        "end_date": "2023-05-15 15:00:00",
         "prod_com": "프린홈",
         "prod_name": "RF 에르반 템바 1800 거실장",
         "prod_state": 1,
@@ -43,7 +43,7 @@
         "bid_price": 60000,
         "pay_date": "230505",
         "prod_price": "30000",
-        "prod_owner": null
+        "prod_owner": 1
       },
       {
         "product_code": 33425634,   
