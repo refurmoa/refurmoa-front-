@@ -27,6 +27,7 @@
   border: 2px solid #c7b9ae;
 }
 .CSnav_main {
+  float: left;
   margin: 15px 0 0 25px;
   width: 210px;
 }

@@ -16,9 +16,9 @@ const CsNavbar = () => {
     <div className="CS-wrap">
 
       <span className="CSnavbar">
-        <Link className="CSnavtitle" to="cs/notice">
+        <div className="CSnavtitle">
           고객센터
-        </Link>
+        </div>
         <hr className="CSnavline" />
         <div className="CSnav_main">
           <NavLink
