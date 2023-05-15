@@ -1,0 +1,83 @@
+.noticelist-view-title {
+  margin: 10px 0;
+  display: flex;
+  font-size: 25px;
+  line-height: 35px;
+  border-bottom: 2px solid rgba(185, 168, 154, 0.3);
+}
+.noticelist-view-date {
+  display: inline-flex;
+  text-align: right;
+  width: 150px;
+  font-size: 20px;
+  color: white;
+  line-height: 55px;
+}
+
+.noticelist-view-title > label:first-child {
+  margin: 10px 0;
+  width: 80%;
+}
+
+.noticelist-view-title > *:nth-child(2) {
+  margin: 0px 0;
+  width: 20%;
+}
+
+.notice-content-box {
+  resize: none;
+  background-color: #eeeeee;
+  width: 800px;
+  height: 900px;
+  text-align: left;
+  overflow-y: auto;
+  max-height: 900px;
+}
+
+.notice-content-box p {
+  font-size: 24px;
+}
+.notice-detail-content {
+  width: 90%;
+  margin: 20px 0 0 40px;
+}
+
+.notice-view-go-list-btn {
+  position: relative;
+  width: 95px;
+  height: 50px;
+  margin: 0 0 0 350px;
+  top: 50px;
+  font-size: 20px;
+  padding: 10px;
+  background-color: #514438;
+  border: 2px solid #514438;
+  border-radius: 10px;
+  color: white;
+}
+.notice-detail-edit-btn {
+  position: relative;
+  width: 95px;
+  height: 50px;
+  margin: 0 0 0 10px;
+  top: 50px;
+  font-size: 20px;
+  padding: 10px;
+  background-color: white;
+  border: 2px solid #514438;
+  border-radius: 10px;
+  color: #514438;
+}
+.notice-detail-delete-btn {
+  position: relative;
+  width: 95px;
+  height: 50px;
+  margin: 0 0 0 10px;
+  top: 50px;
+  font-size: 20px;
+  padding: 10px;
+  background-color: white;
+  border: 2px solid #514438;
+  border-radius: 10px;
+  color: #514438;
+}

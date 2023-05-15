@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+
+* {
+  margin: 0 auto;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+  color: #000000;
+  list-style: none;
+}
+
+body {
+  margin: 0 auto;
+  padding: 0;
+}
+
+.inquirylist-table {
+  width: 900px;
+  position: relative;
+  left: 150px;
+  top: 205px;
+  font-size: 20px;
+  line-height: 30px;
+  align-items: center;
+  color: #000000;
+}
+.inquirylist-header {
+  display: flex;
+  align-items: center;
+  font-size: 25px;
+  line-height: 35px;
+  color: #514438;
+  height: 50px;
+  font-weight: bold;
+  /* border-bottom: 3px solid rgba(185, 168, 154, 0.8); */
+}
+.inquiry-post-btn {
+  position: relative;
+  width: 104px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  /* font-weight: bold; */
+  font-size: 20px;
+  border: 0;
+  margin: 0 0 0 700px;
+  background: rgba(81, 68, 56, 0.8);
+  border-radius: 10px;
+  color: white;
+}
+.inquiry-post-btn:hover {
+  background-color: #b9a89a;
+  color: rgba(81, 68, 56, 0.8);
+}
+
+.inquiry-post-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+/* .inquirylist-tbody {
+  width: 900px;
+  height: 60px;
+} */
+.inquirylist-post {
+  width: 900px;
+  height: 60px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  padding: 10px 5px;
+  border-bottom: 2px solid rgba(185, 168, 154, 0.3);
+}
+.inquirylist-post:first-child span {
+  margin: 10px 0;
+  width: 70%;
+  white-space: nowrap;
+}
+
+.inquirylist-post:last-child span {
+  margin: 0px 0 0 20px;
+  width: 30%;
+  white-space: nowrap;
+  margin-right: 0;
+  text-align: right;
+}
+
+.inquirylist-post-num {
+  width: 35px;
+  height: 30px;
+  font-size: 20px;
+  margin: 15px 35px 15px 10px;
+}
+.inquirylist-post-title {
+  white-space: normal;
+  margin: 10px 0;
+  text-align: left;
+  width: 500px;
+  height: 30px;
+  display: inline-block;
+  font-size: 25px;
+  line-height: 35px;
+  /* white-space: nowrap; */
+}
+
+.inquirylist-answer-status {
+  width: 181px;
+  height: 30px;
+  position: relative;
+  right: 0;
+  /* z-index: 1; css 겹칠때 우선순위로 설정*/
+  padding: 10px 5px;
+  display: flex;
+  color: #7d9e8c;
+  /* margin-left: 100px; */
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.inquirylist-delete-btn {
+  position: relative;
+  width: 70px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: right;
+  font-size: 18px;
+  border: 0;
+  margin: 0 0 0 10px;
+  background-color: rgba(185, 168, 154, 0.8);
+  border-radius: 10px;
+  color: white;
+}
+.inquirylist-delete-btn:hover {
+  background-color: #ddd;
+}
+
+.inquirylist-delete-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.inquirylist-post-date {
+  text-align: right;
+  margin: 0 0 0 10px;
+  /* margin-left: auto; 요소를 오른쪽에 정렬 */
+  margin-right: 0; /* 오른쪽 간격을 0으로 설정 */
+  white-space: nowrap; /* 텍스트가 줄바꿈되지 않도록 설정 */
+}
+.inquirylist-pagination {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+  left: 150px;
+  top: 205px;
+  position: relative;
+}
+
+.inquirylist-pagination button {
+  background-color: #fff;
+  border: 1px solid transparent;
+  color: rgba(81, 68, 56, 0.7);
+
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 16px;
+  margin: 0 5px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.inquirylist-pagination button:hover {
+  background-color: #ddd;
+}
+
+.inquirylist-pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.pagination button:first-child {
+  margin-left: 0;
+}
+
+.pagination button:last-child {
+  margin-right: 0;
+}
