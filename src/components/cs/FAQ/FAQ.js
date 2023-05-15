@@ -12,6 +12,8 @@ function FAQ() {
   const [category, setCatrgory] = useState(0);
   const [totalPage, setTotalPage] = useState(1);
   const logId = "admin";
+  // const logId= window.sessionStorage.getItem("id")
+
   useEffect(() => {
     setDataList(FAQList);
     pageCount();

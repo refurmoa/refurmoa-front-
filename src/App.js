@@ -39,7 +39,7 @@ function App() {
         <Route element={<CsNavbar />}>
           <Route path="cs/notice" element={<NoticeList />} />
           <Route path="cs/notice/detail/:noticeid" element={<NoticeView />} />
-          <Route path="/FAQ" element={<FAQ />} />
+          <Route path="/cs/faq" element={<FAQ />} />
         </Route>
         <Route path="/cs/as_store" element={<AsStore />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />
