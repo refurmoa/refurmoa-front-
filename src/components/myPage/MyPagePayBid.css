@@ -183,7 +183,7 @@ padding: 0;
     position: relative;
     background-image: url(../../images/search.png);
     background-size: contain;
-    opacity: 0.5;
+    background-color: white;
     border: none;
     width: 17px;
     height: 17.13px;
@@ -193,9 +193,9 @@ padding: 0;
 }
 
 .flex_wrap {
-max-width: 1200px;
+max-width: 1180px;
 display: grid;
-grid-template-columns: repeat(2, 590px);
+grid-template-columns: 1fr 1fr;
 gap: 40px 0px;
 margin-top: 35px;
 }

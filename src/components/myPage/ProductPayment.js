@@ -8,19 +8,21 @@ export const ProductPayment = ({ product }) => {
   const navigate = useNavigate();
 
   //props or location 사용
-  const onClick = (product_code) => {
-    navigate(`/post/detail/${product_code}`, {
-      state: { product_code: product_code },
+  const onClick = (board_num) => {
+    navigate(`/post/detail/${board_num}`, {
+      state: { board_num: board_num },
     });
   };
 
-  const pay = (product_code) => {
-    navigate("/post/pay", { state: { product_code: product_code } });
+  const pay = (board_num) => {
+    navigate("/post/pay/:board_num", {
+      state: { board_num: board_num, sell_type: 1 },
+    });
   };
 
-  const delivery = (product_code) => {
-    navigate("/payment/detail", {
-      state: { product_code: product_code },
+  const delivery = (board_num) => {
+    navigate("/payment/detail/${board_num}", {
+      state: { board_num: board_num },
     });
   };
 
@@ -34,7 +36,7 @@ export const ProductPayment = ({ product }) => {
         <img
           src={`/images/prod/${product.main_image}`}
           alt="productimage"
-          onClick={onClick}
+          onClick={() => onClick(product.board_num)}
         />
       </image>
       <information className="marginzero">
@@ -60,7 +62,10 @@ export const ProductPayment = ({ product }) => {
           </div>
         )}
         <div className="com_namePay">{product.prod_com}</div>
-        <div className="product_namePay" onClick={onClick}>
+        <div
+          className="product_namePay"
+          onClick={() => onClick(product.board_num)}
+        >
           {product.prod_name}
         </div>
 
@@ -86,7 +91,7 @@ export const ProductPayment = ({ product }) => {
                 className="payButtonPay"
                 type="button"
                 value="결제 하기"
-                onClick={pay}
+                onClick={() => pay(product.board_num, product.sell_type)}
               ></input>
               <productpay product_code={product.product_code}></productpay>
             </div>
@@ -102,8 +107,8 @@ export const ProductPayment = ({ product }) => {
                   className="inqButtonPay"
                   type="button"
                   value="배송 조회"
-                  onClick={delivery}
-                  product_code={product.product_code}
+                  onClick={() => delivery(product.board_num)}
+                  board_num={product.board_num}
                 ></input>
                 <productdetail
                   product_code={product.product_code}
@@ -116,7 +121,7 @@ export const ProductPayment = ({ product }) => {
                 className="cancleButtonPay"
                 type="button"
                 value="결제 상세"
-                onClick={delivery}
+                onClick={() => delivery(product.board_num)}
               ></input>
               <productdetail
                 product_code={product.product_code}
@@ -133,7 +138,7 @@ export const ProductPayment = ({ product }) => {
                 className="payButtonPay"
                 type="button"
                 value="결제 상세"
-                onClick={delivery}
+                onClick={() => delivery(product.board_num)}
               ></input>
               <productdetail
                 product_code={product.product_code}

@@ -20,6 +20,7 @@ padding: 0;
 .productPay {
   display: flex;
   width: 560px;
+  margin-right: 60px;
 }
 
 .imagePay {
