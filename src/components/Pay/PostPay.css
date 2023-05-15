@@ -1,0 +1,352 @@
+/* 판매 결제 페이지 */
+
+input:disabled {
+    background-color: #FFFFFF;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* 판매 결제 페이지 wrap */
+.PP-_wrap {
+    width: 1200px;
+    margin: 70px auto 0;
+}
+
+/* top */
+.PP-title {
+    width: 1140px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 30px;
+    color: #514438;
+    margin: 0 0 15px 30px;
+}
+
+.PP-code {
+    float: right;
+    height: 30px;
+    font-weight: 500;
+    font-size: 23px;
+    line-height: 30px;
+    color: #514438;
+}
+
+.PP-main_line {
+    width: 1200px;
+    border: 1.5px solid #514438;
+}
+
+/* 회원 정보 */
+.PP-user_info_wrap {
+    width: 1140px;
+    height: 205px;
+    border-bottom: 3px solid rgba(185, 168, 154, 0.2);
+    padding: 30px;
+}
+
+.PP-user_info {
+    float: left;
+    width: 362px;
+    height: 200px;
+    padding: 5px 0;
+    border-right: 3px solid rgba(185, 168, 154, 0.1);
+}
+
+.PP-user_info_title {
+    height: 30px;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    color: rgba(81, 68, 56, 0.8);
+}
+
+.PP-user_info_wrap .PP-user_info_title {
+    margin-bottom: 30px;
+}
+
+.PP-user_info_text {
+    width: 330px;
+    height: 35px;
+    font-size: 20px;
+    line-height: 35px;
+    margin: 10px 0 0 5px;
+    overflow: hidden;
+}
+
+/* 배송 정보 */
+.PP-delivery_wrap {
+    float: left;
+    width: 725px;
+    margin: 5px 0 0 50px;
+}
+
+.PP-info_title_wrap {
+    height: 30px;
+    margin-bottom: 30px;
+}
+
+.PP-info_title {
+    float: left;
+    height: 30px;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    color: rgba(81, 68, 56, 0.8);
+}
+
+.PP-info_checkbox {
+    float: left;
+    height: 30px;
+    margin-left: 20px;
+}
+
+.PP-info_checkbox > input {
+    width: 15px;
+    height: 15px;
+}
+
+.PP-info_checkbox > label {
+    height: 30px;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 30px;
+    margin-left: 10px;
+}
+
+.PP-form_left {
+    float: left;
+    width: 270px;
+}
+
+.PP-form_left > .PP-form {
+    width: 280px;
+    height: 35px;
+}
+
+.PP-form > label {
+    float: left;
+    height: 35px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 35px;
+}
+
+.PP-form_left > .PP-form input {
+    width: 188px;
+}
+
+.PP-form input {
+    float: right;
+    height: 33px;
+    border: 1px solid #B9A89A;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 35px;
+    padding: 0 10px;
+}
+
+.PP-form:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.PP-form input::placeholder {
+    color: rgba(185, 168, 154, 0.6);
+}
+
+.PP-form input:focus {
+    border-color: #514438;
+    outline: 0;
+}
+
+.PP-form_right {
+    float: right;
+    width: 410px;
+}
+
+.PP-form_right > .PP-form {
+    width: 410px;
+    height: 35px;
+}
+
+.PP-form_search_wrap, .PP-form_wrap {
+    float: right;
+}
+
+.PP-form_search_wrap > input {
+    float: left;
+    width: 303px;
+    margin-right: 10px;
+}
+
+.PP-search_icon {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin-top: 7.5px;
+    cursor: pointer;
+}
+
+.PP-form_wrap > input {
+    width: 333px;
+}
+
+.PP-form_bottom {
+    float: left;
+    width: 725px;
+}
+
+.PP-form_bottom > .PP-form {
+    width: 725px;
+    height: 35px;
+    margin-top: 15px;
+}
+
+.PP-form_bottom > .PP-form > input {
+    width: 573px;
+}
+
+  /* 쿠폰, 마일리지 사용 */
+.PP-pay_user_wrap {
+    width: 1140px;
+    height: 90px;
+    border-bottom: 3px solid rgba(185, 168, 154, 0.2);
+    padding: 30px;
+}
+
+.PP-pay_user_wrap .PP-user_info_title {
+    margin-bottom: 25px;
+}
+
+.PP-pay_user {
+    height: 35px;
+    margin-left: 5px;
+}
+
+.PP-pay_coupon_wrap {
+    float: left;
+    height: 35px;
+    margin-right: 70px;
+}
+
+.PP-pay_user_title {
+    float: left;
+    height: 35px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 35px;
+    margin-right: 20px;
+}
+
+.PP-pay_user_use {
+    float: left;
+    height: 33px;
+    border: 1px solid #B9A89A;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 35px;
+    text-align: right;
+}
+
+.PP-pay_coupon_wrap > .PP-pay_user_use {
+    width: 228px;
+    padding: 0 10px;
+}
+
+.PP-pay_coupon_button {
+    float: left;
+    height: 35px;
+    background-color: #B9A89A;
+    border-width: 0;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 35px;
+    text-align: center;
+    color: #FFFFFF;
+    padding: 0 10px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.PP-pay_mile_wrap {
+    float: left;
+    height: 35px;
+}
+
+.PP-pay_mile_wrap .PP-pay_user_use {
+    width: 207px;
+    padding: 0 31px 0 10px;
+}
+
+.PP-pay_mile_wrap .PP-pay_user_use::placeholder {
+    color: #000000;
+}
+
+.PP-pay_mile {
+    position: relative;
+    float: left;
+    width: 250px;
+    height: 35px;
+}
+
+.PP-pay_mile_text {
+    position: absolute;
+    right: 11px;
+    font-size: 18px;
+    line-height: 35px;
+}
+
+.PP-pay_user_mile {
+    height: 35px;
+    font-size: 18px;
+    line-height: 35px;
+    color: rgba(0, 0, 0, 0.6);
+    margin-left: 10px;
+}
+
+/* 결제 수단 선택 */
+.PP-pay_wrap {
+    width: 1200px;
+}
+
+.PP-pay_top {
+    width: 1200px;
+    height: 90px;
+    margin: 30px;
+}
+
+.PP-pay_wrap .PP-user_info_title {
+    float: left;
+    margin-right: 40px;
+}
+
+.PP-pay_radio {
+    float: left;
+    height: 30px;
+    margin-right: 30px;
+}
+
+.PP-pay_radio > input {
+    float: left;
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+}
+
+.PP-pay_radio > label {
+    float: left;
+    height: 30px;
+    font-weight: 600;
+    font-size: 23px;
+    line-height: 30px;
+    color: #514438;
+    margin-left: 10px;
+}

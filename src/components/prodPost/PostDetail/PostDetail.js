@@ -140,12 +140,8 @@ function PostDetail() {
     if (login_id === null) {
       navigate("/login");
     } else {
-      navigate("/pay/$", {
-        member_id: login_id,
-        board_num: board_num,
-        product_code: prodInfo.product_code,
-        sell_type: prodInfo.sell_type,
-        direct_price: prodInfo.direct_price
+      navigate(`/post/pay/${board_num}`, {
+        sell_type: prodInfo.sell_type
       })
     }
   };
@@ -239,7 +235,7 @@ function PostDetail() {
             <ul className="PD-main_info_text_wrap">
               <li className="PD-main_info_text">
                 <span>상태</span>
-                <span>{prodInfo.prod_grade}</span>
+                <span>{prodInfo.prod_grade}급</span>
                 <img className="PD-main_info_icon" alt="상품 상태 상세정보" src={info_icon_brown} onClick={InfoIconClick("grade")}></img>
               </li>
               { prodInfo.sell_type !== 2 && <>
