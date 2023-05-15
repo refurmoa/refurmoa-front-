@@ -9,7 +9,7 @@ import SignupComplete from "./components/sign/signup/SignupComplete";
 import ProductWrite from "./components/product/ProductWrite";
 import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
-import PostPay from "./components/prodPost/PostPay";
+import PostPay from "./components/Pay/PostPay";
 import NoticeList from "./components/cs/NoticeList";
 import NoticeView from "./components/cs/NoticeView";
 import AsStore from "./components/cs/asStore/AsStore";
