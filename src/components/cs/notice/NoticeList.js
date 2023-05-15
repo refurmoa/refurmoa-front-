@@ -44,7 +44,7 @@ const NoticeList = () => {
       <div className="NL-header">
         <span className="NL-title">공지사항</span>
         {login_id === "admin" && 
-          <Link to="/notice/post" className="NL-post-btn">등록</Link>
+          <Link to="/cs/notice/write" className="NL-post-btn">등록</Link>
         }
       </div>
       <hr className="NL-line" />
@@ -53,13 +53,13 @@ const NoticeList = () => {
       <div className="NL-list_wrap">
           {dataList.map((list) => (
             <div className="NL-list" key={list.noti_num}>
-              <Link className="NL-list_title" to={`/notice/detail/${list.noti_num}`} onClick={readcountUp}>
+              <Link className="NL-list_title" to={`/cs/notice/detail/${list.noti_num}`} onClick={readcountUp}>
                 {list.noti_title}
               </Link>
               <span className="NL-list_right_wrap">
                 {login_id === "admin" && (
                   <span className="NL-list_admin_btn_wrap">
-                    <Link to={`/notice/update/${list.noti_num}`} className="NL-list_btn">
+                    <Link to={`/cs/notice/update/${list.noti_num}`} className="NL-list_btn">
                       수정
                     </Link>
                     <span className="NL-list_btn" onClick={deleteList}>삭제</span>

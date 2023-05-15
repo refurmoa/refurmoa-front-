@@ -5,7 +5,6 @@ import Data from "./Data.json";
 import { useNavigate, useParams } from "react-router-dom";
 import naver from "../../../images/naver.png";
 import { Link } from "react-router-dom";
-import CsNavbar from "../CsNavbar";
 
 const NoticeView = () => {
   //admin 관리자페이지에서 수정,삭제
@@ -35,50 +34,60 @@ const NoticeView = () => {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = dataList.slice(indexOfFirstItem, indexOfLastItem);
 
+  // 삭제
+  const deleteList = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <>
-      <CsNavbar />
+    <span className="NV-wrap">
+      <div className="NV-header">
+        <span className="NV-title">공지사항</span>
+      </div>
+      <hr className="NV-line" />
+      {currentItems.map((list) => {
+        return (
+          <div className="NV-board-wrap" key={list.noti_num}>
+            <div className="NV-title-wrap">
+              <span className="NV-board-title">{list.noti_title}</span>
+              <span className="NV-date">{list.noti_date}</span>
+            </div>
+            <hr className="NV-title-line" />
+            <div className="NV-info">{list.noti_inf}</div>
+            <div className="NV-content-box">
+              <span>
+                {" dddddd"}
+                <br />
+                <img className="NV-img" src={naver} alt="naver" />
+              </span>
+            </div>
 
-      <table className="noticelist-table">
-        <tr>
-          <td className="noticelist-header">공지사항</td>
-        </tr>
-        {currentItems.map((item, index) => {
-          return (
-            <tr key={index}>
-              <div className="noticelist-view-title">
-                <label>{item.title}</label>
-
-                <div className="noticelist-view-date">
-                  <label>{item.date}</label>
-                </div>
-              </div>
-              <div>{item.content}</div>
-              <div className="notice-detail-content">
-                <div className="notice-content-box">
-                  <label>
-                    {" "}
-                    <img src={naver} alt="naver" />
-                  </label>
-                </div>
-                <button
-                  className="notice-view-go-list-btn"
-                  onClick={() => navigate(-1)}
-                >
+            <div>
+              <div className="NV-btn-wrap">
+                <span className="NV-go-list-btn" onClick={() => navigate(-1)}>
                   목록
-                </button>
+                </span>
                 {loginid === "admin" && (
                   <>
-                    <button className="notice-detail-edit-btn">수정</button>
-                    <button className="notice-detail-delete-btn">삭제</button>
+                    <span
+                      className="NV-edit-btn"
+                      onClick={() => {
+                        navigate("/cs/notice/update");
+                      }}
+                    >
+                      수정
+                    </span>
+                    <span className="NV-delete-btn" onClick={deleteList}>
+                      삭제
+                    </span>
                   </>
                 )}
               </div>
-            </tr>
-          );
-        })}
-      </table>
-    </>
+            </div>
+          </div>
+        );
+      })}
+    </span>
   );
 };
 export default NoticeView;
