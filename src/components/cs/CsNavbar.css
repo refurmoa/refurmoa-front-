@@ -1,4 +1,10 @@
-/* 마진 오토로 두면 센터로.. */
+/* 고객센터 메뉴 */
+
+.CS-wrap {
+  width: 1200px;
+  margin: 70px auto 0;
+}
+
 .CSnavbar {
   margin: auto;
   width: 260px;
@@ -17,8 +23,8 @@
 }
 .CSnavline {
   float: left;
-  width: 255.2px;
-  border: 3px solid #c7b9ae;
+  width: 256px;
+  border: 2px solid #c7b9ae;
 }
 .CSnav_main {
   margin: 15px 0 0 25px;

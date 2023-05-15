@@ -1,114 +1,91 @@
+// 공지사항 목록 페이지
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./NoticeList.css";
-import { noticeList } from "../../components/cs/Data";
-import "./CsNavbar.css";
-import CsNavbar from "./CsNavbar";
+import Data from "./Data.json";
 
 const NoticeList = () => {
-  //admin 관리자페이지에서 수정,삭제
-  const loginid = "admin";
-
-  // 데이터를 페이지 단위로 나누기 위한 변수들
+  // const login_id = window.sessionStorage.getItem("member_id"); // 세션 ID
   const [dataList, setDataList] = useState([]);
+  const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+
+  const login_id = "admin";
 
   useEffect(() => {
-    setDataList(noticeList);
+    setDataList(Data);
+
+    pageCount(); // 문의 글 수 조회
   }, []);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(8);
+  // 문의 글 목록 조회
+  const ListSearch = () => {
 
-  // 현재 페이지에 해당하는 데이터 추출
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = noticeList.slice(indexOfFirstItem, indexOfLastItem);
-
-  // 페이지 번호 클릭 이벤트 핸들러
-  const handleClick = (e) => {
-    setCurrentPage(Number(e.target.id));
-  };
-
-  // 페이지 번호 버튼 생성
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(noticeList.length / itemsPerPage); i++) {
-    pageNumbers.push(
-      <button key={i} id={i} onClick={handleClick}>
-        {i}
-      </button>
-    );
   }
 
   // 조회수
-  const readcountup = (e) => {};
+  const readcountUp = (e) => {
+
+  }
+
+  // 삭제
+  const deleteList = (e) => {
+    e.stopPropagation();
+  }
+
+  // 문의 글 수 조회
+  const pageCount = () => {
+    setTotalPage(5);
+  }
 
   return (
-    <div className="CS-wrap">
-      <CsNavbar />
-      <span className="noticelist-main">
-          <div className="noticelist-header">
-            <span className="noticelist-title">공지사항</span>
-            <span className="noticelist-admin-post">
-              {loginid === "admin" && (
-                <Link to="/notice/post" className="admin-post-btn">
-                  등록
-                </Link>
-              )}
-            </span>
-          </div>
-         <hr className="noticelist-line" />
-         <div className="noticelist-wrap">
-           <div>
-              {currentItems.map((item, index) => {
-              return (    
-                  <div key={index} className="noticelist-post">
-                    <span className="noticelist-title-wrap">                     
-                          <Link to={`/notice/detail/${item.noti_num}`} onClick={readcountup}>
-                            {item.title}
-                          </Link>
-                      </span>
-                    <span className="noticelist-admin">
-                      {loginid === "admin" && (
-                        <>
-                          <span>
-                            <Link to={`/notice/update/${item.noti_num}`} className="noticelist-admin-edit-btn">
-                              수정
-                            </Link>
-                          </span>
-                          <span>
-                            <button className="noticelist-admin-delete-btn">삭제</button>
-                          </span>
-                        </>
-                      )}
-                      <span className="noticelist-post-date">{item.date}</span>
-                    </span>
-                  </div>
-                );
-              })}        
-            </div>
-        </div>
+    <span className="NL-wrap">
+      <div className="NL-header">
+        <span className="NL-title">공지사항</span>
+        {login_id === "admin" && 
+          <Link to="/notice/post" className="NL-post-btn">등록</Link>
+        }
+      </div>
+      <hr className="NL-line" />
 
-        <div className="noticelist-pagination">
-          <div>
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              {"<"}
-            </button>
-            {pageNumbers}
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={
-                currentPage === Math.ceil(noticeList.length / itemsPerPage)
-              }
-            >
-              {">"}
-            </button>
-          </div>
+      {/* 리스트 출력 */}
+      <div className="NL-list_wrap">
+          {dataList.map((list) => (
+            <div className="NL-list" key={list.noti_num}>
+              <Link className="NL-list_title" to={`/notice/detail/${list.noti_num}`} onClick={readcountUp}>
+                {list.noti_title}
+              </Link>
+              <span className="NL-list_right_wrap">
+                {login_id === "admin" && (
+                  <span className="NL-list_admin_btn_wrap">
+                    <Link to={`/notice/update/${list.noti_num}`} className="NL-list_btn">
+                      수정
+                    </Link>
+                    <span className="NL-list_btn" onClick={deleteList}>삭제</span>
+                  </span>
+                )}
+                <span className="NL-list-date">{list.noti_date}</span>
+              </span>
+            </div>
+          ))}
+      </div>
+
+      {/* 페이지 출력 */}
+      { totalPage > 1 &&
+        <div className="NL-page">
+          { currentPage === 1 ? <span className="NL-page_prev_gray">&lt;</span>
+            : <span className="NL-page_prev" onClick={() => setCurrentPage(currentPage - 1)}>&lt;</span>
+          }
+          <span className="NL-page_now">{currentPage}</span>
+          &nbsp;&nbsp;/&nbsp;&nbsp;
+          <span className="NL-page_total">{totalPage}</span>
+          { currentPage === totalPage ? <span className="NL-page_next_gray">&gt;</span>
+            : <span className="NL-page_next" onClick={() => setCurrentPage(currentPage + 1)}>&gt;</span>
+          }
         </div>
-      </span>
-    </div>
+      }
+    </span>
   );
 };
 

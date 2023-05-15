@@ -7,24 +7,24 @@ import lock_icon from "../../../images/lock_icon-240.png";
 import inquirylist from "./inquirylist.json";
 
 function ProdInquiry(props) {
-  const [inquiryList, setInquiryList] = useState(inquirylist);
-  const [inquiryExist, setInquiryExist] = useState(0);
-  const [inquiryForm, setInquiryForm] = useState({
+  const [inquiryList, setInquiryList] = useState(inquirylist); // 문의 글 리스트
+  const [inquiryExist, setInquiryExist] = useState(false); // 문의 글 여부
+  const [inquiryForm, setInquiryForm] = useState({ // 문의 글 등록
     private: 0,
     title: "",
     content: "",
   });
-  const [detailOn, setDetailOn] = useState("");
-  const [replyForm, setReplyForm] = useState("");
-  const [totalPage, setTotalPage] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [detailOn, setDetailOn] = useState(""); // 문의 상세 보기
+  const [replyForm, setReplyForm] = useState(""); // 답글 등록
+  const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
 
   useEffect(() => {
     // 문의 리스트 조회
     // setList();
 
     // 문의 글 여부 조회
-    setInquiryExist(1);
+    setInquiryExist(true);
 
     // 문의 글 수 조회
     pageCount();
@@ -190,7 +190,7 @@ function ProdInquiry(props) {
       {/* 문의 글 목록 */}
       <table className="PI-list">
         <tbody>
-          { inquiryExist === 0 ?
+          { !inquiryExist ?
             <tr className="PI-list_line">
               <td className="PI-list_line_none">작성된 문의 글이 없습니다.</td>
             </tr>
