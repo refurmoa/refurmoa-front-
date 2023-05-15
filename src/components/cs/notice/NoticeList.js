@@ -73,15 +73,15 @@ const NoticeList = () => {
 
       {/* 페이지 출력 */}
       { totalPage > 1 &&
-        <div className="PI-page">
-          { currentPage === 1 ? <span className="PI-page_prev_gray">&lt;</span>
-            : <span className="PI-page_prev" onClick={() => setCurrentPage(currentPage - 1)}>&lt;</span>
+        <div className="NL-page">
+          { currentPage === 1 ? <span className="NL-page_prev_gray">&lt;</span>
+            : <span className="NL-page_prev" onClick={() => setCurrentPage(currentPage - 1)}>&lt;</span>
           }
-          <span className="PI-page_now">{currentPage}</span>
+          <span className="NL-page_now">{currentPage}</span>
           &nbsp;&nbsp;/&nbsp;&nbsp;
-          <span className="PI-page_total">{totalPage}</span>
-          { currentPage === totalPage ? <span className="PI-page_next_gray">&gt;</span>
-            : <span className="PI-page_next" onClick={() => setCurrentPage(currentPage + 1)}>&gt;</span>
+          <span className="NL-page_total">{totalPage}</span>
+          { currentPage === totalPage ? <span className="NL-page_next_gray">&gt;</span>
+            : <span className="NL-page_next" onClick={() => setCurrentPage(currentPage + 1)}>&gt;</span>
           }
         </div>
       }

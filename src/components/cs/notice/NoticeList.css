@@ -91,3 +91,34 @@
   line-height: 30px;
   color: #777777;
 }
+
+/* 페이지 번호 */
+.NL-page {
+  height: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  color: rgba(81, 68, 56, 0.5);
+  margin-top: 50px;
+}
+
+.NL-page_now, .NL-page_prev, .NL-page_next {
+  color: rgba(81, 68, 56, 0.8);
+}
+
+.NL-page_total, .NL-page_prev_gray, .NL-page_next_gray {
+  color: rgba(81, 68, 56, 0.5);
+}
+
+.NL-page_prev, .NL-page_prev_gray {
+  margin-right: 20px;
+}
+
+.NL-page_next, .NL-page_next_gray {
+  margin-left: 20px;
+}
+
+.NL-page_prev, .NL-page_next {
+  cursor: pointer;
+}
