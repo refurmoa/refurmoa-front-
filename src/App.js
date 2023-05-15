@@ -37,8 +37,8 @@ function App() {
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
         <Route path="/post/pay/:board_num" element={<PostPay />} />
         <Route element={<CsNavbar />}>
-          <Route path="/notice" element={<NoticeList />} />
-          <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
+          <Route path="cs/notice" element={<NoticeList />} />
+          <Route path="cs/notice/detail/:noticeid" element={<NoticeView />} />
         </Route>
         <Route path="/cs/as_store" element={<AsStore />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />
