@@ -145,12 +145,26 @@ padding: 0;
     width: 150px;
     height: 30px;
     background: rgba(185, 168, 154, 0.15);
-    border-color: rgba(185, 168, 154, 0.15);
+    border: none;
     border-radius: 5px;
     margin: 0 6px;
     font-size: 18px;
     line-height: 30px;
     cursor: pointer;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.datesearchbutton {
+    display: inline-block;
+    position: relative;
+    background-image: url(../../images/search.png);
+    background-size: contain;
+    background-color: white;
+    border: none;
+    width: 17px;
+    height: 17.13px;
+    cursor: pointer;
+    margin-left: 5px;
 }
 
 .searchbox{
@@ -164,55 +178,85 @@ padding: 0;
     cursor: text;
 }
 
-.searchboxbutton{
+.searchboxbutton {
     display: inline-block;
     position: relative;
-    background-image: url(../../../public/images/prod/searchicon.png);
+    background-image: url(../../images/search.png);
+    background-size: contain;
+    opacity: 0.5;
     border: none;
     width: 17px;
     height: 17.13px;
     cursor: pointer;
     margin: 46px 0 0 652px;
-    cursor: pointer;
+    background-color: white;
 }
 
-    .flex_wrap {
-    max-width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(2, 590px);
-    gap: 40px 0px;
-    margin-top: 35px;
-  }
+.flex_wrap {
+max-width: 1200px;
+display: grid;
+grid-template-columns: repeat(2, 590px);
+gap: 40px 0px;
+margin-top: 35px;
+}
 
-  .radio label {
-    margin: 0 20px 0 10px;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 25px;
-    color: rgba(81, 68, 56, 0.8);
-  }
+.radio label {
+margin: 0 20px 0 10px;
+font-weight: 600;
+font-size: 20px;
+line-height: 25px;
+color: rgba(81, 68, 56, 0.8);
+}
 
-  .radio input {
-    box-sizing: border-box;
-    width: 15px;
-    height: 15px;
-    accent-color: rgba(81, 68, 56, 0.6);
-  }
+.radio input {
+box-sizing: border-box;
+width: 15px;
+height: 15px;
+accent-color: rgba(81, 68, 56, 0.6);
+}
 
-  .option {
-    width: 90px;
+.option {
+width: 75px;
+height: 27px;
+font-size: 15px;
+color: rgba(81, 68, 56, 0.8);
+text-align: center;
+border-radius: 5px;
+}
+
+.option option {
+font-size: 15px;
+color: rgba(81, 68, 56, 0.8);
+}
+
+.PI-pagemp {
     height: 30px;
-    color: rgba(81, 68, 56, 0.8);
-    font-size: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 30px;
     text-align: center;
-    border-radius: 5px;
-  }
+    color: rgba(81, 68, 56, 0.5);
+    margin-top: 50px;
+}
 
-  .option option {
-    font-size: 15px;
-    line-height: 25px;
-    align-items: center;
+.PI-page_nowmp, .PI-page_prevmp, .PI-page_nextmp {
     color: rgba(81, 68, 56, 0.8);
-  }
+}
+
+.PI-page_totalmp, .PI-page_prev_graymp, .PI-page_next_graymp {
+    color: rgba(81, 68, 56, 0.5);
+}
+
+.PI-page_prevmp, .PI-page_prev_graymp {
+    margin-right: 20px;
+}
+
+.PI-page_nextmp, .PI-page_next_graymp {
+    margin-left: 20px;
+}
+
+.PI-page_prevmp, .PI-page_nextmp {
+    cursor: pointer;
+}
 
   

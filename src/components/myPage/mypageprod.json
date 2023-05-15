@@ -3,8 +3,8 @@
       {
         "product_code": 33425634,
         "main_image": "image01.png",
-        "start_date": "2023-04-30 15:00:00",
-        "end_date": "2023-05-16 16:00:00",
+        "start_date": "2023-05-30 15:00:00",
+        "end_date": "2023-06-16 16:00:00",
         "prod_com": "리바트",
         "prod_name": "스와레 6인 세라믹식탁(5종)",
         "prod_state": 2,
@@ -12,14 +12,14 @@
         "cur_price": 600000,
         "bid_price": 400000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 30000,
         "prod_owner": 0
       },
       {
         "product_code": 33425634,
         "main_image": "image02.png",
         "start_date": "2023-04-30 15:00:00",
-        "end_date": "2023-05-15 15:00:00",
+        "end_date": "2023-05-16 2:04:30",
         "prod_com": "프린홈",
         "prod_name": "RF 에르반 템바 1800 거실장",
         "prod_state": 1,
@@ -27,7 +27,7 @@
         "cur_price": 200000,
         "bid_price": 200000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 300000,
         "prod_owner": 1
       },
       {
@@ -42,7 +42,7 @@
         "cur_price": 20000,       
         "bid_price": 60000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 250000,
         "prod_owner": 1
       },
       {
@@ -57,7 +57,7 @@
         "cur_price": 100000,
         "bid_price": 60000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 450000,
         "prod_owner": null
       },
       {
@@ -72,7 +72,7 @@
         "cur_price": 800000,
         "bid_price": 1200000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 980000,
         "prod_owner": 1
       },
       {
@@ -87,7 +87,7 @@
         "cur_price": 600000,
         "bid_price": 60000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 1990000,
         "prod_owner": 0
       },
       {
@@ -102,7 +102,7 @@
         "cur_price": 70000,
         "bid_price": 60000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 30000,
         "prod_owner": 0
       },
       {
@@ -117,7 +117,7 @@
         "cur_price": 3000000,
         "bid_price": 3000000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 30000,
         "prod_owner": 0
       },
       {
@@ -132,7 +132,7 @@
         "cur_price": 456000,
         "bid_price": 200000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 30000,
         "prod_owner": 0
       },
       {
@@ -147,7 +147,7 @@
         "cur_price": 15000,     
         "bid_price": 5000,
         "pay_date": "230505",
-        "prod_price": "30000",
+        "prod_price": 30000,
         "prod_owner": null
       }
     ]

@@ -101,7 +101,7 @@ padding: 0;
 
 .pricewrap {
   display: grid;
-  grid-template-columns: 1.5fr 1.5fr 2fr;
+  grid-template-columns: 1.2fr 1.5fr 2.5fr;
 }
 
 .priceBidnum {
@@ -121,32 +121,36 @@ padding: 0;
   color:red;
   font-size: 18px;
   line-height: 30px;
+  height: 30px;
+  font-weight: 700;
 }
 
 .balckcolorBid {
   font-size: 18px;
   line-height: 30px;
+  height: 30px;
 }
 
 .clockiconred{
   display: inline-block;
   background-image: url(../../../public/images/prod/clockiconred.png);
   border: none;
-  width: 17px;
-  height: 17px;  
+  width: 13.5px;
+  height: 13.5px;  
+  background-size: contain;
   cursor: pointer;
-  margin-right: 10px;
-  
+  margin-right: 8px;
 }
 
 .clockiconblack{
   display: inline-block;
   background-image: url(../../../public/images/prod/clockiconblack.png);
   border: none;
-  width: 17px;
-  height: 17px;  
+  width: 13.5px;
+  height: 13.5px;  
+  background-size: contain; 
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 8px;
   
 }
 

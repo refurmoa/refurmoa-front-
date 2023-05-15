@@ -53,7 +53,7 @@ export const ProductPayment = ({ product }) => {
             <div className="iconblack"></div>배송 준비중
           </div>
         ) : product.prod_state === 4 ? (
-          <div className="graycolorPay">베송 완료</div>
+          <div className="graycolorPay">배송 완료</div>
         ) : (
           <div className="graycolorPay">
             <div className="iconblack"></div>구매확정
@@ -66,9 +66,13 @@ export const ProductPayment = ({ product }) => {
 
         <price className="pricePay">
           {product.prod_state === 2 ? (
-            <div className="redcolormoneyPay">{product.prod_price}원</div>
+            <div className="redcolormoneyPay">
+              {product.prod_price.toLocaleString("ko-KR")}원
+            </div>
           ) : (
-            <div className="blackcolormoneyPay">{product.prod_price}원</div>
+            <div className="blackcolormoneyPay">
+              {product.prod_price.toLocaleString("ko-KR")}원
+            </div>
           )}
         </price>
         <div className="mile">

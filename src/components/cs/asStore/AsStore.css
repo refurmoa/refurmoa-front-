@@ -44,9 +44,10 @@ padding: 0;
 }
 
 .astoptextR img {
-   height: 17px;
-   width:  17px;
+   height: 15px;
+   width:  16px;
    margin-left: 5px;
+   margin-top: 15px;
    cursor: pointer;
 }
 
@@ -99,7 +100,7 @@ padding: 0;
 
 .asmiddleselect {
     box-sizing: border-box;
-    width: 165px;
+    width: 170px;
     height: 40px;
     padding-left: 20px;
     border: 2px solid rgba(185, 168, 154, 0.3);
@@ -123,7 +124,7 @@ padding: 0;
 }
 
 .asmiddlesearchbox {
-    width: 317px;
+    width: 326px;
     height: 35px;
     border: 2px solid rgba(185, 168, 154, 0.3);
     border-radius: 30px;
@@ -184,7 +185,7 @@ input::placeholder {
     font-weight: 700;
     font-size: 20px;
     line-height: 25px;
-    margin: 15px 0 10px 20px;
+    margin: 15px 0 10px 25px;
 }
 
 .aslistphone {
@@ -192,13 +193,14 @@ input::placeholder {
     line-height: 25px;
     color: #666666; 
     margin-top: 15px;
+    margin-right: 25px;
 }
 
 .aslistaddr {
     width: 305px;
     font-size: 18px;
     line-height: 25px;
-    margin: 0 0 5px 20px;
+    margin: 0 25px 5px 25px;
 }
 
 .aslistone {
@@ -206,6 +208,7 @@ input::placeholder {
     font-size: 15px;
     line-height: 25px;
     margin-left: 272px;
+    margin-right: 25px;
     padding-bottom: 15px;
     cursor: pointer;
     }
@@ -236,3 +239,14 @@ input::placeholder {
     z-index: 1;
 }
 
+.mylocationcursor {
+    font-size: 20px;
+    cursor: pointer;
+    color: #6e645b;
+}
+
+.locationstyle {
+    font-size: 20px;
+    color: #B9A89A;
+    cursor: pointer;
+}
