@@ -16,6 +16,7 @@ import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
 import UserUpdate from "./components/userUpdate/UserUpdate";
+import MyPagePayDetail from "./components/myPage/MyPagePayDetail";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/mypage" element={<MyPageBookmarkList />} />
         <Route path="/userupdate" element={<UserUpdate />} />
         <Route path="/mypage/payment" element={<MyPagePayment />} />
+        <Route path="/payment/detail" element={<MyPagePayDetail />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
       </Routes>
