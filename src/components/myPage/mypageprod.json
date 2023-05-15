@@ -1,10 +1,11 @@
 {
     "prodlist" : [
       {
+        "board_num":0,
         "product_code": 33425634,
         "main_image": "image01.png",
-        "start_date": "2023-04-30 15:00:00",
-        "end_date": "2023-05-16 16:00:00",
+        "start_date": "2023-05-30 15:00:00",
+        "end_date": "2023-06-16 16:00:00",
         "prod_com": "리바트",
         "prod_name": "스와레 6인 세라믹식탁(5종)",
         "prod_state": 2,
@@ -12,14 +13,16 @@
         "cur_price": 600000,
         "bid_price": 400000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": 0
+        "prod_price": 30000,
+        "prod_owner": 0,
+        "sell_type": 1
       },
       {
+        "board_num":1,
         "product_code": 33425634,
         "main_image": "image02.png",
         "start_date": "2023-04-30 15:00:00",
-        "end_date": "2023-05-15 15:00:00",
+        "end_date": "2023-05-16 2:04:30",
         "prod_com": "프린홈",
         "prod_name": "RF 에르반 템바 1800 거실장",
         "prod_state": 1,
@@ -27,10 +30,12 @@
         "cur_price": 200000,
         "bid_price": 200000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": 1
+        "prod_price": 300000,
+        "prod_owner": 1,
+        "sell_type":2
       },
       {
+        "board_num":2,
         "product_code": 33425634,
         "main_image": "image03.png",
         "start_date": "2023-04-10 16:00:00",
@@ -42,10 +47,12 @@
         "cur_price": 20000,       
         "bid_price": 60000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": 1
+        "prod_price": 250000,
+        "prod_owner": 1,
+        "sell_type":3
       },
       {
+        "board_num":3,
         "product_code": 33425634,   
         "main_image": "image04.png",
         "start_date": "2023-04-30 17:00:00",
@@ -57,10 +64,12 @@
         "cur_price": 100000,
         "bid_price": 60000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": null
+        "prod_price": 450000,
+        "prod_owner": 1,
+        "sell_type":1
       },
       {
+        "board_num":4,
         "product_code": 33425634,
         "main_image": "image05.png",
         "start_date": "2023-04-30 18:30:00",
@@ -72,10 +81,12 @@
         "cur_price": 800000,
         "bid_price": 1200000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": 1
+        "prod_price": 980000,
+        "prod_owner": 1,
+        "sell_type":2
       },
       {
+        "board_num":5,
         "product_code": 33425634,
         "main_image": "image06.png",
         "start_date": "2023-05-04 19:00:00",
@@ -87,10 +98,12 @@
         "cur_price": 600000,
         "bid_price": 60000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": 0
+        "prod_price": 1990000,
+        "prod_owner": 0,
+        "sell_type":1
       },
       {
+        "board_num":6,
         "product_code": 33425634,
         "main_image": "image07.png",
         "start_date": "2023-04-30 20:00:00",
@@ -102,10 +115,12 @@
         "cur_price": 70000,
         "bid_price": 60000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": 0
+        "prod_price": 30000,
+        "prod_owner": 0,
+        "sell_type":1
       },
       {
+        "board_num":7,
         "product_code": 33425634,
         "main_image": "image08.png",
         "start_date": "2023-04-30 20:00:00",
@@ -117,10 +132,12 @@
         "cur_price": 3000000,
         "bid_price": 3000000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": 0
+        "prod_price": 30000,
+        "prod_owner": 0,
+        "sell_type":1
       },
       {
+        "board_num":8,
         "product_code": 33425634,
         "main_image": "image09.png",
         "start_date": "2023-04-30 20:00:00",
@@ -132,10 +149,12 @@
         "cur_price": 456000,
         "bid_price": 200000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": 0
+        "prod_price": 30000,
+        "prod_owner": 0,
+        "sell_type":3
       },
       {
+        "board_num":9,
         "product_code": 33425634,
         "main_image": "image10.png",
         "start_date": "2023-04-30 21:00:00",
@@ -147,8 +166,9 @@
         "cur_price": 15000,     
         "bid_price": 5000,
         "pay_date": "230505",
-        "prod_price": "30000",
-        "prod_owner": null
+        "prod_price": 30000,
+        "prod_owner": null,
+        "sell_type":2
       }
     ]
   }
