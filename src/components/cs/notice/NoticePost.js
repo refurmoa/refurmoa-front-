@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { getPostByNo } from "../../components/cs/Data";
 import "./NoticePost.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
