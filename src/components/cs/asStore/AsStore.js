@@ -1,17 +1,19 @@
 import "./AsStore.css";
 import { ProductMap } from "./ProductMap";
-import { Link } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import location_icon from "../../../images/location_icon.png";
 import LocationData from "./CountryCity.json";
 import customerinfo from "./customer.json";
 import markers from "./marker.json";
 import axios from "axios";
+import kakaoQR from "../../../images/kakaotalkQR.png";
 
 const AsStore = () => {
   const [marker, setMarker] = useState();
+  const [qrModal, setQrModal] = useState(0); // 비즈니스 문의 모달 창
   // const [searchData, setSeatchData] = useState();
 
+  // 데이터 가져오기
   const asDetail = (store_name) => {
     // axios
     //   .get(`/api/getproducts?store_name=${store_name}`)
@@ -77,6 +79,7 @@ const AsStore = () => {
     setCountry(e.target.value);
   }
 
+  // 광역시/시/군/구 동적 select
   function handleCity(e) {
     setData([
       LocationData.countries.find(
@@ -88,20 +91,16 @@ const AsStore = () => {
     ]);
   }
 
+  //현재 위치 찾기
   const [currLocation, setCurrLocation] = useState({});
-
-  useEffect(() => {
-    getLocation();
-  }, []);
-
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
       setCurrLocation({ latitude, longitude });
     });
+    setData([currLocation.latitude, currLocation.longitude]);
   };
-
-  const [myplace, setMyplace] = useState();
+  const [myplace, setMyplace] = useState("현재위치");
   const { kakao } = window;
   const geocoder = new kakao.maps.services.Geocoder();
   const callback = function (result, status) {
@@ -109,7 +108,6 @@ const AsStore = () => {
       setMyplace(result[0].address_name);
     }
   };
-
   geocoder.coord2RegionCode(
     currLocation.longitude,
     currLocation.latitude,
@@ -119,19 +117,30 @@ const AsStore = () => {
   return (
     <div>
       <topbar className="astop">
-        <div className="astoptextL">고객센터</div>
         <div className="astoptextM">A/S 매장 찾기</div>
         {customerinfo.map((cus) => (
           <div className="astoptextR">
             {cus.accept_location === 0 ? (
               <div>
-                <img alt="" src={location_icon} />
                 {cus.address}
+                <img
+                  alt=""
+                  src={location_icon}
+                  onClick={() => {
+                    getLocation();
+                  }}
+                />
               </div>
             ) : cus.accept_location === 1 ? (
               <div>
-                <img alt="" src={location_icon} />
                 {myplace}
+                <img
+                  alt=""
+                  src={location_icon}
+                  onClick={() => {
+                    getLocation();
+                  }}
+                />
               </div>
             ) : (
               ""
@@ -141,19 +150,6 @@ const AsStore = () => {
       </topbar>
       <div className="astopbar"></div>
       <underbar className="asunder">
-        {/* 왼쪽 메뉴바 */}
-        <div className="asleft">
-          <Link to="/cs/notice">
-            <div className="asunderrest">공지사항</div>
-          </Link>
-          <Link to="/cs/faq">
-            <div className="asunderrest">FAQ</div>
-          </Link>
-          <Link to="/cs/inquiry">
-            <div className="asunderrest">1:1 문의하기</div>
-          </Link>
-          <div className="asundertopic">A/S 매장 찾기</div>
-        </div>
         {/* 가운데 정보 */}
         <div className="asmiddle">
           <div className="asmiddlelocation">지역 검색</div>
@@ -217,7 +213,14 @@ const AsStore = () => {
                   <div className="aslistphone">{marker.store_phone}</div>
                 </div>
                 <div className="aslistaddr">{marker.store_addr}</div>
-                <div className="aslistone">1:1 상담</div>
+                <div
+                  className="aslistone"
+                  onClick={() => {
+                    setQrModal(1);
+                  }}
+                >
+                  1:1 상담
+                </div>
               </div>
             ))}
           </div>
@@ -231,6 +234,16 @@ const AsStore = () => {
           />
         </div>
       </underbar>
+      {qrModal === 1 && (
+        <div
+          className="F-QRModal_wrap"
+          onClick={() => {
+            setQrModal(0);
+          }}
+        >
+          <img className="F-QRModal" alt="찜하기" src={kakaoQR}></img>
+        </div>
+      )}
     </div>
   );
 };

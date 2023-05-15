@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { getPostByNo } from "../../components/cs/Data";
 // import "./Post.css";
 import "./NoticeView.css";
-import { noticeList } from "../../components/cs/Data";
+import Data from "./Data.json";
 import { useNavigate, useParams } from "react-router-dom";
-import naver from "../../images/naver.png";
+import naver from "../../../images/naver.png";
+import { Link } from "react-router-dom";
+import CsNavbar from "../CsNavbar";
 
 const NoticeView = () => {
   //admin 관리자페이지에서 수정,삭제
@@ -15,7 +16,7 @@ const NoticeView = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setDataList(noticeList);
+    setDataList(Data);
   }, []);
   // const [data, setData] = useState({});
 
@@ -23,7 +24,7 @@ const NoticeView = () => {
   //   setData(getPostByNo(no));
   // }, []);
   console.log(noticeid);
-  console.log(noticeList);
+  // console.log(noticeList);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(1);
@@ -32,10 +33,12 @@ const NoticeView = () => {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = noticeList.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = dataList.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <>
+      <CsNavbar />
+
       <table className="noticelist-table">
         <tr>
           <td className="noticelist-header">공지사항</td>

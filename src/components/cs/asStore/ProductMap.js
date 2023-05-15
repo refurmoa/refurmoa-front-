@@ -11,7 +11,7 @@ export const ProductMap = ({ markers, data, currLocation }) => {
     const mapContainer = document.getElementById("map");
     const mapOptions = {
       center: new kakao.maps.LatLng(data[0], data[1]),
-      level: 8,
+      level: 7,
     };
     //지도 생성
     const map = new kakao.maps.Map(mapContainer, mapOptions);

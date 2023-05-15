@@ -4,13 +4,21 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const ProductBidlist = ({ product }) => {
-  const today = new Date().getTime();
+  const [today, setToday] = useState(new Date().getTime()); // 현재날짜(ms) 구하기
   const dday = new Date(product.end_date).getTime();
   const gapday = dday - today;
   const day = parseInt(gapday / (1000 * 60 * 60 * 24));
   const hour = Math.floor((gapday % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   const min = Math.floor((gapday % (1000 * 60 * 60)) / (1000 * 60));
   const sec = Math.floor((gapday % (1000 * 60)) / 1000);
+
+  // 1초마다 리렌더링
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      setToday(new Date().getTime());
+    }, 1000);
+    return () => clearInterval(countdown);
+  }, [today]);
 
   const navigate = useNavigate();
 

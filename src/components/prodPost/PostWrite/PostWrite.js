@@ -1,13 +1,18 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import "./ProductWrite.css";
-import searchIcon from "../../images/search.png";
-import alt_img from "../../images/alt_image1.png";
+import { useState, useEffect, useRef } from "react";
+import "../../product/ProductWrite.css";
+import "./PostWrite.css";
+import searchIcon from "../../../images/search.png";
+import alt_img from "../../../images/alt_image1.png";
 import axios from "axios";
 import Modal from "react-modal";
-import FindCompany from "./FindCompany";
+import FindCompany from "../../product/FindCompany";
+import PostAll from "./PostAll";
+import PostAuction from "./PostAuction";
+import PostDirect from "./PostDirect";
+import FindProduct from "./FindProduct";
 
-function ProductUpdate(props) {
+function PostWrite(props) {
   const product_num = props;
 
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
@@ -19,45 +24,37 @@ function ProductUpdate(props) {
   const [prod_name, setProd_name] = useState("");
   const [prod_Grade, setprod_Grade] = useState("");
   const [org_price, setOrg_price] = useState("");
+  const [dir_price, setDir_price] = useState("");
+  const [auc_price, setAuc_price] = useState("");
+  const [del_price, setDel_price] = useState("");
+  const [as_date, setAs_date] = useState("");
   const [guarantee, setGuarantee] = useState("");
+  const [auction, setAuction] = useState(false);
+  const [direct, setDirect] = useState(false);
   const [defect_text, setDefect_text] = useState("");
+  const [start_date, setStart_date] = useState("");
+  const [end_date, setEnd_date] = useState("");
   const [reg_date, setReg_date] = useState("");
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
-
+  const [img_con, setImg_con] = useState(false);
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
+  /*===============================================*/
+  const [Productname, setProductname] = useState();
+  const [searchProduct, setSearchProduct] = useState([]);
 
-  /*=================샘플 데이터 이미지는 백엔드에서=========================*/
-  const productData = {
-    product_code: "1",
-    com_num: "6",
-    category_code: "SF",
-    category: "funliving",
-    main_image: "",
-    prod_com: "삼성",
-    prod_name: "쇼파",
-    prod_grade: "B",
-    guarantee: false,
-    org_price: "102000",
-    Deffect_text: "모서리 스크래치",
-    image: process.env.PUBLIC_URL + "/images/prod/image02.png",
-    deffect_image1: process.env.PUBLIC_URL + "/images/prod/image03.png",
-    deffect_image2: process.env.PUBLIC_URL + "/images/prod/image04.png",
-    deffect_image3: process.env.PUBLIC_URL + "/images/prod/image05.png",
+  const [prod_popup, setProd_Popup] = useState(false);
+  const [prod_modal, setProd_Modal] = useState(false);
+  const Changeprod_PopUP = () => {
+    setProd_Popup(true);
+    setProd_Modal(true);
   };
-  useEffect(() => {
-    /*
-    axios
-      .post("/product/update", {
-        product_code: product_num,
-      })
-      .then((res) => {})
-      .catch((e) => {
-        console.error(e);
-      });
-    */
-
+  const close_prod_modal = () => {
+    setProd_Popup(false);
+    setProd_Modal(false);
+  };
+  const setData = (productData) => {
     if (
       productData.category === "funliving" ||
       productData.category === "funbed" ||
@@ -71,6 +68,12 @@ function ProductUpdate(props) {
       setAppliance(true);
       setCate("appliance");
     }
+    let imageUrlLists = [];
+    imageUrlLists.push(productData.deffect_image1);
+    imageUrlLists.push(productData.deffect_image2);
+    imageUrlLists.push(productData.deffect_image3);
+    setShowImages(imageUrlLists);
+    setImg_con(true);
     setCate_code(productData.category);
     setCode(productData.category_code);
     setSearchCompany(productData.com_num);
@@ -78,11 +81,6 @@ function ProductUpdate(props) {
     setProd_name(productData.prod_name);
     setOrg_price(productData.org_price);
     setMainImg(productData.image);
-    let imageUrlLists = [];
-    imageUrlLists.push(productData.deffect_image1);
-    imageUrlLists.push(productData.deffect_image2);
-    imageUrlLists.push(productData.deffect_image3);
-    setShowImages(imageUrlLists);
     if (productData.prod_grade === "S") onCHKS();
     else if (productData.prod_grade === "A") onCHKA();
     else if (productData.prod_grade === "B") onCHKB();
@@ -90,7 +88,11 @@ function ProductUpdate(props) {
     setGuarantee(productData.guarantee);
     setDefect_text(productData.Deffect_text);
     setInputCount(productData.Deffect_text.length);
-  }, []);
+  };
+  /*===============================================*/
+
+  /*=================샘플 데이터 이미지는 백엔드에서=========================*/
+
   /*===============================================*/
 
   const [file, setFile] = useState(null);
@@ -146,6 +148,13 @@ function ProductUpdate(props) {
     setGuarantee(false);
   };
   /*===============================================*/
+  const onAuction = () => {
+    setAuction(!auction);
+  };
+  const onDirect = () => {
+    setDirect(!direct);
+  };
+  /*===============================================*/
   const [funiture, setFuniture] = useState(false);
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
@@ -173,7 +182,6 @@ function ProductUpdate(props) {
       console.log("bbb :" + uploadFile);
       fileList.push(uploadFile); // 배열에 push
     });
-
     setListfile(fileList); // console.log("fileList=>" + fileList);
     reader.readAsDataURL(e.target.files[0]);
   };
@@ -191,7 +199,7 @@ function ProductUpdate(props) {
     if (imageUrlLists.length > 3) {
       imageUrlLists = imageUrlLists.slice(0, 3);
     }
-
+    setImg_con(true);
     setShowImages(imageUrlLists);
   };
   const handleDeleteImage = (id) => {
@@ -203,10 +211,26 @@ function ProductUpdate(props) {
     let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return returnString;
   };
-  const onChangePoints = (e) => {
+  const onChangeOrg = (e) => {
     const { value } = e.target;
     let str = value.replaceAll(",", "");
     setOrg_price(str);
+  };
+  const onChangeDir = (e) => {
+    const { value } = e.target;
+    let str = value.replaceAll(",", "");
+    setDir_price(str);
+  };
+  const onChangeAuc = (e) => {
+    const { value } = e.target;
+    let str = value.replaceAll(",", "");
+    setAuc_price(str);
+  };
+
+  const onChangeDel = (e) => {
+    const { value } = e.target;
+    let str = value.replaceAll(",", "");
+    setDel_price(str);
   };
   /*===============================================*/
 
@@ -265,7 +289,7 @@ function ProductUpdate(props) {
   return (
     <div className="PW_form">
       <div className="PW_header">
-        <div className="PW_title">상품 수정</div>
+        <div className="PR_title">판매글 작성</div>
         <div className="PW_button">
           <button className="PW_list_btn">취소</button>
           <button className="PW_wrie_btn" onClick={Product_write}>
@@ -353,7 +377,65 @@ function ProductUpdate(props) {
           </div>
         </div>
       </div>
-      <div className="PW_product_input">
+      <div className="PR_product_input">
+        <div className="PR_product_info">
+          <div className="PR_product_info_title">상품정보</div>
+          <div className="PR_product_info_search">
+            <input
+              className="PR_search_input"
+              placeholder="상품 검색"
+              value={Productname}
+              onChange={(e) => setProductname(e.target.value)}
+            />
+            <img
+              className="PR_search_logo"
+              src={searchIcon}
+              onClick={Changeprod_PopUP}
+            />
+            <Modal
+              style={{
+                overlay: {
+                  position: "fixed",
+                  backgroundColor: "rgba(0, 0, 0, 0.75)",
+                },
+                content: {
+                  position: "absolute",
+                  top: "10%",
+                  width: "1000px",
+                  height: "660px",
+                  left: "40px",
+                  right: "40px",
+                  bottom: "40px",
+                  border: "1px solid #ccc",
+                  background: "#fff",
+                  overflow: "auto",
+                  WebkitOverflowScrolling: "touch",
+                  borderRadius: "10px",
+                  outline: "none",
+                  padding: "20px",
+                },
+              }}
+              isOpen={prod_modal}
+            >
+              <div className="close_modal">
+                <button onClick={close_prod_modal}>
+                  <b>X</b>
+                </button>
+              </div>
+              <div className="PW_company_modal">
+                {prod_popup && (
+                  <FindProduct
+                    setMainImg={setMainImg}
+                    searchProduct={searchProduct}
+                    setProductname={setProductname}
+                    setData={setData}
+                    close_prod_modal={close_prod_modal}
+                  ></FindProduct>
+                )}
+              </div>
+            </Modal>
+          </div>
+        </div>
         <div className="PW_product_category">
           <div className="PW_product_input_header">분류</div>
           <div className="PW_product_input_select">
@@ -416,14 +498,16 @@ function ProductUpdate(props) {
         <div className="PW_product_category">
           <div className="PW_product_input_header">원가</div>
           <div className="PW_product_price">
-            {" "}
-            <input
-              className="PW_product_price_input"
-              type="text"
-              onChange={(e) => onChangePoints(e)}
-              value={addComma(org_price) || ""}
-            />
-            원
+            <div className="PW_product_price_inside">
+              {" "}
+              <input
+                className="PW_product_price_input"
+                type="text"
+                onChange={(e) => onChangeOrg(e)}
+                value={addComma(org_price) || ""}
+              />
+              &nbsp; 원
+            </div>
           </div>
         </div>
         <div className="PW_product_category">
@@ -459,14 +543,14 @@ function ProductUpdate(props) {
               type="checkbox"
               className="PW_state"
               onClick={onExist}
-              checked={guarantee}
+              checked={guarantee !== "" && guarantee}
             />
             &nbsp; <label>있음</label>
             <input
               type="checkbox"
               className="PW_state_other"
               onClick={onNotExist}
-              checked={!guarantee}
+              checked={guarantee !== "" && !guarantee}
             />
             &nbsp;<label>없음</label>
           </div>
@@ -484,19 +568,20 @@ function ProductUpdate(props) {
           />
         </div>
         <div className="PW_product_defect">
-          <div className="PW_product_imgList">
-            {showImages.map((image, id) => (
-              <div key={id}>
-                <img
-                  className="PW_defect_img"
-                  src={image}
-                  alt={`${image}-${id}`}
-                  onClick={() => handleDeleteImage(id)}
-                />
-              </div>
-            ))}
-          </div>
-
+          {img_con && (
+            <div className="PW_product_imgList">
+              {showImages.map((image, id) => (
+                <div key={id}>
+                  <img
+                    className="PW_defect_img"
+                    src={image}
+                    alt={`${image}-${id}`}
+                    onClick={() => handleDeleteImage(id)}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
           <div className="PW_defect_content">
             <textarea
               className="PW_product_defect_content"
@@ -509,9 +594,72 @@ function ProductUpdate(props) {
             <span className="PW_countInput">{inputCount}/200</span>
           </div>
         </div>
+        <div className="PW_product_category">
+          <div className="PR_product_info_title">판매 정보</div>
+          <div className="PR_product_state">
+            <input
+              type="checkbox"
+              className="PR_state"
+              onClick={onAuction}
+              value={auction}
+            />
+            &nbsp; <label>경매</label>
+            <input
+              type="checkbox"
+              className="PR_state_other"
+              onClick={onDirect}
+              value={direct}
+            />
+            &nbsp;<label className="PR_state_other_label">즉시 구매</label>
+          </div>
+        </div>
+        {auction && !direct && (
+          <PostAuction
+            addComma={addComma}
+            onChangeAuc={onChangeAuc}
+            onChangeDel={onChangeDel}
+            setAs_date={setAs_date}
+            auc_price={auc_price}
+            del_price={del_price}
+            start_date={start_date}
+            end_date={end_date}
+            as_date={as_date}
+            setStart_date={setStart_date}
+            setEnd_date={setEnd_date}
+          />
+        )}
+        {auction && direct && (
+          <PostAll
+            onChangeDir={onChangeDir}
+            addComma={addComma}
+            onChangeAuc={onChangeAuc}
+            onChangeDel={onChangeDel}
+            setAs_date={setAs_date}
+            dir_price={dir_price}
+            auc_price={auc_price}
+            del_price={del_price}
+            start_date={start_date}
+            end_date={end_date}
+            as_date={as_date}
+            setStart_date={setStart_date}
+            setEnd_date={setEnd_date}
+          />
+        )}
+        {!auction && direct && (
+          <PostDirect
+            onChangeDir={onChangeDir}
+            addComma={addComma}
+            onChangeAuc={onChangeAuc}
+            onChangeDel={onChangeDel}
+            setAs_date={setAs_date}
+            dir_price={dir_price}
+            del_price={del_price}
+            as_date={as_date}
+          />
+        )}
       </div>
     </div>
   );
 }
 
-export default ProductUpdate;
+export default PostWrite;
