@@ -39,9 +39,7 @@
   line-height: 35px;
   color: #b9a89a;
 }
-.CSnavbarmenu:hover {
-  color: rgba(81, 68, 56, 0.7);
-}
+.CSnavbarmenu:hover,
 .CSnavbarmenu.active {
   color: rgba(81, 68, 56, 0.7);
 }
