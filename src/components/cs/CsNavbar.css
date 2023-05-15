@@ -1,0 +1,46 @@
+/* 고객센터 메뉴 */
+
+.CS-wrap {
+  width: 1200px;
+  margin: 70px auto 0;
+}
+
+.CSnavbar {
+  margin: auto;
+  width: 260px;
+  height: 300px;
+  float: left;
+}
+.CSnavtitle {
+  width: 230px;
+  height: 35px;
+  margin-left: 25px;
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 23px;
+  line-height: 35px;
+  color: rgba(81, 68, 56, 0.7);
+}
+.CSnavline {
+  float: left;
+  width: 256px;
+  border: 2px solid #c7b9ae;
+}
+.CSnav_main {
+  float: left;
+  margin: 15px 0 0 25px;
+  width: 210px;
+}
+.CSnavbarmenu {
+  width: 230px;
+  margin-bottom: 5px;
+  height: 35px;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 35px;
+  color: #b9a89a;
+}
+.CSnavbarmenu:hover,
+.CSnavbarmenu.active {
+  color: rgba(81, 68, 56, 0.7);
+}

@@ -1,6 +1,7 @@
 .F-wrapper {
+    clear: both;
     height: 260px;
-    margin-top: 150px;
+    padding-top: 150px;
 }
 
 .F-Line {

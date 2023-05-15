@@ -10,15 +10,16 @@ import ProductWrite from "./components/product/ProductWrite";
 import ProductUpdate from "./components/product/ProductUpdate";
 import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
-import PostPay from "./components/prodPost/PostPay";
-import NoticeList from "./components/cs/NoticeList";
-import NoticeView from "./components/cs/NoticeView";
+import PostPay from "./components/Pay/PostPay";
+import NoticeList from "./components/cs/notice/NoticeList";
+import NoticeView from "./components/cs/notice/NoticeView";
 import AsStore from "./components/cs/asStore/AsStore";
 import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
 import UserUpdate from "./components/myPage/userUpdate/UserUpdate";
 import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
+import CsNavbar from "./components/cs/CsNavbar";
 
 function App() {
   return (
@@ -35,8 +36,10 @@ function App() {
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
         <Route path="/post/pay/:board_num" element={<PostPay />} />
-        <Route path="/notice" element={<NoticeList />} />
-        <Route path="/notice/detail/:noticeid" element={<NoticeView />} />
+        <Route element={<CsNavbar />}>
+          <Route path="cs/notice" element={<NoticeList />} />
+          <Route path="cs/notice/detail/:noticeid" element={<NoticeView />} />
+        </Route>
         <Route path="/cs/as_store" element={<AsStore />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />
         <Route path="/userupdate" element={<UserUpdate />} />
