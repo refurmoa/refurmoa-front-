@@ -11,6 +11,7 @@ import ProductUpdate from "./components/product/ProductUpdate";
 import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import PostPay from "./components/Pay/PostPay";
+import PayDetail from "./components/myPage/MyPagePayDetail";
 import NoticeList from "./components/cs/notice/NoticeList";
 import NoticeView from "./components/cs/notice/NoticeView";
 import AsStore from "./components/cs/asStore/AsStore";
@@ -44,6 +45,7 @@ function App() {
         <Route path="/mypage" element={<MyPageBookmarkList />} />
         <Route path="/userupdate" element={<UserUpdate />} />
         <Route path="/mypage/payment" element={<MyPagePayment />} />
+        <Route path="/payment/detail" element={<PayDetail />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
       </Route>

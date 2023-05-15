@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import ProdPost from "./ProdPost";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const PostPage = () => {
   const navigate = useNavigate();
-  const memberId = "admin1";
+  const memberId = "admin";
   
   // 경매, 즉시구매 저장 변수 all, auction, direct, none
   const [selectedSellType, setSelectedSellType] = useState("all");
@@ -125,8 +124,8 @@ const PostPage = () => {
               {buyAndStateFilterBox()}
             </AdminSectionBox>
             <AdminButtonBox>
-              <AdminProductListBtn onClick={() => {navigate("/prod")}}>상품 목록</AdminProductListBtn>
-              <AdminPostBtn onClick={() => {navigate("/post/write")}}>등록</AdminPostBtn>
+              <AdminProductListBtn onClick={() => {navigate("/prod")}}><span>상품 목록</span></AdminProductListBtn>
+              <AdminPostBtn onClick={() => {navigate("/post/write")}}><span>등록</span></AdminPostBtn>
             </AdminButtonBox>
           </TopFilterBox>
         ) : (
@@ -189,7 +188,7 @@ const TopFilterBox = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #514438;
-  height: 41px;
+  height: 65px;
   line-height: 41px;
 `;
 
@@ -200,6 +199,7 @@ const AdminSectionBox = styled.div`
 `;
 
 const BuyFilterBox = styled.div`
+  margin-top: 20px;
   margin-left: 30px;
   font-weight: 700;
   font-size: 25px;
@@ -217,7 +217,7 @@ const SellTypeSpan = styled.span`
 `;
 
 const StateFilterBox = styled.div`
-  margin:0px 35px 0px 30px;
+  margin:20px 35px 0px 30px;
   font-size: 20px;
   font-weight: 600;
   color: rgba(81, 68, 56, 0.8);
@@ -246,15 +246,12 @@ const AdminButtonBox = styled.div`
   display: flex;
   margin: 0px 35px 13px 0px;
 
-  font-weight: 700;
-  font-size: 20px;
-
   div {
+    font-weight: 700;
+    font-size: 20px;
     border: 2px solid #514438;
     border-radius: 10px;
-    padding: 0px 20px;
-    height: 35px;
-    line-height: 32px;
+    height: 50px;
     box-sizing: border-box;
   }
   div:hover {
@@ -263,13 +260,21 @@ const AdminButtonBox = styled.div`
 `;
 
 const AdminProductListBtn = styled.div`
-  color: #514438;
+  span {
+    color: #514438;
+    line-height: 45px;
+    padding: 0px 25px;
+  }
 `;
 
 const AdminPostBtn = styled.div`
-  color: #ffffff;
   background-color: #514438;
   margin-left: 15px;
+  span {
+    color: #ffffff;
+    line-height: 45px;
+    padding: 0px 25px;
+  }
 `;
 
 const BottomFilterBox = styled.div`

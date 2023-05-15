@@ -98,7 +98,7 @@ export const ProductPayment = ({ product }) => {
                   className="inqButtonPay"
                   type="button"
                   value="배송 조회"
-                  onClick={delivery}
+                  onClick={() => {delivery(product.product_code)}}
                   product_code={product.product_code}
                 ></input>
                 <productdetail
@@ -112,7 +112,7 @@ export const ProductPayment = ({ product }) => {
                 className="cancleButtonPay"
                 type="button"
                 value="결제 상세"
-                onClick={delivery}
+                onClick={() => {delivery(product.product_code)}}
               ></input>
               <productdetail
                 product_code={product.product_code}
@@ -129,7 +129,7 @@ export const ProductPayment = ({ product }) => {
                 className="payButtonPay"
                 type="button"
                 value="결제 상세"
-                onClick={delivery}
+                onClick={() => {delivery(product.product_code)}}
               ></input>
               <productdetail
                 product_code={product.product_code}
