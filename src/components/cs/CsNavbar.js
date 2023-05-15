@@ -1,4 +1,6 @@
-import { Link, NavLink } from "react-router-dom";
+// 고객센터 메뉴
+
+import { Outlet, Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./CsNavbar.css";
 
@@ -10,6 +12,8 @@ const CsNavbar = () => {
   };
 
   return (
+    <div className="CS-wrap">
+
     <span className="CSnavbar">
       <Link className="CSnavtitle" to="/notice">
         고객센터
@@ -51,6 +55,8 @@ const CsNavbar = () => {
         </NavLink>
       </div>
     </span>
+    <Outlet />
+    </div>
   );
 };
 
