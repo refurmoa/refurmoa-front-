@@ -45,10 +45,10 @@ const MemberInfo = () => {
   };
 
   const getMemberInfo = () => {
-    const id = "유저정보";
-    // axios.post("/api/getmemberinfo", id)
+    const memberinforequest = { id: "유저정보" };
+    // axios.post("/api/getmemberinfo", memberinforequest)
     // .then((res) => {
-    //   const {data} = res;
+    //   const { data } = res;
     //   setMemberInfo(dataProcess(data));
     // })
     // .catch((e) => {
@@ -56,7 +56,7 @@ const MemberInfo = () => {
     // })
     let data = infodata;
     setMemberInfo(dataProcess(data));
-    console.log(data);
+    // console.log(data);
   }
 
   useEffect(() => {

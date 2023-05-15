@@ -107,8 +107,13 @@ export const ProductPayment = ({ product }) => {
                   className="inqButtonPay"
                   type="button"
                   value="배송 조회"
+<<<<<<< HEAD
                   onClick={() => delivery(product.board_num)}
                   board_num={product.board_num}
+=======
+                  onClick={() => {delivery(product.product_code)}}
+                  product_code={product.product_code}
+>>>>>>> d77afd779a1c497b57ab3ba1c0a26df862e7ad53
                 ></input>
                 <productdetail
                   product_code={product.product_code}
@@ -121,7 +126,11 @@ export const ProductPayment = ({ product }) => {
                 className="cancleButtonPay"
                 type="button"
                 value="결제 상세"
+<<<<<<< HEAD
                 onClick={() => delivery(product.board_num)}
+=======
+                onClick={() => {delivery(product.product_code)}}
+>>>>>>> d77afd779a1c497b57ab3ba1c0a26df862e7ad53
               ></input>
               <productdetail
                 product_code={product.product_code}
@@ -138,7 +147,11 @@ export const ProductPayment = ({ product }) => {
                 className="payButtonPay"
                 type="button"
                 value="결제 상세"
+<<<<<<< HEAD
                 onClick={() => delivery(product.board_num)}
+=======
+                onClick={() => {delivery(product.product_code)}}
+>>>>>>> d77afd779a1c497b57ab3ba1c0a26df862e7ad53
               ></input>
               <productdetail
                 product_code={product.product_code}
