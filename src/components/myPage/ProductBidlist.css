@@ -97,20 +97,26 @@ padding: 0;
 }
 
 .priceBid {
-  text-align: right;
-  margin-top: 15px;
+  display: flex;
+  margin-top: 18px;
 }
 
-.pricewrap {
-  display: grid;
-  grid-template-columns: 1.2fr 1.5fr 2.5fr;
-  margin-top: 20px;
+.priceBidAll1 {
+  margin-right: 0;
+
 }
+
+.priceBidAll2 {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
 
 .priceBidnum {
   font-weight: 600;
   font-size: 25px;
   line-height: 30px;
+  text-align: right;
 }
 
 .priceBidword {
@@ -118,47 +124,53 @@ padding: 0;
   height: 30px;
   line-height: 30px;
   color: #333333;
+  text-align: right;
 }
 
 
 .redcolorBid {
-  color:red;
   font-size: 18px;
-  line-height: 30px;
-  height: 30px;
   font-weight: 700;
+  display: flex;
+  align-items: center;
+  color: #ff0000;
+  margin: 3px 0px 0px 0px;
+}
+
+.redcolorBid img {
+  width: 18px;
+  height: 18px;
+  margin: 2px 10px 0px 0px;
 }
 
 .balckcolorBid {
   font-size: 18px;
-  line-height: 30px;
-  height: 30px;
+  display: flex;
+  font-weight: 600;
+  align-items: center;
+  margin: 3px 0px 0px 0px;
 }
 
-.clockiconred{
-  display: inline-block;
-  background-image: url(../../images/time_icon_red.png);
-  border: none;
-  width: 15px;
-  height: 15px;  
-  background-size: contain;
-  cursor: pointer;
-  margin-right: 8px;
+.balckcolorBid img {
+  width: 18px;
+  height: 18px;
+  margin: 2px 10px 0px 0px;
 }
 
-.clockiconblack{
-  display: inline-block;
-  background-image: url(../../../public/images/prod/clockiconblack.png);
-  border: none;
-  width: 13.5px;
-  height: 13.5px;  
-  background-size: contain; 
-  cursor: pointer;
-  margin-right: 8px;
-  margin-top: 5px;
-  
+.balckcolorBidNum {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  margin: 3px 0px 0px 0px;
+}
+
+.balckcolorBidNum img {
+  width: 18px;
+  height: 18px;
+  margin: 2px 10px 0px 0px;
 }
 
 .inmargin {
   margin-left: 20px;
+  width: 340px;
 }
