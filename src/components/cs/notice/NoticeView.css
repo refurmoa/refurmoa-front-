@@ -1,83 +1,106 @@
-.noticelist-view-title {
-  margin: 10px 0;
-  display: flex;
+.NV-wrap {
+  float: left;
+  width: 940px;
+}
+
+.NV-header {
+  width: 880px;
+  height: 35px;
+  margin: 0 20px 10px;
+}
+.NV-title {
+  float: left;
+  height: 35px;
+  font-weight: 600;
   font-size: 25px;
   line-height: 35px;
-  border-bottom: 2px solid rgba(185, 168, 154, 0.3);
+  color: #514438;
 }
-.noticelist-view-date {
-  display: inline-flex;
-  text-align: right;
-  width: 150px;
+
+.NV-line {
+  width: 936px;
+  border: 2px solid #c7b9ae;
+}
+.NV-board-wrap {
+  height: 725px;
+  margin-top: 25px;
+}
+.NV-title-wrap {
+  padding-left: 20px;
+  height: 35px;
+  margin-bottom: 10px;
+}
+.NV-board-title {
+  float: left;
+  font-size: 25px;
+}
+.NV-title-line {
+  width: 936px;
+  border: 1px solid #eeeeee;
+}
+
+.NV-date {
+  margin-right: 20px;
+  float: right;
   font-size: 20px;
-  color: white;
-  line-height: 55px;
+  color: #666666;
 }
 
-.noticelist-view-title > label:first-child {
-  margin: 10px 0;
-  width: 80%;
+.NV-info {
+  float: left;
+  padding: 25px 20px;
 }
-
-.noticelist-view-title > *:nth-child(2) {
-  margin: 0px 0;
-  width: 20%;
-}
-
-.notice-content-box {
+.NV-content-box {
+  margin: 25px 65px 30px 65px;
+  padding: 10px;
   resize: none;
   background-color: #eeeeee;
   width: 800px;
-  height: 900px;
+  height: 600px;
   text-align: left;
   overflow-y: auto;
-  max-height: 900px;
+  max-height: 600px;
+  /* position: relative; */
 }
 
-.notice-content-box p {
-  font-size: 24px;
+.NV-img {
+  float: left;
+  max-width: 500px;
+  max-height: 500px;
 }
-.notice-detail-content {
-  width: 90%;
-  margin: 20px 0 0 40px;
-}
+.NV-btn-wrap {
+  float: left;
 
-.notice-view-go-list-btn {
-  position: relative;
-  width: 95px;
-  height: 50px;
-  margin: 0 0 0 350px;
-  top: 50px;
+  margin-bottom: 10px;
+}
+.NV-go-list-btn {
   font-size: 20px;
-  padding: 10px;
+  margin: 0 0 0 418px;
+  padding: 9px 27.5px;
   background-color: #514438;
   border: 2px solid #514438;
   border-radius: 10px;
   color: white;
+  cursor: pointer;
 }
-.notice-detail-edit-btn {
-  position: relative;
-  width: 95px;
-  height: 50px;
+.NV-edit-btn {
   margin: 0 0 0 10px;
-  top: 50px;
   font-size: 20px;
-  padding: 10px;
+  padding: 9px 27.5px;
   background-color: white;
   border: 2px solid #514438;
   border-radius: 10px;
   color: #514438;
+  cursor: pointer;
 }
-.notice-detail-delete-btn {
-  position: relative;
-  width: 95px;
-  height: 50px;
+.NV-delete-btn {
+  /* margin-right: 300px; */
   margin: 0 0 0 10px;
-  top: 50px;
   font-size: 20px;
-  padding: 10px;
+  padding: 9px 27.5px;
   background-color: white;
   border: 2px solid #514438;
   border-radius: 10px;
   color: #514438;
+  cursor: pointer;
 }

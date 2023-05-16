@@ -14,9 +14,13 @@ import PostPay from "./components/Pay/PostPay";
 import PayDetail from "./components/myPage/MyPagePayDetail";
 import NoticeList from "./components/cs/notice/NoticeList";
 import NoticeView from "./components/cs/notice/NoticeView";
+import NoticePost from "./components/cs/notice/NoticePost";
 import FAQ from "./components/cs/FAQ/FAQ";
 import FAQWrite from "./components/cs/FAQ/FAQWrite";
 import FAQUpdate from "./components/cs/FAQ/FAQUpdate";
+import OneononeInquiry from "./components/cs/oneonone/OneononeInquiry";
+import OneononeDetail from "./components/cs/oneonone/OneononeDetail";
+import OneononeUserpost from "./components/cs/oneonone/OneononeUserpost";
 import AsStore from "./components/cs/asStore/AsStore";
 import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
 import UserUpdate from "./components/myPage/userUpdate/UserUpdate";
@@ -41,11 +45,15 @@ function App() {
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
         <Route path="/post/pay/:board_num" element={<PostPay />} />
         <Route element={<CsNavbar />}>
-          <Route path="cs/notice" element={<NoticeList />} />
-          <Route path="cs/notice/detail/:noticeid" element={<NoticeView />} />
+          <Route path="/cs/notice" element={<NoticeList />} />
+          <Route path="/cs/notice/detail/:noticeid" element={<NoticeView />} />
+          <Route path="/cs/notice/write" element={<NoticePost />} />
           <Route path="/cs/faq" element={<FAQ />} />
           <Route path="/cs/faq/write" element={<FAQWrite />} />
           <Route path="/cs/faq/update" element={<FAQUpdate />} />
+          <Route path="/cs/inquiry" element={<OneononeInquiry />} />
+          <Route path="/cs/inquiry/detail" element={<OneononeDetail />} />
+          <Route path="/cs/inquiry/write" element={<OneononeUserpost />} />
         </Route>
         <Route path="/cs/as_store" element={<AsStore />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />

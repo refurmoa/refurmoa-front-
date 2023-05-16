@@ -4,9 +4,8 @@ import { getPostByNo } from "./OneononeData";
 import "./OneononeDetail.css";
 import { inquiryList } from "./OneononeData";
 import { useNavigate, useParams } from "react-router-dom";
-import naver from "../../images/naver.png";
+import naver from "../../../images/naver.png";
 import { Link } from "react-router-dom";
-import CsNavbar from "./CsNavbar";
 
 const OneononeDetail = () => {
   //admin 관리자페이지에서 수정,삭제
@@ -38,7 +37,7 @@ const OneononeDetail = () => {
 
   return (
     <>
-      <CsNavbar />
+    
       <table className="oneonone-detail-table">
         <thead>
           <tr>

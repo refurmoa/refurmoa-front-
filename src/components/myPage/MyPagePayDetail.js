@@ -13,26 +13,30 @@ import trackingStateIcon4 from "../../images/delivery_icon4.png";
 import trackingStateIcon5 from "../../images/delivery_icon5.png";
 
 const MyPagePayDetail = () => {
-  const { state: productCode } = useLocation();
+  const { state: board_num } = useLocation();
   const apiKey = process.env.REACT_APP_SWEETTRACKER_API_KEY;
   const [payDetailData, setPayDetailData] = useState();
   const [trackingData, setTrackingData] = useState();
-  console.log(productCode);
+  console.log(board_num);
 
   // 현재 위치 조회
   const trackingHandler = () => {
+    // 팝업창 크기 및 위치 설정
+    const width = 500;
+    const height = 600;
+    const top = window.innerHeight / 2 - height / 2 + window.screenY;
+    const left = window.innerWidth / 2 - width / 2 + window.screenX;
+    const popupStyle = `width=${width},height=${height},left=${left},top=${top}`;
+
+    // 폼데이터
     const formData = {
       "t_key": `${apiKey}`,
       "t_code": "04",
       "t_invoice": `${payDetailData.deli_num}`,
     }
-  
-    const form = document.createElement("form");
-    form.target = "tracking-form";
-    form.method = "POST"
-    form.action = "http://info.sweettracker.co.kr/tracking/4"
-    // form.action = window.open("http://info.sweettracker.co.kr/tracking/4", "", "width=500, height= 500");
 
+    // 폼 객체 만들어서 데이터 넣기
+    const form = document.createElement("form");
     for (let key in formData) {
       const input = document.createElement("input");
       input.type = "hidden";
@@ -40,7 +44,14 @@ const MyPagePayDetail = () => {
       input.value = formData[key];
       form.appendChild(input);
     }
-
+    
+    // 팝업창
+    window.open("", "tracking", `${popupStyle}`);
+    // 폼 데이터 팝업창으로 전송
+    form.target = "tracking";
+    form.method = "POST";
+    form.action = "http://info.sweettracker.co.kr/tracking/4";
+    
     document.body.appendChild(form);
     form.submit();
   }
@@ -53,7 +64,7 @@ const MyPagePayDetail = () => {
 
     // let paydata = null;
     // 결제상세 정보 받아오기
-    // axios.post("/api/getpaydetail", productCode)
+    // axios.post("/api/getpaydetail", board_num)
     // .then((res) => {
     //   paydata = res.data;
     //   setPayDetailData(paydata);
