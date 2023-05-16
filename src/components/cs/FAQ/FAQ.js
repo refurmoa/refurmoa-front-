@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FAQList } from "./FAQList";
 import FAQPOST from "./FAQPost";
+import { Link, useLocation } from "react-router-dom";
 import "../notice/NoticeList.css";
 import "../CsNavbar.css";
 import "./FAQ.css";
@@ -18,7 +19,9 @@ function FAQ() {
     setDataList(FAQList);
     pageCount();
   }, []);
-
+  const FAQRegi = () => {
+    document.location.href = "/cs/faq/write";
+  };
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
@@ -60,7 +63,11 @@ function FAQ() {
               onChange={(e) => setSearchFAQ(e.target.value)}
             />
           </div>
-          <span>등록</span>
+          <div className="FAQRegi">
+            <Link to="/cs/faq/write">
+              <span>등록</span>
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="FAQTitle">
@@ -114,6 +121,12 @@ function FAQ() {
           onClick={() => setCatrgory(5)}
         >
           경매/낙찰
+        </button>
+        <button
+          className={category === 6 ? "active" : ""}
+          onClick={() => setCatrgory(6)}
+        >
+          기타
         </button>
       </div>
 
