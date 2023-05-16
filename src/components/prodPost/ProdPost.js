@@ -4,13 +4,14 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { getDdayArray } from "../shared/sharedFn";
 
+// 더미데이터
+import productlist from "../shared/prod.json";
+
 // 이미지파일
 import timeicon from "../../images/time_icon.png";
 import timeredicon from "../../images/time_icon_red.png";
 import star_icon_line from "../../images/star_icon_line-240.png";
 import star_icon_filled from "../../images/star_icon_filled-240.png";
-
-import productlist from "../shared/prod.json";
 
 const ProdPost = ({ filter }) => {
   const {selectedSellType, selectedCategory, selectedSellStatus, selectedOrderby} = filter;
@@ -52,11 +53,11 @@ const ProdPost = ({ filter }) => {
   // 찜버튼
   const likeHandler = (event, board_num) => {
     event.stopPropagation(); // 이벤트 버블링 막기
-    const data = { board_num: board_num, id: "회원정보" };
-    console.log(data);
-    // axios.post("/api/like", data)
+    const likerequest = { board_num: board_num, id: "회원정보" };
+    console.log(likerequest);
+    // axios.post("/api/like", likerequest)
     // .then((res) => {
-    //   console.log(res);
+      // console.log(res);
     //   getProdData();
     // })
     // .catch((e) => {
@@ -68,8 +69,8 @@ const ProdPost = ({ filter }) => {
   const prodDetailHandler = (board_num) => {
     console.log("dd");
     navigate(`/post/detail/${board_num}`);
-    // const data = {board_num: board_num};
-    // axios.post("/api/plusreadcount", data)
+    // const readrequest = { board_num: board_num };
+    // axios.post("/api/plusreadcount", readrequest)
     // .then((res) => {
     //   // console.log(res);
     //   navigate(`/post/detail/${board_num}`);  

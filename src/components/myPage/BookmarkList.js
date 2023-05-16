@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from "styled-components";
+import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 // 시간계산 함수
@@ -20,29 +21,6 @@ const BookmarkList = () => {
   const navigate = useNavigate();
   const [bookmarkProd, setBookmarkProd] = useState();
   const [today, setToday] = useState(new Date().getTime()); // 현재날짜(ms) 구하기
-
-  // 검색기능
-  const searchHandler = () => {
-    // console.log(searchRef.current.value);
-    if (searchRef.current.value === "") {
-      return alert("검색어를 입력해 주세요.");
-    }
-    const searchData = {searchword : searchRef.current.value, id: "userID"}
-    console.log(searchData);
-    // axios.post("/api/searchbookmark", searchData)
-    // .then((res) => {
-    //   console.log(res);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-  }
-  // 엔터키
-  const activeEnter = (e) => {
-    if(e.key === "Enter") {
-      searchHandler();
-    }
-  }
 
   // 남은시간이 12시간보다 적을 경우
   const lessThanTwelve = (ms) => {
@@ -76,27 +54,12 @@ const BookmarkList = () => {
     }
   };
 
-  // 조회수 올리는 axios 요청 후 성공하면 상세페이지 넘어가기
-  const prodDetailHandler = (board_num) => {
-    console.log("dd");
-    navigate(`/post/detail/${board_num}`);
-    // const data = {board_num: board_num};
-    // axios.post("/api/plusreadcount", data)
-    // .then((res) => {
-      //   // console.log(res);
-      //   navigate(`/post/detail/${board_num}`);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
-  };
-
   // 찜버튼
   const likeHandler = (event, board_num) => {
     event.stopPropagation(); // 이벤트 버블링 막기
-    const data = { board_num: board_num, id: "회원정보" };
-    console.log(data);
-    // axios.post("/api/like", data)
+    const likerequest = { board_num: board_num, id: "회원정보" };
+    console.log(likerequest);
+    // axios.post("/api/like", likerequest)
     // .then((res) => {
     //   console.log(res);
     //   getBookmarkData();
@@ -106,11 +69,52 @@ const BookmarkList = () => {
     // });
   };
 
-  const getBookmarkData = () => {
-    const id = "유저정보";
-    // axios.post("/api/getbookmarkprod", id)
+  // 조회수 올리는 axios 요청 후 성공하면 상세페이지 넘어가기
+  const prodDetailHandler = (board_num) => {
+    console.log("dd");
+    navigate(`/post/detail/${board_num}`);
+    // const readrequest = { board_num: board_num };
+    // axios.post("/api/plusreadcount", readrequest)
     // .then((res) => {
-    //   const {data} = res;
+      //   // console.log(res);
+      //   navigate(`/post/detail/${board_num}`);
+    // })
+    // .catch((e) => {
+    //   console.error(e);
+    // });
+  };
+
+  // 검색기능
+  const searchHandler = () => {
+    // console.log(searchRef.current.value);
+    if (searchRef.current.value === "") {
+      return alert("검색어를 입력해 주세요.");
+    }
+    const searchData = { searchword : searchRef.current.value, id: "userID" }
+    console.log(searchData);
+    // axios.post("/api/searchbookmark", searchData)
+    // .then((res) => {
+    //   console.log(res);
+    //   const { data } = res;
+    //   setBookmarkProd(data);
+    // })
+    // .catch((e) => {
+    //   console.error(e);
+    // })
+  }
+  // 엔터키
+  const activeEnter = (e) => {
+    if(e.key === "Enter") {
+      searchHandler();
+    }
+  }
+
+  // 찜한상품 데이터 가져오기
+  const getBookmarkData = () => {
+    const datarequest = { id: "유저정보" };
+    // axios.post("/api/getbookmarkprod", datarequest)
+    // .then((res) => {
+    //   const { data } = res;
     //   setBookmarkProd(data);
     // })
     // .catch((e) => {

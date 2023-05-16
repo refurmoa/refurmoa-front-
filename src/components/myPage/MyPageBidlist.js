@@ -1,5 +1,4 @@
-import { useEffect, useRef } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./MyPagePayBid.css";
 import prod from "./mypageprod.json";
@@ -9,6 +8,27 @@ import axios from "axios";
 
 const MyPage_detail = () => {
   const [prodbidlistData, setProdData] = useState(prod.prodlist);
+
+  const [totalPageBid, setTotalPageBid] = useState(1);
+  const [currentPageBid, setCurrentPageBid] = useState(1);
+
+  useEffect(() => {
+    // 입찰 리스트 조회
+    // setListBid();
+
+    // 상품 개수 조회
+    pageCountBid();
+  }, []);
+
+  // 상품 목록 조회
+  const setListBid = () => {
+    // setInquiryList();
+  };
+
+  // 상품 전체 수 조회
+  const pageCountBid = () => {
+    setTotalPageBid(7);
+  };
 
   // const name = window.sessionStorage.getItem("name");
   // const id = window.sessionStorage.getItem("id");
@@ -151,6 +171,34 @@ const MyPage_detail = () => {
         })}
         {/* <ProductBidlist product={prodbidlistData} />; */}
       </div>
+      {/* 페이지 출력 */}
+      {totalPageBid > 1 && (
+        <div className="PI-pagemp">
+          {currentPageBid === 1 ? (
+            <span className="PI-page_prev_graymp">&lt;</span>
+          ) : (
+            <span
+              className="PI-page_prevmp"
+              onClick={() => setCurrentPageBid(currentPageBid - 1)}
+            >
+              &lt;
+            </span>
+          )}
+          <span className="PI-page_nowmp">{currentPageBid}</span>
+          &nbsp;&nbsp;/&nbsp;&nbsp;
+          <span className="PI-page_totalmp">{totalPageBid}</span>
+          {currentPageBid === totalPageBid ? (
+            <span className="PI-page_next_graymp">&gt;</span>
+          ) : (
+            <span
+              className="PI-page_nextmp"
+              onClick={() => setCurrentPageBid(currentPageBid + 1)}
+            >
+              &gt;
+            </span>
+          )}
+        </div>
+      )}
     </div>
   );
 };

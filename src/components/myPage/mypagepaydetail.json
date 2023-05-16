@@ -1,0 +1,19 @@
+{
+  "product_code": 2023033002,
+  "main_image": "image01.png",
+  "prod_com": "가구회사",
+  "prod_grade": "S",
+  "prod_name": "프리미엄 패브릭 우주 소파 SF-18029",
+  "recipt_name": "이모아",
+  "recipt_phone": "010-2345-6789",
+  "recipt_addr": "서울특별시 서초구 반포로 1234",
+  "recipt_detail": "반포자이아파트 1111동 1111호",
+  "recipt_req": "도착하시면 전화 부탁드립니다.",
+  "deli_num": null,
+  "prod_price": 505000,
+  "delivery_price": 10000,
+  "coupon_price": 1000,
+  "mile_use": 15000,
+  "pay_price": 515000,
+  "card_num": "1234-5678-****-4567"
+}

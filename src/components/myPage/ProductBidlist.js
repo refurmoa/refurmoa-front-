@@ -47,21 +47,29 @@ export const ProductBidlist = ({ product }) => {
           src={`/images/prod/${product.main_image}`}
           alt="productimage"
           onClick={onClick}
-          product_code={product.product_code}
         />
       </image>
       <information className="inmargin">
         {day <= 0 && hour < 0 ? (
           <div className="balckcolorBid">
+            <img src="../../images/time_icon_red.png" alt=""></img>
             <div className="clockiconblack"></div>경매 종료
           </div>
-        ) : day <= 0 && hour <= 5 ? (
+        ) : day === 0 && hour < 12 ? (
           <div className="redcolorBid">
+            <img src="../../images/time_icon_red.png" alt=""></img>{" "}
             <div className="clockiconred"></div>
-            {day}일 {hour}시간 {min}분 {sec}초
+            {hour}시간 {min}분 {sec}초
+          </div>
+        ) : day === 0 && hour <= 24 ? (
+          <div className="blackcolorBid">
+            <img src="../../images/time_icon_red.png" alt=""></img>
+            <div className="clockiconblack"></div>
+            {hour}시간 {min}분 {sec}초
           </div>
         ) : (
-          <div className="blackcolorBid">
+          <div className="balckcolorBid">
+            <img src="../../images/time_icon_red.png" alt=""></img>
             <div className="clockiconblack"></div>
             {day}일 {hour}시간 {min}분 {sec}초
           </div>
@@ -89,8 +97,12 @@ export const ProductBidlist = ({ product }) => {
               <div className="priceBidword">현재가</div>
             </div>
             <div>
-              <div className="priceBidnum"> {product.bid_price}원</div>
-              <div className="priceBidnum"> {product.cur_price}원</div>
+              <div className="priceBidnum">
+                {product.bid_price.toLocaleString("ko-KR")}원
+              </div>
+              <div className="priceBidnum">
+                {product.cur_price.toLocaleString("ko-KR")}원
+              </div>
             </div>
           </div>
         </price>

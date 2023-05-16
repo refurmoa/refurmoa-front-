@@ -1,6 +1,6 @@
 import "./AsStore.css";
 import { ProductMap } from "./ProductMap";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import location_icon from "../../../images/location_icon.png";
 import LocationData from "./CountryCity.json";
 import customerinfo from "./customer.json";
@@ -9,7 +9,7 @@ import axios from "axios";
 import kakaoQR from "../../../images/kakaotalkQR.png";
 
 const AsStore = () => {
-  const [marker, setMarker] = useState();
+  const [marker, setMarker] = useState(markers);
   const [qrModal, setQrModal] = useState(0); // 비즈니스 문의 모달 창
   // const [searchData, setSeatchData] = useState();
 
@@ -24,9 +24,11 @@ const AsStore = () => {
     //   .catch((e) => {
     //     console.error(e);
     //   });
-
-    const data = markers.placelist;
-    setMarker(data);
+    // setMarker([
+    //   markers.placelist.find((sub) => (sub.store_name = store_name)).lat,
+    //   markers.placelist.find((sub) => (sub.store_name = store_name)).lng,
+    // ]);
+    // console.log(data);
   };
 
   function searchlocationtext(e) {
@@ -72,12 +74,10 @@ const AsStore = () => {
     //     console.error(e);
     //   });
   };
+  const [textstyle, setTextstyle] = useState("locationstyle");
 
   const [country, setCountry] = useState();
   const [data, setData] = useState([37.624915253753194, 127.15122688059974]);
-  function handleCountry(e) {
-    setCountry(e.target.value);
-  }
 
   // 광역시/시/군/구 동적 select
   function handleCity(e) {
@@ -99,6 +99,7 @@ const AsStore = () => {
       setCurrLocation({ latitude, longitude });
     });
     setData([currLocation.latitude, currLocation.longitude]);
+    setTextstyle("mylocationcursor");
   };
   const [myplace, setMyplace] = useState("현재위치");
   const { kakao } = window;
@@ -108,6 +109,12 @@ const AsStore = () => {
       setMyplace(result[0].address_name);
     }
   };
+
+  function handleCountry(e) {
+    setCountry(e.target.value);
+    setMyplace(e.target.value);
+    console.log(myplace);
+  }
   geocoder.coord2RegionCode(
     currLocation.longitude,
     currLocation.latitude,
@@ -132,15 +139,14 @@ const AsStore = () => {
                 />
               </div>
             ) : cus.accept_location === 1 ? (
-              <div>
+              <div
+                className={textstyle}
+                onClick={() => {
+                  getLocation();
+                }}
+              >
                 {myplace}
-                <img
-                  alt=""
-                  src={location_icon}
-                  onClick={() => {
-                    getLocation();
-                  }}
-                />
+                <img alt="" src={location_icon} />
               </div>
             ) : (
               ""
@@ -228,7 +234,7 @@ const AsStore = () => {
         {/* 지도 부분 */}
         <div className="asright">
           <ProductMap
-            markers={markers}
+            markers={marker}
             data={data}
             currLocation={currLocation}
           />

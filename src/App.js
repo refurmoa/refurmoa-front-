@@ -11,9 +11,11 @@ import ProductUpdate from "./components/product/ProductUpdate";
 import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import PostPay from "./components/Pay/PostPay";
+import PayDetail from "./components/myPage/MyPagePayDetail";
 import NoticeList from "./components/cs/notice/NoticeList";
 import NoticeView from "./components/cs/notice/NoticeView";
 import NoticePost from "./components/cs/notice/NoticePost";
+import FAQ from "./components/cs/FAQ/FAQ";
 import OneononeInquiry from "./components/cs/oneonone/OneononeInquiry";
 import OneononeDetail from "./components/cs/oneonone/OneononeDetail";
 import OneononeUserpost from "./components/cs/oneonone/OneononeUserpost";
@@ -44,6 +46,7 @@ function App() {
           <Route path="/cs/notice" element={<NoticeList />} />
           <Route path="/cs/notice/detail/:noticeid" element={<NoticeView />} />
           <Route path="/cs/notice/write" element={<NoticePost />} />
+          <Route path="/cs/faq" element={<FAQ />} />
           <Route path="/cs/inquiry" element={<OneononeInquiry />} />
           <Route path="/cs/inquiry/detail" element={<OneononeDetail />} />
           <Route path="/cs/inquiry/write" element={<OneononeUserpost />} />
@@ -52,6 +55,7 @@ function App() {
         <Route path="/mypage" element={<MyPageBookmarkList />} />
         <Route path="/userupdate" element={<UserUpdate />} />
         <Route path="/mypage/payment" element={<MyPagePayment />} />
+        <Route path="/payment/detail" element={<PayDetail />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
       </Route>
