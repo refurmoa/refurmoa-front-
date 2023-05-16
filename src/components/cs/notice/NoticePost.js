@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./NoticePost.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import CsNavbar from "./CsNavbar";
+import CsNavbar from "../CsNavbar";
 const NoticePost = () => {
   //파일첨부(재현님꺼..)
   const [showImages, setShowImages] = useState([]);
@@ -19,8 +19,8 @@ const NoticePost = () => {
     if (imageUrlLists.length > 3) {
       imageUrlLists = imageUrlLists.slice(0, 3);
     }
-
-    setShowImages(imageUrlLists);
+    // 이미지 안보여도 되어서 주석처리 
+    // setShowImages(imageUrlLists);
   };
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
@@ -40,35 +40,33 @@ const NoticePost = () => {
 
   return (
    <div className="CS-wrap">
-      <CsNavbar />
-      <span className="noticepost-table">
+     
+      <span className="NP-table">
         <tr>
-          <td className="noticepost-header">공지사항</td>
+          <td className="NP-header">공지사항</td>
         </tr>
-        <hr className="noticepost-line" />
+        <hr className="NP-line" />
         <input
-          className="noticepost-title-box"
+          className="NP-title-box"
           input
           type="text"
           placeholder="제목을 입력하세요"
         ></input>
         <textarea
           onChange={onInputHandler}
-          className="noticepost-content"
+          className="NP-content"
           input
           type="text"
           maxLength="1000"
           placeholder="내용을 입력하세요"
-        />
-        <p>
-          <span className="notice-post-content-count">{inputCount} / 1000</span>
-        </p>
-        <div className="noticepost-box"></div>
-        <div>
-          <div className="PW_product_defect">
+        />     
+          <div className="NP-content-count">{inputCount} / 1000</div>     
+        <div className="NP-box">
+        <div className="NP-fileupload-wrap">
+          <div className="NP_product_defect">
             <input
               type="file"
-              className="PW_defect_image"
+              className="NP_defect_image"
               id="input-file"
               accept="image/*"
               multiple
@@ -76,21 +74,22 @@ const NoticePost = () => {
               onChange={handleAddImages}
             />
 
-            {showImages.map((image, id) => (
+            {/* {showImages.map((image, id) => (
               <div key={id}>
                 <img
-                  className="PW_defect_img"
+                  className="NP_defect_img"
                   src={image}
                   alt={`${image}-${id}`}
                   onClick={() => handleDeleteImage(id)}
                 />
               </div>
-            ))}
+            ))} */}
+            </div>
           </div>
         </div>
-        <div>
-          <button className="noticepost-cancle-btn">취소</button>
-          <button className="noticepost-upload-btn">등록</button>
+        <div className="NP-btn">
+          <button className="NP-cancle-btn">취소</button>
+          <button className="NP-upload-btn">등록</button>
         </div>
       </span>
    </div>

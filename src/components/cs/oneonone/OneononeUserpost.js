@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getPostByNo } from "./Data";
+import { getPostByNo } from "../notice/Data";
 import "./OneononeUserpost.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import CsNavbar from "./CsNavbar";
 
 const OneononeUserpost = () => {
   const navigate = useNavigate();
@@ -45,7 +44,7 @@ const OneononeUserpost = () => {
 
   return (
     <>
-      <CsNavbar />
+    
 
       <table className="oneonone-user-post-table">
         <tr>
