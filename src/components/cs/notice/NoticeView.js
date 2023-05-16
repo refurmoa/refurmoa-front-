@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import "./NoticeView.css";
 import Data from "./Data.json";
 import { useNavigate, useParams } from "react-router-dom";
-import naver from "../../../images/naver.png";
+import naver from "../../../images/iu.jpg";
 import { Link } from "react-router-dom";
 
 const NoticeView = () => {
@@ -54,13 +54,8 @@ const NoticeView = () => {
             </div>
             <hr className="NV-title-line" />
             <div className="NV-info">{list.noti_inf}</div>
-            <div className="NV-content-box">
-              <span>
-                {" dddddd"}
-                <br />
-                <img className="NV-img" src={naver} alt="naver" />
-              </span>
-            </div>
+
+            <img className="NV-img" src={naver} alt="naver" />
 
             <div>
               <div className="NV-btn-wrap">
