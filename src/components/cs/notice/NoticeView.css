@@ -50,32 +50,18 @@
   float: left;
   padding: 25px 20px;
 }
-.NV-content-box {
-  margin: 25px 65px 30px 65px;
-  padding: 10px;
-  resize: none;
-  background-color: #eeeeee;
-  width: 800px;
-  height: 600px;
-  text-align: left;
-  overflow-y: auto;
-  max-height: 600px;
-  /* position: relative; */
-}
 
 .NV-img {
-  float: left;
-  max-width: 500px;
-  max-height: 500px;
+  clear: both;
+  width: 695px;
+  margin: 35px auto 30px;
+  object-fit: contain;
 }
 .NV-btn-wrap {
-  float: left;
-
-  margin-bottom: 10px;
+  margin: 0 auto;
 }
 .NV-go-list-btn {
   font-size: 20px;
-  margin: 0 0 0 418px;
   padding: 9px 27.5px;
   background-color: #514438;
   border: 2px solid #514438;
