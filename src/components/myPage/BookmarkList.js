@@ -350,8 +350,12 @@ const SearchInput = styled.div`
 
 const SearchImg = styled.div`
   margin: 5px 10px 0px 0px;
+  width: 17px;
+  height: 17px;
   cursor: pointer;
   img {
+    width: 100%;
+    height: 100%;
     color: #B9A89A;
   }
 `;
