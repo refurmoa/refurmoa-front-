@@ -201,3 +201,110 @@
   color: #555555;
   cursor: pointer;
 }
+/* ========================================================= */
+.FAQ-Writecategory {
+  width: 900px;
+  padding: 15px 0;
+  clear: both;
+}
+.FAQ-Writecategory > .active {
+  background: #cccccc;
+  color: #fff;
+  border: 2px solid #cccccc;
+  outline: none !important;
+}
+.FAQ-Writecategory button {
+  height: 40px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 36px;
+  color: #999999;
+  background: #fff;
+  padding: 0 25px;
+  margin-right: 10px;
+  border: 2px solid rgba(204, 204, 204, 0.5);
+  cursor: pointer;
+}
+.FAQ_Title_input {
+  width: 896px;
+  height: 46px;
+  border: 2px solid #dddddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+.FAQ_Title_input input {
+  width: 860px;
+  height: 30px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 50px;
+  display: flex;
+  color: #000;
+  border: none;
+}
+.FAQ_Title_input input:focus {
+  outline: none !important;
+}
+.FAQ_Title_input input::placeholder {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 50px;
+  color: #888888;
+}
+.FAQ_Text_input {
+  width: 856px;
+  height: 376px;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  border: 2px solid #dddddd;
+  border-radius: 10px;
+}
+.FAQ_Text_input textarea {
+  width: 860px;
+  height: 345px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  border: none;
+  resize: none;
+}
+.FAQ_Text_input textarea:focus {
+  outline: none !important;
+}
+.FAQ_Text_input span {
+  float: right;
+  color: #888888;
+}
+.FAQ_button {
+  width: 200px;
+  height: 50px;
+  margin-right: 20px;
+  float: right;
+}
+.FAQ_button_cancel {
+  width: 95px;
+  height: 50px;
+  background-color: #fff;
+  border: 2px solid #514438;
+  border-radius: 10px;
+  margin-right: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 50px;
+  color: #514438;
+}
+.FAQ_button_regi {
+  width: 95px;
+  height: 50px;
+  background-color: #514438;
+  border-radius: 10px;
+
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 50px;
+  color: #fff;
+}

@@ -14,6 +14,9 @@ import PostPay from "./components/Pay/PostPay";
 import PayDetail from "./components/myPage/MyPagePayDetail";
 import NoticeList from "./components/cs/notice/NoticeList";
 import NoticeView from "./components/cs/notice/NoticeView";
+import FAQ from "./components/cs/FAQ/FAQ";
+import FAQWrite from "./components/cs/FAQ/FAQWrite";
+import FAQUpdate from "./components/cs/FAQ/FAQUpdate";
 import AsStore from "./components/cs/asStore/AsStore";
 import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
 import UserUpdate from "./components/myPage/userUpdate/UserUpdate";
@@ -41,6 +44,8 @@ function App() {
           <Route path="cs/notice" element={<NoticeList />} />
           <Route path="cs/notice/detail/:noticeid" element={<NoticeView />} />
           <Route path="/cs/faq" element={<FAQ />} />
+          <Route path="/cs/faq/write" element={<FAQWrite />} />
+          <Route path="/cs/faq/update" element={<FAQUpdate />} />
         </Route>
         <Route path="/cs/as_store" element={<AsStore />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />
