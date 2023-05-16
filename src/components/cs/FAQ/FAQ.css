@@ -156,7 +156,8 @@
 .FAQSearchAdimin input:focus {
   outline: none !important;
 }
-.FAQTitle span {
+
+.FAQTitle a {
   font-weight: 600;
   font-size: 20px;
   width: 37px;
@@ -166,6 +167,7 @@
   text-align: center;
   margin-right: 25px;
   color: #514438;
+  cursor: pointer;
 }
 .FAQAdminTitle {
   width: 460px;
