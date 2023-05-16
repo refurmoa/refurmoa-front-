@@ -154,7 +154,7 @@ const MyPage_detail = () => {
         <span className="wordsearchpart">
           <input className="searchbox" type="text" ref={searchRef}></input>
           <input
-            className="searchboxbutton"
+            className="searchboxbuttonBid"
             type="button"
             value=""
             onClick={search_product}

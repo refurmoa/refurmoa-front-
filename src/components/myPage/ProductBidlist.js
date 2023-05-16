@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import "./ProductBidlist.css";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import redtimeicon from "../../images/time_icon_red.png";
+import blacktimeicon from "../../images/time_icon_black.png";
 
 export const ProductBidlist = ({ product }) => {
   const [today, setToday] = useState(new Date().getTime()); // 현재날짜(ms) 구하기
@@ -33,12 +35,17 @@ export const ProductBidlist = ({ product }) => {
       <image className="imageBid">
         {product.prod_owner === 0 ? (
           <div className="productnownerBid">
-            <div>패찰</div>
+            <div onClick={() => onClick(product.product_code)}>패찰</div>
           </div>
         ) : product.prod_owner === 1 ? (
           <div className="productownerBid">
             <div className="productownerboxBid"></div>
-            <span className="productownertextBid">낙찰</span>
+            <span
+              className="productownertextBid"
+              onClick={() => onClick(product.product_code)}
+            >
+              낙찰
+            </span>
           </div>
         ) : (
           ""
@@ -46,39 +53,34 @@ export const ProductBidlist = ({ product }) => {
         <img
           src={`/images/prod/${product.main_image}`}
           alt="productimage"
-          onClick={onClick}
+          onClick={() => onClick(product.product_code)}
         />
       </image>
       <information className="inmargin">
-        {day <= 0 && hour < 0 ? (
+        {day <= 0 && hour <= 0 && min <= 0 && sec <= 0 ? (
           <div className="balckcolorBid">
-            <img src="../../images/time_icon_red.png" alt=""></img>
-            <div className="clockiconblack"></div>경매 종료
+            <img src={blacktimeicon} alt=""></img>경매 종료
           </div>
         ) : day === 0 && hour < 12 ? (
           <div className="redcolorBid">
-            <img src="../../images/time_icon_red.png" alt=""></img>{" "}
-            <div className="clockiconred"></div>
+            <img src={redtimeicon} alt=""></img>
             {hour}시간 {min}분 {sec}초
           </div>
         ) : day === 0 && hour <= 24 ? (
-          <div className="blackcolorBid">
-            <img src="../../images/time_icon_red.png" alt=""></img>
-            <div className="clockiconblack"></div>
+          <div className="balckcolorBidNum">
+            <img src={blacktimeicon} alt=""></img>
             {hour}시간 {min}분 {sec}초
           </div>
         ) : (
-          <div className="balckcolorBid">
-            <img src="../../images/time_icon_red.png" alt=""></img>
-            <div className="clockiconblack"></div>
+          <div className="balckcolorBidNum">
+            <img src={blacktimeicon} alt=""></img>
             {day}일 {hour}시간 {min}분 {sec}초
           </div>
         )}
         <div className="com_nameBid">{product.prod_com}</div>
         <div
           className="product_nameBid"
-          onClick={onClick}
-          product_code={product.product_code}
+          onClick={() => onClick(product.product_code)}
         >
           {product.prod_name}
         </div>
@@ -90,19 +92,16 @@ export const ProductBidlist = ({ product }) => {
             : "경매참여자 : 0 명"}
         </div>
         <price className="priceBid">
-          <div className="pricewrap">
-            <div></div>
-            <div>
-              <div className="priceBidword">나의 입찰가</div>
-              <div className="priceBidword">현재가</div>
+          <div className="priceBidAll1">
+            <div className="priceBidword">나의 입찰가</div>
+            <div className="priceBidword">현재가</div>
+          </div>
+          <div className="priceBidAll2">
+            <div className="priceBidnum">
+              {product.bid_price.toLocaleString("ko-KR")}원
             </div>
-            <div>
-              <div className="priceBidnum">
-                {product.bid_price.toLocaleString("ko-KR")}원
-              </div>
-              <div className="priceBidnum">
-                {product.cur_price.toLocaleString("ko-KR")}원
-              </div>
+            <div className="priceBidnum">
+              {product.cur_price.toLocaleString("ko-KR")}원
             </div>
           </div>
         </price>

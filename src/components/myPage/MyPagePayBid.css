@@ -138,7 +138,7 @@ padding: 0;
     font-size: 20px;
     line-height: 25px;
     color: #514438;
-    margin: 40px 40px 0 25px;
+    margin: 42px 30px 0 25px;
 }
 
 .date {
@@ -173,7 +173,18 @@ padding: 0;
     border: 1px solid #B9A89A;
     border-radius: 15px;
     position: absolute;
-    margin: 40px 0 0 445px;
+    margin: 40px 0 0 466px;
+    padding-left: 15px;
+    cursor: text;
+}
+
+.searchboxpay{
+    width: 220px;
+    height: 30px;
+    border: 1px solid #B9A89A;
+    border-radius: 15px;
+    position: absolute;
+    margin: 40px 0 0 450px;
     padding-left: 15px;
     cursor: text;
 }
@@ -186,9 +197,23 @@ padding: 0;
     background-color: white;
     border: none;
     width: 17px;
-    height: 17.13px;
+    height: 17px;
     cursor: pointer;
-    margin: 46px 0 0 652px;
+    margin: 46px 0 0 653px;
+    background-color: white;
+}
+
+.searchboxbuttonBid {
+    display: inline-block;
+    position: relative;
+    background-image: url(../../images/search.png);
+    background-size: contain;
+    background-color: white;
+    border: none;
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    margin: 46px 0 0 669px;
     background-color: white;
 }
 

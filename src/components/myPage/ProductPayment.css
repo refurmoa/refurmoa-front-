@@ -75,46 +75,41 @@ padding: 0;
 }
 
 .redcolorPay {
-  color:red;
-  font-weight: 600;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  color: #ff0000;
+  font-weight: 600;
   line-height: 30px;
-  margin: 0;
+}
+
+.redcolorPay img {
+  width: 18px;
+  height: 18px;
+  margin: 2px 10px 0px 0px;
 }
 
 .balckcolorPay {
-  font-weight: 700;
   font-size: 18px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
   line-height: 30px;
-  margin: 0;
 }
 
-.iconblack{
-    display: inline-block;
-    background-image: url(../../../public/images/prod/loadingiconblack.png);
-    border: none;
-    width: 15px;
-    height: 15px;  
-    cursor: pointer;
-    margin-right: 8px;
-    background-size: contain;
+.balckcolorPay img {
+  width: 18px;
+  height: 18px;
+  margin: 2px 10px 0px 0px;
 }
 
-.iconred{
-    display: inline-block;
-    background-image: url(../../../public/images/prod/loadingiconred.png);
-    border: none;
-    width: 15px;
-    height: 15px;  
-    cursor: pointer;
-    margin-right: 8px;
-    background-size: contain;
-}
 
 .graycolorPay {
   font-weight: 700;
   font-size: 18px;
-  line-height: 30px;
+  display: flex;
+  align-items: center;
+  color: #999999;
 }
 
 .redcolormoneyPay {
