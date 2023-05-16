@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./OneononeInquiry.css";
 import { inquiryList } from "./OneononeData";
-import CsNavbar from "./CsNavbar";
 
 const InquiryList = () => {
   //admin 관리자페이지에서 수정,삭제
@@ -54,14 +53,13 @@ const InquiryList = () => {
 
   return (
     <>
-      <CsNavbar />
       <table className="inquirylist-table">
         <thead>
           <tr>
             <td className="inquirylist-header">
               1:1 문의
               {loginid === "" && (
-                <Link to={`/oneonone/userpost`} className="inquiry-post-btn">
+                <Link to={`/cs/inquiry/write`} className="inquiry-post-btn">
                   문의하기
                 </Link>
               )}
@@ -77,7 +75,7 @@ const InquiryList = () => {
                     <label className="inquirylist-post-num">{item.num}</label>
                     <Link
                       className="inquirylist-post-title"
-                      to={`/oneonone/detail`}
+                      to={`/cs/inquiry/detail`}
                       onClick={readcountup}
                     >
                       {item.title}
