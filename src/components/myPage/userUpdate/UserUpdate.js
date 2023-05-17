@@ -202,7 +202,7 @@ const User_update = () => {
     <>
       <form className="UU_input_form">
         <div className="SU_Main_header">회원정보 수정</div>
-        <div className="SU_sub_header">&nbsp;&nbsp;</div>
+
         <div className="form_wrap">
           <table className="SU_input_table">
             <tr>
