@@ -8,6 +8,23 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
     setPageNum(1);
   };
 
+  // const [userbidlist, setUserbidlist] = useState();
+  // const id = window.sessionStorage.getItem("id");
+  const postUserData = () => {
+    // axios
+    //   .get(`/api/post/UserBidList`{
+    //   id:id
+    // })
+    //   .then((res) => {
+    //     const { data } = res;
+    //     setUserdata(data);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+    // setUserbidlist(data);
+  };
+
   const SearchBidList = useRef();
   // const [userlist, setUserlist] = useState();
   const AUDsearch = () => {
@@ -93,7 +110,7 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
                       {userlist.cur_price.toLocaleString("ko-KR")}원
                     </span>
                   </div>
-                ) : userlist.prod_state >= 2 && userlist.prod_owner === 1 ? (
+                ) : userlist.prod_state >= 2 && userlist.bid_cancle === 0 ? (
                   <div>
                     <div className="AUDBidListPirceRed">낙찰</div>
 

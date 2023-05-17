@@ -11,7 +11,7 @@
         "prod_state": 5,
         "cur_price": 600000,
         "bid_price": 400000,
-        "prod_owner": 1,
+        "bid_cancle": 1,
         "prod_price": 30000
       },
       {
@@ -25,7 +25,7 @@
         "prod_state": 1,
         "cur_price": 200000,
         "bid_price": 200000,
-        "prod_owner": 1,
+        "bid_cancle": 1,
         "prod_price": 30000
       },
       {
@@ -39,7 +39,7 @@
         "prod_state": 1,
         "cur_price": 20000,       
         "bid_price": 60000,
-        "prod_owner": null,
+        "bid_cancle": 0,
         "prod_price": 30000
       },
       {
@@ -53,7 +53,7 @@
         "prod_state": 5,
         "cur_price": 100000,
         "bid_price": 60000,
-        "prod_owner": 0,
+        "bid_cancle": 0,
         "prod_price": 30000
       },
       {
@@ -67,7 +67,7 @@
         "prod_state": 2,
         "cur_price": 800000,
         "bid_price": 1200000,
-        "prod_owner": 1,
+        "bid_cancle": 1,
         "prod_price": 30000
       },
       {
@@ -81,7 +81,7 @@
         "prod_state": 1,
         "cur_price": 600000,
         "bid_price": 60000,
-        "prod_owner": 0,
+        "bid_cancle": 0,
         "prod_price": 30000
       },
       {
@@ -95,7 +95,7 @@
         "prod_state": 1,
         "cur_price": 70000,
         "bid_price": 60000,
-        "prod_owner": 0,
+        "bid_cancle": 0,
         "prod_price": 30000
       },
       {
@@ -109,7 +109,7 @@
         "prod_state": 1,
         "cur_price": 3000000,
         "bid_price": 3000000,
-        "prod_owner": 1,
+        "bid_cancle": 1,
         "prod_price": 30000
       },
       {
@@ -123,7 +123,7 @@
         "prod_state": 2,
         "cur_price": 456000,
         "bid_price": 200000,
-        "prod_owner": 0,
+        "bid_cancle": 0,
         "prod_price": 30000
       },
       {
@@ -137,7 +137,7 @@
         "prod_state": 1,
         "cur_price": 15000,     
         "bid_price": 5000,
-        "prod_owner": null,
+        "bid_cancle": 0,
         "prod_price": 30000
       }
     ]

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./ProductPayment.css";
 import React, { useEffect, useState } from "react";
 import member from "../../images/member.png";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import loadiconblack from "../../images/loadingiconblack.png";
 import loadiconred from "../../images/loadingiconred.png";
@@ -23,6 +24,22 @@ export const ProductPayment = ({ product }) => {
 
   const delivery = (board_num) => {
     navigate(`/payment/detail/${board_num}`);
+  };
+
+  const canclechange = () => {
+    // axios
+    //   .post("/updatebidcancle", {})
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+  };
+
+  const prodstatechange = () => {
+    // axios
+    //   .post("/updateprodstate", {})
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
   };
 
   return (
@@ -95,6 +112,8 @@ export const ProductPayment = ({ product }) => {
               ></input>
               <productpay product_code={product.product_code}></productpay>
             </div>
+          ) : product.prod_state === 2 && product.pay_cancle === 1 ? (
+            <div>취소물품입니다.</div>
           ) : product.prod_state === 2 ? (
             <div>
               <div>
@@ -102,6 +121,7 @@ export const ProductPayment = ({ product }) => {
                   className="cancleButtonPay"
                   type="button"
                   value="결제 취소"
+                  onClick={canclechange}
                 ></input>
                 <input
                   className="inqButtonPay"
@@ -130,6 +150,7 @@ export const ProductPayment = ({ product }) => {
                 className="inqButtonPay"
                 type="button"
                 value="구매 확정"
+                onClick={prodstatechange}
               ></input>
             </div>
           ) : (

@@ -13,6 +13,23 @@ const AdminUserDetail = () => {
 
   const AUDUserUpdate = () => {};
 
+  // const [userdata, setUserdata] = useState();
+  // const id = window.sessionStorage.getItem("id");
+  const postUserData = () => {
+    // axios
+    //   .get(`/api/post/UserData`{
+    //   id:id
+    // })
+    //   .then((res) => {
+    //     const { data } = res;
+    //     setUserdata(data);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+    // setUserdata(data);
+  };
+
   return (
     <div className="AUDAll">
       <left className="AUDLeftAll">

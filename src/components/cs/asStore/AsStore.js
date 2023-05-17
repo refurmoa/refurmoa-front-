@@ -14,6 +14,23 @@ const AsStore = () => {
   // const [searchData, setSeatchData] = useState();
 
   // 데이터 가져오기
+  const asListData = () => {
+    // axios
+    //   .get("/api/asListData")
+    //   .then((res) => {
+    //     const { data } = res;
+    //     setMarker(data);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+    // setMarker([
+    //   markers.placelist.find((sub) => (sub.store_name = store_name)).latitude,
+    //   markers.placelist.find((sub) => (sub.store_name = store_name)).longitude,
+    // ]);
+    // console.log(data);
+  };
+
   const asDetail = (store_name) => {
     // axios
     //   .get(`/api/getproducts?store_name=${store_name}`)
