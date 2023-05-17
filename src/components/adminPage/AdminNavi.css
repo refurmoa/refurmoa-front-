@@ -1,0 +1,52 @@
+/* 관리자 페이지 메뉴 */
+
+.AN-wrap {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.AN-nav_wrap {
+    width: 975px;
+    height: 50px;
+    margin: 5px auto 0;
+}
+
+.AN-nav {
+    position: relative;
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: rgba(81, 68, 56, 0.6);
+    margin-right: 25px;
+}
+
+.AN-nav:last-child {
+    margin-right: 0;
+}
+
+.AN-nav_main, .AN-nav_active {
+    color: #514438;
+}
+
+.AN-line {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 10px;
+    background-color: rgba(185, 168, 154, 0.2);
+    z-index: -1;
+}
+
+.AN-line_active {
+    background-color: rgba(178, 212, 193, 0.7);
+}
+
+.AN-bottom_line {
+    clear: both;
+    width: 1198px;
+    border: 1px solid #B9A89A;
+}
