@@ -3,8 +3,12 @@ import { AdminUserDetailBidList } from "./AdminUserDetailBidList";
 import { AdminUserDetailPayList } from "./AdminUserDetailPayList";
 import userdata from "./AdminUserDetail.json";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const AdminUserDetail = () => {
+  // const location = useLocation();
+  // const id = location.state;
+  // console.log(id);
   const [pageNum, setPageNum] = useState(0);
 
   const AUDCuList = () => {};
