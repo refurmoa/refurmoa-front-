@@ -378,6 +378,7 @@ function PostUpdate() {
           <div className="PW_partner_name">제휴회사명</div>
           <div className="PW_partner_serach">
             <input
+              maxLength="15"
               className="PW_partner_input"
               type="text"
               placeholder="회사명"
@@ -460,6 +461,7 @@ function PostUpdate() {
             <input
               className="PR_search_input"
               placeholder="상품 검색"
+              maxLength="30"
               value={Productname}
               onChange={(e) => setProductname(e.target.value)}
             />
@@ -556,6 +558,7 @@ function PostUpdate() {
             <input
               className="PW_product_name_input"
               type="text"
+              maxLength="15"
               placeholder="제품회사명"
               value={prod_com}
             />
@@ -565,6 +568,7 @@ function PostUpdate() {
             <input
               className="PW_product_name_input"
               type="text"
+              maxLength="30"
               placeholder="제품명"
               value={prod_name}
             />

@@ -37,7 +37,7 @@ const Update_card = (props) => {
               <input
                 name="card_num"
                 type="text"
-                maxlength="16"
+                maxlength="150"
                 placeholder="0000-0000-0000-0000"
                 onChange={(e) => setCard_num(e.target.value)}
               />
@@ -53,7 +53,7 @@ const Update_card = (props) => {
                 name="valid_date"
                 type="month"
                 placeholder="0000-0000-0000-0000"
-                maxLength={"16"}
+                maxLength="150"
                 onChange={(e) => setValid_date(e.target.value)}
               />
               <hr className="SU_input_line" />

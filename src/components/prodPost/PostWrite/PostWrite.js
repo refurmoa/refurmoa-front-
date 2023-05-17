@@ -305,6 +305,7 @@ function PostWrite(props) {
               className="PW_partner_input"
               type="text"
               placeholder="회사명"
+              maxLength="15"
               value={searchCompany}
               onChange={(e) => setSearchCompany(e.target.value)}
             />
@@ -384,6 +385,7 @@ function PostWrite(props) {
             <input
               className="PR_search_input"
               placeholder="상품 검색"
+              maxLength="30"
               value={Productname}
               onChange={(e) => setProductname(e.target.value)}
             />
@@ -481,6 +483,7 @@ function PostWrite(props) {
             <input
               className="PW_product_name_input"
               type="text"
+              maxLength="15"
               placeholder="제품회사명"
               value={prod_com}
             />
@@ -490,6 +493,7 @@ function PostWrite(props) {
             <input
               className="PW_product_name_input"
               type="text"
+              maxLength="30"
               placeholder="제품명"
               value={prod_name}
             />

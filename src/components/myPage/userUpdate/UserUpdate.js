@@ -266,6 +266,7 @@ const User_update = () => {
                   type="text"
                   placeholder="아이디"
                   value={id}
+                  maxLength="15"
                   onChange={onIdCHK}
                 />
 
@@ -285,6 +286,7 @@ const User_update = () => {
                   name="password"
                   type="password"
                   placeholder="비밀번호"
+                  maxLength="20"
                   value={password}
                   onChange={onChangePassword}
                 />
@@ -303,6 +305,7 @@ const User_update = () => {
                   name="passwordChk"
                   type="password"
                   placeholder="비밀번호 확인"
+                  maxLength="20"
                   value={passwordChk}
                   onChange={onPwCHK}
                 />
@@ -325,6 +328,7 @@ const User_update = () => {
                   type="text"
                   placeholder="이메일"
                   value={email}
+                  maxLength="15"
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 @ &nbsp;
@@ -333,6 +337,7 @@ const User_update = () => {
                   name="domain"
                   id="domain-txt"
                   type="text"
+                  maxLength="15"
                   placeholder="직접 입력"
                   value={domain}
                   onChange={onEmailCHK}
@@ -365,7 +370,8 @@ const User_update = () => {
                   className="UU_address_input"
                   name="address"
                   type="text"
-                  size="100"
+                  size="50"
+                  maxLength="50"
                   placeholder={address}
                   value={update_address}
                   required={true}
@@ -423,6 +429,8 @@ const User_update = () => {
                   name="address_detail"
                   type="text"
                   placeholder="상세 주소"
+                  size="50"
+                  maxLength="50"
                   value={address_detail}
                   onChange={(e) => setAddress_detail(e.target.value)}
                 />
@@ -435,7 +443,6 @@ const User_update = () => {
                 <input
                   name="birth"
                   type="date"
-                  size="100"
                   placeholder="생년월일"
                   value={birth}
                   onChange={(e) => setBirth(e.target.value)}
