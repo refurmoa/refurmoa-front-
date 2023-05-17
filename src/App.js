@@ -36,6 +36,7 @@ import AdminNavi from "./components/adminPage/AdminNavi";
 import Admin from "./components/adminPage/Admin";
 import AdminUser from "./components/adminPage/AdminUser";
 import AdminUserDetail from "./components/adminPage/AdminUserDetail";
+import AdminPartnerDetail from "./components/adminPage/AdminPartnerDetail";
 import Alliance from "./components/company/AllianceForm";
 
 function App() {
@@ -50,7 +51,7 @@ function App() {
         <Route path="/signup/4" element={<SignupComplete />} />
         <Route path="/prod" element={<ProductList />} />
         <Route path="/prod/write" element={<ProductWrite />} />
-        <Route path="/prod/update" element={<ProductUpdate />} />
+        <Route path="/prod/update/:product_code" element={<ProductUpdate />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/write" element={<PostWrite />} />
         <Route path="/post/update/:board_num" element={<PostUpdate />} />
@@ -80,6 +81,7 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
+          <Route path="/admin/partner/detail" element={<AdminPartnerDetail />} />
         </Route>
         <Route path="/partnership" element={<Alliance />} />
       </Route>
