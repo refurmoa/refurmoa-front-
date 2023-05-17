@@ -2,26 +2,26 @@ import React from "react";
 import "../../sign/signup/Signup.css";
 import "./UserUpdate.css";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Update_phone from "./UserUpdatePhone";
 import Update_card from "./UserUpdateCard";
 import Post from "../../sign/signup/FindAddress";
 
 const User_update = () => {
-  const [name, setName] = useState("리퍼모아");
-  const [phone, setPhone] = useState("01012345678");
-  const [id, setId] = useState("refurmore");
-  const [password, setPassword] = useState("12341234");
-  const [passwordChk, setPasswordChk] = useState("12341234");
-  const [email, setEmail] = useState("referore");
-  const [domain, setDomain] = useState("gmail.com");
-  const [address, setAddress] = useState("서울시 노원구");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordChk, setPasswordChk] = useState("");
+  const [email, setEmail] = useState("");
+  const [domain, setDomain] = useState("");
+  const [address, setAddress] = useState(" ");
   const [update_address, setupdate_address] = useState("");
-  const [address_detail, setAddress_detail] = useState("강북로 2030202");
-  const [birth, setBirth] = useState("2001/12/11");
-  const [card_num, setCard_num] = useState("1234-5678-****-5555");
-  const [valid_date, setValid_date] = useState("23 / 04");
+  const [address_detail, setAddress_detail] = useState(" ");
+  const [birth, setBirth] = useState("");
+  const [card_num, setCard_num] = useState("");
+  const [valid_date, setValid_date] = useState("");
   const [cvc, setCvc] = useState("");
   const [card_pw1, setCard_pw1] = useState("");
   const [card_pw2, setCard_pw2] = useState("");
@@ -36,6 +36,34 @@ const User_update = () => {
   const [check_id, setCheck_id] = useState(false);
   const [check_Email, setCheck_Email] = useState(false);
   const [check_box, setCheck_box] = useState(false);
+  // =====================================================
+
+  useEffect = () => {
+    setId(window.sessionStorage.getItem("id"));
+    /*
+    axios
+      .get("/userupdate", {
+        id: id,
+      })
+      .then((res) => {
+        const user=res.data;
+        const mail = user.mail.split("@");
+        setName(user.name);
+        setPhone(user.phone);
+        setPassword(user.password);
+        setEmail(mail[0]);
+        setDomain(mail[1]);
+        setAddress(user.address);
+        setAddress_detail(user.detail_address);
+        setBirth(user.birth);
+        setCard_num(user.birth);
+        setValid_date(user.valid_date);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+    */
+  };
 
   /*========================== */
   const [popup, setPopup] = useState(false);
@@ -74,6 +102,29 @@ const User_update = () => {
   const onClick = () => {
     if (check_pw && check_id && check_Email) {
       alert("회원정보를 수정하시겠습니까?");
+      /*
+    axios
+      .post("/userupdate", {
+        id: id,
+      })
+      .then((res) => {
+        const user=res.data;
+        const mail = user.mail.split("@");
+        setName(user.name);
+        setPhone(user.phone);
+        setPassword(user.password);
+        setEmail(mail[0]);
+        setDomain(mail[1]);
+        setAddress(user.address);
+        setAddress_detail(user.detail_address);
+        setBirth(user.birth);
+        setCard_num(user.birth);
+        setValid_date(user.valid_date);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+    */
     }
     if (!check_pw) {
       alert("비밀번호를 입력해주세요!");
@@ -151,7 +202,7 @@ const User_update = () => {
     <>
       <form className="UU_input_form">
         <div className="SU_Main_header">회원정보 수정</div>
-        <div className="SU_sub_header">&nbsp;&nbsp;</div>
+
         <div className="form_wrap">
           <table className="SU_input_table">
             <tr>
@@ -215,6 +266,7 @@ const User_update = () => {
                   type="text"
                   placeholder="아이디"
                   value={id}
+                  maxLength="15"
                   onChange={onIdCHK}
                 />
 
@@ -234,6 +286,7 @@ const User_update = () => {
                   name="password"
                   type="password"
                   placeholder="비밀번호"
+                  maxLength="20"
                   value={password}
                   onChange={onChangePassword}
                 />
@@ -252,6 +305,7 @@ const User_update = () => {
                   name="passwordChk"
                   type="password"
                   placeholder="비밀번호 확인"
+                  maxLength="20"
                   value={passwordChk}
                   onChange={onPwCHK}
                 />
@@ -274,6 +328,7 @@ const User_update = () => {
                   type="text"
                   placeholder="이메일"
                   value={email}
+                  maxLength="15"
                   onChange={(e) => setEmail(e.target.value)}
                 />
                 @ &nbsp;
@@ -282,6 +337,7 @@ const User_update = () => {
                   name="domain"
                   id="domain-txt"
                   type="text"
+                  maxLength="15"
                   placeholder="직접 입력"
                   value={domain}
                   onChange={onEmailCHK}
@@ -314,7 +370,8 @@ const User_update = () => {
                   className="UU_address_input"
                   name="address"
                   type="text"
-                  size="100"
+                  size="50"
+                  maxLength="50"
                   placeholder={address}
                   value={update_address}
                   required={true}
@@ -372,6 +429,8 @@ const User_update = () => {
                   name="address_detail"
                   type="text"
                   placeholder="상세 주소"
+                  size="50"
+                  maxLength="50"
                   value={address_detail}
                   onChange={(e) => setAddress_detail(e.target.value)}
                 />
@@ -384,7 +443,6 @@ const User_update = () => {
                 <input
                   name="birth"
                   type="date"
-                  size="100"
                   placeholder="생년월일"
                   value={birth}
                   onChange={(e) => setBirth(e.target.value)}
@@ -394,7 +452,7 @@ const User_update = () => {
             </tr>
           </table>
         </div>
-        <div className="SU_card_header">결제수단</div>
+        {/* <div className="SU_card_header">결제수단</div>
         <div className="UU_card_box">
           <div className="UU_card_line" />
           <div className="UU_update_cardnum">{card_num}</div>
@@ -453,7 +511,7 @@ const User_update = () => {
             삭제
           </button>
           <div></div>
-        </div>
+        </div> */}
         <button className="SU_input_btn" onClick={onClick}>
           정보수정
         </button>

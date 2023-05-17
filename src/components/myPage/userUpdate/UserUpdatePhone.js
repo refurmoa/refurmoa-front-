@@ -28,6 +28,7 @@ const Update_phone = (props) => {
                   name="name"
                   type="text"
                   placeholder="이름"
+                  maxLength="10"
                   value={name}
                 />
                 <hr className="SU_phone_line" />
@@ -41,6 +42,7 @@ const Update_phone = (props) => {
                   name="phone"
                   type="text"
                   placeholder="전화번호"
+                  maxLength="15"
                   size="15"
                   onChange={(e) => setPhone(e.target.value)}
                 />

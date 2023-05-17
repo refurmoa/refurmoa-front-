@@ -79,40 +79,42 @@ const Signup_input = () => {
       setEmail(email.concat("@", domain));
       setCard_pw(Number(card_pw1.concat(card_pw2)));
       /*
-         axios
-        .post("/signup", {
-          id: id,
-          password:password,
-          email:email,
-          address:address
-          address_detail:address_detail
-          birth:birth
-        })
-        .then((res) => {
-          if(cardnum!==""){
-             axios
-              .post("/signup", {
-                id: id,
-                card_num:card_num,
-                valid_date:valid_date,
+    setEmail(email.concat("@", domain));
+    axios
+      .post("/signup", {
+        id: id,
+        phone:phone
+        password:password
+        email:mail
+        address:address
+        address_detail:address_detail
+        birth:birth
+      })
+      .then((res) => {
+        if(res.data){  
+        
+        axios
+            .post("/card", {
+                id:id
+                card_num:card_num
+                valid_date:valid_date
                 cvc:cvc
                 card_pw:card_pw
-              })
-              .then((res) => {
-
-              })
-              .catch((e) => {
-                console.error(e);
-              });
+            })
+            .then((res) => {
+              if(res.data){
+                alert(aaa)
+              }
+            })
+            .catch((e) => {
+              console.error(e);
+            });
           }
-         
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-
-
-      */
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+    */
       document.location.href = "/signup/3";
     }
     if (!check_pw) {
@@ -132,6 +134,7 @@ const Signup_input = () => {
       return false;
     }
     console.log({ valid_date });
+
     window.sessionStorage.setItem("id", id);
   };
   const onIdCHK = (e) => {
@@ -192,7 +195,7 @@ const Signup_input = () => {
   };
   return (
     <>
-      <form className="SU_input_form">
+      <div className="SU_input_form">
         <div className="SU_Main_header">회원가입</div>
         <div className="SU_sub_header">
           01 본인인증 &nbsp;&nbsp;
@@ -406,10 +409,10 @@ const Signup_input = () => {
             </tr>
           </table>
         </div>
-
+        {/*
         <div className="SU_card_header">결제수단 추가</div>
         <div className="SU_card_sub">카드 등록</div>
-        <div className="form_wrap">
+       <div className="form_wrap">
           <table className="SU_input_table">
             <tr>
               <td>
@@ -419,7 +422,7 @@ const Signup_input = () => {
                 <input
                   name="card_num"
                   type="text"
-                  maxlength="150"
+                  maxlength="20"
                   placeholder="0000-0000-0000-0000"
                   value={card_num}
                   onChange={(e) => setCard_num(e.target.value)}
@@ -496,13 +499,13 @@ const Signup_input = () => {
               </td>
             </tr>
           </table>
-        </div>
+        </div> */}
         <Link to="/signup/2">
           <button className="SU_input_btn" onClick={onClick}>
             다음
           </button>
         </Link>
-      </form>
+      </div>
     </>
   );
 };

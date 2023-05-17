@@ -12,6 +12,8 @@ import ProductUpdate from "./components/product/ProductUpdate";
 import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import PostPay from "./components/Pay/PostPay";
+import PostWrite from "./components/prodPost/PostWrite/PostWrite";
+import PostUpdate from "./components/prodPost/PostWrite/PostUpdate";
 import PayDetail from "./components/myPage/MyPagePayDetail";
 import CsNavbar from "./components/cs/CsNavbar";
 import NoticeList from "./components/cs/notice/NoticeList";
@@ -51,6 +53,8 @@ function App() {
         <Route path="/prod/write" element={<ProductWrite />} />
         <Route path="/prod/update/:product_code" element={<ProductUpdate />} />
         <Route path="/post" element={<PostPage />} />
+        <Route path="/post/write" element={<PostWrite />} />
+        <Route path="/post/update/:board_num" element={<PostUpdate />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
         <Route path="/post/pay/:board_num" element={<PostPay />} />
         <Route path="/payment/detail" element={<PayDetail />} />
@@ -74,7 +78,7 @@ function App() {
         <Route path="/payment/detail/:board_num" element={<PayDetail />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route element={<AdminNavi />}>
-          <Route path="/admin" element={<Admin />}/>
+          <Route path="/admin" element={<Admin />} />
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
           <Route path="/admin/partner/detail" element={<AdminPartnerDetail />} />

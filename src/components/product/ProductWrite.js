@@ -213,6 +213,7 @@ function ProductWrite() {
               className="PW_partner_input"
               type="text"
               placeholder="회사명"
+              maxLength="15"
               value={searchCompany}
               onChange={(e) => setSearchCompany(e.target.value)}
             />
@@ -329,6 +330,7 @@ function ProductWrite() {
             <input
               className="PW_product_name_input"
               type="text"
+              maxLength="15"
               placeholder="제품회사명"
             />
           </div>
@@ -338,6 +340,7 @@ function ProductWrite() {
               className="PW_product_name_input"
               type="text"
               placeholder="제품명"
+              maxLength="30"
             />
           </div>
         </div>
