@@ -29,22 +29,7 @@ function FAQ() {
     setDataList(FAQList);
     pageCount();
   }, []);
-  const changeCate = (item) => {
-    setCatrgory(item);
-    if (item !== 0) {
-      // axios
-      // .get("/cs/faq/", {
-      //    cate:category
-      // })
-      // .then((res) => {
-      //   setDataList(res.data);
-      // })
-      // .catch((e) => {
-      //   console.error(e);
-      // });
-      return true;
-    }
-  };
+
   const FAQRegi = () => {
     document.location.href = "/cs/faq/write";
   };
@@ -74,7 +59,22 @@ function FAQ() {
   }
 
   // 조회수
-
+  const changeCate = (item) => {
+    setCatrgory(item);
+    if (item !== 0) {
+      // axios
+      // .get("/cs/faq/", {
+      //    cate:category
+      // })
+      // .then((res) => {
+      //   setDataList(res.data);
+      // })
+      // .catch((e) => {
+      //   console.error(e);
+      // });
+      return true;
+    }
+  };
   return (
     <div className="FAQ-List-form">
       {logId === "admin" ? (
@@ -114,43 +114,43 @@ function FAQ() {
       <div className="FAQ-category">
         <button
           className={category === 0 ? "active" : ""}
-          onClick={changeCate(0)}
+          onClick={() => changeCate(0)}
         >
           전체
         </button>
         <button
           className={category === 1 ? "active" : ""}
-          onClick={changeCate(1)}
+          onClick={() => changeCate(1)}
         >
           주문/결제
         </button>
         <button
           className={category === 2 ? "active" : ""}
-          onClick={changeCate(2)}
+          onClick={() => changeCate(2)}
         >
           배송
         </button>
         <button
           className={category === 3 ? "active" : ""}
-          onClick={changeCate(3)}
+          onClick={() => changeCate(3)}
         >
           취소/환불/교환
         </button>
         <button
           className={category === 4 ? "active" : ""}
-          onClick={changeCate(4)}
+          onClick={() => changeCate(4)}
         >
           회원
         </button>
         <button
           className={category === 5 ? "active" : ""}
-          onClick={changeCate(5)}
+          onClick={() => changeCate(5)}
         >
           경매/낙찰
         </button>
         <button
           className={category === 6 ? "active" : ""}
-          onClick={changeCate(6)}
+          onClick={() => changeCate(6)}
         >
           기타
         </button>
