@@ -83,10 +83,7 @@ function App() {
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
           <Route path="/admin/partner" element={<AdminPartner />} />
-          <Route
-            path="/admin/partner/detail"
-            element={<AdminPartnerDetail />}
-          />
+          <Route path="/admin/partner/detail" element={<AdminPartnerDetail />} />
           <Route path="/admin/order" element={<AdminOrder />} />
         </Route>
         <Route path="/partnership" element={<Alliance />} />
