@@ -28,7 +28,9 @@ const FAQPOST = (props) => {
               <div className="FAQAdminTitle" onClick={() => setMode(false)}>
                 {item.title}
               </div>
-              <button className="FAQAdminUpdate">수정</button>
+              <Link to="/cs/faq/update" state={{ item: item }}>
+                <button className="FAQAdminUpdate">수정</button>
+              </Link>
               <button className="FAQAdminDelete">삭제</button>
               <img
                 className="FAQArrowRotate"
@@ -42,7 +44,9 @@ const FAQPOST = (props) => {
               <div className="FAQ_List_post">
                 <div className="FAQPostCate">{cate}</div>
                 <div className="FAQAdminTitle">{item.title}</div>
-                <button className="FAQAdminUpdate">수정</button>
+                <Link to="/cs/faq/update" state={{ item: item }}>
+                  <button className="FAQAdminUpdate">수정</button>
+                </Link>
                 <button className="FAQAdminDelete">삭제</button>
                 <img
                   className="FAQArrow"

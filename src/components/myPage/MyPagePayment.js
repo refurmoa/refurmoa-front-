@@ -129,8 +129,8 @@ const MyPage_detail = () => {
           value=""
           onClick={search_date}
         ></input>
-        <span className="wordsearchpart">
-          <input className="searchbox" type="text" ref={searchRef}></input>
+        <span>
+          <input className="searchboxpay" type="text" ref={searchRef}></input>
           <input
             className="searchboxbutton"
             type="button"

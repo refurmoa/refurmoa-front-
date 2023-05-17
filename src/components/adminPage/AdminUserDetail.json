@@ -1,0 +1,12 @@
+   { 
+        "name":"이모아",
+        "member_id": "leemoa",
+        "birth": "23.01.09",
+        "phone": "01012345678",
+        "email": "leemoa@gmail.com",
+        "grade": 4,
+        "address": "서울특별시 종로구 사직로 161",
+        "detail_address":"멀티캠퍼스 101동 101호",
+        "mile": 10000
+   }
+  

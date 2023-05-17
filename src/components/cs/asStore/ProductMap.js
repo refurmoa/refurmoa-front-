@@ -17,7 +17,7 @@ export const ProductMap = ({ markers, data, currLocation }) => {
     const map = new kakao.maps.Map(mapContainer, mapOptions);
 
     markers.placelist.map((marker) => {
-      const position = new kakao.maps.LatLng(marker.lat, marker.lng);
+      const position = new kakao.maps.LatLng(marker.latitude, marker.longitude);
 
       const marker1 = new kakao.maps.Marker({
         position: position,
