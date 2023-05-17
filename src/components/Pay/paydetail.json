@@ -15,5 +15,5 @@
   "coupon_price": 1000,
   "mile_use": 15000,
   "pay_price": 515000,
-  "card_num": "1234-5678-****-4567"
+  "buy_method": "카카오페이"
 }
