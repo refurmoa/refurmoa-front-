@@ -35,7 +35,7 @@ const MyPage_detail = () => {
 
   // const postbidlistData = () => {
   //   axios
-  //     .get(`/api/post/bidlist`)
+  //     .get(`/api/post/productinfo`)
   //     .then((res) => {
   //       const { data } = res;
   //       setProdData(data);

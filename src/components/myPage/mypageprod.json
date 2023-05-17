@@ -8,13 +8,14 @@
         "end_date": "2023-05-16 22:14:00",
         "prod_com": "리바트",
         "prod_name": "스와레 6인 세라믹식탁(5종)",
-        "prod_state": 5,
+        "prod_state": 2,
         "bid_count": 10, 
         "cur_price": 600000,
         "bid_price": 400000,
         "pay_date": "230505",
         "prod_price": 30000,
-        "prod_owner": 0,
+        "bid_cancle": 0,
+        "pay_cancle": 0,
         "sell_type": 1
       },
       {
@@ -25,13 +26,14 @@
         "end_date": "2023-05-16 2:04:30",
         "prod_com": "프린홈",
         "prod_name": "RF 에르반 템바 1800 거실장",
-        "prod_state": 1,
+        "prod_state": 2,
         "bid_count": 4, 
         "cur_price": 200000,
         "bid_price": 200000,
         "pay_date": "230505",
         "prod_price": 300000,
-        "prod_owner": 1,
+        "bid_cancle": 1,
+        "pay_cancle": 1,
         "sell_type":2
       },
       {
@@ -48,7 +50,8 @@
         "bid_price": 60000,
         "pay_date": "230505",
         "prod_price": 250000,
-        "prod_owner": 1,
+        "bid_cancle": 1,
+        "pay_cancle": 0,
         "sell_type":3
       },
       {
@@ -65,7 +68,8 @@
         "bid_price": 60000,
         "pay_date": "230505",
         "prod_price": 450000,
-        "prod_owner": 1,
+        "bid_cancle": 1,
+        "pay_cancle": 0,
         "sell_type":1
       },
       {
@@ -82,7 +86,8 @@
         "bid_price": 1200000,
         "pay_date": "230505",
         "prod_price": 980000,
-        "prod_owner": 1,
+        "bid_cancle": 1,
+        "pay_cancle": 0,
         "sell_type":2
       },
       {
@@ -99,7 +104,8 @@
         "bid_price": 60000,
         "pay_date": "230505",
         "prod_price": 1990000,
-        "prod_owner": 0,
+        "bid_cancle": 0,
+        "pay_cancle": 0,
         "sell_type":1
       },
       {
@@ -116,7 +122,8 @@
         "bid_price": 60000,
         "pay_date": "230505",
         "prod_price": 30000,
-        "prod_owner": 0,
+        "bid_cancle": 0,
+        "pay_cancle": 0,
         "sell_type":1
       },
       {
@@ -133,7 +140,8 @@
         "bid_price": 3000000,
         "pay_date": "230505",
         "prod_price": 30000,
-        "prod_owner": 0,
+        "bid_cancle": 0,
+        "pay_cancle": 0,
         "sell_type":1
       },
       {
@@ -150,7 +158,8 @@
         "bid_price": 200000,
         "pay_date": "230505",
         "prod_price": 30000,
-        "prod_owner": 0,
+        "bid_cancle": 0,
+        "pay_cancle": 0,
         "sell_type":3
       },
       {
@@ -167,7 +176,8 @@
         "bid_price": 5000,
         "pay_date": "230505",
         "prod_price": 30000,
-        "prod_owner": null,
+        "bid_cancle": 1,
+        "pay_cancle": 0,
         "sell_type":2
       }
     ]

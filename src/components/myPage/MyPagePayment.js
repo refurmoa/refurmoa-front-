@@ -12,7 +12,7 @@ const MyPage_detail = () => {
   // const id = window.sessionStorage.getItem("id");
 
   const postProdData = () => {
-    // axios.get(`/api/post/bidprod`)
+    // axios.get(`/api/post/productinfo`)
     // .then((res) => {
     //   const { data } = res;
     //   setProdData(data);
