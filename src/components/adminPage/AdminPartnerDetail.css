@@ -1,0 +1,61 @@
+.APDAll {
+    display: flex;
+    margin-top: 230px;
+}
+
+/* 왼쪽 부분 */
+.APDLeftAll {
+    width: 260px;
+    height: 940px;
+    border-right: 2px solid rgba(185, 168, 154, 0.3);
+    margin-right: 40px;
+}
+
+.APDLeftInfo :nth-child(1) {
+    height: 35px;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 35px;
+    color: #514438;
+    margin: 0 0 35px 0;
+    display: flex;
+}
+
+.APDLeftInfo :nth-child(2n+2) {
+    width: 80px;
+    height: 30px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    color: rgba(81, 68, 56, 0.7);
+    margin: 0;
+}
+
+.APDLeftInfo :nth-child(2n+3) {
+    width: 260px;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+    margin: 0 0 20px 0;
+    word-break: break-all;
+}
+
+.APDLeftButton input {
+    width: 101px;
+    height: 35px;
+    background: #B9A89A;
+    border: none;
+    border-radius: 10px;
+    margin: 10px 0 5px 0;
+    font-size: 18px;
+    line-height: 35px;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+/* 오른쪽 부분 */
+.APDRightAll {
+    margin-left: 0;
+    width: 870px;
+}
+
