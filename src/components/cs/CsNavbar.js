@@ -1,6 +1,6 @@
 // 고객센터 메뉴
 
-import { Outlet, Link, NavLink } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
 import { useState } from "react";
 import "./CsNavbar.css";
 
@@ -21,7 +21,7 @@ const CsNavbar = () => {
         <hr className="CSnavline" />
         <div className="CSnav_main">
           <NavLink
-            to="cs/notice"
+            to="/cs/notice"
             className={`CSnavbarmenu ${activeLink === "notice" ? "active" : ""}`}
             onClick={() => handleLinkClick("notice")}
           >
@@ -29,7 +29,7 @@ const CsNavbar = () => {
           </NavLink>
 
           <NavLink
-            to="cs/faq"
+            to="/cs/faq"
             className={`CSnavbarmenu ${activeLink === "faq" ? "active" : ""}`}
             onClick={() => handleLinkClick("faq")}
           >
