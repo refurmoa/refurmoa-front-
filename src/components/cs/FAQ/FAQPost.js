@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import "../notice/NoticeList.css";
 import arrow from "../../../images/arrow_icon_brown-240.png";
 import "./FAQ.css";
 import userEvent from "@testing-library/user-event";
-
+import { Link, useLocation } from "react-router-dom";
 const FAQPOST = (props) => {
   const item = props.item;
   const logId = props.logId;
@@ -17,6 +16,7 @@ const FAQPOST = (props) => {
     else if (item.FAQ_cate === 3) setCate("취소/환불/교환");
     else if (item.FAQ_cate === 4) setCate("회원");
     else if (item.FAQ_cate === 5) setCate("경매/낙찰");
+    else if (item.FAQ_cate === 6) setCate("기타");
   }, []);
 
   return (

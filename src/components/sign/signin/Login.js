@@ -88,7 +88,13 @@ function Login() {
               <tr>
                 <td>아이디</td>
                 <td>
-                  <input name="id" type="text" placeholder="아이디" ref={id} />
+                  <input
+                    name="id"
+                    type="text"
+                    placeholder="아이디"
+                    maxLength="15"
+                    ref={id}
+                  />
                   <hr className="SU_phone_line" />
                 </td>
               </tr>
@@ -99,6 +105,7 @@ function Login() {
                   <input
                     name="password"
                     type="password"
+                    maxLength="20"
                     placeholder="비밀번호"
                     ref={password}
                   />
