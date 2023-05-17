@@ -63,6 +63,7 @@ function Signup_phone() {
                   name="name"
                   type="text"
                   placeholder="이름"
+                  maxLength="10"
                   onChange={onChange}
                   ref={nameInput}
                   value={name}
@@ -82,6 +83,7 @@ function Signup_phone() {
                   type="text"
                   placeholder="전화번호"
                   size="15"
+                  maxLength="15"
                   onChange={onChange}
                   ref={nameInput}
                   value={phone}
