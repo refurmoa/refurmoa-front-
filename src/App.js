@@ -48,7 +48,7 @@ function App() {
         <Route path="/signup/4" element={<SignupComplete />} />
         <Route path="/prod" element={<ProductList />} />
         <Route path="/prod/write" element={<ProductWrite />} />
-        <Route path="/prod/update" element={<ProductUpdate />} />
+        <Route path="/prod/update/:product_code" element={<ProductUpdate />} />
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
         <Route path="/post/pay/:board_num" element={<PostPay />} />
