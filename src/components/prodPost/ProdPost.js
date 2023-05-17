@@ -430,6 +430,8 @@ const ProdNameBox = styled.div`
   font-size: 25px;
   font-weight: 400;
   line-height: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const BidCountBox = styled.div`

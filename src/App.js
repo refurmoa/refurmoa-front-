@@ -6,6 +6,7 @@ import SignupPhone from "./components/sign/signup/SignupPhone";
 import SignupInput from "./components/sign/signup/SignupInput";
 import SignupAccept from "./components/sign/signup/SignupAccept";
 import SignupComplete from "./components/sign/signup/SignupComplete";
+import ProductList from "./components/product/ProductList";
 import ProductWrite from "./components/product/ProductWrite";
 import ProductUpdate from "./components/product/ProductUpdate";
 import PostPage from "./components/prodPost/PostPage";
@@ -42,6 +43,7 @@ function App() {
         <Route path="/signup/2" element={<SignupInput />} />
         <Route path="/signup/3" element={<SignupAccept />} />
         <Route path="/signup/4" element={<SignupComplete />} />
+        <Route path="/prod" element={<ProductList />} />
         <Route path="/prod/write" element={<ProductWrite />} />
         <Route path="/prod/update" element={<ProductUpdate />} />
         <Route path="/post" element={<PostPage />} />
