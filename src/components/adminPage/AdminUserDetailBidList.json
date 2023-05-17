@@ -8,25 +8,31 @@
         "end_date": "2023-05-16 22:14:00",
         "prod_com": "리바트",
         "prod_name": "스와레 6인 세라믹식탁(5종)",
-        "prod_state": 5,
+        "prod_state": 0,
         "cur_price": 600000,
         "bid_price": 400000,
         "bid_cancle": 1,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/05/01",
+        "auction_price": 500000,
+        "sell_type":1
       },
       {
         "board_num":1,
         "product_code": 33425634,
         "main_image": "image02.png",
-        "start_date": "2023-04-30 15:00:00",
-        "end_date": "2023-05-16 2:04:30",
+        "start_date": "2023-05-30 15:00:00",
+        "end_date": "2023-06-16 2:04:30",
         "prod_com": "프린홈",
         "prod_name": "RF 에르반 템바 1800 거실장",
         "prod_state": 1,
         "cur_price": 200000,
         "bid_price": 200000,
         "bid_cancle": 1,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/11/01",
+        "auction_price": 670000,
+        "sell_type":2
       },
       {
         "board_num":2,
@@ -36,11 +42,14 @@
         "end_date": "2023-05-02 16:00:00",
         "prod_com": "인피니처",
         "prod_name": "에스원 컴퓨터책상",
-        "prod_state": 1,
+        "prod_state": 2,
         "cur_price": 20000,       
         "bid_price": 60000,
         "bid_cancle": 0,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/08/01",
+        "auction_price": 100000,
+        "sell_type":3
       },
       {
         "board_num":3,
@@ -50,11 +59,14 @@
         "end_date": "2023-05-06 17:00:00",
         "prod_com": "레아",
         "prod_name": "LED 멀티수납침대 프레임 + 매트리스 세트",
-        "prod_state": 5,
+        "prod_state": 3,
         "cur_price": 100000,
         "bid_price": 60000,
         "bid_cancle": 0,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/01/01",
+        "auction_price": 500000,
+        "sell_type":1
       },
       {
         "board_num":4,
@@ -64,11 +76,14 @@
         "end_date": "2023-05-06 18:30:00",
         "prod_com": "브레드",
         "prod_name": "4인 소파 오션 리자 그레이샌드",
-        "prod_state": 2,
+        "prod_state": 4,
         "cur_price": 800000,
         "bid_price": 1200000,
         "bid_cancle": 1,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/01/01",
+        "auction_price": 500000,
+        "sell_type":1
       },
       {
         "board_num":5,
@@ -78,11 +93,14 @@
         "end_date": "2023-05-07 19:00:00",
         "prod_com": "Vacation5",
         "prod_name": "1인 천연가죽 리클라이너 소파",
-        "prod_state": 1,
+        "prod_state": 5,
         "cur_price": 600000,
         "bid_price": 60000,
         "bid_cancle": 0,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/01/01",
+        "auction_price": 500000,
+        "sell_type":1
       },
       {
         "board_num":6,
@@ -96,7 +114,10 @@
         "cur_price": 70000,
         "bid_price": 60000,
         "bid_cancle": 0,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/01/01",
+        "auction_price": 500000,
+        "sell_type":1
       },
       {
         "board_num":7,
@@ -110,7 +131,10 @@
         "cur_price": 3000000,
         "bid_price": 3000000,
         "bid_cancle": 1,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/01/01",
+        "auction_price": 500000,
+        "sell_type":1
       },
       {
         "board_num":8,
@@ -124,7 +148,10 @@
         "cur_price": 456000,
         "bid_price": 200000,
         "bid_cancle": 0,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/01/01",
+        "auction_price": 500000,
+        "sell_type":1
       },
       {
         "board_num":9,
@@ -138,7 +165,10 @@
         "cur_price": 15000,     
         "bid_price": 5000,
         "bid_cancle": 0,
-        "prod_price": 30000
+        "prod_price": 30000,
+        "reg_date": "2023/01/01",
+        "auction_price": 500000,
+        "sell_type":1
       }
     ]
   }

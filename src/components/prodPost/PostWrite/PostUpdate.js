@@ -11,9 +11,10 @@ import PostAll from "./PostAll";
 import PostAuction from "./PostAuction";
 import PostDirect from "./PostDirect";
 import FindProduct from "./FindProduct";
+import { useParams } from "react-router-dom";
 
-function PostUpdate(props) {
-  const product_num = props;
+function PostUpdate() {
+  const board_num = useParams().board_num;
 
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
   const [cate, setCate] = useState("");
@@ -44,6 +45,17 @@ function PostUpdate(props) {
   /*===============================================*/
 
   useEffect(() => {
+    console.log(board_num);
+    /*
+    axios
+      .get("/post/update", {
+        board_num: board_num,
+      })
+      .then((res) => {})
+      .catch((e) => {
+        console.error(e);
+      });
+    */
     const ex_data = {
       product_code: "1",
       com_num: "6",
@@ -366,6 +378,7 @@ function PostUpdate(props) {
           <div className="PW_partner_name">제휴회사명</div>
           <div className="PW_partner_serach">
             <input
+              maxLength="15"
               className="PW_partner_input"
               type="text"
               placeholder="회사명"
@@ -448,6 +461,7 @@ function PostUpdate(props) {
             <input
               className="PR_search_input"
               placeholder="상품 검색"
+              maxLength="30"
               value={Productname}
               onChange={(e) => setProductname(e.target.value)}
             />
@@ -465,7 +479,7 @@ function PostUpdate(props) {
                 content: {
                   position: "absolute",
                   top: "10%",
-                  width: "1000px",
+                  width: "1100px",
                   height: "660px",
                   left: "40px",
                   right: "40px",
@@ -544,6 +558,7 @@ function PostUpdate(props) {
             <input
               className="PW_product_name_input"
               type="text"
+              maxLength="15"
               placeholder="제품회사명"
               value={prod_com}
             />
@@ -553,6 +568,7 @@ function PostUpdate(props) {
             <input
               className="PW_product_name_input"
               type="text"
+              maxLength="30"
               placeholder="제품명"
               value={prod_name}
             />
