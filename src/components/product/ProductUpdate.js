@@ -6,9 +6,10 @@ import alt_img from "../../images/alt_image1.png";
 import axios from "axios";
 import Modal from "react-modal";
 import FindCompany from "./FindCompany";
+import { useParams } from "react-router-dom";
 
-function ProductUpdate(props) {
-  const product_num = props;
+function ProductUpdate() {
+  const product_code = useParams().product_code;
 
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
   const [cate, setCate] = useState("");
@@ -47,6 +48,7 @@ function ProductUpdate(props) {
     deffect_image3: process.env.PUBLIC_URL + "/images/prod/image05.png",
   };
   useEffect(() => {
+    console.log(product_code);
     /*
     axios
       .post("/product/update", {
