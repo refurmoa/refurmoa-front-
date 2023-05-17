@@ -248,7 +248,7 @@ function PostWrite(props) {
     }
 
     axios
-      .post("/product/update", {
+      .post("/product/write", {
         CATEGORY_CODE: code,
         CATEGORY: cate_code,
         MAIN_IMAGE: main_Image,
@@ -293,7 +293,7 @@ function PostWrite(props) {
         <div className="PW_button">
           <button className="PW_list_btn">취소</button>
           <button className="PW_wrie_btn" onClick={Product_write}>
-            수정
+            등록
           </button>
         </div>
       </div>
@@ -401,7 +401,7 @@ function PostWrite(props) {
                 content: {
                   position: "absolute",
                   top: "10%",
-                  width: "1000px",
+                  width: "1100px",
                   height: "660px",
                   left: "40px",
                   right: "40px",

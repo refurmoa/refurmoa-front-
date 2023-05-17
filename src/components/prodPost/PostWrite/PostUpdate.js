@@ -477,7 +477,7 @@ function PostUpdate() {
                 content: {
                   position: "absolute",
                   top: "10%",
-                  width: "1000px",
+                  width: "1100px",
                   height: "660px",
                   left: "40px",
                   right: "40px",
