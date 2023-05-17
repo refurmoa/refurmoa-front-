@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "../notice/NoticeList.css";
 import arrow from "../../../images/arrow_icon_brown-240.png";
 import "./FAQ.css";
