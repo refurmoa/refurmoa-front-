@@ -28,6 +28,7 @@ import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
 import CsNavbar from "./components/cs/CsNavbar";
+import AdminUserDetail from "./components/adminPage/AdminUserDetail";
 
 function App() {
   return (
@@ -62,6 +63,7 @@ function App() {
         <Route path="/payment/detail/:board_num" element={<PayDetail />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
+        <Route path="/admin/user/detail" element={<AdminUserDetail />} />
       </Route>
     </Routes>
   );
