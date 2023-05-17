@@ -57,6 +57,7 @@ const FindProduct = (props) => {
             <thead>
               <tr>
                 <th>번호</th>
+                <th>이미지</th>
                 <th>제품 회사</th>
                 <th>제품 이름</th>
                 <th>제품 상태</th>
@@ -72,6 +73,9 @@ const FindProduct = (props) => {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
+                    <td>
+                      <img src={item.image} className="FP_main_img" />
+                    </td>
                     <td>{item.prod_com}</td>
                     <td>{item.prod_name}</td>
                     <td>{item.prod_grade}</td>

@@ -248,7 +248,7 @@ function PostWrite(props) {
     }
 
     axios
-      .post("/product/update", {
+      .post("/product/write", {
         CATEGORY_CODE: code,
         CATEGORY: cate_code,
         MAIN_IMAGE: main_Image,
@@ -293,7 +293,7 @@ function PostWrite(props) {
         <div className="PW_button">
           <button className="PW_list_btn">취소</button>
           <button className="PW_wrie_btn" onClick={Product_write}>
-            수정
+            등록
           </button>
         </div>
       </div>
@@ -305,6 +305,7 @@ function PostWrite(props) {
               className="PW_partner_input"
               type="text"
               placeholder="회사명"
+              maxLength="15"
               value={searchCompany}
               onChange={(e) => setSearchCompany(e.target.value)}
             />
@@ -384,6 +385,7 @@ function PostWrite(props) {
             <input
               className="PR_search_input"
               placeholder="상품 검색"
+              maxLength="30"
               value={Productname}
               onChange={(e) => setProductname(e.target.value)}
             />
@@ -401,7 +403,7 @@ function PostWrite(props) {
                 content: {
                   position: "absolute",
                   top: "10%",
-                  width: "1000px",
+                  width: "1100px",
                   height: "660px",
                   left: "40px",
                   right: "40px",
@@ -481,6 +483,7 @@ function PostWrite(props) {
             <input
               className="PW_product_name_input"
               type="text"
+              maxLength="15"
               placeholder="제품회사명"
               value={prod_com}
             />
@@ -490,6 +493,7 @@ function PostWrite(props) {
             <input
               className="PW_product_name_input"
               type="text"
+              maxLength="30"
               placeholder="제품명"
               value={prod_name}
             />
