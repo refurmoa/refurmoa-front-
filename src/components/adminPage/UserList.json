@@ -1,0 +1,66 @@
+[
+    {
+        "member_id": "id1111",
+        "name": "이름이름이름이름이름이름이름이름",
+        "phone": "010-0000-0000",
+        "grade": 4,
+        "mile": 1000,
+        "coupon_cnt": 1
+    },
+    {
+        "member_id": "id1112",
+        "name": "이름이름",
+        "phone": "010-0000-0000",
+        "grade": 2,
+        "mile": 1000,
+        "coupon_cnt": 1
+    },
+    {
+        "member_id": "id1113",
+        "name": "이름이름",
+        "phone": "010-0000-0000",
+        "grade": 1,
+        "mile": 1000,
+        "coupon_cnt": 1
+    },
+    {
+        "member_id": "id1114",
+        "name": "이름이름",
+        "phone": "010-0000-0000",
+        "grade": 0,
+        "mile": 1000,
+        "coupon_cnt": 1
+    },
+    {
+        "member_id": "id1115",
+        "name": "이름이름",
+        "phone": "010-0000-0000",
+        "grade": 1,
+        "mile": 1000,
+        "coupon_cnt": 1
+    },
+    {
+        "member_id": "id1161",
+        "name": "이름이름",
+        "phone": "010-0000-0000",
+        "grade": 2,
+        "mile": 1000,
+        "coupon_cnt": 1
+    },
+    {
+        "member_id": "id1117",
+        "name": "이름이름",
+        "phone": "010-0000-0000",
+        "grade": 3,
+        "mile": 1000,
+        "coupon_cnt": 1
+    },
+    {
+        "member_id": "id1181",
+        "name": "이름이름",
+        "phone": "010-0000-0000",
+        "grade": 4,
+        "mile": 1000,
+        "coupon_cnt": 1
+    }
+]

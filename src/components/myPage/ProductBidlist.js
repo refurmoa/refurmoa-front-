@@ -33,12 +33,12 @@ export const ProductBidlist = ({ product }) => {
   return (
     <div className="productBid">
       <image className="imageBid">
-        {/* prod_owner => 0 패찰 1 낙찰 */}
-        {product.prod_owner === 0 ? (
+        {/* bid_cancle => 0 낙찰 1 패찰 */}
+        {product.bid_cancle === 1 ? (
           <div className="productnownerBid">
             <div onClick={() => onClick(product.product_code)}>패찰</div>
           </div>
-        ) : product.prod_owner === 1 ? (
+        ) : product.bid_cancle === 0 ? (
           <div className="productownerBid">
             <div className="productownerboxBid"></div>
             <span
