@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
-import detaildata from "./mypagepaydetail.json";
+import { useParams } from 'react-router-dom';
+import detaildata from "./paydetail.json";
 
 // 이미지파일
 import deliveryIcon from "../../images/delivery_icon.png";
@@ -12,8 +12,8 @@ import trackingStateIcon3 from "../../images/delivery_icon3.png";
 import trackingStateIcon4 from "../../images/delivery_icon4.png";
 import trackingStateIcon5 from "../../images/delivery_icon5.png";
 
-const MyPagePayDetail = () => {
-  const { state: board_num } = useLocation();
+const PayDetail = () => {
+  const board_num = useParams().board_num;
   const apiKey = process.env.REACT_APP_SWEETTRACKER_API_KEY;
   const [payDetailData, setPayDetailData] = useState();
   const [trackingData, setTrackingData] = useState();
@@ -170,8 +170,7 @@ const MyPagePayDetail = () => {
           </PayAmountBox>
           <PayCompleteBox>
             <PaySubComplete>결제 완료</PaySubComplete>
-            {/* 결제수단 다양해지면 조건부 렌더링 처리 */}
-            {payDetailData?.card_num && <PayUserComplete>간편결제 {payDetailData.card_num}</PayUserComplete>}
+            <PayUserComplete>{payDetailData.buy_method}</PayUserComplete>
           </PayCompleteBox>
         </PayInfoBox>
       </DeliveryAndPayInfoBox>
@@ -224,7 +223,7 @@ const MyPagePayDetail = () => {
   )
 }
 
-export default MyPagePayDetail
+export default PayDetail
 
 // 주문 상세 정보
 const MainTitleWrapper = styled.div`
