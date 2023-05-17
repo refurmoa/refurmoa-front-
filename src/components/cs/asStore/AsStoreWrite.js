@@ -83,12 +83,12 @@ function AsStoreWrite() {
     if (window.confirm("등록을 완료하시겠습니까?")) {
       // axios
       // .post("/cs/asstore/write", {
-      //     store_name: store_name,
-      //     store_phone: store_phone,
-      //     store_addr:store_addr,
-      //     store_detail: store_detail,
-      //     lattitude:lattitude,
-      //     longitude:longitude,
+      // store_name: store_name,
+      // store_phone: store_phone,
+      // store_addr:store_addr,
+      // store_detail: store_detail,
+      // lattitude:lattitude,
+      // longitude:longitude,
       // })
       // .then((res) => {
       //   if (res.data === 1) {

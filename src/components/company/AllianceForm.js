@@ -5,16 +5,19 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import Post from "../sign/signup/FindAddress";
 import Modal from "react-modal";
+import Update from "./AllianceUpdate";
 
 const AllianceForm = () => {
   const [name, setName] = useState("");
+  const [ceo, setCeo] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [domain, setDomain] = useState("");
+  const [mail, setMail] = useState("");
   const [address, setAddress] = useState("");
   const [address_detail, setAddress_detail] = useState("");
   const [chkEmailmsg, setChkEmailmsg] = useState("");
-
+  const [status, setStatus] = useState(0);
   const [check_Email, setCheck_Email] = useState(false);
 
   /*========================== */
@@ -30,19 +33,34 @@ const AllianceForm = () => {
   };
   /*========================== */
 
-  const onClick = () => {
+  const [update_popup, setUpdate_popup] = useState(false);
+  const [update_modal, update_setModal] = useState(false);
+  const update_ChangePopUP = () => {
+    setUpdate_popup(true);
+    update_setModal(true);
+  };
+  const update_close_modal = () => {
+    setUpdate_popup(false);
+    update_setModal(false);
+  };
+  /*========================== */
+
+  const Register_partner = () => {
     if (check_Email) {
       alert("다음으로 넘어가시겠습니까?");
-      setEmail(email.concat("@", domain));
+      setMail(email.concat("@", domain));
+      update_ChangePopUP();
 
       /*
          axios
         .post("/company", {
-          name: name,
-          phone:phone,
-          email:email,
-          address:address
-          address_detail:address_detail
+          com_name: name,
+          com_ceo:ceo
+          com_phone:phone,
+          com_mail:mail,
+          com_addr:address
+          com_detail_addr:address_detail
+          com_status: status
         })
         .then((res) => {
          
@@ -70,7 +88,7 @@ const AllianceForm = () => {
 
   return (
     <>
-      <form className="AF_input_form">
+      <div className="AF_input_form">
         <div className="SU_Main_header">파트너 제휴 신청</div>
         <div className="form_wrap">
           <table className="SU_input_table">
@@ -82,7 +100,22 @@ const AllianceForm = () => {
                   type="text"
                   placeholder="업체명"
                   value={name}
+                  maxLength="15"
                   onChange={(e) => setName(e.target.value)}
+                />
+                <hr className="SU_input_line" />
+              </td>
+            </tr>
+            <tr>
+              <td>대표명</td>
+              <td>
+                <input
+                  name="name"
+                  type="text"
+                  placeholder="대표명"
+                  value={ceo}
+                  maxLength="10"
+                  onChange={(e) => setCeo(e.target.value)}
                 />
                 <hr className="SU_input_line" />
               </td>
@@ -95,6 +128,7 @@ const AllianceForm = () => {
                   type="text"
                   placeholder="연락처"
                   value={phone}
+                  maxLength="20"
                   onChange={(e) => setPhone(e.target.value)}
                 />
                 <hr className="SU_input_line" />
@@ -108,6 +142,7 @@ const AllianceForm = () => {
                   name="email"
                   type="text"
                   placeholder="이메일"
+                  maxLength="15"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -119,6 +154,7 @@ const AllianceForm = () => {
                   type="text"
                   placeholder="직접 입력"
                   value={domain}
+                  maxLength="15"
                   onChange={onEmailCHK}
                 />
                 <select
@@ -151,6 +187,7 @@ const AllianceForm = () => {
                   type="text"
                   size="100"
                   placeholder="주소"
+                  maxLength="50"
                   value={address}
                   required={true}
                 />
@@ -209,6 +246,7 @@ const AllianceForm = () => {
                   type="text"
                   placeholder="상세 주소"
                   value={address_detail}
+                  maxLength="50"
                   onChange={(e) => setAddress_detail(e.target.value)}
                 />
                 <hr className="SU_input_line" />
@@ -216,12 +254,57 @@ const AllianceForm = () => {
             </tr>
           </table>
         </div>
-        <Link to="/signup/3">
-          <button className="SU_input_btn" onClick={onClick}>
-            다음
-          </button>
-        </Link>
-      </form>
+
+        <button className="SU_input_btn" /*onClick={Register_partner}*/>
+          다음
+        </button>
+        <Modal
+          style={{
+            overlay: {
+              position: "fixed",
+
+              backgroundColor: "rgba(0, 0, 0, 0.75)",
+            },
+            content: {
+              position: "absolute",
+              top: "10%",
+              width: "900px",
+              height: "700px",
+              left: "40px",
+              right: "40px",
+              bottom: "40px",
+              border: "1px solid #ccc",
+              background: "#fff",
+              overflow: "auto",
+              WebkitOverflowScrolling: "touch",
+              borderRadius: "10px",
+              outline: "none",
+              padding: "20px",
+            },
+          }}
+          isOpen={update_modal}
+        >
+          <div className="close_modal">
+            <button onClick={update_close_modal}>
+              <b>X</b>
+            </button>
+          </div>
+          <div>
+            {update_popup && (
+              <Update
+                name={name}
+                ceo={ceo}
+                phone={phone}
+                mail={mail}
+                address={address}
+                address_detail={address_detail}
+                status={status}
+                update_setModal={update_setModal}
+              ></Update>
+            )}
+          </div>
+        </Modal>
+      </div>
     </>
   );
 };

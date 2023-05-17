@@ -16,12 +16,13 @@ const Signup_input = () => {
   const [address, setAddress] = useState("");
   const [address_detail, setAddress_detail] = useState("");
   const [birth, setBirth] = useState("");
-  const [card_num, setCard_num] = useState("");
-  const [valid_date, setValid_date] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [card_pw, setCard_pw] = useState("");
-  const [card_pw1, setCard_pw1] = useState("");
-  const [card_pw2, setCard_pw2] = useState("");
+  const [mileage, setMileage] = useState(0);
+  const [card_num, setCard_num] = useState();
+  const [valid_date, setValid_date] = useState();
+  const [cvc, setCvc] = useState();
+  const [card_pw, setCard_pw] = useState();
+  const [card_pw1, setCard_pw1] = useState();
+  const [card_pw2, setCard_pw2] = useState();
   const text = noticeList[4].content;
 
   const [chkPWmsg, setchkPWmsg] = useState("");
@@ -76,7 +77,7 @@ const Signup_input = () => {
     if (check_pw && check_id && check_Email && check_box && Is_pw) {
       alert("다음으로 넘어가시겠습니까?");
       setEmail(email.concat("@", domain));
-      setCard_pw(card_pw1.concat(card_pw2));
+      setCard_pw(Number(card_pw1.concat(card_pw2)));
       /*
          axios
         .post("/signup", {
@@ -215,6 +216,7 @@ const Signup_input = () => {
                   className="address_input"
                   name="id"
                   type="text"
+                  maxLength="15"
                   placeholder="아이디"
                   value={id}
                   onChange={onIdCHK}
@@ -238,6 +240,7 @@ const Signup_input = () => {
                   name="password"
                   type="password"
                   placeholder="비밀번호"
+                  maxLength="20"
                   value={password}
                   onChange={onChangePassword}
                 />
@@ -256,6 +259,7 @@ const Signup_input = () => {
                   name="passwordChk"
                   type="password"
                   placeholder="비밀번호 확인"
+                  maxLength="20"
                   value={passwordChk}
                   onChange={onPwCHK}
                 />
@@ -277,6 +281,7 @@ const Signup_input = () => {
                   name="email"
                   type="text"
                   placeholder="이메일"
+                  maxLength="15"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -289,6 +294,7 @@ const Signup_input = () => {
                   placeholder="직접 입력"
                   value={domain}
                   onChange={onEmailCHK}
+                  maxLength="15"
                 />
                 <select
                   class="box"
@@ -322,6 +328,7 @@ const Signup_input = () => {
                   placeholder="주소"
                   value={address}
                   required={true}
+                  maxLength="50"
                 />
                 <button className="SU_find_address" onClick={ChangePopUP}>
                   주소찾기
@@ -376,6 +383,7 @@ const Signup_input = () => {
                   name="address_detail"
                   type="text"
                   placeholder="상세 주소"
+                  maxLength="50"
                   value={address_detail}
                   onChange={(e) => setAddress_detail(e.target.value)}
                 />
@@ -411,7 +419,7 @@ const Signup_input = () => {
                 <input
                   name="card_num"
                   type="text"
-                  maxlength="16"
+                  maxlength="150"
                   placeholder="0000-0000-0000-0000"
                   value={card_num}
                   onChange={(e) => setCard_num(e.target.value)}

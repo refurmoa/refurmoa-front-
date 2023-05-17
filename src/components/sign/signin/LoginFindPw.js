@@ -47,6 +47,7 @@ const LoginFindPw = (props) => {
                   name="name"
                   type="text"
                   placeholder="이름"
+                  maxLength="10"
                   onChange={(e) => setName(e.target.value)}
                 />
                 <hr className="SU_phone_line" />
@@ -61,6 +62,7 @@ const LoginFindPw = (props) => {
                   type="text"
                   placeholder="전화번호"
                   size="15"
+                  maxLength="15"
                   onChange={(e) => setPhone(e.target.value)}
                 />
                 <button className="SU_cert_num">인증번호 전송</button>
@@ -86,6 +88,7 @@ const LoginFindPw = (props) => {
                   name="id"
                   type="text"
                   placeholder="아이디"
+                  maxLength="15"
                   onChange={(e) => setId(e.target.value)}
                 />
                 <hr className="SU_phone_line" />
