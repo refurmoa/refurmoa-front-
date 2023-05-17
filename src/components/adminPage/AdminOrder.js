@@ -1,20 +1,20 @@
-// 관리자 페이지 - 제휴회사 관리
+// 관리자 페이지 - 주문/배송 관리
 
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import search_icon from "../../images/search.png";
-import partnerList from "./AdminPartner.json";
+import orderList from "./AdminOrder.json";
 import axios from "axios";
 
-function AdminPartner() {
-  const [partnerlist, setPartnerlist] = useState(partnerList); // 제휴회사 리스트
+function AdminOrder() {
+  const [orderlist, setOrderlist] = useState(orderList); // 주문 리스트
   const [page, setPage] = useState(1); // 페이지
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
 
   useEffect(() => {
-    // 제휴회사 리스트 조회
-    // partnerListup();
+    // 주문 리스트 조회
+    // orderListup();
 
     // 무한 스크롤
     window.addEventListener("scroll", handleScroll); // 스크롤 이벤트 등록
@@ -23,14 +23,14 @@ function AdminPartner() {
     }; // 스크롤 이벤트 제거
   }, []);
 
-  // 제휴회사 리스트 조회
-  const partnerListup = () => {
+  // 주문 리스트 조회
+  const orderListup = () => {
     if (isLoading) return;
     setIsLoading(true);
 
     try {
       // axios
-      // setPartnerlist();
+      // setOrderlist();
       // setPage((prevPage) => prevPage + 1);
     } catch (e) {
     } finally {
@@ -38,14 +38,14 @@ function AdminPartner() {
     }
   };
 
-  // 회원 검색
+  // 주문 검색
   const searchUser = () => {
-    // setPartnerlist();
+    // setOrderlist();
   };
 
   // 페이지가 변경될 때마다 데이터 요청
   useEffect(() => {
-    partnerListup();
+    orderListup();
   }, [page]);
 
   // 스크롤 감지
@@ -54,63 +54,55 @@ function AdminPartner() {
       window.innerHeight + window.scrollY >= document.body.offsetHeight &&
       !isLoading
     )
-      partnerListup();
+      orderListup();
   };
 
   return (
     <AdminUserWrap>
       <TitleWrap>
-        <span>제휴회사 관리</span>
+        <span>주문/배송</span>
         <input type="text" id="search" name="search" maxLength="20" />
         <img alt="검색 아이콘" src={search_icon} onClick={searchUser} />
       </TitleWrap>
       <TableWrap>
         <TableTitleWrap>
-          <TableTitle width={88}>상태</TableTitle>
-          <TableTitle width={438}>회사명</TableTitle>
-          <TableTitle width={148}>대표명</TableTitle>
+          <TableTitle width={198}>주문번호</TableTitle>
+          <TableTitle width={168}>상품코드</TableTitle>
+          <TableTitle width={148}>수령인</TableTitle>
           <TableTitle width={213}>연락처</TableTitle>
-          <TableTitle width={108} right>
-            제품수
+          <TableTitle width={223}>송장번호</TableTitle>
+          <TableTitle width={153}>주문상태</TableTitle>
+          <TableTitle width={243} right>
+            결제일
           </TableTitle>
         </TableTitleWrap>
-        {partnerlist.map((partner, index) => (
+        {orderlist.map((order, index) => (
           <Partner key={index}>
             <Link
               to={{
-                pathname: "admin/partner/detail",
-                state: { COM_NUM: partner.COM_NUM },
+                pathname: "admin/order/detail",
+                state: { COM_NUM: order.COM_NUM },
               }}
             >
-              {partner.COM_STATUS === "신청" && (
+              <PartnerInfo width={198}>{order.PAY_NUM}</PartnerInfo>
+              <PartnerInfo width={168}>{order.PRODUCT_CODE}</PartnerInfo>
+              <PartnerInfo width={148}>{order.RECIPT_NAME}</PartnerInfo>
+              <PartnerInfo width={213}>{order.RECIPT_PHONE}</PartnerInfo>
+              <PartnerInfo width={223}>{order.DELI_NUM}</PartnerInfo>
+              {/* <PartnerInfo width={153}>{order.order_state}</PartnerInfo> */}
+
+              {order.order_state === "상품 준비중" ? (
                 <>
-                  <PartnerInfo width={88} color="red">
-                    {partner.COM_STATUS}
+                  <PartnerInfo width={153} color="red">
+                    {order.order_state}
                   </PartnerInfo>
                 </>
-              )}
-              {partner.COM_STATUS === "제휴" && (
-                <>
-                  <PartnerInfo width={88} color="black">
-                    {partner.COM_STATUS}
-                  </PartnerInfo>
-                </>
-              )}
-              {partner.COM_STATUS === "종료" && (
-                <>
-                  <PartnerInfo width={88} color="gray">
-                    {partner.COM_STATUS}
-                  </PartnerInfo>
-                </>
+              ) : (
+                <PartnerInfo width={153}>{order.order_state} </PartnerInfo>
               )}
 
-              <PartnerInfo width={438} align>
-                {partner.COM_NAME}
-              </PartnerInfo>
-              <PartnerInfo width={148}>{partner.COM_CEO_NAME}</PartnerInfo>
-              <PartnerInfo width={213}>{partner.COM_PHONE}</PartnerInfo>
-              <PartnerInfo width={108} align right>
-                {partner.tatal_quantity}
+              <PartnerInfo width={243} right>
+                {order.PAY_DATE}
               </PartnerInfo>
             </Link>
           </Partner>
@@ -120,7 +112,7 @@ function AdminPartner() {
   );
 }
 
-export default AdminPartner;
+export default AdminOrder;
 
 const AdminUserWrap = styled.div`
   width: 1200px;
@@ -167,7 +159,7 @@ const TableWrap = styled.span`
 `;
 
 const TableTitleWrap = styled.div`
-  width: 1005px;
+  width: 1360px;
   height: 55px;
   background-color: rgba(185, 168, 154, 0.2);
   margin-bottom: 20px;
@@ -186,7 +178,7 @@ const TableTitle = styled.span`
 `;
 
 const Partner = styled.div`
-  width: 1005px;
+  width: 1360px;
   height: 30px;
   margin-bottom: 25px;
 `;
