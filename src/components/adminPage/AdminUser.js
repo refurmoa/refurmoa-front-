@@ -80,7 +80,7 @@ function AdminUser()  {
                 </TableTitleWrap>
                 {userlist.map((user, index) => (
                     <User key={index}>
-                        <Link to={{ pathname: "admin/user/detail", state: { member_id: user.member_id }}}>
+                        <Link to={`/admin/user/detail`}state={{ member_id: user.member_id }}>
                             <UserInfo width={163} alignleft>{user.member_id}</UserInfo>
                             <UserInfo width={98}>{user.name}</UserInfo>
                             <UserInfo width={163}>{user.phone}</UserInfo>
