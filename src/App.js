@@ -12,6 +12,7 @@ import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import PostPay from "./components/Pay/PostPay";
 import PayDetail from "./components/myPage/MyPagePayDetail";
+import CsNavbar from "./components/cs/CsNavbar";
 import NoticeList from "./components/cs/notice/NoticeList";
 import NoticeView from "./components/cs/notice/NoticeView";
 import NoticePost from "./components/cs/notice/NoticePost";
@@ -26,8 +27,10 @@ import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
 import UserUpdate from "./components/myPage/userUpdate/UserUpdate";
 import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
+import AdminNavi from "./components/adminPage/AdminNavi";
+import Admin from "./components/adminPage/Admin";
+import AdminUser from "./components/adminPage/AdminUser";
 import Alliance from "./components/company/AllianceForm";
-import CsNavbar from "./components/cs/CsNavbar";
 
 function App() {
   return (
@@ -44,6 +47,7 @@ function App() {
         <Route path="/post" element={<PostPage />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
         <Route path="/post/pay/:board_num" element={<PostPay />} />
+        <Route path="/payment/detail" element={<PayDetail />} />
         <Route element={<CsNavbar />}>
           <Route path="/cs/notice" element={<NoticeList />} />
           <Route path="/cs/notice/detail/:noticeid" element={<NoticeView />} />
@@ -58,9 +62,12 @@ function App() {
         <Route path="/cs/as_store" element={<AsStore />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />
         <Route path="/userupdate" element={<UserUpdate />} />
-        <Route path="/mypage/payment" element={<MyPagePayment />} />
-        <Route path="/payment/detail" element={<PayDetail />} />
+        <Route path="/mypage/payment" element={<MyPagePayment />} /> 
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
+        <Route element={<AdminNavi />}>
+          <Route path="/admin" element={<Admin />}/>
+          <Route path="/admin/user" element={<AdminUser />} />
+        </Route>
         <Route path="/partnership" element={<Alliance />} />
       </Route>
     </Routes>
