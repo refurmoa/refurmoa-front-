@@ -11,9 +11,10 @@ import PostAll from "./PostAll";
 import PostAuction from "./PostAuction";
 import PostDirect from "./PostDirect";
 import FindProduct from "./FindProduct";
+import { useParams } from "react-router-dom";
 
-function PostUpdate(props) {
-  const product_num = props;
+function PostUpdate() {
+  const board_num = useParams().board_num;
 
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
   const [cate, setCate] = useState("");
@@ -44,6 +45,17 @@ function PostUpdate(props) {
   /*===============================================*/
 
   useEffect(() => {
+    console.log(board_num);
+    /*
+    axios
+      .get("/post/update", {
+        board_num: board_num,
+      })
+      .then((res) => {})
+      .catch((e) => {
+        console.error(e);
+      });
+    */
     const ex_data = {
       product_code: "1",
       com_num: "6",

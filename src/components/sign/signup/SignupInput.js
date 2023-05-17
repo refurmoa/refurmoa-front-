@@ -79,40 +79,42 @@ const Signup_input = () => {
       setEmail(email.concat("@", domain));
       setCard_pw(Number(card_pw1.concat(card_pw2)));
       /*
-         axios
-        .post("/signup", {
-          id: id,
-          password:password,
-          email:email,
-          address:address
-          address_detail:address_detail
-          birth:birth
-        })
-        .then((res) => {
-          if(cardnum!==""){
-             axios
-              .post("/signup", {
-                id: id,
-                card_num:card_num,
-                valid_date:valid_date,
+    setEmail(email.concat("@", domain));
+    axios
+      .post("/signup", {
+        id: id,
+        phone:phone
+        password:password
+        email:mail
+        address:address
+        address_detail:address_detail
+        birth:birth
+      })
+      .then((res) => {
+        if(res.data){  
+        
+        axios
+            .post("/card", {
+                id:id
+                card_num:card_num
+                valid_date:valid_date
                 cvc:cvc
                 card_pw:card_pw
-              })
-              .then((res) => {
-
-              })
-              .catch((e) => {
-                console.error(e);
-              });
+            })
+            .then((res) => {
+              if(res.data){
+                alert(aaa)
+              }
+            })
+            .catch((e) => {
+              console.error(e);
+            });
           }
-         
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-
-
-      */
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+    */
       document.location.href = "/signup/3";
     }
     if (!check_pw) {
@@ -132,6 +134,7 @@ const Signup_input = () => {
       return false;
     }
     console.log({ valid_date });
+
     window.sessionStorage.setItem("id", id);
   };
   const onIdCHK = (e) => {
