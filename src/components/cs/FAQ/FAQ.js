@@ -42,6 +42,7 @@ function FAQ() {
       // .catch((e) => {
       //   console.error(e);
       // });
+      return true;
     }
   };
   const FAQRegi = () => {
