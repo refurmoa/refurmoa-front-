@@ -104,10 +104,14 @@ function AdminUser() {
                 </>
               )}
 
-              <PartnerInfo width={438}>{partner.COM_NAME}</PartnerInfo>
+              <PartnerInfo width={438} align>
+                {partner.COM_NAME}
+              </PartnerInfo>
               <PartnerInfo width={148}>{partner.COM_CEO_NAME}</PartnerInfo>
               <PartnerInfo width={213}>{partner.COM_PHONE}</PartnerInfo>
-              <PartnerInfo width={108}>{partner.tatal_quantity}</PartnerInfo>
+              <PartnerInfo width={108} align right>
+                {partner.tatal_quantity}
+              </PartnerInfo>
             </Link>
           </Partner>
         ))}
@@ -193,8 +197,7 @@ const PartnerInfo = styled.span`
   height: 30px;
   font-size: 20px;
   line-height: 30px;
-  text-align: ${(props) =>
-    props.align ? "right" : (props) => (props.alignleft ? "left" : "center")};
+  text-align: ${(props) => (props.align ? "left" : "center")};
   border-right: ${(props) =>
     props.right ? "0" : "2px solid rgba(185, 168, 154, 0.5)"};
 
