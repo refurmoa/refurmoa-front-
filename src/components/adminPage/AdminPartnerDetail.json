@@ -1,0 +1,9 @@
+{ 
+    "com_name":"이모아",
+    "com_phone": "01012345678",
+    "com_email": "leemoa@gmail.com",
+    "com_addr": "서울특별시 종로구 사직로 161",
+    "com_detail_addr":"멀티캠퍼스 101동 101호",
+    "com_ceo_name": "홍길동",
+    "com_status": 0
+}
