@@ -198,8 +198,8 @@ const ProductList = () => {
         </BottomFilterBox>
       </FilterWrapper>
       <ProductListWrapper>
-        {prodData?.map((data) => (
-          <ProductItem>
+        {prodData?.map((data, index) => (
+          <ProductItem key={index}>
             <ProductItemTop>
               <ProductItemTopInner>
               <ProductCategotyCode>{data.category_code}</ProductCategotyCode>
