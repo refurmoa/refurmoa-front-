@@ -32,6 +32,7 @@ import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
 import CsNavbar from "./components/cs/CsNavbar";
 import AdminUserDetail from "./components/adminPage/AdminUserDetail";
+import AdminPartnerDetail from "./components/adminPage/AdminPartnerDetail";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route path="/partnership" element={<Alliance />} />
         <Route path="/admin/user/detail" element={<AdminUserDetail />} />
+        <Route path="/admin/partner/detail" element={<AdminPartnerDetail />} />
       </Route>
     </Routes>
   );
