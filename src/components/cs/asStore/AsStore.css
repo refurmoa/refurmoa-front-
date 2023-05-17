@@ -23,7 +23,7 @@ padding: 0;
 .astopbar {
     width: 940px;
     display: flex;
-    border-bottom: 3px solid rgba(185, 168, 154, 0.8);
+    border-bottom: 4px solid rgba(185, 168, 154, 0.8);
 }
 
 .astoptextM {

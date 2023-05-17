@@ -35,7 +35,7 @@ const MyPage_detail = () => {
 
   // const postbidlistData = () => {
   //   axios
-  //     .get(`/api/post/bidlist`)
+  //     .get(`/api/post/productinfo`)
   //     .then((res) => {
   //       const { data } = res;
   //       setProdData(data);
@@ -154,7 +154,7 @@ const MyPage_detail = () => {
         <span className="wordsearchpart">
           <input className="searchbox" type="text" ref={searchRef}></input>
           <input
-            className="searchboxbutton"
+            className="searchboxbuttonBid"
             type="button"
             value=""
             onClick={search_product}

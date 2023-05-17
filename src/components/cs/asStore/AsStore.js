@@ -14,6 +14,23 @@ const AsStore = () => {
   // const [searchData, setSeatchData] = useState();
 
   // 데이터 가져오기
+  const asListData = () => {
+    // axios
+    //   .get("/api/asListData")
+    //   .then((res) => {
+    //     const { data } = res;
+    //     setMarker(data);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+    // setMarker([
+    //   markers.placelist.find((sub) => (sub.store_name = store_name)).latitude,
+    //   markers.placelist.find((sub) => (sub.store_name = store_name)).longitude,
+    // ]);
+    // console.log(data);
+  };
+
   const asDetail = (store_name) => {
     // axios
     //   .get(`/api/getproducts?store_name=${store_name}`)
@@ -25,8 +42,8 @@ const AsStore = () => {
     //     console.error(e);
     //   });
     // setMarker([
-    //   markers.placelist.find((sub) => (sub.store_name = store_name)).lat,
-    //   markers.placelist.find((sub) => (sub.store_name = store_name)).lng,
+    //   markers.placelist.find((sub) => (sub.store_name = store_name)).latitude,
+    //   markers.placelist.find((sub) => (sub.store_name = store_name)).longitude,
     // ]);
     // console.log(data);
   };
@@ -100,8 +117,11 @@ const AsStore = () => {
     });
     setData([currLocation.latitude, currLocation.longitude]);
     setTextstyle("mylocationcursor");
+    setMyplace2(1);
   };
-  const [myplace, setMyplace] = useState("현재위치");
+
+  const [myplace, setMyplace] = useState();
+  const [myplace2, setMyplace2] = useState(0);
   const { kakao } = window;
   const geocoder = new kakao.maps.services.Geocoder();
   const callback = function (result, status) {
@@ -112,9 +132,10 @@ const AsStore = () => {
 
   function handleCountry(e) {
     setCountry(e.target.value);
-    setMyplace(e.target.value);
-    console.log(myplace);
+    setMyplace2(0);
+    setTextstyle("locationstyle");
   }
+
   geocoder.coord2RegionCode(
     currLocation.longitude,
     currLocation.latitude,
@@ -145,7 +166,7 @@ const AsStore = () => {
                   getLocation();
                 }}
               >
-                {myplace}
+                {myplace2 === 0 ? "현재 위치" : myplace}
                 <img alt="" src={location_icon} />
               </div>
             ) : (

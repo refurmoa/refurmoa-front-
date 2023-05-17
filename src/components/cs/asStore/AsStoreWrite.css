@@ -1,0 +1,255 @@
+.AsStoreTitleHead {
+  width: 150px;
+  height: 35px;
+  left: 650px;
+  top: 205px;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 35px;
+  color: #514438;
+  float: left;
+  margin-right: 20px;
+}
+.AsStore_Regi_form {
+  width: 880px;
+  height: 83px;
+  padding: 30px;
+  border-bottom: 2px solid rgba(185, 168, 154, 0.3);
+}
+.AsStore_info_form {
+  width: 330px;
+  height: 85px;
+  float: left;
+  margin-right: 35px;
+}
+.AsStore_addr_form {
+  width: 415px;
+  height: 85px;
+  float: left;
+}
+.AsStore_regi_btn {
+  width: 80px;
+  height: 85px;
+  float: right;
+}
+.AsStore_name_form {
+  height: 35px;
+  margin-bottom: 13px;
+}
+.AsStore_name_title {
+  width: 56px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 35px;
+  color: #000000;
+  float: left;
+  margin-right: 20px;
+}
+.AsStore_addr_find {
+  height: 35px;
+  margin-bottom: 15px;
+}
+.AsStore_name_input {
+  width: 230px;
+  height: 35px;
+  padding: 0 10px;
+  float: left;
+  border: 1px solid #b9a89a;
+  border-radius: 5px;
+}
+.AsStore_name_input input {
+  height: 33px;
+  border-radius: 5px;
+  width: 230px;
+  display: flex;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 33px;
+  color: #000000;
+  border: none;
+}
+.AsStore_name_input input::placeholder {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 35px;
+  color: rgba(185, 168, 154, 0.6);
+}
+.AsStore_name_input input {
+  outline: none !important;
+}
+.AsStore_addr_header {
+  width: 37px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 35px;
+  color: #000000;
+  float: left;
+  margin-right: 20px;
+}
+.AsStore_addr_input {
+  padding: 0 10px;
+  width: 301px;
+  height: 33px;
+  float: left;
+  border: 1px solid #b9a89a;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+.AsStore_addr_input input {
+  height: 33px;
+  border-radius: 5px;
+  width: 300px;
+  display: flex;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 33px;
+  color: #000000;
+  outline: none !important;
+  border: none;
+}
+.AsStore_addr_logo {
+  margin-top: 7.5px;
+  float: right;
+}
+.AsStore_addr_logo img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.AsStore_addr_detail_form {
+  padding: 0 10px;
+  height: 33px;
+  width: 331px;
+  float: left;
+  border: 1px solid #b9a89a;
+  border-radius: 5px;
+}
+.AsStore_addr_detail_form input {
+  height: 33px;
+  border-radius: 5px;
+  width: 333px;
+  display: flex;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 33px;
+  color: #000000;
+  border: none;
+  outline: none !important;
+}
+.AsStore_regi_btn button {
+  width: 80px;
+  height: 50px;
+  background: #b9a89a;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center;
+  color: #ffffff;
+}
+.AsStore_List {
+  width: 880px;
+  height: 40px;
+  padding: 0 30px;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+.AsStore_List_Category {
+  width: 880px;
+  height: 40px;
+}
+.AsStore_Category_base {
+  float: left;
+  width: 156px;
+  height: 36px;
+  border: 2px solid rgba(185, 168, 154, 0.3);
+  border-radius: 30px;
+  padding: 0 20px;
+  margin-right: 10px;
+}
+.AsStore_Category_base select {
+  width: 156px;
+  height: 36px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 36px;
+  outline: none !important;
+  display: flex;
+  align-items: center;
+  color: #b9a89a;
+  border: none;
+}
+.AsStore_Name_find {
+  float: right;
+  width: 416px;
+  height: 36px;
+  border: 2px solid rgba(185, 168, 154, 0.3);
+  border-radius: 30px;
+  padding: 0 20px;
+}
+.AsStore_Name_find input {
+  height: 36px;
+  border-radius: 5px;
+  width: 380px;
+  float: left;
+  display: flex;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 36px;
+  color: #000000;
+  border: none;
+  outline: none !important;
+}
+.AsStore_Post_List {
+  width: 860px;
+  height: 60px;
+  padding: 15px 20px;
+  background: rgba(185, 168, 154, 0.1);
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+.AsStore_Post_Header {
+  width: 860px;
+  height: 25px;
+  margin-bottom: 10px;
+}
+.AsStore_Post_Title {
+  height: 25px;
+  float: left;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  color: #000000;
+  margin-right: 15px;
+}
+.AsStore_Post_phone {
+  height: 25px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  float: left;
+  color: #666666;
+}
+.AsStore_Post_button {
+  width: 86px;
+  height: 25px;
+  float: right;
+  color: #514438;
+  text-align: center;
+}
+.AsStore_Post_button a {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #514438;
+}
+.AsStore_Post_Detail {
+  height: 25px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+  color: #000000;
+}
