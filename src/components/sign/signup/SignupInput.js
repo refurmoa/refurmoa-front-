@@ -195,7 +195,7 @@ const Signup_input = () => {
   };
   return (
     <>
-      <form className="SU_input_form">
+      <div className="SU_input_form">
         <div className="SU_Main_header">회원가입</div>
         <div className="SU_sub_header">
           01 본인인증 &nbsp;&nbsp;
@@ -409,10 +409,10 @@ const Signup_input = () => {
             </tr>
           </table>
         </div>
-
+        {/*
         <div className="SU_card_header">결제수단 추가</div>
         <div className="SU_card_sub">카드 등록</div>
-        <div className="form_wrap">
+       <div className="form_wrap">
           <table className="SU_input_table">
             <tr>
               <td>
@@ -422,7 +422,7 @@ const Signup_input = () => {
                 <input
                   name="card_num"
                   type="text"
-                  maxlength="150"
+                  maxlength="20"
                   placeholder="0000-0000-0000-0000"
                   value={card_num}
                   onChange={(e) => setCard_num(e.target.value)}
@@ -499,13 +499,13 @@ const Signup_input = () => {
               </td>
             </tr>
           </table>
-        </div>
+        </div> */}
         <Link to="/signup/2">
           <button className="SU_input_btn" onClick={onClick}>
             다음
           </button>
         </Link>
-      </form>
+      </div>
     </>
   );
 };

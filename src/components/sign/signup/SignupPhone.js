@@ -72,9 +72,6 @@ function Signup_phone() {
               </td>
             </tr>
             <tr>
-              <td>&nbsp;</td>
-            </tr>
-            <tr>
               <td>전화번호</td>
               <td>
                 <input

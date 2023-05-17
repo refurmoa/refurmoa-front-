@@ -37,7 +37,7 @@ const Update_card = (props) => {
               <input
                 name="card_num"
                 type="text"
-                maxlength="150"
+                maxlength="20"
                 placeholder="0000-0000-0000-0000"
                 onChange={(e) => setCard_num(e.target.value)}
               />

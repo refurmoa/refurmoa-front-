@@ -452,7 +452,7 @@ const User_update = () => {
             </tr>
           </table>
         </div>
-        <div className="SU_card_header">결제수단</div>
+        {/* <div className="SU_card_header">결제수단</div>
         <div className="UU_card_box">
           <div className="UU_card_line" />
           <div className="UU_update_cardnum">{card_num}</div>
@@ -511,7 +511,7 @@ const User_update = () => {
             삭제
           </button>
           <div></div>
-        </div>
+        </div> */}
         <button className="SU_input_btn" onClick={onClick}>
           정보수정
         </button>
