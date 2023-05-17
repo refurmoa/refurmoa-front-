@@ -28,6 +28,7 @@ import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import Alliance from "./components/company/AllianceForm";
 import CsNavbar from "./components/cs/CsNavbar";
+import ProductList from "./components/product/ProductList";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path="/signup/2" element={<SignupInput />} />
         <Route path="/signup/3" element={<SignupAccept />} />
         <Route path="/signup/4" element={<SignupComplete />} />
+        <Route path="/prod" element={<ProductList />} />
         <Route path="/prod/write" element={<ProductWrite />} />
         <Route path="/prod/update" element={<ProductUpdate />} />
         <Route path="/post" element={<PostPage />} />
