@@ -33,6 +33,7 @@ export const ProductBidlist = ({ product }) => {
   return (
     <div className="productBid">
       <image className="imageBid">
+        {/* prod_owner => 0 패찰 1 낙찰 */}
         {product.prod_owner === 0 ? (
           <div className="productnownerBid">
             <div onClick={() => onClick(product.product_code)}>패찰</div>
@@ -91,19 +92,40 @@ export const ProductBidlist = ({ product }) => {
             ? "경매참여자: 0 명"
             : "경매참여자 : 0 명"}
         </div>
-        <price className="priceBid">
-          <div className="priceBidAll1">
-            <div className="priceBidword">나의 입찰가</div>
-            <div className="priceBidword">현재가</div>
-          </div>
-          <div className="priceBidAll2">
-            <div className="priceBidnum">
-              {product.bid_price.toLocaleString("ko-KR")}원
+        <price>
+          {product.prod_state === 1 ? (
+            <div className="priceBid">
+              <div className="priceBidAll1">
+                <div className="priceBidword">나의 입찰가</div>
+                <div className="priceBidword">현재가</div>
+              </div>
+              <div className="priceBidAll2">
+                <div className="priceBidnum">
+                  {product.bid_price.toLocaleString("ko-KR")}원
+                </div>
+                <div className="priceBidnum">
+                  {product.cur_price.toLocaleString("ko-KR")}원
+                </div>
+              </div>
             </div>
-            <div className="priceBidnum">
-              {product.cur_price.toLocaleString("ko-KR")}원
+          ) : product.prod_state >= 2 ? (
+            <div className="priceBid">
+              <div className="priceBidAll1">
+                <div className="priceBidword">나의 입찰가</div>
+                <div className="priceBidword">낙찰가</div>
+              </div>
+              <div className="priceBidAll2">
+                <div className="priceBidnum">
+                  {product.bid_price.toLocaleString("ko-KR")}원
+                </div>
+                <div className="priceBidnum">
+                  {product.prod_price.toLocaleString("ko-KR")}원
+                </div>
+              </div>
             </div>
-          </div>
+          ) : (
+            ""
+          )}
         </price>
       </information>
     </div>

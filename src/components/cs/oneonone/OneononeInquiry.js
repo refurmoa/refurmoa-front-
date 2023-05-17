@@ -1,44 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./OneononeInquiry.css";
-import { inquiryList } from "./OneononeData";
+import OneononeData from "./OneononeData.json";
 
 const InquiryList = () => {
   //admin 관리자페이지에서 수정,삭제
-  const loginid = "";
+  const loginid = "admin";
 
-  //답변여부에 따른 상태
-  const answerstatus = "no";
-
-  // 데이터를 페이지 단위로 나누기 위한 변수들
+  // const login_id = window.sessionStorage.getItem("member_id"); // 세션 ID
   const [dataList, setDataList] = useState([]);
-
+  const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   useEffect(() => {
-    setDataList(inquiryList);
+    setDataList(OneononeData);
+
+    pageCount(); // 문의 글 수 조회
   }, []);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-
-  // 현재 페이지에 해당하는 데이터 추출
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = inquiryList.slice(indexOfFirstItem, indexOfLastItem);
-
-  // 페이지 번호 클릭 이벤트 핸들러
-  const handleClick = (e) => {
-    setCurrentPage(Number(e.target.id));
+  // 문의 글 수 조회
+  const pageCount = () => {
+    setTotalPage(5);
   };
 
-  // 페이지 번호 버튼 생성
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(inquiryList.length / itemsPerPage); i++) {
-    pageNumbers.push(
-      <button key={i} id={i} onClick={handleClick}>
-        {i}
-      </button>
-    );
-  }
+  // 문의 글 목록 조회
+  const ListSearch = () => {};
 
   // 조회수
   const readcountup = (e) => {};
@@ -53,78 +38,116 @@ const InquiryList = () => {
 
   return (
     <>
-      <table className="inquirylist-table">
-        <thead>
-          <tr>
-            <td className="inquirylist-header">
-              1:1 문의
-              {loginid === "" && (
-                <Link to={`/cs/inquiry/write`} className="inquiry-post-btn">
-                  문의하기
-                </Link>
-              )}
-            </td>
-          </tr>
-        </thead>
-        <tbody className="inquirylist-tbody">
-          {currentItems.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td className="inquirylist-post">
-                  <span>
-                    <label className="inquirylist-post-num">{item.num}</label>
-                    <Link
-                      className="inquirylist-post-title"
-                      to={`/cs/inquiry/detail`}
-                      onClick={readcountup}
-                    >
-                      {item.title}
-                    </Link>
-                  </span>
-                  <span className="inquirylist-answer-status">
-                    {answerstatus === "no" && <>미답변</>}
-                    {answerstatus === "yes" && <>답변완료</>}
-                    <div className="inquirylist-post-date">{item.date}</div>
-                    {loginid === "" && (
-                      <>
-                        {answerstatus === "no" && (
-                          <>
-                            <button
-                              className="inquirylist-delete-btn"
-                              onClick={deletePlInquiry}
-                            >
-                              삭제
-                            </button>
-                          </>
-                        )}
-                      </>
-                    )}
-                  </span>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-      <div className="inquirylist-pagination">
-        <div>
-          <button
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            {"<"}
-          </button>
-          {pageNumbers}
-          <button
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={
-              currentPage === Math.ceil(inquiryList.length / itemsPerPage)
-            }
-          >
-            {">"}
-          </button>
+      <span className="OI-table">
+        <div className="OI-header">
+          <span className="OI-title"> 1:1 문의</span>
+
+          {loginid === "" && (
+            <Link to={`/cs/inquiry/write`} className="OI-post-btn">
+              문의하기
+            </Link>
+          )}
         </div>
-      </div>
+        <hr className="OI-line" />
+
+        {/* 리스트 출력 */}
+        <div className="OI-list_wrap">
+          {dataList.map((item) => (
+            <div className="OI-list" key={item.num}>
+              <span className="OI-board-left-wrap">
+                <Link
+                  className="OI-board-num"
+                  to={`/cs/inquiry/detail/${item.num}`}
+                  onClick={readcountup}
+                >
+                  {item.num}
+                </Link>
+                <span>
+                  {loginid === "admin" && (
+                    <span className="OI-answer-wrap">
+                      {item.ANSWER_STATE === "미답변" && (
+                        <span className="OI-answer-n">미답변</span>
+                      )}
+                      {item.ANSWER_STATE === "답변" && (
+                        <span className="OI-answer-y">답변완료</span>
+                      )}
+                    </span>
+                  )}
+                </span>
+                <Link
+                  className="OI-board-title"
+                  to={`/cs/inquiry/detail`}
+                  onClick={readcountup}
+                >
+                  {item.INQ_TITLE}
+                </Link>
+              </span>
+              <span className="OI-board-right-wrap">
+                <span className="OI-answer-state">
+                  {loginid === "admin" && (
+                    <>
+                      <span className="OI-memberid">{item.MEMBER_ID}</span>
+                    </>
+                  )}
+                  {loginid === "" && (
+                    <>
+                      {item.ANSWER_STATE === "답변" && (
+                        <>
+                          <span className="OI-answer-yes">답변완료</span>
+                        </>
+                      )}
+                    </>
+                  )}
+                  <span className="inquirylist-post-date">{item.INQ_DATE}</span>
+                  {loginid === "" && (
+                    <>
+                      {item.ANSWER_STATE === "미답변" && (
+                        <>
+                          <span
+                            className="OI-delete-btn"
+                            onClick={deletePlInquiry}
+                          >
+                            삭제
+                          </span>
+                        </>
+                      )}
+                    </>
+                  )}
+                </span>
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* 페이지 출력 */}
+        {totalPage > 1 && (
+          <div className="OI-page">
+            {currentPage === 1 ? (
+              <span className="OI-page_prev_gray">&lt;</span>
+            ) : (
+              <span
+                className="OI-page_prev"
+                onClick={() => setCurrentPage(currentPage - 1)}
+              >
+                &lt;
+              </span>
+            )}
+            <span className="OI-page_now">{currentPage}</span>
+            &nbsp;&nbsp;/&nbsp;&nbsp;
+            <span className="OI-page_total">{totalPage}</span>
+            {currentPage === totalPage ? (
+              <span className="OI-page_next_gray">&gt;</span>
+            ) : (
+              <span
+                className="OI-page_next"
+                onClick={() => setCurrentPage(currentPage + 1)}
+              >
+                &gt;
+              </span>
+            )}
+          </div>
+        )}
+      </span>
     </>
   );
 };
