@@ -1,6 +1,6 @@
 import "./AdminUserDetail.css";
 import { AdminUserDetailBidList } from "./AdminUserDetailBidList";
-import { AdminUserDetailPayList } from "./user/AdminUserDetailPayList";
+import { AdminUserDetailPayList } from "./AdminUserDetailPayList";
 import userdata from "./AdminUserDetail.json";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
