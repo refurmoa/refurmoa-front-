@@ -57,7 +57,7 @@ const BookmarkList = () => {
   // 찜버튼
   const likeHandler = (event, board_num) => {
     event.stopPropagation(); // 이벤트 버블링 막기
-    const likerequest = { board_num: board_num, id: "회원정보" };
+    const likerequest = { board_num: board_num, id: sessionStorage.getItem("id") };
     console.log(likerequest);
     // axios.post("/api/like", likerequest)
     // .then((res) => {
@@ -90,7 +90,7 @@ const BookmarkList = () => {
     if (searchRef.current.value === "") {
       return alert("검색어를 입력해 주세요.");
     }
-    const searchData = { searchword : searchRef.current.value, id: "userID" }
+    const searchData = { searchword : searchRef.current.value, id: sessionStorage.getItem("id") }
     console.log(searchData);
     // axios.post("/api/searchbookmark", searchData)
     // .then((res) => {
@@ -111,7 +111,7 @@ const BookmarkList = () => {
 
   // 찜한상품 데이터 가져오기
   const getBookmarkData = () => {
-    const datarequest = { id: "유저정보" };
+    const datarequest = { id: sessionStorage.getItem("id") };
     // axios.post("/api/bookmarkprod", datarequest)
     // .then((res) => {
     //   const { data } = res;
