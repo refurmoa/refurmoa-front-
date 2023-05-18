@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./banner.css";
+import "./AdminBanner.css";
 import search from "../../../images/search.png";
-import List from "./bannerList.json";
+import List from "./BnnerList.json";
 import axios from "axios";
 
-const Banner = () => {
+const AdminBanner = () => {
   const [bannList, setBannList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   useEffect = () => {
@@ -86,4 +86,4 @@ const Banner = () => {
   );
 };
 
-export default Banner;
+export default AdminBanner;
