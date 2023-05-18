@@ -5,24 +5,23 @@ import { useState } from "react";
 import Post from "./FindAddress";
 import Modal from "react-modal";
 import { noticeList } from "../../shared/AcceptText";
-const Signup_input = () => {
-  const name = window.sessionStorage.getItem("name");
-  const phone = window.sessionStorage.getItem("phone");
+
+const Signup_input = (props) => {
+  const setMode = props.setMode;
+  const setTotal_Id = props.setTotal_Id;
+  const name = props.name;
+  const phone = props.phone;
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordChk, setPasswordChk] = useState("");
+  const [mail, setMail] = useState("");
   const [email, setEmail] = useState("");
   const [domain, setDomain] = useState("");
   const [address, setAddress] = useState("");
   const [address_detail, setAddress_detail] = useState("");
   const [birth, setBirth] = useState("");
-  const [mileage, setMileage] = useState(0);
-  const [card_num, setCard_num] = useState();
+
   const [valid_date, setValid_date] = useState();
-  const [cvc, setCvc] = useState();
-  const [card_pw, setCard_pw] = useState();
-  const [card_pw1, setCard_pw1] = useState();
-  const [card_pw2, setCard_pw2] = useState();
 
   const [chkPWmsg, setchkPWmsg] = useState("");
   const [chkIdmsg, setChkIdmsg] = useState("");
@@ -73,10 +72,12 @@ const Signup_input = () => {
     }
   };
   const onClick = () => {
-    if (check_pw && check_id && check_Email && check_box && Is_pw) {
+    if (check_pw && check_id && check_Email && Is_pw) {
       alert("다음으로 넘어가시겠습니까?");
-      setEmail(email.concat("@", domain));
-      setCard_pw(Number(card_pw1.concat(card_pw2)));
+      setMail(email + "@" + domain);
+
+      setTotal_Id(id);
+      setMode(3);
       /*
     setEmail(email.concat("@", domain));
     axios
@@ -114,7 +115,6 @@ const Signup_input = () => {
         console.error(e);
       });
     */
-      document.location.href = "/signup/3";
     }
     if (!check_pw) {
       alert("비밀번호를 입력해주세요!");
@@ -128,10 +128,7 @@ const Signup_input = () => {
       alert("이메일을 입력해주세요!");
       return false;
     }
-    if (!check_box) {
-      alert("개인 정보 동의를 체크해주세요!");
-      return false;
-    }
+
     console.log({ valid_date });
 
     window.sessionStorage.setItem("id", id);
@@ -500,11 +497,10 @@ const Signup_input = () => {
             </tr>
           </table>
         </div> */}
-        <Link to="/signup/2">
-          <button className="SU_input_btn" onClick={onClick}>
-            다음
-          </button>
-        </Link>
+
+        <button className="SU_input_btn" onClick={onClick}>
+          다음
+        </button>
       </div>
     </>
   );
