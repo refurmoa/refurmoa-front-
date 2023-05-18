@@ -49,26 +49,33 @@ const AdminBannerWirte = () => {
         </div>
         <div className="ABinfo">
           <div className="ABMiddleLtext">게시일</div>
-          <div>
-            <input className="ABCal" type="date" data-placeholder="시작일" /> ~
-            <input className="ABCal" type="date" data-placeholder="종료일" />
+          <div className="ABCal">
+            <input className="ABCal1" type="date" data-placeholder="시작일" />~
+            <input className="ABCal2" type="date" data-placeholder="종료일" />
           </div>
         </div>
         <div className="ABinfo">
           <div className="ABMiddleLtext">배너 링크</div>
-          <input className="ABInputText" type="text" value="연결링크" />
+          <input className="ABInputText" type="text" placeholder="연결 링크" />
         </div>
         <div className="ABinfo">
           <div className="ABMiddleLtext">업체명</div>
-          <input className="ABInputText" type="text" value="업체명" />
+          <input className="ABInputText" type="text" placeholder="업체명" />
         </div>
         <div className="ABinfo">
           <div className="ABMiddleLtext">연락처</div>
-          <input className="ABInputText" type="text" value="연락처" />
+          <input className="ABInputText" type="text" placeholder="연락처" />
         </div>
       </div>
-      <div>
-        <input type="text" value="연락처" />
+      <form className="ABTextBox">
+        <textarea
+          className="ABInputTextBox"
+          placeholder="참고사항을 입력하세요"
+        />
+      </form>
+      <div className="ABUnderButton">
+        <input type="button" value="취소" />
+        <input type="button" value="등록" />
       </div>
     </div>
   );
