@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./AdminBanner.css";
 import search from "../../../images/search.png";
-import List from "./BannerList.json";
+import List from "./bannerList.json";
 import axios from "axios";
 
 const AdminBanner = () => {
   const [bannList, setBannList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  useEffect = () => {
+  useEffect(() => {
     // axios
     //   .get("/api/banner")
     //   .then((res) => {
@@ -19,7 +19,7 @@ const AdminBanner = () => {
     //     console.error(e);
     //   });
     // console.log(data);
-  };
+  }, []);
   const searchBanner = () => {
     // axios
     //   .get("/api/banner"){
@@ -40,7 +40,9 @@ const AdminBanner = () => {
       <div className="BN_wrap">
         <div className="BN_header">
           <span>배너관리</span>
-          <button>등록</button>
+          <Link to="/admin/banner/write">
+            <button>등록</button>
+          </Link>
           <div className="BN_search">
             <input
               placeholder="업체명"
