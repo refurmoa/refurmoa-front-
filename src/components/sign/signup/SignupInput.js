@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import Post from "./FindAddress";
 import Modal from "react-modal";
-import { noticeList } from "./SignupAcceptText";
+import { noticeList } from "../../shared/AcceptText";
 const Signup_input = () => {
   const name = window.sessionStorage.getItem("name");
   const phone = window.sessionStorage.getItem("phone");
@@ -23,7 +23,6 @@ const Signup_input = () => {
   const [card_pw, setCard_pw] = useState();
   const [card_pw1, setCard_pw1] = useState();
   const [card_pw2, setCard_pw2] = useState();
-  const text = noticeList[4].content;
 
   const [chkPWmsg, setchkPWmsg] = useState("");
   const [chkIdmsg, setChkIdmsg] = useState("");

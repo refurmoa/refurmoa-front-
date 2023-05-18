@@ -3,12 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import search_icon from "../../images/search.png";
+import search_icon from "../../../images/search.png";
 import partnerList from "./AdminPartner.json";
 import axios from "axios";
 
-function AdminUser() {
+function AdminPartner() {
   const [partnerlist, setPartnerlist] = useState(partnerList); // 제휴회사 리스트
+  const [searchData, setSearchData] = useState(""); // 검색어
   const [page, setPage] = useState(1); // 페이지
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
 
@@ -38,8 +39,8 @@ function AdminUser() {
     }
   };
 
-  // 회원 검색
-  const searchUser = () => {
+  // 회시 검색
+  const searchPartner = () => {
     // setPartnerlist();
   };
 
@@ -58,11 +59,13 @@ function AdminUser() {
   };
 
   return (
-    <AdminUserWrap>
+    <AdminPartnerWrap>
       <TitleWrap>
         <span>제휴회사 관리</span>
-        <input type="text" id="search" name="search" maxLength="20" />
-        <img alt="검색 아이콘" src={search_icon} onClick={searchUser} />
+        <input type="text" id="search" name="search" maxLength="20"
+          value={searchData} onChange={(e) => setSearchData(e.target.value)}
+          onKeyDown={(e) => {if (e.key === 'Enter') searchPartner();}} />
+        <img alt="검색 아이콘" src={search_icon} onClick={() => {searchPartner()}} />
       </TitleWrap>
       <TableWrap>
         <TableTitleWrap>
@@ -70,59 +73,29 @@ function AdminUser() {
           <TableTitle width={438}>회사명</TableTitle>
           <TableTitle width={148}>대표명</TableTitle>
           <TableTitle width={213}>연락처</TableTitle>
-          <TableTitle width={108} right>
-            제품수
-          </TableTitle>
+          <TableTitle width={108} right>제품수</TableTitle>
         </TableTitleWrap>
-        {partnerlist.map((partner, index) => (
-          <Partner key={index}>
-            <Link
-              to={{
-                pathname: "admin/partner/detail",
-                state: { COM_NUM: partner.COM_NUM },
-              }}
-            >
-              {partner.COM_STATUS === "신청" && (
-                <>
-                  <PartnerInfo width={88} color="red">
-                    {partner.COM_STATUS}
-                  </PartnerInfo>
-                </>
-              )}
-              {partner.COM_STATUS === "제휴" && (
-                <>
-                  <PartnerInfo width={88} color="black">
-                    {partner.COM_STATUS}
-                  </PartnerInfo>
-                </>
-              )}
-              {partner.COM_STATUS === "종료" && (
-                <>
-                  <PartnerInfo width={88} color="gray">
-                    {partner.COM_STATUS}
-                  </PartnerInfo>
-                </>
-              )}
-
-              <PartnerInfo width={438} align>
-                {partner.COM_NAME}
+        {partnerlist.map((partner) => (
+          <Partner key={partner.com_num}>
+            <Link to={`/admin/partner/detail`} state={{ com_num: partner.com_num }}>
+              <PartnerInfo width={38} color={partner.com_status} left>
+                {partner.com_status === 0 ? "신청" : partner.com_status === 1 ? "제휴" : "종료"}
               </PartnerInfo>
-              <PartnerInfo width={148}>{partner.COM_CEO_NAME}</PartnerInfo>
-              <PartnerInfo width={213}>{partner.COM_PHONE}</PartnerInfo>
-              <PartnerInfo width={108} align right>
-                {partner.tatal_quantity}
-              </PartnerInfo>
+              <PartnerInfo width={388} align="left" color={partner.com_status}>{partner.com_name}</PartnerInfo>
+              <PartnerInfo width={98} color={partner.com_status}>{partner.com_ceo_name}</PartnerInfo>
+              <PartnerInfo width={163} color={partner.com_status}>{partner.com_phone}</PartnerInfo>
+              <PartnerInfo width={58} right align="right" color={partner.com_status}>{partner.prod_cnt.toLocaleString('ko-KR')}개</PartnerInfo>
             </Link>
           </Partner>
         ))}
       </TableWrap>
-    </AdminUserWrap>
+    </AdminPartnerWrap>
   );
 }
 
-export default AdminUser;
+export default AdminPartner;
 
-const AdminUserWrap = styled.div`
+const AdminPartnerWrap = styled.div`
   width: 1200px;
   margin: 40px auto 0;
 `;
@@ -193,14 +166,15 @@ const Partner = styled.div`
 
 const PartnerInfo = styled.span`
   float: left;
-  width: ${(props) => props.width}px;
+  width: ${props => props.width}px;
   height: 30px;
   font-size: 20px;
   line-height: 30px;
-  text-align: ${(props) => (props.align ? "left" : "center")};
-  border-right: ${(props) =>
-    props.right ? "0" : "2px solid rgba(185, 168, 154, 0.5)"};
-
+  text-align: ${props => props.align || 'center'};
+  border-right: ${props => props.right ? '0' : '2px solid rgba(185, 168, 154, 0.5)'};
+  color: ${props => props.color === 0 && props.left ? 'red' : props.color === 2 ? '#999999' : 'black'};
+  padding: 0 25px;
   overflow: hidden;
-  color: ${(props) => props.color};
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;

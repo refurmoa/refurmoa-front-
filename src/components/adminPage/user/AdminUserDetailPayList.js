@@ -14,7 +14,7 @@ export const AdminUserDetailPayList = ({ setPageNum }) => {
   const navigate = useNavigate();
   const [payListData, setPayListData] = useState();
   const [invoiceInputState, setInvoiceInputState] = useState(false);
-
+  
   const changePage = () => {
     setPageNum(0);
   };

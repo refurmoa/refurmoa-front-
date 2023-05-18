@@ -1,0 +1,98 @@
+.H-wrap {
+    position: relative;
+    height: 135px;   
+}
+
+.H-top_line {
+    width: 100%;
+    height: 30px;
+}
+
+.H-line_box {
+    width: 100%;
+    height: 30px;
+    fill: #B9A89A;
+}
+
+.H-top_shape {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 223px;
+    height: 86px;
+    margin: 0 auto;
+}
+
+#H-logo_header_svg {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 241.97px;
+    height: 55px;
+    align-items: center;
+}
+
+.H-nav_wrap {
+    width: 1200px;
+    height: 30px;
+    margin: 8px auto 0;
+}
+
+.H-nav_left {
+    float: left;
+}
+
+.H-nav_right {
+    float: right;
+}
+
+.H-nav {
+    float: left;
+    height: 30px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 30px;
+    color: #B9A89A;
+}
+
+.H-nav_main, .H-nav_active {
+    color: rgba(81, 68, 56, 0.8);
+}
+
+.H-nav_left > .H_text {
+    margin-right: 50px;
+}
+
+.H-nav_right > .H_text {
+    margin-left: 50px;
+}
+
+.H-nav_left > .H_icon {
+    margin-right: 40px;
+}
+
+.H-nav_right > .H_icon {
+    margin-left: 30px;
+}
+
+.H_icon > svg {
+    padding-top: 5px;
+    cursor: pointer;
+}
+
+.H-search {
+    position: relative;
+}
+
+.H-search > input {
+    position: absolute;
+    right: -10px;
+    width: 188px;
+    height: 28px;
+    border: 1px solid #B9A89A;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0);
+    padding: 0 40px 0 15px;
+}

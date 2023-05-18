@@ -34,10 +34,12 @@ import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import AdminNavi from "./components/adminPage/AdminNavi";
 import Admin from "./components/adminPage/Admin";
-import AdminUser from "./components/adminPage/AdminUser";
-import AdminUserDetail from "./components/adminPage/AdminUserDetail";
-import AdminPartner from "./components/adminPage/AdminPartner";
-import AdminPartnerDetail from "./components/adminPage/AdminPartnerDetail";
+import AdminOrder from "./components/adminPage/order/AdminOrder";
+import AdminUser from "./components/adminPage/user/AdminUser";
+import AdminUserDetail from "./components/adminPage/user/AdminUserDetail";
+import AdminPartner from "./components/adminPage/partner/AdminPartner";
+import AdminPartnerDetail from "./components/adminPage/partner/AdminPartnerDetail";
+import AdminBannerWrite from "./components/adminPage/AdminBannerWirte";
 import Alliance from "./components/company/AllianceForm";
 
 function App() {
@@ -79,10 +81,12 @@ function App() {
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route element={<AdminNavi />}>
           <Route path="/admin" element={<Admin />} />
+          <Route path="/admin/order" element={<AdminOrder />} />
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
           <Route path="/admin/partner" element={<AdminPartner />} />
           <Route path="/admin/partner/detail" element={<AdminPartnerDetail />} />
+          <Route path="/admin/banner/write" element={<AdminBannerWrite />} />
         </Route>
         <Route path="/partnership" element={<Alliance />} />
       </Route>

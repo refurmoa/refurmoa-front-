@@ -66,7 +66,9 @@ const InquiryList = () => {
                   {loginid === "admin" && (
                     <span className="OI-answer-wrap">
                       {item.ANSWER_STATE === "미답변" && (
-                        <span className="OI-answer-n">미답변</span>
+                        <span className="OI-answer-n">
+                          &nbsp;&nbsp;미답변&nbsp;&nbsp;
+                        </span>
                       )}
                       {item.ANSWER_STATE === "답변" && (
                         <span className="OI-answer-y">답변완료</span>
