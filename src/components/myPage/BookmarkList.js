@@ -112,7 +112,7 @@ const BookmarkList = () => {
   // 찜한상품 데이터 가져오기
   const getBookmarkData = () => {
     const datarequest = { id: "유저정보" };
-    // axios.post("/api/getbookmarkprod", datarequest)
+    // axios.post("/api/bookmarkprod", datarequest)
     // .then((res) => {
     //   const { data } = res;
     //   setBookmarkProd(data);

@@ -86,7 +86,7 @@ const ProdPost = ({ filter }) => {
     console.log("카테고리 : " + selectedCategory);
     console.log("판매상태 : " + selectedSellStatus);
     console.log("정렬 : " + selectedOrderby);
-    // axios.get(`/api/getproducts?selltype=${selectedSellType}&category=${selectedCategory}&sellstatus=${selectedSellStatus}&orderby=${selectedOrderby}`)
+    // axios.get(`/api/products?selltype=${selectedSellType}&category=${selectedCategory}&sellstatus=${selectedSellStatus}&orderby=${selectedOrderby}`)
     // .then((res) => {
     //   const { data } = res;
     //   setProdData(data);

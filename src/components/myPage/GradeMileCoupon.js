@@ -73,7 +73,7 @@ const GradeMileCoupon = () => {
 
   const getMembershipInfo = () => {
     const membershiprequest = { id: "유저정보" };
-    // axios.post("/api/getmembership", membershiprequest)
+    // axios.post("/api/membership", membershiprequest)
     // .then((res) => {
     //   const { data } = res;
     //   setMembershipInfo(dataProcess(data));

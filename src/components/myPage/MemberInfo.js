@@ -46,7 +46,7 @@ const MemberInfo = () => {
 
   const getMemberInfo = () => {
     const memberinforequest = { id: "유저정보" };
-    // axios.post("/api/getmemberinfo", memberinforequest)
+    // axios.post("/api/memberinfo", memberinforequest)
     // .then((res) => {
     //   const { data } = res;
     //   setMemberInfo(dataProcess(data));
