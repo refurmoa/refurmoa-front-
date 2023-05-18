@@ -1,6 +1,6 @@
 import "./AdminBannerWrite.css";
 import { useState } from "react";
-import alt_img from "../../images/picture-icon-240.png";
+import alt_img from "../../../images/picture-icon-240.png";
 
 const AdminBannerWirte = () => {
   let [main_Image, setMainImg] = useState("");
