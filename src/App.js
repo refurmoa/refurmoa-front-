@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
+import Main from "./components/refurmoa/Main";
 import Login from "./components/sign/signin/Login";
 import SignupMain from "./components/sign/signup/SignupMain";
 import SignupPhone from "./components/sign/signup/SignupPhone";
@@ -47,6 +48,7 @@ function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
+        <Route index element={<Main />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignupMain />} />
         <Route path="/signup/1" element={<SignupPhone />} />
