@@ -14,7 +14,7 @@ function Signup_complete() {
   return (
     <>
       <wrap>
-        <form className="Signup_form">
+        <form className="Signup_compelte_form">
           <div className="SU_Main_header">회원가입</div>
           <div className="SU_sub_header">
             01 본인인증 &nbsp;&nbsp; 02 정보입력 &nbsp;&nbsp; 03 약관동의

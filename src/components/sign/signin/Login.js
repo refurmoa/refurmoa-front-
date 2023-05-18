@@ -2,7 +2,7 @@ import React from "react";
 import "../signup/Signup.css";
 import "./Login.css";
 import Modal from "react-modal";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import google from "../../../images/google.png";
 import kakao from "../../../images/kakao.png";
 import naver from "../../../images/naver.png";
@@ -12,14 +12,14 @@ import FindPW from "./LoginFindPw";
 // id, password, passwordChk(비밀번호확인), name, tel 기본값 호출
 function Login() {
   // 제출버튼을 누르면 변경된 파라미터 값 전달함(추후 수정 필요)
-
+  const navigate = useNavigate();
   const onClick = () => {
     alert("다음으로 넘어가시겠습니까?");
     if (id.current.value === "" || password.current.value === "") {
       alert("정보를 모두 입력하여 주세요!");
       return false;
     }
-    document.location.href = "/signup/4";
+    navigate(-1);
   };
   const id = useRef();
   const password = useRef();
@@ -114,11 +114,10 @@ function Login() {
               </tr>
             </table>
           </div>
-          <Link to="/login">
-            <button className="login_btn" onClick={onClick}>
-              LOGIN
-            </button>
-          </Link>
+
+          <button className="login_btn" onClick={onClick}>
+            LOGIN
+          </button>
           <div className="login_detail">
             <button className="login_find" onClick={ChangePopUP}>
               아이디 찾기
