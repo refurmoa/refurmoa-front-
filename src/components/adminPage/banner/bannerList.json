@@ -1,0 +1,113 @@
+[
+  {
+    "bann_num": 1,
+    "bann_image": "/images/prod/ex_main_banner1.jpg",
+    "seller_name": "제목1",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항1",
+    "bann_start": "2023-01-30",
+    "bann_end": "2023-04-30"
+  },
+  {
+    "bann_num": 2,
+    "bann_image": "/images/prod/ex_main_banner2.png",
+    "seller_name": "제목2",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항2",
+    "bann_start": "2023-02-30",
+    "bann_end": "2023-06-30"
+  },
+  {
+    "bann_num": 3,
+    "bann_image": "/images/prod/example.jpg",
+    "seller_name": "제목3",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항3",
+    "bann_start": "2023-03-30",
+    "bann_end": "2023-07-30"
+  },
+  {
+    "bann_num": 4,
+    "bann_image": "/images/prod/samsung.png",
+    "seller_name": "제목4",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항4",
+    "bann_start": "2023-04-30",
+    "bann_end": "2023-08-30"
+  },
+  {
+    "bann_num": 5,
+    "bann_image": "/images/prod/ex_main_banner1.jpg",
+    "seller_name": "제목1",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항1",
+    "bann_start": "2023-01-30",
+    "bann_end": "2023-04-30"
+  },
+  {
+    "bann_num": 6,
+    "bann_image": "/images/prod/ex_main_banner2.png",
+    "seller_name": "제목2",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항2",
+    "bann_start": "2023-02-30",
+    "bann_end": "2023-06-30"
+  },
+  {
+    "bann_num": 7,
+    "bann_image": "/images/prod/example.jpg",
+    "seller_name": "제목3",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항3",
+    "bann_start": "2023-03-30",
+    "bann_end": "2023-07-30"
+  },
+  {
+    "bann_num": 8,
+    "bann_image": "/images/prod/samsung.png",
+    "seller_name": "제목4",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항4",
+    "bann_start": "2023-04-30",
+    "bann_end": "2023-08-30"
+  },
+
+  {
+    "bann_num": 9,
+    "bann_image": "/images/prod/ex_main_banner2.png",
+    "seller_name": "제목2",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항2",
+    "bann_start": "2023-02-30",
+    "bann_end": "2023-06-30"
+  },
+  {
+    "bann_num": 10,
+    "bann_image": "/images/prod/example.jpg",
+    "seller_name": "제목3",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항3",
+    "bann_start": "2023-03-30",
+    "bann_end": "2023-07-30"
+  },
+  {
+    "bann_num": 11,
+    "bann_image": "/images/prod/samsung.png",
+    "seller_name": "제목4",
+    "seller_phone": "010-1234-5678",
+    "bann_link": "https://www.samsung.com/sec/galaxy-s23/launching/?cid=sec_paid_ppc_google_f1h23-dm_ecommerce_searchad_text_launching_%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90_pfm&utm_source=google&utm_medium=searchad&utm_campaign=f1h23-dm&utm_term=%EC%82%BC%EC%84%B1%EC%A0%84%EC%9E%90&_AT=000202C801AD036168AE&gad=1&gclid=CjwKCAjw9pGjBhB-EiwAa5jl3DgOqHJn2nCYMQZJgdbNClXVw8E5sXnh9RUMGAu7YJ5K5ZCcV9IWnRoC-EsQAvD_BwE",
+    "bann_ref": "참고사항4",
+    "bann_start": "2023-04-30",
+    "bann_end": "2023-08-30"
+  }
+]
