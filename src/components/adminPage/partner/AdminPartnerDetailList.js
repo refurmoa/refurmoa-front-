@@ -1,5 +1,5 @@
 import "./AdminPartnerDetailList.css";
-import partnerlistdata from "../user/AdminUserDetailBidList.json";
+import partnerlistdata from "./AdminUserDetailBidList.json";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -23,7 +23,7 @@ export const AdminPartnerDetailList = () => {
 
   const SearchBidList = useRef();
 
-  const AUDsearch = () => {
+  const AUDsearch = (e) => {
     if (
       SearchBidList.current.value === "" ||
       SearchBidList.current.value === undefined
@@ -32,6 +32,18 @@ export const AdminPartnerDetailList = () => {
       SearchBidList.current.focus();
       return false;
     }
+    // axios
+    //   .post(`/api/post/PartnerSearchData`{
+    //   search : e.target.value
+    // })
+    //   .then((res) => {
+    //     const { data } = res;
+    //     setPartnerlistdata(data);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+    // setPartnerlistdata(data);
   };
 
   const navigate = useNavigate();
@@ -51,12 +63,15 @@ export const AdminPartnerDetailList = () => {
           </span>
         </div>
         <div className="APDinput">
-          <input className="APDsearchbox" type="text"></input>
+          <input
+            className="APDsearchbox"
+            type="text"
+            ref={SearchBidList}
+          ></input>
           <input
             className="APDsearchboxbutton"
             type="button"
             onClick={AUDsearch}
-            ref={SearchBidList}
           ></input>
         </div>
       </top>
