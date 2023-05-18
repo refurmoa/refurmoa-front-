@@ -1,0 +1,66 @@
+[
+  {
+    "com_num": 1,
+    "com_name": "한샘",
+    "com_ceo_name": "이건희",
+    "com_phone": "111-111-1111",
+    "prod_cnt": 2,
+    "com_status": 0
+  },
+  {
+    "com_num": 2,
+    "com_name": "한샘",
+    "com_ceo_name": "이건희",
+    "com_phone": "111-111-1111",
+    "prod_cnt": 2,
+    "com_status": 2
+  },
+  {
+    "com_num": 3,
+    "com_name": "한샘",
+    "com_ceo_name": "이건희",
+    "com_phone": "111-111-1111",
+    "prod_cnt": 2,
+    "com_status": 2
+  },
+  {
+    "com_num": 4,
+    "com_name": "한샘",
+    "com_ceo_name": "이건희",
+    "com_phone": "111-111-1111",
+    "prod_cnt": 2,
+    "com_status": 1
+  },
+  {
+    "com_num": 5,
+    "com_name": "한샘",
+    "com_ceo_name": "이건희",
+    "com_phone": "111-111-1111",
+    "prod_cnt": 2,
+    "com_status": 2
+  },
+  {
+    "com_num": 6,
+    "com_name": "한샘",
+    "com_ceo_name": "이건희",
+    "com_phone": "111-111-1111",
+    "prod_cnt": 2,
+    "com_status": 1
+  },
+  {
+    "com_num": 7,
+    "com_name": "한샘",
+    "com_ceo_name": "이건희",
+    "com_phone": "111-111-1111",
+    "prod_cnt": 2,
+    "com_status": 0
+  },
+  {
+    "com_num": 8,
+    "com_name": "한샘",
+    "com_ceo_name": "이건희",
+    "com_phone": "111-111-1111",
+    "prod_cnt": 2,
+    "com_status": 0
+  }
+]

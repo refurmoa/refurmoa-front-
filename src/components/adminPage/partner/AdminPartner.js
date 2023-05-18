@@ -1,20 +1,21 @@
-// 관리자 페이지 - 주문/배송 관리
+// 관리자 페이지 - 제휴회사 관리
 
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import search_icon from "../../images/search.png";
-import orderList from "./AdminOrder.json";
+import search_icon from "../../../images/search.png";
+import partnerList from "./AdminPartner.json";
 import axios from "axios";
 
-function AdminOrder() {
-  const [orderlist, setOrderlist] = useState(orderList); // 주문 리스트
+function AdminPartner() {
+  const [partnerlist, setPartnerlist] = useState(partnerList); // 제휴회사 리스트
+  const [searchData, setSearchData] = useState(""); // 검색어
   const [page, setPage] = useState(1); // 페이지
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
 
   useEffect(() => {
-    // 주문 리스트 조회
-    // orderListup();
+    // 제휴회사 리스트 조회
+    // partnerListup();
 
     // 무한 스크롤
     window.addEventListener("scroll", handleScroll); // 스크롤 이벤트 등록
@@ -23,14 +24,14 @@ function AdminOrder() {
     }; // 스크롤 이벤트 제거
   }, []);
 
-  // 주문 리스트 조회
-  const orderListup = () => {
+  // 제휴회사 리스트 조회
+  const partnerListup = () => {
     if (isLoading) return;
     setIsLoading(true);
 
     try {
       // axios
-      // setOrderlist();
+      // setPartnerlist();
       // setPage((prevPage) => prevPage + 1);
     } catch (e) {
     } finally {
@@ -38,14 +39,14 @@ function AdminOrder() {
     }
   };
 
-  // 주문 검색
-  const searchUser = () => {
-    // setOrderlist();
+  // 회시 검색
+  const searchPartner = () => {
+    // setPartnerlist();
   };
 
   // 페이지가 변경될 때마다 데이터 요청
   useEffect(() => {
-    orderListup();
+    partnerListup();
   }, [page]);
 
   // 스크롤 감지
@@ -54,67 +55,47 @@ function AdminOrder() {
       window.innerHeight + window.scrollY >= document.body.offsetHeight &&
       !isLoading
     )
-      orderListup();
+      partnerListup();
   };
 
   return (
-    <AdminUserWrap>
+    <AdminPartnerWrap>
       <TitleWrap>
-        <span>주문/배송</span>
-        <input type="text" id="search" name="search" maxLength="20" />
-        <img alt="검색 아이콘" src={search_icon} onClick={searchUser} />
+        <span>제휴회사 관리</span>
+        <input type="text" id="search" name="search" maxLength="20"
+          value={searchData} onChange={(e) => setSearchData(e.target.value)}
+          onKeyDown={(e) => {if (e.key === 'Enter') searchPartner();}} />
+        <img alt="검색 아이콘" src={search_icon} onClick={() => {searchPartner()}} />
       </TitleWrap>
       <TableWrap>
         <TableTitleWrap>
-          <TableTitle width={198}>주문번호</TableTitle>
-          <TableTitle width={168}>상품코드</TableTitle>
-          <TableTitle width={148}>수령인</TableTitle>
+          <TableTitle width={88}>상태</TableTitle>
+          <TableTitle width={438}>회사명</TableTitle>
+          <TableTitle width={148}>대표명</TableTitle>
           <TableTitle width={213}>연락처</TableTitle>
-          <TableTitle width={223}>송장번호</TableTitle>
-          <TableTitle width={153}>주문상태</TableTitle>
-          <TableTitle width={243} right>
-            결제일
-          </TableTitle>
+          <TableTitle width={108} right>제품수</TableTitle>
         </TableTitleWrap>
-        {orderlist.map((order, index) => (
-          <Partner key={index}>
-            <Link
-              to={{
-                pathname: "admin/order/detail",
-                state: { COM_NUM: order.COM_NUM },
-              }}
-            >
-              <PartnerInfo width={198}>{order.PAY_NUM}</PartnerInfo>
-              <PartnerInfo width={168}>{order.PRODUCT_CODE}</PartnerInfo>
-              <PartnerInfo width={148}>{order.RECIPT_NAME}</PartnerInfo>
-              <PartnerInfo width={213}>{order.RECIPT_PHONE}</PartnerInfo>
-              <PartnerInfo width={223}>{order.DELI_NUM}</PartnerInfo>
-              {/* <PartnerInfo width={153}>{order.order_state}</PartnerInfo> */}
-
-              {order.order_state === "상품 준비중" ? (
-                <>
-                  <PartnerInfo width={153} color="red">
-                    {order.order_state}
-                  </PartnerInfo>
-                </>
-              ) : (
-                <PartnerInfo width={153}>{order.order_state} </PartnerInfo>
-              )}
-
-              <PartnerInfo width={243} right>
-                {order.PAY_DATE}
+        {partnerlist.map((partner) => (
+          <Partner key={partner.com_num}>
+            <Link to={`/admin/partner/detail`} state={{ com_num: partner.com_num }}>
+              <PartnerInfo width={38} color={partner.com_status} left>
+                {partner.com_status === 0 ? "신청" : partner.com_status === 1 ? "제휴" : "종료"}
               </PartnerInfo>
+              <PartnerInfo width={388} align="left" color={partner.com_status}>{partner.com_name}</PartnerInfo>
+              <PartnerInfo width={98} color={partner.com_status}>{partner.com_ceo_name}</PartnerInfo>
+              <PartnerInfo width={163} color={partner.com_status}>{partner.com_phone}</PartnerInfo>
+              <PartnerInfo width={58} right align="right" color={partner.com_status}>{partner.prod_cnt.toLocaleString('ko-KR')}개</PartnerInfo>
             </Link>
           </Partner>
         ))}
       </TableWrap>
-    </AdminUserWrap>
+    </AdminPartnerWrap>
   );
 }
 
-export default AdminOrder;
+export default AdminPartner;
 
-const AdminUserWrap = styled.div`
+const AdminPartnerWrap = styled.div`
   width: 1200px;
   margin: 40px auto 0;
 `;
@@ -159,7 +140,7 @@ const TableWrap = styled.span`
 `;
 
 const TableTitleWrap = styled.div`
-  width: 1360px;
+  width: 1005px;
   height: 55px;
   background-color: rgba(185, 168, 154, 0.2);
   margin-bottom: 20px;
@@ -178,21 +159,22 @@ const TableTitle = styled.span`
 `;
 
 const Partner = styled.div`
-  width: 1360px;
+  width: 1005px;
   height: 30px;
   margin-bottom: 25px;
 `;
 
 const PartnerInfo = styled.span`
   float: left;
-  width: ${(props) => props.width}px;
+  width: ${props => props.width}px;
   height: 30px;
   font-size: 20px;
   line-height: 30px;
-  text-align: ${(props) => (props.align ? "left" : "center")};
-  border-right: ${(props) =>
-    props.right ? "0" : "2px solid rgba(185, 168, 154, 0.5)"};
-
+  text-align: ${props => props.align || 'center'};
+  border-right: ${props => props.right ? '0' : '2px solid rgba(185, 168, 154, 0.5)'};
+  color: ${props => props.color === 0 && props.left ? 'red' : props.color === 2 ? '#999999' : 'black'};
+  padding: 0 25px;
   overflow: hidden;
-  color: ${(props) => props.color};
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;

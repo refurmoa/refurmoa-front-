@@ -144,7 +144,7 @@
 
 .APDsearchboxbutton {
     position: relative;
-    background-image: url(../../../public/images/prod/searchicon.png);
+    background-image: url(../../../../public/images/prod/searchicon.png);
     border: none;
     width: 17px;
     height: 17px;
