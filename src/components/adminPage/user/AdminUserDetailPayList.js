@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 
 // 이미지파일
-import cancelicon from "../../images/cancel.png";
+import cancelicon from "../../../images/cancel.png";
 
 // 더미데이터
 import dummydata from "./AdminUserDetailPayList.json"
