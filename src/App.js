@@ -36,7 +36,9 @@ import AdminNavi from "./components/adminPage/AdminNavi";
 import Admin from "./components/adminPage/Admin";
 import AdminUser from "./components/adminPage/AdminUser";
 import AdminUserDetail from "./components/adminPage/AdminUserDetail";
+import AdminPartner from "./components/adminPage/AdminPartner";
 import AdminPartnerDetail from "./components/adminPage/AdminPartnerDetail";
+import AdminOrder from "./components/adminPage/AdminOrder";
 import Alliance from "./components/company/AllianceForm";
 
 function App() {
@@ -80,7 +82,9 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
+          <Route path="/admin/partner" element={<AdminPartner />} />
           <Route path="/admin/partner/detail" element={<AdminPartnerDetail />} />
+          <Route path="/admin/order" element={<AdminOrder />} />
         </Route>
         <Route path="/partnership" element={<Alliance />} />
       </Route>
