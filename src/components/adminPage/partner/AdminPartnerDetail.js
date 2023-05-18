@@ -5,7 +5,6 @@ import { useState } from "react";
 import Modal from "react-modal";
 import UpdatePartner from "./AdminPartnerDetailUpdate";
 import axios from "axios";
-import { productList } from "../prodPost/PostWrite/ProdcutList";
 
 const AdminPartnerDetail = () => {
   const APDpush = () => {
