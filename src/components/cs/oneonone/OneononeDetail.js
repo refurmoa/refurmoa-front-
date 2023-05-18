@@ -37,51 +37,39 @@ const OneononeDetail = () => {
 
   return (
     <>
-    
-      <table className="oneonone-detail-table">
-        <thead>
-          <tr>
-            <th className="oneonone-detail-header">1:1 문의</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td>
-                  <div className="oneonone-detail-view-title">
-                    <label>{item.title}</label>
+      <span className="OD-wrap">
+        <div className="OD-header">
+          <span className="OD-title"> 1:1 문의</span>
+        </div>
+        <hr className="OD-line" />
 
-                    <div>
-                      <label className="oneonone-detail-view-date">
-                        {item.date}
-                      </label>
-                      <button className="oneonone-detail-delete-btn">
-                        삭제
-                      </button>
-                    </div>
-                  </div>
+        {currentItems.map((item, index) => {
+          return (
+            <div key={index}>
+              <span>
+                <span className="OD-view-title">{item.INQ_TITLE} </span>
+                <span className="OD-top-wrap">
+                  <span className="OD-view-date">{item.INQ_DATE}</span>
+                  <button className="OD-delete-btn">삭제</button>
+                </span>
+              </span>
+              <hr className="OD-title-line" />
 
-                  <div className="oneonone-detail-content">{item.content}</div>
-                  <div>
-                    <div className="oneonone-content-box">
-                      <span className="oneonone-reply-icon">A.</span>
-                      <label className="oneonone-reply-content">
-                        {item.answer} <br></br>
-                        <img src={naver} alt="naver" />
-                      </label>
-                      <br></br>
-                      <label className="oneonone-reply-date">
-                        {item.answerdate}
-                      </label>
-                    </div>
-                    <button
-                      className="oneonone-view-go-list-btn"
-                      onClick={() => navigate(-1)}
-                    >
-                      목록
-                    </button>
-                    {/* {loginid === "admin" && (
+              <div className="OD-content">{item.INQ_CON}</div>
+
+              <div className="OD-content-box">
+                <span className="OD-reply-icon">A.</span>
+                <label className="OD-reply-content">
+                  {item.ANSWER_CON} <br></br>
+                  <img src={naver} alt="naver" />
+                </label>
+                <br></br>
+                <span className="OD-reply-date">{item.ANSWER_date}</span>
+              </div>
+              <button className="OD-go-list-btn" onClick={() => navigate(-1)}>
+                목록
+              </button>
+              {/* {loginid === "admin" && (
                       <>
                         <button className="oneonone-detail-edit-btn">
                           수정
@@ -89,13 +77,10 @@ const OneononeDetail = () => {
                         
                       </>
                     )} */}
-                  </div>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+            </div>
+          );
+        })}
+      </span>
     </>
   );
 };

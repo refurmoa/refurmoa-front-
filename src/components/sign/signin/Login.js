@@ -13,10 +13,13 @@ import FindPW from "./LoginFindPw";
 function Login() {
   // 제출버튼을 누르면 변경된 파라미터 값 전달함(추후 수정 필요)
   const navigate = useNavigate();
+
   const onClick = () => {
-    alert("다음으로 넘어가시겠습니까?");
-    if (id.current.value === "" || password.current.value === "") {
-      alert("정보를 모두 입력하여 주세요!");
+    if (id.current.value === "") {
+      alert("아이디를 입력해주세요");
+      return false;
+    } else if (password.current.value === "") {
+      alert("비밀번호를 입력해주세요");
       return false;
     }
     navigate(-1);
@@ -114,7 +117,6 @@ function Login() {
               </tr>
             </table>
           </div>
-
           <button className="login_btn" onClick={onClick}>
             LOGIN
           </button>

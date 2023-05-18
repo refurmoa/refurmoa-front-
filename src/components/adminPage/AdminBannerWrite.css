@@ -1,0 +1,111 @@
+.ABAll {
+    width: 1000px;
+    height: 910px;
+}
+
+.ABHeader {
+    width: 960px;
+    height: 35px;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 35px;
+    color: #514438;
+    margin: 45px 0 15px 20px;
+}
+
+.ABHeaderLine {
+    width: 1000px;
+    border-bottom: 2px solid rgba(185, 168, 154, 0.5);
+}
+
+.ABMiddle {
+    width: 960px;
+}
+
+.ABinfo {
+    display: flex;
+}
+
+.ABMiddleLtext {
+    width: 80px;
+    height: 30px;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 30px;
+    color: #514438;
+    margin-left: 0;
+    margin-top: 35px;
+}
+
+.ABCal {
+    box-sizing: border-box;
+    width: 410px;
+    height: 50px;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+    margin-top: 25px;
+}
+
+.ABInputText {
+    box-sizing: border-box;
+    width: 860px;
+    height: 50px;
+    border: 2px solid #DDDDDD;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+input[type='date']::before {
+    content: attr(data-placeholder);
+    width: 100%;
+}
+
+.ABMFileInput > input {
+    margin-top: 30px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    color: #000000; 
+}
+
+.ABMFileInput > ::-webkit-file-upload-button {
+    width: 119px;
+    height: 40px;
+    background: #dddddd;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    color: #000000;
+    cursor: pointer;
+    margin-right: 20px;
+    border: none;
+}
+
+.ABMImgView {
+    margin-top: 20px;
+}
+
+.ABMImgNone {
+    width: 960px;
+    height: 250px;
+    line-height: 400px;
+    text-align: center;
+    background: #dddddd;
+    margin-bottom: 5px;
+  }
+
+  .ABMImgNone > img {
+    max-width: 100px;
+    max-height: 100px;
+    opacity: 0.3;
+  }
+
+  .ABMImgShow > img {
+    width: 400px;
+    height: 400px;
+  }
+
+  
+  
