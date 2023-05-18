@@ -103,7 +103,7 @@ function FAQWrite() {
         <textarea
           className="FAQ_Text_content"
           type="text"
-          placeholder="제품 하자 내용"
+          placeholder="내용 입력하세요."
           onChange={onInputHandler}
           maxLength="500"
           value={content}
