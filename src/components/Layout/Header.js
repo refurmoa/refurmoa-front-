@@ -79,10 +79,16 @@ function Header() {
                 join
             </Link>
             </> : <>
-            <Link className={`H-nav H_text ${linkStyle("/mypage")}`}
-              to="/mypage" onClick={() => setCurrentPath("/mypage")}>
-              mypage
-            </Link>
+            { login_id === "admin" ?
+              <Link className={`H-nav H_text ${linkStyle("/admin")}`}
+                to="/admin" onClick={() => setCurrentPath("/admin")}>
+                admin
+              </Link>
+              : <Link className={`H-nav H_text ${linkStyle("/mypage")}`}
+                to="/mypage" onClick={() => setCurrentPath("/mypage")}>
+                mypage
+              </Link> }
+            
             <span className="H-nav H_icon" onClick={() => {setRingOpen(true)}}>
               { ringlist !== null ?
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
