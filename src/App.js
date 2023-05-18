@@ -39,8 +39,8 @@ import AdminUser from "./components/adminPage/user/AdminUser";
 import AdminUserDetail from "./components/adminPage/user/AdminUserDetail";
 import AdminPartner from "./components/adminPage/partner/AdminPartner";
 import AdminPartnerDetail from "./components/adminPage/partner/AdminPartnerDetail";
-import Alliance from "./components/company/AllianceForm";
 import AdminBannerWrite from "./components/adminPage/AdminBannerWirte";
+import Alliance from "./components/company/AllianceForm";
 
 function App() {
   return (
@@ -85,10 +85,7 @@ function App() {
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
           <Route path="/admin/partner" element={<AdminPartner />} />
-          <Route
-            path="/admin/partner/detail"
-            element={<AdminPartnerDetail />}
-          />
+          <Route path="/admin/partner/detail" element={<AdminPartnerDetail />} />
           <Route path="/admin/banner/write" element={<AdminBannerWrite />} />
         </Route>
         <Route path="/partnership" element={<Alliance />} />
