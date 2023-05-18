@@ -13,7 +13,8 @@ import FindPW from "./LoginFindPw";
 function Login() {
   // 제출버튼을 누르면 변경된 파라미터 값 전달함(추후 수정 필요)
   const navigate = useNavigate();
-
+  const id = useRef();
+  const password = useRef();
   const onClick = () => {
     if (id.current.value === "") {
       alert("아이디를 입력해주세요");
@@ -22,10 +23,9 @@ function Login() {
       alert("비밀번호를 입력해주세요");
       return false;
     }
+    window.sessionStorage.setItem("id", id.current.value);
     navigate(-1);
   };
-  const id = useRef();
-  const password = useRef();
 
   /*
   axios
