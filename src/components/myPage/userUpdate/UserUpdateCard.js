@@ -2,7 +2,7 @@ import React from "react";
 import "../../sign/signup/Signup.css";
 import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
-import { noticeList } from "../../sign/signup/SignupAcceptText";
+import { noticeList } from "../../shared/AcceptText";
 const Update_card = (props) => {
   const setCard_num = props.setCard_num;
   const setValid_date = props.setValid_date;

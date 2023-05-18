@@ -1,0 +1,41 @@
+.H-wrap {
+    position: relative;
+    height: 135px;   
+}
+
+.H-top_line {
+    width: 100%;
+    height: 30px;
+}
+
+.H-line_box {
+    width: 100%;
+    height: 30px;
+    fill: #B9A89A;
+}
+
+.H-top_shape {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 223px;
+    height: 86px;
+    margin: 0 auto;
+}
+
+#H-logo_header_svg {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 241.97px;
+    height: 55px;
+    align-items: center;
+}
+
+.H-nav_wrap {
+    width: 1200px;
+    height: 30px;
+    margin-top: 8px;
+}
