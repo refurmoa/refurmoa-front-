@@ -64,7 +64,7 @@ const PayDetail = () => {
 
     // let paydata = null;
     // 결제상세 정보 받아오기
-    // axios.post("/api/getpaydetail", board_num)
+    // axios.post("/api/paydetail", board_num)
     // .then((res) => {
     //   paydata = res.data;
     //   setPayDetailData(paydata);
@@ -95,7 +95,7 @@ const PayDetail = () => {
   <>
     <MainTitleWrapper>
       <MainTitle>주문 상세 정보</MainTitle>
-      <ProductCode>{payDetailData?.product_code}</ProductCode>
+      <ProductCode>{payDetailData?.pay_num}</ProductCode>
     </MainTitleWrapper>
     <ProductInfoWrapper>
       <ProductInfoBox>
@@ -170,7 +170,12 @@ const PayDetail = () => {
           </PayAmountBox>
           <PayCompleteBox>
             <PaySubComplete>결제 완료</PaySubComplete>
-            <PayUserComplete>{payDetailData.buy_method}</PayUserComplete>
+            <PayUserComplete>
+              {payDetailData?.buy_method === "simple" && "간편결제"}
+              {payDetailData?.buy_method === "card" && "신용/체크"}
+              {payDetailData?.buy_method === "phone" && "휴대폰결제"}
+              {payDetailData?.buy_method === "account" && "계좌이체"}
+              </PayUserComplete>
           </PayCompleteBox>
         </PayInfoBox>
       </DeliveryAndPayInfoBox>

@@ -1,0 +1,116 @@
+[
+  {
+    "member_id": "leemoa",
+    "board_num": 1,
+    "main_image": "image01.png",
+    "pay_num": 2023033132,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 1,
+    "prod_price": 90000,
+    "sell_status": 0
+  },
+  {
+    "member_id": "leemoa",
+    "board_num": 2,
+    "main_image": "image02.png",
+    "pay_num": 2023033133,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 1,
+    "prod_price": 90000,
+    "sell_status": 1
+  },
+  {
+    "member_id": "leemoa",
+    "board_num": 3,
+    "main_image": "image03.png",
+    "pay_num": 2023033134,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 1,
+    "prod_price": 90000,
+    "sell_status": 2,
+    "deli_num": 12345678
+  },
+  {
+    "member_id": "leemoa",
+    "board_num": 4,
+    "main_image": "image04.png",
+    "pay_num": 2023033135,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 1,
+    "prod_price": 90000,
+    "sell_status": 3,
+    "deli_num": 12345678
+  },
+  {
+    "member_id": "leemoa",
+    "board_num": 5,
+    "main_image": "image05.png",
+    "pay_num": 2023033136,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 1,
+    "prod_price": 90000,
+    "sell_status": 4
+  },
+  {
+    "member_id": "leemoa",
+    "board_num": 6,
+    "main_image": "image06.png",
+    "pay_num": 2023033137,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 2,
+    "prod_price": 90000,
+    "sell_status": 0
+  },
+  {
+    "member_id": "leemoa",
+    "board_num": 7,
+    "main_image": "image07.png",
+    "pay_num": 2023033138,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 2,
+    "prod_price": 90000,
+    "sell_status": 1
+  },
+  {
+    "member_id": "leemoa",
+    "board_num": 8,
+    "main_image": "image08.png",
+    "pay_num": 2023033139,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 2,
+    "prod_price": 90000,
+    "sell_status": 2,
+    "deli_num": 12345678
+  },
+  {
+    "member_id": "leemoa",
+    "board_num": 9,
+    "main_image": "image09.png",
+    "pay_num": 2023033140,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 2,
+    "prod_price": 90000,
+    "sell_status": 3,
+    "deli_num": 12345678
+  },
+  {
+    "member_id": "leemoa",
+    "board_num": 6,
+    "main_image": "image06.png",
+    "pay_num": 2023033137,
+    "prod_com": "공간사이",
+    "prod_name": "엘리사 800 확장형 화장대",
+    "sell_type": 2,
+    "prod_price": 90000,
+    "sell_status": 4
+  }
+]

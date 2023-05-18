@@ -137,7 +137,7 @@ const ProductList = () => {
   const getProdData = () => {
     console.log("카테고리 : " + selectedCategory);
     console.log("판매상태 : " + selectedSellStatus);
-    // axios.get(`/api/getproductlist?category=${selectedCategory}&sellstatus=${selectedSellStatus}`)
+    // axios.get(`/api/productlist?category=${selectedCategory}&sellstatus=${selectedSellStatus}`)
     // .then((res) => {
     //   const { data } = res;
     //   setProdData(data);
@@ -261,7 +261,7 @@ export default ProductList;
 
 // 필터
 const FilterWrapper = styled.div`
-  margin: 208px auto 40px;
+  margin: 73px auto 40px;
   width: 1400px;
 `;
 

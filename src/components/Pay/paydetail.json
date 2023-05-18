@@ -1,5 +1,5 @@
 {
-  "product_code": 2023033002,
+  "pay_num": 2023033002,
   "main_image": "image01.png",
   "prod_com": "가구회사",
   "prod_grade": "S",
@@ -15,5 +15,5 @@
   "coupon_price": 1000,
   "mile_use": 15000,
   "pay_price": 515000,
-  "buy_method": "카카오페이"
+  "buy_method": "simple"
 }
