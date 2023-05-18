@@ -23,7 +23,7 @@ function Login() {
       alert("비밀번호를 입력해주세요");
       return false;
     }
-    window.sessionStorage.setItem("id", id.current.value);
+    window.sessionStorage.setItem("id", id);
     navigate(-1);
   };
 
