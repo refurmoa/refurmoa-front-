@@ -1,6 +1,6 @@
 import React from "react";
 import "./AdminPartnerDetailUpdate.css";
-import Post from "../sign/signup/FindAddress";
+import Post from "../../sign/signup/FindAddress";
 import Modal from "react-modal";
 import { useState } from "react";
 import axios from "axios";
