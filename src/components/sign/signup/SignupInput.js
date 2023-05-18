@@ -396,6 +396,7 @@ const Signup_input = () => {
               <td>생년월일</td>
               <td>
                 <input
+                  className={birth === "" ? "SU_birth" : "active"}
                   name="birth"
                   type="date"
                   size="100"

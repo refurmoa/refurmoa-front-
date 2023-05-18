@@ -482,3 +482,15 @@
   border-radius: 30px;
   text-align: center;
 }
+.SU_input_table > tr > td > .SU_birth {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #b9a89a;
+}
+.SU_input_table > tr > td > .active {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: black;
+}
