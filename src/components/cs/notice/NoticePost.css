@@ -11,12 +11,13 @@
   font-weight: 600;
   font-size: 25px;
   line-height: 35px;
-  color: #514438;}
-  
-  .NP-line {
-    width: 936.8px;
-    border: 2px solid #c7b9ae;
-  }
+  color: #514438;
+}
+
+.NP-line {
+  width: 936.8px;
+  border: 2px solid #c7b9ae;
+}
 
 .NP-title-box {
   margin: 20px 0 0 20px;
@@ -51,16 +52,18 @@
   font-size: 20px;
   color: #888888;
 }
-.NP-content-count{
+.NP-content-count {
+  margin-top: -45px;
+  margin-bottom: 20px;
   margin-right: 35px;
   width: 900px;
-  height: 50px;
+  height: 40px;
   text-align: right;
   color: #888888;
   font-size: 20px;
 }
 
-.NP-fileupload{
+.NP-fileupload {
   width: 233px;
   height: 40px;
 }
@@ -74,12 +77,11 @@
   border-radius: 10px;
   font-size: 20px;
 }
-.NP-btn{
+.NP-btn {
   width: 200px;
   height: 50px;
   float: right;
   margin-right: 20px;
-  
 }
 .NP-cancle-btn {
   position: relative;
@@ -126,7 +128,7 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
-.NP-box{
+.NP-box {
   width: 900px;
   height: 50px;
   /* float: left; */
