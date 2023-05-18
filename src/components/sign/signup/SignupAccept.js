@@ -2,7 +2,7 @@ import React from "react";
 import "./Signup.css";
 import { Link, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
-import { noticeList } from "./SignupAcceptText";
+import { noticeList } from "../../shared/AcceptText";
 const Signup_accept = () => {
   const [check_ALL, setCheck_ALL] = useState(false);
   const [check_box1, setCheck_box1] = useState(false);

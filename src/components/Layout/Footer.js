@@ -1,7 +1,7 @@
 import "./Footer.css";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { noticeList } from "../sign/signup/SignupAcceptText";
+import { noticeList } from "../shared/AcceptText";
 import logo from "../../images/logo.png";
 import kakaoQR from "../../images/kakaotalkQR.png";
 
