@@ -197,12 +197,12 @@ function PostPay() {
                 <div className="PP-pay_top">
                     <div className="PP-user_info_title">결제수단</div>
                     <span className="PP-pay_radio">
-                        <input type="radio" name="pay" id="pay_simple" value="simple" />
-                        <label htmlFor="pay_simple">간편결제</label>
-                    </span>
-                    <span className="PP-pay_radio">
                         <input type="radio" name="pay" id="pay_card" value="card" />
                         <label htmlFor="pay_card">신용/체크</label>
+                    </span>
+                    <span className="PP-pay_radio">
+                        <input type="radio" name="pay" id="pay_simple" value="simple" />
+                        <label htmlFor="pay_simple">간편결제</label>
                     </span>
                     <span className="PP-pay_radio">
                         <input type="radio" name="pay" id="pay_phone" value="phone" />
@@ -210,7 +210,7 @@ function PostPay() {
                     </span>
                     <span className="PP-pay_radio">
                         <input type="radio" name="pay" id="pay_account" value="account" />
-                        <label htmlFor="account">무통장입금</label>
+                        <label htmlFor="account">계좌이체</label>
                     </span>
                 </div>
             </div>

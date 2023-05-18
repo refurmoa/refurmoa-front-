@@ -1,0 +1,61 @@
+[
+  {
+    "pay_num": 10,
+    "product_code": "SF-0000000000",
+    "board_num": 1,
+    "recipt_name": "이건희",
+    "recipt_phone": "111-111-1111",
+    "deli_num": null,
+    "state": 0,
+    "pay_date": "2023-05-05 05:00:30"
+  },
+  {
+    "pay_num": null,
+    "product_code": "SF-00000",
+    "board_num": 1,
+    "recipt_name": "이건희",
+    "recipt_phone": "111-111-1111",
+    "deli_num": null,
+    "state": 1,
+    "pay_date": "2023-05-05 05:00:30"
+  },
+  {
+    "pay_num": 12,
+    "product_code": "SF-00000",
+    "board_num": 1,
+    "recipt_name": "이건희",
+    "recipt_phone": "111-111-1111",
+    "deli_num": "0000-0001-0509-0204",
+    "state": 2,
+    "pay_date": "2023-05-05 05:00:30"
+  },
+  {
+    "pay_num": 14,
+    "product_code": "SF-00000",
+    "board_num": 1,
+    "recipt_name": "이건희",
+    "recipt_phone": "111-111-1111",
+    "deli_num": "0000-0001-0509-0204",
+    "state": 3,
+    "pay_date": "2023-05-05 05:00:30"
+  },
+  {
+    "pay_num": 31,
+    "product_code": "SF-00000",
+    "recipt_name": "이건희",
+    "recipt_phone": "111-111-1111",
+    "deli_num": "0000-0001-0509-0204",
+    "state": 2,
+    "pay_date": "2023-05-05 05:00:30"
+  },
+  {
+    "pay_num": 50,
+    "product_code": "SF-00000",
+    "board_num": 1,
+    "recipt_name": "이건희",
+    "recipt_phone": "111-111-1111",
+    "deli_num": "0000-0001-0509-0204",
+    "state": 3,
+    "pay_date": "2023-05-05 05:00:30"
+  }
+]

@@ -3,12 +3,13 @@
 import React, { useEffect, useState } from "react";
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
-import search_icon from "../../images/search.png";
+import search_icon from "../../../images/search.png";
 import userList from "./UserList.json";
 import axios from "axios";
 
 function AdminUser()  {
     const [userlist, setUserlist] = useState(userList); // 회원 리스트
+    const [searchData, setSearchData] = useState(""); // 검색어
     const [page, setPage] = useState(1); // 페이지
     const [isLoading, setIsLoading] = useState(false); // 로딩 상태
     
@@ -38,6 +39,7 @@ function AdminUser()  {
         try {
             // axios
             // setUserlist();
+            // setUserlist((prevUserlist) => [...prevUserlist, ...userList]);
             // setPage((prevPage) => prevPage + 1);
         } catch (e) {
         } finally {
@@ -48,11 +50,12 @@ function AdminUser()  {
     // 회원 검색
     const searchUser = () => {
         // setUserlist();
+        // searchData axios
     }
 
     // 페이지가 변경될 때마다 데이터 요청
     useEffect(() => {
-        userListup();
+        // userListup();
     }, [page]);
 
     // 스크롤 감지
@@ -66,8 +69,10 @@ function AdminUser()  {
         <AdminUserWrap>
             <TitleWrap>
                 <span>회원관리</span>
-                <input type="text" id="search" name="search" maxLength="20" />
-                <img alt="검색 아이콘" src={search_icon} onClick={searchUser}/>
+                <input type="text" id="search" name="search" maxLength="20"
+                    value={searchData} onChange={(e) => setSearchData(e.target.value)}
+                    onKeyDown={(e) => {if (e.key === 'Enter') searchUser();}} />
+                <img alt="검색 아이콘" src={search_icon} onClick={() => {searchUser()}} />
             </TitleWrap>
             <TableWrap>
                 <TableTitleWrap>
@@ -80,13 +85,13 @@ function AdminUser()  {
                 </TableTitleWrap>
                 {userlist.map((user, index) => (
                     <User key={index}>
-                        <Link to={`/admin/user/detail`}state={{ member_id: user.member_id }}>
-                            <UserInfo width={163} alignleft>{user.member_id}</UserInfo>
+                        <Link to={`/admin/user/detail`} state={{ member_id: user.member_id }}>
+                            <UserInfo width={163} align="left">{user.member_id}</UserInfo>
                             <UserInfo width={98}>{user.name}</UserInfo>
                             <UserInfo width={163}>{user.phone}</UserInfo>
                             <UserInfo width={83}>{grade.find((g) => g.id === user.grade).name}</UserInfo>
-                            <UserInfo width={133} align>{user.mile.toLocaleString('ko-KR')}원</UserInfo>
-                            <UserInfo width={55} align right>{user.coupon_cnt.toLocaleString('ko-KR')}개</UserInfo>
+                            <UserInfo width={133} align="right">{user.mile.toLocaleString('ko-KR')}원</UserInfo>
+                            <UserInfo width={55} align="right" right>{user.coupon_cnt.toLocaleString('ko-KR')}개</UserInfo>
                         </Link>
                     </User>
                 ))}
@@ -173,8 +178,10 @@ const UserInfo = styled.span`
     height: 30px;
     font-size: 20px;
     line-height: 30px;
-    text-align: ${props => props.align ? 'right' : props => props.alignleft ? 'left' : 'center'};
+    text-align: ${props => props.align || 'center'};
     border-right: ${props => props.right ? '0' : '2px solid rgba(185, 168, 154, 0.5)'};
     padding: 0 25px;
     overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 `;
