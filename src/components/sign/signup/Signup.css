@@ -190,7 +190,7 @@
 .SU_input_form {
   padding: 30px;
   width: 1050px;
-  height: 950px;
+  height: 1050px;
   margin-top: 35px;
   border: 0px;
   background: #ffffff;
@@ -481,4 +481,16 @@
   box-shadow: 0px 0px 20px 5px rgba(185, 168, 154, 0.1);
   border-radius: 30px;
   text-align: center;
+}
+.SU_input_table > tr > td > .SU_birth {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: #b9a89a;
+}
+.SU_input_table > tr > td > .active {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  color: black;
 }

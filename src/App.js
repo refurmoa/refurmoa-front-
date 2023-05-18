@@ -2,11 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Main from "./components/refurmoa/Main";
 import Login from "./components/sign/signin/Login";
-import SignupMain from "./components/sign/signup/SignupMain";
-import SignupPhone from "./components/sign/signup/SignupPhone";
-import SignupInput from "./components/sign/signup/SignupInput";
-import SignupAccept from "./components/sign/signup/SignupAccept";
-import SignupComplete from "./components/sign/signup/SignupComplete";
+import Signup from "./components/sign/signup/Signup";
 import ProductList from "./components/product/ProductList";
 import ProductWrite from "./components/product/ProductWrite";
 import ProductUpdate from "./components/product/ProductUpdate";
@@ -50,11 +46,7 @@ function App() {
       <Route element={<Layout />}>
         <Route index element={<Main />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignupMain />} />
-        <Route path="/signup/1" element={<SignupPhone />} />
-        <Route path="/signup/2" element={<SignupInput />} />
-        <Route path="/signup/3" element={<SignupAccept />} />
-        <Route path="/signup/4" element={<SignupComplete />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/prod" element={<ProductList />} />
         <Route path="/prod/write" element={<ProductWrite />} />
         <Route path="/prod/update/:product_code" element={<ProductUpdate />} />
