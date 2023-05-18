@@ -81,7 +81,7 @@ function Login() {
   return (
     <>
       <wrap>
-        <div className="Signup_form">
+        <div className="Login_form">
           <div className="LG_Main_header">로그인</div>
           <div className="SU_phone_form">
             <table className="LG_login_input">
