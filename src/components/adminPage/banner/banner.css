@@ -1,0 +1,132 @@
+.BN_wrap {
+  width: 1200px;
+}
+.BN_header {
+  padding: 40px 30px 25px 30px;
+  height: 35px;
+  border-bottom: 2px solid rgba(185, 168, 154, 0.5);
+}
+.BN_header span {
+  width: 100px;
+  float: left;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 35px;
+  color: #514438;
+  margin-right: 15px;
+}
+.BN_header button {
+  width: 60px;
+  height: 35px;
+  background: rgba(185, 168, 154, 0.6);
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 35px;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+}
+.BN_search {
+  width: 468px;
+  height: 33px;
+  float: right;
+  padding: 0 15px;
+  border: 1px solid #b9a89a;
+  border-radius: 30px;
+}
+.BN_search input {
+  width: 400px;
+  height: 33px;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 33px;
+  display: flex;
+  border: none;
+  float: left;
+  outline: none !important;
+}
+.BN_search img {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  float: right;
+  margin-top: 7.5px;
+  cursor: pointer;
+}
+.BN_banner {
+  width: 1200px;
+  height: 100px;
+  padding: 10px 0;
+  border-bottom: 2px solid rgba(185, 168, 154, 0.5);
+}
+.BN_banner_num {
+  padding: 35px 10px;
+  width: 120px;
+  height: 30px;
+  float: left;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 30px;
+  color: #000000;
+  background: rgba(238, 238, 238, 0.2);
+}
+.BN_banner_img {
+  float: left;
+}
+.BN_banner_img img {
+  width: 385px;
+  height: 100px;
+}
+.BN_banner_info {
+  padding: 20px 15px;
+  width: 280px;
+  height: 60px;
+  float: left;
+  background: rgba(238, 238, 238, 0.5);
+}
+.BN_banner_info div {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+}
+.BN_banner_date {
+  padding: 20px 15px;
+  width: 230px;
+  height: 60px;
+  float: left;
+  overflow: hidden;
+  background: rgba(238, 238, 238, 0.2);
+}
+
+.BN_banner_date a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 30px;
+  color: #888888;
+}
+.BN_banner_date .BN_banner_date_info {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: #000000;
+}
+.BN_banner_delete {
+  padding: 35px 15px;
+  width: 75px;
+  height: 30px;
+  float: left;
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: #666666;
+  background: rgba(238, 238, 238, 0.5);
+}

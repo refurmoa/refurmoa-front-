@@ -84,7 +84,7 @@ function Login() {
   return (
     <>
       <wrap>
-        <div className="Signup_form">
+        <div className="Login_form">
           <div className="LG_Main_header">로그인</div>
           <div className="SU_phone_form">
             <table className="LG_login_input">
@@ -117,9 +117,9 @@ function Login() {
               </tr>
             </table>
           </div>
-            <button className="login_btn" onClick={onClick}>
-              LOGIN
-            </button>
+          <button className="login_btn" onClick={onClick}>
+            LOGIN
+          </button>
           <div className="login_detail">
             <button className="login_find" onClick={ChangePopUP}>
               아이디 찾기
