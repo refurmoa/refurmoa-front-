@@ -1,6 +1,8 @@
 import "./AdminBannerWrite.css";
 import { useState } from "react";
 import alt_img from "../../../images/picture-icon-240.png";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const AdminBannerWirte = () => {
   let [main_Image, setMainImg] = useState("");
@@ -21,6 +23,36 @@ const AdminBannerWirte = () => {
     setImg_con(true);
     setListfile(fileList); // console.log("fileList=>" + fileList);
     reader.readAsDataURL(e.target.files[0]);
+  };
+
+  const [startDate, setStartDate] = useState();
+  const [endtDate, setEndDate] = useState();
+  const [bannerLink, setBannerLink] = useState();
+  const [bannerCom, setBannerCom] = useState();
+  const [bannerPhone, setBannerPhone] = useState();
+  const BannerCancle = () => {
+    setStartDate();
+    setEndDate();
+    setBannerLink();
+    setBannerCom();
+    setBannerPhone();
+  };
+
+  const BannerInput = () => {
+    // axios
+    //   .post("/bannerinsert", {
+    //     startDate: startDate,
+    //     endtDate: endtDate,
+    //     bannerLink: bannerLink,
+    //     bannerCom: bannerCom,
+    //     bannerPhone: bannerPhone,
+    //   })
+    //   .then((res) => {
+    //     // AdminBanner에서 배너 목록 불러오는 함수 위치
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
   };
 
   return (
@@ -50,21 +82,47 @@ const AdminBannerWirte = () => {
         <div className="ABinfo">
           <div className="ABMiddleLtext">게시일</div>
           <div className="ABCal">
-            <input className="ABCal1" type="date" data-placeholder="시작일" />~
-            <input className="ABCal2" type="date" data-placeholder="종료일" />
+            <input
+              className="ABCal1"
+              type="datetime-local"
+              data-placeholder="시작일"
+              onChange={(e) => setStartDate(e.target.value)}
+            />
+            ~
+            <input
+              className="ABCal2"
+              type="datetime-local"
+              data-placeholder="종료일"
+              onChange={(e) => setEndDate(e.target.value)}
+            />
           </div>
         </div>
         <div className="ABinfo">
           <div className="ABMiddleLtext">배너 링크</div>
-          <input className="ABInputText" type="text" placeholder="연결 링크" />
+          <input
+            className="ABInputText"
+            type="text"
+            placeholder="연결 링크"
+            onChange={(e) => setBannerLink(e.target.value)}
+          />
         </div>
         <div className="ABinfo">
           <div className="ABMiddleLtext">업체명</div>
-          <input className="ABInputText" type="text" placeholder="업체명" />
+          <input
+            className="ABInputText"
+            type="text"
+            placeholder="업체명"
+            onChange={(e) => setBannerCom(e.target.value)}
+          />
         </div>
         <div className="ABinfo">
           <div className="ABMiddleLtext">연락처</div>
-          <input className="ABInputText" type="text" placeholder="연락처" />
+          <input
+            className="ABInputText"
+            type="text"
+            placeholder="연락처"
+            onChange={(e) => setBannerPhone(e.target.value)}
+          />
         </div>
       </div>
       <form className="ABTextBox">
@@ -73,10 +131,12 @@ const AdminBannerWirte = () => {
           placeholder="참고사항을 입력하세요"
         />
       </form>
-      <div className="ABUnderButton">
-        <input type="button" value="취소" />
-        <input type="button" value="등록" />
-      </div>
+      <Link to={`/admin/banner`}>
+        <div className="ABUnderButton">
+          <input type="button" value="취소" onClick={BannerCancle} />
+          <input type="button" value="등록" onClick={BannerInput} />
+        </div>
+      </Link>
     </div>
   );
 };

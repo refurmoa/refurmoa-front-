@@ -8,18 +8,20 @@ import axios from "axios";
 const AdminBanner = () => {
   const [bannList, setBannList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  useEffect = () => {
-    // axios
-    //   .get("/api/banner")
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setBannList(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // console.log(data);
-  };
+  // useEffect =
+  //   (() => {
+  //     // axios
+  //     //   .get("/api/banner")
+  //     //   .then((res) => {
+  //     //     const { data } = res;
+  //     //     setBannList(data);
+  //     //   })
+  //     //   .catch((e) => {
+  //     //     console.error(e);
+  //     //   });
+  //     // console.log(data);
+  //   },
+  //   []);
   const searchBanner = () => {
     // axios
     //   .get("/api/banner"){
