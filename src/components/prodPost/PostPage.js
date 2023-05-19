@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const PostPage = () => {
   const navigate = useNavigate();
-  const memberId = "admin";
+  const memberId = sessionStorage.getItem("id");
   
   // 경매, 즉시구매 저장 변수 all, auction, direct, none
   const [selectedSellType, setSelectedSellType] = useState("all");

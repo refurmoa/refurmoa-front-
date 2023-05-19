@@ -41,11 +41,11 @@ const MemberInfo = () => {
     // let id = sessionStorage.getItem("id");
     // return data = { ...data, grade: grade, id: id};
     let id = "leemoa";
-    return data = { ...data, grade: grade, id: id };
+    return data = { ...data, grade: grade, id: sessionStorage.getItem("id") };
   };
 
   const getMemberInfo = () => {
-    const memberinforequest = { id: "유저정보" };
+    const memberinforequest = { id: sessionStorage.getItem("id") };
     // axios.post("/api/memberinfo", memberinforequest)
     // .then((res) => {
     //   const { data } = res;

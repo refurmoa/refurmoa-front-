@@ -3,7 +3,8 @@ import "./Signup.css";
 import { Link, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import { noticeList } from "../../shared/AcceptText";
-const Signup_accept = () => {
+const Signup_accept = (props) => {
+  const setMode = props.setMode;
   const [check_ALL, setCheck_ALL] = useState(false);
   const [check_box1, setCheck_box1] = useState(false);
   const [check_box2, setCheck_box2] = useState(false);
@@ -61,6 +62,7 @@ const Signup_accept = () => {
   const onClick = () => {
     if (check_box1 && check_box2) {
       alert("회원가입을 마치시겠습니까?");
+      setMode(4);
       /*
       axios
       .post("/signup", {
@@ -74,7 +76,6 @@ const Signup_accept = () => {
         console.error(e);
       });
       */
-      document.location.href = "/signup/4";
     } else {
       alert("필수 정보를 체크해주세요!!");
       return false;
@@ -83,7 +84,7 @@ const Signup_accept = () => {
 
   return (
     <>
-      <form className="SU_accept_form">
+      <div className="SU_accept_form">
         <div className="SU_Main_header">회원가입</div>
         <div className="SU_sub_header">
           01 본인인증 &nbsp;&nbsp; 02 정보입력 &nbsp;&nbsp;
@@ -168,12 +169,11 @@ const Signup_accept = () => {
             </tr>
           </table>
         </div>
-        <Link to="/signup/3">
-          <button className="SU_input_btn" onClick={onClick}>
-            회원 가입
-          </button>
-        </Link>
-      </form>
+
+        <button className="SU_input_btn" onClick={onClick}>
+          회원 가입
+        </button>
+      </div>
     </>
   );
 };

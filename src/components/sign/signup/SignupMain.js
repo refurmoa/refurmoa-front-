@@ -5,11 +5,13 @@ import google from "../../../images/google.png";
 import kakao from "../../../images/kakao.png";
 import naver from "../../../images/naver.png";
 // id, password, passwordChk(비밀번호확인), name, tel 기본값 호출
-function Signup_main() {
+function Signup_main(props) {
   // 제출버튼을 누르면 변경된 파라미터 값 전달함(추후 수정 필요)
+  const setMode = props.setMode;
 
   const onClick = () => {
     alert("회원 가입을 진행하시겠습니까?");
+    setMode(1);
   };
   let naver_api_url =
     "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" +
@@ -29,13 +31,13 @@ function Signup_main() {
       <wrap>
         <form className="Signup_form">
           <div className="SU_Main_header">회원가입</div>
-          <Link to="/signup/1">
-            <div>
-              <button className="SU_Nomal_btn" onClick={onClick}>
-                일반 회원가입
-              </button>
-            </div>
-          </Link>
+
+          <div>
+            <button className="SU_Nomal_btn" onClick={onClick}>
+              일반 회원가입
+            </button>
+          </div>
+
           <div>
             <hr className="signup_line" />
           </div>

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const OneononeDetail = () => {
   //admin 관리자페이지에서 수정,삭제
-  // const loginid = "";
+  const loginid = "admin";
 
   const noticeid = useParams().noticeid;
   const [dataList, setDataList] = useState([]);
@@ -59,10 +59,7 @@ const OneononeDetail = () => {
 
               <div className="OD-content-box">
                 <span className="OD-reply-icon">A.</span>
-                <label className="OD-reply-content">
-                  {item.ANSWER_CON} <br></br>
-                  <img src={naver} alt="naver" />
-                </label>
+                <label className="OD-reply-content">{item.ANSWER_CON}</label>
                 <br></br>
                 <span className="OD-reply-date">{item.ANSWER_date}</span>
               </div>

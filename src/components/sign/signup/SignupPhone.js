@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 
 import { useRef, useState } from "react";
 
-function Signup_phone() {
+function Signup_phone(props) {
+  const setMode = props.setMode;
+  const setTotal_Name = props.setTotal_Name;
+  const setTotal_Phone = props.setTotal_Phone;
   const certi = useRef();
   const [inputs, setInputs] = useState({
     name: "",
@@ -36,18 +39,17 @@ function Signup_phone() {
     alert("다음으로 넘어가시겠습니까?");
     if (inputs.name === "" || inputs.phone === "") {
       alert("정보를 모두 입력해 주세요!");
-
       return false;
+    } else {
+      setTotal_Name(name);
+      setTotal_Phone(phone);
+      setMode(2);
     }
-
-    window.sessionStorage.setItem("name", name);
-    window.sessionStorage.setItem("phone", phone);
-    document.location.href = "/signup/2";
   };
 
   return (
     <>
-      <form className="SU_Phone_form">
+      <div className="SU_Phone_form">
         <div className="SU_Main_header">회원가입</div>
         <div className="SU_sub_header">
           <n className="SU_pro_now">01 본인인증 </n>&nbsp;&nbsp; 02 정보입력
@@ -103,12 +105,11 @@ function Signup_phone() {
           <br />
           인증 이외의 용도로 이용 또는 저장되지 않습니다.
         </div>
-        <Link to="/signup/1">
-          <button className="SU_phone_btn" onClick={onClick}>
-            다음
-          </button>
-        </Link>
-      </form>
+
+        <button className="SU_phone_btn" onClick={onClick}>
+          다음
+        </button>
+      </div>
     </>
   );
 }
