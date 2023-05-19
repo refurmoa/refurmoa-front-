@@ -46,6 +46,10 @@
   border: 2px solid transparent;
   border-radius: 10px;
   color: #333333;
+  cursor: pointer;
+}
+.OD-delete-btn:hover {
+  font-weight: 550;
 }
 .OD-title-line {
   width: 936px;
@@ -106,7 +110,6 @@
 
 .OD-go-list-btn {
   float: right;
-  /* position: relative; */
   width: 95px;
   height: 50px;
   margin: 0px 20px 0 0;
@@ -115,8 +118,11 @@
   border: 2px solid #514438;
   border-radius: 10px;
   color: white;
+  cursor: pointer;
 }
-
+.OD-go-list-btn:hover {
+  background-color: #d9d9d9;
+}
 .OD-reply-date {
   float: right;
   width: 189px;
