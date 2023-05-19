@@ -11,6 +11,7 @@ import trackingStateIcon2 from "../../images/delivery_icon2.png";
 import trackingStateIcon3 from "../../images/delivery_icon3.png";
 import trackingStateIcon4 from "../../images/delivery_icon4.png";
 import trackingStateIcon5 from "../../images/delivery_icon5.png";
+import PayInfo from './PayInfo';
 
 const PayDetail = () => {
   const board_num = useParams().board_num;
@@ -97,7 +98,8 @@ const PayDetail = () => {
       <MainTitle>주문 상세 정보</MainTitle>
       <ProductCode>{payDetailData?.pay_num}</ProductCode>
     </MainTitleWrapper>
-    <ProductInfoWrapper>
+    {payDetailData && (<PayInfo prod={payDetailData} />)}
+    {/* <ProductInfoWrapper>
       <ProductInfoBox>
         <ProductInfoImageAndNameBox>
           <ProductInfoImage>
@@ -113,7 +115,7 @@ const PayDetail = () => {
           <ProductInfoPrce>{payDetailData?.prod_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</ProductInfoPrce>
         </ProductInfoPriceBox>
       </ProductInfoBox>
-    </ProductInfoWrapper>
+    </ProductInfoWrapper> */}
     <DeliveryAndPayInfoWrapper>
       <DeliveryAndPayInfoBox>
         <DeliveryInfoBox>
@@ -142,7 +144,7 @@ const PayDetail = () => {
           <PayTitle>결제 정보</PayTitle>
           <PayInfoDetailBox>
             <PaySubTitle>상품금액</PaySubTitle>
-            <PayUserInfo>{payDetailData?.prod_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</PayUserInfo>
+            <PayUserInfo>{payDetailData?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</PayUserInfo>
           </PayInfoDetailBox>
           <PayInfoDetailBox>
             <PaySubTitle>배송설치비</PaySubTitle>
