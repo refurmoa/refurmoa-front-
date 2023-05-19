@@ -24,7 +24,8 @@ function Login() {
       return false;
     }
     window.sessionStorage.setItem("id", id.current.value);
-    navigate(-1);
+    if(id.current.value === "admin") navigate(-1);
+    else  document.location.href = "/";
   };
 
   /*
