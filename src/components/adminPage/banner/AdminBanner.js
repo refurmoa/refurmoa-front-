@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./AdminBanner.css";
 import search from "../../../images/search.png";
-import List from "./bannerList.json";
+import List from "./BannerList.json";
 import axios from "axios";
 
 const AdminBanner = () => {
