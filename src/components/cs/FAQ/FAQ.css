@@ -133,6 +133,10 @@
   width: 50px;
   float: left;
   margin-right: 20px;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 35px;
+  color: #514438;
 }
 .FAQSearchAdimin {
   width: 496px;
@@ -157,7 +161,12 @@
 .FAQSearchAdimin input:focus {
   outline: none !important;
 }
-
+.FAQTitle span{
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 35px;
+  color: #514438;
+}
 .FAQTitle a {
   font-weight: 600;
   font-size: 20px;
