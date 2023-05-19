@@ -98,7 +98,8 @@ const OneononeDetail = () => {
               <span className="OD-view-title">{item.INQ_TITLE} </span>
               <span className="OD-top-wrap">
                 <span className="OD-view-date">{item.INQ_DATE}</span>
-                <button className="OD-delete-btn">삭제</button>
+                {item.ANSWER_CON === "" &&(<button className="OD-delete-btn">삭제</button>)}
+                
               </span>
             </span>
             <hr className="OD-title-line" />
