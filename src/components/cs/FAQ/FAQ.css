@@ -37,7 +37,7 @@
   line-height: 40px;
 
   border: none;
-  color: rgba(185, 168, 154, 0.7);
+  color: #000;
 }
 .FAQSearch input:focus {
   outline: none !important;
