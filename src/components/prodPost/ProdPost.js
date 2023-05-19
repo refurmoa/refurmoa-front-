@@ -53,7 +53,7 @@ const ProdPost = ({ filter }) => {
   // 찜버튼
   const likeHandler = (event, board_num) => {
     event.stopPropagation(); // 이벤트 버블링 막기
-    const likerequest = { board_num: board_num, id: "회원정보" };
+    const likerequest = { board_num: board_num, id: sessionStorage.getItem("id") };
     console.log(likerequest);
     // axios.post("/api/like", likerequest)
     // .then((res) => {
