@@ -11,6 +11,8 @@ const Signup_input = (props) => {
   const setTotal_Id = props.setTotal_Id;
   const name = props.name;
   const phone = props.phone;
+  const setData=props.setData;
+
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordChk, setPasswordChk] = useState("");
@@ -75,46 +77,18 @@ const Signup_input = (props) => {
     if (check_pw && check_id && check_Email && Is_pw) {
       alert("다음으로 넘어가시겠습니까?");
       setMail(email + "@" + domain);
-
       setTotal_Id(id);
+      setData({
+        id:id,
+        phone:phone,
+        password:password,
+        email:mail,
+        address:address,
+        address_detail:address_detail,
+        birth:birth,
+    })
       setMode(3);
-      /*
-    setEmail(email.concat("@", domain));
-    axios
-      .post("/signup", {
-        id: id,
-        phone:phone
-        password:password
-        email:mail
-        address:address
-        address_detail:address_detail
-        birth:birth
-      })
-      .then((res) => {
-        if(res.data){  
-        
-        axios
-            .post("/card", {
-                id:id
-                card_num:card_num
-                valid_date:valid_date
-                cvc:cvc
-                card_pw:card_pw
-            })
-            .then((res) => {
-              if(res.data){
-                alert(aaa)
-              }
-            })
-            .catch((e) => {
-              console.error(e);
-            });
-          }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-    */
+
     }
     if (!check_pw) {
       alert("비밀번호를 입력해주세요!");
@@ -406,98 +380,7 @@ const Signup_input = (props) => {
             </tr>
           </table>
         </div>
-        {/*
-        <div className="SU_card_header">결제수단 추가</div>
-        <div className="SU_card_sub">카드 등록</div>
-       <div className="form_wrap">
-          <table className="SU_input_table">
-            <tr>
-              <td>
-                <b>카드번호</b>
-              </td>
-              <td>
-                <input
-                  name="card_num"
-                  type="text"
-                  maxlength="20"
-                  placeholder="0000-0000-0000-0000"
-                  value={card_num}
-                  onChange={(e) => setCard_num(e.target.value)}
-                />
-                <hr className="SU_input_line" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>유효기간</b>
-              </td>
-              <td>
-                <input
-                  name="valid_date"
-                  type="month"
-                  placeholder="0000-0000-0000-0000"
-                  value={valid_date}
-                  onChange={(e) => setValid_date(e.target.value)}
-                />
-                <hr className="SU_input_line" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>CVC</b>
-              </td>
-              <td>
-                <input
-                  name="cvc"
-                  type="text"
-                  placeholder="카드 뒷면 3자리 숫자"
-                  value={cvc}
-                  maxlength="3"
-                  onChange={(e) => setCvc(e.target.value)}
-                />
-                <hr className="SU_input_line" />
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <b>카드 비밀번호</b>
-              </td>
-              <td>
-                <input
-                  className="card_pw"
-                  name="card_pw1"
-                  type="password"
-                  placeholder="*"
-                  maxlength="1"
-                  value={card_pw1}
-                  onChange={(e) => setCard_pw1(e.target.value)}
-                />
-                <input
-                  className="card_pw"
-                  name="card_pw2"
-                  type="password"
-                  placeholder="*"
-                  maxlength="1"
-                  value={card_pw2}
-                  onChange={(e) => setCard_pw2(e.target.value)}
-                />
-                *&nbsp;*
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={2} className="accept">
-                <input type="checkbox" className="accept" onClick={onCHKbox} />
-                개인(신용)정보 수집 및 이용 동의
-              </td>
-            </tr>
-            <tr>
-              <td colSpan={2}>
-                <textarea className="terms" value={text} />
-              </td>
-            </tr>
-          </table>
-        </div> */}
-
+  
         <button className="SU_input_btn" onClick={onClick}>
           다음
         </button>
