@@ -99,7 +99,7 @@ function Header() {
                 </svg>
               }
             </span>
-            <span className="H-nav H_icon" onClick={() => {window.sessionStorage.clear();}}>
+            <span className="H-nav H_icon" onClick={() => {window.sessionStorage.clear("id");}}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                 <path fill="#B9A89A" d="M16 10v-5l8 7-8 7v-5h-8v-4h8zm-16-8v20h14v-2h-12v-16h12v-2h-14z"/>
               </svg>
