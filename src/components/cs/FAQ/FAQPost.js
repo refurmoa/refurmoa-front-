@@ -44,7 +44,9 @@ const FAQPOST = (props) => {
             <>
               <div className="FAQ_List_post">
                 <div className="FAQPostCate">{cate}</div>
-                <div className="FAQAdminTitle">{item.title}</div>
+                <div className="FAQAdminTitle" onClick={() => setMode(true)}>
+                  {item.title}
+                </div>
                 <Link to="/cs/faq/update" state={{ item: item }}>
                   <button className="FAQAdminUpdate">수정</button>
                 </Link>
@@ -81,7 +83,9 @@ const FAQPOST = (props) => {
             <>
               <div className="FAQ_List_post">
                 <div className="FAQPostCate">{cate}</div>
-                <div className="FAQPostTitle">{item.title}</div>
+                <div className="FAQPostTitle" onClick={() => setMode(true)}>
+                  {item.title}
+                </div>
                 <img
                   className="FAQArrow"
                   src={arrow}
