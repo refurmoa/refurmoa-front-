@@ -5,7 +5,7 @@ import OneononeData from "./OneononeData.json";
 
 const InquiryList = () => {
   //admin 관리자페이지에서 수정,삭제
-  const loginid = "admin";
+  const loginid = "";
 
   // const login_id = window.sessionStorage.getItem("member_id"); // 세션 ID
   const [dataList, setDataList] = useState([]);

@@ -36,12 +36,12 @@
   color: white;
   display: flex;
 }
-.inquiry-post-btn:hover {
+.OI-post-btn:hover {
   background-color: #b9a89a;
-  color: rgba(81, 68, 56, 0.8);
+  color: white;
 }
 
-.inquiry-post-btn:disabled {
+.OI-post-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
@@ -108,12 +108,14 @@
   background-color: rgba(185, 168, 154, 0.8);
   border-radius: 10px;
   color: white;
-}
-.OI-delete-btn-delete-btn:hover {
-  background-color: #ddd;
+  cursor: pointer;
 }
 
-.OI-delete-btn-delete-btn:disabled {
+.OI-delete-btn:hover {
+  background-color: rgba(81, 68, 56, 0.8);
+}
+
+.OI-delete-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
