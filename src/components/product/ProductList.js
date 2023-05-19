@@ -145,7 +145,7 @@ const ProductList = () => {
     // .catch((e) => {
     //   console.error(e);
     // })
-    const data = productlist.products
+    const data = productlist
     setProdData(setStatusData(data));
   };
 
