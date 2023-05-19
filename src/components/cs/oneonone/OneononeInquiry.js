@@ -5,9 +5,8 @@ import OneononeData from "./OneononeData.json";
 
 const InquiryList = () => {
   //admin 관리자페이지에서 수정,삭제
-  const loginid = "";
 
-  // const login_id = window.sessionStorage.getItem("member_id"); // 세션 ID
+  const loginid = window.sessionStorage.getItem("id"); // 세션 ID
   const [dataList, setDataList] = useState([]);
   const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지

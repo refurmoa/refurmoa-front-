@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../images/logo-header.svg";
 
 function Header() {
-  const login_id = window.sessionStorage.getItem("member_id");
+  const login_id = window.sessionStorage.getItem("id");
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [ringlist, setRinglist] = useState(null); // 알림 리스트
   const [searchData, setSearchData] = useState(); // 검색어
