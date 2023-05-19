@@ -8,20 +8,18 @@ import axios from "axios";
 const AdminBanner = () => {
   const [bannList, setBannList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  // useEffect =
-  //   (() => {
-  //     // axios
-  //     //   .get("/api/banner")
-  //     //   .then((res) => {
-  //     //     const { data } = res;
-  //     //     setBannList(data);
-  //     //   })
-  //     //   .catch((e) => {
-  //     //     console.error(e);
-  //     //   });
-  //     // console.log(data);
-  //   },
-  //   []);
+  useEffect(() => {
+    // axios
+    //   .get("/api/banner")
+    //   .then((res) => {
+    //     const { data } = res;
+    //     setBannList(data);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+    // console.log(data);
+  }, []);
   const searchBanner = () => {
     // axios
     //   .get("/api/banner"){
@@ -42,7 +40,9 @@ const AdminBanner = () => {
       <div className="BN_wrap">
         <div className="BN_header">
           <span>배너관리</span>
-          <button>등록</button>
+          <Link to="/admin/banner/write">
+            <button>등록</button>
+          </Link>
           <div className="BN_search">
             <input
               placeholder="업체명"

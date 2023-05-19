@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../images/logo-header.svg";
 
 function Header() {
-  const login_id = window.sessionStorage.getItem("member_id");
+  const login_id = window.sessionStorage.getItem("id");
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [ringlist, setRinglist] = useState(null); // 알림 리스트
   const [searchData, setSearchData] = useState(); // 검색어
@@ -40,7 +40,7 @@ function Header() {
       <svg className="H-top_shape" xmlns="http://www.w3.org/2000/svg">
         <path d="M0 0H223L156.852 86H49.6112L0 0Z" fill="#B9A89A"/>
       </svg>
-      <Link to="/"><Logo /></Link>
+      <Link to="/" onClick={() => setCurrentPath("/")}><Logo /></Link>
 
       <div className="H-nav_wrap">
         <span className="H-nav_left">

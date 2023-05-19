@@ -6,8 +6,9 @@ import "./AdminNavi.css";
 
 const AdminNavi = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
-    const login_id = window.sessionStorage.getItem("member_id");
+    const login_id = window.sessionStorage.getItem("id");
     // if (login_id !== "admin") navigate("/login");
   }, []);
 
@@ -61,7 +62,7 @@ const AdminNavi = () => {
                 </Link>
             </div>
         </div>
-        <hr className="AN-bottom_line" />
+        {/* <hr className="AN-bottom_line" /> */}
         <Outlet />
     </>
   );
