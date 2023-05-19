@@ -80,7 +80,10 @@ function App() {
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
           <Route path="/admin/partner" element={<AdminPartner />} />
-          <Route path="/admin/partner/detail" element={<AdminPartnerDetail />} />
+          <Route
+            path="/admin/partner/detail"
+            element={<AdminPartnerDetail />}
+          />
           <Route path="/admin/banner" element={<AdminBanner />} />
           <Route path="/admin/banner/write" element={<AdminBannerWrite />} />
         </Route>

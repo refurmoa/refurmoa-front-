@@ -22,7 +22,7 @@
 
 .OD-view-title {
   float: left;
-  margin: 10px 0 0 20px;
+  margin: 10px 5px 0 20px;
   display: flex;
   font-size: 25px;
   line-height: 35px;
@@ -125,13 +125,80 @@
 }
 .OD-reply-date {
   float: right;
-  width: 189px;
+  width: 250px;
   height: 35px;
   font-size: 20px;
-  /* text-align: right; */
   color: #888888;
   line-height: 35px;
-  margin: 35px 0px 20px 810px;
+  margin: -15px 0px 20px 810px;
+}
+.OD_text_box {
+  border-top: 2px solid #eeeeee;
+  border-bottom: 2px solid #eeeeee;
+  width: 870px;
+  height: 300px;
+  padding: 25px 30px 85px 30px;
+  background: rgba(238, 238, 238, 0.3);
+  margin-bottom: 15px;
+}
+.OD_text_indside {
+  width: 840px;
+  height: 250px;
+  background: #ffffff;
+  border: 2px solid #dddddd;
+  border-radius: 10px;
+  padding: 10px 15px 40px 15px;
+  margin-bottom: 15px;
+}
+.OD_member_id {
+  float: right;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 35px;
+  margin-top: 10px;
+
+  color: #555555;
+}
+.OD_member_id label {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 35px;
+  color: #555555;
+  color: #000000;
+}
+.OD_text_content {
+  width: 840px;
+  height: 250px;
+  outline: none !important;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+  resize: none;
+  border: none;
+  color: #000;
+}
+.OD_text_content::placeholder {
+  color: #888888;
+}
+.OD_text_indside span {
+  float: right;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 30px;
+
+  color: #888888;
+}
+.OD_text_box button {
+  float: right;
+  width: 95px;
+  height: 50px;
+  border: none;
+  background: #b9a89a;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
+  color: #ffffff;
 }
 /* .OD-edit-btn {
   position: relative;
