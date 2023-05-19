@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { getPostByNo } from "../notice/Data";
 import "./OneononeUserpost.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-
-const OneononeUserpost = () => {
-  const navigate = useNavigate();
-
+import CsNavbar from "../CsNavbar";
+const NoticePost = () => {
   //파일첨부(재현님꺼..)
   const [showImages, setShowImages] = useState([]);
 
@@ -22,15 +19,14 @@ const OneononeUserpost = () => {
     if (imageUrlLists.length > 3) {
       imageUrlLists = imageUrlLists.slice(0, 3);
     }
-
-    setShowImages(imageUrlLists);
+    // 이미지 안보여도 되어서 주석처리
+    // setShowImages(imageUrlLists);
   };
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
   };
 
-  // textarea
-
+  //textarea
   const onInputHandler = (e) => {
     setInputCount(e.target.value.length);
   };
@@ -43,51 +39,63 @@ const OneononeUserpost = () => {
   let [inputCount, setInputCount] = useState(0);
 
   return (
-    <>
-    
-
-      <table className="oneonone-user-post-table">
+    <div className="CS-wrap">
+      <span className="OU-table">
         <tr>
-          <td className="oneonone-user-post-header">1:1 문의</td>
+          <td className="OU-header">1:1 문의</td>
         </tr>
-        <div className="oneonone-user-name">
+        <hr className="OU-line" />
+        <div className="OU-username">
           작성자
-          <label className="oneonone-userid">이모아(lee)</label>
+          <label className="OU-userid">이모아(lee)</label>
         </div>
         <input
-          className="oneonone-user-post-title-box"
+          className="OU-title-box"
           input
           type="text"
           placeholder="제목을 입력하세요"
         ></input>
         <textarea
           onChange={onInputHandler}
-          className="oneonone-user-post-content"
+          className="OU-content"
           input
           type="text"
           maxLength="1000"
           placeholder="내용을 입력하세요"
         />
-        <p>
-          <span className="oneonone-user-post-content-count">
-            {inputCount} / 1000
-          </span>
-        </p>
+        <div className="OU-content-count">{inputCount} / 1000</div>
+        <div className="OU-box">
+          <div className="OU-fileupload-wrap">
+            <div className="OU_product_defect">
+              <input
+                type="file"
+                className="OU_defect_image"
+                id="input-file"
+                accept="image/*"
+                multiple
+                readonly
+                onChange={handleAddImages}
+              />
 
-        <div className="oneonone-user-post-box"></div>
-        <button className="oneonone-user-post-fileupload-btn">파일 첨부</button>
-        <label> 파일명.jpg</label>
-        <div>
-          <button
-            className="oneonone-user-post-cancle-btn"
-            onClick={() => navigate(-1)}
-          >
-            취소
-          </button>
-          <button className="oneonone-user-post-upload-btn">등록</button>
+              {/* {showImages.map((image, id) => (
+              <div key={id}>
+                <img
+                  className="NP_defect_img"
+                  src={image}
+                  alt={`${image}-${id}`}
+                  onClick={() => handleDeleteImage(id)}
+                />
+              </div>
+            ))} */}
+            </div>
+          </div>
         </div>
-      </table>
-    </>
+        <div className="OU-btn">
+          <button className="OU-cancle-btn">취소</button>
+          <button className="OU-upload-btn">등록</button>
+        </div>
+      </span>
+    </div>
   );
 };
-export default OneononeUserpost;
+export default NoticePost;
