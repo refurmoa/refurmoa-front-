@@ -80,7 +80,7 @@
     height: 50px;
     border: 2px solid #DDDDDD;
     border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 25px;
     margin-right: 0;
     font-size: 20px;
     line-height: 30px;
@@ -139,7 +139,7 @@
 
   .ABTextBox {
     width: 960px;
-    margin-top: 20px;
+    margin-top: 25px;
   }
 
   .ABInputTextBox {

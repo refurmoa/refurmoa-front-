@@ -5,8 +5,12 @@ import { useState } from "react";
 import Modal from "react-modal";
 import UpdatePartner from "./AdminPartnerDetailUpdate";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const AdminPartnerDetail = () => {
+  // const location = useLocation();
+  // const com_num = location.state;
+  // console.log(com_num);
   const APDpush = () => {
     // axios
     //   .post("/api/APDpush", {
@@ -31,7 +35,7 @@ const AdminPartnerDetail = () => {
   const getUserData = () => {
     // axios
     //   .get(`/api/get/PartnerData`{
-    //   name : name
+    //   com_name : com_name
     // })
     //   .then((res) => {
     //     const { data } = res;
