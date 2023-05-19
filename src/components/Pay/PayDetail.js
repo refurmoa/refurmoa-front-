@@ -180,7 +180,9 @@ const PayDetail = () => {
         </PayInfoBox>
       </DeliveryAndPayInfoBox>
     </DeliveryAndPayInfoWrapper>
-    <TrackingWrapper>
+    {/* 구매확정이 false이면 배송정보 렌더링 */}
+    {!payDetailData?.is_purchaseconfirm && (
+      <TrackingWrapper>
       <TrackingTitleAndNumberBox>
         <TrackingTitle>배송 조회</TrackingTitle>
         {payDetailData?.deli_num !== null ? 
@@ -224,6 +226,7 @@ const PayDetail = () => {
       </TrackingStateBox>
       <TrackingNowLocationBtn onClick={() => {trackingHandler()}}><span>현재 위치 조회</span></TrackingNowLocationBtn>
     </TrackingWrapper>
+    )}
   </>
   )
 }
