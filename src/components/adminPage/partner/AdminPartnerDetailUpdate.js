@@ -34,7 +34,7 @@ const UpdatePartner = (props) => {
   const onClick = () => {
     setComEmail(email.concat("@", domain));
     // axios
-    //   .post("/partnerupdate", {
+    //   .post("/admin/partner/update", {
     //     com_name: com_name,
     //     com_ceo_name: com_ceo_name,
     //     com_phone: com_phone,

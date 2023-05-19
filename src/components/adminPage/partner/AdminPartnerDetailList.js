@@ -8,7 +8,7 @@ export const AdminPartnerDetailList = () => {
   // const id = window.sessionStorage.getItem("id");
   const postPartnerData = () => {
     // axios
-    //   .get(`/api/post/PartnerListData`{
+    //   .get(`/admin/partner/list`{
     //   name : name
     // })
     //   .then((res) => {
@@ -23,7 +23,7 @@ export const AdminPartnerDetailList = () => {
 
   const SearchBidList = useRef();
 
-  const AUDsearch = (e) => {
+  const APDsearch = (e) => {
     if (
       SearchBidList.current.value === "" ||
       SearchBidList.current.value === undefined
@@ -33,8 +33,8 @@ export const AdminPartnerDetailList = () => {
       return false;
     }
     // axios
-    //   .post(`/api/post/PartnerSearchData`{
-    //   search : e.target.value
+    //   .post(`/admin/partner/search`{
+    //    search : e.target.value
     // })
     //   .then((res) => {
     //     const { data } = res;
@@ -44,6 +44,7 @@ export const AdminPartnerDetailList = () => {
     //     console.error(e);
     //   });
     // setPartnerlistdata(data);
+    console.log(e.target.value);
   };
 
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ export const AdminPartnerDetailList = () => {
           <input
             className="APDsearchboxbutton"
             type="button"
-            onClick={AUDsearch}
+            onClick={APDsearch}
           ></input>
         </div>
       </top>

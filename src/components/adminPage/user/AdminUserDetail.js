@@ -4,24 +4,47 @@ import { AdminUserDetailPayList } from "./AdminUserDetailPayList";
 import userdata from "./AdminUserDetail.json";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const AdminUserDetail = () => {
-  // const location = useLocation();
-  // const id = location.state;
-  // console.log(id);
+const AdminUserDetail = (props) => {
+  const location = useLocation();
+  const id = location.state.member_id;
+  console.log(id);
   const [pageNum, setPageNum] = useState(0);
+  const [cuList, setCuList] = useState(0);
 
-  const AUDCuList = () => {};
+  const AUDCuList = () => {
+    // axios
+    //   .post(`/admin/user/detail/culist`{
+    //   id:id
+    // })
+    //   .then((res) => {
+    //     const { data } = res;
+    //     setCuList(data);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+    // setCuList(data);
+  };
 
-  const AUDCuInput = () => {};
-
-  const AUDUserUpdate = () => {};
+  const AUDCuInput = () => {
+    // axios
+    //   .post(`/admin/user/detail/insertcu`{
+    //   id:id
+    // })
+    //   .then((res) => {
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+  };
 
   // const [userdata, setUserdata] = useState();
   // const id = window.sessionStorage.getItem("id");
   const postUserData = () => {
     // axios
-    //   .get(`/api/post/UserData`{
+    //   .post(`/admin/user/detail/memberinfo`{
     //   id:id
     // })
     //   .then((res) => {
@@ -40,7 +63,13 @@ const AdminUserDetail = () => {
         <info className="AUDLeftInfo">
           <div>
             <div className="AUDLeftInfo1">회원정보</div>
-            <input type="button" value="수정" onClick={AUDUserUpdate}></input>
+            <Link
+              className="AUDUpdatLink"
+              to={`/userupdate`}
+              state={{ id: id }}
+            >
+              <input type="button" value="수정"></input>
+            </Link>
           </div>
           <div className="AUDLeftInfo2">회원등급</div>
           <div className="AUDLeftInfo3">
@@ -57,7 +86,7 @@ const AdminUserDetail = () => {
           <div>이름</div>
           <div>{userdata.name}</div>
           <div>아이디</div>
-          <div>{userdata.member_id}</div>
+          <div>{id}</div>
           <div>생년월일</div>
           <div>{userdata.birth}</div>
           <div>연락처</div>

@@ -6,7 +6,7 @@ import axios from "axios";
 
 const AdminBannerWirte = () => {
   let [main_Image, setMainImg] = useState("");
-  var fileList = [];
+  const fileList = []; // 업로드 할 파일 리스트 저장
   const [listFile, setListfile] = useState();
   const [img_con, setImg_con] = useState(false);
 
@@ -39,16 +39,21 @@ const AdminBannerWirte = () => {
   };
 
   const BannerInput = () => {
+    // const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용
+    // fileList.forEach((file) => {
+    //   formData.append("uploadfiles", file);
+    // });
     // axios
-    //   .post("/bannerinsert", {
+    //   .post("/admin/banner/write", {
     //     startDate: startDate,
     //     endtDate: endtDate,
     //     bannerLink: bannerLink,
     //     bannerCom: bannerCom,
     //     bannerPhone: bannerPhone,
+    //     formData: formData,
     //   })
     //   .then((res) => {
-    //     // AdminBanner에서 배너 목록 불러오는 함수 위치
+    //     // AdminBanner에서 배너 목록 불러오는 함수 이름
     //   })
     //   .catch((e) => {
     //     console.error(e);
