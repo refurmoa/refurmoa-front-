@@ -6,12 +6,10 @@ import "./NoticeList.css";
 import Data from "./Data.json";
 
 const NoticeList = () => {
-// const login_id = window.sessionStorage.getItem("member_id"); // 세션 ID
+const login_id = window.sessionStorage.getItem("id"); // 세션 ID
 const [dataList, setDataList] = useState([]);
 const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
 const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
-
-const login_id = "admin";
 
 useEffect(() => {
   setDataList(Data);

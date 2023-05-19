@@ -68,8 +68,6 @@ function AdminOrder() {
       if (order.pay_num === pay_num) {
         const p_num = order.pay_num;
         const d_num = delinums[pay_num];
-        console.log(p_num);
-        console.log(d_num);
   
         // axios : p_num, d_num 보내기
   

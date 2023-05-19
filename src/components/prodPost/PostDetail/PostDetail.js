@@ -17,7 +17,7 @@ import bidlist from "./bidlist.json";
 function PostDetail() {
   const board_num = useParams().board_num;
   const navigate = useNavigate();
-  // const login_id = window.sessionStorage.getItem("member_id"); // 세션 ID
+  const login_id = window.sessionStorage.getItem("id"); // 세션 ID
   const [prodInfo, setProdInfo] = useState(post); // 상품 상세 정보
   const [bidList, setBidList] = useState(bidlist); // 입찰 내역
   const [state, setState] = useState(0); // 판매 상태 (0 : 판매예정, 1 : 판매중, 2 : 판매종료)
@@ -28,8 +28,6 @@ function PostDetail() {
   const [imageView, setImageView] = useState(0); // 하자 이미지 모달 창
   const [detailInfo, setDetailInfo] = useState(1); // 메뉴 (1 : 상세정보, 2 : 상품문의, 3 : 결제 및 배송, 4 : 교환환불)
   const [now, setNow] = useState(new Date().getTime()); // 현재 날짜(ms)
-
-  const login_id = "admin";
 
   // sell_type => 1 : 경매, 2 : 즉시구매, 3 : 경매+즉시구매
 
