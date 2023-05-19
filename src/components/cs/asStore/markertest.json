@@ -1,0 +1,13 @@
+{
+    "placelist" : [
+     {
+        "store_num":1,  
+        "store_name": "삼성전자",
+        "store_phone":"02-3277-0570",
+        "store_addr":"서울 서초구 서초대로74길 11 삼성전자빌딩",
+        "latitude": 37.62197524055062,
+        "longitude": 127.16017523675508
+      }
+    ]
+  }
+    

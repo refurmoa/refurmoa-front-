@@ -1,6 +1,7 @@
 {
   "placelist" : [
    {
+      "store_num":1,  
       "store_name": "삼성전자",
       "store_phone":"02-3277-0570",
       "store_addr":"서울 서초구 서초대로74길 11 삼성전자빌딩",
@@ -8,6 +9,7 @@
       "longitude": 127.16017523675508
     },
     {
+      "store_num":2,
       "store_name": "LG전자",
       "store_phone":"02-3277-0570",
       "store_addr":"서울 경기 여의대로 128",
@@ -15,6 +17,7 @@
       "longitude": 127.1583774403176
     },
   {
+      "store_num":3,  
       "store_name": "샤오미",
       "store_phone":"02-3277-0570",
       "store_addr":"서울 홍대 여의대로 128",
@@ -22,6 +25,7 @@
       "longitude": 127.15122688059974
     },
     {
+      "store_num":4,
       "store_name": "멀티캠퍼스",
       "store_phone":"02-3277-0570",
       "store_addr":"서울 서초 여의대로 128",
@@ -29,6 +33,7 @@
       "longitude": 127.15211256646381
     },
     {
+      "store_num":5,
       "store_name": "리액트",
       "store_phone":"02-3277-0570",
       "store_addr":"서울 강남 여의대로 128",
