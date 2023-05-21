@@ -5,7 +5,7 @@ import { useState } from "react";
 import "./CsNavbar.css";
 
 const CsNavbar = () => {
-  const login_id = window.sessionStorage.getItem("member_id"); // 세션 ID
+  const login_id = window.sessionStorage.getItem("id"); // 세션 ID
   const [activeLink, setActiveLink] = useState("");
 
   const handleLinkClick = (link) => {
