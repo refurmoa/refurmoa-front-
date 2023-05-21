@@ -35,7 +35,9 @@ const MyPage_detail = () => {
 
   // const postbidlistData = () => {
   //   axios
-  //     .get(`/api/post/productinfo`)
+  //     .get("/mypage/bidlist/list", {
+  //       id: id,
+  //     })
   //     .then((res) => {
   //       const { data } = res;
   //       setProdData(data);
@@ -47,20 +49,9 @@ const MyPage_detail = () => {
   //   setProdbidlistData(data);
   // };
 
-  //  useEffect(() => {
-  //   axios
-  //   .all([axios("/api/countpay"), axios("/api/countbid"), axios("api/countlike")])
-  //   .then(
-  //     axios.spread((res1, res2, res3) => {
-  //       console.log(res1, res2, res3);
-  //     })
-  //   )
-  //   .catch((err) => console.log(err));
-  //  },[]);
-
   const searchRef = useRef();
 
-  const search_product = () => {
+  const search_product = (e) => {
     if (
       searchRef.current.value === "" ||
       searchRef.current.value === undefined
@@ -69,6 +60,18 @@ const MyPage_detail = () => {
       searchRef.current.focus();
       return false;
     }
+    // axios
+    //   .post(`/admin/user/detail/search`{
+    //    search : e.target.value
+    // })
+    //   .then((res) => {
+    //     const { data } = res;
+    //     setProdData(data);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e);
+    //   });
+    // setProdData(data);
   };
 
   const search_all = () => {
@@ -76,54 +79,28 @@ const MyPage_detail = () => {
   };
 
   const search_ing = () => {
-    setProdData(prod.prodlist.filter((li) => li.prod_owner === 1));
+    setProdData(
+      prod.prodlist.filter((li) => new Date(li.end_date) > new Date())
+    );
   };
 
   const search_done = () => {
-    setProdData(prod.prodlist.filter((li) => li.prod_owner === 0));
+    setProdData(
+      prod.prodlist.filter((li) => new Date(li.end_date) <= new Date())
+    );
   };
 
-  const search_3 = () => {
-    // axios
-    //   .post(`/api/post/threesearch`)
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setProdData(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // const data = prod.prodlist;
-    // setProdbidlistData(data);
+  const searchMonth = (e) => {
+    setProdData(
+      prod.prodlist.filter(
+        (li) =>
+          new Date(li.start_date).getTime() >=
+          new Date().getTime() - e.target.value * 30 * 24 * 60 * 60 * 1000
+      )
+    );
   };
 
-  const search_6 = () => {
-    // axios
-    //   .post(`/api/post/sixsearch`)
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setProdData(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // const data = prod.prodlist;
-    // setProdbidlistData(data);
-  };
-
-  const search_9 = () => {
-    // axios
-    //   .post(`/api/post/ninesearch`)
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setProdData(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // const data = prod.prodlist;
-    // setProdbidlistData(data);
-  };
+  console.log(prodbidlistData);
 
   return (
     <div>
@@ -140,16 +117,11 @@ const MyPage_detail = () => {
           <input type="radio" name="month" onClick={search_done}></input>
           <label>종료</label>
         </radio>
-        <select className="option">
-          <option value="3" onChange={search_3}>
-            3개월
-          </option>
-          <option value="6" onChange={search_6}>
-            6개월
-          </option>
-          <option value="12" onChange={search_9}>
-            12개월
-          </option>
+        <select className="option" onChange={(e) => searchMonth(e)}>
+          <option value="48">개월 수</option>
+          <option value="3">3개월</option>
+          <option value="6">6개월</option>
+          <option value="12">12개월</option>
         </select>
         <span className="wordsearchpart">
           <input className="searchbox" type="text" ref={searchRef}></input>

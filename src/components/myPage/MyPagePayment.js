@@ -12,7 +12,9 @@ const MyPage_detail = () => {
   // const id = window.sessionStorage.getItem("id");
 
   const postProdData = () => {
-    // axios.get(`/api/post/productinfo`)
+    // axios
+    // .get(`/api/post/list`{
+    //     id:id
     // .then((res) => {
     //   const { data } = res;
     //   setProdData(data);
@@ -23,17 +25,6 @@ const MyPage_detail = () => {
     const data = prod.prodlist;
     setProdData(data);
   };
-
-  //  useEffect(() => {
-  //   axios
-  //   .all([axios("/api/countpay"), axios("/api/countbid"), axios("api/countlike")])
-  //   .then(
-  //     axios.spread((res1, res2, res3) => {
-  //       console.log(res1, res2, res3);
-  //     })
-  //   )
-  //   .catch((err) => console.log(err));
-  //  },[]);
 
   const day1Ref = useRef();
   const day2Ref = useRef();
@@ -59,6 +50,11 @@ const MyPage_detail = () => {
   const pageCountBid = () => {
     setTotalPageBid(7);
   };
+
+  const [searchDate1, setSearchDate1] = useState();
+  const [searchDate2, setSearchDate2] = useState();
+  console.log(searchDate1);
+  console.log(searchDate2);
 
   const search_date = () => {
     if (day1Ref.current.value === "" || day1Ref.current.value === undefined) {
@@ -91,7 +87,7 @@ const MyPage_detail = () => {
     // setProdbidlistData(data);
   };
 
-  const search_product = () => {
+  const search_product = (e) => {
     if (
       searchRef.current.value === "" ||
       searchRef.current.value === undefined
@@ -102,9 +98,9 @@ const MyPage_detail = () => {
     }
 
     // axios
-    //   .post("/api/post/seachtext", {
-    //     id: searchRef.current.value,
-    //   })
+    //   .post(`/admin/user/detail/search`{
+    //    search : e.target.value
+    // })
     //   .then((res) => {
     //     const { data } = res;
     //     setProdData(data);
@@ -112,8 +108,7 @@ const MyPage_detail = () => {
     //   .catch((e) => {
     //     console.error(e);
     //   });
-    // const data = prod.prodlist;
-    // setProdbidlistData(data);
+    // setProdData(data);
   };
 
   return (
@@ -121,8 +116,19 @@ const MyPage_detail = () => {
       <MemberInfo />
       <mid className="mid">
         <div className="payword">결제 내역</div>
-        <input className="date" type="date" ref={day1Ref}></input>~
-        <input className="date" type="date" ref={day2Ref}></input>
+        <input
+          className="date"
+          type="date"
+          ref={day1Ref}
+          onChange={(e) => setSearchDate1(e.target.value)}
+        ></input>
+        ~
+        <input
+          className="date"
+          type="date"
+          ref={day2Ref}
+          onChange={(e) => setSearchDate2(e.target.value)}
+        ></input>
         <input
           className="datesearchbutton"
           type="button"

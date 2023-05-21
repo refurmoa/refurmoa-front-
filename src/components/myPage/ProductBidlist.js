@@ -34,11 +34,12 @@ export const ProductBidlist = ({ product }) => {
     <div className="productBid">
       <image className="imageBid">
         {/* bid_cancle => 0 낙찰 1 패찰 */}
-        {product.bid_cancle === 1 ? (
-          <div className="productnownerBid">
-            <div onClick={() => onClick(product.product_code)}>패찰</div>
-          </div>
-        ) : product.bid_cancle === 0 ? (
+        {product.prod_state < 2 ? (
+          ""
+        ) : product.prod_state >= 2 &&
+          product.prod_price === product.bid_price &&
+          product.bid_cancle === 0 &&
+          product.pay_cancle === 0 ? (
           <div className="productownerBid">
             <div className="productownerboxBid"></div>
             <span
@@ -49,7 +50,9 @@ export const ProductBidlist = ({ product }) => {
             </span>
           </div>
         ) : (
-          ""
+          <div className="productnownerBid">
+            <div onClick={() => onClick(product.product_code)}>패찰</div>
+          </div>
         )}
         <img
           src={`/images/prod/${product.main_image}`}
@@ -61,6 +64,16 @@ export const ProductBidlist = ({ product }) => {
         {day <= 0 && hour <= 0 && min <= 0 && sec <= 0 ? (
           <div className="balckcolorBid">
             <img src={blacktimeicon} alt=""></img>경매 종료
+          </div>
+        ) : day === 0 && hour === 0 && min === 0 ? (
+          <div className="redcolorBid">
+            <img src={redtimeicon} alt=""></img>
+            {sec}초
+          </div>
+        ) : day === 0 && hour === 0 ? (
+          <div className="redcolorBid">
+            <img src={redtimeicon} alt=""></img>
+            {min}분 {sec}초
           </div>
         ) : day === 0 && hour < 12 ? (
           <div className="redcolorBid">
