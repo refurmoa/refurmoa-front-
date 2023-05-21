@@ -38,7 +38,7 @@ const User_update = () => {
   const [check_box, setCheck_box] = useState(false);
   // =====================================================
 
-  useEffect = () => {
+  useEffect(() => {
     setId(window.sessionStorage.getItem("id"));
     /*
     axios
@@ -63,7 +63,7 @@ const User_update = () => {
         console.error(e);
       });
     */
-  };
+  }, []);
 
   /*========================== */
   const [popup, setPopup] = useState(false);

@@ -4,15 +4,26 @@ import "./OneononeInquiry.css";
 import OneononeData from "./OneononeData.json";
 
 const InquiryList = () => {
-  //admin 관리자페이지에서 수정,삭제
-
   const loginid = window.sessionStorage.getItem("id"); // 세션 ID
   const [dataList, setDataList] = useState([]);
   const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   useEffect(() => {
+    // axios
+    // .get("/cs/inquiry",{
+    //     member_id:id
+    // })
+    // .then((res) => {
+    //   if (res.data === 1) {
+    //     setDataList(res.datea);
+    //   } else {
+    //     alert("등록에 실패했습니다.");
+    //   }
+    // })
+    // .catch((e) => {
+    //   console.error(e);
+    // });
     setDataList(OneononeData);
-
     pageCount(); // 문의 글 수 조회
   }, []);
 
@@ -41,7 +52,7 @@ const InquiryList = () => {
         <div className="OI-header">
           <span className="OI-title"> 1:1 문의</span>
 
-          {loginid === "" && (
+          {loginid !== "admin" && (
             <Link to={`/cs/inquiry/write`} className="OI-post-btn">
               문의하기
             </Link>
@@ -56,7 +67,8 @@ const InquiryList = () => {
               <span className="OI-board-left-wrap">
                 <Link
                   className="OI-board-num"
-                  to={`/cs/inquiry/detail/${item.num}`}
+                  to="/cs/inquiry/detail"
+                  state={{ item: item }}
                   onClick={readcountup}
                 >
                   {item.num}
@@ -64,12 +76,11 @@ const InquiryList = () => {
                 <span>
                   {loginid === "admin" && (
                     <span className="OI-answer-wrap">
-                      {item.ANSWER_STATE === "미답변" && (
+                      {item.ANSWER_CON === "" ? (
                         <span className="OI-answer-n">
                           &nbsp;&nbsp;미답변&nbsp;&nbsp;
                         </span>
-                      )}
-                      {item.ANSWER_STATE === "답변" && (
+                      ) : (
                         <span className="OI-answer-y">답변완료</span>
                       )}
                     </span>
@@ -77,7 +88,8 @@ const InquiryList = () => {
                 </span>
                 <Link
                   className="OI-board-title"
-                  to={`/cs/inquiry/detail`}
+                  to="/cs/inquiry/detail"
+                  state={{ item: item }}
                   onClick={readcountup}
                 >
                   {item.INQ_TITLE}
@@ -85,24 +97,27 @@ const InquiryList = () => {
               </span>
               <span className="OI-board-right-wrap">
                 <span className="OI-answer-state">
-                  {loginid === "admin" && (
+                  {loginid === "admin" ? (
                     <>
                       <span className="OI-memberid">{item.MEMBER_ID}</span>
                     </>
-                  )}
-                  {loginid === "" && (
+                  ) : (
                     <>
-                      {item.ANSWER_STATE === "답변" && (
+                      {item.ANSWER_CON !== "" && (
                         <>
                           <span className="OI-answer-yes">답변완료</span>
                         </>
                       )}
                     </>
                   )}
-                  <span className="inquirylist-post-date">{item.INQ_DATE}</span>
-                  {loginid === "" && (
+                  {loginid !== "admin" && (
+                    <span className="inquirylist-post-date">
+                      {item.INQ_DATE}
+                    </span>
+                  )}
+                  {loginid !== "admin" && (
                     <>
-                      {item.ANSWER_STATE === "미답변" && (
+                      {item.ANSWER_CON === "" && (
                         <>
                           <span
                             className="OI-delete-btn"

@@ -13,7 +13,7 @@ function Signup() {
   const [id, setTotal_Id] = useState("");
   const [phone, setTotal_Phone] = useState("");
   const [name, setTotal_Name] = useState("");
-
+  const [data, setData]=useState({})
   if (mode === 0) {
     content = <Main setMode={setMode} />;
   } else if (mode === 1) {
@@ -31,10 +31,11 @@ function Signup() {
         name={name}
         phone={phone}
         setTotal_Id={setTotal_Id}
+        setData={setData}
       />
     );
   } else if (mode === 3) {
-    content = <Accept setMode={setMode} />;
+    content = <Accept setMode={setMode}  data={data}/>;
   } else if (mode === 4) {
     content = <Complete setMode={setMode} name={name} id={id} />;
   }
