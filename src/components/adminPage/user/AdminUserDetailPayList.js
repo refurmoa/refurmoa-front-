@@ -11,7 +11,7 @@ import cancelicon from "../../../images/cancel.png";
 // 더미데이터
 import dummydata from "./AdminUserDetailPayList.json"
 
-export const AdminUserDetailPayList = ({ setPageNum }) => {
+export const AdminUserDetailPayList = ({ setPageNum, id }) => {
   const navigate = useNavigate();
   const [payListData, setPayListData] = useState();
   const [invoiceInputState, setInvoiceInputState] = useState(false);
@@ -20,33 +20,35 @@ export const AdminUserDetailPayList = ({ setPageNum }) => {
     setPageNum(0);
   };
 
-  const SearchBidList = useRef();
+  const searchRef = useRef();
   // const [userlist, setUserlist] = useState();
   const AUDsearch = () => {
     if (
-      SearchBidList.current.value === "" ||
-      SearchBidList.current.value === undefined
+      searchRef.current.value === "" ||
+      searchRef.current.value === undefined
     ) {
       alert("내용을 입력하세요!!");
-      SearchBidList.current.focus();
+      searchRef.current.focus();
       return false;
     }
 
+    const searchData = { id: id, searchword : searchRef.current.value }
+    console.log(searchData);
     // axios
-    //   .post(`/api/searchlocation`, {
-    //     searchData,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     setUserlist();
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
+    // .post("/admin/user/detail/pay/search", {
+    //   searchData,
+    // })
+    // .then((res) => {
+    //   const { data } = res;
+    //   setPayListData(data);
+    // })
+    // .catch((e) => {
+    //   console.error(e);
+    // });
   };
 
   const getPayList = () => {
-    const requestData = { id: sessionStorage.getItem("id") }
+    const requestData = { id: id }
     // axios.post("/api/admin/paylist", requestData)
     // .then((res) => {
     //   const { data } = res;
@@ -72,12 +74,11 @@ export const AdminUserDetailPayList = ({ setPageNum }) => {
           입찰 내역
         </div>
         <div className="AUDinput">
-          <input className="AUDsearchbox" type="text"></input>
+          <input className="AUDsearchbox" ref={searchRef} type="text"></input>
           <input
             className="AUDsearchboxbutton"
             type="button"
             onClick={AUDsearch}
-            ref={SearchBidList}
           ></input>
         </div>
       </top>
