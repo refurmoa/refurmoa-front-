@@ -114,7 +114,7 @@ const AdminUserDetail = (props) => {
         {pageNum === 0 ? (
           <AdminUserDetailBidList setPageNum={setPageNum} />
         ) : (
-          <AdminUserDetailPayList setPageNum={setPageNum} />
+          <AdminUserDetailPayList setPageNum={setPageNum} id={id} />
         )}
       </right>
     </div>
