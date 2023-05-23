@@ -10,7 +10,7 @@ import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import PostWrite from "./components/prodPost/PostWrite/PostWrite";
 import PostUpdate from "./components/prodPost/PostWrite/PostUpdate";
-import PostPay from "./components/Pay/PostPay";
+// import PostPay from "./components/Pay/PortonePay";
 import PayDetail from "./components/Pay/PayDetail";
 import CsNavbar from "./components/cs/CsNavbar";
 import NoticeList from "./components/cs/notice/NoticeList";
@@ -66,12 +66,12 @@ function App() {
           <Route path="/cs/inquiry" element={<OneononeInquiry />} />
           <Route path="/cs/inquiry/detail" element={<OneononeDetail />} />
           <Route path="/cs/inquiry/write" element={<OneononeUserpost />} />
-          <Route path="/cs/as_store" element={<AsStore />} />
-          <Route path="/cs/as_store/write" element={<AsStoreWrite />} />
-          <Route path="/cs/as_store/update" element={<AsStoreUpdate />} />
+          <Route path="/cs/as" element={<AsStore />} />
+          <Route path="/cs/as/write" element={<AsStoreWrite />} />
+          <Route path="/cs/as/update" element={<AsStoreUpdate />} />
         </Route>
+        <Route path="/user/update" element={<UserUpdate />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />
-        <Route path="/userupdate" element={<UserUpdate />} />
         <Route path="/mypage/payment" element={<MyPagePayment />} />
         <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
         <Route element={<AdminNavi />}>
