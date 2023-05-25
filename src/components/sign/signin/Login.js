@@ -16,7 +16,7 @@ function Login() {
   const [idModal, setIdModal] = useState(false); // ID 찾기 모달
   const [pwModal, setPwModal] = useState(false); // PW 찾기 모달
 
-  // 유효성 검사
+  // 로그인
   const LoginClick = () => {
     if (id === "") {
       alert("아이디를 입력해주세요");
@@ -25,6 +25,7 @@ function Login() {
       alert("비밀번호를 입력해주세요");
       return false;
     }
+
     axios
       .post("/login", {
         member_id: id,
