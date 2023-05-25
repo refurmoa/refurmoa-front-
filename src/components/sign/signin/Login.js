@@ -1,21 +1,22 @@
-import React from "react";
-import "../signup/Signup.css";
+// 로그인 페이지
+
 import "./Login.css";
-import Modal from "react-modal";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import google from "../../../images/google.png";
-import kakao from "../../../images/kakao.png";
-import naver from "../../../images/naver.png";
-import { useRef, useState, useEffect } from "react";
-import FindID from "./LoginFindId";
-import FindPW from "./LoginFindPw";
-// id, password, passwordChk(비밀번호확인), name, tel 기본값 호출
+import Find from "./LoginFind";
+import naver from "../../../images/naver_logo-150.png";
+import kakao from "../../../images/kakao_logo-150.png";
+import google from "../../../images/google_logo-150.png";
+
 function Login() {
-  // 제출버튼을 누르면 변경된 파라미터 값 전달함(추후 수정 필요)
   const navigate = useNavigate();
-  const id = useRef();
-  const password = useRef();
-  const onClick = () => {
+  const [id, setId] = useState();
+  const [password, setPassword] = useState();
+  const [idModal, setIdModal] = useState(false); // ID 찾기 모달
+  const [pwModal, setPwModal] = useState(false); // PW 찾기 모달
+
+  // 유효성 검사
+  const LoginClick = () => {
     if (id.current.value === "") {
       alert("아이디를 입력해주세요");
       return false;
@@ -27,48 +28,8 @@ function Login() {
     navigate(-1);
   };
 
-  /*
-  axios
-        .get("/login", {
-          id: id,
-          password: password,
-        })
-        .then((res) => {
-          if (res.data === 1) {
-            window.sessionStorage.setItem("id", id);
-          } else {
-            alert("해당 정보의 아이디는 존재하지 않습니다! 아이디 입니다!");
-          }
-        })
-        .catch((e) => {
-          console.error(e);
-        });
-
-  */
-
-  const [popup, setPopup] = useState(false);
-  const [modal, setModal] = useState(false);
-  const ChangePopUP = () => {
-    setPopup(true);
-    setModal(true);
-  };
-  const close_modal = () => {
-    setPopup(false);
-    setModal(false);
-  };
-  /*=========================================================== */
-  const [Pw_popup, setPw_Popup] = useState(false);
-  const [Pw_modal, setPw_Modal] = useState(false);
-  const ChangePw_PopUP = () => {
-    setPw_Popup(true);
-    setPw_Modal(true);
-  };
-  const Pw_close_modal = () => {
-    setPw_Popup(false);
-    setPw_Modal(false);
-  };
-  /*=========================================================== */
-  let naver_api_url =
+  // API URL
+  const naver_api_url =
     "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" +
     process.env.REACT_APP_NAVER_CLIENT_ID +
     "&redirect_uri=" +
@@ -76,148 +37,72 @@ function Login() {
     "&state=" +
     Math.random().toString(36).substr(3, 14);
 
-  let kakao_api_url = `https://kauth.kakao.com/oauth/authorize?client_id=${
+  const kakao_api_url = `https://kauth.kakao.com/oauth/authorize?client_id=${
     process.env.REACT_APP_KAKAO_REST_API_KEY
   }&redirect_uri=${encodeURI(
     process.env.REACT_APP_KAKAO_CALLBACK_URI
   )}&response_type=code`;
+
+
   return (
-    <>
-      <wrap>
-        <div className="Login_form">
-          <div className="LG_Main_header">로그인</div>
-          <div className="SU_phone_form">
-            <table className="LG_login_input">
-              <tr>
-                <td>아이디</td>
-                <td>
-                  <input
-                    name="id"
-                    type="text"
-                    placeholder="아이디"
-                    maxLength="15"
-                    ref={id}
-                  />
-                  <hr className="SU_phone_line" />
-                </td>
-              </tr>
+    <div className="Login_wrap">
+      <div className="Login_header">로그인</div>
 
-              <tr>
-                <td>비밀번호</td>
-                <td>
-                  <input
-                    name="password"
-                    type="password"
-                    maxLength="20"
-                    placeholder="비밀번호"
-                    ref={password}
-                  />
-                  <hr className="SU_phone_line" />
-                </td>
-              </tr>
-            </table>
-          </div>
-          <button className="login_btn" onClick={onClick}>
-            LOGIN
-          </button>
-          <div className="login_detail">
-            <button className="login_find" onClick={ChangePopUP}>
-              아이디 찾기
-            </button>
-            <Modal
-              style={{
-                overlay: {
-                  position: "fixed",
-                  backgroundColor: "rgba(255, 255, 255, 0.75)",
-                },
-                content: {
-                  position: "absolute",
-                  top: "40px",
-                  width: "600px",
-                  height: "540px",
-                  left: "40px",
-                  right: "40px",
-                  bottom: "40px",
-                  border: "1px solid #ccc",
-                  background: "#fff",
-                  overflow: "auto",
-                  WebkitOverflowScrolling: "touch",
-                  borderRadius: "15px",
-                  outline: "none",
-                  padding: "20px",
-                },
-              }}
-              isOpen={modal}
-            >
-              <div className="close_modal">
-                <button type="button" onClick={close_modal}>
-                  <b>X</b>
-                </button>
-              </div>
-              <div>{popup && <FindID setModal={setModal}></FindID>}</div>
-            </Modal>
-            &nbsp; |&nbsp;
-            <button className="login_find" onClick={ChangePw_PopUP}>
-              비밀번호 찾기
-            </button>
-            <Modal
-              style={{
-                overlay: {
-                  position: "fixed",
-                  backgroundColor: "rgba(255, 255, 255, 0.75)",
-                },
-                content: {
-                  position: "absolute",
-                  top: "40px",
-                  width: "600px",
-                  height: "600px",
-                  left: "40px",
-                  right: "40px",
-                  bottom: "40px",
-                  border: "1px solid #ccc",
-                  background: "#fff",
-                  overflow: "auto",
-                  WebkitOverflowScrolling: "touch",
-                  borderRadius: "15px",
-                  outline: "none",
-                  padding: "20px",
-                },
-              }}
-              isOpen={Pw_modal}
-            >
-              <div className="close_modal">
-                <button type="button" onClick={Pw_close_modal}>
-                  <b>X</b>
-                </button>
-              </div>
-              <div>
-                {Pw_popup && <FindPW setPw_Modal={setPw_Modal}></FindPW>}
-              </div>
-            </Modal>
-            &nbsp; |&nbsp;
-            <a href="/signup">회원가입</a>
-          </div>
-          <div className="SU_social_btn">
-            <button type="button" className="SU_naver">
-              <a href={naver_api_url}>
-                <img src={naver} alt="naver" />
-              </a>
-            </button>
-            <button type="button" className="SU_kakao">
-              <a href={kakao_api_url}>
-                <img src={kakao} alt="kakao" className="SU_kakao_img" />
-              </a>
-            </button>
+      {/* 로그인 폼 */}
+      <div className="Login_form">
+        <div className="Login_form_line">
+          <label className="Login_form_text" htmlFor="id">아이디</label>
+          <input className="Login_input"
+            name="id" type="text" placeholder="아이디" maxLength="15"
+            value={id} onChange={(e)=>setId(e.target.value)} />
+        </div>
+        <div className="Login_form_line">
+          <label className="Login_form_text" htmlFor="password">비밀번호</label>
+          <input className="Login_input"
+            name="password" type="password" maxLength="20" placeholder="비밀번호"
+            value={password} onChange={(e)=>setPassword(e.target.value)} />
+        </div>
+      </div>
+      <div className="Login_btn" onClick={LoginClick}>LOGIN</div>
 
-            <button type="button" className="SU_google">
-              <a>
-                <img src={google} alt="google" />
-              </a>
-            </button>
+      {/* ID 찾기, PW 찾기, 회원가입 */}
+      <div className="Login_detail">
+        <span className="Login_detail_text" onClick={() => {setIdModal(true)}}>아이디 찾기</span>
+        <span className="Login_detail_text">|</span>
+        <span className="Login_detail_text" onClick={() => {setPwModal(true)}}>비밀번호 찾기</span>
+        <span className="Login_detail_text">|</span>
+        <Link href="/signup" className="Login_detail_text">회원가입</Link>
+      </div>
+
+      {/* ID, PW 찾기 모달 창*/}
+      { idModal &&
+        <div className="Login_modal_overlay">
+          <div className="Login_modal">
+            <Find modal="id" setModal={setIdModal} />
           </div>
         </div>
-      </wrap>
-    </>
+      }
+      { pwModal &&
+        <div className="Login_modal_overlay">
+          <div className="Login_modal">
+            <Find modal="pw" setModal={setPwModal} />
+          </div>
+        </div>
+      }
+
+      {/* 소셜 로그인 */}
+      <div className="Login_social">
+        <Link href={naver_api_url} className="Login_social_btn">
+          <img className="Login_social_logo" src={naver} alt="naver" />
+        </Link>
+        <Link href={kakao_api_url} className="Login_social_btn">
+            <img className="Login_social_logo" src={kakao} alt="kakao" />
+        </Link>
+        <Link href="" className="Login_social_btn">
+        <img className="Login_social_logo" src={google} alt="google" />
+        </Link>
+      </div>
+    </div>
   );
 }
 
