@@ -116,7 +116,7 @@ function Login() {
         <Link to={kakao_api_url} className="Login_social_btn">
             <img className="Login_social_logo" src={kakao} alt="kakao" />
         </Link>
-        <Link href="" className="Login_social_btn">
+        <Link to="" className="Login_social_btn">
         <img className="Login_social_logo" src={google} alt="google" />
         </Link>
       </div>
