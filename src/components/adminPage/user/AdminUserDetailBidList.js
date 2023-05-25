@@ -12,7 +12,7 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
   // const id = window.sessionStorage.getItem("id");
   const postUserData = () => {
     // axios
-    //   .get(`/api/post/UserBidList`{
+    //   .get(`/admin/user/detail/bid/list`{
     //   id:id
     // })
     //   .then((res) => {
@@ -27,7 +27,7 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
 
   const SearchBidList = useRef();
   // const [userlist, setUserlist] = useState();
-  const AUDsearch = () => {
+  const AUDsearch = (e) => {
     if (
       SearchBidList.current.value === "" ||
       SearchBidList.current.value === undefined
@@ -36,18 +36,18 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
       SearchBidList.current.focus();
       return false;
     }
-
     // axios
-    //   .post(`/api/searchlocation`, {
-    //     searchData,
-    //   })
+    //   .post(`/admin/user/detail/search`{
+    //    search : e.target.value
+    // })
     //   .then((res) => {
-    //     console.log(res);
-    //     setUserlist();
+    //     const { data } = res;
+    //     setUserbidlist(data);
     //   })
     //   .catch((e) => {
     //     console.error(e);
     //   });
+    // setUserbidlist(data);
   };
 
   const navigate = useNavigate();

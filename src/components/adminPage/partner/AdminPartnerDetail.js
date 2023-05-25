@@ -13,7 +13,7 @@ const AdminPartnerDetail = () => {
   // console.log(com_num);
   const APDpush = () => {
     // axios
-    //   .post("/api/APDpush", {
+    //   .post("/admin/partner/start", {
     //     com_name: com_name,
     //   })
     //   .then((res) => {
@@ -23,7 +23,7 @@ const AdminPartnerDetail = () => {
 
   const APDend = () => {
     // axios
-    //   .post("/api/APDend", {
+    //   .post("/admin/partner/end", {
     //     com_name: com_name,
     //   })
     //   .then((res) => {
@@ -34,7 +34,7 @@ const AdminPartnerDetail = () => {
   // const [partnerdata, setPartnerdata] = useState();
   const getUserData = () => {
     // axios
-    //   .get(`/api/get/PartnerData`{
+    //   .get(`/admin/partner/partnerinfo`{
     //   com_name : com_name
     // })
     //   .then((res) => {
@@ -98,7 +98,7 @@ const AdminPartnerDetail = () => {
                     },
                     content: {
                       position: "absolute",
-                      top: "18%",
+                      // top: "18%",
                       width: "1050px",
                       height: "735px",
                       left: "40px",
@@ -115,7 +115,7 @@ const AdminPartnerDetail = () => {
                   }}
                   isOpen={Partner_modal}
                 >
-                  <div className="close_modal">
+                  <div className="APDModalClose">
                     <button onClick={Partner_close_modal}>
                       <b>X</b>
                     </button>

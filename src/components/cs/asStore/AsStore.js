@@ -5,18 +5,18 @@ import location_icon from "../../../images/location_icon.png";
 import LocationData from "./CountryCity.json";
 import customerinfo from "./customer.json";
 import markers from "./marker.json";
+import markers1 from "./markertest.json";
 import axios from "axios";
 import kakaoQR from "../../../images/kakaotalkQR.png";
 
 const AsStore = () => {
-  const [marker, setMarker] = useState(markers);
   const [qrModal, setQrModal] = useState(0); // 비즈니스 문의 모달 창
-  // const [searchData, setSeatchData] = useState();
 
-  // 데이터 가져오기
+  // 데이터 가져오기============================================================================
+
   const asListData = () => {
     // axios
-    //   .get("/api/asListData")
+    //   .get("/cs/as_store/list")
     //   .then((res) => {
     //     const { data } = res;
     //     setMarker(data);
@@ -31,45 +31,36 @@ const AsStore = () => {
     // console.log(data);
   };
 
-  const asDetail = (store_name) => {
-    // axios
-    //   .get(`/api/getproducts?store_name=${store_name}`)
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setMarker(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // setMarker([
-    //   markers.placelist.find((sub) => (sub.store_name = store_name)).latitude,
-    //   markers.placelist.find((sub) => (sub.store_name = store_name)).longitude,
-    // ]);
-    // console.log(data);
-  };
+  // =============================================================================================
 
-  function searchlocationtext(e) {
-    // setSeatchData(e.target.value);
+  // 기업 filtering===============================================================================
+  const [marker, setMarker] = useState(markers);
+  const [asComNum, setAsComNum] = useState();
+
+  useEffect(() => {
+    findas();
+  }, []);
+  function findas() {
+    // setMarker(markers1);
+    // {
+    //   markers1.placelist.map((ascom) => {
+    //     setData([ascom.latitude, ascom.longitude]);
+    //   });
+    // }
+    setMarker([markers.placelist.filter((as) => as.store_num === asComNum)]);
+    console.log(marker);
+    // setData([marker.placelist.latitude, marker.placelist.longitude]);
   }
 
+  // ==============================================================================================
+
+  // 광역시 시 군 구 구하기=========================================================================
   const BigCity = useRef();
   const SmallCity = useRef();
   const SearchCom = useRef();
+  const [searchData, setSeatchData] = useState();
 
-  const searchlocation = () => {
-    if (BigCity.current.value === "" || BigCity.current.value === undefined) {
-      alert("광역시를 정해주세요!!");
-      BigCity.current.focus();
-      return false;
-    }
-    if (
-      SmallCity.current.value === "" ||
-      SmallCity.current.value === undefined
-    ) {
-      alert("시군구를 정해주세요!!");
-      SmallCity.current.focus();
-      return false;
-    }
+  const searchlocation = (e) => {
     if (
       SearchCom.current.value === "" ||
       SearchCom.current.value === undefined
@@ -78,23 +69,24 @@ const AsStore = () => {
       SearchCom.current.focus();
       return false;
     }
-
+    console.log(e.target.value);
     // axios
-    //   .post(`/api/searchlocation`, {
-    //     searchData,
-    //   })
+    //   .post(`/cs/as_store/search`{
+    //    search : e.target.value
+    // })
     //   .then((res) => {
-    //     console.log(res);
-    //     setMarker();
+    //     const { data } = res;
+    //     setMarker(data);
     //   })
     //   .catch((e) => {
     //     console.error(e);
     //   });
+    // setMarker(data);
   };
-  const [textstyle, setTextstyle] = useState("locationstyle");
 
+  const [textstyle, setTextstyle] = useState("locationstyle");
   const [country, setCountry] = useState();
-  const [data, setData] = useState([37.624915253753194, 127.15122688059974]);
+  const [data, setData] = useState([37.503937534848404, 127.04281232332467]);
 
   // 광역시/시/군/구 동적 select
   function handleCity(e) {
@@ -108,7 +100,9 @@ const AsStore = () => {
     ]);
   }
 
-  //현재 위치 찾기
+  // ==========================================================================================
+
+  //현재 위치 찾기=============================================================================
   const [currLocation, setCurrLocation] = useState({});
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -141,6 +135,7 @@ const AsStore = () => {
     currLocation.latitude,
     callback
   );
+  // ====================================================================================================
 
   return (
     <div>
@@ -151,13 +146,7 @@ const AsStore = () => {
             {cus.accept_location === 0 ? (
               <div>
                 {cus.address}
-                <img
-                  alt=""
-                  src={location_icon}
-                  onClick={() => {
-                    getLocation();
-                  }}
-                />
+                <img alt="" src={location_icon} />
               </div>
             ) : cus.accept_location === 1 ? (
               <div
@@ -217,8 +206,9 @@ const AsStore = () => {
                   className="asmiddlesearchbox"
                   type="text"
                   placeholder="매장명"
-                  onChange={searchlocationtext}
                   ref={SearchCom}
+                  value={searchData}
+                  onChange={(e) => setSeatchData(e.target.value)}
                 ></input>
                 <input
                   className="asmiddlesearchboxbutton"
@@ -232,8 +222,7 @@ const AsStore = () => {
             {markers.placelist.map((marker) => (
               <div
                 className="asmiddlelist"
-                key={marker.store_name}
-                onClick={() => asDetail(marker.store_name)}
+                onClick={() => setAsComNum(marker.store_num)}
               >
                 <div className="asmiddlelisttop">
                   <div className="aslistname">{marker.store_name}</div>
@@ -258,6 +247,7 @@ const AsStore = () => {
             markers={marker}
             data={data}
             currLocation={currLocation}
+            asComNum={asComNum}
           />
         </div>
       </underbar>

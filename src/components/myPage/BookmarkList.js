@@ -120,7 +120,7 @@ const BookmarkList = () => {
     // .catch((e) => {
     //   console.error(e);
     // })
-    const data = productlist.prodlist;
+    const data = productlist;
     setBookmarkProd(data);
   };
 

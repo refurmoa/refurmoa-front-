@@ -40,9 +40,9 @@ const PostPage = () => {
         <SellTypeSpan active={directState} onClick={()=>{sellTypeHandler("direct")}}>즉시구매</SellTypeSpan>
       </BuyFilterBox>
       <StateFilterBox>
-        <span><input id="yet" type="checkbox" value="yet" onClick={(e) => {checkboxHandler(e)}} defaultChecked /><label htmlFor="yet">진행예정</label></span>
-        <span><input id="ing" type="checkbox" value="ing" onClick={(e) => {checkboxHandler(e)}} defaultChecked /><label htmlFor="ing">진행중</label></span>
-        <span><input id="end" type="checkbox" value="end" onClick={(e) => {checkboxHandler(e)}} defaultChecked /><label htmlFor="end">종료</label></span>
+        <span><input id="yet" type="checkbox" checked={sellStatus.yet} onChange={(e) => {checkboxHandler(e)}} /><label htmlFor="yet">진행예정</label></span>
+        <span><input id="ing" type="checkbox" checked={sellStatus.ing} onChange={(e) => {checkboxHandler(e)}} /><label htmlFor="ing">진행중</label></span>
+        <span><input id="end" type="checkbox" checked={sellStatus.end} onChange={(e) => {checkboxHandler(e)}} /><label htmlFor="end">종료</label></span>
       </StateFilterBox>
     </>)
   }
@@ -50,9 +50,11 @@ const PostPage = () => {
   // 경매, 즉시구매 누르면 토글기능
   const sellTypeHandler = (type) => {
     if(type === "auction") {
-      setAuctionState(!auctionState);
+      if (auctionState && directState) setAuctionState(!auctionState);
+      else if (!auctionState) setAuctionState(true)
     } else if (type === "direct") {
-      setDirectState(!directState);
+      if (auctionState && directState) setDirectState(!directState);
+      else if (!directState) setDirectState(true);
     }
   };
 
@@ -73,7 +75,16 @@ const PostPage = () => {
 
   // 판매상태 체크박스
   const checkboxHandler = (e) => {
-    setSellStatus({...sellStatus, [e.target.value]:e.target.checked});
+    if (e.target.id === "yet") {
+      if (sellStatus.yet && (sellStatus.ing || sellStatus.end)) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: false }));
+      else if (!sellStatus.yet) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: true }));
+    } else if (e.target.id === "ing") {
+      if (sellStatus.ing && (sellStatus.yet || sellStatus.end)) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: false }));
+      else if (!sellStatus.ing) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: true }));
+    } else if (e.target.id === "end") {
+      if (sellStatus.end && (sellStatus.yet || sellStatus.ing)) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: false }));
+      else if (!sellStatus.end) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: true }));
+    }
   }
 
   // 정렬 select 박스

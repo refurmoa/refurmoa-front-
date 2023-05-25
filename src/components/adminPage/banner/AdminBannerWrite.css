@@ -1,6 +1,5 @@
 .ABAll {
     width: 1000px;
-    height: 910px;
 }
 
 .ABHeader {
@@ -133,8 +132,8 @@
   }
 
   .ABMImgShow > img {
-    width: 400px;
-    height: 400px;
+    width: 960px;
+    height: 250px;
   }
 
   .ABTextBox {

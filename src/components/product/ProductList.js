@@ -73,7 +73,16 @@ const ProductList = () => {
 
   // 판매상태 체크박스
   const checkboxHandler = (e) => {
-    setSellStatus({...sellStatus, [e.target.value]:e.target.checked});
+    if (e.target.id === "yet") {
+      if (sellStatus.yet && (sellStatus.ing || sellStatus.end)) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: false }));
+      else if (!sellStatus.yet) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: true }));
+    } else if (e.target.id === "ing") {
+      if (sellStatus.ing && (sellStatus.yet || sellStatus.end)) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: false }));
+      else if (!sellStatus.ing) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: true }));
+    } else if (e.target.id === "end") {
+      if (sellStatus.end && (sellStatus.yet || sellStatus.ing)) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: false }));
+      else if (!sellStatus.end) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: true }));
+    }
   }
   useEffect(() => {
     // 판매상태 체크박스에 따라 axios로 담아줄 selectedSellStatus 변수 값 변경
@@ -145,7 +154,7 @@ const ProductList = () => {
     // .catch((e) => {
     //   console.error(e);
     // })
-    const data = productlist.products
+    const data = productlist
     setProdData(setStatusData(data));
   };
 
@@ -191,9 +200,9 @@ const ProductList = () => {
             </SearchImg>
           </SearchBar>
           <StateFilterBox>
-            <span><input id="yet" type="checkbox" value="yet" onClick={(e) => {checkboxHandler(e)}} defaultChecked /><label htmlFor="yet">판매 전</label></span>
-            <span><input id="ing" type="checkbox" value="ing" onClick={(e) => {checkboxHandler(e)}} defaultChecked /><label htmlFor="ing">판매 중</label></span>
-            <span><input id="end" type="checkbox" value="end" onClick={(e) => {checkboxHandler(e)}} defaultChecked /><label htmlFor="end">판매완료</label></span>
+            <span><input id="yet" type="checkbox" checked={sellStatus.yet} onChange={(e) => {checkboxHandler(e)}} /><label htmlFor="yet">게시 전</label></span>
+            <span><input id="ing" type="checkbox" checked={sellStatus.ing} onChange={(e) => {checkboxHandler(e)}} /><label htmlFor="ing">게시완료</label></span>
+            <span><input id="end" type="checkbox" checked={sellStatus.end} onChange={(e) => {checkboxHandler(e)}} /><label htmlFor="end">구매확정</label></span>
           </StateFilterBox>
         </BottomFilterBox>
       </FilterWrapper>

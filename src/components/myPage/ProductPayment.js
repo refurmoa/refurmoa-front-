@@ -28,7 +28,7 @@ export const ProductPayment = ({ product }) => {
 
   const canclechange = () => {
     // axios
-    //   .post("/updatebidcancle", {})
+    //   .get("/mypage/payment/cancle", {})
     //   .catch((e) => {
     //     console.error(e);
     //   });
@@ -36,7 +36,7 @@ export const ProductPayment = ({ product }) => {
 
   const prodstatechange = () => {
     // axios
-    //   .post("/updateprodstate", {})
+    //   .get("/mypage/payment/final", {})
     //   .catch((e) => {
     //     console.error(e);
     //   });

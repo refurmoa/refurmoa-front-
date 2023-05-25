@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { noticeList } from "../../shared/AcceptText";
 const Signup_accept = (props) => {
   const setMode = props.setMode;
+  const data=props.data;
   const [check_ALL, setCheck_ALL] = useState(false);
   const [check_box1, setCheck_box1] = useState(false);
   const [check_box2, setCheck_box2] = useState(false);
@@ -63,19 +64,30 @@ const Signup_accept = (props) => {
     if (check_box1 && check_box2) {
       alert("회원가입을 마치시겠습니까?");
       setMode(4);
-      /*
-      axios
+        /*
+    setEmail(email.concat("@", domain));
+    axios
       .post("/signup", {
-        ACCEPT_LOCATION: check_box3,
+        id: data.id,
+        phone:data.phone
+        password:data.password
+        email:data.mail
+        address:data.address
+        address_detail:data.address_detail
+        birth:data.birth
+         ACCEPT_LOCATION: check_box3,
         ACCEPT_ALARM:check_box4,
       })
       .then((res) => {
-
+        if(res.data){  
+        
+       
       })
       .catch((e) => {
         console.error(e);
       });
-      */
+    */
+   
     } else {
       alert("필수 정보를 체크해주세요!!");
       return false;

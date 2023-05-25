@@ -94,7 +94,7 @@ const ProdPost = ({ filter }) => {
     // .catch((e) => {
     //   console.error(e);
     // })
-    const data = productlist.prodlist; 
+    const data = productlist;
     setProdData(data);
   };
 

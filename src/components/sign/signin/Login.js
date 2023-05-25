@@ -7,6 +7,7 @@ import Find from "./LoginFind";
 import naver from "../../../images/naver_logo-150.png";
 import kakao from "../../../images/kakao_logo-150.png";
 import google from "../../../images/google_logo-150.png";
+import axios from "axios";
 
 function Login() {
   const navigate = useNavigate();
@@ -17,15 +18,31 @@ function Login() {
 
   // 유효성 검사
   const LoginClick = () => {
-    if (id.current.value === "") {
+    if (id === "") {
       alert("아이디를 입력해주세요");
       return false;
-    } else if (password.current.value === "") {
+    } else if (password === "") {
       alert("비밀번호를 입력해주세요");
       return false;
     }
-    window.sessionStorage.setItem("id", id.current.value);
-    navigate(-1);
+    axios
+      .post("/login", {
+        member_id: id,
+        password: password,
+      })
+      .then((res) => {
+        if (res.data === 1) {
+          window.sessionStorage.setItem("id", id);
+          if (id === "admin") navigate(-1);
+          else document.location.href = "/";
+        } else {
+          alert("아이디, 비밀번호를 확인해주세요.");
+          return false;
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   // API URL
