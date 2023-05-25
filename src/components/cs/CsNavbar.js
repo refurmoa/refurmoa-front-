@@ -1,71 +1,62 @@
-// 관리자 페이지 메뉴
+// 고객센터 메뉴
 
-import { Outlet, Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import "./AdminNavi.css";
+import { Outlet, NavLink } from "react-router-dom";
+import { useState } from "react";
+import "./CsNavbar.css";
 
-const AdminNavi = () => {
-  const navigate = useNavigate();
+const CsNavbar = () => {
+  const login_id = window.sessionStorage.getItem("member_id"); // 세션 ID
+  const [activeLink, setActiveLink] = useState("");
 
-  useEffect(() => {
-    const login_id = window.sessionStorage.getItem("id");
-    if (login_id !== "admin") navigate("/login");
-  }, []);
-
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
-
-  const linkStyle = (link) => {
-    return currentPath === "/admin" ? "main"
-        : currentPath === link ? "active" : "";
-  }
+  const handleLinkClick = (link) => {
+    setActiveLink(link);
+  };
 
   return (
-    <>
-        <div className="AN-wrap">
-            <div className="AN-nav_wrap">
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin/order")}`}
-                    to="/admin/order" onClick={() => setCurrentPath("/admin/order")}>
-                    주문/배송
-                    <span className={`AN-line AN-line_${linkStyle("/admin/order")}`}></span>
-                </Link>
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin/user")}`}
-                    to="/admin/user" onClick={() => setCurrentPath("/admin/user")}>
-                    회원
-                    <span className={`AN-line AN-line_${linkStyle("/admin/user")}`}></span>
-                </Link>
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin/partner")}`}
-                    to="/admin/partner" onClick={() => setCurrentPath("/admin/partner")}>
-                    제휴회사
-                    <span className={`AN-line AN-line_${linkStyle("/admin/partner")}`}></span>
-                </Link>
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin/banner")}`}
-                    to="/admin/banner" onClick={() => setCurrentPath("/admin/banner")}>
-                    배너
-                    <span className={`AN-line AN-line_${linkStyle("/admin/banner")}`}></span>
-                </Link>
-                
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin")}`} to="/prod/write">
-                    상품등록
-                    <span className="AN-line"></span>
-                </Link>
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin")}`} to="/post/write">
-                    판매등록
-                    <span className="AN-line"></span>
-                </Link>
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin")}`} to="/cs/notice/write">
-                    공지등록
-                    <span className="AN-line"></span>
-                </Link>
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin")}`} to="/cs/inquiry">
-                    1:1 문의
-                    <span className="AN-line"></span>
-                </Link>
-            </div>
+    <div className="CS-wrap">
+      <span className="CSnavbar">
+        <div className="CSnavtitle">
+          고객센터
         </div>
-        {/* <hr className="AN-bottom_line" /> */}
-        <Outlet />
-    </>
+        <hr className="CSnavline" />
+        <div className="CSnav_main">
+          <NavLink
+            to="/cs/notice"
+            className={`CSnavbarmenu ${activeLink === "notice" ? "active" : ""}`}
+            onClick={() => handleLinkClick("notice")}
+          >
+            공지사항
+          </NavLink>
+
+          <NavLink
+            to="/cs/faq"
+            className={`CSnavbarmenu ${activeLink === "faq" ? "active" : ""}`}
+            onClick={() => handleLinkClick("faq")}
+          >
+            FAQ
+          </NavLink>
+
+          <NavLink
+            to="/cs/inquiry"
+            className={`CSnavbarmenu ${
+              activeLink === "oneonone" ? "active" : ""}`}
+            onClick={() => handleLinkClick("oneonone")}
+          >
+            1:1 문의하기
+          </NavLink>
+
+          <NavLink
+            to={login_id !== "admin" ? "/cs/as_store" : "/cs/as_store/list"}
+            className={`CSnavbarmenu ${activeLink === "as" ? "active" : ""}`}
+            onClick={() => handleLinkClick("as")}
+          >
+            A/S 매장 찾기
+          </NavLink>
+        </div>
+      </span>
+      <Outlet />
+    </div>
   );
 };
 
-export default AdminNavi;
+export default CsNavbar;
