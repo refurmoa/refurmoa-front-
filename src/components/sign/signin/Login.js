@@ -32,7 +32,7 @@ function Login() {
           password: password,
         })
         .then((res) => {
-          if (res) {
+          if (res.data==1) {
             alert("로그인 되었습니다.");
             console.log(res.data);
             window.sessionStorage.setItem("id",id);
