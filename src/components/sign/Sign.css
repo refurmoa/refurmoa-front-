@@ -1,0 +1,61 @@
+/* 로그인/회원가입 */
+
+.Sign_wrap {
+    padding: 60px;
+    margin-top: 25px;
+    background: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0px 0px 20px 5px rgba(185, 168, 154, 0.1);
+}
+
+.Sign_header {
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 40px;
+    text-align: center;
+    color: rgba(81, 68, 56, 0.6);
+}
+
+.Sign_btn {
+    width: 420px;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 40px;
+    color: #ffffff;
+    text-align: center;
+    border-width: 0;
+    border-radius: 40px;
+    background: #b9a89a;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.Sign_btn:hover {
+    opacity: 0.8;
+    transition: 0.7s;
+}
+
+/* 소셜 로그인/회원가입 */
+
+.Sign_social {
+    width: 300px;
+    height: 80px;
+}
+
+.Sign_social_btn {
+    width: 80px;
+    height: 80px;
+}
+
+.Sign_social_btn:not(:last-child) {
+    margin-right: 30px;
+}
+
+.Sign_social_logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.25));
+}
