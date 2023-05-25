@@ -2,6 +2,7 @@ import "./AdminBannerWrite.css";
 import { useState } from "react";
 import alt_img from "../../../images/picture-icon-240.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const AdminBannerWirte = () => {
@@ -38,7 +39,24 @@ const AdminBannerWirte = () => {
     setBannerPhone();
   };
 
+  const navigate = useNavigate();
   const BannerInput = () => {
+    if (startDate > endtDate) {
+      alert("날짜 오류입니다.");
+      return false;
+    }
+    if (bannerLink === "" || bannerLink === undefined) {
+      alert("배너 링크를 입력하세요!!!");
+      return false;
+    }
+    if (bannerCom === "" || bannerCom === undefined) {
+      alert("업체명을 입력하세요!!!");
+      return false;
+    }
+    if (bannerPhone === "" || bannerPhone === undefined) {
+      alert("연라처를 입력하세요!!!");
+      return false;
+    }
     // const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용
     // fileList.forEach((file) => {
     //   formData.append("uploadfiles", file);
@@ -58,6 +76,7 @@ const AdminBannerWirte = () => {
     //   .catch((e) => {
     //     console.error(e);
     //   });
+    navigate(`/admin/banner`);
   };
 
   return (
@@ -136,12 +155,10 @@ const AdminBannerWirte = () => {
           placeholder="참고사항을 입력하세요"
         />
       </form>
-      <Link to={`/admin/banner`}>
-        <div className="ABUnderButton">
-          <input type="button" value="취소" onClick={BannerCancle} />
-          <input type="button" value="등록" onClick={BannerInput} />
-        </div>
-      </Link>
+      <div className="ABUnderButton">
+        <input type="button" value="취소" onClick={BannerCancle} />
+        <input type="button" value="등록" onClick={BannerInput} />
+      </div>
     </div>
   );
 };
