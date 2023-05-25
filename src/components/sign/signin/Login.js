@@ -6,46 +6,47 @@ import { Link, useNavigate } from "react-router-dom";
 import google from "../../../images/google.png";
 import kakao from "../../../images/kakao.png";
 import naver from "../../../images/naver.png";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import FindID from "./LoginFindId";
 import FindPW from "./LoginFindPw";
+import axios from "axios";
 // id, password, passwordChk(비밀번호확인), name, tel 기본값 호출
 function Login() {
   // 제출버튼을 누르면 변경된 파라미터 값 전달함(추후 수정 필요)
   const navigate = useNavigate();
-  const id = useRef();
-  const password = useRef();
+  const [id,setId]=useState("");
+  const [password,setPassword]=useState("");
+
   const onClick = () => {
-    if (id.current.value === "") {
+    if (id === "") {
       alert("아이디를 입력해주세요");
       return false;
-    } else if (password.current.value === "") {
+    } else if (password === "") {
       alert("비밀번호를 입력해주세요");
       return false;
     }
-    window.sessionStorage.setItem("id", id.current.value);
-    if(id.current.value === "admin") navigate(-1);
-    else  document.location.href = "/";
-  };
-
-  /*
-  axios
-        .get("/login", {
-          id: id,
+    axios
+        .post("/login", {
+          member_id: id,
           password: password,
         })
         .then((res) => {
-          if (res.data === 1) {
-            window.sessionStorage.setItem("id", id);
+          if (res.data==1) {
+            alert("로그인 되었습니다.");
+            console.log(res.data);
+            window.sessionStorage.setItem("id",id);
+            if(id=== "admin") navigate(-1);
+            else  document.location.href = "/";
           } else {
-            alert("해당 정보의 아이디는 존재하지 않습니다! 아이디 입니다!");
+            alert("해당 정보는 존재하지 않습니다! ");
+            return false
           }
         })
         .catch((e) => {
           console.error(e);
         });
-
-  */
+   
+  };
 
   const [popup, setPopup] = useState(false);
   const [modal, setModal] = useState(false);
@@ -97,7 +98,8 @@ function Login() {
                     type="text"
                     placeholder="아이디"
                     maxLength="15"
-                    ref={id}
+                    value={id}
+                    onChange={(e)=>setId(e.target.value)}
                   />
                   <hr className="SU_phone_line" />
                 </td>
@@ -111,7 +113,8 @@ function Login() {
                     type="password"
                     maxLength="20"
                     placeholder="비밀번호"
-                    ref={password}
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
                   />
                   <hr className="SU_phone_line" />
                 </td>
