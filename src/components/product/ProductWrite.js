@@ -11,6 +11,7 @@ function ProductWrite() {
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   let [main_Image, setMainImg] = useState("");
+  const [com_num, setCom_num] = useState();
   const [code, setCode] = useState("");
   const [prod_com, setProd_com] = useState("");
   const [prod_name, setProd_name] = useState("");
@@ -257,7 +258,7 @@ function ProductWrite() {
                   <FindCompany
                     searchCompany={searchCompany}
                     setSearchCompany={setSearchCompany}
-                    setProd_com={setProd_com}
+                    setCom_num={setCom_num}
                     close_modal={close_modal}
                   ></FindCompany>
                 )}

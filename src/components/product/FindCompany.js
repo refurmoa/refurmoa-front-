@@ -6,16 +6,15 @@ const FindCompany = (props) => {
   // 데이터를 페이지 단위로 나누기 위한 변수들
   const searchCompany = props.searchCompany;
   const setSearchCompany = props.setSearchCompany;
-  const setProd_com = props.setProd_com;
+  const setCom_num = props.setCom_num;
   const close_modal = props.close_modal;
   const [dataList, setDataList] = useState([]);
 
   const setCompanyInfo = (item) => {
     const name = item.com_name;
     const num = item.com_num;
-
+    setCom_num(num);
     setSearchCompany(name);
-    setProd_com(num);
     close_modal();
   };
 
