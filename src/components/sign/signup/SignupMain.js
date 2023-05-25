@@ -1,9 +1,9 @@
 import React from "react";
 import "./Signup.css";
 import { Link } from "react-router-dom";
-import google from "../../../images/google.png";
-import kakao from "../../../images/kakao.png";
-import naver from "../../../images/naver.png";
+import google from "../../../images/google_logo-150.png";
+import kakao from "../../../images/kakao_logo-150.png";
+import naver from "../../../images/naver_logo-150.png";
 // id, password, passwordChk(비밀번호확인), name, tel 기본값 호출
 function Signup_main(props) {
   // 제출버튼을 누르면 변경된 파라미터 값 전달함(추후 수정 필요)

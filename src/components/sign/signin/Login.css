@@ -1,121 +1,200 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap");
+/* 로그인 페이지 */
 
-.login_detail {
-  margin-top: 10px;
-  margin-bottom: 20px;
-  color: #b9a89a;
-}
-.Login_form {
-  padding: 30px;
-  width: 740px;
-  height: 600px;
-  margin-top: 35px;
-  border: 0px;
+.Login_wrap {
+  width: 680px;
+  height: 560px;
+  padding: 60px;
+  margin-top: 25px;
   background: #ffffff;
-  box-shadow: 0px 0px 20px 5px rgba(185, 168, 154, 0.1);
   border-radius: 30px;
+  box-shadow: 0px 0px 20px 5px rgba(185, 168, 154, 0.1);
+}
+
+.Login_header {
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 40px;
   text-align: center;
+  margin-bottom: 65px;
+  color: rgba(81, 68, 56, 0.6);
 }
-.login_detail > a {
-  height: 30px;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 30px;
-  color: #b9a89a;
-  text-decoration-line: none;
+
+/* 로그인 폼 */
+.Login_form {
+  width: 420px;
+  margin: 0 auto;
 }
-.login_btn {
-  font-family: "Noto Sans KR", sans-serif;
-  font-style: normal;
+
+.Login_form_line {
+  width: 420px;
+  height: 40px;
+  margin-bottom: 50px;
+}
+
+.Login_form_text {
+  float: left;
+  height: 40px;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 40px;
+}
+
+.Login_input {
+  float: right;
+  width: 280px;
+  height: 38px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 40px;
+  padding: 0 10px;
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  border-color: #514438;
+}
+
+.Login_input:focus {
+  outline: none;
+}
+
+.Login_btn {
+  width: 420px;
   font-weight: 500;
   font-size: 25px;
   line-height: 40px;
   color: #ffffff;
-  background: #b9a89a;
-  border: 0px;
-  border-radius: 40px;
-  width: 450px;
-  height: 70px;
-  margin-top: 20px;
   text-align: center;
+  border-width: 0;
+  border-radius: 40px;
+  background: #b9a89a;
+  padding: 15px;
+  margin: 10px auto 0;
   cursor: pointer;
 }
-.signup_indivation {
+
+/* ID 찾기, PW 찾기, 회원가입 */
+.Login_detail {
+  max-width: 300px;
+  height: 25px;
+  margin: 10px auto 0;
+}
+
+.Login_detail_text {
+  display: inline-block;
+  height: 25px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+  color: #B9A89A;
+  cursor: pointer;
+}
+
+.Login_detail_text:not(:last-child) {
+  margin-right: 5px;
+}
+
+/* ID, PW 찾기 모달 창 */
+.Login_modal_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.Login_modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 80%;
+  max-height: 90%;
+  z-index: 1;
+}
+
+.Login_find_wrap {
+  position: relative;
+  padding: 70px 180px;
+  background: #ffffff;
+  border-radius: 30px;
+}
+
+.Login_phone_line {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.Login_phone {
+  width: 165px;
+  padding-right: 125px;
+}
+
+.Login_phone_btn {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 115px;
+  height: 30px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 30px;
+  color: #FFFFFF;
   text-align: center;
-  margin-top: 20px;
+  background: #B9A89A;
+  cursor: pointer;
+}
+
+.Login_indivation {
+  width: 415px;
+  height: 40px;
   font-weight: 200;
   font-size: 15px;
   line-height: 20px;
   color: #888888;
-}
-.LG_login_input > tr > td {
-  padding-right: 20px;
-  padding-bottom: 50px;
-  font-size: 25px;
-  line-height: 30px;
-  color: #514438;
-  font-weight: bold;
-  font-family: "Noto Sans KR";
+  margin: 25px auto 70px;
 }
 
-.LG_login_input > tr > td > input {
-  font-size: 20px;
-  width: 300px;
-  height: 30px;
-  border-width: 0;
+.Login_indivation_left {
+  float: left;
+  margin-right: 10px;
 }
 
-.LG_login_input :focus {
-  outline: none !important;
-  background: #ffffff;
+.Login_indivation_right {
+  float: left;
 }
-.LG_Main_header {
-  text-align: center;
-  font-weight: 600;
-  margin-top: 40px;
-  margin-bottom: 60px;
-  font-size: 35px;
-  line-height: 40px;
-  color: rgba(81, 68, 56, 0.6);
-}
-.LG_Find_header {
-  text-align: center;
-  font-weight: 600;
-  margin-top: 40px;
-  margin-bottom: 60px;
-  font-size: 35px;
-  line-height: 40px;
-  color: rgba(81, 68, 56, 0.6);
-}
-.login_find {
-  height: 30px;
-  font-weight: normal;
-  font-size: 15px;
-  line-height: 30px;
-  color: #b9a89a;
-  text-decoration-line: none;
-  border: none;
-  background: #fff;
+
+.Login_modal_close {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  width: 20ps;
+  height: 20px;
   cursor: pointer;
 }
-.SU_Find_input > tr > td {
-  padding-right: 20px;
-  padding-bottom: 25px;
-  font-size: 25px;
-  line-height: 30px;
-  color: #514438;
-  font-weight: bold;
-  font-family: "Noto Sans KR";
+
+/* 소셜 로그인 */
+.Login_social {
+  width: 300px;
+  height: 80px;
+  margin: 55px auto 10px;
 }
 
-.SU_Find_input > tr > td > input {
-  font-size: 20px;
-  width: 200px;
-  height: 30px;
-  border-width: 0;
+.Login_social_btn {
+  width: 80px;
+  height: 80px;
 }
 
-.SU_Find_input :focus {
-  outline: none !important;
-  background: #ffffff;
+.Login_social_btn:not(:last-child) {
+  margin-right: 30px;
+}
+
+.Login_social_logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  filter: drop-shadow(1px 2px 4px rgba(0, 0, 0, 0.25));
 }

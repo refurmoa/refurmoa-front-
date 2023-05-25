@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./OneononeDetail.css";
 import { useLocation } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
-import naver from "../../../images/naver.png";
 import { Link } from "react-router-dom";
 
 const OneononeDetail = () => {

@@ -26,7 +26,7 @@ function PostPay() {
         coupon_num: 0,
         coupon_price: 0,
         mile: 0,
-        buy_method: 0
+        buy_method: 0 // 결제수단 : 카드 card, 계좌이체 trans, 휴대폰결제 phone
     });
 
     useEffect (() => {
@@ -103,7 +103,6 @@ function PostPay() {
     const couponChoice = () => {
 
     }
-
 
     return (
         <div className="PP-_wrap">
@@ -214,6 +213,7 @@ function PostPay() {
                     </span>
                 </div>
             </div>
+            
         </div>
     );
 };

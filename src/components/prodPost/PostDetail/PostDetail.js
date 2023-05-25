@@ -1,7 +1,7 @@
 // 판매 상세 페이지
 
 import "./PostDetail.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { getDdayArray } from "../../shared/sharedFn";
 import PostProdDetail from "./PostProdDetail";
