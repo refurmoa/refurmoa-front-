@@ -1,17 +1,18 @@
 import React from "react";
 import "./Signup.css";
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Post from "./FindAddress";
 import Modal from "react-modal";
 import { noticeList } from "../../shared/AcceptText";
+import axios from "axios";
 
 const Signup_input = (props) => {
   const setMode = props.setMode;
   const setTotal_Id = props.setTotal_Id;
   const name = props.name;
   const phone = props.phone;
-  const setData=props.setData;
+  const setData = props.setData;
 
   const [id, setId] = useState("");
   const [password, setPassword] = useState("");
@@ -49,15 +50,18 @@ const Signup_input = (props) => {
   };
 
   /*========================== */
+  const idRef = useRef();
   const IDcheck = () => {
     if (check_id) {
       alert("O");
-      /*
-        axios
-        .post("/checkid", {
-          id: id.current.value,
+      console.log(idRef.current.value);
+
+      axios
+        .post("/signup/distinct", {
+          memberId: idRef.current.value,
         })
         .then((res) => {
+          console.log(res);
           if (res.data === 1) {
             alert("중복된 아이디 입니다.");
             setId("");
@@ -68,7 +72,7 @@ const Signup_input = (props) => {
         })
         .catch((e) => {
           console.error(e);
-        });*/
+        });
     } else {
       alert("X");
     }
@@ -79,17 +83,15 @@ const Signup_input = (props) => {
       setMail(email + "@" + domain);
       setTotal_Id(id);
       setData({
-        id:id,
-        name:name,
-        phone:phone,
-        password:password,
-        email:email + "@" + domain,
-        address:address,
-        address_detail:address_detail,
-        birth:birth,
-      })
+        id: id,
+        phone: phone,
+        password: password,
+        email: mail,
+        address: address,
+        address_detail: address_detail,
+        birth: birth,
+      });
       setMode(3);
-
     }
     if (!check_pw) {
       alert("비밀번호를 입력해주세요!");
@@ -188,11 +190,12 @@ const Signup_input = (props) => {
               <td>
                 <input
                   className="address_input"
-                  name="id"
+                  name="MEMBER_ID"
+                  id="MEMBER_ID"
                   type="text"
                   maxLength="15"
                   placeholder="아이디"
-                  value={id}
+                  ref={idRef}
                   onChange={onIdCHK}
                 />
                 <button className="SU_find_address" onClick={IDcheck}>
@@ -381,7 +384,7 @@ const Signup_input = (props) => {
             </tr>
           </table>
         </div>
-  
+
         <button className="SU_input_btn" onClick={onClick}>
           다음
         </button>

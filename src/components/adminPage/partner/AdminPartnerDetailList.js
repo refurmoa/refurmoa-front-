@@ -2,40 +2,27 @@ import "./AdminPartnerDetailList.css";
 import partnerlistdata from "../user/AdminUserDetailBidList.json";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export const AdminPartnerDetailList = () => {
   // const [partnerlistdata, setPartnerlistdata] = useState();
   // const id = window.sessionStorage.getItem("id");
-  const postPartnerData = () => {
-    // axios
-    //   .get(`/admin/partner/list`{
-    //   name : name
-    // })
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setPartnerlistdata(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // setPartnerlistdata(data);
-  };
 
-  const SearchBidList = useRef();
-
+  const searchpartRef = useRef();
   const APDsearch = (e) => {
     if (
-      SearchBidList.current.value === "" ||
-      SearchBidList.current.value === undefined
+      searchpartRef.current.value === "" ||
+      searchpartRef.current.value === undefined
     ) {
       alert("내용을 입력하세요!!");
-      SearchBidList.current.focus();
+      searchpartRef.current.focus();
       return false;
     }
+    console.log(searchpartRef.current.value);
     // axios
-    //   .post(`/admin/partner/search`{
-    //    search : e.target.value
-    // })
+    //   .post(`/admin/partner/prod/search`, {
+    //     search: searchpartRef.current.value,
+    //   })
     //   .then((res) => {
     //     const { data } = res;
     //     setPartnerlistdata(data);
@@ -43,8 +30,6 @@ export const AdminPartnerDetailList = () => {
     //   .catch((e) => {
     //     console.error(e);
     //   });
-    // setPartnerlistdata(data);
-    console.log(e.target.value);
   };
 
   const navigate = useNavigate();
@@ -67,7 +52,7 @@ export const AdminPartnerDetailList = () => {
           <input
             className="APDsearchbox"
             type="text"
-            ref={SearchBidList}
+            ref={searchpartRef}
           ></input>
           <input
             className="APDsearchboxbutton"
@@ -85,15 +70,12 @@ export const AdminPartnerDetailList = () => {
               <img
                 src={`/images/prod/${partnerlist.main_image}`}
                 alt=""
-                onClick={() => onClick(partnerlist.board_num)}
+                onClick={onClick}
               />
               <div className="APDBidListInfo">
                 <div className="APDBidListInfoDate">{partnerlist.reg_date}</div>
                 <div className="APDBidListInfoCom">{partnerlist.prod_com}</div>
-                <div
-                  className="APDBidListInfoName"
-                  onClick={() => onClick(partnerlist.board_num)}
-                >
+                <div className="APDBidListInfoName" onClick={onClick}>
                   {partnerlist.prod_name}
                 </div>
               </div>
@@ -102,7 +84,7 @@ export const AdminPartnerDetailList = () => {
                   <div>
                     <div className="APDBidListPirceRed">게시 전</div>
                     <span className="APDBidListPircenum">
-                      {partnerlist.auction_price.toLocaleString("ko-KR")}원
+                      {partnerlist.org_price.toLocaleString("ko-KR")}원
                     </span>
                   </div>
                 ) : partnerlist.prod_state === 1 &&
@@ -118,7 +100,7 @@ export const AdminPartnerDetailList = () => {
                     )}
 
                     <span className="APDBidListPircenum">
-                      {partnerlist.auction_price.toLocaleString("ko-KR")}원
+                      {partnerlist.org_price.toLocaleString("ko-KR")}원
                     </span>
                   </div>
                 ) : partnerlist.prod_state === 1 ? (
@@ -132,7 +114,7 @@ export const AdminPartnerDetailList = () => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                      {partnerlist.cur_price.toLocaleString("ko-KR")}원
+                      {partnerlist.org_price.toLocaleString("ko-KR")}원
                     </span>
                   </div>
                 ) : partnerlist.prod_state === 2 ? (
@@ -146,7 +128,7 @@ export const AdminPartnerDetailList = () => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                      {partnerlist.cur_price.toLocaleString("ko-KR")}원
+                      {partnerlist.org_price.toLocaleString("ko-KR")}원
                     </span>
                   </div>
                 ) : partnerlist.prod_state === 3 ? (
@@ -160,7 +142,7 @@ export const AdminPartnerDetailList = () => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                      {partnerlist.cur_price.toLocaleString("ko-KR")}원
+                      {partnerlist.org_price.toLocaleString("ko-KR")}원
                     </span>
                   </div>
                 ) : partnerlist.prod_state === 4 ? (
@@ -174,7 +156,7 @@ export const AdminPartnerDetailList = () => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                      {partnerlist.cur_price.toLocaleString("ko-KR")}원
+                      {partnerlist.org_price.toLocaleString("ko-KR")}원
                     </span>
                   </div>
                 ) : (
@@ -188,7 +170,7 @@ export const AdminPartnerDetailList = () => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                      {partnerlist.cur_price.toLocaleString("ko-KR")}원
+                      {partnerlist.org_price.toLocaleString("ko-KR")}원
                     </span>
                   </div>
                 )}

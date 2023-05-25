@@ -8,33 +8,22 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const AdminPartnerDetail = () => {
-  // const location = useLocation();
-  // const com_num = location.state;
-  // console.log(com_num);
-  const APDpush = () => {
+  const location = useLocation();
+  const com_num = location.state;
+  console.log(com_num);
+  const APDChange = () => {
     // axios
-    //   .post("/admin/partner/start", {
+    //   .get("/admin/partner/detail/change", {
     //     com_name: com_name,
     //   })
     //   .then((res) => {
-    //     postUserData();
-    //   });
-  };
-
-  const APDend = () => {
-    // axios
-    //   .post("/admin/partner/end", {
-    //     com_name: com_name,
-    //   })
-    //   .then((res) => {
-    //     postUserData();
     //   });
   };
 
   // const [partnerdata, setPartnerdata] = useState();
   const getUserData = () => {
     // axios
-    //   .get(`/admin/partner/partnerinfo`{
+    //   .get(`/admin/partner/detail`{
     //   com_name : com_name
     // })
     //   .then((res) => {
@@ -44,7 +33,6 @@ const AdminPartnerDetail = () => {
     //   .catch((e) => {
     //     console.error(e);
     //   });
-    // setPartnerdata(data);
   };
 
   const [Partner_popup, setPartnerPopup] = useState(false);
@@ -79,7 +67,7 @@ const AdminPartnerDetail = () => {
           {partnerdata.com_status === 0 ? (
             <div>
               <div>
-                <input type="button" value="신청 승인" onClick={APDpush} />
+                <input type="button" value="신청 승인" onClick={APDChange} />
               </div>
             </div>
           ) : partnerdata.com_status === 1 ? (
@@ -128,7 +116,7 @@ const AdminPartnerDetail = () => {
                 </Modal>
               </div>
               <div>
-                <input type="button" value="제휴 종료" onClick={APDend} />
+                <input type="button" value="제휴 종료" onClick={APDChange} />
               </div>
             </div>
           ) : (

@@ -12,7 +12,7 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
   // const id = window.sessionStorage.getItem("id");
   const postUserData = () => {
     // axios
-    //   .get(`/admin/user/detail/bid/list`{
+    //   .get(`/user/bid`{
     //   id:id
     // })
     //   .then((res) => {
@@ -27,7 +27,7 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
 
   const SearchBidList = useRef();
   // const [userlist, setUserlist] = useState();
-  const AUDsearch = (e) => {
+  const AUDsearch = () => {
     if (
       SearchBidList.current.value === "" ||
       SearchBidList.current.value === undefined
@@ -38,7 +38,7 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
     }
     // axios
     //   .post(`/admin/user/detail/search`{
-    //    search : e.target.value
+    //    search : SearchBidList.current.value,
     // })
     //   .then((res) => {
     //     const { data } = res;
@@ -47,13 +47,14 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
     //   .catch((e) => {
     //     console.error(e);
     //   });
-    // setUserbidlist(data);
   };
 
   const navigate = useNavigate();
   const onClick = (board_num) => {
     navigate(`/post/detail/${board_num}`);
   };
+
+  const today = new Date();
 
   return (
     <div>
@@ -96,7 +97,7 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
                 </div>
               </div>
               <div className="AUDBidListPirce">
-                {userlist.prod_state === 1 ? (
+                {today <= new Date(userlist.end_date) ? (
                   <div>
                     <div className="AUDBidListPirceGreen">진행중</div>
                     <div>
@@ -110,7 +111,8 @@ export const AdminUserDetailBidList = ({ setPageNum }) => {
                       {userlist.cur_price.toLocaleString("ko-KR")}원
                     </span>
                   </div>
-                ) : userlist.prod_state >= 2 && userlist.bid_cancle === 0 ? (
+                ) : today >= new Date(userlist.end_date) &&
+                  userlist.cur_price === userlist.bid_price ? (
                   <div>
                     <div className="AUDBidListPirceRed">낙찰</div>
 

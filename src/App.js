@@ -54,7 +54,7 @@ function App() {
         <Route path="/post/write" element={<PostWrite />} />
         <Route path="/post/update/:board_num" element={<PostUpdate />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
-        <Route path="/post/pay/:board_num" element={<PostPay />} />
+        {/* <Route path="/post/pay/:board_num" element={<PostPay />} /> */}
         <Route path="/payment/detail/:board_num" element={<PayDetail />} />
         <Route element={<CsNavbar />}>
           <Route path="/cs/notice" element={<NoticeList />} />
@@ -80,7 +80,10 @@ function App() {
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
           <Route path="/admin/partner" element={<AdminPartner />} />
-          <Route path="/admin/partner/detail" element={<AdminPartnerDetail />} />
+          <Route
+            path="/admin/partner/detail"
+            element={<AdminPartnerDetail />}
+          />
           <Route path="/admin/banner" element={<AdminBanner />} />
           <Route path="/admin/banner/write" element={<AdminBannerWrite />} />
         </Route>

@@ -15,7 +15,7 @@ const AdminUserDetail = (props) => {
 
   const AUDCuList = () => {
     // axios
-    //   .post(`/admin/user/detail/culist`{
+    //   .post(`/mypage/membership`{
     //   id:id
     // })
     //   .then((res) => {
@@ -30,8 +30,12 @@ const AdminUserDetail = (props) => {
 
   const AUDCuInput = () => {
     // axios
-    //   .post(`/admin/user/detail/insertcu`{
-    //   id:id
+    //   .post(`/admin/user/detail/coupon/insert`{
+    //   member_id:
+    //  coupon_name:
+    //  sale_price:
+    //  issue_date:
+    //  valid_date:
     // })
     //   .then((res) => {
     //   })
@@ -44,7 +48,7 @@ const AdminUserDetail = (props) => {
   // const id = window.sessionStorage.getItem("id");
   const postUserData = () => {
     // axios
-    //   .post(`/admin/user/detail/memberinfo`{
+    //   .post(`/user/info`{
     //   id:id
     // })
     //   .then((res) => {
@@ -54,7 +58,6 @@ const AdminUserDetail = (props) => {
     //   .catch((e) => {
     //     console.error(e);
     //   });
-    // setUserdata(data);
   };
 
   return (
@@ -65,8 +68,8 @@ const AdminUserDetail = (props) => {
             <div className="AUDLeftInfo1">회원정보</div>
             <Link
               className="AUDUpdatLink"
-              to={`/userupdate`}
-              state={{ id: id }}
+              to={`/user/update`}
+              state={{ id: id, name: userdata.name, phone: userdata.phone }}
             >
               <input type="button" value="수정"></input>
             </Link>

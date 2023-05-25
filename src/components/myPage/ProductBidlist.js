@@ -132,7 +132,7 @@ export const ProductBidlist = ({ product }) => {
                   {product.bid_price.toLocaleString("ko-KR")}원
                 </div>
                 <div className="priceBidnum">
-                  {product.prod_price.toLocaleString("ko-KR")}원
+                  {product.cur_price.toLocaleString("ko-KR")}원
                 </div>
               </div>
             </div>
