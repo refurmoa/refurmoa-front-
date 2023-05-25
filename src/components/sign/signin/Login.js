@@ -89,7 +89,7 @@ function Login() {
         <span className="Login_detail_text">|</span>
         <span className="Login_detail_text" onClick={() => {setPwModal(true)}}>비밀번호 찾기</span>
         <span className="Login_detail_text">|</span>
-        <Link href="/signup" className="Login_detail_text">회원가입</Link>
+        <Link to="/signup" className="Login_detail_text">회원가입</Link>
       </div>
 
       {/* ID, PW 찾기 모달 창*/}
@@ -110,13 +110,13 @@ function Login() {
 
       {/* 소셜 로그인 */}
       <div className="Login_social">
-        <Link href={naver_api_url} className="Login_social_btn">
+        <Link to={naver_api_url} className="Login_social_btn">
           <img className="Login_social_logo" src={naver} alt="naver" />
         </Link>
-        <Link href={kakao_api_url} className="Login_social_btn">
+        <Link to={kakao_api_url} className="Login_social_btn">
             <img className="Login_social_logo" src={kakao} alt="kakao" />
         </Link>
-        <Link href="" className="Login_social_btn">
+        <Link to="" className="Login_social_btn">
         <img className="Login_social_logo" src={google} alt="google" />
         </Link>
       </div>
