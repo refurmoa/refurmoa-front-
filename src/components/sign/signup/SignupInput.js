@@ -80,13 +80,14 @@ const Signup_input = (props) => {
       setTotal_Id(id);
       setData({
         id:id,
+        name:name,
         phone:phone,
         password:password,
-        email:mail,
+        email:email + "@" + domain,
         address:address,
         address_detail:address_detail,
         birth:birth,
-    })
+      })
       setMode(3);
 
     }

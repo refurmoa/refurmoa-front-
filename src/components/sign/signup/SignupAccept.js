@@ -1,5 +1,6 @@
 import React from "react";
 import "./Signup.css";
+import axios from "axios";
 import { Link, useLocation } from "react-router-dom";
 import { useRef, useState, useEffect } from "react";
 import { noticeList } from "../../shared/AcceptText";
@@ -63,31 +64,30 @@ const Signup_accept = (props) => {
   const onClick = () => {
     if (check_box1 && check_box2) {
       alert("회원가입을 마치시겠습니까?");
-      setMode(4);
-        /*
-    setEmail(email.concat("@", domain));
-    axios
+      console.log(data);
+      axios
       .post("/signup", {
-        id: data.id,
-        phone:data.phone
-        password:data.password
-        email:data.mail
-        address:data.address
-        address_detail:data.address_detail
-        birth:data.birth
-         ACCEPT_LOCATION: check_box3,
-        ACCEPT_ALARM:check_box4,
+        member_id: data.id,
+        password: data.password,
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        address: data.address,
+        detail_address: data.address_detail,
+        birth: data.birth,
+        accept_location: check_box3,
+        accept_alarm: check_box4,
       })
       .then((res) => {
-        if(res.data){  
-        
-       
+        if(res.data === 1){
+          setMode(4);
+        } else {
+          alert("회원가입 실패!");
+        }
       })
       .catch((e) => {
         console.error(e);
       });
-    */
-   
     } else {
       alert("필수 정보를 체크해주세요!!");
       return false;
