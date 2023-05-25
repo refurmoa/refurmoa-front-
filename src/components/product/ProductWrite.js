@@ -28,11 +28,12 @@ function ProductWrite() {
   /*===============================================*/
 
   const [file, setFile] = useState(null);
-  const [listFile, setListfile] = useState();
+  const [listFile, setListfile] = useState([]);
   const [fileDataList, setFileDataList] = useState(); // 서버에 업로드 된 파일 리스트
 
   let [inputCount, setInputCount] = useState(0);
   const onInputHandler = (e) => {
+    setDefect_text(e.target.value);
     setInputCount(e.target.value.length);
   };
   /*===============================================*/
@@ -98,6 +99,7 @@ function ProductWrite() {
 
   const setPreviewImg = (e) => {
     var reader = new FileReader();
+   
     const uploadFiles = Array.prototype.slice.call(e.target.files); // 파일 이름을 배열 형태로 저장하는 객체
     reader.onload = function (e) {
       setMainImg(e.target.result);
@@ -105,14 +107,26 @@ function ProductWrite() {
     uploadFiles.forEach((uploadFile) => {
       console.log("bbb :" + uploadFile);
       fileList.push(uploadFile); // 배열에 push
+      setListfile(list=>[...list,uploadFile]);
     });
+    
     setImg_con(true);
-    setListfile(fileList); // console.log("fileList=>" + fileList);
+     // console.log("fileList=>" + fileList);
+    
     reader.readAsDataURL(e.target.files[0]);
   };
   /*===============================================*/
 
   const handleAddImages = (event) => {
+    const uploadFiles =Array.prototype.slice.call(event.target.files);
+    uploadFiles.forEach((uploadFile) => {
+      console.log("bbb :" + uploadFile);
+      fileList.push(uploadFile); // 배열에 push
+      setListfile(list=>[...list,uploadFile]);
+    });
+    
+    
+   
     const imageLists = event.target.files;
     let imageUrlLists = [...showImages];
 
@@ -145,43 +159,36 @@ function ProductWrite() {
 
   const Product_write = (e) => {
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
-    console.log("fileList=>" + listFile);
-
+    
     listFile.forEach((file) => {
       formData.append("uploadfiles", file);
     });
 
-    console.log(formData);
-    if (listFile.length === 0) {
-      alert("상품 사진을 하나 이상 등록해 주세요.");
-    }
+    
 
     axios
       .post("/product/write", {
-        CATEGORY_CODE: cate_code,
-        CATEGORY: cate + code,
-        MAIN_IMAGE: main_Image,
-        PROD_COM: prod_com,
-        PROD_NAME: prod_name,
-        PROD_GRADE: prod_Grade,
-        ORG_PRICE: org_price,
-        GUARANTEE: guarantee,
-        DEFFECT_TEXT: defect_text,
-        DEFFECT_IMAGE1: showImages[0],
-        DEFFECT_IMAGE2: showImages[1],
-        DEFFECT_IMAGE3: showImages[2],
-        REG_DATE: new Date(),
+        product_code:null,
+        category_code: cate_code,
+        category: cate + code,
+        main_image: 0,
+        prod_com: prod_com,
+        prod_name: prod_name,
+        prod_grade: prod_Grade,
+        org_price: org_price,
+        guarantee: guarantee,
+        deffect_text: defect_text,
+        deffect_image1: 0,
+        deffect_image2: 0,
+        deffect_image3: 0,
+        reg_date: new Date(),
+        prod_state:0,
+        com_num:com_num
       })
       .then((res) => {
         console.log(res);
         console.log(res.data);
-        console.log("upload request");
-      })
-      .catch((e) => {
-        console.error(e);
-      })
-      .then(() => {
-        // 동작 안되면 "/uploadfile" 로 수정하세요
+        console.log(listFile);
         axios
           .post("/uploadfile", formData)
           .then((res) => {
@@ -192,7 +199,11 @@ function ProductWrite() {
           .catch((e) => {
             console.error(e);
           });
-      });
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+     
   };
 
   return (
@@ -333,6 +344,8 @@ function ProductWrite() {
               type="text"
               maxLength="15"
               placeholder="제품회사명"
+              value={prod_com}
+              onChange={(e)=>setProd_com(e.target.value)}
             />
           </div>
           <div>
@@ -342,6 +355,8 @@ function ProductWrite() {
               type="text"
               placeholder="제품명"
               maxLength="30"
+              value={prod_name}
+              onChange={(e)=>setProd_name(e.target.value)}
             />
           </div>
         </div>
@@ -398,7 +413,7 @@ function ProductWrite() {
               type="checkbox"
               className="PW_state_other"
               onClick={onNotExist}
-              checked={guarantee}
+              checked={!guarantee}
             />
             &nbsp;<label>없음</label>
           </div>
