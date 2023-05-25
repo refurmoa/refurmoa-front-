@@ -4,7 +4,6 @@ import { getPostByNo } from "./OneononeData";
 import "./OneononeDetail.css";
 import { inquiryList } from "./OneononeData";
 import { useNavigate, useParams } from "react-router-dom";
-import naver from "../../../images/naver.png";
 import { Link } from "react-router-dom";
 
 const OneononeDetail = () => {
