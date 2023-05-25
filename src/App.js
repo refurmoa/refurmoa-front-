@@ -10,7 +10,7 @@ import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import PostWrite from "./components/prodPost/PostWrite/PostWrite";
 import PostUpdate from "./components/prodPost/PostWrite/PostUpdate";
-// import PostPay from "./components/Pay/PortonePay";
+import PostPay from "./components/Pay/PostPay";
 import PayDetail from "./components/Pay/PayDetail";
 import CsNavbar from "./components/cs/CsNavbar";
 import NoticeList from "./components/cs/notice/NoticeList";
