@@ -25,7 +25,6 @@ function Login() {
       alert("비밀번호를 입력해주세요");
       return false;
     }
-    console.log(id,password);
     axios
         .post("/login", {
           member_id: id,
