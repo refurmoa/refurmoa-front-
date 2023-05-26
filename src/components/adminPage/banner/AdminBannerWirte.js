@@ -1,45 +1,37 @@
 import "./AdminBannerWrite.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import alt_img from "../../../images/picture-icon-240.png";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const AdminBannerWirte = () => {
-  let [main_Image, setMainImg] = useState("");
-  const fileList = []; // 업로드 할 파일 리스트 저장
-  const [listFile, setListfile] = useState();
-  const [img_con, setImg_con] = useState(false);
-
-  const setPreviewImg = (e) => {
-    var reader = new FileReader();
-    const uploadFiles = Array.prototype.slice.call(e.target.files); // 파일 이름을 배열 형태로 저장하는 객체
-    reader.onload = function (e) {
-      setMainImg(e.target.result);
-    };
-    uploadFiles.forEach((uploadFile) => {
-      console.log("bbb :" + uploadFile);
-      fileList.push(uploadFile); // 배열에 push
-    });
-    setImg_con(true);
-    setListfile(fileList); // console.log("fileList=>" + fileList);
-    reader.readAsDataURL(e.target.files[0]);
-  };
-
+  const navigate = useNavigate();
+  // 미리보기 이미지
+  const [main_Image, setMainImg] = useState("");
+  // 폼데이터 전송 이미지데이터
+  const [uploadFile, setUploadFile] = useState();
+  // 배너 정보
   const [startDate, setStartDate] = useState();
   const [endtDate, setEndDate] = useState();
   const [bannerLink, setBannerLink] = useState();
   const [bannerCom, setBannerCom] = useState();
   const [bannerPhone, setBannerPhone] = useState();
-  const BannerCancle = () => {
-    setStartDate();
-    setEndDate();
-    setBannerLink();
-    setBannerCom();
-    setBannerPhone();
+  const [bannerNotes, setBannerNotes] = useState();
+
+  // 미리보기 이미지
+  const setPreviewImg = (e) => {
+    if (e.target.files.length > 0) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        setMainImg(e.target.result);
+      };
+      setUploadFile(e.target.files[0]);
+      reader.readAsDataURL(e.target.files[0]);
+    } else {
+      setMainImg("");
+    }
   };
 
-  const navigate = useNavigate();
   const BannerInput = () => {
     if (startDate > endtDate) {
       alert("날짜 오류입니다.");
@@ -54,29 +46,33 @@ const AdminBannerWirte = () => {
       return false;
     }
     if (bannerPhone === "" || bannerPhone === undefined) {
-      alert("연라처를 입력하세요!!!");
+      alert("연락처를 입력하세요!!!");
       return false;
     }
-    // const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용
-    // fileList.forEach((file) => {
-    //   formData.append("uploadfiles", file);
-    // });
-    // axios
-    //   .post("/admin/banner/write", {
-    //     startDate: startDate,
-    //     endtDate: endtDate,
-    //     bannerLink: bannerLink,
-    //     bannerCom: bannerCom,
-    //     bannerPhone: bannerPhone,
-    //     formData: formData,
-    //   })
-    //   .then((res) => {
-    //     // AdminBanner에서 배너 목록 불러오는 함수 이름
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    navigate(`/admin/banner`);
+
+    // formData 객체 만들어서 데이터 삽입
+    const formData = new FormData(); 
+    formData.append("banner_img", uploadFile);
+    formData.append("seller_name", bannerCom);
+    formData.append("seller_phone", bannerPhone);
+    formData.append("bann_link", bannerLink);
+    formData.append("bann_ref", bannerNotes);
+    formData.append("bann_start", new Date(startDate));
+    formData.append("bann_end", new Date(endtDate));
+
+    axios
+      .post("/admin/banner/write", formData, {
+        headers: {
+        "Content-Type": "multipart/form-data",
+        },})
+      .then((res) => {
+        if (res.data === 1) {
+          navigate("/admin/banner");
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   return (
@@ -110,14 +106,14 @@ const AdminBannerWirte = () => {
               className="ABCal1"
               type="datetime-local"
               data-placeholder="시작일"
-              onChange={(e) => setStartDate(e.target.value)}
+              onChange={(e) => setStartDate((e.target.value).replace("T", " "))}
             />
             ~
             <input
               className="ABCal2"
               type="datetime-local"
               data-placeholder="종료일"
-              onChange={(e) => setEndDate(e.target.value)}
+              onChange={(e) => setEndDate((e.target.value).replace("T", " "))}
             />
           </div>
         </div>
@@ -153,10 +149,11 @@ const AdminBannerWirte = () => {
         <textarea
           className="ABInputTextBox"
           placeholder="참고사항을 입력하세요"
+          onChange={(e) => setBannerNotes(e.target.value)}
         />
       </form>
       <div className="ABUnderButton">
-        <input type="button" value="취소" onClick={BannerCancle} />
+        <input type="button" value="취소" onClick={() => {navigate(-1)}} />
         <input type="button" value="등록" onClick={BannerInput} />
       </div>
     </div>
