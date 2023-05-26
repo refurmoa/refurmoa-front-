@@ -115,21 +115,21 @@ const AdminBanner = () => {
         <div className="BN_content">
           {bannList?.map((item, index) => (
             <div className="BN_banner" key={index}>
-              <div className="BN_banner_num">{item.bannNum}</div>
+              <div className="BN_banner_num">{item.bann_num}</div>
               <div className="BN_banner_img">
-                  <img alt="bannerimage" src={`/images/banner/${item.bannImage}`}/>
+                  <img alt="bannerimage" src={`/images/banner/${item.bann_image}`}/>
               </div>
               <div className="BN_banner_info">
-                  <div>{item.sellerName}</div>
-                  <div>{item.sellerPhone}</div>
+                  <div>{item.seller_name}</div>
+                  <div>{item.seller_phone}</div>
               </div>
               <div className="BN_banner_date">
-                <a href={item.bannLink}>{item.bannLink}</a>
+                <a href={item.bann_link}>{item.bann_link}</a>
                 <div className="BN_banner_date_info">
-                  {item.bannStart.substring(0, 10)}~{item.bannEnd.substring(0, 10)}
+                  {item.bann_start.substring(0, 10)}~{item.bann_end.substring(0, 10)}
                 </div>
               </div>
-              <div className="BN_banner_delete" onClick={() => {deleteHandler(item.bannNum)}}>삭제</div>
+              <div className="BN_banner_delete" onClick={() => {deleteHandler(item.bann_num)}}>삭제</div>
             </div>
           ))}
         </div>
