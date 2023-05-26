@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import DaumPostcode from "react-daum-postcode";
 
+const Header = styled.div`
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 35px;
+  margin-left: 5px;
+`;
+
 const Find_address = (props) => {
-  const address = props.address;
   const setAddress = props.setAddress;
-  const setMdoal = props.setMdoal;
+  const setModoal = props.setMdoal;
+
   const onCompletePost = (data) => {
-    console.log(data.address);
-    setMdoal(false);
     setAddress(data.address);
+    setModoal(false);
   };
 
   const postCodeStyle = {
@@ -21,6 +27,7 @@ const Find_address = (props) => {
 
   return (
     <>
+      <Header>주소 찾기</Header>
       <DaumPostcode
         style={postCodeStyle}
         autoClose

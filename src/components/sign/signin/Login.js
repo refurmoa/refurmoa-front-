@@ -1,7 +1,8 @@
 // 로그인 페이지
 
 import "./Login.css";
-import React, { useState } from "react";
+import "../Sign.css";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Find from "./LoginFind";
@@ -16,19 +17,23 @@ function Login() {
   const [idModal, setIdModal] = useState(false); // ID 찾기 모달
   const [pwModal, setPwModal] = useState(false); // PW 찾기 모달
 
+  useEffect(() => {
+    if (sessionStorage.getItem("id") !== null) navigate("/");
+  }, []);
+
   // 로그인
   const LoginClick = () => {
     if (id === "") {
-      alert("아이디를 입력해주세요");
+      alert("아이디를 입력해주세요.");
       return false;
     } else if (password === "") {
-      alert("비밀번호를 입력해주세요");
+      alert("비밀번호를 입력해주세요.");
       return false;
     }
 
     axios
       .post("/login", {
-        member_id: id,
+        memberId: id,
         password: password,
       })
       .then((res) => {
@@ -37,7 +42,7 @@ function Login() {
           if (id === "admin") navigate(-1);
           else document.location.href = "/";
         } else {
-          alert("아이디, 비밀번호를 확인해주세요.");
+          alert("아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.");
           return false;
         }
       })
@@ -63,25 +68,25 @@ function Login() {
 
 
   return (
-    <div className="Login_wrap">
-      <div className="Login_header">로그인</div>
+    <div className="Sign_wrap Login_wrap">
+      <div className="Sign_header Login_header">로그인</div>
 
       {/* 로그인 폼 */}
       <div className="Login_form">
-        <div className="Login_form_line">
-          <label className="Login_form_text" htmlFor="id">아이디</label>
-          <input className="Login_input"
+        <div className="Sign_form_line">
+          <label className="Sign_form_text" htmlFor="id">아이디</label>
+          <input className="Sign_input"
             name="id" type="text" placeholder="아이디" maxLength="15"
-            value={id} onChange={(e)=>setId(e.target.value)} />
+            value={id} onChange={(e)=>setId(e.target.value)} required />
         </div>
-        <div className="Login_form_line">
-          <label className="Login_form_text" htmlFor="password">비밀번호</label>
-          <input className="Login_input"
+        <div className="Sign_form_line">
+          <label className="Sign_form_text" htmlFor="password">비밀번호</label>
+          <input className="Sign_input"
             name="password" type="password" maxLength="20" placeholder="비밀번호"
-            value={password} onChange={(e)=>setPassword(e.target.value)} />
+            value={password} onChange={(e)=>setPassword(e.target.value)} required />
         </div>
       </div>
-      <div className="Login_btn" onClick={LoginClick}>LOGIN</div>
+      <div className="Sign_btn Login_btn" onClick={LoginClick}>LOGIN</div>
 
       {/* ID 찾기, PW 찾기, 회원가입 */}
       <div className="Login_detail">
@@ -109,15 +114,15 @@ function Login() {
       }
 
       {/* 소셜 로그인 */}
-      <div className="Login_social">
-        <Link to={naver_api_url} className="Login_social_btn">
-          <img className="Login_social_logo" src={naver} alt="naver" />
+      <div className="Sign_social Login_social">
+        <Link to={naver_api_url} className="Sign_social_btn">
+          <img className="Sign_social_logo" src={naver} alt="naver" />
         </Link>
-        <Link to={kakao_api_url} className="Login_social_btn">
-            <img className="Login_social_logo" src={kakao} alt="kakao" />
+        <Link to={kakao_api_url} className="Sign_social_btn">
+            <img className="Sign_social_logo" src={kakao} alt="kakao" />
         </Link>
-        <Link to="" className="Login_social_btn">
-        <img className="Login_social_logo" src={google} alt="google" />
+        <Link to="" className="Sign_social_btn">
+        <img className="Sign_social_logo" src={google} alt="google" />
         </Link>
       </div>
     </div>

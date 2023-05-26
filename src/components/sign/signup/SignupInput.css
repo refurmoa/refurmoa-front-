@@ -1,0 +1,139 @@
+/* 회원가입 정보입력 (1) */
+
+.Signup_Input_wrap {
+  width: 1050px;
+}
+
+.Signup_form_line_long {
+  width: 570px;
+  height: 40px;
+  margin-bottom: 35px;
+}
+
+.Singup_input_none {
+  border: none;
+}
+
+.Signup_check_line {
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.Signup_check {
+  width: 310px;
+  padding-right: 100px;
+}
+
+.Signup_input_check {
+  width: 90px;
+}
+
+.Signup_chkmsg_line {
+  margin-bottom: 0;
+}
+
+.Signup_chkmsg {
+  width: 400px;
+  height: 20px;
+  font-size: 15px;
+  line-height: 20px;
+  color: red;
+  padding: 0 10px 0 160px;
+  margin: 5px auto 10px;
+}
+.Signup_email_line {
+  position: relative;
+}
+
+.Signup_email_input {
+  float: right;
+  width: 420px;
+  height: 38px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 40px;
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  border-color: #514438;
+}
+
+.Signup_email {
+  width: 180px;
+  height: 38px;
+  border: none;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 40px;
+  padding: 0 10px;
+}
+
+.Signup_email:focus {
+  outline: none;
+}
+
+.Signup_email::placeholder {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 40px;
+  color: #CCCCCC;
+}
+
+.Signup_email:first-child {
+  float: left;
+}
+
+.Signup_domain {
+  float: right;
+  width: 155px;
+  padding-right: 35px;
+}
+
+.Signup_email_select {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  width: 180px;
+  height: 240px;
+  z-index: 1;
+}
+
+.Signup_email_option {
+  width: 180px;
+  height: 40px;
+  border: none;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 40px;
+  background-color: #FFFFFF;
+  padding: 0 10px;
+}
+
+.Signup_email_option:hover {
+  background-color: #EEEEEE;
+}
+
+.Signup_select_icon {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.Signup_input_birth {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 40px;
+  color: #CCCCCC;
+}
+
+.Signup_input_birth_on {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 40px;
+}
+
+.Signup_input_btn {
+  margin: 75px auto 10px;
+}

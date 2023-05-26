@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import SignVerification from "../SignVerification";
 import cancel from "../../../images/cancel.png";
 
 const LoginFind = (props) => {
@@ -9,11 +10,6 @@ const LoginFind = (props) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [certi, setCerti] = useState("");
-
-  // 인증번호 전송
-  const certifyClick = () => {
-
-  }
   
   // ID, PW 찾기 버튼 클릭 시
   const findLogin = () => {
@@ -115,43 +111,18 @@ const LoginFind = (props) => {
   
   return (
     <div className="Login_find_wrap">
-      <div className="Login_header">{props.modal === "id" ? "아이디 찾기" : "비밀번호 찾기"}</div>
+      <div className="Sign_header Login_header">{props.modal === "id" ? "아이디 찾기" : "비밀번호 찾기"}</div>
       { props.modal === "pw" &&
-        <div className="Login_form_line">
-          <label className="Login_form_text" htmlFor="id">아이디</label>
-          <input className="Login_input"
+        <div className="Sign_form_line">
+          <label className="Sign_form_text" htmlFor="id">아이디</label>
+          <input className="Sign_input"
             name="id" type="text" placeholder="아이디" maxLength="15"
-            value={id} onChange={(e) => setId(e.target.value)} />
+            value={id} onChange={(e) => setId(e.target.value)} required />
         </div>
       }
-      <div className="Login_form_line">
-        <label className="Login_form_text" htmlFor="name">이름</label>
-        <input className="Login_input"
-          name="name" type="text" placeholder="이름" maxLength="10"
-          value={name} onChange={(e) => setName(e.target.value)} />
-      </div>
-      <div className="Login_form_line Login_phone_line">
-        <label className="Login_form_text" htmlFor="phone">전화번호</label>
-        <input className="Login_input Login_phone"
-          name="phone" type="text" placeholder="전화번호" maxLength="15"
-          value={phone} onChange={(e) => setPhone(e.target.value)} />
-        <span className="Login_phone_btn" onClick={certifyClick}>인증번호 전송</span>
-      </div>
-      <div className="Login_form_line Login_phone_line">
-        <input className="Login_input"
-          name="phone" type="text" placeholder="인증번호 입력" maxLength="15"
-          value={certi} onChange={(e) => setCerti(e.target.value)} />
-      </div>
-      <div className="Login_indivation">
-        <span className="Login_indivation_left">∙</span>
-        <span className="Login_indivation_right">
-          본인인증 시 제공되는 정보는 해당 인증기관에서 직접 수집하며,
-          <br />
-          인증 이외의 용도로 이용 또는 저장되지 않습니다.
-        </span>
-      </div>
-      <div className="Login_btn" onClick={() => {findLogin()}}>{props.modal === "id" ? "아이디 찾기" : "비밀번호 찾기"}</div>
-      <img className="Login_modal_close" alt="창 닫기" src={cancel} onClick={() => {props.setModal(false);}} />
+      <SignVerification name={name} setName={setName} phone={phone} setPhone={setPhone} certi={certi} setCerti={setCerti} />
+      <div className="Sign_btn Login_btn" onClick={() => {findLogin()}}>{props.modal === "id" ? "아이디 찾기" : "비밀번호 찾기"}</div>
+      <img className="Sign_modal_close" alt="창 닫기" src={cancel} onClick={() => {props.setModal(false);}} />
     </div>
   );
 };
