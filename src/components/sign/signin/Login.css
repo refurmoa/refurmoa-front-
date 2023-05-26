@@ -15,37 +15,6 @@
   margin: 0 auto;
 }
 
-.Login_form_line {
-  width: 420px;
-  height: 40px;
-  margin-bottom: 50px;
-}
-
-.Login_form_text {
-  float: left;
-  height: 40px;
-  font-weight: 500;
-  font-size: 25px;
-  line-height: 40px;
-}
-
-.Login_input {
-  float: right;
-  width: 280px;
-  height: 38px;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 40px;
-  padding: 0 10px;
-  border-width: 0 0 2px 0;
-  border-style: solid;
-  border-color: #514438;
-}
-
-.Login_input:focus {
-  outline: none;
-}
-
 .Login_btn {
   margin: 10px auto 0;
 }
@@ -97,60 +66,6 @@
   padding: 70px 180px;
   background: #ffffff;
   border-radius: 30px;
-}
-
-.Login_phone_line {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-.Login_phone {
-  width: 165px;
-  padding-right: 125px;
-}
-
-.Login_phone_btn {
-  position: absolute;
-  top: 5px;
-  right: 0;
-  width: 115px;
-  height: 30px;
-  border-radius: 10px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 30px;
-  color: #FFFFFF;
-  text-align: center;
-  background: #B9A89A;
-  cursor: pointer;
-}
-
-.Login_indivation {
-  width: 415px;
-  height: 40px;
-  font-weight: 200;
-  font-size: 15px;
-  line-height: 20px;
-  color: #888888;
-  margin: 25px auto 70px;
-}
-
-.Login_indivation_left {
-  float: left;
-  margin-right: 10px;
-}
-
-.Login_indivation_right {
-  float: left;
-}
-
-.Login_modal_close {
-  position: absolute;
-  top: 25px;
-  right: 25px;
-  width: 20ps;
-  height: 20px;
-  cursor: pointer;
 }
 
 /* 소셜 로그인 */

@@ -12,21 +12,21 @@ import Complete from "./SignupComplete";
 function Signup() {
   const navigate = useNavigate();
   const [mode, setMode] = useState(0);
-  const [id, setTotal_Id] = useState("");
-  const [phone, setTotal_Phone] = useState("");
-  const [name, setTotal_Name] = useState("");
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [data, setData]=useState({});
 
-  // useEffect(() => {
-  //   if (sessionStorage.getItem("id") !== null) navigate("/");
-  // }, []);
+  useEffect(() => {
+    if (sessionStorage.getItem("id") !== null) navigate("/");
+  }, []);
 
   if (mode === 1) {
-    return ( <Phone setMode={setMode} setTotal_Name={setTotal_Name} setTotal_Phone={setTotal_Phone} /> );
+    return ( <Phone setMode={setMode} name={name} setName={setName} phone={phone} setPhone={setPhone} /> );
   } else if (mode === 2) {
-    return ( <Input setMode={setMode} name={name} phone={phone} setTotal_Id={setTotal_Id} setData={setData} /> );
+    return ( <Input setMode={setMode} id={id} setId={setId} name={name} setName={setName} phone={phone} setPhone={setPhone} setData={setData} /> );
   } else if (mode === 3) {
-    return ( <Accept setMode={setMode}  data={data}/> );
+    return ( <Accept setMode={setMode} id={id} name={name} phone={phone} data={data} /> );
   } else if (mode === 4) {
     return ( <Complete setMode={setMode} name={name} id={id} /> );
   } else return ( <Main setMode={setMode} /> );

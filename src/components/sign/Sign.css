@@ -16,6 +16,97 @@
     color: rgba(81, 68, 56, 0.6);
 }
 
+/* input 폼 */
+.Sign_form_line {
+    width: 420px;
+    height: 40px;
+    margin-bottom: 50px;
+}
+
+.Sign_form_text {
+    float: left;
+    height: 40px;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 40px;
+}
+
+.Sign_input, .Sign_input_long {
+    float: right;
+    height: 38px;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 40px;
+    padding: 0 10px;
+    border-width: 0 0 2px 0;
+    border-style: solid;
+    border-color: #514438;
+}
+
+.Sign_input {
+    width: 280px;
+}
+
+.Sign_input_long {
+    width: 400px;
+}
+
+.Sign_input:focus, .Sign_input_long:focus {
+    outline: none;
+}
+
+.Sign_input::placeholder, .Sign_input_long::placeholder {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 40px;
+    color: #CCCCCC;
+}
+
+.Sign_phone_line {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.Sign_phone {
+    width: 165px;
+    padding-right: 125px;
+}
+
+.Sign_phone_btn {
+    position: absolute;
+    top: 5px;
+    right: 0;
+    width: 115px;
+    height: 30px;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 30px;
+    color: #FFFFFF;
+    text-align: center;
+    background: #B9A89A;
+    cursor: pointer;
+}
+
+.Sign_indivation {
+    width: 415px;
+    height: 40px;
+    font-weight: 200;
+    font-size: 15px;
+    line-height: 20px;
+    color: #888888;
+    margin: 25px auto 70px;
+}
+
+.Sign_indivation_left {
+    float: left;
+    margin-right: 10px;
+}
+
+.Sign_indivation_right {
+    float: left;
+}
+
 .Sign_btn {
     width: 420px;
     font-weight: 500;
@@ -35,8 +126,16 @@
     transition: 0.7s;
 }
 
-/* 소셜 로그인/회원가입 */
+.Sign_modal_close {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 20ps;
+    height: 20px;
+    cursor: pointer;
+}
 
+/* 소셜 로그인/회원가입 */
 .Sign_social {
     width: 300px;
     height: 80px;

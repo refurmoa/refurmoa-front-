@@ -1,7 +1,6 @@
 /* 회원가입 페이지 */
 
-/* ==========================  회원가입 메인 (0)  ========================== */
-
+/* 회원가입 메인 (0) */
 .Signup_Main_wrap {
   width: 680px;
   height: 480px;
@@ -50,373 +49,152 @@
   margin: 30px auto 10px;
 }
 
-
-/* ==========================  회원가입 본인인증 (1)  ========================== */
-
-.SU_Phone_form {
-  padding: 30px;
-  width: 740px;
-  height: 600px;
-  margin-top: 35px;
-  border: 0px;
-  background: #ffffff;
-  box-shadow: 0px 0px 20px 5px rgba(185, 168, 154, 0.1);
-  border-radius: 30px;
-  text-align: center;
+/* 회원가입 Header */
+.Signup_header {
+  margin-bottom: 25px;
 }
-.SU_sub_header {
+
+.Signup_sub {
+  height: 25px;
+  text-align: center;
+  margin: 0 auto 55px;
+}
+
+.Signup_sub_text {
+  height: 25px;
   font-weight: 600;
   font-size: 20px;
   line-height: 25px;
-  margin-top: 40px;
-  margin-bottom: 50px;
   color: rgba(185, 168, 154, 0.6);
 }
-.SU_sub_header > .SU_pro_now {
-  color: #b9a89a;
-}
-.SU_phone_form {
-  margin-top: 40px;
-  text-align: left;
+
+.Signup_sub_text:not(:last-child) {
+  margin-right: 30px;
 }
 
-.SU_phone_input > tr > td {
-  padding-right: 20px;
-  padding-bottom: 25px;
-  font-size: 25px;
-  line-height: 30px;
-  color: #514438;
-  font-weight: bold;
-  font-family: "Noto Sans KR";
+.Signup_sub_text_main {
+  color: #B9A89A;
 }
 
-.SU_phone_input > tr > td > input {
-  font-size: 20px;
-  width: 200px;
-  height: 30px;
-  border-width: 0;
+/* 회원가입 본인인증 (1) */
+.Signup_Phone_wrap {
+  width: 680px;
+  height: 550px;
 }
 
-.SU_phone_input :focus {
-  outline: none !important;
-  background: #ffffff;
-}
-.SU_phone_line {
-  width: 300px;
-  margin-left: 0px;
-  margin-top: 5px;
-  border: 2px solid #514438;
-}
-.SU_phone_btn {
-  background: #b9a89a;
-  border: 0px;
-  border-radius: 40px;
-  width: 450px;
-  height: 70px;
-  margin-top: 40px;
-  font-weight: 500;
-  font-size: 25px;
-  color: #ffffff;
-  cursor: pointer;
-}
-.signup_information {
-  text-align: center;
-  margin-top: 20px;
-  font-weight: 200;
-  font-size: 15px;
-  line-height: 20px;
-  color: #888888;
-}
-.SU_phone_btn:hover {
-  background-color: rgba(185, 168, 154, 0.6);
-  transition: 0.7s;
-}
-.SU_cert_num {
-  width: 100px;
-  height: 30px;
-  background: #b9a89a;
-  border-radius: 10px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 30px;
-  color: #ffffff;
-  border: 0px;
-  cursor: pointer;
-}
-.SU_cert_num:hover {
-  background-color: rgba(185, 168, 154, 0.6);
-  transition: 0.7s;
-}
 
-/*==========================회원 가입 개인정보 입력(Signup_input.js)========================*/
-.SU_input_form {
-  padding: 30px;
+/* 회원가입 약관동의 (3) */
+.Signup_Accept_wrap {
   width: 1050px;
-  height: 1050px;
-  margin-top: 35px;
-  border: 0px;
-  background: #ffffff;
-  box-shadow: 0px 0px 20px 5px rgba(185, 168, 154, 0.1);
-  border-radius: 30px;
-  text-align: center;
 }
-.SU_input_table {
-  width: 650px;
-  margin-top: 40px;
-  text-align: left;
+
+.Signup_Accept {
+  width: 700px;
 }
-.SU_input_table > tr > td {
-  padding-right: 20px;
-  padding-bottom: 30px;
-  width: 400px;
-  font-size: 25px;
-  line-height: 30px;
-  color: #514438;
+
+.Signup_Accept_title {
+  width: 690px;
+  margin: 0 5px;
+}
+
+.Signup_Accept_title:not(:first-child) {
+  margin: 20px 0 10px 5px;
+}
+
+.Signup_Accept_title > input {
+  width: 15px;
+  height: 15px;
+  margin: 5px 10px 0 0;
+}
+
+.Signup_Accept_title > label {
+  height: 25px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+}
+
+.Signup_Accept_title:first-child > label {
   font-weight: bold;
-  font-family: "Noto Sans KR";
 }
 
-.SU_input_table > tr > td > input {
-  font-size: 20px;
-  width: 450px;
-  height: 30px;
-  border-width: 0;
-}
-.SU_input_table :focus {
-  outline: none !important;
-}
-.SU_input_table > tr > td > .email_input {
-  font-size: 20px;
-  width: 135px;
-  height: 30px;
-  border-width: 0;
-}
-.SU_input_table > tr > td > .address_input {
-  font-size: 20px;
-  width: 250px;
-  height: 30px;
-  border-width: 0;
-}
-.SU_input_table > tr > td > .card_pw {
-  font-size: 25px;
-  width: 20px;
-  height: 30px;
-  background-color: transparent;
-  border: none;
-  margin-right: 5px;
-  text-align: center;
-  border-bottom: 2px solid #514438;
-  box-sizing: border-box;
-  position: relative;
-}
-
-.SU_input_table > tr > .prev_value {
-  font-family: "Noto Sans KR";
-  text-align: left;
-  font-size: 20px;
-  line-height: 30px;
-  color: #514438;
-  font-weight: normal;
-}
-
-.SU_not_chk {
-  font-weight: 500;
+.Signup_Accept_title > label > span {
   font-size: 15px;
-  line-height: 30px;
-  color: #ff1122;
-}
-.SU_ok_chk {
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 30px;
-  color: #7d9e8c;
-}
-.SU_input_table > tr > td > .box {
-  font-size: 20px;
-  width: 140px;
-  height: 30px;
-  border-width: 0;
-}
-.SU_input_line {
-  width: 450px;
-  height: 0px;
-  margin-left: 0px;
-  margin-top: 5px;
-  border: 2px solid #514438;
-  transform: matrix(1, 0, 0, 1, 0, 0);
+  color: #666666;
 }
 
-.SU_find_address {
-  float: right;
-  width: 115px;
-  height: 30px;
-  background: #b9a89a;
-  border-radius: 10px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 30px;
-  color: #ffffff;
-  border: 0px;
-  cursor: pointer;
-}
-.SU_find_address:hover {
-  background-color: rgba(185, 168, 154, 0.6);
-  transition: 0.7s;
-}
-.SU_card_header {
-  margin-top: 50px;
-  width: 160px;
-  height: 30px;
-  font-weight: 600;
-  font-size: 25px;
-  line-height: 30px;
-  text-align: center;
-  color: #514438;
-}
-.SU_card_sub {
-  margin-top: 20px;
-  width: 120px;
-  height: 34px;
-  font-weight: 600;
-  font-size: 25px;
-  line-height: 34px;
-  text-align: center;
-  color: rgba(81, 68, 56, 0.6);
+.Signup_Accept_content {
+  width: 680px;
+  height: 130px;
+  padding: 10px;
+  resize: none;
 }
 
-.SU_input_table > tr > td > .accept {
-  width: 15px;
-  height: 15px;
-  border-width: 0;
-  margin-left: 10px;
+.Signup_Accept_content::-webkit-scrollbar {
+  width: 7px;
 }
-.SU_input_table > tr > .accept {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 25px;
-  color: #514438;
-}
-.SU_input_table > tr > td > .terms {
-  width: 625px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  height: 100px;
-}
-.SU_input_table > tr > td > .terms::-webkit-scrollbar {
-  width: 10px;
-}
-.SU_input_table > tr > td > .terms::-webkit-scrollbar-thumb {
-  background-color: #b9a89a;
+
+.Signup_Accept_content::-webkit-scrollbar-thumb {
+  background-color: #DDDDDD;
   height: 50px;
   border-radius: 10px;
 }
-.SU_input_table > tr > td > .terms::-webkit-scrollbar-track {
+
+.Signup_Accept_content::-webkit-scrollbar-track {
   background-color: white;
 }
-.SU_input_btn {
-  background: #b9a89a;
-  border: 0px;
-  border-radius: 40px;
-  width: 450px;
-  height: 70px;
-  margin-top: 20px;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 25px;
-  text-align: center;
-  color: #ffffff;
-  cursor: pointer;
+
+.Signup_Accept_btn {
+  margin: 65px auto 10px;
 }
 
-/*======================동의문(SIgnup_accept.js)====================*/
-.SU_input_table > tr > td > .SU_accept {
-  width: 15px;
-  height: 15px;
-  border-width: 0;
-  margin-left: 100px;
-}
-.SU_input_table > tr > .SU_accept {
-  padding-top: 5px;
-  padding-bottom: 10px;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 25px;
-  color: #514438;
-}
-.SU_input_table > tr > td > .accepts {
-  width: 450px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  height: 150px;
-  margin-left: 100px;
-}
-.SU_input_table > tr > td > .accepts::-webkit-scrollbar {
-  width: 10px;
-}
-.SU_input_table > tr > td > .accepts::-webkit-scrollbar-thumb {
-  background-color: #b9a89a;
-  height: 50px;
-  border-radius: 10px;
-}
-.SU_input_table > tr > td > .accepts::-webkit-scrollbar-track {
-  background-color: white;
-}
-.SU_accept_form {
-  padding: 30px;
-  width: 800px;
-  height: 1260px;
-  margin-top: 35px;
-  border: 0px;
-  background: #ffffff;
-  box-shadow: 0px 0px 20px 5px rgba(185, 168, 154, 0.1);
-  border-radius: 30px;
-  text-align: center;
+/* 회원가입 완료 (4) */
+.Signup_Complete_wrap {
+  width: 680px;
 }
 
-/*=============회원가입 완료(Signup_compleye.js)===============*/
-.signup_detail {
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 25px;
-  color: #514438;
+.Signup_icon_wrap {
+  width: 100px;
+  margin: 10px auto 20px;
 }
-.detail_em {
-  font-style: bold;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 25px;
-  /* or 139% */
 
-  color: #514438;
-}
-.Signup_logo {
-  margin-bottom: 20px;
-  margin-top: 10px;
+.Signup_icon {
   width: 100px;
   height: 100px;
 }
-.signup_info {
-  margin-bottom: 40px;
 
-  font-style: normal;
+.Signup_complete_text {
   font-weight: 700;
   font-size: 25px;
   line-height: 40px;
   text-align: center;
-  color: #7d9e8c;
-}
-.info_detail {
   color: #514438;
 }
-.close_modal > button {
-  border: 0px;
-  background: #fff;
-  width: 30px;
-  height: 30px;
+
+.Signup_complete_text > span {
+  color: #7D9E8C;
 }
+
+.Signup_detail_text {
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #514438;
+  margin: 55px auto 20px;
+}
+
+.Sign_complete_btn {
+  margin: 0 115px 10px;
+}
+
+
+
+
+
+
+
+
+
 /*===================================*/
 .UU_input_btn {
   background: #b9a89a;

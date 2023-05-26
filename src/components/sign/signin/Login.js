@@ -73,17 +73,17 @@ function Login() {
 
       {/* 로그인 폼 */}
       <div className="Login_form">
-        <div className="Login_form_line">
-          <label className="Login_form_text" htmlFor="id">아이디</label>
-          <input className="Login_input"
+        <div className="Sign_form_line">
+          <label className="Sign_form_text" htmlFor="id">아이디</label>
+          <input className="Sign_input"
             name="id" type="text" placeholder="아이디" maxLength="15"
-            value={id} onChange={(e)=>setId(e.target.value)} />
+            value={id} onChange={(e)=>setId(e.target.value)} required />
         </div>
-        <div className="Login_form_line">
-          <label className="Login_form_text" htmlFor="password">비밀번호</label>
-          <input className="Login_input"
+        <div className="Sign_form_line">
+          <label className="Sign_form_text" htmlFor="password">비밀번호</label>
+          <input className="Sign_input"
             name="password" type="password" maxLength="20" placeholder="비밀번호"
-            value={password} onChange={(e)=>setPassword(e.target.value)} />
+            value={password} onChange={(e)=>setPassword(e.target.value)} required />
         </div>
       </div>
       <div className="Sign_btn Login_btn" onClick={LoginClick}>LOGIN</div>
