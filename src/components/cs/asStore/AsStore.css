@@ -133,13 +133,13 @@ padding: 0;
     padding:5px 0 0 20px;
 }
 
-input::placeholder {
+/* input::placeholder {
     font-size: 18px;
     line-height: 40px;
     display: flex;
     align-items: center;
     color: #B9A89A;
-  }
+  } */
 
 .asmiddlesearchboxbutton {
     display: inline-block;
