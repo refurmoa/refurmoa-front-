@@ -13,7 +13,7 @@ const Signup_accept = (props) => {
   const [check_box3, setCheck_box3] = useState(false);
   const [check_box4, setCheck_box4] = useState(false);
 
-  // 
+  // 약관 전체 동의
   const onCHKALL = (e) => {
     if (e.target.checked) {
       setCheck_ALL(true);
