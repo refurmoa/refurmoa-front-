@@ -10,7 +10,6 @@ function Signup_main(props) {
   const setMode = props.setMode;
 
   const onClick = () => {
-    alert("회원 가입을 진행하시겠습니까?");
     setMode(1);
   };
   let naver_api_url =

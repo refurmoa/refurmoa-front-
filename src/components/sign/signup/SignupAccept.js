@@ -63,20 +63,18 @@ const Signup_accept = (props) => {
   };
   const onClick = () => {
     if (check_box1 && check_box2) {
-      alert("회원가입을 마치시겠습니까?");
-      console.log(data);
       axios
       .post("/signup", {
-        member_id: data.id,
+        memberId: data.id,
         password: data.password,
         name: data.name,
         phone: data.phone,
         email: data.email,
         address: data.address,
-        detail_address: data.address_detail,
+        detailAddress: data.address_detail,
         birth: data.birth,
-        accept_location: check_box3,
-        accept_alarm: check_box4,
+        acceptLocation: check_box3,
+        acceptAlarm: check_box4,
       })
       .then((res) => {
         if(res.data === 1){

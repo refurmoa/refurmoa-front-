@@ -36,7 +36,6 @@ function Signup_phone(props) {
   });
   */
   const onClick = () => {
-    alert("다음으로 넘어가시겠습니까?");
     if (inputs.name === "" || inputs.phone === "") {
       alert("정보를 모두 입력해 주세요!");
       return false;

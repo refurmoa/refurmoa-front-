@@ -79,14 +79,14 @@ const Signup_input = (props) => {
   };
   const onClick = () => {
     if (check_pw && check_id && check_Email && Is_pw) {
-      alert("다음으로 넘어가시겠습니까?");
       setMail(email + "@" + domain);
       setTotal_Id(id);
       setData({
         id: id,
+        name: name,
         phone: phone,
         password: password,
-        email: mail,
+        email: email + "@" + domain,
         address: address,
         address_detail: address_detail,
         birth: birth,
