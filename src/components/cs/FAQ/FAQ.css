@@ -296,10 +296,12 @@
   height: 50px;
   margin-right: 20px;
   float: right;
+  display: flex;
 }
 .FAQ_button_cancel {
   width: 95px;
   height: 50px;
+  box-sizing: border-box;
   background-color: #fff;
   border: 2px solid #514438;
   border-radius: 10px;
@@ -308,15 +310,18 @@
   font-size: 20px;
   line-height: 50px;
   color: #514438;
+  cursor: pointer;
 }
 .FAQ_button_regi {
   width: 95px;
   height: 50px;
+  box-sizing: border-box;
   background-color: #514438;
   border-radius: 10px;
-
+  border: none;
   font-weight: 700;
   font-size: 20px;
   line-height: 50px;
   color: #fff;
+  cursor: pointer;
 }

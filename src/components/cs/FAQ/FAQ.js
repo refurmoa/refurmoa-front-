@@ -1,43 +1,75 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import FAQPOST from "./FAQPost";
 import "../notice/NoticeList.css";
 import "../CsNavbar.css";
 import "./FAQ.css";
 
-// 더미데이터
-import { FAQList } from "./FAQList";
 // 이미지파일
 import searchIcon from "../../../images/search.png";
 
 function FAQ() {
   const logId = window.sessionStorage.getItem("id");
+  const nanigate = useNavigate();
+  const [searchword, setSearchword] = useState();
+
+  const searchRef = useRef();
   const [dataList, setDataList] = useState([]);
-  const [searchFAQ, setSearchFAQ] = useState();
 
   const [category, setCatrgory] = useState(0);
 
+  // 페이징기능
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  useEffect(() => {
+  const getFaqList = () => {
     axios
-    .get(`/cs/faq?faq_cate=${category}&page=${currentPage-1}&size=10`)
+    .get(`/cs/faq?faq_cate=${category}&page=${currentPage-1}&size=10&sort=faqNum,desc`)
     .then((res) => {
       const { data } = res;
-      console.log(data);
       setDataList(data.content);
       setTotalPage(data.totalPages);
     })
     .catch((e) => {
       console.error(e);
     });
-  }, [category, currentPage]);
+  }
+
+  // 검색기능
+  // 엔터키
+  const activeEnter = (e) => {
+    if(e.key === "Enter") {
+      searchHandler();
+    }
+  }
+  const searchHandler = () => {
+    setSearchword(searchRef.current.value);
+  }
+  const getSearchList = () => {
+    axios
+    .get(`/cs/faq/search?search=${searchword}&faq_cate=${category}&page=${currentPage-1}&size=10&sort=faqNum,desc`)
+    .then((res) => {
+      const { data } = res;
+      setDataList(data.content);
+      setTotalPage(data.totalPages);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+  }
+
+  useEffect(() => {
+    if (searchword === undefined) {
+      getFaqList();
+    } else {
+      getSearchList();
+    }
+  }, [searchword, category, currentPage]);
 
   const changeCate = (item) => {
     setCatrgory(item);
-    setCurrentPage(0);
+    setCurrentPage(1);
   };
 
   return (
@@ -46,14 +78,8 @@ function FAQ() {
         <div className="FAQTitle">
           <div className="FAQTitleHead">FAQ</div>
           <div className="FAQSearchAdimin">
-            <input type="text" placeholder="검색어를 입력하세요"></input>
-            <img
-              className="FAQSearchIcon"
-              src={searchIcon}
-              value={searchFAQ}
-              onChange={(e) => setSearchFAQ(e.target.value)}
-              alt="searchbutton"
-            />
+            <input type="text" placeholder="검색어를 입력하세요" ref={searchRef} onKeyDown={(e) => {activeEnter(e)}}/>
+            <img className="FAQSearchIcon" src={searchIcon} alt="searchbutton" onClick={() => {searchHandler()}}/>
           </div>
           <div className="FAQRegi">
             <Link to="/cs/faq/write">
@@ -65,14 +91,8 @@ function FAQ() {
         <div className="FAQTitle">
           FAQ
           <div className="FAQSearch">
-            <input type="text" placeholder="검색어를 입력하세요"></input>
-            <img
-              className="FAQSearchIcon"
-              src={searchIcon}
-              value={searchFAQ}
-              onChange={(e) => setSearchFAQ(e.target.value)}
-              alt="searchbutton"
-            />
+            <input type="text" placeholder="검색어를 입력하세요" ref={searchRef} />
+            <img className="FAQSearchIcon" src={searchIcon} alt="searchbutton"/>
           </div>
         </div>
       )}
@@ -90,7 +110,7 @@ function FAQ() {
       </div>
 
       {dataList?.map((item, index) => (
-        <FAQPOST logId={logId} item={item} key={index} />
+        <FAQPOST logId={logId} item={item} key={index} getList={getFaqList} />
       ))}
 
       {/* 총 페이지 수가 1보다 클 때 */}
