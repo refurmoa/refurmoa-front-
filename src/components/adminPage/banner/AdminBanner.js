@@ -57,10 +57,10 @@ const AdminBanner = () => {
   };
 
   const deleteHandler = (bannerNum) => {
-    axios.get(`/admin/banner/delete?bannerNum=${bannerNum}`)
+    axios.get(`/admin/banner/delete?banner_num=${bannerNum}`)
     .then((res) => {
       if (res.data === 1) {
-        getBannerList()
+        window.location.reload();
       }
     })
     .catch((e) => {
@@ -82,9 +82,12 @@ const AdminBanner = () => {
   }
 
   useEffect(() => {
-    // if (sessionStorage.getItem("id") !== "admin") {
-    //   return navigate("/");
-    // }
+    if ((sessionStorage.getItem("id") !== "admin") && (sessionStorage.getItem("id") !== null)) {
+      return navigate("/");
+    } else if (sessionStorage.getItem("id") === null) {
+      return navigate("/login");
+    };
+    
     // 검색상태가 아니고 하단의 ref를 만났을 때
     if ((inView) && (!searchState)) {
       getBannerList();
