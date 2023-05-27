@@ -15,14 +15,14 @@ const CsNavbar = () => {
   return (
     <div className="CS-wrap">
       <span className="CSnavbar">
-        <div className="CSnavtitle">
-          고객센터
-        </div>
+        <div className="CSnavtitle">고객센터</div>
         <hr className="CSnavline" />
         <div className="CSnav_main">
           <NavLink
             to="/cs/notice"
-            className={`CSnavbarmenu ${activeLink === "notice" ? "active" : ""}`}
+            className={`CSnavbarmenu ${
+              activeLink === "notice" ? "active" : ""
+            }`}
             onClick={() => handleLinkClick("notice")}
           >
             공지사항
@@ -39,14 +39,15 @@ const CsNavbar = () => {
           <NavLink
             to="/cs/inquiry"
             className={`CSnavbarmenu ${
-              activeLink === "oneonone" ? "active" : ""}`}
+              activeLink === "oneonone" ? "active" : ""
+            }`}
             onClick={() => handleLinkClick("oneonone")}
           >
             1:1 문의하기
           </NavLink>
 
           <NavLink
-            to={login_id !== "admin" ? "/cs/as_store" : "/cs/as_store/list"}
+            to={login_id !== "admin" ? "/cs/as" : "/cs/as/write"}
             className={`CSnavbarmenu ${activeLink === "as" ? "active" : ""}`}
             onClick={() => handleLinkClick("as")}
           >

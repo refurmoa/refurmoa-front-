@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import search_logo from "../../../images/search.png";
 import { Link } from "react-router-dom";
 import "../notice/NoticeList.css";
@@ -9,6 +9,7 @@ import markers from "./marker.json";
 import CountryCity from "./CountryCity.json";
 import Post from "./FindStoreAddress";
 import Modal from "react-modal";
+import axios from "axios";
 
 function AsStoreWrite() {
   const [city, setCity] = useState();
@@ -20,10 +21,26 @@ function AsStoreWrite() {
   const [longitude, setLongitude] = useState();
   const [find_name, setFind_name] = useState();
   const [dataList, setDataList] = useState([]);
+  const searchpartRef = useRef();
 
   useEffect(() => {
-    setDataList(markers.placelist);
+    aslist();
   }, []);
+
+  const aslist = () => {
+    axios
+      .get("/cs/as", {})
+      .then((res) => {
+        // res : 서버의 응답 결과 저장
+        console.log("res ==>", res);
+        const { data } = res; // data = res.data
+        console.log("data ==>", data);
+        setDataList(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -40,18 +57,14 @@ function AsStoreWrite() {
   const currentItems = dataList.slice(indexOfFirstItem, indexOfLastItem);
   // 페이지 번호 버튼 생성
   const pageNumbers = [];
-  for (
-    let i = 1;
-    i <= Math.ceil(markers.placelist.length / itemsPerPage);
-    i++
-  ) {
+  for (let i = 1; i <= Math.ceil(dataList.length / itemsPerPage); i++) {
     pageNumbers.push(
       <button key={i} id={i} onClick={handleClick}>
         {i}
       </button>
     );
   }
-
+  console.log(dataList.length);
   const [popup, setPopup] = useState(false);
   const [modal, setModal] = useState(false);
   const ChangePopUP = () => {
@@ -62,50 +75,85 @@ function AsStoreWrite() {
     setPopup(false);
     setModal(false);
   };
-  const FindStore = () => {
-    // axios
-    // .post("/cs/asstore/find", {
-    //     find_name:find_name
-    // })
-    // .then((res) => {
-    //   if (res.data === 1) {
-    //     alert("성공적으로 등록되었습니다.");
-    //     setDataList(res.data);
-    //   } else {
-    //     alert("등록에 실패했습니다.");
-    //   }
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
-  };
+
   const StoreRegi = () => {
     if (window.confirm("등록을 완료하시겠습니까?")) {
-      // axios
-      // .post("/cs/asstore/write", {
-      // store_name: store_name,
-      // store_phone: store_phone,
-      // store_addr:store_addr,
-      // store_detail: store_detail,
-      // lattitude:lattitude,
-      // longitude:longitude,
-      // })
-      // .then((res) => {
-      //   if (res.data === 1) {
-      //     alert("성공적으로 등록되었습니다.");
-      //   } else {
-      //     alert("등록에 실패했습니다.");
-      //   }
-      // })
-      // .catch((e) => {
-      //   console.error(e);
-      // });
-      alert("등록이 완료되었습니다.");
-      document.location.href = "/cs/as_store/write";
+      axios
+        .post("/cs/as/admin/write", {
+          storeName: store_name,
+          storePhone: store_phone,
+          storeAddr: store_addr,
+          storeDetail: store_detail,
+          latitude: lattitude,
+          longitude: longitude,
+        })
+        .then((res) => {
+          console.log("길이는", res.data);
+          // if (res.data.length >= 1) {
+          //   alert("성공적으로 등록되었습니다.");
+          //   aslist();
+          //   document.location.href = "/cs/as/write";
+          // } else {
+          //   alert("등록에 실패했습니다.");
+          //   document.location.href = "/cs/as/write";
+          // }
+          alert("성공적으로 등록되었습니다.");
+          aslist();
+          document.location.href = "/cs/as/write";
+        })
+        .catch((e) => {
+          console.error(e);
+        });
     } else {
       return false;
     }
   };
+
+  const asDelete = (e) => {
+    console.log("num", e.target.id);
+    axios
+      .post("/cs/as/admin/delete", {
+        storeNum: e.target.id,
+      })
+      .then((res) => {
+        aslist();
+        alert("삭제가 완료되었습니다.");
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  function searchCity(e) {
+    console.log(e.target.value);
+    axios
+      .post("/cs/as/search", {
+        storeAddr: e.target.value,
+      })
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setDataList(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
+
+  function searchCityText() {
+    console.log(searchpartRef.current.value);
+    axios
+      .post("/cs/as/search2", {
+        storeName: searchpartRef.current.value,
+      })
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setDataList(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
+
   return (
     <>
       <div className="FAQ-List-form">
@@ -214,7 +262,7 @@ function AsStoreWrite() {
             </div>
           </div>
           <div className="AsStore_regi_btn">
-            <button onClick={StoreRegi}> 등록</button>
+            <button onClick={StoreRegi}>등록</button>
           </div>
         </div>
         <div className="AsStore_List">
@@ -228,13 +276,11 @@ function AsStoreWrite() {
               </select>
             </div>
             <div className="AsStore_Category_base">
-              <select>
+              <select onChange={searchCity}>
                 <option>전체</option>
                 {CountryCity.countries.map((countries) =>
                   city === countries.section ? (
-                    <option value={countries.section_detail}>
-                      {countries.section_detail}
-                    </option>
+                    <option>{countries.section_detail}</option>
                   ) : (
                     <></>
                   )
@@ -247,10 +293,10 @@ function AsStoreWrite() {
                 maxLength="30"
                 placeholder="매장명"
                 value={find_name}
-                onChange={(e) => setFind_name(e.target.value)}
+                ref={searchpartRef}
               ></input>
               <div className="AsStore_addr_logo">
-                <img src={search_logo} onClick={FindStore} />
+                <img src={search_logo} onClick={searchCityText} />
               </div>
             </div>
           </div>
@@ -258,19 +304,23 @@ function AsStoreWrite() {
         {currentItems.map((marker, index) => (
           <div className="AsStore_Post_List">
             <div className="AsStore_Post_Header">
-              <div className="AsStore_Post_Title">{marker.store_name}</div>
-              <div className="AsStore_Post_phone">{marker.store_phone}</div>
+              <div className="AsStore_Post_Title">{marker.storeName}</div>
+              <div className="AsStore_Post_phone">{marker.storePhone}</div>
               <div className="AsStore_Post_button">
-                <Link to="/cs/as_store/update" state={{ marker: marker }}>
+                <Link to="/cs/as/update" state={{ marker: marker }}>
                   수정
                 </Link>
                 &nbsp;|&nbsp;
-                <a>삭제</a>
+                <Link>
+                  <a id={marker.storeNum} onClick={asDelete}>
+                    삭제
+                  </a>
+                </Link>
               </div>
             </div>
             <div className="AsStore_Post_Detail">
-              {marker.store_addr}&nbsp;
-              {marker.store_detail}
+              {marker.storeAddr}&nbsp;
+              {marker.storeDetail}
             </div>
           </div>
         ))}
@@ -286,8 +336,7 @@ function AsStoreWrite() {
             <button
               onClick={() => setCurrentPage(currentPage + 1)}
               disabled={
-                currentPage ===
-                Math.ceil(markers.placelist.length / itemsPerPage)
+                currentPage === Math.ceil(dataList.length / itemsPerPage)
               }
             >
               {">"}

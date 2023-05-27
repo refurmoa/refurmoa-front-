@@ -7,15 +7,17 @@ import Modal from "react-modal";
 import Update_phone from "./UserUpdatePhone";
 import Update_card from "./UserUpdateCard";
 import Post from "../../sign/signup/FindAddress";
+import axios from "axios";
 
 const User_update = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [id, setId] = useState("");
+  const [id, setId] = useState("sajun28");
   const [password, setPassword] = useState("");
   const [passwordChk, setPasswordChk] = useState("");
   const [email, setEmail] = useState("");
   const [domain, setDomain] = useState("");
+  const [emailFinal, setEmailFinal] = useState("");
   const [address, setAddress] = useState(" ");
   const [update_address, setupdate_address] = useState("");
   const [address_detail, setAddress_detail] = useState(" ");
@@ -36,34 +38,36 @@ const User_update = () => {
   const [check_id, setCheck_id] = useState(false);
   const [check_Email, setCheck_Email] = useState(false);
   const [check_box, setCheck_box] = useState(false);
+  const [dataList, setDataList] = useState();
   // =====================================================
 
   useEffect(() => {
-    setId(window.sessionStorage.getItem("id"));
-    /*
+    // setId(window.sessionStorage.getItem("id"));
+    console.log(id);
     axios
-      .get("/userupdate", {
-        id: id,
+      .post("/user/info", {
+        memberId: id,
       })
       .then((res) => {
-        const user=res.data;
-        const mail = user.mail.split("@");
-        setName(user.name);
-        setPhone(user.phone);
-        setPassword(user.password);
+        // res : 서버의 응답 결과 저장
+        console.log("res ==>", res);
+        const { data } = res; // data = res.data
+        console.log("data ==>", data);
+        const mail = data[0].email.split("@");
+        setName(data[0].name);
+        setPhone(data[0].phone);
+        setPassword(data[0].password);
         setEmail(mail[0]);
         setDomain(mail[1]);
-        setAddress(user.address);
-        setAddress_detail(user.detail_address);
-        setBirth(user.birth);
-        setCard_num(user.birth);
-        setValid_date(user.valid_date);
+        setAddress(data[0].address);
+        setAddress_detail(data[0].detailAddress);
+        setBirth(data[0].birth);
       })
       .catch((e) => {
         console.error(e);
       });
-    */
   }, []);
+  console.log(phone);
 
   /*========================== */
   const [popup, setPopup] = useState(false);
@@ -102,29 +106,24 @@ const User_update = () => {
   const onClick = () => {
     if (check_pw && check_id && check_Email) {
       alert("회원정보를 수정하시겠습니까?");
-      /*
-    axios
-      .post("/userupdate", {
-        id: id,
-      })
-      .then((res) => {
-        const user=res.data;
-        const mail = user.mail.split("@");
-        setName(user.name);
-        setPhone(user.phone);
-        setPassword(user.password);
-        setEmail(mail[0]);
-        setDomain(mail[1]);
-        setAddress(user.address);
-        setAddress_detail(user.detail_address);
-        setBirth(user.birth);
-        setCard_num(user.birth);
-        setValid_date(user.valid_date);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-    */
+
+      axios
+        .post(`/user/update/${id}`, {
+          memberId: id,
+          password: password,
+          phone: phone,
+          email: emailFinal,
+          address: address,
+          detailAddress: address_detail,
+        })
+        .then((res) => {
+          alert("성공적으로 수정되었습니다.");
+          // aslist();
+          document.location.href = "/mypage";
+        })
+        .catch((e) => {
+          console.error(e);
+        });
     }
     if (!check_pw) {
       alert("비밀번호를 입력해주세요!");
@@ -141,6 +140,21 @@ const User_update = () => {
     console.log(valid_date);
     window.sessionStorage.setItem("id", id);
   };
+
+  const userDelete = () => {
+    axios
+      .post("/user/delete", {
+        memberId: id,
+      })
+      .then(() => {
+        alert("회원탈퇴가 완료되었습니다.");
+        document.location.href = "/";
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
   const onIdCHK = (e) => {
     setId(e.target.value);
     const idRegExp = /^[a-zA-z0-9]{4,12}$/;
@@ -180,13 +194,13 @@ const User_update = () => {
       setCheck_pw(false);
     }
   };
-  const Card_delete = () => {
-    setCard_num("");
-    setValid_date("");
-    setCvc("");
-    setCard_pw1("");
-    setCard_pw2("");
-  };
+  // const Card_delete = () => {
+  //   setCard_num("");
+  //   setValid_date("");
+  //   setCvc("");
+  //   setCard_pw1("");
+  //   setCard_pw2("");
+  // };
   const onEmailCHK = (e) => {
     setDomain(e.target.value);
     if (email === "" || e.target.value === "") {
@@ -195,6 +209,8 @@ const User_update = () => {
     } else {
       setChkEmailmsg("");
       setCheck_Email(true);
+      setEmailFinal(email + "@" + domain);
+      console.log(domain);
     }
   };
 
@@ -260,23 +276,15 @@ const User_update = () => {
             </tr>
             <tr>
               <td>아이디</td>
-              <td>
-                <input
-                  name="id"
-                  type="text"
-                  placeholder="아이디"
-                  value={id}
-                  maxLength="15"
-                  onChange={onIdCHK}
-                />
-
+              <td className="prev_value">{id}</td>
+              {/* <td>
                 <hr className="SU_input_line" />
                 {check_id ? (
                   <span className="SU_ok_chk">{chkIdmsg}</span>
                 ) : (
                   <span className="SU_not_chk">{chkIdmsg}</span>
                 )}
-              </td>
+              </td> */}
             </tr>
 
             <tr>
@@ -287,7 +295,7 @@ const User_update = () => {
                   type="password"
                   placeholder="비밀번호"
                   maxLength="20"
-                  value={password}
+                  // value={password}
                   onChange={onChangePassword}
                 />
                 <hr className="SU_input_line" />
@@ -516,7 +524,7 @@ const User_update = () => {
           정보수정
         </button>
         <div>
-          <button className="UU_user_delete_btn" onClick={onClick}>
+          <button className="UU_user_delete_btn" onClick={userDelete}>
             회원탈퇴
           </button>
         </div>
