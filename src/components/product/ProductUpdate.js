@@ -44,8 +44,12 @@ function ProductUpdate() {
    /*=================샘플 데이터 이미지는 백엔드에서=========================*/
 
    useEffect(() => {
-    
-    axios
+    const navigate = useNavigate();
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
+  
+  axios
       .get("/prod/update/info", {
         params:{product_code: product_code}
       })
@@ -53,9 +57,9 @@ function ProductUpdate() {
         console.log(res.data.prod.mainImage)
         const productData=res.data.prod
         if (
-          productData.category === "funliving" ||
-          productData.category === "funbed" ||
-          productData.category === "funoffice"
+          productData.categoryCode === "funliving" ||
+          productData.categoryCode === "funbed" ||
+          productData.categoryCode === "funoffice"
         ) {
           setFuniture(true);
           setAppliance(false);
@@ -184,7 +188,7 @@ function ProductUpdate() {
     };
     setMainFile(e.target.files[0]);
     
-    setImg_con(true);
+   
      // console.log("fileList=>" + fileList);
     
     reader.readAsDataURL(e.target.files[0]);
@@ -192,6 +196,7 @@ function ProductUpdate() {
   /*===============================================*/
 
   const handleAddImages = (event) => {
+    setImg_con(true);
     const uploadFiles =Array.prototype.slice.call(event.target.files);
     uploadFiles.forEach((uploadFile) => {
       console.log("bbb :" + uploadFile);

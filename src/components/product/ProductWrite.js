@@ -8,6 +8,13 @@ import Modal from "react-modal";
 import FindCompany from "./FindCompany";
 
 function ProductWrite() {
+
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
+  },[]);
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   let [main_Image, setMainImg] = useState("");
@@ -106,7 +113,6 @@ function ProductWrite() {
     };
     setMainFile(e.target.files[0]);
     
-    setImg_con(true);
      // console.log("fileList=>" + fileList);
     
     reader.readAsDataURL(e.target.files[0]);
@@ -114,6 +120,7 @@ function ProductWrite() {
   /*===============================================*/
 
   const handleAddImages = (event) => {
+    setImg_con(true);
     const uploadFiles =Array.prototype.slice.call(event.target.files);
     uploadFiles.forEach((uploadFile) => {
       console.log("bbb :" + uploadFile);
