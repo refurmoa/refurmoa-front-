@@ -47,7 +47,6 @@ function FAQ() {
     setSearchword(searchRef.current.value);
   }
   const getSearchList = () => {
-    console.log(searchword);
     axios
     .get(`/cs/faq/search?search=${searchword}&faq_cate=${category}&page=${currentPage-1}&size=10&sort=faqNum,desc`)
     .then((res) => {

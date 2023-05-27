@@ -13,6 +13,7 @@ const AdminBanner = () => {
   // 무한스크롤
   const [ref, inView] = useInView(); // 하단의 ref가 화면에 보여지면 inView 값이 true로 바뀜
   const [page, setPage] = useState(0);
+  const [searchword, setSearchword] = useState();
   const [searchState, setSearchState] = useState(false);
   const [isFirstSearch, setIsFirstSearch] = useState(true);
 
@@ -30,11 +31,12 @@ const AdminBanner = () => {
     // 처음 검색할때에는 기존의 bannList의 데이터를 비워주고 새로 받아온 데이터를 넣는다.
     if ((searchRef.current.value !== "") && (searchRef.current.value !== null) && (isFirstSearch)) {
       axios
-      .get(`/admin/banner/search?search=${searchRef.current.value}&page=${page}&size=3`) 
+      .get(`/admin/banner/search?search=${searchRef.current.value}&page=0&size=3`) 
       .then((res) => {
         const { data } = res;
+        console.log(data);
         setBannList([...data.content]);
-        setPage((page) => page+1);
+        setPage(1);
         setIsFirstSearch(false);
       })
       .catch((e) => {
@@ -82,6 +84,10 @@ const AdminBanner = () => {
   }
 
   useEffect(() => {
+    setIsFirstSearch(true);
+  }, [searchword])
+
+  useEffect(() => {
     if ((sessionStorage.getItem("id") !== "admin") && (sessionStorage.getItem("id") !== null)) {
       return navigate("/");
     } else if (sessionStorage.getItem("id") === null) {
@@ -109,6 +115,7 @@ const AdminBanner = () => {
             <input
               placeholder="업체명"
               maxLength="15px"
+              onChange={(e) => {setSearchword(e.target.value)}}
               onKeyDown={(e) => {activeEnter(e)}}
               ref={searchRef}
             ></input>
