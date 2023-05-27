@@ -2,11 +2,24 @@ import React, { useState, useEffect } from "react";
 import "../notice/NoticeList.css";
 import arrow from "../../../images/arrow_icon_brown-240.png";
 import "./FAQ.css";
-import userEvent from "@testing-library/user-event";
-import { Link, useLocation } from "react-router-dom";
-const FAQPOST = ({logId, item}) => {
+import { Link } from "react-router-dom";
+import axios from "axios";
+
+const FAQPOST = ({ logId, item, getList }) => {
   const [cate, setCate] = useState("");
   const [mode, setMode] = useState(true);
+
+  const deleteHandler = (faq_num) => {
+    axios.get(`/cs/faq/delete?faq_num=${faq_num}`)
+    .then((res) => {
+      if (res.data === 1) {
+        window.location.reload();
+      }
+    })
+    .catch((e) => {
+      console.error(e);
+    })
+  }
 
   useEffect(() => {
     setMode(true);
@@ -29,7 +42,7 @@ const FAQPOST = ({logId, item}) => {
               <Link to="/cs/faq/update" state={{ item: item }}>
                 <button className="FAQAdminUpdate">수정</button>
               </Link>
-              <button className="FAQAdminDelete">삭제</button>
+              <button className="FAQAdminDelete" onClick={() => {deleteHandler(item.faq_num)}}>삭제</button>
               <img className="FAQArrowRotate" src={arrow} onClick={() => setMode(false)} alt="arrow" />
             </div>
           )}
