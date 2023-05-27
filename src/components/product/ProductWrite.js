@@ -177,7 +177,7 @@ function ProductWrite() {
     formData.append("com_num",com_num);
    
     axios
-      .post("/product/write", formData, {
+      .post("/prod/write", formData, {
         headers: {
         "Content-Type": "multipart/form-data",
         },})
@@ -188,7 +188,7 @@ function ProductWrite() {
         console.log(formDataLength);
         if(formDataLength!==0){
         axios
-          .post("/uploadfile", formimg)
+          .post("/prod/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
             alert("파일 등록이 완료되었습니다!");

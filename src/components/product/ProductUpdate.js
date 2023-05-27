@@ -46,7 +46,7 @@ function ProductUpdate() {
    useEffect(() => {
     
     axios
-      .get("/product/updateInfo", {
+      .get("/prod/update/info", {
         params:{product_code: product_code}
       })
       .then((res) => {
@@ -255,7 +255,7 @@ function ProductUpdate() {
     formData.append("com_num",com_num);
    
     axios
-      .post("/product/update", formData, {
+      .post("/prod/update", formData, {
         headers: {
         "Content-Type": "multipart/form-data",
         },})
@@ -266,7 +266,7 @@ function ProductUpdate() {
         console.log(formDataLength);
         if(formDataLength!==0){
         axios
-          .post("/uploadfile", formimg)
+          .post("/prod/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
             alert("파일 등록이 완료되었습니다!");
