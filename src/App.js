@@ -18,7 +18,6 @@ import NoticeView from "./components/cs/notice/NoticeView";
 import NoticePost from "./components/cs/notice/NoticePost";
 import FAQ from "./components/cs/FAQ/FAQ";
 import FAQWrite from "./components/cs/FAQ/FAQWrite";
-import FAQUpdate from "./components/cs/FAQ/FAQUpdate";
 import OneononeInquiry from "./components/cs/oneonone/OneononeInquiry";
 import OneononeDetail from "./components/cs/oneonone/OneononeDetail";
 import OneononeUserpost from "./components/cs/oneonone/OneononeUserpost";
@@ -62,7 +61,7 @@ function App() {
           <Route path="/cs/notice/write" element={<NoticePost />} />
           <Route path="/cs/faq" element={<FAQ />} />
           <Route path="/cs/faq/write" element={<FAQWrite />} />
-          <Route path="/cs/faq/update" element={<FAQUpdate />} />
+          <Route path="/cs/faq/update" element={<FAQWrite />} />
           <Route path="/cs/inquiry" element={<OneononeInquiry />} />
           <Route path="/cs/inquiry/detail" element={<OneononeDetail />} />
           <Route path="/cs/inquiry/write" element={<OneononeUserpost />} />
