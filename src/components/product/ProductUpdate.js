@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 
 function ProductUpdate() {
   const product_code = useParams().product_code;
-
+  
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
@@ -44,12 +44,8 @@ function ProductUpdate() {
    /*=================샘플 데이터 이미지는 백엔드에서=========================*/
 
    useEffect(() => {
-    const navigate = useNavigate();
-    if(window.sessionStorage.getItem("id")!=="admin"){
-      navigate("/");
-    }
-  
-  axios
+    
+    axios
       .get("/prod/update/info", {
         params:{product_code: product_code}
       })
@@ -327,9 +323,9 @@ function ProductUpdate() {
                 },
                 content: {
                   position: "absolute",
-                  top: "15%",
-                  width: "600px",
-                  height: "610px",
+                  top: "10%",
+                  width: "900px",
+                  height: "700px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",

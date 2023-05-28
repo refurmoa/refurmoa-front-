@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./ProductWrite.css";
 import searchIcon from "../../images/search.png";
 import alt_img from "../../images/picture-icon-240.png";
@@ -8,13 +9,13 @@ import Modal from "react-modal";
 import FindCompany from "./FindCompany";
 
 function ProductWrite() {
-
+  
   const navigate = useNavigate();
   useEffect(()=>{
     if(window.sessionStorage.getItem("id")!=="admin"){
       navigate("/");
     }
-  },[]);
+},[]);
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   let [main_Image, setMainImg] = useState("");
@@ -216,6 +217,8 @@ function ProductWrite() {
   };
 
   return (
+    
+     
     <div className="PW_form">
       <div className="PW_header">
         <div className="PW_title">상품 등록</div>
@@ -251,9 +254,9 @@ function ProductWrite() {
                 },
                 content: {
                   position: "absolute",
-                  top: "15%",
-                  width: "600px",
-                  height: "610px",
+                  top: "10%",
+                  width: "900px",
+                  height: "700px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",
@@ -468,7 +471,11 @@ function ProductWrite() {
         </div>
       </div>
     </div>
-  );
+    
+
+
+    
+  )
 }
 
 export default ProductWrite;
