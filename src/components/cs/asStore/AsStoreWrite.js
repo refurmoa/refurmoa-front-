@@ -13,6 +13,7 @@ import axios from "axios";
 
 function AsStoreWrite() {
   const [city, setCity] = useState();
+  const [store_num, setStore_num] = useState();
   const [store_name, setStore_name] = useState();
   const [store_phone, setStore_phone] = useState();
   const [store_addr, setStore_addr] = useState();
@@ -21,6 +22,8 @@ function AsStoreWrite() {
   const [longitude, setLongitude] = useState();
   const [find_name, setFind_name] = useState();
   const [dataList, setDataList] = useState([]);
+  const [actionMode, setActionMode] = useState(0);
+  const [item, setItem] = useState([]);
   const searchpartRef = useRef();
 
   useEffect(() => {
@@ -89,14 +92,6 @@ function AsStoreWrite() {
         })
         .then((res) => {
           console.log("길이는", res.data);
-          // if (res.data.length >= 1) {
-          //   alert("성공적으로 등록되었습니다.");
-          //   aslist();
-          //   document.location.href = "/cs/as/write";
-          // } else {
-          //   alert("등록에 실패했습니다.");
-          //   document.location.href = "/cs/as/write";
-          // }
           alert("성공적으로 등록되었습니다.");
           aslist();
           document.location.href = "/cs/as/write";
@@ -109,8 +104,44 @@ function AsStoreWrite() {
     }
   };
 
+  const StoreUpdate = () => {
+    if (window.confirm("수정을 완료하시겠습니까?")) {
+      axios
+        .post(`/cs/as/admin/update/${store_num}`, {
+          storeNum: store_num,
+          storeName: store_name,
+          storePhone: store_phone,
+          storeAddr: store_addr,
+          storeDetail: store_detail,
+          latitude: lattitude,
+          longitude: longitude,
+        })
+        .then((res) => {
+          alert("성공적으로 수정되었습니다.");
+          // aslist();
+          document.location.href = "/cs/as/admin";
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    } else {
+      return false;
+    }
+  };
+
+  const updateChange = (e) => {
+    setStore_num(dataList[e.target.id - 1].storeNum);
+    setStore_name(dataList[e.target.id - 1].storeName);
+    setStore_phone(dataList[e.target.id - 1].storePhone);
+    setStore_addr(dataList[e.target.id - 1].storeAddr);
+    setStore_detail(dataList[e.target.id - 1].storeDetail);
+    setLattitude(dataList[e.target.id - 1].latitude);
+    setLongitude(dataList[e.target.id - 1].longitude);
+    console.log("number", store_name);
+    setActionMode(1);
+  };
+
   const asDelete = (e) => {
-    console.log("num", e.target.id);
     axios
       .post("/cs/as/admin/delete", {
         storeNum: e.target.id,
@@ -262,7 +293,11 @@ function AsStoreWrite() {
             </div>
           </div>
           <div className="AsStore_regi_btn">
-            <button onClick={StoreRegi}>등록</button>
+            {actionMode === 0 ? (
+              <button onClick={StoreRegi}>등록</button>
+            ) : (
+              <button onClick={StoreUpdate}>수정</button>
+            )}
           </div>
         </div>
         <div className="AsStore_List">
@@ -307,15 +342,13 @@ function AsStoreWrite() {
               <div className="AsStore_Post_Title">{marker.storeName}</div>
               <div className="AsStore_Post_phone">{marker.storePhone}</div>
               <div className="AsStore_Post_button">
-                <Link to="/cs/as/update" state={{ marker: marker }}>
+                <span id={marker.storeNum} onClick={updateChange}>
                   수정
-                </Link>
+                </span>
                 &nbsp;|&nbsp;
-                <Link>
-                  <a id={marker.storeNum} onClick={asDelete}>
-                    삭제
-                  </a>
-                </Link>
+                <span id={marker.storeNum} onClick={asDelete}>
+                  삭제
+                </span>
               </div>
             </div>
             <div className="AsStore_Post_Detail">
