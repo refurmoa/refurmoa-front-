@@ -10,6 +10,7 @@ const FindCompany = (props) => {
   const close_modal = props.close_modal;
   const [dataList, setDataList] = useState([]);
 
+
   useEffect(() => {
     axios
     .get("/partner/search", {

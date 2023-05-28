@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import ProdPost from '../prodPost/ProdPost';
+
 
 // 더미데이터
 import productlist from "./productlist.json";
@@ -14,7 +14,8 @@ import loadingicon from "../../images/loading-icon-brown.png"
 const ProductList = () => {
   const searchRef = useRef();
   const navigate = useNavigate();
-  const [prodData, setProdData] = useState();
+  const [prodData, setProdData] = useState([]);
+ 
 
   // 카테고리 저장 변수
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -41,6 +42,7 @@ const ProductList = () => {
       setFurnitureState(true);
     }
   }
+
 
   // 검색기능
   const searchHandler = () => {
@@ -70,7 +72,10 @@ const ProductList = () => {
       searchHandler();
     }
   }
-
+  const addComma = (price) => {
+    let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return returnString;
+  };
   // 판매상태 체크박스
   const checkboxHandler = (e) => {
     if (e.target.id === "yet") {
@@ -120,48 +125,70 @@ const ProductList = () => {
         data[i].sell_status = "구매 확정"
       }
     }
+    return setCateDetail(data);
+  }
+  const setCateDetail = (data) => {
+    for (let i=0; i<data.length; i++) {
+      switch(data[i].prod.categoryCode){
+        case "appkitchen":data[i].prod.categoryCode="주방"
+        break;
+        case "applife":data[i].prod.categoryCode="생활"
+        break;
+        case "appelec":data[i].prod.categoryCode="전자기기"
+        break;
+        case "funliving":data[i].prod.categoryCode="거실/주방"
+        break;
+        case "funbed":data[i].prod.categoryCode="침실"
+        break;
+        case "funoffice":data[i].prod.categoryCode="사무실"
+        break;
+        default: break;
+      }
+    }
     return data;
   }
-
   // 상품삭제
   const deleteHandler = (product_code) => {
     console.log(product_code);
-    // axios.delete(`/api/deleteproduct?product_code=${product_code}`)
-    // .then((res) => {
-    //   getProdData();
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
+    axios.get(`/prod/delete?product_code=${product_code}`)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((e) => {
+      console.error(e);
+    })
   };
 
   const detailHandler = (data) => {
     if (data.sell_status === "게시 전") {
-      navigate(`/post/write/${data.product_code}`);
+      navigate(`/post/write/${data.productCode}`);
     } else {
-      navigate(`/post/detail/${data.product_code}`);
+      navigate(`/post/detail/${data.productCode}`);
     }
   }
   
   const getProdData = () => {
     console.log("카테고리 : " + selectedCategory);
     console.log("판매상태 : " + selectedSellStatus);
-    // axios.get(`/api/productlist?category=${selectedCategory}&sellstatus=${selectedSellStatus}`)
-    // .then((res) => {
-    //   const { data } = res;
-    //   setProdData(data);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    const data = productlist
-    setProdData(setStatusData(data));
+    axios
+    .get(`/prod?category=${selectedCategory}&sell_status=${selectedSellStatus}`)
+    .then((res) => {
+      console.log(res.data)
+      setProdData(setStatusData(res.data));
+    
+    })
+    .catch((e) => {
+      console.error(e);
+    })
+
   };
+ 
 
   useEffect(() => {
     // 필터조건이 바뀔때마다 데이터에 axios 요청
     getProdData();
-  }, [prodData, selectedCategory, selectedSellStatus]);
+}, []);
+  // }, [prodData, selectedCategory, selectedSellStatus]);
 
   return (
     <>
@@ -174,7 +201,7 @@ const ProductList = () => {
             {applianceState && (
               <>
                 <CategoryDetailSpan active={selectedCategory === "appliance"} onClick={()=>{categoryHandler("appliance")}}>가전 전체</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "appkiechen"} onClick={()=>{categoryHandler("appkiechen")}}>주방</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "appkiechen"} onClick={()=>{categoryHandler("appkitchen")}}>주방</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "applife"} onClick={()=>{categoryHandler("applife")}}>생활</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "appelec"} onClick={()=>{categoryHandler("appelec")}}>전자기기</CategoryDetailSpan>
               </>
@@ -211,14 +238,14 @@ const ProductList = () => {
           <ProductItem key={index}>
             <ProductItemTop>
               <ProductItemTopInner>
-              <ProductCategotyCode>{data.category_code}</ProductCategotyCode>
+              <ProductCategotyCode>{data.prod.categoryCode}</ProductCategotyCode>
               <ComnameAndEditAndDelete>
-                <ComnameBox sellState={((data.sell_status === "게시 전") | (data.sell_status === "판매 전"))} >{data.com_name}</ComnameBox>
+                <ComnameBox sellState={((data.sell_status === "게시 전") | (data.sell_status === "판매 전"))} >{data.prod.comName}</ComnameBox>
                 {/* 판매상태가 1(게시전), 2(판매전)일 때만 수정, 삭제 버튼 렌더링 */}
                 {((data.sell_status === "게시 전") | (data.sell_status === "판매 전")) ? 
                 <EditAndDeleteBox>
-                  <EditBtn onClick={() => {navigate(`/prod/update/${data.product_code}`)}}>수정</EditBtn>
-                  <DeleteBtn onClick={() => {deleteHandler(data.product_code)}}>삭제</DeleteBtn>
+                  <EditBtn onClick={() => {navigate(`/prod/update/${data.prod.productCode}`)}}>수정</EditBtn>
+                  <DeleteBtn onClick={() => {deleteHandler(data.prod.productCode)}}>삭제</DeleteBtn>
                 </EditAndDeleteBox> : (<></>)}
               </ComnameAndEditAndDelete>
               </ProductItemTopInner>
@@ -226,23 +253,23 @@ const ProductList = () => {
             <ProductMiddle>
               <ProductMiddleInner onClick={() => {detailHandler(data)}}>
                 <ProductMainImg>
-                  <img src={`/images/prod/${data.main_image}`} alt="productmain" />
+                  <img src={`${process.env.PUBLIC_URL}/images/${data.prod.mainImage}`} alt="productmain" />
                 </ProductMainImg>
                 <ProductInfoBox>
                   <ProductStateAndDateBox>
                     <ProductState>
                       <img src={loadingicon} alt="loadingicon" />{data.sell_status}
                     </ProductState>
-                    <ProductDate>{data.reg_date} 입고</ProductDate>
+                    <ProductDate>{data.prod.regDate} 입고</ProductDate>
                   </ProductStateAndDateBox>
                   <ProductComBox>
-                    {data.prod_com}
+                    {data.prod.prodCom}
                   </ProductComBox>
                   <ProductGradeAndNameBox>
-                    <ProductGrade>{data.prod_grade}급</ProductGrade>
-                    <ProductName>{data.prod_name}</ProductName>
+                    <ProductGrade>{data.prod.prodGrade}급</ProductGrade>
+                    <ProductName>{data.prod.prodName}</ProductName>
                   </ProductGradeAndNameBox>
-                  <ProductPriceBox>{data.org_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</ProductPriceBox>
+                  <ProductPriceBox>{addComma(data.prod.orgPrice)}원</ProductPriceBox>
                 </ProductInfoBox>
               </ProductMiddleInner>
             </ProductMiddle>
@@ -250,12 +277,12 @@ const ProductList = () => {
               <ProductBottomInner>
                 <ProductDeffectAndGuaranteeBox>
                   <ProductDeffect>하자내용</ProductDeffect>
-                  <ProductGuarantee>{data.guarantee === 0 ? "보증서 없음" : "보증서 있음"}</ProductGuarantee>
+                  <ProductGuarantee>{data.prod.guarantee  ? "보증서 있음" : "보증서 없음"}</ProductGuarantee>
                 </ProductDeffectAndGuaranteeBox>
-                <ProductDeffectText>{data.deffect_text}</ProductDeffectText>
-                {data.deffect_image1 && <ProductDeffectImg><img src={`/images/prod/${data.deffect_image1}`} alt="deffect1"/></ProductDeffectImg>}
-                {data.deffect_image2 && <ProductDeffectImg><img src={`/images/prod/${data.deffect_image2}`} alt="deffect1"/></ProductDeffectImg>}
-                {data.deffect_image3 && <ProductDeffectImg><img src={`/images/prod/${data.deffect_image3}`} alt="deffect1"/></ProductDeffectImg>}
+                <ProductDeffectText>{data.prod.defectText}</ProductDeffectText>
+                {data.prod.defectImage1 && <ProductDeffectImg><img src={`${process.env.PUBLIC_URL}/images/${data.prod.defectImage1}`} alt="deffect1"/></ProductDeffectImg>}
+                {data.prod.defectImage2 && <ProductDeffectImg><img src={`${process.env.PUBLIC_URL}/images/${data.prod.defectImage2}`} alt="deffect2"/></ProductDeffectImg>}
+                {data.prod.defectImage3&& <ProductDeffectImg><img src={`${process.env.PUBLIC_URL}/images/${data.prod.defectImage3}`} alt="deffect3"/></ProductDeffectImg>}
               </ProductBottomInner>
             </ProductBottom>
           </ProductItem>
