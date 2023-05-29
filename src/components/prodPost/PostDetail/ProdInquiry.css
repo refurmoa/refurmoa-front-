@@ -84,11 +84,13 @@
     color: #FFFFFF;
     background-color: #514438;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .PI-form_checkbox {
     height: 30px;
     margin-left: 7px;
+    cursor: pointer;
 }
 
 .PI-form_checkbox > input {
@@ -302,6 +304,7 @@
     line-height: 30px;
     color: #FFFFFF;
     background-color: #B9A89A;
+    cursor: pointer;
 }
 
 /* 페이지 번호 */
