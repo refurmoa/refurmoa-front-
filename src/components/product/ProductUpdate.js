@@ -50,8 +50,8 @@ function ProductUpdate() {
         params:{product_code: product_code}
       })
       .then((res) => {
-        console.log(res.data.prod.mainImage)
-        const productData=res.data.prod
+        console.log(res.data)
+        const productData=res.data
         if (
           productData.categoryCode === "funliving" ||
           productData.categoryCode === "funbed" ||
