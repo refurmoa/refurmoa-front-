@@ -1,28 +1,28 @@
 // 관리자 페이지 - 제휴회사 관리
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import search_icon from "../../../images/search.png";
 import partnerList from "./AdminPartner.json";
 import axios from "axios";
+import { useInView } from "react-intersection-observer";
 
 function AdminPartner() {
   const [partnerlist, setPartnerlist] = useState(partnerList); // 제휴회사 리스트
   const [searchData, setSearchData] = useState(""); // 검색어
-  const [page, setPage] = useState(1); // 페이지
+  const [page, setPage] = useState(0); // 페이지
+  const searchRef = useRef();
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
+  const [dataList, setDataList] = useState([]);
+  const [searchState, setSearchState] = useState(false);
+  const [isFirstSearch, setIsFirstSearch] = useState(true);
+ // 무한스크롤
 
-  useEffect(() => {
-    // 제휴회사 리스트 조회
-    // partnerListup();
+ const [ref, inView] = useInView(); // 하단의 ref가 화면에 보여지면 inView 값이 true로 바뀜
+ 
 
-    // 무한 스크롤
-    window.addEventListener("scroll", handleScroll); // 스크롤 이벤트 등록
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    }; // 스크롤 이벤트 제거
-  }, []);
+
 
   // 제휴회사 리스트 조회
   const partnerListup = () => {
@@ -30,34 +30,66 @@ function AdminPartner() {
     setIsLoading(true);
 
     try {
-      // axios
-      // setPartnerlist();
-      // setPage((prevPage) => prevPage + 1);
+      axios
+    .get(`/admin/partner?search=${searchData}&page=0&size=15`)
+    .then((res) => {
+      const { data } = res;
+      setDataList([...data.content]);
+      setPage(1);
+      setIsFirstSearch(false);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+    } catch (e) {
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const getPartnerList = () => {
+    axios
+    .get(`/admin/partner?search=${searchData}&page=${page}&size=15`)
+    .then((res) => {
+      const { data } = res;
+      setDataList([...dataList, ...data.content]);
+      setPage((page) => page+1);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+  }
+
+  // 회시 검색
+  const searchPartner = () => {
+    try {
+      axios
+    .get(`/admin/partner?search=${searchData}&page=0&size=20`)
+    .then((res) => {
+      const { data } = res;
+      setDataList([...data.content]);
+      setPage(1);
+      setIsFirstSearch(false);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
     } catch (e) {
     } finally {
       setIsLoading(false);
     }
   };
 
-  // 회시 검색
-  const searchPartner = () => {
-    // setPartnerlist();
-  };
-
   // 페이지가 변경될 때마다 데이터 요청
   useEffect(() => {
-    partnerListup();
-  }, [page]);
+    
+    // 검색상태가 아니고 하단의 ref를 만났을 때
+    if ((inView) ) {
+      getPartnerList();
+      // 검색상태이고 하단의 ref를 만났을 때
+    } 
+  }, [inView,searchData]);
 
-  // 스크롤 감지
-  const handleScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight &&
-      !isLoading
-    )
-      partnerListup();
-  };
-
+  
   return (
     <AdminPartnerWrap>
       <TitleWrap>
@@ -75,9 +107,9 @@ function AdminPartner() {
           <TableTitle width={213}>연락처</TableTitle>
           <TableTitle width={108} right>제품수</TableTitle>
         </TableTitleWrap>
-        {partnerlist.map((partner) => (
+        {dataList.map((partner) => (
           <Partner key={partner.com_num}>
-            <Link to={`/admin/partner/detail`} state={{ com_num: partner.com_num }}>
+            <Link to={`/admin/partner/detail`} state={{ partner: partner }}>
               <PartnerInfo width={38} color={partner.com_status} left>
                 {partner.com_status === 0 ? "신청" : partner.com_status === 1 ? "제휴" : "종료"}
               </PartnerInfo>
@@ -88,7 +120,9 @@ function AdminPartner() {
             </Link>
           </Partner>
         ))}
+        <div ref={ref} />
       </TableWrap>
+      
     </AdminPartnerWrap>
   );
 }
