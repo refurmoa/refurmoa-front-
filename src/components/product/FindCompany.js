@@ -9,21 +9,22 @@ const FindCompany = (props) => {
   const setCom_num = props.setCom_num;
   const close_modal = props.close_modal;
   const [dataList, setDataList] = useState([]);
-
+  const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
+  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
 
   useEffect(() => {
     axios
-    .get("/partner/search", {
-      params:{search: searchCompany}
-    })
+    .get(`/partner/search?search=${searchCompany}&page=${currentPage}&size=10`)
     .then((res) => {
       console.log(res.data);
-      setDataList(res.data);
+      const { data } = res;
+      setDataList(data.content);
+      setTotalPage(data.totalPages);
     })
     .catch((e) => {
       console.error(e);
     });
-  }, []);
+  }, [currentPage]);
   const setCompanyInfo = (item) => {
     const name = item.com_name;
     const num = item.com_num;
@@ -36,7 +37,7 @@ const FindCompany = (props) => {
     setDataList(dataList);
   }, []);
 
-  const [currentPage, setCurrentPage] = useState(1);
+  
   const [itemsPerPage, setItemsPerPage] = useState(10);
 
   // 현재 페이지에 해당하는 데이터 추출
@@ -49,17 +50,6 @@ const FindCompany = (props) => {
     setCurrentPage(Number(e.target.id));
   };
 
-  // 페이지 번호 버튼 생성
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(dataList.length / itemsPerPage); i++) {
-    pageNumbers.push(
-      <button key={i} id={i} onClick={handleClick}>
-        {i}
-      </button>
-    );
-  }
-
-  // 조회수
   const readcountup = (e) => {};
 
   return (
@@ -82,7 +72,7 @@ const FindCompany = (props) => {
             </thead>
 
             <tbody>
-              {currentItems.map((item, index) => {
+              {dataList.map((item, index) => {
                 return (
                   <tr key={index}>
                     <td>{item.com_num}</td>
@@ -107,23 +97,19 @@ const FindCompany = (props) => {
         </div>
 
         <div className="company-pagination">
-          <div>
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              {"<"}
-            </button>
-            {pageNumbers}
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={
-                currentPage === Math.ceil(dataList.length / itemsPerPage)
-              }
-            >
-              {">"}
-            </button>
-          </div>
+        { totalPage > 1 &&
+        <div className="PI-page">
+          { currentPage === 0 ? <span className="PI-page_prev_gray">&lt;</span>
+            : <span className="PI-page_prev" onClick={() => setCurrentPage(currentPage-1)}>&lt;</span>
+          }
+          <span className="PI-page_now">{currentPage+1}</span>
+          &nbsp;&nbsp;/&nbsp;&nbsp;
+          <span className="PI-page_total">{totalPage}</span>
+          { currentPage+1 === totalPage ? <span className="PI-page_next_gray">&gt;</span>
+            : <span className="PI-page_next" onClick={() => setCurrentPage(currentPage+1)}>&gt;</span>
+          }
+        </div>
+      }
         </div>
       </div>
     </>
