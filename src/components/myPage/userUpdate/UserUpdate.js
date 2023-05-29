@@ -11,7 +11,7 @@ import axios from "axios";
 const User_update = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [id, setId] = useState("sajun28");
+  const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordChk, setPasswordChk] = useState("");
   const [email, setEmail] = useState("");
