@@ -56,16 +56,15 @@ const ProductList = () => {
       category: selectedCategory,
       sellstatus: selectedSellStatus
      }
-    console.log(searchData);
-    // axios.post("/api/searchproductlist", searchData)
-    // .then((res) => {
-    //   console.log(res);
-    //   const { data } = res;
-    //   setProdData(data);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
+     console.log(searchData);
+     axios.post("/prod/search", searchData)
+     .then((res) => {
+      console.log(res);
+      setProdData(setStatusData(res.data));
+    })
+    .catch((e) => {
+      console.error(e);
+    })
   }
   // 엔터키
   const activeEnter = (e) => {
