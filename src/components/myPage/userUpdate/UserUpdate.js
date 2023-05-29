@@ -104,7 +104,7 @@ const User_update = () => {
   };
   /*========================== */
   const onClick = () => {
-    if (check_pw && check_id && check_Email) {
+    if (check_pw) {
       alert("회원정보를 수정하시겠습니까?");
 
       axios
@@ -129,14 +129,14 @@ const User_update = () => {
       alert("비밀번호를 입력해주세요!");
       return false;
     }
-    if (!check_id) {
-      alert("아이디를 입력해주세요!");
-      return false;
-    }
-    if (!check_Email) {
-      alert("이메일을 입력해주세요!");
-      return false;
-    }
+    // if (!check_id) {
+    //   alert("아이디를 입력해주세요!");
+    //   return false;
+    // }
+    // if (!check_Email) {
+    //   alert("이메일을 입력해주세요!");
+    //   return false;
+    // }
     console.log(valid_date);
     window.sessionStorage.setItem("id", id);
   };
@@ -155,21 +155,21 @@ const User_update = () => {
       });
   };
 
-  const onIdCHK = (e) => {
-    setId(e.target.value);
-    const idRegExp = /^[a-zA-z0-9]{4,12}$/;
+  // const onIdCHK = (e) => {
+  //   setId(e.target.value);
+  //   const idRegExp = /^[a-zA-z0-9]{4,12}$/;
 
-    if (id === "") {
-      setChkIdmsg("아이디 입력은 필수입니다!");
-      setCheck_id(false);
-    } else if (!idRegExp.test(id)) {
-      setChkIdmsg("4-12사이 대소문자 또는 숫자만 입력해 주세요!");
-      setCheck_id(false);
-    } else {
-      setChkIdmsg("올바른 아이디 형식입니다 :)");
-      setCheck_id(true);
-    }
-  };
+  //   if (id === "") {
+  //     setChkIdmsg("아이디 입력은 필수입니다!");
+  //     setCheck_id(false);
+  //   } else if (!idRegExp.test(id)) {
+  //     setChkIdmsg("4-12사이 대소문자 또는 숫자만 입력해 주세요!");
+  //     setCheck_id(false);
+  //   } else {
+  //     setChkIdmsg("올바른 아이디 형식입니다 :)");
+  //     setCheck_id(true);
+  //   }
+  // };
   const onChangePassword = (e) => {
     const passwordRegex =
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;

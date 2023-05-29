@@ -94,7 +94,7 @@ function AsStoreWrite() {
           console.log("길이는", res.data);
           alert("성공적으로 등록되었습니다.");
           aslist();
-          document.location.href = "/cs/as/write";
+          document.location.href = "/cs/as/admin";
         })
         .catch((e) => {
           console.error(e);
@@ -129,15 +129,15 @@ function AsStoreWrite() {
     }
   };
 
-  const updateChange = (e) => {
-    setStore_num(dataList[e.target.id - 1].storeNum);
-    setStore_name(dataList[e.target.id - 1].storeName);
-    setStore_phone(dataList[e.target.id - 1].storePhone);
-    setStore_addr(dataList[e.target.id - 1].storeAddr);
-    setStore_detail(dataList[e.target.id - 1].storeDetail);
-    setLattitude(dataList[e.target.id - 1].latitude);
-    setLongitude(dataList[e.target.id - 1].longitude);
-    console.log("number", store_name);
+  const updateChange = (marker) => {
+    setStore_num(marker.storeNum);
+    setStore_name(marker.storeName);
+    setStore_phone(marker.storePhone);
+    setStore_addr(marker.storeAddr);
+    setStore_detail(marker.storeDetail);
+    setLattitude(marker.latitude);
+    setLongitude(marker.longitude);
+    console.log("number", marker);
     setActionMode(1);
   };
 
@@ -233,7 +233,7 @@ function AsStoreWrite() {
                 />
               </div>
               <div className="AsStore_addr_logo">
-                <img src={search_logo} onClick={ChangePopUP} />
+                <img src={search_logo} onClick={ChangePopUP} alt="" />
               </div>
               <Modal
                 style={{
@@ -331,7 +331,7 @@ function AsStoreWrite() {
                 ref={searchpartRef}
               ></input>
               <div className="AsStore_addr_logo">
-                <img src={search_logo} onClick={searchCityText} />
+                <img src={search_logo} onClick={searchCityText} alt="" />
               </div>
             </div>
           </div>
@@ -342,7 +342,11 @@ function AsStoreWrite() {
               <div className="AsStore_Post_Title">{marker.storeName}</div>
               <div className="AsStore_Post_phone">{marker.storePhone}</div>
               <div className="AsStore_Post_button">
-                <span id={marker.storeNum} onClick={updateChange}>
+                <span
+                  onClick={() => {
+                    updateChange(marker);
+                  }}
+                >
                   수정
                 </span>
                 &nbsp;|&nbsp;
