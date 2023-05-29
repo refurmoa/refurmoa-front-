@@ -31,9 +31,8 @@ function AdminPartner() {
 
     try {
       axios
-    .get(`/partner/search?search=${searchData}&page=0&size=15`)
+    .get(`/admin/partner?search=${searchData}&page=0&size=15`)
     .then((res) => {
-      console.log(res.data);
       const { data } = res;
       setDataList([...data.content]);
       setPage(1);
@@ -49,10 +48,9 @@ function AdminPartner() {
   };
   const getPartnerList = () => {
     axios
-    .get(`/partner/search?search=${searchData}&page=${page}&size=15`)
+    .get(`/admin/partner?search=${searchData}&page=${page}&size=15`)
     .then((res) => {
       const { data } = res;
-      console.log(res.data);
       setDataList([...dataList, ...data.content]);
       setPage((page) => page+1);
     })
@@ -65,9 +63,8 @@ function AdminPartner() {
   const searchPartner = () => {
     try {
       axios
-    .get(`/partner/search?search=${searchData}&page=0&size=20`)
+    .get(`/admin/partner?search=${searchData}&page=0&size=20`)
     .then((res) => {
-      console.log(res.data);
       const { data } = res;
       setDataList([...data.content]);
       setPage(1);
@@ -112,7 +109,7 @@ function AdminPartner() {
         </TableTitleWrap>
         {dataList.map((partner) => (
           <Partner key={partner.com_num}>
-            <Link to={`/admin/partner/detail`} state={{ com_num: partner.com_num }}>
+            <Link to={`/admin/partner/detail`} state={{ partner: partner }}>
               <PartnerInfo width={38} color={partner.com_status} left>
                 {partner.com_status === 0 ? "신청" : partner.com_status === 1 ? "제휴" : "종료"}
               </PartnerInfo>
