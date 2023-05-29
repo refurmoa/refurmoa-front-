@@ -1,11 +1,10 @@
 import React from "react";
 import "../../sign/signup/Signup.css";
 import "./UserUpdate.css";
-import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Update_phone from "./UserUpdatePhone";
-import Update_card from "./UserUpdateCard";
+// import Update_card from "./UserUpdateCard";
 import Post from "../../sign/signup/FindAddress";
 import axios from "axios";
 
@@ -42,17 +41,13 @@ const User_update = () => {
   // =====================================================
 
   useEffect(() => {
-    // setId(window.sessionStorage.getItem("id"));
-    console.log(id);
+    // setId(window.sessionStorage.getItem("id"))
     axios
       .post("/user/info", {
         memberId: id,
       })
       .then((res) => {
-        // res : 서버의 응답 결과 저장
-        console.log("res ==>", res);
         const { data } = res; // data = res.data
-        console.log("data ==>", data);
         const mail = data[0].email.split("@");
         setName(data[0].name);
         setPhone(data[0].phone);
@@ -67,7 +62,6 @@ const User_update = () => {
         console.error(e);
       });
   }, []);
-  console.log(phone);
 
   /*========================== */
   const [popup, setPopup] = useState(false);
@@ -137,7 +131,7 @@ const User_update = () => {
     //   alert("이메일을 입력해주세요!");
     //   return false;
     // }
-    console.log(valid_date);
+
     window.sessionStorage.setItem("id", id);
   };
 
@@ -210,7 +204,6 @@ const User_update = () => {
       setChkEmailmsg("");
       setCheck_Email(true);
       setEmailFinal(email + "@" + domain);
-      console.log(domain);
     }
   };
 
