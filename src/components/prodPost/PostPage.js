@@ -31,6 +31,24 @@ const PostPage = () => {
   // 판매상태 체크박스 상태 저장 변수
   const [sellStatus, setSellStatus] = useState({yet: true, ing: true, end: true});
 
+  // 페이징기능
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageBeforeHandler = () => {
+    setCurrentPage(currentPage - 1)
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+  const pageNextHandler = () => {
+    setCurrentPage(currentPage + 1)
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   // 경매, 즉시구매, 판매상태 html 리턴
   const buyAndStateFilterBox = () => {
     return (
@@ -49,6 +67,7 @@ const PostPage = () => {
 
   // 경매, 즉시구매 누르면 토글기능
   const sellTypeHandler = (type) => {
+    setCurrentPage(1);
     if(type === "auction") {
       if (auctionState && directState) setAuctionState(!auctionState);
       else if (!auctionState) setAuctionState(true)
@@ -60,6 +79,7 @@ const PostPage = () => {
 
   // 카테고리
   const categoryHandler = (category) => {
+    setCurrentPage(1);
     setSelectedCategory(category);
     if(category === "all") {
       setApplianceState(false);
@@ -75,6 +95,7 @@ const PostPage = () => {
 
   // 판매상태 체크박스
   const checkboxHandler = (e) => {
+    setCurrentPage(1);
     if (e.target.id === "yet") {
       if (sellStatus.yet && (sellStatus.ing || sellStatus.end)) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: false }));
       else if (!sellStatus.yet) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: true }));
@@ -89,6 +110,7 @@ const PostPage = () => {
 
   // 정렬 select 박스
   const orderByHandler = (e) => {
+    setCurrentPage(1);
     setSelectedOrderby(e.target.value);
   }
 
@@ -100,8 +122,6 @@ const PostPage = () => {
       setSelectedSellType("auction");
     } else if((directState === true) & (auctionState === false)) {
       setSelectedSellType("direct");
-    } else {
-      setSelectedSellType("none");
     }
   }, [auctionState, directState]);
 
@@ -121,8 +141,6 @@ const PostPage = () => {
       setSelectedSellStatus("ing");
     } else if (!sellStatus.yet & !sellStatus.ing & sellStatus.end) {
       setSelectedSellStatus("end");
-    } else {
-      setSelectedSellStatus("none");
     }
   }, [sellStatus]);
 
@@ -147,19 +165,19 @@ const PostPage = () => {
         <BottomFilterBox>
           <CategoryFilterBox>
             <CategorySpan active={!applianceState & !furnitureState} onClick={()=>{categoryHandler("all")}}>전체</CategorySpan>
-            <CategorySpan active={applianceState} onClick={()=>{categoryHandler("appliance")}}>가전</CategorySpan>
-            <CategorySpan active={furnitureState} onClick={()=>{categoryHandler("furniture")}}>가구</CategorySpan>
+            <CategorySpan active={applianceState} onClick={()=>{categoryHandler("app")}}>가전</CategorySpan>
+            <CategorySpan active={furnitureState} onClick={()=>{categoryHandler("fur")}}>가구</CategorySpan>
             {applianceState && (
               <>
-                <CategoryDetailSpan active={selectedCategory === "appliance"} onClick={()=>{categoryHandler("appliance")}}>가전 전체</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "appkiechen"} onClick={()=>{categoryHandler("appkiechen")}}>주방</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "app"} onClick={()=>{categoryHandler("app")}}>가전 전체</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "appkitchen"} onClick={()=>{categoryHandler("appkitchen")}}>주방</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "applife"} onClick={()=>{categoryHandler("applife")}}>생활</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "appelec"} onClick={()=>{categoryHandler("appelec")}}>전자기기</CategoryDetailSpan>
               </>
             )}
             {furnitureState && (
               <>
-                <CategoryDetailSpan active={selectedCategory === "furniture"} onClick={()=>{categoryHandler("furniture")}}>가구 전체</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "fur"} onClick={()=>{categoryHandler("fur")}}>가구 전체</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "furliving"} onClick={()=>{categoryHandler("furliving")}}>거실/주방</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "furbed"} onClick={()=>{categoryHandler("furbed")}}>침실</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "furoffice"} onClick={()=>{categoryHandler("furoffice")}}>사무실</CategoryDetailSpan>
@@ -170,14 +188,35 @@ const PostPage = () => {
               <select onChange={(e) => {orderByHandler(e)}}>
                 <option value="new" >최신순</option>
                 <option value="view">조회순</option>
-                <option value="close">마감순</option>
+                {/* {(selectedSellType === "auction") || (selectedSellType === "all") ? (<option value="close">마감순</option>) : (<></>)} */}
+                {/* <option value="close">마감순</option> */}
               </select>
           </OrderbyFilterBox>
         </BottomFilterBox>
       </FilterBox>
       <ProdListBox>
-        <ProdPost filter={filter} />
+        <ProdPost filter={filter} cp={currentPage} stp={setTotalPage} />
       </ProdListBox>
+      {/* 총 페이지 수가 1보다 클 때 */}
+      {totalPage > 1 && (
+        <NLPage className="NL-page">
+          {currentPage === 1 ? (
+            <NLPagePrevGray className="NL-page_prev_gray">&lt;</NLPagePrevGray>
+          ) : (
+            <NLPagePrev className="NL-page_prev" onClick={() => pageBeforeHandler()}>&lt;</NLPagePrev>
+          )}
+
+          <NLPageNow className="NL-page_now">{currentPage}</NLPageNow>
+          &nbsp;&nbsp;/&nbsp;&nbsp;
+          <NLPageTotal className="NL-page_total">{totalPage}</NLPageTotal>
+
+          {currentPage === totalPage ? (
+            <NLPageNextGray className="NL-page_next_gray">&gt;</NLPageNextGray>
+          ) : (
+            <NLPageNext className="NL-page_next" onClick={() => pageNextHandler()}>&gt;</NLPageNext>
+          )}
+        </NLPage>
+      )}
     </ProdListWrapper>
   );
 };
@@ -360,4 +399,40 @@ const OrderbyFilterBox = styled.div`
 const ProdListBox = styled.div`
   width: 1350px;
   margin: 0px auto;
+`;
+
+
+// 페이징
+const NLPage = styled.div`
+  height: 30px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 30px;
+  text-align: center;
+  color: rgba(81, 68, 56, 0.5);
+  margin-top: 50px;
+`;
+const NLPagePrevGray = styled.span`
+  margin-right: 20px;
+  color: rgba(81, 68, 56, 0.5);
+`;
+const NLPagePrev = styled.span`
+  cursor: pointer;
+  margin-right: 20px;
+  color: rgba(81, 68, 56, 0.8);
+`;
+const NLPageNow = styled.span`
+  color: rgba(81, 68, 56, 0.8);
+`;
+const NLPageTotal = styled.span`
+  color: rgba(81, 68, 56, 0.5);
+`;
+const NLPageNextGray = styled.span`
+  margin-left: 20px;
+  color: rgba(81, 68, 56, 0.5);
+`;
+const NLPageNext = styled.span`
+  cursor: pointer;
+  margin-left: 20px;
+  color: rgba(81, 68, 56, 0.8);
 `;
