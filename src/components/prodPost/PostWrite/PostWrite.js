@@ -11,6 +11,7 @@ import PostAll from "./PostAll";
 import PostAuction from "./PostAuction";
 import PostDirect from "./PostDirect";
 import FindProduct from "./FindProduct";
+import cancel from "../../../images/cancel.png";
 
 function PostWrite(props) {
   const product_num = props;
@@ -18,7 +19,7 @@ function PostWrite(props) {
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
-  let [main_Image, setMainImg] = useState("");
+  const [main_Image, setMainImg] = useState("");
   const [code, setCode] = useState("");
   const [prod_com, setProd_com] = useState("");
   const [prod_name, setProd_name] = useState("");
@@ -38,7 +39,7 @@ function PostWrite(props) {
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
   const [img_con, setImg_con] = useState(false);
-  let now = new Date();
+
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
   const [Productname, setProductname] = useState();
@@ -286,39 +287,28 @@ function PostWrite(props) {
       });
   };
 
+
   return (
     <div className="PW_form">
       <div className="PW_header">
         <div className="PR_title">판매글 작성</div>
         <div className="PW_button">
           <button className="PW_list_btn">취소</button>
-          <button className="PW_wrie_btn" onClick={Product_write}>
-            등록
-          </button>
+          <button className="PW_wrie_btn" onClick={Product_write}>등록</button>
         </div>
       </div>
       <div className="PW_image_file">
         <div className="PW_partner">
           <div className="PW_partner_name">제휴회사명</div>
           <div className="PW_partner_serach">
-            <input
-              className="PW_partner_input"
-              type="text"
-              placeholder="회사명"
-              maxLength="15"
-              value={searchCompany}
-              onChange={(e) => setSearchCompany(e.target.value)}
-            />
-            <img
-              className="PW_search_logo"
-              src={searchIcon}
-              onClick={ChangePopUP}
-            />
+            <input className="PW_partner_input" type="text" placeholder="회사명" maxLength="15"
+              value={searchCompany} onChange={(e) => setSearchCompany(e.target.value)} />
+            <img className="PW_search_logo" src={searchIcon} alt="검색" onClick={ChangePopUP} />
             <Modal
               style={{
                 overlay: {
                   position: "fixed",
-                  backgroundColor: "rgba(0, 0, 0, 0.75)",
+                  backgroundColor: "rgba(0, 0, 0, 0.75)"
                 },
                 content: {
                   position: "absolute",
@@ -329,12 +319,8 @@ function PostWrite(props) {
                   right: "40px",
                   bottom: "40px",
                   border: "1px solid #ccc",
-                  background: "#fff",
-                  overflow: "auto",
-                  WebkitOverflowScrolling: "touch",
                   borderRadius: "10px",
-                  outline: "none",
-                  padding: "20px",
+                  padding: "20px"
                 },
               }}
               isOpen={modal}
