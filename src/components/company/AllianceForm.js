@@ -3,9 +3,10 @@ import "./AllianceForm.css";
 import "../sign/signup/Signup.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Post from "../shared/FindAddress";
+import Post from "../sign/signup/FindAddress";
 import Modal from "react-modal";
 import Update from "./AllianceUpdate";
+import axios from "axios";
 
 const AllianceForm = () => {
   const [name, setName] = useState("");
@@ -49,30 +50,26 @@ const AllianceForm = () => {
     if (check_Email) {
       alert("다음으로 넘어가시겠습니까?");
       setMail(email.concat("@", domain));
-      update_ChangePopUP();
 
-      /*
          axios
-        .post("/company", {
-          com_name: name,
-          com_ceo:ceo
-          com_phone:phone,
-          com_mail:mail,
-          com_addr:address
-          com_detail_addr:address_detail
-          com_status: status
+        .post("/partnership ", {
+        comNum:null,
+        comName: name,
+        comCeoName: ceo,
+        comPhone: phone,
+        comEmail: email.concat("@", domain),
+        comAddr: address,
+        comDetailAddr: address_detail,
+        comStatus:status
         })
         .then((res) => {
-         
-          }
-         
+          alert("작성이 완료되었습니다.")
+          window.location.href="/";
         })
         .catch((e) => {
           console.error(e);
         });
 
-
-      */
     }
   };
   const onEmailCHK = (e) => {
@@ -255,7 +252,7 @@ const AllianceForm = () => {
           </table>
         </div>
 
-        <button className="SU_input_btn" /*onClick={Register_partner}*/>
+        <button className="SU_input_btn" onClick={Register_partner}>
           다음
         </button>
         <Modal
