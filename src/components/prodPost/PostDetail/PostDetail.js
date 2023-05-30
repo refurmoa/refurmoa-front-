@@ -6,7 +6,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 import axios from "axios";
 import moment from "moment/moment";
-import { getDdayArray } from "../../shared/sharedFn";
+import { getDdayArray } from "../../shared/Timer";
 import PostProdDetail from "./PostProdDetail";
 import ProdInquiry from "./ProdInquiry";
 import SellInfo from "./SellInfo";
@@ -44,7 +44,7 @@ function PostDetail() {
     like: false // (로그인)회원 찜 상태
   });
   const [bidList, setBidList] = useState([]); // 입찰 내역
-  const [state, setState] = useState(0); // 판매 상태 (0 : 판매예정, 1 : 판매중, 2 : 판매종료)
+  const [state, setState] = useState(); // 판매 상태 (0 : 판매예정, 1 : 판매중, 2 : 판매종료)
   const [bidPrice, setBidPrice] = useState(); // 입찰가
   const [countBid, setCountBid] = useState(0); // 입찰 수
   const [bidListState, setBidListState] = useState(false); // 입찰내역 열기/닫기
@@ -54,6 +54,9 @@ function PostDetail() {
   const [imageView, setImageView] = useState(0); // 하자 이미지 모달 창
   const [detailInfo, setDetailInfo] = useState(1); // 메뉴 (1 : 상세정보, 2 : 상품문의, 3 : 결제 및 배송, 4 : 교환환불)
   const [now, setNow] = useState(new Date().getTime()); // 현재 날짜(ms)
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState();
+  const today = new Date();
 
   // sell_type => 1 : 경매, 2 : 즉시구매, 3 : 경매+즉시구매
 
@@ -84,25 +87,20 @@ function PostDetail() {
   // 상품 정보 조회
   const getPost = () => {
     axios
-      .post(`/post/detail/${board_num}`, { memberId: login_id })
+      .post("/post/detail", {
+        memberId: login_id,
+        boardNum: board_num
+    })
       .then((res) => {
         setProdInfo(res.data);
-        setBidPrice(prodInfo.cur_price + prodInfo.unit_price);
-        setSellState();
+        setBidPrice(res.data.cur_price + res.data.unit_price);
+        setStart(new Date(res.data.start_date));
+        setEnd(new Date(res.data.end_date));
+        setState(end-today < 1 ? 2 : start-today > 1 ? 0 : 1);
       })
       .catch((e) => {
-        console.error(e);
+        // console.error(e);
       });
-  }
-
-  // 판매 상태
-  const setSellState = () => {
-    const start = new Date(moment(prodInfo.start_date));
-    const end = new Date(moment(prodInfo.end_date));
-    const today = new Date();
-    const startDay = Math.ceil((start - today) / (1000 * 60 * 60 * 24));
-    const endDay = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
-    setState(endDay < 1 ? 2 : startDay < 1 ? 1 : 0);
   }
 
   // 입찰 내역 조회
@@ -117,7 +115,7 @@ function PostDetail() {
           setBidTotalPage(res.data.totalPages);
         })
         .catch((e) => {
-          console.error(e);
+          // console.error(e);
         });
     }
   }
@@ -128,16 +126,12 @@ function PostDetail() {
     if (deleteQ) {
       axios
         .get(`/post/detail/delete?board_num=${board_num}`)
-        .then((res) => {
-          if (res.data === 1) {
+        .then(() => {
             alert("게시글이 삭제되었습니다.");
             navigate("/post");
-          } else {
-            alert("삭제에 실패하였습니다. 다시 시도해주세요.");
-          }
         })
         .catch((e) => {
-          console.error(e);
+          alert("삭제에 실패하였습니다. 다시 시도해주세요.");
         });
     }
   };
@@ -149,16 +143,14 @@ function PostDetail() {
     } else {
       axios.post("/post/like", {
         memberId: login_id,
-        board_num: board_num,
+        boardNum: board_num,
         like: prodInfo.like
       })
-      .then((res) => {
-        if (res.data === 1) {
+      .then(() => {
           getPost();
-        }
       })
       .catch((e) => {
-        console.log(e);
+        // console.errer(e);
       })
     }
   };
@@ -208,6 +200,46 @@ function PostDetail() {
 
   // 입찰
   const bidBuy = () => {
+    if (login_id === null) {
+      alert("로그인 후 이용 가능합니다.");
+      navigate("/login");
+    } else {
+      const confirm = window.confirm(`${bidPrice.toLocaleString('ko-KR')}원에 입찰하시겠습니까?`);
+      if (confirm) {
+        if (prodInfo.cur_price + prodInfo.unit_price == bidPrice) { // 입찰
+          axios.post("/post/detail/bid/insert", {
+            memberId: login_id,
+            boardNum: board_num,
+            bidPrice: bidPrice,
+            unitPrice: prodInfo.unit_price
+          })
+          .then(() => {
+            alert("입찰되었습니다.");
+            getPost();
+          })
+          .catch((e) => {
+            alert("입찰에 실패하였습니다. 다시 시도해주세요.");
+          })
+        } else {
+          axios.post("/post/detail/bid/auto", {
+            memberId: login_id,
+            boardNum: board_num,
+            autobidPrice: bidPrice,
+            bidPrice: prodInfo.cur_price + prodInfo.unit_price,
+            unitPrice: prodInfo.unit_price
+          })
+          .then(() => {
+            alert("자동입찰되었습니다.");
+            getPost();
+          })
+          .catch((e) => {
+            alert("입찰에 실패하였습니다. 다시 시도해주세요.");
+          })
+        }
+      }
+      
+    }
+    
     
   }
 
@@ -277,8 +309,8 @@ function PostDetail() {
             <div className="PD-star_position">
             <img className="PD-main_image" alt="상품이미지" src={`/images/${prodInfo.main_image}`}></img>
               { !prodInfo.like ?
-                <img className="PD-star" alt="찜하기" src={star_icon_line} onClick={starClick}></img>
-                : <img className="PD-star" alt="찜하기" src={star_icon_filled} onClick={starClick}></img>
+                <img className="PD-star" alt="찜하기" src={star_icon_line} onClick={() => starClick()}></img>
+                : <img className="PD-star" alt="찜하기" src={star_icon_filled} onClick={() => starClick()}></img>
               }
             </div>
           </span>
