@@ -30,10 +30,17 @@ const CsNavbar = () => {
               to="/cs/inquiry" onClick={() => setCurrentPath("/cs/inquiry")}>
               1:1 문의하기
           </Link>
-          <Link className={`CS-nav ${linkStyle("/cs/as")}`}
+          { window.sessionStorage.getItem("id") === "admin" ?
+            <Link className={`CS-nav ${linkStyle("/cs/as/admin")}`}
+                to="/cs/as/admin" onClick={() => setCurrentPath("/cs/as/admin")}>
+                A/S 매장 관리
+            </Link>
+            : <Link className={`CS-nav ${linkStyle("/cs/as")}`}
               to="/cs/as" onClick={() => setCurrentPath("/cs/as")}>
-              A/S 매장
-          </Link>
+              A/S 매장 찾기
+            </Link>
+          }
+          
         </div>
       </span>
       <Outlet />
