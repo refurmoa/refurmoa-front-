@@ -8,30 +8,47 @@ import moment from 'moment';
 
 export const AdminPartnerDetailList = (props) => {
   const num =props.num;
-  const [partnerlistdata, setPartnerlistdata] = useState();
   const [partnerlist, setPartnerlist] = useState([]);
   // const id = window.sessionStorage.getItem("id");
   const [ref, inView] = useInView(); // 하단의 ref가 화면에 보여지면 inView 값이 true로 바뀜
   const [page, setPage] = useState(0); // 페이지
-  const searchRef = useRef();
- 
+  const [searchData, setSearchData] = useState(""); // 검색어
 
-  useEffect(() => {
-   
+  const getPartnerList = () => {
+
     axios
-      .get(`/admin/partner/prod/search?com_num=${num}&page=0&size=8` )
+    .get(`/admin/partner/prod?com_num=${num}&search=${searchData}&page=${page}&size=15`)
     .then((res) => {
-      console.log(res.data);
+      const { data } = res;
+      setPartnerlist([...partnerlist, ...data.content]);
+      setPage((page) => page+1);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+  }
+  const searchPartner = () => {
+    
+    axios
+    .get(`/admin/partner/prod/search?com_num=${num}&search=${searchData}&page=0&size=15`)
+    .then((res) => {
       const { data } = res;
       setPartnerlist([...data.content]);
       setPage(1);
-    
     })
     .catch((e) => {
       console.error(e);
     });
    
-  }, []);
+  };
+  useEffect(() => {
+    
+    // 검색상태가 아니고 하단의 ref를 만났을 때
+    if ((inView) ) {
+      getPartnerList();
+      // 검색상태이고 하단의 ref를 만났을 때
+    } 
+  }, [inView,searchData]);
 
   const searchpartRef = useRef();
   const APDsearch = (e) => {
@@ -77,12 +94,14 @@ export const AdminPartnerDetailList = (props) => {
           <input
             className="APDsearchbox"
             type="text"
-            ref={searchpartRef}
+            value={searchData}
+            onChange={(e)=>setSearchData(e.target.value)}
+            onKeyDown={(e) => {if (e.key === 'Enter') searchPartner();}}
           ></input>
           <input
             className="APDsearchboxbutton"
             type="button"
-            onClick={APDsearch}
+            onClick={() => {searchPartner()}}
           ></input>
         </div>
       </top>

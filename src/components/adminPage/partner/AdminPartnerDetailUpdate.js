@@ -1,6 +1,6 @@
 import React from "react";
 import "./AdminPartnerDetailUpdate.css";
-import Post from "../../shared/FindAddress";
+import Post from "../../sign/signup/FindAddress";
 import Modal from "react-modal";
 import { useState } from "react";
 import axios from "axios";
@@ -8,21 +8,19 @@ import axios from "axios";
 const UpdatePartner = (props) => {
   const partner = props.partner;
   const Partner_close_modal=props.Partner_close_modal;
-  const [com_num, setComNum] = useState(partner.comNum);
-  const [com_name, setComName] = useState(partner.comName);
-  const [com_ceo_name, setCeo] = useState(partner.comCeoName);
-  const [com_phone, setComPhone] = useState(partner.comPhone);
-  const [com_email, setComEmail] = useState(partner.comEmail);
-  const [com_addr, setComAddr] = useState(partner.comAddr);
-  const [com_status, setStatus] = useState(partner.comStatus);
-  const [com_detail_addr, setComAddrDetail] = useState(partner.comDetailAddr);
-  
-
-  const [domain, setDomain] = useState(props.partner.comEmail.split('@')[1]);
-  const [email, setEmail] = useState(props.partner.comEmail.split('@')[0]);
-
+  const [com_num, setComNum] = useState(partner.com_num);
+  const [com_name, setComName] = useState(partner.com_name);
+  const [com_ceo_name, setCeo] = useState(partner.com_ceo_name);
+  const [com_phone, setComPhone] = useState(partner.com_phone);
+  const [com_email, setComEmail] = useState(partner.com_email);
+  const [com_addr, setComAddr] = useState(partner.com_addr);
+  const [com_status, setStatus] = useState(partner.com_status);
+  const [com_detail_addr, setComAddrDetail] = useState(partner.com_detail_addr);
+  const [domain, setDomain] = useState(props.partner.com_email.split('@')[1]);
+  const [email, setEmail] = useState(props.partner.com_email.split('@')[0]);
   const [popup, setPopup] = useState(false);
   const [modal, setModal] = useState(false);
+  
   const ChangePopUP = () => {
     setPopup(true);
     setModal(true);

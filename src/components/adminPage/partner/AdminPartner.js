@@ -11,8 +11,7 @@ import { useInView } from "react-intersection-observer";
 function AdminPartner() {
   const [partnerlist, setPartnerlist] = useState(partnerList); // 제휴회사 리스트
   const [searchData, setSearchData] = useState(""); // 검색어
-  const [page, setPage] = useState(0); // 페이지
-  const searchRef = useRef();
+
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
   const [dataList, setDataList] = useState([]);
   const [searchState, setSearchState] = useState(false);
@@ -20,32 +19,10 @@ function AdminPartner() {
  // 무한스크롤
 
  const [ref, inView] = useInView(); // 하단의 ref가 화면에 보여지면 inView 값이 true로 바뀜
- 
+ const [page, setPage] = useState(0); // 페이지
+ const searchRef = useRef();
 
 
-
-  // 제휴회사 리스트 조회
-  const partnerListup = () => {
-    if (isLoading) return;
-    setIsLoading(true);
-
-    try {
-      axios
-    .get(`/admin/partner?search=${searchData}&page=0&size=15`)
-    .then((res) => {
-      const { data } = res;
-      setDataList([...data.content]);
-      setPage(1);
-      setIsFirstSearch(false);
-    })
-    .catch((e) => {
-      console.error(e);
-    });
-    } catch (e) {
-    } finally {
-      setIsLoading(false);
-    }
-  };
   const getPartnerList = () => {
     axios
     .get(`/admin/partner?search=${searchData}&page=${page}&size=15`)
