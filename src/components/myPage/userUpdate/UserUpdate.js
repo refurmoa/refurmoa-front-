@@ -1,12 +1,10 @@
 import React from "react";
 import "../../sign/signup/Signup.css";
 import "./UserUpdate.css";
-import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Update_phone from "./UserUpdatePhone";
-import Update_card from "./UserUpdateCard";
-import Post from "../../sign/signup/FindAddress";
+import Post from "../../shared/FindAddress";
 
 const User_update = () => {
   const [name, setName] = useState("");
