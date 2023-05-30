@@ -346,7 +346,7 @@ const SearchInput = styled.div`
     height: 100%;
     box-sizing: border-box;
     border: none;
-    color: #B9A89A;
+    color: #000000;
   }
   input::placeholder {
     color: #BBBBBB;
