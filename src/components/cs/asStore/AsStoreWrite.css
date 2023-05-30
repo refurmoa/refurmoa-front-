@@ -238,6 +238,7 @@
   float: right;
   color: #514438;
   text-align: center;
+  cursor: pointer;
 }
 .AsStore_Post_button a {
   font-weight: 600;

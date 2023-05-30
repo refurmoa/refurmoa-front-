@@ -10,11 +10,12 @@ import { useParams } from "react-router-dom";
 
 function ProductUpdate() {
   const product_code = useParams().product_code;
-
+  
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   let [main_Image, setMainImg] = useState("");
+  const [com_num, setCom_num] = useState();
   const [code, setCode] = useState("");
   const [prod_com, setProd_com] = useState("");
   const [prod_name, setProd_name] = useState("");
@@ -25,78 +26,88 @@ function ProductUpdate() {
   const [reg_date, setReg_date] = useState("");
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
+  const[defImg1,setDefImg1]= useState("");
+  const[defImg2,setDefImg2]= useState("");
+  const[defImg3,setDefImg3]= useState("");
+  const [img_con, setImg_con] = useState(false);
+  const[mainFile,setMainFile]=useState();
+
+  const [Maindata, setMaindata] = useState("");
+  const [deffect1, setDeffect1] = useState("");
+  const [deffect2, setDeffect2] = useState("");
+  const [deffect3, setDeffect3] = useState("");
 
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
+  /*===============================================*/
 
-  /*=================샘플 데이터 이미지는 백엔드에서=========================*/
-  const productData = {
-    product_code: "1",
-    com_num: "6",
-    category_code: "SF",
-    category: "funliving",
-    main_image: "",
-    prod_com: "삼성",
-    prod_name: "쇼파",
-    prod_grade: "B",
-    guarantee: false,
-    org_price: "102000",
-    Deffect_text: "모서리 스크래치",
-    image: process.env.PUBLIC_URL + "/images/prod/image02.png",
-    deffect_image1: process.env.PUBLIC_URL + "/images/prod/image03.png",
-    deffect_image2: process.env.PUBLIC_URL + "/images/prod/image04.png",
-    deffect_image3: process.env.PUBLIC_URL + "/images/prod/image05.png",
-  };
-  useEffect(() => {
-    console.log(product_code);
-    /*
+   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
+
+   useEffect(() => {
+    
     axios
-      .post("/product/update", {
-        product_code: product_num,
+      .get("/prod/update/info", {
+        params:{product_code: product_code}
       })
-      .then((res) => {})
+      .then((res) => {
+        console.log(res.data)
+        const productData=res.data
+        if (
+          productData.categoryCode === "funliving" ||
+          productData.categoryCode === "funbed" ||
+          productData.categoryCode === "funoffice"
+        ) {
+          setFuniture(true);
+          setAppliance(false);
+          setCate("funiture");
+        } else {
+          setFuniture(false);
+          setAppliance(true);
+          setCate("appliance");
+        }
+        setCate_code(productData.categoryCode);
+        setCode(productData.category);
+    
+        setProd_com(productData.prodCom);
+        setProd_name(productData.prodName);
+        setOrg_price(productData.orgPrice);
+        console.log(productData.mainImage)
+        setMaindata(productData.mainImage);
+        setMainImg(`${process.env.PUBLIC_URL}/images/${productData.mainImage}`);
+        setMainFile(new Blob());
+        setDeffect1(productData.defectImage1);
+        setDeffect2(productData.defectImage2);
+        setDeffect3(productData.defectImage3);
+
+        let imageUrlLists = [];
+        setDefImg1(productData.defectImage1);
+        setDefImg2(productData.defectImage2);
+        setDefImg3(productData.defectImage3);
+        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage1}`);
+        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage2}`);
+        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage3}`);
+        setShowImages(imageUrlLists);
+        if (productData.prodGrade === "S") onCHKS();
+        else if (productData.prodGrade === "A") onCHKA();
+        else if (productData.prodGrade === "B") onCHKB();
+        setCom_num(res.data.com_num)
+        setSearchCompany(res.data.com_name)
+        setGuarantee(productData.guarantee);
+        setDefect_text(productData.defectText);
+        setInputCount(productData.defectText.length);
+        setProd_state(productData.prodState);
+      })
       .catch((e) => {
         console.error(e);
       });
-    */
+    
 
-    if (
-      productData.category === "funliving" ||
-      productData.category === "funbed" ||
-      productData.category === "funoffice"
-    ) {
-      setFuniture(true);
-      setAppliance(false);
-      setCate("funiture");
-    } else {
-      setFuniture(false);
-      setAppliance(true);
-      setCate("appliance");
-    }
-    setCate_code(productData.category);
-    setCode(productData.category_code);
-    setSearchCompany(productData.com_num);
-    setProd_com(productData.prod_com);
-    setProd_name(productData.prod_name);
-    setOrg_price(productData.org_price);
-    setMainImg(productData.image);
-    let imageUrlLists = [];
-    imageUrlLists.push(productData.deffect_image1);
-    imageUrlLists.push(productData.deffect_image2);
-    imageUrlLists.push(productData.deffect_image3);
-    setShowImages(imageUrlLists);
-    if (productData.prod_grade === "S") onCHKS();
-    else if (productData.prod_grade === "A") onCHKA();
-    else if (productData.prod_grade === "B") onCHKB();
-
-    setGuarantee(productData.guarantee);
-    setDefect_text(productData.Deffect_text);
-    setInputCount(productData.Deffect_text.length);
+    
+    // setInputCount(productData.Deffect_text.length);
   }, []);
   /*===============================================*/
-
   const [file, setFile] = useState(null);
-  const [listFile, setListfile] = useState();
+  const [listFile, setListfile] = useState([]);
   const [fileDataList, setFileDataList] = useState(); // 서버에 업로드 된 파일 리스트
 
   let [inputCount, setInputCount] = useState(0);
@@ -167,21 +178,28 @@ function ProductUpdate() {
 
   const setPreviewImg = (e) => {
     var reader = new FileReader();
-    const uploadFiles = Array.prototype.slice.call(e.target.files); // 파일 이름을 배열 형태로 저장하는 객체
+    
     reader.onload = function (e) {
       setMainImg(e.target.result);
     };
-    uploadFiles.forEach((uploadFile) => {
-      console.log("bbb :" + uploadFile);
-      fileList.push(uploadFile); // 배열에 push
-    });
-
-    setListfile(fileList); // console.log("fileList=>" + fileList);
+    setMainFile(e.target.files[0]);
+    
+   
+     // console.log("fileList=>" + fileList);
+    
     reader.readAsDataURL(e.target.files[0]);
   };
   /*===============================================*/
 
   const handleAddImages = (event) => {
+    setImg_con(true);
+    const uploadFiles =Array.prototype.slice.call(event.target.files);
+    uploadFiles.forEach((uploadFile) => {
+      console.log("bbb :" + uploadFile);
+      fileList.push(uploadFile); // 배열에 push
+      setListfile(list=>[...list,uploadFile]);
+    });
+   
     const imageLists = event.target.files;
     let imageUrlLists = [...showImages];
 
@@ -193,7 +211,7 @@ function ProductUpdate() {
     if (imageUrlLists.length > 3) {
       imageUrlLists = imageUrlLists.slice(0, 3);
     }
-
+    console.log(imageUrlLists);
     setShowImages(imageUrlLists);
   };
   const handleDeleteImage = (id) => {
@@ -214,54 +232,59 @@ function ProductUpdate() {
 
   const Product_write = (e) => {
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
-    console.log("fileList=>" + listFile);
-
+    const formimg = new FormData();
+    console.log(mainFile);
     listFile.forEach((file) => {
-      formData.append("uploadfiles", file);
+      formimg.append("uploadfiles", file)
     });
-
-    console.log(formData);
-    if (listFile.length === 0) {
-      alert("상품 사진을 하나 이상 등록해 주세요.");
-    }
-
+    console.log(listFile);
+    formData.append("main_image",mainFile);
+    formData.append("product_code",product_code);
+    formData.append("category_code",cate_code);
+    formData.append("category", code);
+    formData.append("deffect_image1",defImg1);
+    formData.append("deffect_image2",defImg2);
+    formData.append("deffect_image3",defImg3);
+    formData.append("prod_com", prod_com);
+    formData.append("prod_name",prod_name );
+    formData.append("prod_grade",prod_Grade );
+    formData.append("org_price", org_price);
+    formData.append("guarantee",guarantee );
+    formData.append("deffect_text", defect_text);
+    formData.append("reg_date",new Date() );
+    formData.append("prod_state",0);
+    formData.append("com_num",com_num);
+   
     axios
-      .post("/product/update", {
-        CATEGORY_CODE: code,
-        CATEGORY: cate_code,
-        MAIN_IMAGE: main_Image,
-        PROD_COM: prod_com,
-        PROD_NAME: prod_name,
-        PROD_GRADE: prod_Grade,
-        ORG_PRICE: org_price,
-        GUARANTEE: guarantee,
-        DEFFECT_TEXT: defect_text,
-        DEFFECT_IMAGE1: showImages[0],
-        DEFFECT_IMAGE2: showImages[1],
-        DEFFECT_IMAGE3: showImages[2],
-        REG_DATE: new Date(),
-      })
+      .post("/prod/update", formData, {
+        headers: {
+        "Content-Type": "multipart/form-data",
+        },})
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        console.log("upload request");
-      })
-      .catch((e) => {
-        console.error(e);
-      })
-      .then(() => {
-        // 동작 안되면 "/uploadfile" 로 수정하세요
+        
+        const entries = Array.from(formimg.entries());
+        const formDataLength = entries.length;
+        console.log(formDataLength);
+        if(formDataLength!==0){
         axios
-          .post("/uploadfile", formData)
+          .post("/prod/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("작성이 완료되었습니다!");
+            alert("파일 등록이 완료되었습니다!");
             setFileDataList(res.data);
           })
           .catch((e) => {
             console.error(e);
-          });
-      });
+          });   
+        }  
+        else{
+          alert("작성이 완료되었습니다!");
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+     
   };
 
   return (
@@ -300,9 +323,9 @@ function ProductUpdate() {
                 },
                 content: {
                   position: "absolute",
-                  top: "15%",
-                  width: "600px",
-                  height: "610px",
+                  top: "10%",
+                  width: "900px",
+                  height: "700px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",
@@ -327,7 +350,7 @@ function ProductUpdate() {
                   <FindCompany
                     searchCompany={searchCompany}
                     setSearchCompany={setSearchCompany}
-                    setProd_com={setProd_com}
+                    setCom_num={setCom_num}
                     close_modal={close_modal}
                   ></FindCompany>
                 )}
@@ -405,6 +428,7 @@ function ProductUpdate() {
               placeholder="제품회사명"
               maxLength="15"
               value={prod_com}
+              onChange={(e)=>setProd_com(e.target.value)}
             />
           </div>
           <div>
@@ -415,6 +439,7 @@ function ProductUpdate() {
               placeholder="제품명"
               maxLength="30"
               value={prod_name}
+              onChange={(e)=>setProd_name(e.target.value)}
             />
           </div>
         </div>
