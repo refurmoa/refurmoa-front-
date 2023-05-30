@@ -37,10 +37,10 @@ function Signup_main(props) {
           <img className="Sign_social_logo" src={naver} alt="naver" />
         </Link>
         <Link to={kakao_api_url} className="Sign_social_btn">
-            <img className="Sign_social_logo" src={kakao} alt="kakao" />
+          <img className="Sign_social_logo" src={kakao} alt="kakao" />
         </Link>
         <Link to="" className="Sign_social_btn">
-        <img className="Sign_social_logo" src={google} alt="google" />
+          <img className="Sign_social_logo" src={google} alt="google" />
         </Link>
       </div>
     </div>

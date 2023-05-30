@@ -4,7 +4,7 @@ import "./SignupInput.css";
 import { useState } from "react";
 import axios from "axios";
 import Modal from "react-modal";
-import Post from "./FindAddress";
+import Post from "../../shared/FindAddress";
 import arrow_icon from "../../../images/arrow_icon_brown-240.png";
 import cancel from "../../../images/cancel.png";
 
@@ -40,7 +40,6 @@ const Signup_input = (props) => { // props.id, props.name, props.phone
   const IDcheck = () => {
     if (!idRegExp.test(props.id)) {
       alert("사용 불가능한 아이디입니다.");
-      return false;
     } else if (props.id !== "") {
       axios
         .post("/signup/distinct", {
@@ -50,14 +49,13 @@ const Signup_input = (props) => { // props.id, props.name, props.phone
           if (res.data === 1) {
             alert("중복된 아이디입니다.");
             props.setId("");
-            return false;
           } else {
             alert("사용 가능한 아이디입니다!");
             setCheckId(true);
           }
         })
         .catch((e) => {
-          console.error(e);
+          // console.error(e);
         });
     } else {
       alert("아이디를 입력해주세요.");

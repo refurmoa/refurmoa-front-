@@ -54,20 +54,15 @@ const Signup_accept = (props) => {
           acceptLocation: check_box3,
           acceptAlarm: check_box4
         })
-        .then((res) => {
-          if(res.data === 1){
+        .then(() => {
             props.setMode(4);
-          } else {
-            alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
-            navigate("/signup");
-          }
         })
         .catch((e) => {
-          // console.error(e);
+          alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
+          navigate("/signup");
         });
     } else {
       alert("필수 약관 동의에 체크해주세요.");
-      return false;
     }
   };
 
