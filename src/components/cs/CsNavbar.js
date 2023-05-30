@@ -1,58 +1,46 @@
 // 고객센터 메뉴
 
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, Link } from "react-router-dom";
 import { useState } from "react";
 import "./CsNavbar.css";
 
 const CsNavbar = () => {
-  const login_id = window.sessionStorage.getItem("id"); // 세션 ID
-  const [activeLink, setActiveLink] = useState("");
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
-  const handleLinkClick = (link) => {
-    setActiveLink(link);
-  };
+  const linkStyle = (link) => {
+    const startlink = new RegExp(`^${link}`);
+    return startlink.test(currentPath) && "CS-nav_active";
+  }
 
   return (
     <div className="CS-wrap">
-      <span className="CSnavbar">
-        <div className="CSnavtitle">고객센터</div>
-        <hr className="CSnavline" />
-        <div className="CSnav_main">
-          <NavLink
-            to="/cs/notice"
-            className={`CSnavbarmenu ${
-              activeLink === "notice" ? "active" : ""
-            }`}
-            onClick={() => handleLinkClick("notice")}
-          >
-            공지사항
-          </NavLink>
-
-          <NavLink
-            to="/cs/faq"
-            className={`CSnavbarmenu ${activeLink === "faq" ? "active" : ""}`}
-            onClick={() => handleLinkClick("faq")}
-          >
-            FAQ
-          </NavLink>
-
-          <NavLink
-            to="/cs/inquiry"
-            className={`CSnavbarmenu ${
-              activeLink === "oneonone" ? "active" : ""
-            }`}
-            onClick={() => handleLinkClick("oneonone")}
-          >
-            1:1 문의하기
-          </NavLink>
-
-          <NavLink
-            to={login_id !== "admin" ? "/cs/as" : "/cs/as/write"}
-            className={`CSnavbarmenu ${activeLink === "as" ? "active" : ""}`}
-            onClick={() => handleLinkClick("as")}
-          >
-            A/S 매장 찾기
-          </NavLink>
+      <span className="CS-nav_wrap">
+        <div className="CS-title">고객센터</div>
+        <hr className="CS-top_line" />
+        <div className="CS-nav_bar">
+          <Link className={`CS-nav ${linkStyle("/cs/notice")}`}
+              to="/cs/notice" onClick={() => setCurrentPath("/cs/notice")}>
+              공지사항
+          </Link>
+          <Link className={`CS-nav ${linkStyle("/cs/faq")}`}
+              to="/cs/faq" onClick={() => setCurrentPath("/cs/faq")}>
+              FAQ
+          </Link>
+          <Link className={`CS-nav ${linkStyle("/cs/inquiry")}`}
+              to="/cs/inquiry" onClick={() => setCurrentPath("/cs/inquiry")}>
+              1:1 문의하기
+          </Link>
+          { window.sessionStorage.getItem("id") === "admin" ?
+            <Link className={`CS-nav ${linkStyle("/cs/as/admin")}`}
+                to="/cs/as/admin" onClick={() => setCurrentPath("/cs/as/admin")}>
+                A/S 매장 관리
+            </Link>
+            : <Link className={`CS-nav ${linkStyle("/cs/as")}`}
+              to="/cs/as" onClick={() => setCurrentPath("/cs/as")}>
+              A/S 매장 찾기
+            </Link>
+          }
+          
         </div>
       </span>
       <Outlet />

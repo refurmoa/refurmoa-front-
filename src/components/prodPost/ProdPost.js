@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { getDdayArray } from "../shared/sharedFn";
+import { getDdayArray } from "../shared/Timer";
 
 // 더미데이터
 import productlist from "../shared/prod.json";

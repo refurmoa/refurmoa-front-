@@ -28,7 +28,7 @@ function ProdInquiry(props) {
         setTotalPage(res.data.totalPages);
       })
       .catch((e) => {
-        console.error(e);
+        // console.error(e);
       });
   }
   useEffect(() => {
@@ -63,20 +63,16 @@ function ProdInquiry(props) {
           title: inquiryForm.title,
           content: inquiryForm.content
       })
-      .then((res) => {
-        if (res.data === 1) {
-          setInquiryForm({
-            secret: false,
-            title: "",
-            content: "",
-          });
-          setList();
-        } else {
-          alert("문의 글 등록에 실패하였습니다.\n다시 시도해주세요.");
-        }
+      .then(() => {
+        setInquiryForm({
+          secret: false,
+          title: "",
+          content: "",
+        });
+        setList();
       })
       .catch((e) => {
-        console.error(e);
+        alert("문의 글 등록에 실패하였습니다.\n다시 시도해주세요.");
       })
     }
   };
@@ -96,17 +92,13 @@ function ProdInquiry(props) {
     if (deleteQ) {
       axios
         .get(`/post/detail/inquiry/delete?prod_inquiry_num=${num}`)
-        .then((res) => {
-          if (res.data === 1) {
-            alert("문의글이 삭제되었습니다.");
-            setCurrentPage(0);
-            setList();
-          } else {
-            alert("삭제에 실패하였습니다. 다시 시도해주세요.");
-          }
+        .then(() => {
+          alert("문의글이 삭제되었습니다.");
+          setCurrentPage(0);
+          setList();
         })
         .catch((e) => {
-          console.error(e);
+          alert("삭제에 실패하였습니다. 다시 시도해주세요.");
         });
     }
   }
@@ -118,12 +110,11 @@ function ProdInquiry(props) {
         prodInquiryNum: num,
         reCon: replyForm
       })
-      .then((res) => {
-        if (res.data === 1) { setList(); }
-        else { alert("등록에 실패하였습니다. 다시 시도해주세요."); }
+      .then(() => {
+        setList();
       })
       .catch((e) => {
-        console.error(e);
+        alert("등록에 실패하였습니다. 다시 시도해주세요.");
       });
   }
 

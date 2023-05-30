@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 
 // 시간계산 함수
-import { getDdayArray } from "../shared/sharedFn";
+import { getDdayArray } from "../shared/Timer";
 
 // 더미데이터
 import productlist from "../shared/prod.json";
