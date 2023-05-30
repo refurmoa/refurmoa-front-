@@ -13,13 +13,14 @@ export const AdminPartnerDetailList = (props) => {
   const [ref, inView] = useInView(); // 하단의 ref가 화면에 보여지면 inView 값이 true로 바뀜
   const [page, setPage] = useState(0); // 페이지
   const [searchData, setSearchData] = useState(""); // 검색어
-
+  console.log(num);
   const getPartnerList = () => {
 
     axios
     .get(`/admin/partner/prod?com_num=${num}&search=${searchData}&page=${page}&size=15`)
     .then((res) => {
       const { data } = res;
+      
       setPartnerlist([...partnerlist, ...data.content]);
       setPage((page) => page+1);
     })
@@ -117,7 +118,7 @@ export const AdminPartnerDetailList = (props) => {
                 onClick={onClick}
               />
               <div className="APDBidListInfo">
-                <div className="APDBidListInfoDate">{moment(partnerlist.regDate).format("YYYY-MM-DD HH:mm:ss")}</div>
+                <div className="APDBidListInfoDate">{moment(partnerlist.regDate).format("YYYY-MM-DD")+" 입고"}</div>
                 <div className="APDBidListInfoCom">{partnerlist.prodCom}</div>
                 <div className="APDBidListInfoName" onClick={onClick}>
                   {partnerlist.prodName}
