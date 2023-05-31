@@ -10,7 +10,6 @@ const InquiryList = () => {
   const [dataList, setDataList] = useState([]);
   const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
   const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
-  const [cnt, setCnt] = useState(1);
   var num=1;
 
   //목록 조회
@@ -62,7 +61,7 @@ const InquiryList = () => {
                 <Link
                   className="OI-board-num"
                   to="/cs/inquiry/detail"
-                  state={{ item: item }}
+                  state={{ item: item.num }}
                   onClick={readcountup}
                 >
                   {num++}
@@ -70,7 +69,7 @@ const InquiryList = () => {
                 <span>
                   {loginid === "admin" && (
                     <span className="OI-answer-wrap">
-                      {item.answerCon === null ? (
+                      {item.answerState === 0 ? (
                         <span className="OI-answer-n">
                           &nbsp;&nbsp;미답변&nbsp;&nbsp;
                         </span>
@@ -83,7 +82,7 @@ const InquiryList = () => {
                 <Link
                   className="OI-board-title"
                   to="/cs/inquiry/detail"
-                  state={{ item: item }}
+                  state={{ item: item.num }}
                   onClick={readcountup}
                 >
                   {item.inqTitle}
@@ -97,7 +96,7 @@ const InquiryList = () => {
                     </>
                   ) : (
                     <>
-                      {item.answerCon !== null && (
+                      {item.answerState !== 0  && (
                         <>
                           <span className="OI-answer-yes">답변완료</span>
                         </>
@@ -111,7 +110,7 @@ const InquiryList = () => {
                   )}
                   {loginid !== "admin" && (
                     <>
-                      {item.answerCon === null && (
+                      {item.answerState === 0 && (
                         <>
                           <span
                             className="OI-delete-btn"
