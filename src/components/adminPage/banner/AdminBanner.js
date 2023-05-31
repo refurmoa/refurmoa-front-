@@ -31,7 +31,7 @@ const AdminBanner = () => {
     // 처음 검색할때에는 기존의 bannList의 데이터를 비워주고 새로 받아온 데이터를 넣는다.
     if ((searchRef.current.value !== "") && (searchRef.current.value !== null) && (isFirstSearch)) {
       axios
-      .get(`/admin/banner/search?search=${searchRef.current.value}&page=0&size=3`) 
+      .get(`/admin/banner/search?search=${searchRef.current.value}&page=0&size=10`) 
       .then((res) => {
         const { data } = res;
         console.log(data);
@@ -45,7 +45,7 @@ const AdminBanner = () => {
     // 검색후 하단의 ref div 박스를 만나면 기존의 검색데이터 + 다음 페이지 데이터를 bannList에 넣는다.
     } else if ((searchRef.current.value !== "") && (searchRef.current.value !== null) && (!isFirstSearch)) {
       axios
-      .get(`/admin/banner/search?search=${searchRef.current.value}&page=${page}&size=3`) 
+      .get(`/admin/banner/search?search=${searchRef.current.value}&page=${page}&size=10`) 
       .then((res) => {
         const { data } = res;
         setBannList([...bannList, ...data.content]);
@@ -72,7 +72,7 @@ const AdminBanner = () => {
 
   const getBannerList = () => {
     axios
-    .get(`/admin/banner?page=${page}&size=8`)
+    .get(`/admin/banner?page=${page}&size=10`)
     .then((res) => {
       const { data } = res;
       setBannList([...bannList, ...data.content]);
