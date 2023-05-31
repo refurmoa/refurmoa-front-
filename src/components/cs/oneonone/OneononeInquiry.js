@@ -15,7 +15,7 @@ const InquiryList = () => {
   //목록 조회
   const setList = () => { 
     axios
-      .get(`/cs/inquiry?id=${loginid}&page=${currentPage}&size=10&sort=answerCon,ASC&sort=inqDate,DESC`)
+      .get(`/cs/inquiry?id=${loginid}&page=${currentPage}&size=10&sort=answerCon,ASC&sort=inqDate,ASC`)
       .then((res) => {
         setDataList(res.data.content);
         setTotalPage(res.data.totalPages); 
@@ -32,10 +32,18 @@ const InquiryList = () => {
   const readcountup = (e) => {};
 
   // 문의 글 삭제
-  const deletePlInquiry = (e) => {
-    e.stopPropagation();
+  const deletePlInquiry = (num) => {
     const deleteQ = window.confirm("정말 삭제하시겠습니까?");
     if (deleteQ) {
+      axios
+      .get(`/cs/inquiry/delete?num=${num}`)
+      .then((res) => {
+          window.location.reload();
+      })
+      .catch((e) => {
+        // console.error(e);
+      });
+
     }
   };
 
@@ -93,6 +101,7 @@ const InquiryList = () => {
                   {loginid === "admin" ? (
                     <>
                       <span className="OI-memberid">{item.memberId}</span>
+                      <span className="OI-memberid">{moment(item.inqDate).format("YYYY-MM-DD")}</span>
                     </>
                   ) : (
                     <>
@@ -114,7 +123,7 @@ const InquiryList = () => {
                         <>
                           <span
                             className="OI-delete-btn"
-                            onClick={deletePlInquiry}
+                            onClick={()=>deletePlInquiry(item.num)}
                           >
                             삭제
                           </span>

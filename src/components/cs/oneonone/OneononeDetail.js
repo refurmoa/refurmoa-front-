@@ -27,23 +27,39 @@ const OneononeDetail = () => {
     setContent(e.target.value);
     setInputCount(e.target.value.length);
   };
+
+  const deletePlInquiry = (num) => {
+    const deleteQ = window.confirm("정말 삭제하시겠습니까?");
+    if (deleteQ) {
+      axios
+      .get(`/cs/inquiry/delete?num=${num}`)
+      .then((res) => {
+          window.location.href="/cs/inquiry";
+      })
+      .catch((e) => {
+        // console.error(e);
+      });
+    }
+  };
   const OD_Regi = () => {
     if (window.confirm("답변을 등록하시겠습니까?")) {
-      // axios
-      // .post("/cs/inq/write", {
-      //     answerCon: content,
-      //     ANSWER_DATE:new Date();
-      // })
-      // .then((res) => {
-      //   if (res.data === 1) {
-      //     alert("성공적으로 등록되었습니다.");
-      //   } else {
-      //     alert("등록에 실패했습니다.");
-      //   }
-      // })
-      // .catch((e) => {
-      //   console.error(e);
-      // });
+      axios
+      .post("/cs/inquiry/detail/reply", {
+          num:data.num,
+          answerCon: content,
+          answerDate:new Date()
+      })
+      .then((res) => {
+        if (res.data === 1) {
+          alert("성공적으로 등록되었습니다.");
+          window.location.reload();
+        } else {
+          alert("등록에 실패했습니다.");
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
       return true;
     } else {
       alert("답변이 취소되었습니다.");
@@ -103,9 +119,7 @@ const OneononeDetail = () => {
               <div className="OD-content-box">
                 <span className="OD-reply-icon">A.</span>
                 <label className="OD-reply-content">{data.answerCon}</label>
-                {data.inqOrgImg!==null&&<div className="OD-filename">
-            <span className="OD-file-title" >첨부파일:</span><span onClick={() => downloadImage(item.inqImg)}> {data.inqOrgImg}</span>
-            </div>}
+               
                 <br></br>
                 <span className="OD-reply-date">
                   {moment(data.answerDate).format("YYYY-MM-DD")} 답변 완료
@@ -122,7 +136,7 @@ const OneononeDetail = () => {
               <span className="OD-view-title">{data.inqTitle} </span>
               <span className="OD-top-wrap">
                 <span className="OD-view-date">{moment(data.inqDate).format("YYYY-MM-DD")}</span>
-                {item.answerCon === "" &&(<button className="OD-delete-btn">삭제</button>)}
+                {data.answerCon === null &&(<button className="OD-delete-btn" onClick={()=>deletePlInquiry(data.num)}>삭제</button>)}
                 
               </span>
             </span>
