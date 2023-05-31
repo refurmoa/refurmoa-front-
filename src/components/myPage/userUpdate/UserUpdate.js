@@ -6,6 +6,7 @@ import Modal from "react-modal";
 import Update_phone from "./UserUpdatePhone";
 import Post from "../../shared/FindAddress";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const User_update = () => {
   const [name, setName] = useState("");
@@ -25,10 +26,19 @@ const User_update = () => {
   const [Is_pw, setIs_pw] = useState(false);
   const [check_pw, setCheck_pw] = useState(false);
   const [check_Email, setCheck_Email] = useState(false);
-  const id = window.sessionStorage.getItem("id");
+  const [id, setId] = useState();
+  const location = useLocation();
+
   // =====================================================
 
+  function idConfirm() {
+    if (window.sessionStorage.getItem("id") !== "admin") {
+      setId(window.sessionStorage.getItem("id"));
+    } else setId(location.state.id);
+  }
+
   useEffect(() => {
+    idConfirm();
     axios
       .post("/user/info", {
         memberId: id,
@@ -49,7 +59,7 @@ const User_update = () => {
       .catch((e) => {
         console.error(e);
       });
-  }, []);
+  }, [id]);
 
   /*========================== */
   const [popup, setPopup] = useState(false);
@@ -100,8 +110,6 @@ const User_update = () => {
       alert("비밀번호를 입력해주세요!");
       return false;
     }
-
-    window.sessionStorage.setItem("id", id);
   };
 
   const userDelete = () => {
