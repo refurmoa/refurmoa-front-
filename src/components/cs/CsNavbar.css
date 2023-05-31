@@ -5,13 +5,14 @@
   margin: 70px auto 0;
 }
 
-.CSnavbar {
+.CS-nav_wrap {
   margin: auto;
   width: 260px;
   height: 300px;
   float: left;
 }
-.CSnavtitle {
+
+.CS-title {
   width: 230px;
   height: 35px;
   margin-left: 25px;
@@ -21,17 +22,20 @@
   line-height: 35px;
   color: rgba(81, 68, 56, 0.7);
 }
-.CSnavline {
+
+.CS-top_line {
   float: left;
   width: 256px;
   border: 2px solid #c7b9ae;
 }
-.CSnav_main {
+
+.CS-nav_bar {
   float: left;
   margin: 15px 0 0 25px;
   width: 210px;
 }
-.CSnavbarmenu {
+
+.CS-nav {
   width: 230px;
   margin-bottom: 5px;
   height: 35px;
@@ -40,7 +44,7 @@
   line-height: 35px;
   color: #b9a89a;
 }
-.CSnavbarmenu:hover,
-.CSnavbarmenu.active {
+
+.CS-nav:hover, .CS-nav_active {
   color: rgba(81, 68, 56, 0.7);
 }

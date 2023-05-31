@@ -59,7 +59,18 @@
   width: 1200px;
   height: 100px;
   padding: 10px 0;
+  position: relative;
   border-bottom: 2px solid rgba(185, 168, 154, 0.5);
+}
+.BN_banner_expired {
+  width: 1200px;
+  height: 100px;
+  padding: 10px 0;
+  left:0;
+  top:0;
+  background-color: rgba(0, 0, 0, 0.05);
+  position: absolute;
+  
 }
 .BN_banner_num {
   padding: 35px 10px;
@@ -76,9 +87,15 @@
 .BN_banner_img {
   float: left;
 }
+.BN_banner_img div {
+  width: 385px;
+  height: 100px;
+}
 .BN_banner_img img {
   width: 385px;
   height: 100px;
+  object-fit: cover;
+  object-position: center;
 }
 .BN_banner_info {
   padding: 20px 15px;

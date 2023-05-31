@@ -1,45 +1,35 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+// 회원가입 페이지
+
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Main from "./SignupMain";
 import Phone from "./SignupPhone";
 import Input from "./SignupInput";
 import Accept from "./SignupAccept";
 import Complete from "./SignupComplete";
-import { useState } from "react";
+
 
 function Signup() {
-  let content = null;
+  const navigate = useNavigate();
   const [mode, setMode] = useState(0);
-  const [id, setTotal_Id] = useState("");
-  const [phone, setTotal_Phone] = useState("");
-  const [name, setTotal_Name] = useState("");
-  const [data, setData]=useState({})
-  if (mode === 0) {
-    content = <Main setMode={setMode} />;
-  } else if (mode === 1) {
-    content = (
-      <Phone
-        setMode={setMode}
-        setTotal_Name={setTotal_Name}
-        setTotal_Phone={setTotal_Phone}
-      />
-    );
-  } else if (mode === 2) {
-    content = (
-      <Input
-        setMode={setMode}
-        name={name}
-        phone={phone}
-        setTotal_Id={setTotal_Id}
-        setData={setData}
-      />
-    );
-  } else if (mode === 3) {
-    content = <Accept setMode={setMode}  data={data}/>;
-  } else if (mode === 4) {
-    content = <Complete setMode={setMode} name={name} id={id} />;
-  }
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [data, setData]=useState({});
 
-  return <>{content}</>;
+  useEffect(() => {
+    if (sessionStorage.getItem("id") !== null) navigate("/");
+  }, []);
+
+  if (mode === 1) {
+    return ( <Phone setMode={setMode} name={name} setName={setName} phone={phone} setPhone={setPhone} /> );
+  } else if (mode === 2) {
+    return ( <Input setMode={setMode} id={id} setId={setId} name={name} setName={setName} phone={phone} setPhone={setPhone} setData={setData} /> );
+  } else if (mode === 3) {
+    return ( <Accept setMode={setMode} id={id} name={name} phone={phone} data={data} /> );
+  } else if (mode === 4) {
+    return ( <Complete setMode={setMode} name={name} id={id} /> );
+  } else return ( <Main setMode={setMode} /> );
 }
+
 export default Signup;

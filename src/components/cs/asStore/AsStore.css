@@ -134,13 +134,13 @@ select:required:invalid{
     outline: none !important;
 }
 
-input::placeholder {
+/* input::placeholder {
     font-size: 18px;
     line-height: 40px;
     display: flex;
     align-items: center;
     color: #B9A89A;
-  }
+  } */
 
 .asmiddlesearchboxbutton {
     position: relative;

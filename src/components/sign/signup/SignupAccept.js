@@ -1,23 +1,19 @@
-import React from "react";
-import "./Signup.css";
+// 회원가입 약관동의 (3)
+
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
-import { useRef, useState, useEffect } from "react";
 import { noticeList } from "../../shared/AcceptText";
+
 const Signup_accept = (props) => {
-  const setMode = props.setMode;
-  const data=props.data;
+  const navigate = useNavigate();
   const [check_ALL, setCheck_ALL] = useState(false);
   const [check_box1, setCheck_box1] = useState(false);
   const [check_box2, setCheck_box2] = useState(false);
   const [check_box3, setCheck_box3] = useState(false);
   const [check_box4, setCheck_box4] = useState(false);
 
-  const text1 = noticeList[0].content;
-  const text2 = noticeList[1].content;
-  const text3 = noticeList[2].content;
-  const text4 = noticeList[3].content;
-
+  // 약관 전체 동의
   const onCHKALL = (e) => {
     if (e.target.checked) {
       setCheck_ALL(true);
@@ -33,160 +29,82 @@ const Signup_accept = (props) => {
       setCheck_box4(false);
     }
   };
-  const onCHKBOX1 = (e) => {
-    if (e.target.checked) {
-      setCheck_box1(true);
-    } else {
-      setCheck_box1(false);
-    }
+
+  // 약관 동의
+  const onCHKBOX = (event, num) => {
+    if (num === 1) event.target.checked ? setCheck_box1(true) : setCheck_box1(false);
+    else if (num === 2) event.target.checked ? setCheck_box2(true) : setCheck_box2(false);
+    else if (num === 3) event.target.checked ? setCheck_box3(true) : setCheck_box3(false);
+    else if (num === 4) event.target.checked ? setCheck_box4(true) : setCheck_box4(false);
   };
-  const onCHKBOX2 = (e) => {
-    if (e.target.checked) {
-      setCheck_box2(true);
-    } else {
-      setCheck_box2(false);
-    }
-  };
-  const onCHKBOX3 = (e) => {
-    if (e.target.checked) {
-      setCheck_box3(true);
-    } else {
-      setCheck_box3(false);
-    }
-  };
-  const onCHKBOX4 = (e) => {
-    if (e.target.checked) {
-      setCheck_box4(true);
-    } else {
-      setCheck_box4(false);
-    }
-  };
+
+  // 회원가입
   const onClick = () => {
     if (check_box1 && check_box2) {
-      alert("회원가입을 마치시겠습니까?");
-      console.log(data);
       axios
-      .post("/signup", {
-        member_id: data.id,
-        password: data.password,
-        name: data.name,
-        phone: data.phone,
-        email: data.email,
-        address: data.address,
-        detail_address: data.address_detail,
-        birth: data.birth,
-        accept_location: check_box3,
-        accept_alarm: check_box4,
-      })
-      .then((res) => {
-        if(res.data === 1){
-          setMode(4);
-        } else {
-          alert("회원가입 실패!");
-        }
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+        .post("/signup", {
+          memberId: props.id,
+          password: props.data.password,
+          name: props.name,
+          phone: props.phone,
+          email: props.data.email,
+          address: props.data.address,
+          detailAddress: props.data.address_detail,
+          birth: props.data.birth,
+          acceptLocation: check_box3,
+          acceptAlarm: check_box4
+        })
+        .then(() => {
+            props.setMode(4);
+        })
+        .catch((e) => {
+          alert("회원가입에 실패하였습니다. 다시 시도해주세요.");
+          navigate("/signup");
+        });
     } else {
-      alert("필수 정보를 체크해주세요!!");
-      return false;
+      alert("필수 약관 동의에 체크해주세요.");
     }
   };
 
   return (
-    <>
-      <div className="SU_accept_form">
-        <div className="SU_Main_header">회원가입</div>
-        <div className="SU_sub_header">
-          01 본인인증 &nbsp;&nbsp; 02 정보입력 &nbsp;&nbsp;
-          <n className="SU_pro_now">03 약관동의</n> &nbsp;&nbsp; 04 가입완료
-        </div>
-        <div className="form_wrap">
-          <table className="SU_input_table">
-            <tr>
-              <td className="SU_accept">
-                <input
-                  type="checkbox"
-                  className="SU_accept"
-                  onClick={onCHKALL}
-                />
-                &nbsp; <b>약관 전체 동의</b>
-              </td>
-            </tr>
-            <tr>
-              <td className="SU_accept">
-                <input
-                  type="checkbox"
-                  className="SU_accept"
-                  onClick={onCHKBOX1}
-                  checked={check_box1}
-                />
-                &nbsp; 이용약관 동의 (필수)
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <textarea className="accepts" value={text1} />
-              </td>
-            </tr>
-
-            <tr>
-              <td className="SU_accept">
-                <input
-                  type="checkbox"
-                  className="SU_accept"
-                  onClick={onCHKBOX2}
-                  checked={check_box2}
-                />
-                &nbsp;개인정보 수집 및 이용 동의 (필수)
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <textarea className="accepts" value={text2} />
-              </td>
-            </tr>
-            <tr>
-              <td className="SU_accept">
-                <input
-                  type="checkbox"
-                  className="SU_accept"
-                  onClick={onCHKBOX3}
-                  checked={check_box3}
-                />
-                &nbsp;위치기반 서비스 이용약관 동의 (선택)
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <textarea className="accepts" value={text3} />
-              </td>
-            </tr>
-            <tr>
-              <td className="SU_accept">
-                <input
-                  type="checkbox"
-                  className="SU_accept"
-                  onClick={onCHKBOX4}
-                  checked={check_box4}
-                />
-                &nbsp;알림서비스 수신 동의 (선택)
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <textarea className="accepts" value={text4}></textarea>
-              </td>
-            </tr>
-          </table>
-        </div>
-
-        <button className="SU_input_btn" onClick={onClick}>
-          회원 가입
-        </button>
+    <div className="Sign_wrap Signup_Accept_wrap">
+      <div className="Sign_header Signup_header">회원가입</div>
+      <div className="Signup_sub">
+        <span className="Signup_sub_text">01 본인인증</span>
+        <span className="Signup_sub_text">02 정보입력</span>
+        <span className="Signup_sub_text Signup_sub_text_main">03 약관동의</span>
+        <span className="Signup_sub_text">04 가입완료</span>
       </div>
-    </>
+
+      <div className="Signup_Accept">
+        <div className="Signup_Accept_title">
+          <input type="checkbox" id="all" name="all" onClick={onCHKALL} checked={check_ALL} />
+          <label htmlFor="all">약관 전체 동의</label>
+        </div>
+        <div className="Signup_Accept_title">
+          <input type="checkbox" id="one" name="one" onClick={(e) => {onCHKBOX(e, 1)}} checked={check_box1} />
+          <label htmlFor="one">이용약관 동의 <span>(필수)</span></label>
+        </div>
+        <textarea className="Signup_Accept_content" value={noticeList[0].content} />
+        <div className="Signup_Accept_title">
+          <input type="checkbox" id="two" name="two" onClick={(e) => {onCHKBOX(e, 2)}} checked={check_box2} />
+          <label htmlFor="two">개인정보 수집 및 이용 동의 <span>(필수)</span></label>
+        </div>
+        <textarea className="Signup_Accept_content" value={noticeList[1].content} />
+        <div className="Signup_Accept_title">
+          <input type="checkbox" id="three" name="three" onClick={(e) => {onCHKBOX(e, 3)}} checked={check_box3} />
+          <label htmlFor="three">위치기반 서비스 이용약관 동의 <span>(선택)</span></label>
+        </div>
+        <textarea className="Signup_Accept_content" value={noticeList[2].content} />
+        <div className="Signup_Accept_title">
+          <input type="checkbox" id="four" name="four" onClick={(e) => {onCHKBOX(e, 4)}} checked={check_box4} />
+          <label htmlFor="four">알림서비스 수신 동의 <span>(선택)</span></label>
+        </div>
+        <textarea className="Signup_Accept_content" value={noticeList[3].content} />
+      </div>
+
+      <div className="Sign_btn Signup_Accept_btn" onClick={onClick}>회원가입</div>
+    </div>
   );
 };
 

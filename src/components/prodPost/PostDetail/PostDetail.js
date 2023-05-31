@@ -3,7 +3,10 @@
 import "./PostDetail.css";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { getDdayArray } from "../../shared/sharedFn";
+import { useInView } from "react-intersection-observer";
+import axios from "axios";
+import moment from "moment/moment";
+import { getDdayArray } from "../../shared/Timer";
 import PostProdDetail from "./PostProdDetail";
 import ProdInquiry from "./ProdInquiry";
 import SellInfo from "./SellInfo";
@@ -11,46 +14,58 @@ import star_icon_filled from "../../../images/star_icon_filled-240.png";
 import star_icon_line from "../../../images/star_icon_line-240.png";
 import info_icon_brown from "../../../images/info_icon_brown-240.png";
 import arrow_icon_brown from "../../../images/arrow_icon_brown-240.png";
-import post from "./post.json";
-import bidlist from "./bidlist.json";
 
 function PostDetail() {
   const board_num = useParams().board_num;
   const navigate = useNavigate();
   const login_id = window.sessionStorage.getItem("id"); // 세션 ID
-  const [prodInfo, setProdInfo] = useState(post); // 상품 상세 정보
-  const [bidList, setBidList] = useState(bidlist); // 입찰 내역
-  const [state, setState] = useState(0); // 판매 상태 (0 : 판매예정, 1 : 판매중, 2 : 판매종료)
-  const [starState, setStarState] = useState(false); // 찜 상태
-  const [bidPrice, setBidPrice] = useState(prodInfo.cur_price + prodInfo.unit_price); // 입찰가
+  const [prodInfo, setProdInfo] = useState({ // 상품 상세 정보
+    product_code: 0, // 제품코드
+    sell_type: 0, // 판매방식
+    main_image: "", // 메인 이미지
+    prod_com: "", // 제품 회사명
+    prod_name: "", // 제품 이름
+    prod_grade: "", // 제품 상태
+    org_price: 0, // 원가
+    direct_price: 0, // 즉시구입가
+    auction_price: 0, // 경매시작가
+    unit_price: 0, // 입찰 단위
+    guarantee: false, // 보증서
+    as_date: 0, // AS 기간
+    delivery_price: 0, // 배송설치비
+    cur_price: 0, // 현재가
+    detail_image: "", // 상품 상세정보
+    start_date: null, // 경매 시작일
+    end_date: null, // 경매 종료일
+    defect_text: null, // 하자 정보
+    defect_image1: null, // 하자 이미지1
+    defect_image2: null, // 하자 이미지2
+    defect_image3: null, // 하자 이미지3
+    like: false // (로그인)회원 찜 상태
+  });
+  const [bidList, setBidList] = useState([]); // 입찰 내역
+  const [state, setState] = useState(); // 판매 상태 (0 : 판매예정, 1 : 판매중, 2 : 판매종료)
+  const [bidPrice, setBidPrice] = useState(); // 입찰가
   const [countBid, setCountBid] = useState(0); // 입찰 수
   const [bidListState, setBidListState] = useState(false); // 입찰내역 열기/닫기
+  const [bidref, inViewBid] = useInView(); // 입찰내역 하단 추적
+  const [bidPage, setBidPage] = useState(0); // 입찰내역 페이지
+  const [bidTotalPage, setBidTotalPage] = useState(0); // 입찰내역 총 페이지
   const [imageView, setImageView] = useState(0); // 하자 이미지 모달 창
   const [detailInfo, setDetailInfo] = useState(1); // 메뉴 (1 : 상세정보, 2 : 상품문의, 3 : 결제 및 배송, 4 : 교환환불)
   const [now, setNow] = useState(new Date().getTime()); // 현재 날짜(ms)
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState();
+  const today = new Date();
 
   // sell_type => 1 : 경매, 2 : 즉시구매, 3 : 경매+즉시구매
 
   useEffect (() => {
     // 상품 정보 조회
-    // setProdInfo();
-
-    // 판매 상태
-    const start = new Date(prodInfo.start_date);
-    const end = new Date(prodInfo.end_date);
-    const today = new Date();
-    const startDay = Math.ceil((start - today) / (1000 * 60 * 60 * 24));
-    const endDay = Math.ceil((end - today) / (1000 * 60 * 60 * 24));
-    setState(endDay < 1 ? 2 : startDay < 1 ? 1 : 0);
-
-    // 찜 상태
-    login_id !== null && prodStar();
+    getPost();
 
     // 입찰 내역 조회
-    // setBidList();
-
-    // 입찰 수 조회
-    prodInfo.sell_type !== 2 && setCountBid(7);
+    getBidList();
 
     // 타이머 > 1초마다 리렌더링
     const countdown = setInterval(() => {
@@ -63,17 +78,62 @@ function PostDetail() {
     };
   }, []);
 
+  useEffect(() => { // 페이징
+    if ((inViewBid) && (bidListState)) { // 입찰내역
+      getBidList();
+    }
+  }, [inViewBid]);
+
+  // 상품 정보 조회
+  const getPost = () => {
+    axios
+      .post("/post/detail", {
+        memberId: login_id,
+        boardNum: board_num
+    })
+      .then((res) => {
+        setProdInfo(res.data);
+        setBidPrice(res.data.cur_price + res.data.unit_price);
+        setStart(new Date(res.data.start_date));
+        setEnd(new Date(res.data.end_date));
+        setState(end-today < 1 ? 2 : start-today > 1 ? 0 : 1);
+      })
+      .catch((e) => {
+        // console.error(e);
+      });
+  }
+
+  // 입찰 내역 조회
+  const getBidList = () => {
+    if (bidPage === 0 || bidPage < bidTotalPage) {
+      axios
+        .get(`/post/detail/bid?board_num=${board_num}&page=${bidPage}&size=7`)
+        .then((res) => {
+          setBidList([...bidList, ...res.data.content]);
+          setBidPage((page) => page+1);
+          setCountBid(res.data.totalElements);
+          setBidTotalPage(res.data.totalPages);
+        })
+        .catch((e) => {
+          // console.error(e);
+        });
+    }
+  }
+
   // 삭제
   const postDelete = () => {
     const deleteQ = window.confirm("정말 삭제하시겠습니까?");
     if (deleteQ) {
-      
+      axios
+        .get(`/post/detail/delete?board_num=${board_num}`)
+        .then(() => {
+            alert("게시글이 삭제되었습니다.");
+            navigate("/post");
+        })
+        .catch((e) => {
+          alert("삭제에 실패하였습니다. 다시 시도해주세요.");
+        });
     }
-  };
-
-  // 찜 조회 (0 : 찜X, 1 : 찜O)
-  const prodStar = () => {
-    // setStarState(true);
   };
 
   // 찜 등록/취소
@@ -81,11 +141,21 @@ function PostDetail() {
     if (login_id === null) {
       navigate("/login");
     } else {
-      !starState ? setStarState(true) : setStarState(false);
+      axios.post("/post/like", {
+        memberId: login_id,
+        boardNum: board_num,
+        like: prodInfo.like
+      })
+      .then(() => {
+          getPost();
+      })
+      .catch((e) => {
+        // console.errer(e);
+      })
     }
   };
 
-  // 상품 설명 상세 정보 (상태 : grade, 배송설치비 : delivery, 입찰가 : bid_info, 하자정보 : DeffectInfo)
+  // 상품 설명 상세 정보 (상태 : grade, 배송설치비 : delivery, 입찰가 : bid_info, 하자정보 : DefectInfo)
   const InfoIconClick = (content) => {
     // content === "grade" ?  : content === "delivery" ?  : ;
   }
@@ -130,6 +200,46 @@ function PostDetail() {
 
   // 입찰
   const bidBuy = () => {
+    if (login_id === null) {
+      alert("로그인 후 이용 가능합니다.");
+      navigate("/login");
+    } else {
+      const confirm = window.confirm(`${bidPrice.toLocaleString('ko-KR')}원에 입찰하시겠습니까?`);
+      if (confirm) {
+        if (prodInfo.cur_price + prodInfo.unit_price == bidPrice) { // 입찰
+          axios.post("/post/detail/bid/insert", {
+            memberId: login_id,
+            boardNum: board_num,
+            bidPrice: bidPrice,
+            unitPrice: prodInfo.unit_price
+          })
+          .then(() => {
+            alert("입찰되었습니다.");
+            getPost();
+          })
+          .catch((e) => {
+            alert("입찰에 실패하였습니다. 다시 시도해주세요.");
+          })
+        } else {
+          axios.post("/post/detail/bid/auto", {
+            memberId: login_id,
+            boardNum: board_num,
+            autobidPrice: bidPrice,
+            bidPrice: prodInfo.cur_price + prodInfo.unit_price,
+            unitPrice: prodInfo.unit_price
+          })
+          .then(() => {
+            alert("자동입찰되었습니다.");
+            getPost();
+          })
+          .catch((e) => {
+            alert("입찰에 실패하였습니다. 다시 시도해주세요.");
+          })
+        }
+      }
+      
+    }
+    
     
   }
 
@@ -152,18 +262,15 @@ function PostDetail() {
   }
 
   // 입찰내역
-  const bidListMap = bidList.map((li) => (
-    <li className="PD-bid_list_line" key={li.bid_num}>
+  const bidListMap = bidList.map((li, index) => (
+    <li className="PD-bid_list_line" key={index}>
       <span className="PD-bid_list_id">
         { login_id === "admin" || login_id === li.member_id ? li.member_id
-          : li.member_id.slice(0, 2) + "*".repeat(li.member_id.length-2)
-        }
-        { li.bid_auto === 1 &&
-          <span className="PD-bid_list_auto"> [자동]</span>
-        }
+          : li.member_id.slice(0, 2) + "*".repeat(li.member_id.length-2) }
+        { li.bid_auto && " [자동]" }
       </span>
       <span className="PD-bid_list_price">{li.bid_price.toLocaleString('ko-KR')}원</span>
-      <span className="PD-bid_list_date">{li.bid_date}</span>
+      <span className="PD-bid_list_date">{moment(li.bid_date).format("YYYY-MM-DD HH:mm:ss")}</span>
     </li>
   ));
 
@@ -171,8 +278,8 @@ function PostDetail() {
   const imageViewChange = (i) => {
     if (imageView !== 0) setImageView(0);
     else if (i === 1) setImageView(1);
-    else if (i === 2) prodInfo.deffect_image2 !== null && setImageView(2);
-    else if (i === 3) prodInfo.deffect_image3 !== null && setImageView(3);
+    else if (i === 2) prodInfo.defect_image2 !== null && setImageView(2);
+    else if (i === 3) prodInfo.defect_image3 !== null && setImageView(3);
     else setImageView(0);
   }
 
@@ -201,9 +308,9 @@ function PostDetail() {
           <span className="PD-main_image_wrap">
             <div className="PD-star_position">
             <img className="PD-main_image" alt="상품이미지" src={`/images/${prodInfo.main_image}`}></img>
-              { !starState ?
-                <img className="PD-star" alt="찜하기" src={star_icon_line} onClick={starClick}></img>
-                : <img className="PD-star" alt="찜하기" src={star_icon_filled} onClick={starClick}></img>
+              { !prodInfo.like ?
+                <img className="PD-star" alt="찜하기" src={star_icon_line} onClick={() => starClick()}></img>
+                : <img className="PD-star" alt="찜하기" src={star_icon_filled} onClick={() => starClick()}></img>
               }
             </div>
           </span>
@@ -212,7 +319,7 @@ function PostDetail() {
           <span className="PD-info_text">
             { prodInfo.sell_type !== 2 &&
               <div className="PD-period">
-                {prodInfo.start_date} ~ {prodInfo.end_date}
+                {moment(prodInfo.start_date).format("YYYY-MM-DD HH:mm")} ~ {moment(prodInfo.end_date).format("YYYY-MM-DD HH:mm")}
               </div>
             }
             <div className="PD-company">{prodInfo.prod_com}</div>
@@ -268,7 +375,7 @@ function PostDetail() {
             
             {/* 즉시구매/판매완료 버튼 */}
             { state === 0 ? 
-                <div className="PD-buy_btn_gray">{prodInfo.start_date} 오픈 예정</div>
+                <div className="PD-buy_btn_gray">{moment(prodInfo.start_date).format("YYYY-MM-DD HH:mm")} 오픈 예정</div>
               : state === 2 ?
                 <div className="PD-buy_btn_gray">판매종료</div>
               : prodInfo.sell_type === 2 &&
@@ -338,50 +445,56 @@ function PostDetail() {
                       alt="입찰내역" src={arrow_icon_brown} onClick={bidListOut}></img>
                   </span>
                 </div>
-                { bidListState &&
+                { bidListState && ( countBid === 0 ?
                   <ul className="PD-bid_list">
-                    {bidListMap}
+                    <li className="PD-bid_list_line">
+                      <div className="PD-bid_list_none">입찰 내역이 없습니다.</div>
+                    </li>
                   </ul>
-                }
+                  : <ul className="PD-bid_list">
+                    {bidListMap}
+                    <div ref={bidref} />
+                  </ul>
+                )}
               </div>
 
               <hr className="PD-info_line"></hr>
               </>
             }
               {/* 하자 정보 */}
-              <div className="PD-deffect_wrap">
-                <div className="PD-deffect_title_wrap">
-                  <span className="PD-deffect_title">하자정보</span>
-                  <img className="PD-main_info_icon" alt="하자정보" src={info_icon_brown} onClick={InfoIconClick("DeffectInfo")}></img>
+              <div className="PD-defect_wrap">
+                <div className="PD-defect_title_wrap">
+                  <span className="PD-defect_title">하자정보</span>
+                  <img className="PD-main_info_icon" alt="하자정보" src={info_icon_brown} onClick={InfoIconClick("DefectInfo")}></img>
                 </div>
-                { login_id === null ? <div className="PD-deffect_content_notlogin">로그인 후 확인 가능합니다</div>
+                { login_id === null ? <div className="PD-defect_content_notlogin">로그인 후 확인 가능합니다</div>
                   : <>
-                    <div className="PD-deffect_content">{prodInfo.deffect_text}</div>
-                    {prodInfo.deffect_image1 !== null &&
-                      <div className="PD-deffect_image_wrap">
-                        <img className="PD-deffect_image"
-                          alt="하자이미지1" src={`/images/${prodInfo.deffect_image1}`} onClick={() =>{imageViewChange(1)}}></img>
-                        { prodInfo.deffect_image2 === null ? <span className="PD-noImage">no<br/>image</span>
-                          : <img className="PD-deffect_image"
-                              alt="하자이미지2" src={`/images/${prodInfo.deffect_image2}`} onClick={() =>{imageViewChange(2)}}></img>
+                    <div className="PD-defect_content">{prodInfo.defect_text}</div>
+                    {prodInfo.defect_image1 !== null &&
+                      <div className="PD-defect_image_wrap">
+                        <img className="PD-defect_image"
+                          alt="하자이미지1" src={`/images/${prodInfo.defect_image1}`} onClick={() =>{imageViewChange(1)}}></img>
+                        { prodInfo.defect_image2 === null ? <span className="PD-noImage">no<br/>image</span>
+                          : <img className="PD-defect_image"
+                              alt="하자이미지2" src={`/images/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(2)}}></img>
                         }
-                        { prodInfo.deffect_image3 === null ? <span className="PD-noImage">no<br/>image</span>
-                          : <img className="PD-deffect_image"
-                              alt="하자이미지3" src={`/images/${prodInfo.deffect_image2}`} onClick={() =>{imageViewChange(3)}}></img>
+                        { prodInfo.defect_image3 === null ? <span className="PD-noImage">no<br/>image</span>
+                          : <img className="PD-defect_image"
+                              alt="하자이미지3" src={`/images/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(3)}}></img>
                         }
                       </div>
                     }
                     { imageView !== 0 &&
-                      <div className="PD-deffect_image_modal_wrap" onClick={() =>{imageViewChange(4)}}>
+                      <div className="PD-defect_image_modal_wrap" onClick={() =>{imageViewChange(4)}}>
                         { imageView === 1 ?
-                          <img className="PD-deffect_image_modal"
-                            alt="하자이미지1" src={`/images/${prodInfo.deffect_image1}`} onClick={() =>{imageViewChange(1)}}></img>
+                          <img className="PD-defect_image_modal"
+                            alt="하자이미지1" src={`/images/${prodInfo.defect_image1}`} onClick={() =>{imageViewChange(1)}}></img>
                           : imageView === 2 ?
-                          <img className="PD-deffect_image_modal"
-                            alt="하자이미지2" src={`/images/${prodInfo.deffect_image2}`} onClick={() =>{imageViewChange(2)}}></img>
+                          <img className="PD-defect_image_modal"
+                            alt="하자이미지2" src={`/images/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(2)}}></img>
                           : imageView === 3 &&
-                          <img className="PD-deffect_image_modal"
-                            alt="하자이미지3" src={`/images/${prodInfo.deffect_image2}`} onClick={() =>{imageViewChange(3)}}></img>
+                          <img className="PD-defect_image_modal"
+                            alt="하자이미지3" src={`/images/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(3)}}></img>
                         }
                       </div>
                     }

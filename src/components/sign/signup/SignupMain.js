@@ -1,19 +1,15 @@
-import React from "react";
-import "./Signup.css";
-import { Link } from "react-router-dom";
-import google from "../../../images/google_logo-150.png";
-import kakao from "../../../images/kakao_logo-150.png";
-import naver from "../../../images/naver_logo-150.png";
-// id, password, passwordChk(비밀번호확인), name, tel 기본값 호출
-function Signup_main(props) {
-  // 제출버튼을 누르면 변경된 파라미터 값 전달함(추후 수정 필요)
-  const setMode = props.setMode;
+// 회원가입 메인 (0)
 
-  const onClick = () => {
-    alert("회원 가입을 진행하시겠습니까?");
-    setMode(1);
-  };
-  let naver_api_url =
+import React from "react";
+import { Link } from "react-router-dom";
+import naver from "../../../images/naver_logo-150.png";
+import kakao from "../../../images/kakao_logo-150.png";
+import google from "../../../images/google_logo-150.png";
+
+function Signup_main(props) {
+
+  // API URL
+  const naver_api_url =
     "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" +
     process.env.REACT_APP_NAVER_CLIENT_ID +
     "&redirect_uri=" +
@@ -21,49 +17,33 @@ function Signup_main(props) {
     "&state=" +
     Math.random().toString(36).substr(3, 14);
 
-  let kakao_api_url = `https://kauth.kakao.com/oauth/authorize?client_id=${
+  const kakao_api_url = `https://kauth.kakao.com/oauth/authorize?client_id=${
     process.env.REACT_APP_KAKAO_REST_API_KEY
   }&redirect_uri=${encodeURI(
     process.env.REACT_APP_KAKAO_CALLBACK_URI
   )}&response_type=code`;
+
+
   return (
-    <>
-      <wrap>
-        <form className="Signup_form">
-          <div className="SU_Main_header">회원가입</div>
+    <div className="Sign_wrap Signup_Main_wrap">
+      <div className="Sign_header Signup_Main_header">회원가입</div>
+      <div className="Signup_Main_btn" onClick={() => {props.setMode(1);}}>일반 회원가입</div>
+      <hr className="Signup_Main_line" />
 
-          <div>
-            <button className="SU_Nomal_btn" onClick={onClick}>
-              일반 회원가입
-            </button>
-          </div>
-
-          <div>
-            <hr className="signup_line" />
-          </div>
-
-          <div className="SU_Signup_social">소셜계정으로 회원가입</div>
-          <div className="SU_social_btn">
-            <button type="button" className="SU_naver">
-              <a href={naver_api_url}>
-                <img src={naver} alt="naver" />
-              </a>
-            </button>
-            <button type="button" className="SU_kakao">
-              <a href={kakao_api_url}>
-                <img src={kakao} alt="kakao" className="SU_kakao_img" />
-              </a>
-            </button>
-
-            <button type="button" className="SU_google">
-              <a>
-                <img src={google} alt="google" />
-              </a>
-            </button>
-          </div>
-        </form>
-      </wrap>
-    </>
+      {/* 소셜 로그인 */}
+      <div className="Signup_Main_social">소셜계정으로 회원가입</div>
+      <div className="Sign_social Signup_Main_social">
+        <Link to={naver_api_url} className="Sign_social_btn">
+          <img className="Sign_social_logo" src={naver} alt="naver" />
+        </Link>
+        <Link to={kakao_api_url} className="Sign_social_btn">
+          <img className="Sign_social_logo" src={kakao} alt="kakao" />
+        </Link>
+        <Link to="" className="Sign_social_btn">
+          <img className="Sign_social_logo" src={google} alt="google" />
+        </Link>
+      </div>
+    </div>
   );
 }
 

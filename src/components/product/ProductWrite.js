@@ -1,5 +1,6 @@
 import React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./ProductWrite.css";
 import searchIcon from "../../images/search.png";
 import alt_img from "../../images/picture-icon-240.png";
@@ -8,9 +9,17 @@ import Modal from "react-modal";
 import FindCompany from "./FindCompany";
 
 function ProductWrite() {
+  
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
+},[]);
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   let [main_Image, setMainImg] = useState("");
+  const [com_num, setCom_num] = useState();
   const [code, setCode] = useState("");
   const [prod_com, setProd_com] = useState("");
   const [prod_name, setProd_name] = useState("");
@@ -22,16 +31,18 @@ function ProductWrite() {
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
   const [img_con, setImg_con] = useState(false);
+  const[mainFile,setMainFile]=useState();
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
 
   const [file, setFile] = useState(null);
-  const [listFile, setListfile] = useState();
+  const [listFile, setListfile] = useState([]);
   const [fileDataList, setFileDataList] = useState(); // 서버에 업로드 된 파일 리스트
 
   let [inputCount, setInputCount] = useState(0);
   const onInputHandler = (e) => {
+    setDefect_text(e.target.value);
     setInputCount(e.target.value.length);
   };
   /*===============================================*/
@@ -97,21 +108,27 @@ function ProductWrite() {
 
   const setPreviewImg = (e) => {
     var reader = new FileReader();
-    const uploadFiles = Array.prototype.slice.call(e.target.files); // 파일 이름을 배열 형태로 저장하는 객체
+    
     reader.onload = function (e) {
       setMainImg(e.target.result);
     };
-    uploadFiles.forEach((uploadFile) => {
-      console.log("bbb :" + uploadFile);
-      fileList.push(uploadFile); // 배열에 push
-    });
-    setImg_con(true);
-    setListfile(fileList); // console.log("fileList=>" + fileList);
+    setMainFile(e.target.files[0]);
+    
+     // console.log("fileList=>" + fileList);
+    
     reader.readAsDataURL(e.target.files[0]);
   };
   /*===============================================*/
 
   const handleAddImages = (event) => {
+    setImg_con(true);
+    const uploadFiles =Array.prototype.slice.call(event.target.files);
+    uploadFiles.forEach((uploadFile) => {
+      console.log("bbb :" + uploadFile);
+      fileList.push(uploadFile); // 배열에 push
+      setListfile(list=>[...list,uploadFile]);
+    });
+   
     const imageLists = event.target.files;
     let imageUrlLists = [...showImages];
 
@@ -123,7 +140,7 @@ function ProductWrite() {
     if (imageUrlLists.length > 3) {
       imageUrlLists = imageUrlLists.slice(0, 3);
     }
-
+    console.log(imageUrlLists);
     setShowImages(imageUrlLists);
   };
   const handleDeleteImage = (id) => {
@@ -144,57 +161,64 @@ function ProductWrite() {
 
   const Product_write = (e) => {
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
-    console.log("fileList=>" + listFile);
+    const formimg = new FormData();
 
     listFile.forEach((file) => {
-      formData.append("uploadfiles", file);
+      formimg.append("uploadfiles", file)
     });
-
-    console.log(formData);
-    if (listFile.length === 0) {
-      alert("상품 사진을 하나 이상 등록해 주세요.");
-    }
-
+    console.log(listFile);
+    formData.append("main_image",mainFile);
+    formData.append("product_code",0);
+    formData.append("category_code",cate_code);
+    formData.append("category", code);
+    formData.append("deffect_image1","");
+    formData.append("deffect_image2","");
+    formData.append("deffect_image3","");
+    formData.append("prod_com", prod_com);
+    formData.append("prod_name",prod_name );
+    formData.append("prod_grade",prod_Grade );
+    formData.append("org_price", org_price);
+    formData.append("guarantee",guarantee );
+    formData.append("deffect_text", defect_text);
+    formData.append("reg_date",new Date() );
+    formData.append("prod_state",0);
+    formData.append("com_num",com_num);
+   
     axios
-      .post("/product/write", {
-        CATEGORY_CODE: cate_code,
-        CATEGORY: cate + code,
-        MAIN_IMAGE: main_Image,
-        PROD_COM: prod_com,
-        PROD_NAME: prod_name,
-        PROD_GRADE: prod_Grade,
-        ORG_PRICE: org_price,
-        GUARANTEE: guarantee,
-        DEFFECT_TEXT: defect_text,
-        DEFFECT_IMAGE1: showImages[0],
-        DEFFECT_IMAGE2: showImages[1],
-        DEFFECT_IMAGE3: showImages[2],
-        REG_DATE: new Date(),
-      })
+      .post("/prod/write", formData, {
+        headers: {
+        "Content-Type": "multipart/form-data",
+        },})
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        console.log("upload request");
-      })
-      .catch((e) => {
-        console.error(e);
-      })
-      .then(() => {
-        // 동작 안되면 "/uploadfile" 로 수정하세요
+        
+        const entries = Array.from(formimg.entries());
+        const formDataLength = entries.length;
+        console.log(formDataLength);
+        if(formDataLength!==0){
         axios
-          .post("/uploadfile", formData)
+          .post("/prod/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("작성이 완료되었습니다!");
+            alert("파일 등록이 완료되었습니다!");
             setFileDataList(res.data);
           })
           .catch((e) => {
             console.error(e);
-          });
-      });
+          });   
+        }  
+        else{
+          alert("작성이 완료되었습니다!");
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+     
   };
 
   return (
+    
+     
     <div className="PW_form">
       <div className="PW_header">
         <div className="PW_title">상품 등록</div>
@@ -230,9 +254,9 @@ function ProductWrite() {
                 },
                 content: {
                   position: "absolute",
-                  top: "15%",
-                  width: "600px",
-                  height: "610px",
+                  top: "10%",
+                  width: "900px",
+                  height: "700px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",
@@ -257,7 +281,7 @@ function ProductWrite() {
                   <FindCompany
                     searchCompany={searchCompany}
                     setSearchCompany={setSearchCompany}
-                    setProd_com={setProd_com}
+                    setCom_num={setCom_num}
                     close_modal={close_modal}
                   ></FindCompany>
                 )}
@@ -332,6 +356,8 @@ function ProductWrite() {
               type="text"
               maxLength="15"
               placeholder="제품회사명"
+              value={prod_com}
+              onChange={(e)=>setProd_com(e.target.value)}
             />
           </div>
           <div>
@@ -341,6 +367,8 @@ function ProductWrite() {
               type="text"
               placeholder="제품명"
               maxLength="30"
+              value={prod_name}
+              onChange={(e)=>setProd_name(e.target.value)}
             />
           </div>
         </div>
@@ -397,7 +425,7 @@ function ProductWrite() {
               type="checkbox"
               className="PW_state_other"
               onClick={onNotExist}
-              checked={guarantee}
+              checked={guarantee===""?false:!guarantee}
             />
             &nbsp;<label>없음</label>
           </div>
@@ -443,7 +471,11 @@ function ProductWrite() {
         </div>
       </div>
     </div>
-  );
+    
+
+
+    
+  )
 }
 
 export default ProductWrite;

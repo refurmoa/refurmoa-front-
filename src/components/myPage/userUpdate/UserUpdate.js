@@ -4,8 +4,7 @@ import "./UserUpdate.css";
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Update_phone from "./UserUpdatePhone";
-// import Update_card from "./UserUpdateCard";
-import Post from "../../sign/signup/FindAddress";
+import Post from "../../shared/FindAddress";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
