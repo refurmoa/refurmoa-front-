@@ -1,94 +1,95 @@
 import "./AsStore.css";
 import { ProductMap } from "./ProductMap";
 import { useState, useRef, useEffect } from "react";
-import location_icon from "../../../images/location_icon.png";
+import location_icon from "../../../images/home.png";
 import LocationData from "./CountryCity.json";
-import customerinfo from "./customer.json";
 import markers from "./marker.json";
-import markers1 from "./markertest.json";
 import axios from "axios";
 import kakaoQR from "../../../images/kakaotalkQR.png";
 
 const AsStore = () => {
   const [qrModal, setQrModal] = useState(0); // 비즈니스 문의 모달 창
+  const [dataList, setDataList] = useState([]);
+  const [customerinfo, setCustomerInfo] = useState("");
+  const [textstyle, setTextstyle] = useState("locationstyle");
+  const [country, setCountry] = useState("");
+  const [data, setData] = useState([37.503937534848404, 127.04281232332467]);
+  const id = window.sessionStorage.getItem("id");
+  const [myplace, setMyplace] = useState();
+  const [myplace2, setMyplace2] = useState(0);
+  const [message, setMessage] = useState();
+
+  useEffect(() => {
+    aslist();
+    customerInfo();
+  }, []);
+
+  // 회원 주소 데이터 가져오기============================================================================
+
+  const customerInfo = () => {
+    axios
+      .post("/cs/as/user/addr", {
+        memberId: id,
+        acceptLocation: false,
+      })
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setCustomerInfo(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
 
   // 데이터 가져오기============================================================================
 
-  const asListData = () => {
-    // axios
-    //   .get("/cs/as_store/list")
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setMarker(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // setMarker([
-    //   markers.placelist.find((sub) => (sub.store_name = store_name)).latitude,
-    //   markers.placelist.find((sub) => (sub.store_name = store_name)).longitude,
-    // ]);
-    // console.log(data);
+  const aslist = () => {
+    axios
+      .get("/cs/as", {})
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setDataList(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   // =============================================================================================
 
   // 기업 filtering===============================================================================
-  const [marker, setMarker] = useState(markers);
   const [asComNum, setAsComNum] = useState();
+  const [cityFirstWord, setCityFirstWord] = useState();
 
+  function searchCity(e) {
+    axios
+      .post("/cs/as/search/city", {
+        storeAddr: e.target.value,
+        storeDetail: cityFirstWord,
+      })
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setDataList(data);
+        handleCity(e);
+        inputDefault();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
   useEffect(() => {
-    findas();
-  }, []);
-  function findas() {
-    // setMarker(markers1);
-    // {
-    //   markers1.placelist.map((ascom) => {
-    //     setData([ascom.latitude, ascom.longitude]);
-    //   });
-    // }
-    setMarker([markers.placelist.filter((as) => as.store_num === asComNum)]);
-    console.log(marker);
-    // setData([marker.placelist.latitude, marker.placelist.longitude]);
+    setCityFirstWord(country.substr(0, 1));
+  }, [country]);
+
+  function inputDefault() {
+    setMessage("");
   }
 
-  // ==============================================================================================
-
-  // 광역시 시 군 구 구하기=========================================================================
-  const BigCity = useRef();
-  const SmallCity = useRef();
-  const SearchCom = useRef();
-  const [searchData, setSeatchData] = useState();
-
-  const searchlocation = (e) => {
-    if (
-      SearchCom.current.value === "" ||
-      SearchCom.current.value === undefined
-    ) {
-      alert("내용을 입력하세요!!");
-      SearchCom.current.focus();
-      return false;
-    }
-    console.log(e.target.value);
-    // axios
-    //   .post(`/cs/as_store/search`{
-    //    search : e.target.value
-    // })
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setMarker(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // setMarker(data);
+  const handleChange = (event) => {
+    setMessage(event.target.value);
   };
 
-  const [textstyle, setTextstyle] = useState("locationstyle");
-  const [country, setCountry] = useState();
-  const [data, setData] = useState([37.503937534848404, 127.04281232332467]);
-
-  // 광역시/시/군/구 동적 select
+  // ==============================================================================================
   function handleCity(e) {
     setData([
       LocationData.countries.find(
@@ -98,6 +99,30 @@ const AsStore = () => {
         (sub) => sub.section_detail === e.target.value
       ).longitude,
     ]);
+  }
+
+  // 광역시 시 군 구 구하기=========================================================================
+
+  const searchpartRef = useRef();
+
+  function searchCityText() {
+    axios
+      .post("/cs/as/search/text", {
+        storeName: searchpartRef.current.value,
+      })
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setDataList(data);
+        selectDefault();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
+
+  function selectDefault() {
+    document.getElementById("city").selectedIndex = 0;
+    document.getElementById("country").selectedIndex = 0;
   }
 
   // ==========================================================================================
@@ -112,10 +137,11 @@ const AsStore = () => {
     setData([currLocation.latitude, currLocation.longitude]);
     setTextstyle("mylocationcursor");
     setMyplace2(1);
+    selectDefault();
+    aslist();
+    inputDefault();
   };
 
-  const [myplace, setMyplace] = useState();
-  const [myplace2, setMyplace2] = useState(0);
   const { kakao } = window;
   const geocoder = new kakao.maps.services.Geocoder();
   const callback = function (result, status) {
@@ -136,33 +162,31 @@ const AsStore = () => {
     callback
   );
   // ====================================================================================================
-
+  console.log(dataList);
   return (
     <div>
       <topbar className="astop">
         <div className="astoptextM">A/S 매장 찾기</div>
-        {customerinfo.map((cus) => (
-          <div className="astoptextR">
-            {cus.accept_location === 0 ? (
-              <div>
-                {cus.address}
-                <img alt="" src={location_icon} />
-              </div>
-            ) : cus.accept_location === 1 ? (
-              <div
-                className={textstyle}
-                onClick={() => {
-                  getLocation();
-                }}
-              >
-                {myplace2 === 0 ? "현재 위치" : myplace}
-                <img alt="" src={location_icon} />
-              </div>
-            ) : (
-              ""
-            )}
-          </div>
-        ))}
+        <div className="astoptextR">
+          {customerinfo !== 0 ? (
+            <div className="astoptextRlocation">
+              {customerinfo}
+              <img alt="" src={location_icon} />
+            </div>
+          ) : customerinfo === 0 ? (
+            <div
+              className={textstyle}
+              onClick={() => {
+                getLocation();
+              }}
+            >
+              {myplace2 === 0 ? "현재 위치" : myplace}
+              <img alt="" src={location_icon} />
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </topbar>
       <div className="astopbar"></div>
       <underbar className="asunder">
@@ -173,10 +197,11 @@ const AsStore = () => {
             <select
               className="asmiddleselect"
               onChange={handleCountry}
-              ref={BigCity}
+              required
+              id="city"
             >
               <option value="" disabled selected>
-                광역시/도
+                시/도
               </option>
               {LocationData.cities.map((main) => (
                 <option value={main.name}>{main.name}</option>
@@ -184,8 +209,9 @@ const AsStore = () => {
             </select>
             <select
               className="asmiddleselect"
-              onChange={handleCity}
-              ref={SmallCity}
+              onChange={searchCity}
+              required
+              id="country"
             >
               <option value="" disabled selected>
                 시/군/구
@@ -206,45 +232,57 @@ const AsStore = () => {
                   className="asmiddlesearchbox"
                   type="text"
                   placeholder="매장명"
-                  ref={SearchCom}
-                  value={searchData}
-                  onChange={(e) => setSeatchData(e.target.value)}
+                  ref={searchpartRef}
+                  value={message}
+                  onChange={handleChange}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") searchCityText();
+                  }}
                 ></input>
                 <input
                   className="asmiddlesearchboxbutton"
                   type="button"
-                  onClick={searchlocation}
+                  onClick={searchCityText}
                 ></input>
               </div>
             </div>
           </div>
           <div className="asmiddlelistfull">
-            {markers.placelist.map((marker) => (
-              <div
-                className="asmiddlelist"
-                onClick={() => setAsComNum(marker.store_num)}
-              >
-                <div className="asmiddlelisttop">
-                  <div className="aslistname">{marker.store_name}</div>
-                  <div className="aslistphone">{marker.store_phone}</div>
-                </div>
-                <div className="aslistaddr">{marker.store_addr}</div>
-                <div
-                  className="aslistone"
-                  onClick={() => {
-                    setQrModal(1);
-                  }}
-                >
-                  1:1 상담
-                </div>
+            {dataList.length === 0 ? (
+              <div className="asNoList">매장이 없습니다.</div>
+            ) : (
+              <div>
+                {dataList.map((marker) => (
+                  <div
+                    className="asmiddlelist"
+                    onClick={() => setDataList([marker])}
+                  >
+                    <div className="asmiddlelisttop">
+                      <div className="aslistname">{marker.storeName}</div>
+                      <div className="aslistphone">{marker.storePhone}</div>
+                    </div>
+                    <div className="aslistaddr">
+                      {marker.storeAddr}
+                      {marker.storeDetail}
+                    </div>
+                    <div
+                      className="aslistone"
+                      onClick={() => {
+                        setQrModal(1);
+                      }}
+                    >
+                      1:1 상담
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         </div>
         {/* 지도 부분 */}
         <div className="asright">
           <ProductMap
-            markers={marker}
+            markers={dataList}
             data={data}
             currLocation={currLocation}
             asComNum={asComNum}
@@ -264,4 +302,5 @@ const AsStore = () => {
     </div>
   );
 };
+
 export default AsStore;

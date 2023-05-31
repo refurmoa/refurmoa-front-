@@ -1,32 +1,35 @@
 import "./AdminUserDetail.css";
 import { AdminUserDetailBidList } from "./AdminUserDetailBidList";
 import { AdminUserDetailPayList } from "./AdminUserDetailPayList";
-import userdata from "./AdminUserDetail.json";
-import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+// import userdata from "./AdminUserDetail.json";
+import { useState, useEffect } from "react";
+import { useLocation, Link } from "react-router-dom";
+import axios from "axios";
 
-const AdminUserDetail = (props) => {
+const AdminUserDetail = () => {
   const location = useLocation();
   const id = location.state.member_id;
-  console.log(id);
+  const [userdata, setUserdata] = useState([]);
+  const [milePoint, setMilePoint] = useState(0);
   const [pageNum, setPageNum] = useState(0);
   const [cuList, setCuList] = useState(0);
 
   const AUDCuList = () => {
-    // axios
-    //   .post(`/mypage/membership`{
-    //   id:id
-    // })
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setCuList(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // setCuList(data);
+    axios
+      .post("/user/coupon", {
+        memberId: id,
+      })
+      .then((res) => {
+        const { data } = res;
+        console.log(data);
+        console.log(id);
+        setCuList(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
+  console.log(cuList);
 
   const AUDCuInput = () => {
     // axios
@@ -44,21 +47,20 @@ const AdminUserDetail = (props) => {
     //   });
   };
 
-  // const [userdata, setUserdata] = useState();
-  // const id = window.sessionStorage.getItem("id");
-  const postUserData = () => {
-    // axios
-    //   .post(`/user/info`{
-    //   id:id
-    // })
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setUserdata(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-  };
+  useEffect(() => {
+    axios
+      .post("/user/info", {
+        memberId: id,
+      })
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setMilePoint(data[0].mile);
+        setUserdata(data[0]);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }, []);
 
   return (
     <div className="AUDAll">
@@ -69,7 +71,7 @@ const AdminUserDetail = (props) => {
             <Link
               className="AUDUpdatLink"
               to={`/user/update`}
-              state={{ id: id, name: userdata.name, phone: userdata.phone }}
+              state={{ id: id }}
             >
               <input type="button" value="수정"></input>
             </Link>
@@ -99,10 +101,10 @@ const AdminUserDetail = (props) => {
           <div>주소</div>
           <div>
             {userdata.address}
-            &nbsp;{userdata.detail_address}
+            &nbsp;{userdata.detailAddress}
           </div>
           <div>마일리지</div>
-          <div>{userdata.mile.toLocaleString("ko-KR")}</div>
+          <div>{milePoint.toLocaleString("ko-KR")}</div>
         </info>
         <div className="AUDLeftButton">
           <div>

@@ -40,7 +40,6 @@ const CsNavbar = () => {
               A/S 매장 찾기
             </Link>
           }
-          
         </div>
       </span>
       <Outlet />

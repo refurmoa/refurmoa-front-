@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getDdayArray } from "../shared/Timer";
 
 // 더미데이터
@@ -13,7 +13,8 @@ import timeredicon from "../../images/time_icon_red.png";
 import star_icon_line from "../../images/star_icon_line-240.png";
 import star_icon_filled from "../../images/star_icon_filled-240.png";
 
-const ProdPost = ({ filter }) => {
+const ProdPost = ({ filter, cp, stp }) => {
+  let searchword = useParams().search;
   const {selectedSellType, selectedCategory, selectedSellStatus, selectedOrderby} = filter;
   const navigate = useNavigate();
   const [prodData, setProdData] = useState();
@@ -51,18 +52,16 @@ const ProdPost = ({ filter }) => {
   };
 
   // 찜버튼
-  const likeHandler = (event, board_num) => {
+  const likeHandler = (event, data) => {
     event.stopPropagation(); // 이벤트 버블링 막기
-    const likerequest = { board_num: board_num, id: sessionStorage.getItem("id") };
-    console.log(likerequest);
-    // axios.post("/api/like", likerequest)
-    // .then((res) => {
-      // console.log(res);
-    //   getProdData();
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
+    const likerequest = { boardNum: data.board_num, memberId: sessionStorage.getItem("id"), like: data.like };
+    axios.post("/post/like", likerequest)
+    .then((res) => {
+      getProdData();
+    })
+    .catch((e) => {
+      console.error(e);
+    });
   };
 
   // 조회수 올리는 axios 요청 후 성공하면 상세페이지 넘어가기
@@ -82,20 +81,34 @@ const ProdPost = ({ filter }) => {
 
   // 판매목록 데이터 받아오기
   const getProdData = () => {
-    console.log("판매방식 : " + selectedSellType);
-    console.log("카테고리 : " + selectedCategory);
-    console.log("판매상태 : " + selectedSellStatus);
-    console.log("정렬 : " + selectedOrderby);
-    // axios.get(`/api/products?selltype=${selectedSellType}&category=${selectedCategory}&sellstatus=${selectedSellStatus}&orderby=${selectedOrderby}`)
-    // .then((res) => {
-    //   const { data } = res;
-    //   setProdData(data);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    const data = productlist;
-    setProdData(data);
+    if (!searchword) {
+      searchword = ""
+    } else {
+      searchword = searchword.trim();
+    }
+    const requestData = {
+      search: searchword,
+      sell_type: selectedSellType,
+      category: selectedCategory,
+      sell_status: selectedSellStatus,
+      orderby: selectedOrderby,
+      member_id: sessionStorage.getItem("id"),
+      page: cp-1,
+      size: 12
+    }
+    console.log(requestData);
+    axios.post(`/post`, requestData)
+    .then((res) => {
+      const { data } = res;
+      setProdData(data.content);
+      stp(data.totalPages);
+      console.log(data.content);
+    })
+    .catch((e) => {
+      console.error(e);
+    })
+    // const data = productlist;
+    // setProdData(data);
   };
 
   // 1초마다 리렌더링
@@ -109,7 +122,7 @@ const ProdPost = ({ filter }) => {
   useEffect(() => {
     // 필터조건이 바뀔때마다 데이터에 axios 요청
     getProdData();
-  }, [prodData, selectedSellType, selectedCategory, selectedSellStatus, selectedOrderby]);
+  }, [selectedSellType, selectedCategory, selectedSellStatus, selectedOrderby, cp]);
 
   return (
     <>
@@ -134,8 +147,8 @@ const ProdPost = ({ filter }) => {
             )}
 
             {/* 찜 유무 */}
-            {data.like === 0 ? (
-              <StarIcon onClick={(event) => likeHandler(event, data.board_num)}>
+            {data.like === false ? (
+              <StarIcon onClick={(event) => likeHandler(event, data)}>
                 <img src={star_icon_line} alt="staricon" />
               </StarIcon>
             ) : (
@@ -160,63 +173,64 @@ const ProdPost = ({ filter }) => {
           <InfoBox>
             {/* 경매상품이거나 경매, 즉시구매이고 오픈예정이 아니고 경매종료일이 지나지 않은 상품 */}
             {(((data.sell_type === 1) & (data.prod_state === 1)) |
-              ((data.sell_type === 3) & (data.prod_state === 1))) &
-            (Date.parse(data.start_date) < today) &
-            (Date.parse(data.end_date) > today) &
-            (lessThanTwelve(Date.parse(data.end_date)) !== true) ? (
-              <TimeBox>
-                <img src={timeicon} alt="timeicon" />
-                {getDday(data)}
-              </TimeBox>
-            ) : null}
-            {/* 12시간 미만 상품 빨간색으로 남은시간 표시 */}
-            {(((data.sell_type === 1) & (data.prod_state === 1)) |
-              ((data.sell_type === 3) & (data.prod_state === 1))) &
-            (Date.parse(data.start_date) < today) &
-            (Date.parse(data.end_date) > today) &
-            (lessThanTwelve(Date.parse(data.end_date)) === true) ? (
-              <RedTimeBox>
-                <img src={timeredicon} alt="timeicon" />
-                {getDday(data)}
-              </RedTimeBox>
-            ) : null}
+                ((data.sell_type === 3) & (data.prod_state === 1))) &
+              (Date.parse(data.start_date) < today) &
+              (Date.parse(data.end_date) > today) &
+              (lessThanTwelve(Date.parse(data.end_date)) !== true) ? (
+                <TimeBox>
+                  <img src={timeicon} alt="timeicon" />
+                  {getDday(data)}
+                </TimeBox>
+              ) : null}
+              {/* 12시간 미만 상품 빨간색으로 남은시간 표시 */}
+              {(((data.sell_type === 1) & (data.prod_state === 1)) |
+                ((data.sell_type === 3) & (data.prod_state === 1))) &
+              (Date.parse(data.start_date) < today) &
+              (Date.parse(data.end_date) > today) &
+              (lessThanTwelve(Date.parse(data.end_date)) === true) ? (
+                <RedTimeBox>
+                  <img src={timeredicon} alt="timeicon" />
+                  {getDday(data)}
+                </RedTimeBox>
+              ) : null}
+              {/* 경매오픈예정 상품 */}
+              {Date.parse(data.start_date) > today && (
+                <TimeBox>
+                  <img src={timeicon} alt="timeicon" />
+                  {getDday(data)}
+                </TimeBox>
+              )}
+              {/* 즉시구매, 판매중 상품 */}
+              {(data.sell_type === 2) & (data.prod_state === 1) ? (
+                <TimeBox>─</TimeBox>
+              ) : null}
 
-            {/* 경매오픈예정 상품 */}
-            {Date.parse(data.start_date) > today && (
-              <TimeBox>
-                <img src={timeicon} alt="timeicon" />
-                {getDday(data)}
-              </TimeBox>
-            )}
+              {/* 판매완료(상품현황: 2) 상품 */}
+              {data.prod_state === 2 && (
+                <TimeBox>
+                  <img src={timeicon} alt="timeicon" />
+                  판매종료
+                </TimeBox>
+              )}
+              {/* 판매완료(상품현황1이지만 경매종료일 지난) 상품 */}
+              {(data.prod_state === 1) & (Date.parse(data.end_date) < today) ? (
+                <TimeBox>
+                  <img src={timeicon} alt="timeicon" />
+                  판매종료
+                </TimeBox>
+              ) : null}
 
-            {/* 즉시구매, 판매중 상품 */}
-            {(data.sell_type === 2) & (data.prod_state === 1) ? (
-              <TimeBox>─</TimeBox>
-            ) : null}
+            
 
-            {/* 판매완료(상품현황: 2) 상품 */}
-            {data.prod_state === 2 && (
-              <TimeBox>
-                <img src={timeicon} alt="timeicon" />
-                판매종료
-              </TimeBox>
-            )}
-            {/* 판매완료(상품현황1이지만 경매종료일 지난) 상품 */}
-            {(data.prod_state === 1) & (Date.parse(data.end_date) < today) ? (
-              <TimeBox>
-                <img src={timeicon} alt="timeicon" />
-                판매종료
-              </TimeBox>
-            ) : null}
+            
 
             <PrdoInfoBox>
               <ProdComBox>{data.prod_com}</ProdComBox>
               <ProdNameBox>{data.prod_name}</ProdNameBox>
 
-              {/* bid_count가 null이 아닐경우에만 경매참여자 렌더링 */}
-              {data.bid_count !== null && (
-                <BidCountBox>경매참여자 : {data.bid_count}명</BidCountBox>
-              )}
+              
+
+              
 
               {/* 경매 */}
               {data.sell_type === 1 && (
@@ -246,6 +260,10 @@ const ProdPost = ({ filter }) => {
                     {data.direct_price.toLocaleString("ko-KR")}원
                   </DirectPriceBox>
                 </>
+              )}
+              {/* bid_count가 null이 아닐경우에만 경매참여자 렌더링 */}
+              {data.bid_count !== null && (
+                <BidCountBox>경매참여자 : {data.bid_count}명</BidCountBox>
               )}
             </PrdoInfoBox>
           </InfoBox>
@@ -279,8 +297,10 @@ const ImageBox = styled.div`
   position: relative;
 
   img {
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
   }
 `;
 
@@ -291,6 +311,13 @@ const StarIcon = styled.div`
   position: absolute;
   bottom: 10px;
   left: 10px;
+
+  img {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    object-position: center;
+  }
 
   z-index: 1;
 `;
@@ -395,7 +422,7 @@ const TimeBox = styled.div`
   img {
     width: 18px;
     height: 18px;
-    margin: 2px 3px 0px 0px;
+    margin: 2px 7px 0px 0px;
   }
 `;
 
@@ -409,7 +436,7 @@ const RedTimeBox = styled.div`
   img {
     width: 18px;
     height: 18px;
-    margin: 2px 3px 0px 0px;
+    margin: 2px 7px 0px 0px;
   }
 `;
 
@@ -427,7 +454,8 @@ const ProdComBox = styled.div`
 
 const ProdNameBox = styled.div`
   margin: 5px 0px 5px 0px;
-  font-size: 25px;
+  font-size: 21px;
+  height: 60px;
   font-weight: 400;
   line-height: 30px;
   overflow: hidden;
@@ -435,16 +463,16 @@ const ProdNameBox = styled.div`
 `;
 
 const BidCountBox = styled.div`
-  margin: 10px 0px 0px 0px;
-  text-align: right;
+  margin: 0px;
+  text-align: center;
   font-size: 18px;
   font-weight: 400;
   color: #888888;
 `;
 
 const OriAndNowPriceBox = styled.div`
-  text-align: right;
-  font-size: 25px;
+  text-align: center;
+  font-size: 23px;
   font-weight: 600;
   span {
     font-weight: 400;
@@ -456,8 +484,8 @@ const OriAndNowPriceBox = styled.div`
 `;
 
 const DirectPriceBox = styled.div`
-  text-align: right;
-  font-size: 25px;
+  text-align: center;
+  font-size: 23px;
   font-weight: 600;
   span {
     font-weight: 400;
