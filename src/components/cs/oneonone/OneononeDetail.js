@@ -103,6 +103,9 @@ const OneononeDetail = () => {
               <div className="OD-content-box">
                 <span className="OD-reply-icon">A.</span>
                 <label className="OD-reply-content">{data.answerCon}</label>
+                {data.inqOrgImg!==null&&<div className="OD-filename">
+            <span className="OD-file-title" >첨부파일:</span><span onClick={() => downloadImage(item.inqImg)}> {data.inqOrgImg}</span>
+            </div>}
                 <br></br>
                 <span className="OD-reply-date">
                   {moment(data.answerDate).format("YYYY-MM-DD")} 답변 완료
@@ -125,6 +128,9 @@ const OneononeDetail = () => {
             </span>
             <hr className="OD-title-line" />
             <div className="OD-content">{data.inqCon}</div>
+            {data.inqOrgImg!==null&&<div className="OD-filename">
+            <span className="OD-file-title" >첨부파일:</span><span onClick={() => downloadImage(item.inqImg)}> {data.inqOrgImg}</span>
+            </div>}
             <>
               <>
                 {data.answerCon !== null && (
