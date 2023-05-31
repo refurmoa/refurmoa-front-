@@ -5,9 +5,8 @@ const { kakao } = window;
 export const ProductMap = ({ markers, data, currLocation, asComNum }) => {
   useEffect(() => {
     mapscript();
-  }, [asComNum]);
-  // console.log(markers);
-  // console.log(data);
+  }, [markers, data]);
+  console.log(markers);
 
   const mapscript = () => {
     const mapContainer = document.getElementById("map");
@@ -18,7 +17,7 @@ export const ProductMap = ({ markers, data, currLocation, asComNum }) => {
     //지도 생성
     const map = new kakao.maps.Map(mapContainer, mapOptions);
 
-    markers.placelist.map((markers) => {
+    markers.map((markers) => {
       const position = new kakao.maps.LatLng(
         markers.latitude,
         markers.longitude
@@ -31,21 +30,31 @@ export const ProductMap = ({ markers, data, currLocation, asComNum }) => {
 
       marker1.setMap(map);
 
-      let iwContent = document.createElement("div");
+      // let iwContent = document.createElement("div");
 
-      let companyName = document.createElement("div");
-      companyName.textContent = `회사명 : ${markers.store_name}`;
+      // let companyName = document.createElement("div");
+      // companyName.textContent = `회사명 : ${markers.storeName}`;
 
-      let time = document.createElement("div");
-      time.textContent = `회사주소 : ${markers.store_addr}`;
+      // let time = document.createElement("div");
+      // time.textContent = `회사주소 : ${markers.storeAddr}`;
 
-      let monthlyWage = document.createElement("div");
-      monthlyWage.textContent = `전화번호 : ${markers.store_phone}`;
+      // let monthlyWage = document.createElement("div");
+      // monthlyWage.textContent = `전화번호 : ${markers.storePhone}`;
 
-      iwContent.append(companyName, time, monthlyWage);
+      // iwContent.append(companyName, time, monthlyWage);
+
+      let content =
+        "<div>" +
+        "    <div>" +
+        `        <h3>${markers.storeName}</h3>` +
+        `        <div>${markers.storeAddr}${markers.storeDetail}</div>` +
+        `        <div>${markers.storePhone}</div>` +
+        "    </div>" +
+        "    <div>" +
+        "</div>";
 
       const InfoWindow = new kakao.maps.InfoWindow({
-        content: iwContent,
+        content: content,
         removable: true,
       });
 

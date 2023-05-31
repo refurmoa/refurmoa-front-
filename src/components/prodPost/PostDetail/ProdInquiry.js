@@ -3,37 +3,37 @@
 import "./ProdInquiry.css";
 import React from 'react';
 import { useEffect, useState } from "react";
+import axios from "axios";
+import moment from "moment";
 import lock_icon from "../../../images/lock_icon-240.png";
-import inquirylist from "./inquirylist.json";
 
 function ProdInquiry(props) {
-  const [inquiryList, setInquiryList] = useState(inquirylist); // 문의 글 리스트
-  const [inquiryExist, setInquiryExist] = useState(false); // 문의 글 여부
+  const [inquiryList, setInquiryList] = useState([]); // 문의 글 리스트
   const [inquiryForm, setInquiryForm] = useState({ // 문의 글 등록
-    private: 0,
+    secret: false,
     title: "",
     content: "",
   });
   const [detailOn, setDetailOn] = useState(""); // 문의 상세 보기
   const [replyForm, setReplyForm] = useState(""); // 답글 등록
   const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
-
-  useEffect(() => {
-    // 문의 리스트 조회
-    // setList();
-
-    // 문의 글 여부 조회
-    setInquiryExist(true);
-
-    // 문의 글 수 조회
-    pageCount();
-  }, []);
+  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
 
   // 문의 글 목록 조회
   const setList = () => {
-  // setInquiryList();
+    axios
+      .get(`/post/detail/inquiry?board_num=1&page=${currentPage}&size=10`)
+      .then((res) => {
+        setInquiryList(res.data.content);
+        setTotalPage(res.data.totalPages);
+      })
+      .catch((e) => {
+        // console.error(e);
+      });
   }
+  useEffect(() => {
+    setList();
+  }, [currentPage])
 
   // 문의 내용 폼 입력
   const iiChange = (e) => {
@@ -49,8 +49,32 @@ function ProdInquiry(props) {
   };
 
   // 문의 글 등록
-  const inquiryInsert = () => {
-
+  const inquiryInsert = (e) => {
+    e.preventDefault();
+    if (inquiryForm.title === "") {
+      alert("문의 글 제목을 입력해주세요");
+    } else if (inquiryForm.content === "") {
+      alert("문의 내용을 입력해주세요.");
+    } else {
+      axios.post("/post/detail/inquiry/insert", {
+          boardNum: props.board_num,
+          memberId: sessionStorage.getItem("id"),
+          secret: inquiryForm.secret,
+          title: inquiryForm.title,
+          content: inquiryForm.content
+      })
+      .then(() => {
+        setInquiryForm({
+          secret: false,
+          title: "",
+          content: "",
+        });
+        setList();
+      })
+      .catch((e) => {
+        alert("문의 글 등록에 실패하였습니다.\n다시 시도해주세요.");
+      })
+    }
   };
 
   // 문의 글 상세 보기
@@ -62,39 +86,48 @@ function ProdInquiry(props) {
   };
   
   // 문의 글 삭제
-  const deleteInquiry = (e) => {
+  const deleteInquiry = (e, num) => {
     e.stopPropagation();
     const deleteQ = window.confirm("정말 삭제하시겠습니까?");
     if (deleteQ) {
-      
+      axios
+        .get(`/post/detail/inquiry/delete?prod_inquiry_num=${num}`)
+        .then(() => {
+          alert("문의글이 삭제되었습니다.");
+          setCurrentPage(0);
+          setList();
+        })
+        .catch((e) => {
+          alert("삭제에 실패하였습니다. 다시 시도해주세요.");
+        });
     }
   }
 
-  // 문의 내용 폼 입력
-  const reChange = (e) => {
-    setReplyForm(e.target.value);
-  };
-
   // 문의 댓글 등록
-  const replyInsert = () => {
-
-  }
-
-  // 문의 글 수 조회
-  const pageCount = () => {
-    setTotalPage(5);
+  const replyInsert = (num) => {
+    axios
+      .post("/post/detail/inquiry/answer/insert", {
+        prodInquiryNum: num,
+        reCon: replyForm
+      })
+      .then(() => {
+        setList();
+      })
+      .catch((e) => {
+        alert("등록에 실패하였습니다. 다시 시도해주세요.");
+      });
   }
 
   // 문의 글 목록 >시작<
   const iList = inquiryList.map((li) => (
     <React.Fragment key={li.prod_inquiry_num}>
       <tr className="PI-list_line" onClick={() => detailOnChange(li.prod_inquiry_num)}>
-        <td className={props.login_id !== "admin" ? "PI-reply" : li.re_con === null ? "PI-reply_admin_red" : "PI-reply_admin"}>
-          { li.re_con === null ? "미답변" : "답변완료" }
+        <td className={props.login_id !== "admin" ? "PI-reply" : li.re_con === "" ? "PI-reply_admin_red" : "PI-reply_admin"}>
+          { li.re_con === "" ? "미답변" : "답변완료" }
         </td>
-        <td className={ props.login_id === "admin" || props.login_id === li.member_id ? "PI-title" : li.private === 1 ? "PI-title_lock" : "PI-title"}>
-          { props.login_id === "admin" || props.login_id === li.member_id ? li.title : li.private === 1 && "비밀글입니다." }
-          { li.private === 1 ? 
+        <td className={ props.login_id === "admin" || props.login_id === li.member_id ? "PI-title" : li.secret ? "PI-title_lock" : "PI-title"}>
+          { props.login_id === "admin" || props.login_id === li.member_id ? li.title : li.secret && "비밀글입니다." }
+          { li.secret ? 
             <img className="PI-lock_icon" alt="비밀글" src={lock_icon}></img>
             : li.title
           }
@@ -103,21 +136,21 @@ function ProdInquiry(props) {
               : <span className="PI-id">{li.member_id.slice(0, 2)}{"*".repeat(li.member_id.length-2)}</span>
             }
             { ( props.login_id === "admin" || props.login_id === li.member_id ) &&
-              <span className="PI-delete" onClick={deleteInquiry}>삭제</span>
+              <span className="PI-delete" onClick={(e) => deleteInquiry(e, li.prod_inquiry_num)}>삭제</span>
             }
           </span>
         </td>
-        <td className="PI-date">{li.date}</td>
+        <td className="PI-date">{moment(li.date).format("YYYY-MM-DD")}</td>
       </tr>
 
       {/* 문의 글 상세 */}
       { detailOn === li.prod_inquiry_num &&
-        ( li.private === 0 || props.login_id === "admin" || props.login_id === li.member_id ) &&
+        ( !li.secret || props.login_id === "admin" || props.login_id === li.member_id ) &&
         <tr className="PI-detail_line">
           <td className="PI-reply"></td>
           <td className="PI-content-wrap" colSpan="2">
             <div className="PI-content">{li.content}</div>
-            { li.re_con !== null ?
+            { li.re_con !== "" ?
               <div className="PI-reply_content_wrap">
                 <span className="PI-reply_icon">A.</span>
                 <span className="PI-reply_content">{li.re_con}</span>
@@ -131,13 +164,13 @@ function ProdInquiry(props) {
                       name="inquiry_content"
                       maxLength="500"
                       value={replyForm}
-                      onChange={reChange}
+                      onChange={(e) => setReplyForm(e.target.value)}
                       placeholder="답변을 입력하세요"
                       required
                     />
                     <span className="PI-reply_form_length">{replyForm.length} / 500</span>
                   </span>
-                  <button className="PI-reply_form_btn" onClick={replyInsert}>등록</button>
+                  <button className="PI-reply_form_btn" onClick={() => replyInsert(li.prod_inquiry_num)}>등록</button>
                 </form>
             }
           </td>
@@ -180,8 +213,9 @@ function ProdInquiry(props) {
           <span className="PI-form_btn_wrap">
             <button className="PI-form_btn" onClick={inquiryInsert}>등록</button>
             <div className="PI-form_checkbox">
-              <input type="checkbox" id="private_check" name="private_check" />
-              <label htmlFor="private_check">비공개</label>
+              <input type="checkbox" id="secret_check" name="secret_check" checked={inquiryForm.secret}
+                onChange={(e) => setInquiryForm({ ...inquiryForm, secret: e.target.checked })} />
+              <label htmlFor="secret_check">비공개</label>
             </div>
           </span>
         </form>
@@ -190,7 +224,7 @@ function ProdInquiry(props) {
       {/* 문의 글 목록 */}
       <table className="PI-list">
         <tbody>
-          { !inquiryExist ?
+          { inquiryForm.length === 0 ?
             <tr className="PI-list_line">
               <td className="PI-list_line_none">작성된 문의 글이 없습니다.</td>
             </tr>
@@ -202,14 +236,14 @@ function ProdInquiry(props) {
       {/* 페이지 출력 */}
       { totalPage > 1 &&
         <div className="PI-page">
-          { currentPage === 1 ? <span className="PI-page_prev_gray">&lt;</span>
-            : <span className="PI-page_prev" onClick={() => setCurrentPage(currentPage - 1)}>&lt;</span>
+          { currentPage === 0 ? <span className="PI-page_prev_gray">&lt;</span>
+            : <span className="PI-page_prev" onClick={() => setCurrentPage(currentPage-1)}>&lt;</span>
           }
-          <span className="PI-page_now">{currentPage}</span>
+          <span className="PI-page_now">{currentPage+1}</span>
           &nbsp;&nbsp;/&nbsp;&nbsp;
           <span className="PI-page_total">{totalPage}</span>
-          { currentPage === totalPage ? <span className="PI-page_next_gray">&gt;</span>
-            : <span className="PI-page_next" onClick={() => setCurrentPage(currentPage + 1)}>&gt;</span>
+          { currentPage+1 === totalPage ? <span className="PI-page_next_gray">&gt;</span>
+            : <span className="PI-page_next" onClick={() => setCurrentPage(currentPage+1)}>&gt;</span>
           }
         </div>
       }

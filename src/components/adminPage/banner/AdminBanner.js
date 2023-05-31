@@ -125,6 +125,7 @@ const AdminBanner = () => {
         <div className="BN_content">
           {bannList?.map((item, index) => (
             <div className="BN_banner" key={index}>
+                <div className= {new Date(item.bann_end)<new Date()&&"BN_banner_expired" }/>
               <div className="BN_banner_num">{item.bann_num}</div>
               <div className="BN_banner_img">
                   <img alt="bannerimage" src={`/images/banner/${item.bann_image}`}/>

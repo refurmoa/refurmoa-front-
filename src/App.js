@@ -22,8 +22,7 @@ import OneononeInquiry from "./components/cs/oneonone/OneononeInquiry";
 import OneononeDetail from "./components/cs/oneonone/OneononeDetail";
 import OneononeUserpost from "./components/cs/oneonone/OneononeUserpost";
 import AsStore from "./components/cs/asStore/AsStore";
-import AsStoreWrite from "./components/cs/asStore/AsStoreWrite";
-import AsStoreUpdate from "./components/cs/asStore/AsStoreUpdate";
+import AsStoreAdmin from "./components/cs/asStore/AsStoreAdmin";
 import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
 import UserUpdate from "./components/myPage/userUpdate/UserUpdate";
 import MyPagePayment from "./components/myPage/MyPagePayment";
@@ -67,8 +66,7 @@ function App() {
           <Route path="/cs/inquiry/detail" element={<OneononeDetail />} />
           <Route path="/cs/inquiry/write" element={<OneononeUserpost />} />
           <Route path="/cs/as" element={<AsStore />} />
-          <Route path="/cs/as/write" element={<AsStoreWrite />} />
-          <Route path="/cs/as/update" element={<AsStoreUpdate />} />
+          <Route path="/cs/as/admin" element={<AsStoreAdmin />} />
         </Route>
         <Route path="/user/update" element={<UserUpdate />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />

@@ -39,15 +39,14 @@ function Login() {
       .then((res) => {
         if (res.data === 1) {
           window.sessionStorage.setItem("id", id);
-          if (id === "admin") navigate(-1);
-          else document.location.href = "/";
+          if (document.referrer.includes('/signup')) navigate("/");
+          else navigate(-1);
         } else {
           alert("아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요.");
-          return false;
         }
       })
       .catch((e) => {
-        console.error(e);
+        // console.error(e);
       });
   };
 
@@ -83,7 +82,8 @@ function Login() {
           <label className="Sign_form_text" htmlFor="password">비밀번호</label>
           <input className="Sign_input"
             name="password" type="password" maxLength="20" placeholder="비밀번호"
-            value={password} onChange={(e)=>setPassword(e.target.value)} required />
+            value={password} onChange={(e)=>setPassword(e.target.value)} required
+            onKeyDown={(e) => {e.key === 'Enter' && LoginClick()}} />
         </div>
       </div>
       <div className="Sign_btn Login_btn" onClick={LoginClick}>LOGIN</div>
