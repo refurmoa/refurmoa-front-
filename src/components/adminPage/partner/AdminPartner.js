@@ -25,7 +25,7 @@ function AdminPartner() {
 
   const getPartnerList = () => {
     axios
-    .get(`/admin/partner?search=${searchData}&page=${page}&size=15`)
+    .get(`/admin/partner?search=${searchData}&page=${page}&size=30`)
     .then((res) => {
       const { data } = res;
       setDataList([...dataList, ...data.content]);
@@ -40,7 +40,7 @@ function AdminPartner() {
   const searchPartner = () => {
     try {
       axios
-    .get(`/admin/partner?search=${searchData}&page=0&size=20`)
+    .get(`/admin/partner?search=${searchData}&page=0&size=30`)
     .then((res) => {
       const { data } = res;
       setDataList([...data.content]);

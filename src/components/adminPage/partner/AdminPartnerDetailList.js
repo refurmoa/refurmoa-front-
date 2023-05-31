@@ -13,7 +13,7 @@ export const AdminPartnerDetailList = (props) => {
   const [ref, inView] = useInView(); // 하단의 ref가 화면에 보여지면 inView 값이 true로 바뀜
   const [page, setPage] = useState(0); // 페이지
   const [searchData, setSearchData] = useState(""); // 검색어
-  console.log(num);
+
   const getPartnerList = () => {
 
     axios
@@ -50,30 +50,11 @@ export const AdminPartnerDetailList = (props) => {
       // 검색상태이고 하단의 ref를 만났을 때
     } 
   }, [inView,searchData]);
-
-  const searchpartRef = useRef();
-  const APDsearch = (e) => {
-    if (
-      searchpartRef.current.value === "" ||
-      searchpartRef.current.value === undefined
-    ) {
-      alert("내용을 입력하세요!!");
-      searchpartRef.current.focus();
-      return false;
-    }
-    console.log(searchpartRef.current.value);
-    // axios
-    //   .post(`/admin/partner/prod/search`, {
-    //     search: searchpartRef.current.value,
-    //   })
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setPartnerlistdata(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
+  const addComma = (price) => {
+    let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return returnString;
   };
+ 
 
   const navigate = useNavigate();
   const onClick = (board_num) => {
@@ -129,7 +110,7 @@ export const AdminPartnerDetailList = (props) => {
                   <div>
                     <div className="APDBidListPirceRed">게시 전</div>
                     <span className="APDBidListPircenum">
-                      {partnerlist.orgPrice}원
+                      {addComma(partnerlist.orgPrice)}원
                     </span>
                   </div>
                 ) : partnerlist.prodState === 1 &&
@@ -145,7 +126,7 @@ export const AdminPartnerDetailList = (props) => {
                     )}
 
                     <span className="APDBidListPircenum">
-                       {partnerlist.orgPrice}원
+                       {addComma(partnerlist.orgPrice)}원
                     </span>
                   </div>
                 ) : partnerlist.prod_state === 1 ? (
@@ -159,7 +140,7 @@ export const AdminPartnerDetailList = (props) => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                       {partnerlist.orgPrice}원
+                       {addComma(partnerlist.orgPrice)}원
                     </span>
                   </div>
                 ) : partnerlist.prod_state === 2 ? (
@@ -173,7 +154,7 @@ export const AdminPartnerDetailList = (props) => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                       {partnerlist.orgPrice}원
+                       {addComma(partnerlist.orgPrice)}원
                     </span>
                   </div>
                 ) : partnerlist.prod_state === 3 ? (
@@ -187,7 +168,7 @@ export const AdminPartnerDetailList = (props) => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                       {partnerlist.orgPrice}원
+                       {addComma(partnerlist.orgPrice)}원
                     </span>
                   </div>
                 ) : partnerlist.prod_state === 4 ? (
@@ -201,7 +182,7 @@ export const AdminPartnerDetailList = (props) => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                       {partnerlist.orgPrice}원
+                       {addComma(partnerlist.orgPrice)}원
                     </span>
                   </div>
                 ) : (
@@ -215,7 +196,7 @@ export const AdminPartnerDetailList = (props) => {
                       <div className="APBBidListSellType">경매, 즉시구매</div>
                     )}
                     <span className="APDBidListPircenum">
-                       {partnerlist.orgPrice}원
+                       {addComma(partnerlist.orgPrice)}원
                     </span>
                   </div>
                 )}
