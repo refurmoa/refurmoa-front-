@@ -47,7 +47,7 @@ const CsNavbar = () => {
           </NavLink>
 
           <NavLink
-            to={login_id !== "admin" ? "/cs/as" : "/cs/as/write"}
+            to={login_id !== "admin" ? "/cs/as" : "/cs/as/admin"}
             className={`CSnavbarmenu ${activeLink === "as" ? "active" : ""}`}
             onClick={() => handleLinkClick("as")}
           >

@@ -178,8 +178,16 @@
   outline: none !important;
   display: flex;
   align-items: center;
-  color: #b9a89a;
   border: none;
+}
+select:required:invalid{
+  color: #b9a89a;
+}
+option{
+  color:black;
+}
+option[value=""][disabled] {
+  display: none;
 }
 .AsStore_Name_find {
   float: right;

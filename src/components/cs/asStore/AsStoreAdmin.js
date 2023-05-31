@@ -3,14 +3,15 @@ import search_logo from "../../../images/search.png";
 import "../notice/NoticeList.css";
 import "../CsNavbar.css";
 import "../FAQ/FAQ.css";
-import "./AsStoreWrite.css";
+import "./AsStoreAdmin.css";
 import CountryCity from "./CountryCity.json";
 import Post from "./FindStoreAddress";
 import Modal from "react-modal";
 import axios from "axios";
 
 function AsStoreWrite() {
-  const [city, setCity] = useState();
+  const [city, setCity] = useState("");
+  const [cityFirstWord, setCityFirstWord] = useState();
   const [store_num, setStore_num] = useState();
   const [store_name, setStore_name] = useState();
   const [store_phone, setStore_phone] = useState();
@@ -22,6 +23,7 @@ function AsStoreWrite() {
   const [dataList, setDataList] = useState([]);
   const [actionMode, setActionMode] = useState(0);
   const searchpartRef = useRef();
+  const citysearchRef = useRef();
 
   useEffect(() => {
     aslist();
@@ -99,7 +101,7 @@ function AsStoreWrite() {
   const StoreUpdate = () => {
     if (window.confirm("수정을 완료하시겠습니까?")) {
       axios
-        .post(`/cs/as/admin/update/${store_num}`, {
+        .post(`/cs/as/admin/update`, {
           storeNum: store_num,
           storeName: store_name,
           storePhone: store_phone,
@@ -148,8 +150,9 @@ function AsStoreWrite() {
 
   function searchCity(e) {
     axios
-      .post("/cs/as/search", {
+      .post("/cs/as/search/city", {
         storeAddr: e.target.value,
+        storeDetail: cityFirstWord,
       })
       .then((res) => {
         const { data } = res; // data = res.data
@@ -159,19 +162,28 @@ function AsStoreWrite() {
         console.error(e);
       });
   }
+  useEffect(() => {
+    setCityFirstWord(city.substr(0, 1));
+  }, [city]);
 
   function searchCityText() {
     axios
-      .post("/cs/as/search2", {
+      .post("/cs/as/search/text", {
         storeName: searchpartRef.current.value,
       })
       .then((res) => {
         const { data } = res; // data = res.data
         setDataList(data);
+        selectDefault();
       })
       .catch((e) => {
         console.error(e);
       });
+  }
+
+  function selectDefault() {
+    document.getElementById("city").selectedIndex = 0;
+    document.getElementById("country").selectedIndex = 0;
   }
 
   return (
@@ -292,16 +304,25 @@ function AsStoreWrite() {
         <div className="AsStore_List">
           <div className="AsStore_List_Category">
             <div className="AsStore_Category_base">
-              <select onChange={(e) => setCity(e.target.value)}>
-                <option>전체</option>
+              <select
+                onChange={(e) => setCity(e.target.value)}
+                ref={citysearchRef}
+                required
+                id="city"
+              >
+                <option value="" disabled selected>
+                  시/도
+                </option>
                 {CountryCity.cities.map((cities) => (
                   <option vlaue={cities.name}>{cities.name}</option>
                 ))}
               </select>
             </div>
             <div className="AsStore_Category_base">
-              <select onChange={searchCity}>
-                <option>전체</option>
+              <select onChange={searchCity} required id="country">
+                <option value="" disabled selected>
+                  시/군/구
+                </option>
                 {CountryCity.countries.map((countries) =>
                   city === countries.section ? (
                     <option>{countries.section_detail}</option>
@@ -318,6 +339,9 @@ function AsStoreWrite() {
                 placeholder="매장명"
                 value={find_name}
                 ref={searchpartRef}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") searchCityText();
+                }}
               ></input>
               <div className="AsStore_addr_logo">
                 <img src={search_logo} onClick={searchCityText} alt="" />
