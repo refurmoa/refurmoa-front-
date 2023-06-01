@@ -23,11 +23,11 @@ const DailySalesChart = () => {
       <Tooltip />
       <Legend wrapperStyle={{ fontSize: 12 }} />
 
-      <Bar dataKey="경매" stackId="bar" yAxisId="left" fill="#82ca9d" />
-      <Bar dataKey="즉시구매" stackId="bar" yAxisId="left" fill="#8884d8" />
-      <Bar dataKey="취소" yAxisId="left" fill="#564334" />
+      <Bar dataKey="경매" stackId="bar" yAxisId="left" fill="rgb(204, 235, 197)" />
+      <Bar dataKey="즉시구매" stackId="bar" yAxisId="left" fill="rgb(179, 205, 227)" />
+      <Bar dataKey="취소" yAxisId="left" fill="rgb(251, 180, 174)" />
 
-      <Line type="monotone" dataKey="판매건수" yAxisId="right" stroke="#ffc658" strokeWidth="2" />
+      <Line type="monotone" dataKey="판매건수" yAxisId="right" stroke="rgb(254, 217, 166)" strokeWidth="2" />
     </ComposedChart>
   );
 

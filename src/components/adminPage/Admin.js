@@ -15,11 +15,14 @@ const Admin = () => {
       {/* 일별 매출, 카테고리별 매출 */}
       <DailyAndCategorySalesBox> 
         <DailySalesChart />
+        <MyResponsivePie data={data} />
       </DailyAndCategorySalesBox>
 
       {/* 매출 현황 */}
       <CurrentSituationBox>
-
+        <TotalSalesBox> 
+          <TotalSalesChart />
+        </TotalSalesBox>
       </CurrentSituationBox>
 
       {/* 미답변 상품 문의, MEMO */}
@@ -28,12 +31,7 @@ const Admin = () => {
         <AdminMemo />
       </UnansweredAndMemoBox>
     </>
-
-      <MyResponsivePie data={data} />
-      <TotalSalesBox> 
-        <TotalSalesChart />
-      </TotalSalesBox>
-    );
+  );
 };
 
 export default Admin;
@@ -44,30 +42,26 @@ const DailyAndCategorySalesBox = styled.div`
   height: 450px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const CurrentSituationBox = styled.div`
-  margin: 0px auto 50px;
+  margin: 0px auto 70px;
   width: 1200px;
-  height: 300px;
+  height: 315px;
+`;
 
-  background: #D9D9D9; // 임시
+const TotalSalesBox = styled.div`
+  margin: 0 auto;
+  width: 1200px;
+  height: 315px;
 `;
 
 const UnansweredAndMemoBox = styled.div`
-  margin: 0 auto;
+  margin: 0px auto;
   width: 1200px;
   height: 700px;
 
   display: flex;
   justify-content: space-between;
 `;
-
-const TotalSalesBox = styled.div`
-  margin: 0 auto 40px;
-  width: 1200px;
-  height: 450px;
-  display: flex;
-  justify-content: space-between;
-`;
-

@@ -72,11 +72,11 @@ const AdminMemeoWrapper = styled.div`
 
 const TitleBox = styled.div`
   width: 100%;
-  height: 40px;
+  height: 50px;
 
   font-weight: 700;
   font-size: 20px;
-  line-height: 40px;
+  line-height: 50px;
 
   box-sizing: border-box;
   border-bottom: 1px solid #000000;
