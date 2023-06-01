@@ -74,7 +74,6 @@ const NoticePost = () => {
       .catch((e) => {
         console.error(e);
       });
-      alert("등록이 완료되었습니다.");
       document.location.href = "/cs/inquiry";
     } else {
       alert("등록이 취소되었습니다.");
