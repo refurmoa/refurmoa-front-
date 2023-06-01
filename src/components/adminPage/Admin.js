@@ -7,9 +7,17 @@ import TotalSalesChart from "./TotalSalesChart"
 import DailySalesChart from "./DailySalesChart";
 import UnAnswered from "./UnAnswered";
 import AdminMemo from "./AdminMemo";
-
+import {useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
+  },[]);
+
   return (
     <>
       {/* 일별 매출, 카테고리별 매출 */}
