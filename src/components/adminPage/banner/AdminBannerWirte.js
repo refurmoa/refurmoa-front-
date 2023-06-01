@@ -87,6 +87,12 @@ const AdminBannerWirte = () => {
             accept="image/*"
             onChange={setPreviewImg}
           />
+          <div className="ABMSelectLocation">
+            <select>
+              <option>&nbsp;메인배너</option>
+              <option>&nbsp;광고배너</option>
+            </select>
+          </div>
         </div>
         <div className="ABMImgView">
           {main_Image === "" ? (

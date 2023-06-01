@@ -88,8 +88,13 @@
     outline-color: #DDDDDD;
 }
 
+.ABMFileInput {
+  display: flex;
+  justify-content: space-between;
+}
+
 .ABMFileInput > input {
-    margin-top: 30px;
+    margin: 30px 0px 0px 0px;
     font-weight: 400;
     font-size: 20px;
     line-height: 30px;
@@ -111,6 +116,41 @@
     border: none;
 }
 
+.ABMSelectLocation {
+  margin: 25px 0px 0px 0px;
+  width: 200px;
+  height: 50px;
+  border: 2px solid #DDDDDD;
+  border-radius: 10px;
+}
+
+.ABMSelectLocation > select {
+  margin-left: 5px;
+  width: 92%;
+  height: 100%;
+  line-height: 25px;
+  cursor: pointer;
+  
+  -webkit-appearance:none; /* for chrome */
+  -moz-appearance:none; /*for firefox*/
+  appearance:none;
+
+  border: 0px;
+  box-sizing: border-box;
+
+  font-size: 20px;
+  font-weight:500;
+  color: rgba(81, 68, 56, 0.8);
+  background:url("../../../images/arrow_icon_brown-240.png") no-repeat 97% 50%/15px auto;
+}
+
+.ABMSelectLocation > select:focus {
+  outline: 0;
+}
+
+.ABMSelectLocation > select > option {
+  color: rgba(81, 68, 56, 0.8);
+}
 .ABMImgView {
     margin-top: 20px;
 }

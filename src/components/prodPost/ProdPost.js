@@ -66,17 +66,14 @@ const ProdPost = ({ filter, cp, stp }) => {
 
   // 조회수 올리는 axios 요청 후 성공하면 상세페이지 넘어가기
   const prodDetailHandler = (board_num) => {
-    console.log("dd");
-    navigate(`/post/detail/${board_num}`);
-    // const readrequest = { board_num: board_num };
-    // axios.post("/api/plusreadcount", readrequest)
-    // .then((res) => {
-    //   // console.log(res);
-    //   navigate(`/post/detail/${board_num}`);  
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
+    const readrequest = { board_num: board_num };
+    axios.post("/post/readcount", readrequest)
+    .then((res) => {
+      navigate(`/post/detail/${board_num}`);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
   };
 
   // 판매목록 데이터 받아오기
@@ -94,10 +91,10 @@ const ProdPost = ({ filter, cp, stp }) => {
       orderby: selectedOrderby,
       member_id: sessionStorage.getItem("id"),
       page: cp-1,
-      size: 12
+      size: 16
     }
     console.log(requestData);
-    axios.post(`/post`, requestData)
+    axios.post(`/post?page=${cp-1}&size=16`, requestData)
     .then((res) => {
       const { data } = res;
       setProdData(data.content);
