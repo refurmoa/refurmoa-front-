@@ -1,4 +1,6 @@
 // 관리자 페이지 - 메인
+import { MyResponsivePie } from "./piechart.js";
+import  data  from "./data.json"
 import React from 'react'
 import styled from 'styled-components'
 import TotalSalesChart from "./TotalSalesChart"
@@ -6,7 +8,7 @@ import TotalSalesChart from "./TotalSalesChart"
 const Admin = () => {
 
     return (
-       
+        <MyResponsivePie data={data} />
       <TotalSalesBox> 
         <TotalSalesChart />
       </TotalSalesBox>

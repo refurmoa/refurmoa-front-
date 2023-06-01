@@ -10,7 +10,7 @@ import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import PostWrite from "./components/prodPost/PostWrite/PostWrite";
 import PostUpdate from "./components/prodPost/PostWrite/PostUpdate";
-import PostPay from "./components/Pay/PostPay";
+// import PostPay from "./components/Pay/PostPay";
 import PayDetail from "./components/Pay/PayDetail";
 import CsNavbar from "./components/cs/CsNavbar";
 import NoticeList from "./components/cs/notice/NoticeList";
@@ -78,10 +78,7 @@ function App() {
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
           <Route path="/admin/partner" element={<AdminPartner />} />
-          <Route
-            path="/admin/partner/detail"
-            element={<AdminPartnerDetail />}
-          />
+          <Route path="/admin/partner/detail" element={<AdminPartnerDetail />}/>
           <Route path="/admin/banner" element={<AdminBanner />} />
           <Route path="/admin/banner/write" element={<AdminBannerWrite />} />
         </Route>

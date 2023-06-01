@@ -36,9 +36,8 @@ function AdminUser() {
     axios
       .get(`/admin/user?page=${page}&size=30`)
       .then((res) => {
-        const { data } = res; // data = res.data
         setPage((page) => page + 1);
-        setUserlist([...userlist, ...data.content]);
+        setUserlist([...userlist, ...res.data.content]);
       })
       .catch((e) => {
         console.error(e);
@@ -60,7 +59,6 @@ function AdminUser() {
       });
   };
 
-  console.log(searchData);
   return (
     <AdminUserWrap>
       <TitleWrap>
