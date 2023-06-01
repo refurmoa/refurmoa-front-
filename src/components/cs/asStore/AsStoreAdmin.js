@@ -25,6 +25,8 @@ function AsStoreWrite() {
   const [actionMode, setActionMode] = useState(0);
   const searchpartRef = useRef();
   const citysearchRef = useRef();
+  const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
+  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,22 +34,22 @@ function AsStoreWrite() {
       navigate("/");
     }
     aslist();
-  }, []);
+  }, [currentPage]);
 
   const aslist = () => {
     axios
-      .get("/cs/as", {})
+      .get(`/cs/as?page=${currentPage}&size=10`)
       .then((res) => {
-        const { data } = res; // data = res.data
-        setDataList(data);
+        setDataList(res.data.content);
+        setTotalPage(res.data.totalPages); 
       })
       .catch((e) => {
         console.error(e);
       });
   };
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  
+
 
   // 현재 페이지에 해당하는 데이터 추출
 
@@ -56,18 +58,7 @@ function AsStoreWrite() {
     setCurrentPage(Number(e.target.id));
   };
 
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = dataList.slice(indexOfFirstItem, indexOfLastItem);
-  // 페이지 번호 버튼 생성
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(dataList.length / itemsPerPage); i++) {
-    pageNumbers.push(
-      <button key={i} id={i} onClick={handleClick}>
-        {i}
-      </button>
-    );
-  }
+ 
   const [popup, setPopup] = useState(false);
   const [modal, setModal] = useState(false);
   const ChangePopUP = () => {
@@ -129,6 +120,7 @@ function AsStoreWrite() {
   };
 
   const updateChange = (marker) => {
+    window.scrollTo(0, 0);
     setStore_num(marker.storeNum);
     setStore_name(marker.storeName);
     setStore_phone(marker.storePhone);
@@ -155,13 +147,11 @@ function AsStoreWrite() {
 
   function searchCity(e) {
     axios
-      .post("/cs/as/search/city", {
-        storeAddr: e.target.value,
-        storeDetail: cityFirstWord,
-      })
+      .get(`/cs/as/search/city?storeAddr=${e.target.value}&storeDetail=${cityFirstWord}&page=${currentPage}&size=10`)
       .then((res) => {
-        const { data } = res; // data = res.data
-        setDataList(data);
+        setCurrentPage(0)
+        setDataList(res.data.content);
+        setTotalPage(res.data.totalPages); 
       })
       .catch((e) => {
         console.error(e);
@@ -173,12 +163,11 @@ function AsStoreWrite() {
 
   function searchCityText() {
     axios
-      .post("/cs/as/search/text", {
-        storeName: searchpartRef.current.value,
-      })
+      .get(`/cs/as/search/text?search=${searchpartRef.current.value}&page=${currentPage}&size=10`)
       .then((res) => {
-        const { data } = res; // data = res.data
-        setDataList(data);
+        setCurrentPage(0)
+        setDataList(res.data.content);
+        setTotalPage(res.data.totalPages); 
         selectDefault();
       })
       .catch((e) => {
@@ -354,7 +343,7 @@ function AsStoreWrite() {
             </div>
           </div>
         </div>
-        {currentItems.map((marker, index) => (
+        {dataList.map((marker, index) => (
           <div className="AsStore_Post_List">
             <div className="AsStore_Post_Header">
               <div className="AsStore_Post_Title">{marker.storeName}</div>
@@ -379,27 +368,21 @@ function AsStoreWrite() {
             </div>
           </div>
         ))}
-        {dataList.length!==0&&
         <div className="company-pagination">
-          <div>
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              {"<"}
-            </button>
-            {pageNumbers}
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={
-                currentPage === Math.ceil(dataList.length / itemsPerPage)
-              }
-            >
-              {">"}
-            </button>
-          </div>
+        { totalPage > 1 &&
+        <div className="PI-page">
+          { currentPage === 0 ? <span className="PI-page_prev_gray">&lt;</span>
+            : <span className="PI-page_prev" onClick={() => setCurrentPage(currentPage-1)}>&lt;</span>
+          }
+          <span className="PI-page_now">{currentPage+1}</span>
+          &nbsp;&nbsp;/&nbsp;&nbsp;
+          <span className="PI-page_total">{totalPage}</span>
+          { currentPage+1 === totalPage ? <span className="PI-page_next_gray">&gt;</span>
+            : <span className="PI-page_next" onClick={() => setCurrentPage(currentPage+1)}>&gt;</span>
+          }
         </div>
-        }
+      }
+        </div>
       </div>
     </>
   );
