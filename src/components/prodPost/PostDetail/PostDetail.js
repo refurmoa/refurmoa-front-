@@ -237,7 +237,6 @@ function PostDetail() {
           })
         }
       }
-      
     }
     
     
@@ -307,7 +306,7 @@ function PostDetail() {
           {/* 상품 정보 - 메인 이미지 */}
           <span className="PD-main_image_wrap">
             <div className="PD-star_position">
-            <img className="PD-main_image" alt="상품이미지" src={`/images/${prodInfo.main_image}`}></img>
+            <img className="PD-main_image" alt="상품이미지" src={`/images/prod/${prodInfo.main_image}`}></img>
               { !prodInfo.like ?
                 <img className="PD-star" alt="찜하기" src={star_icon_line} onClick={() => starClick()}></img>
                 : <img className="PD-star" alt="찜하기" src={star_icon_filled} onClick={() => starClick()}></img>

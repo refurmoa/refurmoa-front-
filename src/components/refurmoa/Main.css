@@ -1,0 +1,312 @@
+/* 메인 페이지 */
+
+/* 메인 배너 이미지 */
+.M-banner {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.M-banner_img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 500px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    object-fit: cover;
+    object-position: center;
+}
+
+.M-banner_img_active {
+    opacity: 1;
+    z-index: 1;
+}
+
+.M-banner_arrow {
+    position: absolute;
+    top: 215px;
+    width: 70px;
+    height: 70px;
+    fill: #FFFFFF;
+    mix-blend-mode: overlay;
+    opacity: 0.3;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.M-banner_arrow_left {
+    left: 10px;
+}
+
+.M-banner_arrow_right {
+    right: 10px;
+}
+
+.M-banner_arrow:hover {
+    opacity: 0.5;
+}
+
+/* 메뉴 */
+.M-order_menu_back {
+    width: 100%;
+    height: 250px;
+    background: rgba(217, 217, 217, 0.3);
+    padding-top: 50px;
+    margin-bottom: 25px;
+}
+
+.M-order_menu_wrap {
+    width: 1370px;
+    height: 200px;
+    margin: 0 auto;
+}
+
+.M-order_menu {
+    float: left;
+    position: relative;
+    width: 430px;
+    height: 200px;
+}
+
+.M-order_menu:not(:last-child) {
+    margin-right: 40px;
+}
+
+.M-order_menu_img, .M-order_menu_text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 430px;
+    height: 200px;
+    border-radius: 20px;
+}
+
+.M-order_menu_img {
+    object-fit: cover;
+    object-position: center;
+}
+
+.M-order_menu_text {
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 200px;
+    text-align: center;
+    color: #555555;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* 상품 리스트 */
+.M-items_wrap {
+    width: 1370px;
+    height: 535px;
+    padding: 85px 0;
+    margin: 0px auto;
+}
+
+.M-items_title {
+    height: 35px;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 35px;
+    margin-bottom: 30px;
+}
+
+.M-items_list {
+    display: flex;
+    width: 1370px;
+    height: 480px;
+}
+
+.M-item_box {
+    flex-shrink: 0;
+    width: 300px;
+    height: 450px;
+    background: rgba(238, 238, 238, 0.3);
+    padding: 10px;
+    white-space: nowrap;
+}
+
+.M-item_box:not(:last-child) {
+    margin-right: 30px;
+}
+
+.M-item_img_wrap {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+
+.M-item_img {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.M-item_selltype_wrap {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
+
+.M-item_selltype {
+    height: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    border-radius: 5px;
+    background: #B2D4C1;
+    padding: 5px 10px;
+    margin-left: 10px;
+}
+
+.M-item_img_black {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 300px;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 300px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.M-item_selltype_black {
+    background: #D9D9D9;
+}
+
+.M-item_text_wrap {
+    width: 290px;
+    height: 150px;
+    padding: 0 5px;
+}
+
+.M-item_timer_wrap {
+    position: relative;
+    height: 30px;
+}
+
+.M-item_timer_icon {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    fill: #B9A89A;
+    margin-top: 6.5px;
+}
+
+.M-item_timer_icon_red {
+    fill: red;
+}
+
+.M-item_timer_text {
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    color: #B9A89A;
+    margin-left: 25px;
+}
+
+.M-item_timer_text_red {
+    color: red;
+}
+
+.M-item_timer_none {
+    position: absolute;
+    width: 25px;
+    border: 2px solid rgba(185, 168, 154, 0.2);
+    margin: 9px 132.5px;
+}
+
+.M-item_name {
+    width: 290px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 25px;
+    overflow: hidden;
+    white-space: normal;
+}
+
+.M-item_name > span {
+    font-weight: 600;
+}
+
+.M-item_price {
+    margin-top: 15px;
+}
+
+.M-item_price_left {
+    float: left;
+}
+
+.M-item_price_right {
+    float: right;
+    text-align: right;
+}
+
+.M-item_org_price, .M-item_direct_price {
+    height: 20px;
+    font-size: 13px;
+    line-height: 20px;
+    color: #333333;
+}
+
+.M-item_org_price {
+    text-decoration-line: line-through;
+}
+
+.M-item_pay_price {
+    height: 30px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+/* BEST ITEMS */
+.M-best_items_wrap {
+    position: relative;
+    width: 100%;
+    height: 705px;
+}
+
+.M-items_back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 390px;
+    background: rgba(178, 212, 193, 0.3);
+}
+
+/* 하단 광고 배너 */
+.M-ad_banner_wrap {
+    width: 100%;
+    height: 250px;
+    margin-top: 100px;
+}
+
+.M-ad_banner {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.M-ad_banner_img_wrap {
+    display: inline-block;
+    width: 50%;
+    height: 250px;
+}
+  
+.M-ad_banner_img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    object-position: center;
+}

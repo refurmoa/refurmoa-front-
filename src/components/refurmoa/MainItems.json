@@ -1,0 +1,122 @@
+[
+    {
+        "board_num": 0,
+        "sell_type": 1,
+        "main_image": "image01.png",
+        "start_date": "2023-04-30 15:00:00",
+        "end_date": "2023-06-01 10:00:00",
+        "prod_com": "리바트",
+        "prod_name": "스와레 6인 세라믹식탁(5종)",
+        "org_price": 1488600,
+        "cur_price": 600000,
+        "direct_price": null
+    },
+    {
+        "board_num": 1,
+        "sell_type": 2,
+        "main_image": "image02.png",
+        "start_date": null,
+        "end_date": null,
+        "prod_com": "프린홈",
+        "prod_name": "RF 에르반 템바 1800 거실장",
+        "org_price": 344900,
+        "cur_price": null,
+        "direct_price": 200000
+      },
+      {
+        "board_num": 2,
+        "sell_type": 3,
+        "main_image": "image03.png",
+        "start_date": "2023-06-10 16:00:00",
+        "end_date": "2023-06-12 16:00:00",
+        "prod_com": "인피니처",
+        "prod_name": "에스원 컴퓨터책상",
+        "org_price": 88000,
+        "cur_price": 20000,
+        "direct_price": 60000
+      },
+      {
+        "board_num": 3,
+        "sell_type": 1,
+        "main_image": "image04.png",
+        "start_date": "2023-04-30 17:00:00",
+        "end_date": "2023-06-16 17:00:00",
+        "prod_com": "레아",
+        "prod_name": "LED 멀티수납침대 프레임 + 매트리스 세트",
+        "org_price": 371000,
+        "cur_price": 100000,
+        "direct_price": null
+      },
+      {
+        "board_num": 4,
+        "sell_type": 3,
+        "main_image": "image05.png",
+        "start_date": "2023-04-30 18:30:00",
+        "end_date": "2023-06-16 18:30:00",
+        "prod_com": "브레드",
+        "prod_name": "4인 소파 오션 리자 그레이샌드",
+        "org_price": 1650000,
+        "cur_price": 800000,
+        "direct_price": 1200000
+      },
+      {
+        "board_num": 5,
+        "sell_type": 1,
+        "main_image": "image06.png",
+        "start_date": "2023-06-04 19:00:00",
+        "end_date": "2023-06-17 19:00:00",
+        "prod_com": "Vacation5",
+        "prod_name": "1인 천연가죽 리클라이너 소파",
+        "org_price": 1659000,
+        "cur_price": 600000,
+        "direct_price": null
+      },
+      {
+        "board_num": 6,
+        "sell_type": 1,
+        "main_image": "image07.png",
+        "start_date": "2023-04-30 20:00:00",
+        "end_date": "2023-06-17 20:00:00",
+        "prod_com": "체어클럽",
+        "prod_name": "M2 헤더형 블랙바디 메쉬의자",
+        "org_price": 119000,
+        "cur_price": 70000,
+        "direct_price": null
+      },
+      {
+        "board_num": 7,
+        "sell_type": 2,
+        "main_image": "image08.png",
+        "start_date": null,
+        "end_date": null,
+        "prod_com": "뉴베르가모",
+        "prod_name": "4인 파수비오 오픈형 천연가죽소파",
+        "org_price": 6344000, 
+        "cur_price": null,
+        "direct_price": 3000000
+      },
+      {
+        "board_num": 8,
+        "sell_type": 2,
+        "main_image": "image09.png",
+        "start_date": null,
+        "end_date": null,
+        "prod_com": "파로마",
+        "prod_name": "헤이그 오픈형 티비다이 거실장 1800",
+        "org_price": 249000,
+        "cur_price": null,
+        "direct_price": 200000
+      },
+      {
+        "board_num": 9,
+        "sell_type": 1,
+        "main_image": "image10.png",
+        "start_date": "2023-04-30 21:00:00",
+        "end_date": "2023-06-02 21:00:00",
+        "prod_com": "코멧",
+        "prod_name": "멀티 책상 1260",
+        "org_price": 37000,
+        "cur_price": 15000,
+        "direct_price": null
+      }
+]
