@@ -93,13 +93,11 @@ const ProdPost = ({ filter, cp, stp }) => {
       page: cp-1,
       size: 16
     }
-    console.log(requestData);
     axios.post(`/post?page=${cp-1}&size=16`, requestData)
     .then((res) => {
       const { data } = res;
       setProdData(data.content);
       stp(data.totalPages);
-      console.log(data.content);
     })
     .catch((e) => {
       console.error(e);
