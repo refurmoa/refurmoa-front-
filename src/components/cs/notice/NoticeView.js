@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 const NoticeView = () => {
   //admin 관리자페이지에서 수정,삭제
-  const loginid = "admin";
+  const loginid = window.sessionStorage.getItem("id");
 
   const noticeid = useParams().noticeid;
   const [dataList, setDataList] = useState([]);
@@ -59,7 +59,7 @@ const NoticeView = () => {
 
             <div>
               <div className="NV-btn-wrap">
-                <span className="NV-go-list-btn" onClick={() => navigate(-1)}>
+                <span className="NV-go-list-btn" onClick={() => navigate('/cs/notice')}>
                   목록
                 </span>
                 {loginid === "admin" && (

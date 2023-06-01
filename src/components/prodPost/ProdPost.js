@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getDdayArray } from "../shared/Timer";
 
 // 더미데이터
@@ -15,6 +15,8 @@ import star_icon_filled from "../../images/star_icon_filled-240.png";
 
 const ProdPost = ({ filter, cp, stp }) => {
   let searchword = useParams().search;
+  const location = useLocation();
+  const category = new URLSearchParams(location.search).get('category');
   const {selectedSellType, selectedCategory, selectedSellStatus, selectedOrderby} = filter;
   const navigate = useNavigate();
   const [prodData, setProdData] = useState();

@@ -9,7 +9,7 @@ const AdminNavi = () => {
 
   useEffect(() => {
     const login_id = window.sessionStorage.getItem("id");
-    // if (login_id !== "admin") navigate("/login");
+    if (login_id !== "admin") navigate("/login");
   }, []);
 
   const [currentPath, setCurrentPath] = useState(window.location.pathname);

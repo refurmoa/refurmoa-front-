@@ -10,8 +10,10 @@ import menuImage2 from "../../images/main_menu_image2.jpg";
 import menuImage3 from "../../images/main_menu_image3.jpg";
 import data from "./MainItems.json";
 
-// axios 배너 data
-// 신상품/인기상품/마감임박상품 data
+// axios 메인배너/광고배너 data
+// 신상품 경매/즉시구매, 개수, 
+// 인기상품 조회수
+// 마감임박상품 data 경매
 // 조회수up
 // 판매완료 상품X
 function Main() {
