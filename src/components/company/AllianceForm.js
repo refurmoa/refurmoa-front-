@@ -253,7 +253,7 @@ const AllianceForm = () => {
         </div>
 
         <button className="SU_input_btn" onClick={Register_partner}>
-          다음
+          신청
         </button>
         <Modal
           style={{
