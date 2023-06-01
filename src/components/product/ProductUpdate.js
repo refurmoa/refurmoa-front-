@@ -53,13 +53,13 @@ function ProductUpdate() {
         console.log(res.data)
         const productData=res.data
         if (
-          productData.categoryCode === "funliving" ||
-          productData.categoryCode === "funbed" ||
-          productData.categoryCode === "funoffice"
+          productData.categoryCode === "furliving" ||
+          productData.categoryCode === "furbed" ||
+          productData.categoryCode === "furoffice"
         ) {
           setFuniture(true);
           setAppliance(false);
-          setCate("funiture");
+          setCate("furniture");
         } else {
           setFuniture(false);
           setAppliance(true);
@@ -163,7 +163,7 @@ function ProductUpdate() {
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
     setCate(e.target.value);
-    if (e.target.value === "funiture") {
+    if (e.target.value === "furniture") {
       setFuniture(true);
       setAppliance(false);
     } else if (e.target.value === "appliance") {
@@ -385,7 +385,7 @@ function ProductUpdate() {
           <div className="PW_product_input_select">
             <select className="PW_category" value={cate} onChange={chageCate}>
               <option>카테고리 선택</option>
-              <option value="funiture">가구</option>
+              <option value="furniture">가구</option>
               <option value="appliance">가전</option>
             </select>
             <select
@@ -403,9 +403,9 @@ function ProductUpdate() {
               )}
               {funiture && (
                 <>
-                  <option value="funliving">거실&주방</option>
-                  <option value="funbed">침실 </option>
-                  <option value="funoffice">사무실</option>
+                  <option value="furliving">거실&주방</option>
+                  <option value="furbed">침실 </option>
+                  <option value="furoffice">사무실</option>
                 </>
               )}
             </select>

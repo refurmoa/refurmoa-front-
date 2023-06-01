@@ -22,9 +22,9 @@ function PostWrite(props) {
   const [main_Image, setMainImg] = useState("");
   const [code, setCode] = useState("");
   const [prod_com, setProd_com] = useState("");
-  const [prod_name, setProd_name] = useState("");
-  const [prod_Grade, setprod_Grade] = useState("");
-  const [org_price, setOrg_price] = useState("");
+  const [prod_name, setProd_name] = useState();
+  const [prod_Grade, setprod_Grade] = useState();
+  const [org_price, setOrg_price] = useState();
   const [dir_price, setDir_price] = useState("");
   const [auc_price, setAuc_price] = useState("");
   const [del_price, setDel_price] = useState("");
@@ -32,7 +32,7 @@ function PostWrite(props) {
   const [guarantee, setGuarantee] = useState("");
   const [auction, setAuction] = useState(false);
   const [direct, setDirect] = useState(false);
-  const [defect_text, setDefect_text] = useState("");
+  const [defect_text, setDefect_text] = useState();
   const [start_date, setStart_date] = useState("");
   const [end_date, setEnd_date] = useState("");
   const [reg_date, setReg_date] = useState("");
@@ -57,13 +57,13 @@ function PostWrite(props) {
   };
   const setData = (productData) => {
     if (
-      productData.category === "funliving" ||
-      productData.category === "funbed" ||
-      productData.category === "funoffice"
+      productData.category === "furliving" ||
+      productData.category === "furbed" ||
+      productData.category === "furoffice"
     ) {
       setFuniture(true);
       setAppliance(false);
-      setCate("funiture");
+      setCate("furniture");
     } else {
       setFuniture(false);
       setAppliance(true);
@@ -160,7 +160,7 @@ function PostWrite(props) {
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
     setCate(e.target.value);
-    if (e.target.value === "funiture") {
+    if (e.target.value === "furniture") {
       setFuniture(true);
       setAppliance(false);
     } else if (e.target.value === "appliance") {
@@ -429,7 +429,7 @@ function PostWrite(props) {
           <div className="PW_product_input_select">
             <select className="PW_category" value={cate} onChange={chageCate}>
               <option>카테고리 선택</option>
-              <option value="funiture">가구</option>
+              <option value="furniture">가구</option>
               <option value="appliance">가전</option>
             </select>
             <select
@@ -447,9 +447,9 @@ function PostWrite(props) {
               )}
               {funiture && (
                 <>
-                  <option value="funliving">거실&주방</option>
-                  <option value="funbed">침실 </option>
-                  <option value="funoffice">사무실</option>
+                  <option value="furliving">거실&주방</option>
+                  <option value="furbed">침실 </option>
+                  <option value="furoffice">사무실</option>
                 </>
               )}
             </select>

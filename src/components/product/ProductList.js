@@ -152,15 +152,15 @@ const ProductList = () => {
         break;
         case "appelec":data[i].categoryCode="전자기기"
         break;
-        case "funliving":data[i].categoryCode="거실/주방"
+        case "furliving":data[i].categoryCode="거실/주방"
         break;
-        case "funbed":data[i].categoryCode="침실"
+        case "furbed":data[i].categoryCode="침실"
         break;
-        case "funoffice":data[i].categoryCode="사무실"
+        case "furoffice":data[i].categoryCode="사무실"
         break;
         default: break;
       }
-      data[i].regDate=moment(data[i].regDate).format("YYYY-MM-DD HH:mm:ss")
+      data[i].regDate=moment(data[i].regDate).format("YYYY-MM-DD ")
     }
     return data;
   }
