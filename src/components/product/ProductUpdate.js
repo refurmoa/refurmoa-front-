@@ -44,7 +44,10 @@ function ProductUpdate() {
    /*=================샘플 데이터 이미지는 백엔드에서=========================*/
 
    useEffect(() => {
-    
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      window.location.href="/";
+    }
+    else{
     axios
       .get("/prod/update/info", {
         params:{product_code: product_code}
@@ -102,7 +105,7 @@ function ProductUpdate() {
       });
     
 
-    
+    }
     // setInputCount(productData.Deffect_text.length);
   }, []);
   /*===============================================*/
@@ -228,9 +231,20 @@ function ProductUpdate() {
     let str = value.replaceAll(",", "");
     setOrg_price(str);
   };
+  const Product_delete=() =>{
+    if(window.confirm("작성을 취소하시겠습니까?")){
+      window.location.href="/prod"
+    }
+    
+  }
   /*===============================================*/
 
   const Product_write = (e) => {
+    if(defect_text===""){
+      alert("하자 정보를 입력해주세요.")
+      return false;
+    }
+    else{
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     const formimg = new FormData();
     console.log(mainFile);
@@ -270,8 +284,9 @@ function ProductUpdate() {
           .post("/prod/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("파일 등록이 완료되었습니다!");
+            alert("작성이 완료되었습니다!");
             setFileDataList(res.data);
+            window.location.href="/prod"
           })
           .catch((e) => {
             console.error(e);
@@ -279,12 +294,13 @@ function ProductUpdate() {
         }  
         else{
           alert("작성이 완료되었습니다!");
+          window.location.href="/prod"
         }
       })
       .catch((e) => {
         console.error(e);
       })
-     
+    }
   };
 
   return (
@@ -292,7 +308,7 @@ function ProductUpdate() {
       <div className="PW_header">
         <div className="PW_title">상품 수정</div>
         <div className="PW_button">
-          <button className="PW_list_btn">취소</button>
+          <button className="PW_list_btn" onClick={Product_delete}>취소</button>
           <button className="PW_wrie_btn" onClick={Product_write}>
             수정
           </button>

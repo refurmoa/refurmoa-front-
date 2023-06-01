@@ -64,7 +64,6 @@ const FindCompany = (props) => {
                 <th>제휴 회사명</th>
                 <th>제휴 대표명</th>
                 <th>제휴 연락처</th>
-                <th>제휴 상태</th>
                 <th>제품수</th>
 
                 <th>&nbsp;</th>
@@ -79,7 +78,6 @@ const FindCompany = (props) => {
                     <td>{item.com_name}</td>
                     <td>{item.com_ceo_name}</td>
                     <td>{item.com_phone}</td>
-                    <td>{item.com_status===1?"제휴 중":"제휴 상태 아님"}</td>
                     <td>{item.prod_cnt}</td>
                     <td>
                       <button
