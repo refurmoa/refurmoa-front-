@@ -1,21 +1,20 @@
+// 상품 목록 페이지
+
 import React, { useRef, useState, useEffect } from 'react'
 import styled, { css } from 'styled-components'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 
-// 더미데이터
-import productlist from "./productlist.json";
-
 // 이미지파일
 import searchicon from "../../images/search.png"
 import loadingicon from "../../images/loading-icon-brown.png"
+
 
 const ProductList = () => {
   const searchRef = useRef();
   const navigate = useNavigate();
   const [prodData, setProdData] = useState([]);
- 
 
   // 카테고리 저장 변수
   const [selectedCategory, setSelectedCategory] = useState("all");
@@ -28,6 +27,9 @@ const ProductList = () => {
   // 판매상태 체크박스 상태 저장 변수
   const [sellStatus, setSellStatus] = useState({yet: true, ing: true, end: true});
 
+  const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
+  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
+
   // 카테고리
   const categoryHandler = (category) => {
     setSelectedCategory(category);
@@ -37,27 +39,42 @@ const ProductList = () => {
     } else if(category.includes("app")) {
       setApplianceState(true);
       setFurnitureState(false);
-    } else if (category.includes("fun")) {
+    } else if (category.includes("fur")) {
       setApplianceState(false);
       setFurnitureState(true);
     }
-    
   }
- 
+
+  useEffect(() => {
+    getProdData();
+  }, [])
+
+  const getProdData = () => {
+    
+    console.log(`${searchRef.current.value.trim()}&category=${selectedCategory}&status=${selectedSellStatus}&page=${currentPage}&size=12`);
+    axios
+      .get(`/prod?search=${searchRef.current.value.trim()}&category=${selectedCategory}&status=${selectedSellStatus}&page=${currentPage}&size=12`)
+      .then((res) => {
+        console.log(res.data);
+        setProdData(setStatusData(res.data));
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+  };
+
+  useEffect(() => {
+    // 필터조건이 바뀔때마다 데이터에 axios 요청
+    getProdData();
+  }, [ selectedCategory, selectedSellStatus]);
 
   // 검색기능
   const searchHandler = () => {
-    // console.log(searchRef.current.value);
-    if (searchRef.current.value === "") {
-      return alert("검색어를 입력해 주세요.");
-    }
-    const searchData = { 
-      searchword: searchRef.current.value,
+     axios.post("/prod/search", {
+      search: searchRef.current.value.trim(),
       category: selectedCategory,
       sellstatus: selectedSellStatus
-     }
-     console.log(searchData);
-     axios.post("/prod/search", searchData)
+     })
      .then((res) => {
       console.log(res);
       setProdData(setStatusData(res.data));
@@ -66,6 +83,7 @@ const ProductList = () => {
       console.error(e);
     })
   }
+
   // 엔터키
   const activeEnter = (e) => {
     if(e.key === "Enter") {
@@ -88,7 +106,6 @@ const ProductList = () => {
       if (sellStatus.end && (sellStatus.yet || sellStatus.ing)) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: false }));
       else if (!sellStatus.end) setSellStatus((prevSellStatus) => ({ ...prevSellStatus, [e.target.id]: true }));
     }
-   
   }
   useEffect(() => {
     // 판매상태 체크박스에 따라 axios로 담아줄 selectedSellStatus 변수 값 변경
@@ -106,8 +123,6 @@ const ProductList = () => {
         setSelectedSellStatus("ing");
       } else if (!sellStatus.yet & !sellStatus.ing & sellStatus.end) {
         setSelectedSellStatus("end");
-      } else {
-        setSelectedSellStatus("none");
       }
     }, [sellStatus]);
 
@@ -169,27 +184,7 @@ const ProductList = () => {
     }
   }
   
-  const getProdData = () => {
-    console.log("카테고리 : " + selectedCategory);
-    console.log("판매상태 : " + selectedSellStatus);
-    axios
-    .get(`/prod?category=${selectedCategory}&sell_status=${selectedSellStatus}`)
-    .then((res) => {
-      console.log(res.data)
-      setProdData(setStatusData(res.data));
-    
-    })
-    .catch((e) => {
-      console.error(e);
-    })
-
-  };
- 
-  useEffect(() => {
-    // 필터조건이 바뀔때마다 데이터에 axios 요청
-    getProdData();
- 
-    }, [ selectedCategory, selectedSellStatus]);
+  
 
   return (
     <>
@@ -197,11 +192,11 @@ const ProductList = () => {
         <TopFilterBox>
           <CategoryFilterBox>
             <CategorySpan active={!applianceState & !furnitureState} onClick={()=>{categoryHandler("all")}}>전체</CategorySpan>
-            <CategorySpan active={applianceState} onClick={()=>{categoryHandler("appliance")}}>가전</CategorySpan>
-            <CategorySpan active={furnitureState} onClick={()=>{categoryHandler("funiture")}}>가구</CategorySpan>
+            <CategorySpan active={applianceState} onClick={()=>{categoryHandler("app")}}>가전</CategorySpan>
+            <CategorySpan active={furnitureState} onClick={()=>{categoryHandler("fur")}}>가구</CategorySpan>
             {applianceState && (
               <>
-                <CategoryDetailSpan active={selectedCategory === "appliance"} onClick={()=>{categoryHandler("appliance")}}>가전 전체</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "app"} onClick={()=>{categoryHandler("app")}}>가전 전체</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "appkiechen"} onClick={()=>{categoryHandler("appkitchen")}}>주방</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "applife"} onClick={()=>{categoryHandler("applife")}}>생활</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "appelec"} onClick={()=>{categoryHandler("appelec")}}>전자기기</CategoryDetailSpan>
@@ -209,10 +204,10 @@ const ProductList = () => {
             )}
             {furnitureState && (
               <>
-                <CategoryDetailSpan active={selectedCategory === "funiture"} onClick={()=>{categoryHandler("funiture")}}>가구 전체</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "fuliving"} onClick={()=>{categoryHandler("funliving")}}>거실/주방</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "fubed"} onClick={()=>{categoryHandler("funbed")}}>침실</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "fuoffice"} onClick={()=>{categoryHandler("funoffice")}}>사무실</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "fur"} onClick={()=>{categoryHandler("fur")}}>가구 전체</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "furliving"} onClick={()=>{categoryHandler("furliving")}}>거실/주방</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "furbed"} onClick={()=>{categoryHandler("furbed")}}>침실</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "furoffice"} onClick={()=>{categoryHandler("furoffice")}}>사무실</CategoryDetailSpan>
               </>
             )}
           </CategoryFilterBox>
@@ -239,9 +234,9 @@ const ProductList = () => {
           <ProductItem key={index}>
             <ProductItemTop>
               <ProductItemTopInner>
-              <ProductCategotyCode>{data.categoryCode}</ProductCategotyCode>
+              <ProductCategotyCode>{data.categoryCode}-{data.productCode}</ProductCategotyCode>
               <ComnameAndEditAndDelete>
-                <ComnameBox sellState={((data.sell_status === "게시 전") | (data.sell_status === "판매 전"))} >{data.comName}</ComnameBox>
+                <ComnameBox sellState={((data.sell_status === "게시 전") | (data.sell_status === "판매 전"))}>{data.comName}</ComnameBox>
                 {/* 판매상태가 1(게시전), 2(판매전)일 때만 수정, 삭제 버튼 렌더링 */}
                 {((data.sell_status === "게시 전") | (data.sell_status === "판매 전")) ? 
                 <EditAndDeleteBox>
@@ -261,7 +256,7 @@ const ProductList = () => {
                     <ProductState>
                       <img src={loadingicon} alt="loadingicon" />{data.sell_status}
                     </ProductState>
-                    <ProductDate>{data.regDate} 입고</ProductDate>
+                    <ProductDate>{moment(data.regDate).format("YYYY-MM-DD HH:mm")} 입고</ProductDate>
                   </ProductStateAndDateBox>
                   <ProductComBox>
                     {data.prodCom}
