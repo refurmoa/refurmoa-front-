@@ -106,7 +106,7 @@ function PostUpdate() {
   }, []);
 
   /*===============================================*/
-
+  const [Productnum, setProductnum] = useState();
   const [Productname, setProductname] = useState();
   const [searchProduct, setSearchProduct] = useState([]);
 
@@ -437,6 +437,7 @@ function PostUpdate() {
                     searchCompany={searchCompany}
                     setSearchCompany={setSearchCompany}
                     setCom_num={setCom_num}
+                    setProductnum={setProductnum}
                     close_modal={close_modal}
                   ></FindCompany>
                 )}

@@ -50,7 +50,8 @@ function PostWrite(props) {
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
   const [Productname, setProductname] = useState();
-  const [searchProduct, setSearchProduct] = useState([]);
+  const [Productnum, setProductnum] = useState();
+  const [searchProduct, setSearchProduct] = useState("");
 
   const [prod_popup, setProd_Popup] = useState(false);
   const [prod_modal, setProd_Modal] = useState(false);
@@ -436,6 +437,7 @@ function PostWrite(props) {
                     searchProduct={searchProduct}
                     setProductname={setProductname}
                     setData={setData}
+                    setProductnum={setProductnum}
                     close_prod_modal={close_prod_modal}
                   ></FindProduct>
                 )}
