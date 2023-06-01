@@ -129,7 +129,6 @@
   width: 400px;
   height: 400px;
   object-fit: cover;
-  margin-left: 25px;
 }
 .PW_image_none > img {
   max-width: 100px;
@@ -494,4 +493,8 @@
   background-color: #fff;
   color: #514438;
   cursor: pointer;
+}
+.FP_main_img{
+  width:100px;
+  height:100px;
 }

@@ -1,5 +1,6 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../product/ProductWrite.css";
 import "./PostWrite.css";
 import searchIcon from "../../../images/search.png";
@@ -15,16 +16,22 @@ import cancel from "../../../images/cancel.png";
 
 function PostWrite(props) {
   const product_num = props;
-
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
+  },[]);
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
+  const [com_num, setCom_num] = useState();
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   const [main_Image, setMainImg] = useState("");
   const [code, setCode] = useState("");
   const [prod_com, setProd_com] = useState("");
-  const [prod_name, setProd_name] = useState("");
-  const [prod_Grade, setprod_Grade] = useState("");
-  const [org_price, setOrg_price] = useState("");
+  const [prod_name, setProd_name] = useState();
+  const [prod_Grade, setprod_Grade] = useState();
+  const [org_price, setOrg_price] = useState();
   const [dir_price, setDir_price] = useState("");
   const [auc_price, setAuc_price] = useState("");
   const [del_price, setDel_price] = useState("");
@@ -32,7 +39,7 @@ function PostWrite(props) {
   const [guarantee, setGuarantee] = useState("");
   const [auction, setAuction] = useState(false);
   const [direct, setDirect] = useState(false);
-  const [defect_text, setDefect_text] = useState("");
+  const [defect_text, setDefect_text] = useState();
   const [start_date, setStart_date] = useState("");
   const [end_date, setEnd_date] = useState("");
   const [reg_date, setReg_date] = useState("");
@@ -43,7 +50,8 @@ function PostWrite(props) {
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
   const [Productname, setProductname] = useState();
-  const [searchProduct, setSearchProduct] = useState([]);
+  const [Productnum, setProductnum] = useState();
+  const [searchProduct, setSearchProduct] = useState("");
 
   const [prod_popup, setProd_Popup] = useState(false);
   const [prod_modal, setProd_Modal] = useState(false);
@@ -57,13 +65,13 @@ function PostWrite(props) {
   };
   const setData = (productData) => {
     if (
-      productData.category === "funliving" ||
-      productData.category === "funbed" ||
-      productData.category === "funoffice"
+      productData.category === "furliving" ||
+      productData.category === "furbed" ||
+      productData.category === "furoffice"
     ) {
       setFuniture(true);
       setAppliance(false);
-      setCate("funiture");
+      setCate("furniture");
     } else {
       setFuniture(false);
       setAppliance(true);
@@ -160,7 +168,7 @@ function PostWrite(props) {
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
     setCate(e.target.value);
-    if (e.target.value === "funiture") {
+    if (e.target.value === "furniture") {
       setFuniture(true);
       setAppliance(false);
     } else if (e.target.value === "appliance") {
@@ -236,6 +244,12 @@ function PostWrite(props) {
   /*===============================================*/
 
   const Product_write = (e) => {
+    if(defect_text===""){
+      alert("하자 정보를 입력해주세요.")
+      return false;
+    }
+    else{
+    
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     console.log("fileList=>" + listFile);
 
@@ -280,11 +294,13 @@ function PostWrite(props) {
             console.log("uploadfile request");
             alert("작성이 완료되었습니다!");
             setFileDataList(res.data);
+            window.location.href="/post";
           })
           .catch((e) => {
             console.error(e);
           });
       });
+    }
   };
 
 
@@ -293,7 +309,7 @@ function PostWrite(props) {
       <div className="PW_header">
         <div className="PR_title">판매글 작성</div>
         <div className="PW_button">
-          <button className="PW_list_btn">취소</button>
+          <button className="PW_list_btn"><a href="/post">취소</a></button>
           <button className="PW_wrie_btn" onClick={Product_write}>등록</button>
         </div>
       </div>
@@ -308,19 +324,23 @@ function PostWrite(props) {
               style={{
                 overlay: {
                   position: "fixed",
-                  backgroundColor: "rgba(0, 0, 0, 0.75)"
+                  backgroundColor: "rgba(0, 0, 0, 0.75)",
                 },
                 content: {
                   position: "absolute",
-                  top: "15%",
-                  width: "600px",
-                  height: "610px",
+                  top: "10%",
+                  width: "900px",
+                  height: "700px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",
                   border: "1px solid #ccc",
+                  background: "#fff",
+                  overflow: "auto",
+                  WebkitOverflowScrolling: "touch",
                   borderRadius: "10px",
-                  padding: "20px"
+                  outline: "none",
+                  padding: "20px",
                 },
               }}
               isOpen={modal}
@@ -335,7 +355,7 @@ function PostWrite(props) {
                   <FindCompany
                     searchCompany={searchCompany}
                     setSearchCompany={setSearchCompany}
-                    setProd_com={setProd_com}
+                    setCom_num={setCom_num}
                     close_modal={close_modal}
                   ></FindCompany>
                 )}
@@ -417,6 +437,7 @@ function PostWrite(props) {
                     searchProduct={searchProduct}
                     setProductname={setProductname}
                     setData={setData}
+                    setProductnum={setProductnum}
                     close_prod_modal={close_prod_modal}
                   ></FindProduct>
                 )}
@@ -429,7 +450,7 @@ function PostWrite(props) {
           <div className="PW_product_input_select">
             <select className="PW_category" value={cate} onChange={chageCate}>
               <option>카테고리 선택</option>
-              <option value="funiture">가구</option>
+              <option value="furniture">가구</option>
               <option value="appliance">가전</option>
             </select>
             <select
@@ -447,9 +468,9 @@ function PostWrite(props) {
               )}
               {funiture && (
                 <>
-                  <option value="funliving">거실&주방</option>
-                  <option value="funbed">침실 </option>
-                  <option value="funoffice">사무실</option>
+                  <option value="furliving">거실&주방</option>
+                  <option value="furbed">침실 </option>
+                  <option value="furoffice">사무실</option>
                 </>
               )}
             </select>
