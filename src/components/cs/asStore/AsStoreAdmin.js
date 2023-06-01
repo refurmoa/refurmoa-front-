@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import search_logo from "../../../images/search.png";
 import "../notice/NoticeList.css";
 import "../CsNavbar.css";
@@ -24,8 +25,12 @@ function AsStoreWrite() {
   const [actionMode, setActionMode] = useState(0);
   const searchpartRef = useRef();
   const citysearchRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
     aslist();
   }, []);
 
@@ -374,6 +379,7 @@ function AsStoreWrite() {
             </div>
           </div>
         ))}
+        {dataList.length!==0&&
         <div className="company-pagination">
           <div>
             <button
@@ -393,6 +399,7 @@ function AsStoreWrite() {
             </button>
           </div>
         </div>
+        }
       </div>
     </>
   );
