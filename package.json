@@ -4,10 +4,12 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
+    "@nivo/pie": "^0.83.0",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "axios": "^1.4.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-daum-postcode": "^3.1.1",
     "react-dom": "^18.2.0",

@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import search_logo from "../../../images/search.png";
-import { Link } from "react-router-dom";
 import "../notice/NoticeList.css";
 import "../CsNavbar.css";
 import "../FAQ/FAQ.css";
-import "./AsStoreWrite.css";
-import markers from "./marker.json";
+import "./AsStoreAdmin.css";
 import CountryCity from "./CountryCity.json";
 import Post from "./FindStoreAddress";
 import Modal from "react-modal";
+import axios from "axios";
 
 function AsStoreWrite() {
-  const [city, setCity] = useState();
+  const [city, setCity] = useState("");
+  const [cityFirstWord, setCityFirstWord] = useState();
+  const [store_num, setStore_num] = useState();
   const [store_name, setStore_name] = useState();
   const [store_phone, setStore_phone] = useState();
   const [store_addr, setStore_addr] = useState();
@@ -20,10 +21,25 @@ function AsStoreWrite() {
   const [longitude, setLongitude] = useState();
   const [find_name, setFind_name] = useState();
   const [dataList, setDataList] = useState([]);
+  const [actionMode, setActionMode] = useState(0);
+  const searchpartRef = useRef();
+  const citysearchRef = useRef();
 
   useEffect(() => {
-    setDataList(markers.placelist);
+    aslist();
   }, []);
+
+  const aslist = () => {
+    axios
+      .get("/cs/as", {})
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setDataList(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -40,18 +56,13 @@ function AsStoreWrite() {
   const currentItems = dataList.slice(indexOfFirstItem, indexOfLastItem);
   // 페이지 번호 버튼 생성
   const pageNumbers = [];
-  for (
-    let i = 1;
-    i <= Math.ceil(markers.placelist.length / itemsPerPage);
-    i++
-  ) {
+  for (let i = 1; i <= Math.ceil(dataList.length / itemsPerPage); i++) {
     pageNumbers.push(
       <button key={i} id={i} onClick={handleClick}>
         {i}
       </button>
     );
   }
-
   const [popup, setPopup] = useState(false);
   const [modal, setModal] = useState(false);
   const ChangePopUP = () => {
@@ -62,50 +73,119 @@ function AsStoreWrite() {
     setPopup(false);
     setModal(false);
   };
-  const FindStore = () => {
-    // axios
-    // .post("/cs/asstore/find", {
-    //     find_name:find_name
-    // })
-    // .then((res) => {
-    //   if (res.data === 1) {
-    //     alert("성공적으로 등록되었습니다.");
-    //     setDataList(res.data);
-    //   } else {
-    //     alert("등록에 실패했습니다.");
-    //   }
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
-  };
+
   const StoreRegi = () => {
     if (window.confirm("등록을 완료하시겠습니까?")) {
-      // axios
-      // .post("/cs/asstore/write", {
-      // store_name: store_name,
-      // store_phone: store_phone,
-      // store_addr:store_addr,
-      // store_detail: store_detail,
-      // lattitude:lattitude,
-      // longitude:longitude,
-      // })
-      // .then((res) => {
-      //   if (res.data === 1) {
-      //     alert("성공적으로 등록되었습니다.");
-      //   } else {
-      //     alert("등록에 실패했습니다.");
-      //   }
-      // })
-      // .catch((e) => {
-      //   console.error(e);
-      // });
-      alert("등록이 완료되었습니다.");
-      document.location.href = "/cs/as_store/write";
+      axios
+        .post("/cs/as/admin/write", {
+          storeName: store_name,
+          storePhone: store_phone,
+          storeAddr: store_addr,
+          storeDetail: store_detail,
+          latitude: lattitude,
+          longitude: longitude,
+        })
+        .then((res) => {
+          alert("성공적으로 등록되었습니다.");
+          aslist();
+          document.location.href = "/cs/as/admin";
+        })
+        .catch((e) => {
+          console.error(e);
+        });
     } else {
       return false;
     }
   };
+
+  const StoreUpdate = () => {
+    if (window.confirm("수정을 완료하시겠습니까?")) {
+      axios
+        .post(`/cs/as/admin/update`, {
+          storeNum: store_num,
+          storeName: store_name,
+          storePhone: store_phone,
+          storeAddr: store_addr,
+          storeDetail: store_detail,
+          latitude: lattitude,
+          longitude: longitude,
+        })
+        .then((res) => {
+          alert("성공적으로 수정되었습니다.");
+          // aslist();
+          document.location.href = "/cs/as/admin";
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    } else {
+      return false;
+    }
+  };
+
+  const updateChange = (marker) => {
+    setStore_num(marker.storeNum);
+    setStore_name(marker.storeName);
+    setStore_phone(marker.storePhone);
+    setStore_addr(marker.storeAddr);
+    setStore_detail(marker.storeDetail);
+    setLattitude(marker.latitude);
+    setLongitude(marker.longitude);
+    setActionMode(1);
+  };
+
+  const asDelete = (e) => {
+    axios
+      .post("/cs/as/admin/delete", {
+        storeNum: e.target.id,
+      })
+      .then((res) => {
+        aslist();
+        alert("삭제가 완료되었습니다.");
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+
+  function searchCity(e) {
+    axios
+      .post("/cs/as/search/city", {
+        storeAddr: e.target.value,
+        storeDetail: cityFirstWord,
+      })
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setDataList(data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
+  useEffect(() => {
+    setCityFirstWord(city.substr(0, 1));
+  }, [city]);
+
+  function searchCityText() {
+    axios
+      .post("/cs/as/search/text", {
+        storeName: searchpartRef.current.value,
+      })
+      .then((res) => {
+        const { data } = res; // data = res.data
+        setDataList(data);
+        selectDefault();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  }
+
+  function selectDefault() {
+    document.getElementById("city").selectedIndex = 0;
+    document.getElementById("country").selectedIndex = 0;
+  }
+
   return (
     <>
       <div className="FAQ-List-form">
@@ -154,7 +234,7 @@ function AsStoreWrite() {
                 />
               </div>
               <div className="AsStore_addr_logo">
-                <img src={search_logo} onClick={ChangePopUP} />
+                <img src={search_logo} onClick={ChangePopUP} alt="" />
               </div>
               <Modal
                 style={{
@@ -214,27 +294,38 @@ function AsStoreWrite() {
             </div>
           </div>
           <div className="AsStore_regi_btn">
-            <button onClick={StoreRegi}> 등록</button>
+            {actionMode === 0 ? (
+              <button onClick={StoreRegi}>등록</button>
+            ) : (
+              <button onClick={StoreUpdate}>수정</button>
+            )}
           </div>
         </div>
         <div className="AsStore_List">
           <div className="AsStore_List_Category">
             <div className="AsStore_Category_base">
-              <select onChange={(e) => setCity(e.target.value)}>
-                <option>전체</option>
+              <select
+                onChange={(e) => setCity(e.target.value)}
+                ref={citysearchRef}
+                required
+                id="city"
+              >
+                <option value="" disabled selected>
+                  시/도
+                </option>
                 {CountryCity.cities.map((cities) => (
                   <option vlaue={cities.name}>{cities.name}</option>
                 ))}
               </select>
             </div>
             <div className="AsStore_Category_base">
-              <select>
-                <option>전체</option>
+              <select onChange={searchCity} required id="country">
+                <option value="" disabled selected>
+                  시/군/구
+                </option>
                 {CountryCity.countries.map((countries) =>
                   city === countries.section ? (
-                    <option value={countries.section_detail}>
-                      {countries.section_detail}
-                    </option>
+                    <option>{countries.section_detail}</option>
                   ) : (
                     <></>
                   )
@@ -247,10 +338,13 @@ function AsStoreWrite() {
                 maxLength="30"
                 placeholder="매장명"
                 value={find_name}
-                onChange={(e) => setFind_name(e.target.value)}
+                ref={searchpartRef}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") searchCityText();
+                }}
               ></input>
               <div className="AsStore_addr_logo">
-                <img src={search_logo} onClick={FindStore} />
+                <img src={search_logo} onClick={searchCityText} alt="" />
               </div>
             </div>
           </div>
@@ -258,19 +352,25 @@ function AsStoreWrite() {
         {currentItems.map((marker, index) => (
           <div className="AsStore_Post_List">
             <div className="AsStore_Post_Header">
-              <div className="AsStore_Post_Title">{marker.store_name}</div>
-              <div className="AsStore_Post_phone">{marker.store_phone}</div>
+              <div className="AsStore_Post_Title">{marker.storeName}</div>
+              <div className="AsStore_Post_phone">{marker.storePhone}</div>
               <div className="AsStore_Post_button">
-                <Link to="/cs/as_store/update" state={{ marker: marker }}>
+                <span
+                  onClick={() => {
+                    updateChange(marker);
+                  }}
+                >
                   수정
-                </Link>
+                </span>
                 &nbsp;|&nbsp;
-                <a>삭제</a>
+                <span id={marker.storeNum} onClick={asDelete}>
+                  삭제
+                </span>
               </div>
             </div>
             <div className="AsStore_Post_Detail">
-              {marker.store_addr}&nbsp;
-              {marker.store_detail}
+              {marker.storeAddr}&nbsp;
+              {marker.storeDetail}
             </div>
           </div>
         ))}
@@ -286,8 +386,7 @@ function AsStoreWrite() {
             <button
               onClick={() => setCurrentPage(currentPage + 1)}
               disabled={
-                currentPage ===
-                Math.ceil(markers.placelist.length / itemsPerPage)
+                currentPage === Math.ceil(dataList.length / itemsPerPage)
               }
             >
               {">"}

@@ -1,24 +1,26 @@
 import React from "react";
 import "./AdminPartnerDetailUpdate.css";
-import Post from "../../sign/signup/FindAddress";
+import Post from "../../shared/FindAddress";
 import Modal from "react-modal";
 import { useState } from "react";
 import axios from "axios";
 
 const UpdatePartner = (props) => {
-  const [com_name, setComName] = useState();
-  const [com_ceo_name, setCeo] = useState();
-  const [com_phone, setComPhone] = useState();
-  const [com_email, setComEmail] = useState();
-  const [com_addr, setComAddr] = useState();
-  const [com_detail_addr, setComAddrDetail] = useState();
-  const getUserData = props.getUserData;
-
-  const [domain, setDomain] = useState("");
-  const [email, setEmail] = useState("");
-
+  const partner = props.partner;
+  const Partner_close_modal=props.Partner_close_modal;
+  const [com_num, setComNum] = useState(partner.com_num);
+  const [com_name, setComName] = useState(partner.com_name);
+  const [com_ceo_name, setCeo] = useState(partner.com_ceo_name);
+  const [com_phone, setComPhone] = useState(partner.com_phone);
+  const [com_email, setComEmail] = useState(partner.com_email);
+  const [com_addr, setComAddr] = useState(partner.com_addr);
+  const [com_status, setStatus] = useState(partner.com_status);
+  const [com_detail_addr, setComAddrDetail] = useState(partner.com_detail_addr);
+  const [domain, setDomain] = useState(props.partner.com_email.split('@')[1]);
+  const [email, setEmail] = useState(props.partner.com_email.split('@')[0]);
   const [popup, setPopup] = useState(false);
   const [modal, setModal] = useState(false);
+  
   const ChangePopUP = () => {
     setPopup(true);
     setModal(true);
@@ -28,26 +30,29 @@ const UpdatePartner = (props) => {
     setModal(false);
   };
 
-  console.log(email);
-  console.log(domain);
 
   const onClick = () => {
-    setComEmail(email.concat("@", domain));
-    // axios
-    //   .post("/admin/partner/update", {
-    //     com_name: com_name,
-    //     com_ceo_name: com_ceo_name,
-    //     com_phone: com_phone,
-    //     com_email: com_email,
-    //     com_addr: com_addr,
-    //     com_detail_addr: com_detail_addr,
-    //   })
-    //   .then((res) => {
-    //     getUserData();
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
+    
+    axios
+      .post("/admin/partner/update", {
+        comNum:com_num,
+        comName: com_name,
+        comCeoName: com_ceo_name,
+        comPhone: com_phone,
+        comEmail: email.concat("@", domain),
+        comAddr: com_addr,
+        comDetailAddr: com_detail_addr,
+        comStatus:com_status
+      })
+      .then((res) => {
+        console.log(res.data);
+        alert("수정이 완료되었습니다.")
+        window.location.reload();
+        Partner_close_modal();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   const setDomin = (e) => {
@@ -55,7 +60,7 @@ const UpdatePartner = (props) => {
   };
 
   return (
-    <form>
+    <div>
       <div className="APDUheader">제휴회사 정보 수정</div>
       <div className="APDUmiddle">
         <div className="APDUmiddleinfo">
@@ -65,6 +70,7 @@ const UpdatePartner = (props) => {
             name="name"
             type="text"
             placeholder="업체명"
+            value={com_name}
             onChange={(e) => setComName(e.target.value)}
           ></input>
         </div>
@@ -75,6 +81,7 @@ const UpdatePartner = (props) => {
             name="name"
             type="text"
             placeholder="대표명"
+            value={com_ceo_name}
             onChange={(e) => setCeo(e.target.value)}
           ></input>
         </div>
@@ -85,6 +92,7 @@ const UpdatePartner = (props) => {
             name="name"
             type="text"
             placeholder="연락처"
+            value={com_phone}
             onChange={(e) => setComPhone(e.target.value)}
           ></input>
         </div>
@@ -97,6 +105,7 @@ const UpdatePartner = (props) => {
               type="text"
               placeholder="이메일"
               maxLength="15"
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
             <span className="APDUEmailIcon">@</span>
@@ -133,8 +142,10 @@ const UpdatePartner = (props) => {
               name="address"
               type="text"
               size="100"
-              placeholder="주소"
+              placeholder={partner.com_addr}
+              value={com_addr}
               required={true}
+              
               maxLength="50"
             />
             <input
@@ -190,6 +201,7 @@ const UpdatePartner = (props) => {
             type="text"
             placeholder="상세 주소"
             maxLength="50"
+            value={com_detail_addr}
             onChange={(e) => setComAddrDetail(e.target.value)}
           />
         </div>
@@ -199,7 +211,7 @@ const UpdatePartner = (props) => {
           수정
         </button>
       </div>
-    </form>
+    </div>
   );
 };
 

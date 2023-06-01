@@ -146,10 +146,12 @@
 
 .APDsearchboxbutton {
     position: relative;
-    background-image: url(../../../../public/images/prod/searchicon.png);
+    background-image: url(../../../images/search.png);
     border: none;
     width: 17px;
     height: 17px;
     cursor: pointer;
     margin: 8px 0 0 315px;
+    background-size: contain;
+    background-color: white;
 }

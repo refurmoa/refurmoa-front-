@@ -1,6 +1,9 @@
 // 관리자 페이지 - 메인
-
-import styled from "styled-components";
+import { MyResponsivePie } from "./piechart.js";
+import  data  from "./data.json"
+import React from 'react'
+import styled from 'styled-components'
+import TotalSalesChart from "./TotalSalesChart"
 import DailySalesChart from "./DailySalesChart";
 import UnAnswered from "./UnAnswered";
 import AdminMemo from "./AdminMemo";
@@ -25,6 +28,11 @@ const Admin = () => {
         <AdminMemo />
       </UnansweredAndMemoBox>
     </>
+
+      <MyResponsivePie data={data} />
+      <TotalSalesBox> 
+        <TotalSalesChart />
+      </TotalSalesBox>
     );
 };
 
@@ -54,3 +62,12 @@ const UnansweredAndMemoBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+const TotalSalesBox = styled.div`
+  margin: 0 auto 40px;
+  width: 1200px;
+  height: 450px;
+  display: flex;
+  justify-content: space-between;
+`;
+

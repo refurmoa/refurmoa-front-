@@ -1,69 +1,65 @@
 import React from "react";
 import "../../sign/signup/Signup.css";
 import "./UserUpdate.css";
-import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import Update_phone from "./UserUpdatePhone";
-import Update_card from "./UserUpdateCard";
-import Post from "../../sign/signup/FindAddress";
+import Post from "../../shared/FindAddress";
+import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const User_update = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [id, setId] = useState("");
   const [password, setPassword] = useState("");
   const [passwordChk, setPasswordChk] = useState("");
   const [email, setEmail] = useState("");
   const [domain, setDomain] = useState("");
+  const [emailFinal, setEmailFinal] = useState("");
   const [address, setAddress] = useState(" ");
   const [update_address, setupdate_address] = useState("");
   const [address_detail, setAddress_detail] = useState(" ");
   const [birth, setBirth] = useState("");
-  const [card_num, setCard_num] = useState("");
-  const [valid_date, setValid_date] = useState("");
-  const [cvc, setCvc] = useState("");
-  const [card_pw1, setCard_pw1] = useState("");
-  const [card_pw2, setCard_pw2] = useState("");
-
   const [chkPWmsg, setchkPWmsg] = useState("");
-  const [chkIdmsg, setChkIdmsg] = useState("");
   const [chkEmailmsg, setChkEmailmsg] = useState("");
   const [PWmsg, setPWmsg] = useState("");
-
   const [Is_pw, setIs_pw] = useState(false);
   const [check_pw, setCheck_pw] = useState(false);
-  const [check_id, setCheck_id] = useState(false);
   const [check_Email, setCheck_Email] = useState(false);
-  const [check_box, setCheck_box] = useState(false);
+  const [id, setId] = useState();
+  const location = useLocation();
+
   // =====================================================
 
+  function idConfirm() {
+    if (window.sessionStorage.getItem("id") !== "admin") {
+      setId(window.sessionStorage.getItem("id"));
+    } else setId(location.state.id);
+  }
+
   useEffect(() => {
-    setId(window.sessionStorage.getItem("id"));
-    /*
+    idConfirm();
     axios
-      .get("/userupdate", {
-        id: id,
+      .post("/user/info", {
+        memberId: id,
       })
       .then((res) => {
-        const user=res.data;
-        const mail = user.mail.split("@");
-        setName(user.name);
-        setPhone(user.phone);
-        setPassword(user.password);
+        const { data } = res; // data = res.data
+        console.log(res);
+        const mail = data[0].email.split("@");
+        setName(data[0].name);
+        setPhone(data[0].phone);
+        setPassword(data[0].password);
         setEmail(mail[0]);
         setDomain(mail[1]);
-        setAddress(user.address);
-        setAddress_detail(user.detail_address);
-        setBirth(user.birth);
-        setCard_num(user.birth);
-        setValid_date(user.valid_date);
+        setAddress(data[0].address);
+        setAddress_detail(data[0].detailAddress);
+        setBirth(data[0].birth);
       })
       .catch((e) => {
         console.error(e);
       });
-    */
-  }, []);
+  }, [id]);
 
   /*========================== */
   const [popup, setPopup] = useState(false);
@@ -87,75 +83,49 @@ const User_update = () => {
     setPhone_Popup(false);
     setPhone_Modal(false);
   };
-  /*========================== */
-  const [Card_popup, setCard_Popup] = useState(false);
-  const [Card_modal, setCard_Modal] = useState(false);
-  const Card_ChangePopUP = () => {
-    setCard_Popup(true);
-    setCard_Modal(true);
-  };
-  const Card_close_modal = () => {
-    setCard_Popup(false);
-    setCard_Modal(false);
-  };
+
   /*========================== */
   const onClick = () => {
-    if (check_pw && check_id && check_Email) {
+    if (check_pw) {
       alert("회원정보를 수정하시겠습니까?");
-      /*
-    axios
-      .post("/userupdate", {
-        id: id,
-      })
-      .then((res) => {
-        const user=res.data;
-        const mail = user.mail.split("@");
-        setName(user.name);
-        setPhone(user.phone);
-        setPassword(user.password);
-        setEmail(mail[0]);
-        setDomain(mail[1]);
-        setAddress(user.address);
-        setAddress_detail(user.detail_address);
-        setBirth(user.birth);
-        setCard_num(user.birth);
-        setValid_date(user.valid_date);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-    */
+
+      axios
+        .post(`/user/update`, {
+          memberId: id,
+          password: password,
+          phone: phone,
+          email: emailFinal,
+          address: address,
+          detailAddress: address_detail,
+        })
+        .then((res) => {
+          alert("성공적으로 수정되었습니다.");
+          document.location.href = "/mypage";
+        })
+        .catch((e) => {
+          console.error(e);
+        });
     }
     if (!check_pw) {
       alert("비밀번호를 입력해주세요!");
       return false;
     }
-    if (!check_id) {
-      alert("아이디를 입력해주세요!");
-      return false;
-    }
-    if (!check_Email) {
-      alert("이메일을 입력해주세요!");
-      return false;
-    }
-    console.log(valid_date);
-    window.sessionStorage.setItem("id", id);
   };
-  const onIdCHK = (e) => {
-    setId(e.target.value);
-    const idRegExp = /^[a-zA-z0-9]{4,12}$/;
 
-    if (id === "") {
-      setChkIdmsg("아이디 입력은 필수입니다!");
-      setCheck_id(false);
-    } else if (!idRegExp.test(id)) {
-      setChkIdmsg("4-12사이 대소문자 또는 숫자만 입력해 주세요!");
-      setCheck_id(false);
-    } else {
-      setChkIdmsg("올바른 아이디 형식입니다 :)");
-      setCheck_id(true);
-    }
+  const userDelete = () => {
+    axios
+      .post("/user/delete", {
+        memberId: id,
+      })
+      .then(() => {
+        alert("회원탈퇴가 완료되었습니다.");
+        document.location.href = "/";
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
+
   const onChangePassword = (e) => {
     const passwordRegex =
       /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
@@ -180,13 +150,7 @@ const User_update = () => {
       setCheck_pw(false);
     }
   };
-  const Card_delete = () => {
-    setCard_num("");
-    setValid_date("");
-    setCvc("");
-    setCard_pw1("");
-    setCard_pw2("");
-  };
+
   const onEmailCHK = (e) => {
     setDomain(e.target.value);
     if (email === "" || e.target.value === "") {
@@ -195,6 +159,7 @@ const User_update = () => {
     } else {
       setChkEmailmsg("");
       setCheck_Email(true);
+      setEmailFinal(email + "@" + e.target.value);
     }
   };
 
@@ -260,23 +225,7 @@ const User_update = () => {
             </tr>
             <tr>
               <td>아이디</td>
-              <td>
-                <input
-                  name="id"
-                  type="text"
-                  placeholder="아이디"
-                  value={id}
-                  maxLength="15"
-                  onChange={onIdCHK}
-                />
-
-                <hr className="SU_input_line" />
-                {check_id ? (
-                  <span className="SU_ok_chk">{chkIdmsg}</span>
-                ) : (
-                  <span className="SU_not_chk">{chkIdmsg}</span>
-                )}
-              </td>
+              <td className="prev_value">{id}</td>
             </tr>
 
             <tr>
@@ -287,7 +236,6 @@ const User_update = () => {
                   type="password"
                   placeholder="비밀번호"
                   maxLength="20"
-                  value={password}
                   onChange={onChangePassword}
                 />
                 <hr className="SU_input_line" />
@@ -452,71 +400,11 @@ const User_update = () => {
             </tr>
           </table>
         </div>
-        {/* <div className="SU_card_header">결제수단</div>
-        <div className="UU_card_box">
-          <div className="UU_card_line" />
-          <div className="UU_update_cardnum">{card_num}</div>
-          <div className="UU_update_valid_date">{valid_date}</div>
-        </div>
-        <div className="UU_update_card_info">
-          <button className="UU_update_card_info" onClick={Card_ChangePopUP}>
-            변경
-          </button>{" "}
-          <Modal
-            style={{
-              overlay: {
-                position: "fixed",
-                backgroundColor: "rgba(0, 0, 0, 0.75)",
-              },
-              content: {
-                position: "absolute",
-                top: "10%",
-                width: "800px",
-                height: "740px",
-                left: "40px",
-                right: "40px",
-
-                border: "1px solid #ccc",
-                background: "#fff",
-                overflow: "auto",
-                WebkitOverflowScrolling: "touch",
-                borderRadius: "15px",
-                outline: "none",
-                padding: "20px",
-              },
-            }}
-            isOpen={Card_modal}
-          >
-            <div className="close_modal">
-              <button onClick={Card_close_modal}>
-                <b>X</b>
-              </button>
-            </div>
-            <div>
-              {Card_popup && (
-                <Update_card
-                  setCheck_box={setCheck_box}
-                  setCard_num={setCard_num}
-                  setCvc={setCvc}
-                  setValid_date={setValid_date}
-                  setCard_pw1={setCard_pw1}
-                  setCard_pw2={setCard_pw2}
-                  setCard_Modal={setCard_Modal}
-                ></Update_card>
-              )}
-            </div>
-          </Modal>
-          |{" "}
-          <button className="UU_update_card_info" onClick={Card_delete}>
-            삭제
-          </button>
-          <div></div>
-        </div> */}
         <button className="SU_input_btn" onClick={onClick}>
           정보수정
         </button>
         <div>
-          <button className="UU_user_delete_btn" onClick={onClick}>
+          <button className="UU_user_delete_btn" onClick={userDelete}>
             회원탈퇴
           </button>
         </div>

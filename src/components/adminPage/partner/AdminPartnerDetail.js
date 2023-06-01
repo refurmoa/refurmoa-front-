@@ -1,25 +1,36 @@
 import "./AdminPartnerDetail.css";
 import { AdminPartnerDetailList } from "./AdminPartnerDetailList";
 import partnerdata from "./AdminPartnerDetail.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import UpdatePartner from "./AdminPartnerDetailUpdate";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const AdminPartnerDetail = () => {
-  const location = useLocation();
-  const com_num = location.state;
-  console.log(com_num);
-  const APDChange = () => {
-    // axios
-    //   .get("/admin/partner/detail/change", {
-    //     com_name: com_name,
-    //   })
-    //   .then((res) => {
-    //   });
-  };
 
+  const location = useLocation();
+  const partner = location.state.partner;
+  const num=partner.com_num
+  const [data,setData] = useState([]);
+  
+  useEffect(()=>{
+    
+    axios
+      .get(`/admin/partner/detail?com_num=${num}`)
+      .then((res) => {
+        setData(res.data);
+      });
+  },[partner])
+  const APDChange = () => {
+    const num=partner.com_num
+    axios
+      .get(`/admin/partner/detail/change?com_num=${num}`)
+      .then((res) => {
+        setData(res.data);
+      });
+  };
+  
   // const [partnerdata, setPartnerdata] = useState();
   const getUserData = () => {
     // axios
@@ -50,27 +61,27 @@ const AdminPartnerDetail = () => {
     <div className="APDAll">
       <div className="APDLeftAll">
         <div className="APDLeftInfo">
-          <div>{partnerdata.com_name}</div>
+          <div>{data.com_name}</div>
           <div>연락처</div>
-          <div>{partnerdata.com_phone}</div>
+          <div>{data.com_phone}</div>
           <div>이메일</div>
-          <div>{partnerdata.com_email}</div>
+          <div>{data.com_email}</div>
           <div>주소</div>
           <div>
-            {partnerdata.com_addr}
-            &nbsp;{partnerdata.com_detail_addr}
+            {data.comAddr}
+            &nbsp;{data.com_detail_addr}
           </div>
           <div>대표명</div>
-          <div>{partnerdata.com_ceo_name}</div>
+          <div>{data.com_ceo_name}</div>
         </div>
         <div className="APDLeftButton">
-          {partnerdata.com_status === 0 ? (
+          {data.com_status === 0 ? (
             <div>
               <div>
                 <input type="button" value="신청 승인" onClick={APDChange} />
               </div>
             </div>
-          ) : partnerdata.com_status === 1 ? (
+          ) : data.com_status === 1 ? (
             <div>
               <div>
                 <input
@@ -110,7 +121,7 @@ const AdminPartnerDetail = () => {
                   </div>
                   <div>
                     {Partner_popup && (
-                      <UpdatePartner getUserData={getUserData} />
+                      <UpdatePartner partner={data} Partner_close_modal={Partner_close_modal}  />
                     )}
                   </div>
                 </Modal>
@@ -125,7 +136,7 @@ const AdminPartnerDetail = () => {
         </div>
       </div>
       <div className="APDRightAll">
-        <AdminPartnerDetailList />
+        <AdminPartnerDetailList num={num}/>
       </div>
     </div>
   );
