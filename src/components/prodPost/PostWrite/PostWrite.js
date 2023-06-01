@@ -1,5 +1,6 @@
 import React from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../product/ProductWrite.css";
 import "./PostWrite.css";
 import searchIcon from "../../../images/search.png";
@@ -15,8 +16,14 @@ import cancel from "../../../images/cancel.png";
 
 function PostWrite(props) {
   const product_num = props;
-
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
+  },[]);
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
+  const [com_num, setCom_num] = useState();
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   const [main_Image, setMainImg] = useState("");
@@ -236,6 +243,12 @@ function PostWrite(props) {
   /*===============================================*/
 
   const Product_write = (e) => {
+    if(defect_text===""){
+      alert("하자 정보를 입력해주세요.")
+      return false;
+    }
+    else{
+    
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     console.log("fileList=>" + listFile);
 
@@ -280,11 +293,13 @@ function PostWrite(props) {
             console.log("uploadfile request");
             alert("작성이 완료되었습니다!");
             setFileDataList(res.data);
+            window.location.href="/post";
           })
           .catch((e) => {
             console.error(e);
           });
       });
+    }
   };
 
 
@@ -293,7 +308,7 @@ function PostWrite(props) {
       <div className="PW_header">
         <div className="PR_title">판매글 작성</div>
         <div className="PW_button">
-          <button className="PW_list_btn">취소</button>
+          <button className="PW_list_btn"><a href="/post">취소</a></button>
           <button className="PW_wrie_btn" onClick={Product_write}>등록</button>
         </div>
       </div>
@@ -308,19 +323,23 @@ function PostWrite(props) {
               style={{
                 overlay: {
                   position: "fixed",
-                  backgroundColor: "rgba(0, 0, 0, 0.75)"
+                  backgroundColor: "rgba(0, 0, 0, 0.75)",
                 },
                 content: {
                   position: "absolute",
-                  top: "15%",
-                  width: "600px",
-                  height: "610px",
+                  top: "10%",
+                  width: "900px",
+                  height: "700px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",
                   border: "1px solid #ccc",
+                  background: "#fff",
+                  overflow: "auto",
+                  WebkitOverflowScrolling: "touch",
                   borderRadius: "10px",
-                  padding: "20px"
+                  outline: "none",
+                  padding: "20px",
                 },
               }}
               isOpen={modal}
@@ -335,7 +354,7 @@ function PostWrite(props) {
                   <FindCompany
                     searchCompany={searchCompany}
                     setSearchCompany={setSearchCompany}
-                    setProd_com={setProd_com}
+                    setCom_num={setCom_num}
                     close_modal={close_modal}
                   ></FindCompany>
                 )}

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../product/ProductWrite.css";
 import "./PostWrite.css";
 import searchIcon from "../../../images/search.png";
@@ -15,6 +16,7 @@ import { useParams } from "react-router-dom";
 
 function PostUpdate() {
   const board_num = useParams().board_num;
+  const navigate = useNavigate();
 
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
   const [cate, setCate] = useState("");
@@ -39,13 +41,15 @@ function PostUpdate() {
   const [reg_date, setReg_date] = useState("");
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
-
+  const [com_num, setCom_num] = useState();
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
 
   useEffect(() => {
-    console.log(board_num);
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
     /*
     axios
       .get("/post/update", {
@@ -118,13 +122,13 @@ function PostUpdate() {
   };
   const setData = (productData) => {
     if (
-      productData.category === "funliving" ||
-      productData.category === "funbed" ||
-      productData.category === "funoffice"
+      productData.category === "furliving" ||
+      productData.category === "furbed" ||
+      productData.category === "furoffice"
     ) {
       setFuniture(true);
       setAppliance(false);
-      setCate("funiture");
+      setCate("furniture");
     } else {
       setFuniture(false);
       setAppliance(true);
@@ -234,7 +238,7 @@ function PostUpdate() {
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
     setCate(e.target.value);
-    if (e.target.value === "funiture") {
+    if (e.target.value === "furniture") {
       setFuniture(true);
       setAppliance(false);
     } else if (e.target.value === "appliance") {
@@ -311,6 +315,11 @@ function PostUpdate() {
   /*===============================================*/
 
   const Product_write = (e) => {
+    if(defect_text===""){
+      alert("하자 정보를 입력해주세요.")
+      return false;
+    }
+    else{
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     console.log("fileList=>" + listFile);
 
@@ -355,11 +364,13 @@ function PostUpdate() {
             console.log("uploadfile request");
             alert("작성이 완료되었습니다!");
             setFileDataList(res.data);
+            window.location.href="/post";
           })
           .catch((e) => {
             console.error(e);
           });
       });
+    }
   };
 
   return (
@@ -398,9 +409,9 @@ function PostUpdate() {
                 },
                 content: {
                   position: "absolute",
-                  top: "15%",
-                  width: "600px",
-                  height: "610px",
+                  top: "10%",
+                  width: "900px",
+                  height: "700px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",
@@ -425,7 +436,7 @@ function PostUpdate() {
                   <FindCompany
                     searchCompany={searchCompany}
                     setSearchCompany={setSearchCompany}
-                    setProd_com={setProd_com}
+                    setCom_num={setCom_num}
                     close_modal={close_modal}
                   ></FindCompany>
                 )}
@@ -518,7 +529,7 @@ function PostUpdate() {
           <div className="PW_product_input_select">
             <select className="PW_category" value={cate} onChange={chageCate}>
               <option>카테고리 선택</option>
-              <option value="funiture">가구</option>
+              <option value="furniture">가구</option>
               <option value="appliance">가전</option>
             </select>
             <select
@@ -536,9 +547,9 @@ function PostUpdate() {
               )}
               {funiture && (
                 <>
-                  <option value="funliving">거실&주방</option>
-                  <option value="funbed">침실 </option>
-                  <option value="funoffice">사무실</option>
+                  <option value="furliving">거실&주방</option>
+                  <option value="furbed">침실 </option>
+                  <option value="furoffice">사무실</option>
                 </>
               )}
             </select>
