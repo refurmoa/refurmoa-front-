@@ -2,47 +2,48 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./OneononeInquiry.css";
 import OneononeData from "./OneononeData.json";
+import axios from "axios";
+import moment from "moment";
 
 const InquiryList = () => {
   const loginid = window.sessionStorage.getItem("id"); // 세션 ID
   const [dataList, setDataList] = useState([]);
   const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
-  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
+  var num=1;
+
+  //목록 조회
+  const setList = () => { 
+    axios
+      .get(`/cs/inquiry?id=${loginid}&page=${currentPage}&size=10&sort=answerCon,ASC&sort=inqDate,ASC`)
+      .then((res) => {
+        setDataList(res.data.content);
+        setTotalPage(res.data.totalPages); 
+      })
+      .catch((e) => {
+        // console.error(e);
+      });
+  }
   useEffect(() => {
-    // axios
-    // .get("/cs/inquiry",{
-    //     member_id:id
-    // })
-    // .then((res) => {
-    //   if (res.data === 1) {
-    //     setDataList(res.datea);
-    //   } else {
-    //     alert("등록에 실패했습니다.");
-    //   }
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
-    setDataList(OneononeData);
-    pageCount(); // 문의 글 수 조회
-  }, []);
-
-  // 문의 글 수 조회
-  const pageCount = () => {
-    setTotalPage(5);
-  };
-
-  // 문의 글 목록 조회
-  const ListSearch = () => {};
+    setList();
+  }, [currentPage])
 
   // 조회수
   const readcountup = (e) => {};
 
   // 문의 글 삭제
-  const deletePlInquiry = (e) => {
-    e.stopPropagation();
+  const deletePlInquiry = (num) => {
     const deleteQ = window.confirm("정말 삭제하시겠습니까?");
     if (deleteQ) {
+      axios
+      .get(`/cs/inquiry/delete?num=${num}`)
+      .then((res) => {
+          window.location.reload();
+      })
+      .catch((e) => {
+        // console.error(e);
+      });
+
     }
   };
 
@@ -68,15 +69,15 @@ const InquiryList = () => {
                 <Link
                   className="OI-board-num"
                   to="/cs/inquiry/detail"
-                  state={{ item: item }}
+                  state={{ item: item.num }}
                   onClick={readcountup}
                 >
-                  {item.num}
+                  {num++}
                 </Link>
                 <span>
                   {loginid === "admin" && (
                     <span className="OI-answer-wrap">
-                      {item.ANSWER_CON === "" ? (
+                      {item.answerState === 0 ? (
                         <span className="OI-answer-n">
                           &nbsp;&nbsp;미답변&nbsp;&nbsp;
                         </span>
@@ -89,21 +90,22 @@ const InquiryList = () => {
                 <Link
                   className="OI-board-title"
                   to="/cs/inquiry/detail"
-                  state={{ item: item }}
+                  state={{ item: item.num }}
                   onClick={readcountup}
                 >
-                  {item.INQ_TITLE}
+                  {item.inqTitle}
                 </Link>
               </span>
               <span className="OI-board-right-wrap">
                 <span className="OI-answer-state">
                   {loginid === "admin" ? (
                     <>
-                      <span className="OI-memberid">{item.MEMBER_ID}</span>
+                      <span className="OI-memberid">{item.memberId}</span>
+                      <span className="OI-memberid">{moment(item.inqDate).format("YYYY-MM-DD")}</span>
                     </>
                   ) : (
                     <>
-                      {item.ANSWER_CON !== "" && (
+                      {item.answerState !== 0  && (
                         <>
                           <span className="OI-answer-yes">답변완료</span>
                         </>
@@ -112,16 +114,16 @@ const InquiryList = () => {
                   )}
                   {loginid !== "admin" && (
                     <span className="inquirylist-post-date">
-                      {item.INQ_DATE}
+                      {moment(item.inqDate).format("YYYY-MM-DD")}
                     </span>
                   )}
                   {loginid !== "admin" && (
                     <>
-                      {item.ANSWER_CON === "" && (
+                      {item.answerState === 0 && (
                         <>
                           <span
                             className="OI-delete-btn"
-                            onClick={deletePlInquiry}
+                            onClick={()=>deletePlInquiry(item.num)}
                           >
                             삭제
                           </span>
@@ -134,35 +136,20 @@ const InquiryList = () => {
             </div>
           ))}
         </div>
+        { totalPage > 1 &&
+        <div className="PI-page">
+          { currentPage === 0 ? <span className="PI-page_prev_gray">&lt;</span>
+            : <span className="PI-page_prev" onClick={() => setCurrentPage(currentPage-1)}>&lt;</span>
+          }
+          <span className="PI-page_now">{currentPage+1}</span>
+          &nbsp;&nbsp;/&nbsp;&nbsp;
+          <span className="PI-page_total">{totalPage}</span>
+          { currentPage+1 === totalPage ? <span className="PI-page_next_gray">&gt;</span>
+            : <span className="PI-page_next" onClick={() => setCurrentPage(currentPage+1)}>&gt;</span>
+          }
+        </div>
+      }
 
-        {/* 페이지 출력 */}
-        {totalPage > 1 && (
-          <div className="OI-page">
-            {currentPage === 1 ? (
-              <span className="OI-page_prev_gray">&lt;</span>
-            ) : (
-              <span
-                className="OI-page_prev"
-                onClick={() => setCurrentPage(currentPage - 1)}
-              >
-                &lt;
-              </span>
-            )}
-            <span className="OI-page_now">{currentPage}</span>
-            &nbsp;&nbsp;/&nbsp;&nbsp;
-            <span className="OI-page_total">{totalPage}</span>
-            {currentPage === totalPage ? (
-              <span className="OI-page_next_gray">&gt;</span>
-            ) : (
-              <span
-                className="OI-page_next"
-                onClick={() => setCurrentPage(currentPage + 1)}
-              >
-                &gt;
-              </span>
-            )}
-          </div>
-        )}
       </span>
     </>
   );

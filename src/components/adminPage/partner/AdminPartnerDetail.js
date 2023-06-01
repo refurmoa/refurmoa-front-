@@ -8,13 +8,14 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 
 const AdminPartnerDetail = () => {
+
   const location = useLocation();
   const partner = location.state.partner;
+  const num=partner.com_num
   const [data,setData] = useState([]);
   
   useEffect(()=>{
     
-    const num=partner.com_num
     axios
       .get(`/admin/partner/detail?com_num=${num}`)
       .then((res) => {
@@ -29,7 +30,7 @@ const AdminPartnerDetail = () => {
         setData(res.data);
       });
   };
-
+  
   // const [partnerdata, setPartnerdata] = useState();
   const getUserData = () => {
     // axios
@@ -135,7 +136,7 @@ const AdminPartnerDetail = () => {
         </div>
       </div>
       <div className="APDRightAll">
-        <AdminPartnerDetailList partner={data}/>
+        <AdminPartnerDetailList num={num}/>
       </div>
     </div>
   );

@@ -49,6 +49,7 @@ function App() {
         <Route path="/prod/write" element={<ProductWrite />} />
         <Route path="/prod/update/:product_code" element={<ProductUpdate />} />
         <Route path="/post" element={<PostPage />} />
+        <Route path="/post/:search" element={<PostPage />} />
         <Route path="/post/write" element={<PostWrite />} />
         <Route path="/post/update/:board_num" element={<PostUpdate />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
