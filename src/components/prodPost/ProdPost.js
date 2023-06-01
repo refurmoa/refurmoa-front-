@@ -53,8 +53,10 @@ const ProdPost = ({ filter, cp, stp }) => {
 
   // 찜버튼
   const likeHandler = (event, data) => {
+    console.log(data);
     event.stopPropagation(); // 이벤트 버블링 막기
     const likerequest = { boardNum: data.board_num, memberId: sessionStorage.getItem("id"), like: data.like };
+    console.log(likerequest);
     axios.post("/post/like", likerequest)
     .then((res) => {
       getProdData();
@@ -93,13 +95,11 @@ const ProdPost = ({ filter, cp, stp }) => {
       page: cp-1,
       size: 16
     }
-    console.log(requestData);
     axios.post(`/post?page=${cp-1}&size=16`, requestData)
     .then((res) => {
       const { data } = res;
       setProdData(data.content);
       stp(data.totalPages);
-      console.log(data.content);
     })
     .catch((e) => {
       console.error(e);
@@ -149,7 +149,7 @@ const ProdPost = ({ filter, cp, stp }) => {
                 <img src={star_icon_line} alt="staricon" />
               </StarIcon>
             ) : (
-              <StarIcon onClick={(event) => likeHandler(event, data.board_num)}>
+              <StarIcon onClick={(event) => likeHandler(event, data)}>
                 <img src={star_icon_filled} alt="staricon" />
               </StarIcon>
             )}

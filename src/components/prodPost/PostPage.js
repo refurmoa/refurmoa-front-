@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import ProdPost from "./ProdPost";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const PostPage = () => {
   const navigate = useNavigate();
   const memberId = sessionStorage.getItem("id");
+
   
+
+
   // 경매, 즉시구매 저장 변수 all, auction, direct, none
   const [selectedSellType, setSelectedSellType] = useState("all");
   // 카테고리 저장 변수
@@ -21,6 +24,15 @@ const PostPage = () => {
     selectedSellStatus: selectedSellStatus,
     selectedOrderby: selectedOrderby
   }
+
+  const location = useLocation();
+  const category = new URLSearchParams(location.search).get('category');
+
+  useEffect(() => {
+    if (category !== null) {
+      categoryHandler(category);
+    }
+  }, [])
 
   // 경매, 즉시구매 토글 기능을 위한 상태 변수
   const [auctionState, setAuctionState] = useState(true);
