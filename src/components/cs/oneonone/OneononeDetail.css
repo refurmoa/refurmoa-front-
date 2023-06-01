@@ -130,7 +130,7 @@
   font-size: 20px;
   color: #888888;
   line-height: 35px;
-  margin: -15px 0px 20px 810px;
+  margin: -15px -45px 20px 810px;
 }
 .OD_text_box {
   border-top: 2px solid #eeeeee;
@@ -176,6 +176,24 @@
   resize: none;
   border: none;
   color: #000;
+}
+.OD-filename{
+  width: 900px;
+  height: 30px;
+  padding:  10px 0;
+  font-weight: 400px;
+  font-size: 15px;
+  line-height: 30px;
+  text-align: right;
+  color: #000;
+}
+.OD-filename>span{
+  text-decoration:underline;
+  cursor: pointer;
+}
+.OD-filename>.OD-file-title{
+  text-decoration:none;
+  color: #999;
 }
 .OD_text_content::placeholder {
   color: #888888;

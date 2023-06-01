@@ -3,23 +3,23 @@ import "./OneononeUserpost.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import CsNavbar from "../CsNavbar";
+import axios from "axios";
+
 const NoticePost = () => {
   //파일첨부(재현님꺼..)
   const id = window.sessionStorage.getItem("id");
-  const [name, setName] = useState("이모아"); //axios로 받아올 예정.
+  const [name, setName] = useState(""); //axios로 받아올 예정.
+  
   useEffect(() => {
-    // axios
-    //   .get("/api/member"){
-    //           name:name;
-    // }
-    //   .then((res) => {
-    //
-    //     setName(res.data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // console.log(data);
+    axios
+      .get(`/cs/inquiry/name?id=${window.sessionStorage.getItem("id")}`)
+      .then((res) => {
+        setName(res.data);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+    
   }, []);
 
   const [inq_title, setInq_title] = useState("");

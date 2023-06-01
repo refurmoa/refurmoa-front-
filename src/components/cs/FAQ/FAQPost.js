@@ -5,7 +5,7 @@ import "./FAQ.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
-const FAQPOST = ({ logId, item, getList }) => {
+const FAQPOST = ({ logId, item }) => {
   const [cate, setCate] = useState("");
   const [mode, setMode] = useState(true);
 

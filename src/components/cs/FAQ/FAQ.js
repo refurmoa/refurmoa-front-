@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Children } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import FAQPOST from "./FAQPost";
 import "../notice/NoticeList.css";
@@ -11,8 +11,8 @@ import searchIcon from "../../../images/search.png";
 
 function FAQ() {
   const logId = window.sessionStorage.getItem("id");
-  const nanigate = useNavigate();
   const [searchword, setSearchword] = useState();
+  const [searchState, setSearchState] = useState(false);
 
   const searchRef = useRef();
   const [dataList, setDataList] = useState([]);
@@ -45,6 +45,8 @@ function FAQ() {
   }
   const searchHandler = () => {
     setSearchword(searchRef.current.value);
+    setSearchState(true);
+    setCatrgory(0);
   }
   const getSearchList = () => {
     axios
@@ -59,19 +61,22 @@ function FAQ() {
     });
   }
 
+  const changeCate = (item) => {
+    setCatrgory(item);
+    setCurrentPage(1);
+    setSearchState(false);
+  };
+
   useEffect(() => {
-    if (searchword === undefined) {
+    // 검색어가 없고, 검색상태가 아닐 때
+    if (!searchState) {
       getFaqList();
-    } else {
+    } else { 
       getSearchList();
     }
   }, [searchword, category, currentPage]);
 
-  const changeCate = (item) => {
-    setCatrgory(item);
-    setCurrentPage(1);
-  };
-
+  
   return (
     <div className="FAQ-List-form">
       {logId === "admin" ? (
@@ -91,8 +96,8 @@ function FAQ() {
         <div className="FAQTitle">
           FAQ
           <div className="FAQSearch">
-            <input type="text" placeholder="검색어를 입력하세요" ref={searchRef} />
-            <img className="FAQSearchIcon" src={searchIcon} alt="searchbutton"/>
+            <input type="text" placeholder="검색어를 입력하세요" ref={searchRef} onKeyDown={(e) => {activeEnter(e)}}/>
+            <img className="FAQSearchIcon" src={searchIcon} alt="searchbutton" onClick={() => {searchHandler()}}/>
           </div>
         </div>
       )}
@@ -110,7 +115,7 @@ function FAQ() {
       </div>
 
       {dataList?.map((item, index) => (
-        <FAQPOST logId={logId} item={item} key={index} getList={getFaqList} />
+        <FAQPOST logId={logId} item={item} key={index} />
       ))}
 
       {/* 총 페이지 수가 1보다 클 때 */}
