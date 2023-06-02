@@ -39,25 +39,24 @@ function Main() {
         .catch((e) => {
         console.error(e);
         })
-
-        setMainBanner([
-            { bann_image : "example.jpg", bann_link : "/post/detail/1" },
-            { bann_image : "image01.png", bann_link : "/post/detail/2" },
-            { bann_image : "image02.png", bann_link : "/post/detail/3" },
-            { bann_image : "image03.png", bann_link : "/post/detail/4" },
-            { bann_image : "image04.png", bann_link : "/post/detail/5" },
-            { bann_image : "image05.png", bann_link : "/post/detail/6" }
-        ]);
-
-        setAdBanner([
-            { bann_image : "example.jpg", bann_link : "/post/detail/1" },
-            { bann_image : "image01.png", bann_link : "/post/detail/2" },
-            { bann_image : "image02.png", bann_link : "/post/detail/3" },
-            { bann_image : "image03.png", bann_link : "/post/detail/4" },
-            { bann_image : "image04.png", bann_link : "/post/detail/5" },
-            { bann_image : "image05.png", bann_link : "/post/detail/6" }
-        ]);
-
+        axios
+        .get(`/main/banner`)
+        .then((res) => {
+            console.log(res.data);
+            setMainBanner(res.data);
+        })
+        .catch((e) => {
+        console.error(e);
+        })
+        axios
+        .get(`/main/banner/ad`)
+        .then((res) => {
+            console.log(res.data);
+            setAdBanner(res.data);
+        })
+        .catch((e) => {
+        console.error(e);
+        })
         // 상품 타이머 > 1초마다 리렌더링
         const countdown = setInterval(() => {
             setNow(new Date().getTime());
@@ -152,9 +151,9 @@ function Main() {
             <svg className="M-banner_arrow M-banner_arrow_left" onClick={(e) => {handleMainBanner(e, "prev")}}
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>
             { mainBanner.map((banner, index) => (
-                <Link to={banner.bann_link} key={index}>
+                <Link to={banner.bannLink} key={index}>
                     <img className={`M-banner_img ${index === mainBannerSlide && "M-banner_img_active"}`}
-                        alt="메인배너이미지" src={`/images/banner/${banner.bann_image}`} />
+                        alt="메인배너이미지" src={`/images/banner/${banner.bannImage}`} />
                 </Link>
             ))}
             <svg className="M-banner_arrow M-banner_arrow_right" onClick={(e) => {handleMainBanner(e, "next")}}
@@ -219,8 +218,8 @@ function Main() {
         <div className="M-ad_banner_wrap">
             <div className="M-ad_banner">
                 { adBanner.map((banner, index) => (
-                    <Link to={banner.bann_link} className="M-ad_banner_img_wrap" key={index}>
-                        <img className="M-ad_banner_img" alt="광고배너이미지" src={`/images/banner/${banner.bann_image}`} />
+                    <Link to={banner.bannLink} className="M-ad_banner_img_wrap" key={index}>
+                        <img className="M-ad_banner_img" alt="광고배너이미지" src={`/images/banner/${banner.bannImage}`} />
                     </Link>
                 ))}
             </div>
