@@ -9,6 +9,7 @@ import menuImage1 from "../../images/main_menu_image1.jpg";
 import menuImage2 from "../../images/main_menu_image2.jpg";
 import menuImage3 from "../../images/main_menu_image3.jpg";
 import data from "./MainItems.json";
+import axios from "axios";
 
 // axios 배너 data
 // 신상품/인기상품/마감임박상품 data
@@ -27,6 +28,18 @@ function Main() {
     const [now, setNow] = useState(new Date().getTime()); // 현재 날짜(ms)
 
     useEffect(() => {
+        axios
+        .get(`/main/item`)
+        .then((res) => {
+            console.log(res.data);
+            setBestItemList(res.data[0]);
+            setNewItemList(res.data[1]);
+            setDeadlineItemList(res.data[2]);
+        })
+        .catch((e) => {
+        console.error(e);
+        })
+
         setMainBanner([
             { bann_image : "example.jpg", bann_link : "/post/detail/1" },
             { bann_image : "image01.png", bann_link : "/post/detail/2" },
@@ -115,15 +128,15 @@ function Main() {
                     <div className="M-item_name"><span>{list.prod_com}</span> {list.prod_name}</div>
                     <div className="M-item_price">
                         <span className="M-item_price_left">
-                            <div className="M-item_org_price">{list.org_price.toLocaleString('ko-KR')}</div>
+                            <div className="M-item_org_price">{list.orgPrice}</div>
                             <div className="M-item_pay_price">
-                                {list.sell_type === 2 ? list.direct_price.toLocaleString('ko-KR') : list.cur_price.toLocaleString('ko-KR')}
+                                {list.sell_type === 2 ? list.directPrice : list.curPrice}
                             </div>
                         </span>
                         { list.sell_type === 3 &&
                             <span className="M-item_price_right">
                                 <div className="M-item_direct_price">즉시구매가</div>
-                                <div className="M-item_pay_price">{list.direct_price.toLocaleString('ko-KR')}</div>
+                                <div className="M-item_pay_price">{list.directPrice}</div>
                             </span>
                         }
                     </div>
@@ -159,12 +172,12 @@ function Main() {
                 <span className="M-order_menu" onMouseEnter={() => {setMenuHover(2)}} onMouseLeave={() => {setMenuHover(0)}}>
                     <img className="M-order_menu_img" alt="appliance" src={menuImage2} />
                     { menuHover === 2 &&
-                        <Link to="/post?category=app" className="M-order_menu_text">appliance</Link> }
+                        <Link to="/post?category=appliance" className="M-order_menu_text">appliance</Link> }
                 </span>
                 <span className="M-order_menu" onMouseEnter={() => {setMenuHover(3)}} onMouseLeave={() => {setMenuHover(0)}}>
                     <img className="M-order_menu_img" alt="furniture" src={menuImage3} />
                     { menuHover === 3 &&
-                        <Link to="/post?category=fur" className="M-order_menu_text">furniture</Link> }
+                        <Link to="/post?category=furniture" className="M-order_menu_text">furniture</Link> }
                 </span>
             </div>
         </div>
@@ -217,3 +230,6 @@ function Main() {
 };
 
 export default Main;
+
+
+
