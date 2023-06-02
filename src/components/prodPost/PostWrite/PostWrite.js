@@ -14,6 +14,7 @@ import FindProduct from "./FindProduct";
 import cancel from "../../../images/cancel.png";
 
 function PostWrite(props) {
+  const code_param = new URLSearchParams(window.location.search).get('product_code'); // 상품 목록 페이지에서 보내는 파라미터
   const product_num = props;
 
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
