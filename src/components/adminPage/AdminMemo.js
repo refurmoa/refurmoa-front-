@@ -18,7 +18,7 @@ const AdminMemo = () => {
   }
   const inputMemo = () => {
     console.log("입력");
-    // axios.post("/admin/memo/input")
+    // axios.post("/admin/memo/write")
     // .then((res) => {
 
     // })
