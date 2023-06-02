@@ -1,24 +1,26 @@
 // 관리자 페이지 - 메인
-import { MyResponsivePie } from "./piechart.js";
-import  data  from "./data.json"
-import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import TotalSalesChart from "./TotalSalesChart"
+import axios from "axios";
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
+
 import DailySalesChart from "./DailySalesChart";
+import { MyResponsivePie } from "./piechart.js";
+import TotalSalesChart from "./TotalSalesChart"
 import UnAnswered from "./UnAnswered";
 import AdminMemo from "./AdminMemo";
-import {useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
+import piedata  from "./data.json"
 
 const Admin = () => {
   const navigate = useNavigate();
+  const [adminInfoCount, setAdminInfoCount] = useState();
+
   useEffect(()=>{
     if(window.sessionStorage.getItem("id")!=="admin"){
       navigate("/");
-      
-  const [adminInfoCount, setAdminInfoCount] = useState();
+    }
+  }, []);
 
   const dummydata = {
     "yet": 3,
@@ -74,7 +76,7 @@ const Admin = () => {
       <DailyAndCategorySalesBox> 
         <DailySalesChart />
         <CategoryChart>
-          <MyResponsivePie data={data} />
+          <MyResponsivePie data={piedata} />
         </CategoryChart>
       </DailyAndCategorySalesBox>
 
