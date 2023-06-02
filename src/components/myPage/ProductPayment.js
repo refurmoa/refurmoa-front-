@@ -16,8 +16,7 @@ export const ProductPayment = ({ product }) => {
   };
 
   const pay = (board_num) => {
-    navigate("/post/pay", {
-      board_num: board_num,
+    navigate(`/post/pay/${board_num}`, {
       sell_type: 1,
     });
   };
@@ -44,33 +43,38 @@ export const ProductPayment = ({ product }) => {
 
   return (
     <div className="productPay">
-      <image className="imagePay">
+      <div className="imagePay">
         <div className="productcodePay">
-          {product.pay_date}
-          {product.product_code}
+          {(product.pay_state > 2) ? (
+            <>
+              {product.pay_num}
+            </>
+          ) : (
+            <>
+              
+            </>
+          )}
         </div>
         <img
           src={`/images/prod/${product.main_image}`}
           alt="productimage"
           onClick={() => onClick(product.board_num)}
         />
-      </image>
-      <information className="marginzero">
-        {product.prod_state === 0 ? (
-          <div className="blackcolorPay">게시전</div>
-        ) : product.prod_state === 1 ? (
-          <>
-            <div className="balckcolorPay">게시 완료</div>
-          </>
-        ) : product.prod_state === 2 ? (
+      </div>
+      <div className="marginzero">
+        {product.pay_state === 0 ? (
           <div className="redcolorPay">
             <img src={loadiconred} alt=""></img>낙찰 - 결제전
           </div>
-        ) : product.prod_state === 3 ? (
+        ) : product.pay_state === 1 ? (
           <div className="balckcolorPay">
             <img src={loadiconblack} alt=""></img>배송 준비중
           </div>
-        ) : product.prod_state === 4 ? (
+        ) : product.pay_state === 2 ? (
+          <div className="balckcolorPay">
+            <img src={loadiconblack} alt=""></img>배송 중
+          </div>
+        ) : product.pay_state === 3 ? (
           <div className="balckcolorPay">
             <img src={loadiconblack} alt=""></img>배송 완료
           </div>
@@ -85,8 +89,8 @@ export const ProductPayment = ({ product }) => {
           {product.prod_name}
         </div>
 
-        <price className="pricePay">
-          {product.prod_state === 2 ? (
+        <div className="pricePay">
+          {product.pay_state === 0 ? (
             <div className="redcolormoneyPay">
               {product.prod_price.toLocaleString("ko-KR")}원
             </div>
@@ -95,14 +99,21 @@ export const ProductPayment = ({ product }) => {
               {product.prod_price.toLocaleString("ko-KR")}원
             </div>
           )}
-        </price>
+        </div>
         <div className="mile">
-          마일리지 {(product.prod_price / 100).toLocaleString("ko-KR")}원 적립
-          예정
+        {product.pay_state === 5 ? (
+            <>
+            마일리지 {(product.prod_price / 100).toLocaleString("ko-KR")}원 적립 완료
+            </>
+          ) : (
+            <>
+            마일리지 {(product.prod_price / 100).toLocaleString("ko-KR")}원 적립 예정
+            </>
+          )}
         </div>
 
-        <paybutton className="mile">
-          {product.prod_state === 1 ? (
+        <div className="mile">
+          {product.pay_state === 0 ? (
             <div>
               <input
                 className="payButtonPay"
@@ -110,11 +121,10 @@ export const ProductPayment = ({ product }) => {
                 value="결제 하기"
                 onClick={() => pay(product.board_num, product.sell_type)}
               ></input>
-              <productpay product_code={product.product_code}></productpay>
             </div>
-          ) : product.prod_state === 2 && product.pay_cancle === 1 ? (
+          ) : product.pay_state === 1 && product.pay_cancle === 1 ? (
             <div>취소물품입니다.</div>
-          ) : product.prod_state === 2 ? (
+          ) : product.pay_state === 1 ? (
             <div>
               <div>
                 <input
@@ -130,12 +140,9 @@ export const ProductPayment = ({ product }) => {
                   onClick={() => delivery(product.board_num)}
                   board_num={product.board_num}
                 ></input>
-                <productdetail
-                  product_code={product.product_code}
-                ></productdetail>
               </div>
             </div>
-          ) : product.prod_state === 3 ? (
+          ) : product.pay_state === 2 ? (
             <div>
               <input
                 className="cancleButtonPay"
@@ -143,9 +150,22 @@ export const ProductPayment = ({ product }) => {
                 value="결제 상세"
                 onClick={() => delivery(product.board_num)}
               ></input>
-              <productdetail
-                product_code={product.product_code}
-              ></productdetail>
+              <input
+                  className="inqButtonPay"
+                  type="button"
+                  value="배송 조회"
+                  onClick={() => delivery(product.board_num)}
+                  board_num={product.board_num}
+                ></input>
+            </div>
+          ) : product.pay_state === 3 ? (
+            <div>
+              <input
+                className="payButtonPay"
+                type="button"
+                value="결제 상세"
+                onClick={() => delivery(product.board_num)}
+              ></input>
               <input
                 className="inqButtonPay"
                 type="button"
@@ -161,13 +181,10 @@ export const ProductPayment = ({ product }) => {
                 value="결제 상세"
                 onClick={() => delivery(product.board_num)}
               ></input>
-              <productdetail
-                product_code={product.product_code}
-              ></productdetail>
             </div>
           )}
-        </paybutton>
-      </information>
+        </div>
+      </div>
     </div>
   );
 };

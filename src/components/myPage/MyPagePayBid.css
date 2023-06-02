@@ -144,6 +144,8 @@ padding: 0;
 .date {
     width: 150px;
     height: 30px;
+    padding-left: 10px;
+    padding-right: 5px;
     background: rgba(185, 168, 154, 0.15);
     border: none;
     border-radius: 5px;
@@ -184,9 +186,17 @@ padding: 0;
     border: 1px solid #B9A89A;
     border-radius: 15px;
     position: absolute;
-    margin: 40px 0 0 450px;
+    margin: 40px 0 0 447px;
     padding-left: 15px;
     cursor: text;
+}
+.searchboxpay > input {
+    margin-top: 5px;
+    width: 175px;
+    border: none;
+}
+.searchboxpay > input:focus {
+    outline: none;
 }
 
 .searchboxbutton {
@@ -199,7 +209,7 @@ padding: 0;
     width: 17px;
     height: 17px;
     cursor: pointer;
-    margin: 46px 0 0 653px;
+    margin: 47px 0 0 650px;
     background-color: white;
 }
 
