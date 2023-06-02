@@ -161,12 +161,12 @@ function Main() {
                 <span className="M-order_menu" onMouseEnter={() => {setMenuHover(2)}} onMouseLeave={() => {setMenuHover(0)}}>
                     <img className="M-order_menu_img" alt="appliance" src={menuImage2} />
                     { menuHover === 2 &&
-                        <Link to="/post?category=appliance" className="M-order_menu_text">appliance</Link> }
+                        <Link to="/post?category=app" className="M-order_menu_text">appliance</Link> }
                 </span>
                 <span className="M-order_menu" onMouseEnter={() => {setMenuHover(3)}} onMouseLeave={() => {setMenuHover(0)}}>
                     <img className="M-order_menu_img" alt="furniture" src={menuImage3} />
                     { menuHover === 3 &&
-                        <Link to="/post?category=furniture" className="M-order_menu_text">furniture</Link> }
+                        <Link to="/post?category=fur" className="M-order_menu_text">furniture</Link> }
                 </span>
             </div>
         </div>
