@@ -9,7 +9,6 @@ import { MyResponsivePie } from "./piechart.js";
 import TotalSalesChart from "./TotalSalesChart"
 import UnAnswered from "./UnAnswered";
 import AdminMemo from "./AdminMemo";
-import axios from "axios";
 
 import piedata  from "./data.json"
 
