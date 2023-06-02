@@ -18,9 +18,9 @@ import axios from "axios";
 function Main() {
     const navigate = useNavigate();
     const [mainBanner, setMainBanner] = useState([]); // 메인 배너 data
-    const [newItemList, setNewItemList] = useState(data); // 신상품 data
-    const [bestItemList, setBestItemList] = useState(data); // 인기상품 data
-    const [deadlineItemList, setDeadlineItemList] = useState(data); // 마감임박상품 data
+    const [newItemList, setNewItemList] = useState([]); // 신상품 data
+    const [bestItemList, setBestItemList] = useState([]); // 인기상품 data
+    const [deadlineItemList, setDeadlineItemList] = useState([]); // 마감임박상품 data
     const [adBanner, setAdBanner] = useState([]); // 광고 배너 data
     const [mainBannerSlide, setMainBannerSlide] = useState(0); // 현재 메인 배너(슬라이드)
     const [adBannerSlide, setAdBannerSlide] = useState(0); // 현재 광고 배너(슬라이드)
@@ -128,15 +128,15 @@ function Main() {
                     <div className="M-item_name"><span>{list.prod_com}</span> {list.prod_name}</div>
                     <div className="M-item_price">
                         <span className="M-item_price_left">
-                            <div className="M-item_org_price">{list.orgPrice}</div>
+                            <div className="M-item_org_price">{list.orgPrice.toLocaleString('ko-KR')}</div>
                             <div className="M-item_pay_price">
-                                {list.sell_type === 2 ? list.directPrice : list.curPrice}
+                                {list.sell_type === 2 ? list.directPrice.toLocaleString('ko-KR'): list.curPrice.toLocaleString('ko-KR')}
                             </div>
                         </span>
                         { list.sell_type === 3 &&
                             <span className="M-item_price_right">
                                 <div className="M-item_direct_price">즉시구매가</div>
-                                <div className="M-item_pay_price">{list.directPrice}</div>
+                                <div className="M-item_pay_price">{list.directPrice.toLocaleString('ko-KR')}</div>
                             </span>
                         }
                     </div>
@@ -187,7 +187,7 @@ function Main() {
             <div className="M-items_title">NEW ITEMS</div>
             <div className="M-items_list">
                 <ListScroll reverseScroll = { true }>
-                    {newItemList.map((list) => printMap(list))}
+                    {newItemList?.map((list) => printMap(list))}
                 </ListScroll>
             </div>
         </div>
@@ -199,7 +199,7 @@ function Main() {
                 <div className="M-items_title">BEST ITEMS</div>
                 <div className="M-items_list">
                     <ListScroll reverseScroll = { true }>
-                        {bestItemList.map((list) => printMap(list))}
+                        {bestItemList?.map((list) => printMap(list))}
                     </ListScroll>
                 </div>
             </div>
@@ -210,7 +210,7 @@ function Main() {
             <div className="M-items_title">마감 임박 상품</div>
             <div className="M-items_list">
                 <ListScroll reverseScroll = { true }>
-                    {deadlineItemList.map((list) => printMap(list))}
+                    {deadlineItemList?.map((list) => printMap(list))}
                 </ListScroll>
             </div>
         </div>
