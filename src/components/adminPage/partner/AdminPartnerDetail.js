@@ -136,7 +136,7 @@ const AdminPartnerDetail = () => {
         </div>
       </div>
       <div className="APDRightAll">
-        <AdminPartnerDetailList num={num}/>
+        <AdminPartnerDetailList num={num} status={data.com_status}/>
       </div>
     </div>
   );

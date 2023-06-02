@@ -34,6 +34,12 @@ function FAQWrite() {
     if (category === 0) {
       return alert("카테고리를 선택해주세요.");
     }
+    if (titleRef.current.value==="") {
+      return alert("제목을 작성해주세요.");
+    }
+    if (contentRef.current.value==="") {
+      return alert("내용을 작성해주세요.");
+    }
     if (window.confirm(`${formState}을 완료하시겠습니까?`)) {
       if (formState === "등록") { // formState가 등록인경우
         const writeData = {

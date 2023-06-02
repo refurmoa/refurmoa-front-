@@ -24,25 +24,15 @@ const NoticePost = () => {
 
   const [inq_title, setInq_title] = useState("");
   const [inq_con, setInq_con] = useState("");
-  const [showImages, setShowImages] = useState([]);
+  const [mainFile, setMainFile] = useState();
+  const [mainName, setMainName] = useState("");
 
-  const handleAddImages = (event) => {
-    const imageLists = event.target.files;
-    let imageUrlLists = [...showImages];
-
-    for (let i = 0; i < imageLists.length; i++) {
-      const currentImageUrl = URL.createObjectURL(imageLists[i]);
-      imageUrlLists.push(currentImageUrl);
-    }
-
-    if (imageUrlLists.length > 3) {
-      imageUrlLists = imageUrlLists.slice(0, 3);
-    }
-    // 이미지 안보여도 되어서 주석처리
-    // setShowImages(imageUrlLists);
-  };
-  const handleDeleteImage = (id) => {
-    setShowImages(showImages.filter((_, index) => index !== id));
+  const setPreviewImg = (e) => {
+    
+    const uploadFiles =Array.prototype.slice.call(e.target.files);
+    setMainFile(e.target.files[0]);
+    setMainName(uploadFiles[0].name);
+  
   };
 
   //textarea
@@ -58,26 +48,32 @@ const NoticePost = () => {
   let [inputCount, setInputCount] = useState(0);
 
   const INQ_regi = () => {
+    if (inq_title==="") {
+      return alert("제목을 작성해주세요.");
+    }
+    if (inq_con==="") {
+      return alert("내용을 작성해주세요.");
+    }
     if (window.confirm("등록을 완료하시겠습니까?")) {
-      // axios
-      // .post("/cs/inq/write", {
-      //     inq_title: inq_title,
-      //     inq_con: inq_con,
-      //     inq_date:new Date(),
-      //     member_id: id,
-      //      INQ_IMG:showImages[0]
-      // })
-      // .then((res) => {
-      //   if (res.data === 1) {
-      //     alert("성공적으로 등록되었습니다.");
-      //   } else {
-      //     alert("등록에 실패했습니다.");
-      //   }
-      // })
-      // .catch((e) => {
-      //   console.error(e);
-      // });
-      alert("등록이 완료되었습니다.");
+      const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
+      formData.append("inq_img",mainFile);
+      formData.append("id",window.sessionStorage.getItem("id"));
+      formData.append("inqTitle",inq_title);
+      formData.append("inqCon",inq_con);
+      formData.append("mainImgName",mainName);
+      formData.append("inqDate", new Date());
+      axios
+      .post("/cs/inquiry/write",formData)
+      .then((res) => {
+        if (res.data === 1) {
+          alert("성공적으로 등록되었습니다.");
+        } else {
+          alert("등록에 실패했습니다.");
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      });
       document.location.href = "/cs/inquiry";
     } else {
       alert("등록이 취소되었습니다.");
@@ -132,7 +128,7 @@ const NoticePost = () => {
                 id="input-file"
                 accept="image/*"
                 readonly
-                onChange={handleAddImages}
+                onChange={setPreviewImg}
               />
             </div>
           </div>

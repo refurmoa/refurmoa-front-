@@ -4,8 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
 
-// 더미데이터
-import productlist from "./productlist.json";
+
 
 // 이미지파일
 import searchicon from "../../images/search.png"

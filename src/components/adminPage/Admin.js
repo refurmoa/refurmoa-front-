@@ -7,10 +7,17 @@ import TotalSalesChart from "./TotalSalesChart"
 import DailySalesChart from "./DailySalesChart";
 import UnAnswered from "./UnAnswered";
 import AdminMemo from "./AdminMemo";
+import {useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
 const Admin = () => {
+  const navigate = useNavigate();
+  useEffect(()=>{
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+      
   const [adminInfoCount, setAdminInfoCount] = useState();
 
   const dummydata = {
