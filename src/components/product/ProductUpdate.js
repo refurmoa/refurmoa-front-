@@ -44,10 +44,7 @@ function ProductUpdate() {
    /*=================샘플 데이터 이미지는 백엔드에서=========================*/
 
    useEffect(() => {
-    if(window.sessionStorage.getItem("id")!=="admin"){
-      window.location.href="/";
-    }
-    else{
+    
     axios
       .get("/prod/update/info", {
         params:{product_code: product_code}
@@ -56,13 +53,13 @@ function ProductUpdate() {
         console.log(res.data)
         const productData=res.data
         if (
-          productData.categoryCode === "furliving" ||
-          productData.categoryCode === "furbed" ||
-          productData.categoryCode === "furoffice"
+          productData.categoryCode === "funliving" ||
+          productData.categoryCode === "funbed" ||
+          productData.categoryCode === "funoffice"
         ) {
           setFuniture(true);
           setAppliance(false);
-          setCate("furniture");
+          setCate("funiture");
         } else {
           setFuniture(false);
           setAppliance(true);
@@ -105,7 +102,7 @@ function ProductUpdate() {
       });
     
 
-    }
+    
     // setInputCount(productData.Deffect_text.length);
   }, []);
   /*===============================================*/
@@ -166,7 +163,7 @@ function ProductUpdate() {
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
     setCate(e.target.value);
-    if (e.target.value === "furniture") {
+    if (e.target.value === "funiture") {
       setFuniture(true);
       setAppliance(false);
     } else if (e.target.value === "appliance") {
@@ -231,20 +228,9 @@ function ProductUpdate() {
     let str = value.replaceAll(",", "");
     setOrg_price(str);
   };
-  const Product_delete=() =>{
-    if(window.confirm("작성을 취소하시겠습니까?")){
-      window.location.href="/prod"
-    }
-    
-  }
   /*===============================================*/
 
   const Product_write = (e) => {
-    if(defect_text===""){
-      alert("하자 정보를 입력해주세요.")
-      return false;
-    }
-    else{
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     const formimg = new FormData();
     console.log(mainFile);
@@ -284,9 +270,8 @@ function ProductUpdate() {
           .post("/prod/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("작성이 완료되었습니다!");
+            alert("파일 등록이 완료되었습니다!");
             setFileDataList(res.data);
-            window.location.href="/prod"
           })
           .catch((e) => {
             console.error(e);
@@ -294,13 +279,12 @@ function ProductUpdate() {
         }  
         else{
           alert("작성이 완료되었습니다!");
-          window.location.href="/prod"
         }
       })
       .catch((e) => {
         console.error(e);
       })
-    }
+     
   };
 
   return (
@@ -308,7 +292,7 @@ function ProductUpdate() {
       <div className="PW_header">
         <div className="PW_title">상품 수정</div>
         <div className="PW_button">
-          <button className="PW_list_btn" onClick={Product_delete}>취소</button>
+          <button className="PW_list_btn">취소</button>
           <button className="PW_wrie_btn" onClick={Product_write}>
             수정
           </button>
@@ -401,7 +385,7 @@ function ProductUpdate() {
           <div className="PW_product_input_select">
             <select className="PW_category" value={cate} onChange={chageCate}>
               <option>카테고리 선택</option>
-              <option value="furniture">가구</option>
+              <option value="funiture">가구</option>
               <option value="appliance">가전</option>
             </select>
             <select
@@ -419,9 +403,9 @@ function ProductUpdate() {
               )}
               {funiture && (
                 <>
-                  <option value="furliving">거실&주방</option>
-                  <option value="furbed">침실 </option>
-                  <option value="furoffice">사무실</option>
+                  <option value="funliving">거실&주방</option>
+                  <option value="funbed">침실 </option>
+                  <option value="funoffice">사무실</option>
                 </>
               )}
             </select>

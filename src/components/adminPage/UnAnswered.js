@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios';
 import { useInView } from 'react-intersection-observer';
-import { InView } from 'react-intersection-observer';
-import { useNavigate } from 'react-router-dom';
 
 // 더미데이터
 import unAnsweredWritings from "./UnAnswered.json";
+import { InView } from 'react-intersection-observer';
+import { useNavigate } from 'react-router-dom';
 
 
 const UnAnswered = () => {
@@ -16,7 +16,7 @@ const UnAnswered = () => {
 
 
   const getUnAnsweredData = () => {
-    // axios.get("/admin/inq/unanswered")
+    // axios.get("/admin/unanswered")
     // .then((res) => {
     //   const { data } = res;
     //   setUnAnsweredData(data.content);
