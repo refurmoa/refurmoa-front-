@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import axios from "axios";
 import "./main.css";
 import { Product } from "./product";
@@ -8,11 +8,22 @@ import list from "./images/list.png";
 import star from "./images/star.png";
 
 export const Main = ({ products, setProducts }) => {
+
+
+  const [data,setData]=useState("");
+
   useEffect(() => {
-    axios.get("/data/products.json").then((data) => {
-      setProducts(data.data.products);
-    });
-  }, [setProducts]);
+    
+    axios
+    .get(`/mypage/memberinfo?id=${window.sessionStorage.getItem("id")}`)
+    .then((res) => {
+      console.log(res.data)
+      
+    })
+    .catch((e) => {
+      console.error(e);
+    })
+  }, []);
 
   return (
     <>
