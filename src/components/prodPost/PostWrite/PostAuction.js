@@ -7,8 +7,10 @@ function PostAuction(props) {
   const addComma = props.addComma;
   const onChangeAuc = props.onChangeAuc;
   const onChangeDel = props.onChangeDel;
+  const onChangeUnit = props.onChangeUnit;
   const setAs_date = props.setAs_date;
   const auc_price = props.auc_price;
+  const unit_price=props.unit_price;
   const del_price = props.del_price;
   const start_date = props.start_date;
   const end_date = props.end_date;
@@ -26,6 +28,19 @@ function PostAuction(props) {
             type="text"
             onChange={(e) => onChangeAuc(e)}
             value={addComma(auc_price) || ""}
+          />
+          원
+        </div>
+      </div>
+      <div className="PW_product_category">
+        <div className="PR_product_input_header">입찰단위가</div>
+        <div className="PR_product_price">
+          {" "}
+          <input
+            className="PR_product_price_input"
+            type="text"
+            onChange={(e) => onChangeUnit(e)}
+            value={addComma(unit_price) || ""}
           />
           원
         </div>

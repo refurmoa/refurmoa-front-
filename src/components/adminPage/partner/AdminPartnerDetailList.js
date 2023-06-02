@@ -8,6 +8,7 @@ import moment from 'moment';
 
 export const AdminPartnerDetailList = (props) => {
   const num =props.num;
+  const status=props.status;
   const [partnerlist, setPartnerlist] = useState([]);
   // const id = window.sessionStorage.getItem("id");
   const [ref, inView] = useInView(); // 하단의 ref가 화면에 보여지면 inView 값이 true로 바뀜
@@ -67,10 +68,16 @@ export const AdminPartnerDetailList = (props) => {
     <div>
       <top className="APDBidList">
         <div className="APDBidListL">
-          <span className="APDBidListL1">제휴 제품</span>
-          <span className="APDBidListL2">
-            ({partnerlist.length}개)
-          </span>
+          {status===2?<span className="APDBidListL1">제휴 종료</span>:
+          <>
+           <span className="APDBidListL1">제휴 제품</span>
+           <span className="APDBidListL2">
+             ({partnerlist.length}개)
+           </span>
+           </>
+           }
+
+         
         </div>
         <div className="APDinput">
           <input
@@ -87,7 +94,9 @@ export const AdminPartnerDetailList = (props) => {
           ></input>
         </div>
       </top>
-      {partnerlist.length===0? (
+      {status===2?<div className="APDBidNoList">제휴가 종료되었습니다.</div>:
+      
+      partnerlist.length===0? (
         <div className="APDBidNoList">입찰내역이 없습니다.</div>
       ) : (
         <div className="APDBidListFull">

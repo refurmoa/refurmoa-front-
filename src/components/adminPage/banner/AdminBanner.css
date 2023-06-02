@@ -85,6 +85,7 @@
   background: rgba(238, 238, 238, 0.2);
 }
 .BN_banner_img {
+  width: 385px;
   float: left;
 }
 .BN_banner_img div {
@@ -145,5 +146,6 @@
   font-size: 20px;
   line-height: 30px;
   color: #666666;
+  cursor: pointer;
   background: rgba(238, 238, 238, 0.5);
 }

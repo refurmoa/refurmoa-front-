@@ -1,21 +1,66 @@
 // 관리자 페이지 - 메인
-import { MyResponsivePie } from "./piechart.js";
-import  data  from "./data.json"
-import React from 'react'
+
 import styled from 'styled-components'
-import TotalSalesChart from "./TotalSalesChart"
+import axios from "axios";
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from "react-router-dom";
+
 import DailySalesChart from "./DailySalesChart";
+import { MyResponsivePie } from "./piechart.js";
+import TotalSalesChart from "./TotalSalesChart"
 import UnAnswered from "./UnAnswered";
 import AdminMemo from "./AdminMemo";
 
+import piedata  from "./data.json"
 
 const Admin = () => {
+  const navigate = useNavigate();
+  const [adminInfoCount, setAdminInfoCount] = useState();
+
+  useEffect(()=>{
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
+  }, []);
+
+  const dummydata = {
+    "yet": 3,
+    "ingauction": 5,
+    "ingdirect": 5,
+    "waitpay": 3,
+    "prepare": 5,
+    "shipping": 3,
+    "completed": 6,
+    "productInquiry": 3,
+    "oneononeInquiry": 4,
+    "partnership": 5
+  }
+
+  const getAdminInfo = () => {
+    // axios.get("/admin/info/count")
+    // .then((res) => {
+    //   const { data } = res;
+    //   setAdminInfoCount(data);
+    // })
+    // .catch((e) => {
+    //   console.error(e);
+    // })
+    setAdminInfoCount(dummydata)
+  }
+
+  useEffect(() => {
+    getAdminInfo();
+  }, [])
+
+  
   return (
     <>
       {/* 일별 매출, 카테고리별 매출 */}
       <DailyAndCategorySalesBox> 
         <DailySalesChart />
-        <MyResponsivePie data={data} />
+        <CategoryChart>
+          <MyResponsivePie data={piedata} />
+        </CategoryChart>
       </DailyAndCategorySalesBox>
 
       {/* 매출 현황 */}

@@ -9,6 +9,7 @@ import menuImage1 from "../../images/main_menu_image1.jpg";
 import menuImage2 from "../../images/main_menu_image2.jpg";
 import menuImage3 from "../../images/main_menu_image3.jpg";
 import data from "./MainItems.json";
+import axios from "axios";
 
 // axios 메인배너/광고배너 data
 // 신상품 경매/즉시구매, 개수, 
@@ -19,9 +20,9 @@ import data from "./MainItems.json";
 function Main() {
     const navigate = useNavigate();
     const [mainBanner, setMainBanner] = useState([]); // 메인 배너 data
-    const [newItemList, setNewItemList] = useState(data); // 신상품 data
-    const [bestItemList, setBestItemList] = useState(data); // 인기상품 data
-    const [deadlineItemList, setDeadlineItemList] = useState(data); // 마감임박상품 data
+    const [newItemList, setNewItemList] = useState([]); // 신상품 data
+    const [bestItemList, setBestItemList] = useState([]); // 인기상품 data
+    const [deadlineItemList, setDeadlineItemList] = useState([]); // 마감임박상품 data
     const [adBanner, setAdBanner] = useState([]); // 광고 배너 data
     const [mainBannerSlide, setMainBannerSlide] = useState(0); // 현재 메인 배너(슬라이드)
     const [adBannerSlide, setAdBannerSlide] = useState(0); // 현재 광고 배너(슬라이드)
@@ -29,24 +30,35 @@ function Main() {
     const [now, setNow] = useState(new Date().getTime()); // 현재 날짜(ms)
 
     useEffect(() => {
-        setMainBanner([
-            { bann_image : "example.jpg", bann_link : "/post/detail/1" },
-            { bann_image : "image01.png", bann_link : "/post/detail/2" },
-            { bann_image : "image02.png", bann_link : "/post/detail/3" },
-            { bann_image : "image03.png", bann_link : "/post/detail/4" },
-            { bann_image : "image04.png", bann_link : "/post/detail/5" },
-            { bann_image : "image05.png", bann_link : "/post/detail/6" }
-        ]);
-
-        setAdBanner([
-            { bann_image : "example.jpg", bann_link : "/post/detail/1" },
-            { bann_image : "image01.png", bann_link : "/post/detail/2" },
-            { bann_image : "image02.png", bann_link : "/post/detail/3" },
-            { bann_image : "image03.png", bann_link : "/post/detail/4" },
-            { bann_image : "image04.png", bann_link : "/post/detail/5" },
-            { bann_image : "image05.png", bann_link : "/post/detail/6" }
-        ]);
-
+        axios
+        .get(`/main/item`)
+        .then((res) => {
+            console.log(res.data);
+            setBestItemList(res.data[0]);
+            setNewItemList(res.data[1]);
+            setDeadlineItemList(res.data[2]);
+        })
+        .catch((e) => {
+        console.error(e);
+        })
+        axios
+        .get(`/main/banner`)
+        .then((res) => {
+            console.log(res.data);
+            setMainBanner(res.data);
+        })
+        .catch((e) => {
+        console.error(e);
+        })
+        axios
+        .get(`/main/banner/ad`)
+        .then((res) => {
+            console.log(res.data);
+            setAdBanner(res.data);
+        })
+        .catch((e) => {
+        console.error(e);
+        })
         // 상품 타이머 > 1초마다 리렌더링
         const countdown = setInterval(() => {
             setNow(new Date().getTime());
@@ -117,15 +129,15 @@ function Main() {
                     <div className="M-item_name"><span>{list.prod_com}</span> {list.prod_name}</div>
                     <div className="M-item_price">
                         <span className="M-item_price_left">
-                            <div className="M-item_org_price">{list.org_price.toLocaleString('ko-KR')}</div>
+                            <div className="M-item_org_price">{list.orgPrice.toLocaleString('ko-KR')}</div>
                             <div className="M-item_pay_price">
-                                {list.sell_type === 2 ? list.direct_price.toLocaleString('ko-KR') : list.cur_price.toLocaleString('ko-KR')}
+                                {list.sell_type === 2 ? list.directPrice.toLocaleString('ko-KR'): list.curPrice.toLocaleString('ko-KR')}
                             </div>
                         </span>
                         { list.sell_type === 3 &&
                             <span className="M-item_price_right">
                                 <div className="M-item_direct_price">즉시구매가</div>
-                                <div className="M-item_pay_price">{list.direct_price.toLocaleString('ko-KR')}</div>
+                                <div className="M-item_pay_price">{list.directPrice.toLocaleString('ko-KR')}</div>
                             </span>
                         }
                     </div>
@@ -141,9 +153,9 @@ function Main() {
             <svg className="M-banner_arrow M-banner_arrow_left" onClick={(e) => {handleMainBanner(e, "prev")}}
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>
             { mainBanner.map((banner, index) => (
-                <Link to={banner.bann_link} key={index}>
+                <Link to={banner.bannLink} key={index}>
                     <img className={`M-banner_img ${index === mainBannerSlide && "M-banner_img_active"}`}
-                        alt="메인배너이미지" src={`/images/banner/${banner.bann_image}`} />
+                        alt="메인배너이미지" src={`/images/banner/${banner.bannImage}`} />
                 </Link>
             ))}
             <svg className="M-banner_arrow M-banner_arrow_right" onClick={(e) => {handleMainBanner(e, "next")}}
@@ -161,12 +173,12 @@ function Main() {
                 <span className="M-order_menu" onMouseEnter={() => {setMenuHover(2)}} onMouseLeave={() => {setMenuHover(0)}}>
                     <img className="M-order_menu_img" alt="appliance" src={menuImage2} />
                     { menuHover === 2 &&
-                        <Link to="/post?category=app" className="M-order_menu_text">appliance</Link> }
+                        <Link to="/post?category=appliance" className="M-order_menu_text">appliance</Link> }
                 </span>
                 <span className="M-order_menu" onMouseEnter={() => {setMenuHover(3)}} onMouseLeave={() => {setMenuHover(0)}}>
                     <img className="M-order_menu_img" alt="furniture" src={menuImage3} />
                     { menuHover === 3 &&
-                        <Link to="/post?category=fur" className="M-order_menu_text">furniture</Link> }
+                        <Link to="/post?category=furniture" className="M-order_menu_text">furniture</Link> }
                 </span>
             </div>
         </div>
@@ -176,7 +188,7 @@ function Main() {
             <div className="M-items_title">NEW ITEMS</div>
             <div className="M-items_list">
                 <ListScroll reverseScroll = { true }>
-                    {newItemList.map((list) => printMap(list))}
+                    {newItemList?.map((list) => printMap(list))}
                 </ListScroll>
             </div>
         </div>
@@ -188,7 +200,7 @@ function Main() {
                 <div className="M-items_title">BEST ITEMS</div>
                 <div className="M-items_list">
                     <ListScroll reverseScroll = { true }>
-                        {bestItemList.map((list) => printMap(list))}
+                        {bestItemList?.map((list) => printMap(list))}
                     </ListScroll>
                 </div>
             </div>
@@ -199,7 +211,7 @@ function Main() {
             <div className="M-items_title">마감 임박 상품</div>
             <div className="M-items_list">
                 <ListScroll reverseScroll = { true }>
-                    {deadlineItemList.map((list) => printMap(list))}
+                    {deadlineItemList?.map((list) => printMap(list))}
                 </ListScroll>
             </div>
         </div>
@@ -208,8 +220,8 @@ function Main() {
         <div className="M-ad_banner_wrap">
             <div className="M-ad_banner">
                 { adBanner.map((banner, index) => (
-                    <Link to={banner.bann_link} className="M-ad_banner_img_wrap" key={index}>
-                        <img className="M-ad_banner_img" alt="광고배너이미지" src={`/images/banner/${banner.bann_image}`} />
+                    <Link to={banner.bannLink} className="M-ad_banner_img_wrap" key={index}>
+                        <img className="M-ad_banner_img" alt="광고배너이미지" src={`/images/banner/${banner.bannImage}`} />
                     </Link>
                 ))}
             </div>
@@ -219,3 +231,6 @@ function Main() {
 };
 
 export default Main;
+
+
+

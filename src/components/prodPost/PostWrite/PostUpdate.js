@@ -26,6 +26,7 @@ function PostUpdate() {
   const [prod_Grade, setprod_Grade] = useState("");
   const [org_price, setOrg_price] = useState("");
   const [dir_price, setDir_price] = useState("");
+  const [unit_price, setUnit_price] = useState("");
   const [auc_price, setAuc_price] = useState("");
   const [del_price, setDel_price] = useState("");
   const [as_date, setAs_date] = useState("");
@@ -286,6 +287,11 @@ function PostUpdate() {
   const addComma = (price) => {
     let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return returnString;
+  };
+  const onChangeUnit = (e) => {
+    const { value } = e.target;
+    let str = value.replaceAll(",", "");
+    setUnit_price(str);
   };
   const onChangeOrg = (e) => {
     const { value } = e.target;
@@ -696,9 +702,11 @@ function PostUpdate() {
             addComma={addComma}
             onChangeAuc={onChangeAuc}
             onChangeDel={onChangeDel}
+            onChangeUnit={onChangeUnit}
             setAs_date={setAs_date}
             auc_price={auc_price}
             del_price={del_price}
+            unit_price={unit_price}
             start_date={start_date}
             end_date={end_date}
             as_date={as_date}
@@ -710,11 +718,13 @@ function PostUpdate() {
           <PostAll
             onChangeDir={onChangeDir}
             addComma={addComma}
+            onChangeUnit={onChangeUnit}
             onChangeAuc={onChangeAuc}
             onChangeDel={onChangeDel}
             setAs_date={setAs_date}
             dir_price={dir_price}
             auc_price={auc_price}
+            unit_price={unit_price}
             del_price={del_price}
             start_date={start_date}
             end_date={end_date}

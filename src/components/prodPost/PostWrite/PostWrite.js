@@ -27,6 +27,7 @@ function PostWrite(props) {
   const [prod_Grade, setprod_Grade] = useState("");
   const [org_price, setOrg_price] = useState("");
   const [dir_price, setDir_price] = useState("");
+  const [unit_price, setUnit_price] = useState("");
   const [auc_price, setAuc_price] = useState("");
   const [del_price, setDel_price] = useState("");
   const [as_date, setAs_date] = useState("");
@@ -228,7 +229,11 @@ function PostWrite(props) {
     let str = value.replaceAll(",", "");
     setAuc_price(str);
   };
-
+  const onChangeUnit = (e) => {
+    const { value } = e.target;
+    let str = value.replaceAll(",", "");
+    setUnit_price(str);
+  };
   const onChangeDel = (e) => {
     const { value } = e.target;
     let str = value.replaceAll(",", "");
@@ -612,8 +617,10 @@ function PostWrite(props) {
             setAs_date={setAs_date}
             auc_price={auc_price}
             del_price={del_price}
+            unit_price={unit_price}
             start_date={start_date}
             end_date={end_date}
+            onChangeUnit={onChangeUnit}
             as_date={as_date}
             setStart_date={setStart_date}
             setEnd_date={setEnd_date}
@@ -625,9 +632,11 @@ function PostWrite(props) {
             addComma={addComma}
             onChangeAuc={onChangeAuc}
             onChangeDel={onChangeDel}
+            onChangeUnit={onChangeUnit}
             setAs_date={setAs_date}
             dir_price={dir_price}
             auc_price={auc_price}
+            unit_price={unit_price}
             del_price={del_price}
             start_date={start_date}
             end_date={end_date}

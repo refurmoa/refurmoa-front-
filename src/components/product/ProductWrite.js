@@ -15,7 +15,7 @@ function ProductWrite() {
     if(window.sessionStorage.getItem("id")!=="admin"){
       navigate("/");
     }
-},[]);
+  },[]);
   const [cate, setCate] = useState("");
   const [cate_code, setCate_code] = useState("");
   let [main_Image, setMainImg] = useState("");

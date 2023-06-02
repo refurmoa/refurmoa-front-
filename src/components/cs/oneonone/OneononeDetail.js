@@ -15,13 +15,12 @@ const OneononeDetail = () => {
   let [inputCount, setInputCount] = useState(0);
 
   //파일 다운로드
-  const downloadImage = async (filename) => {
-    const url =process.env.PUBLIC_URL+"/images/"+filename;
-    const download = document.createElement('a');
-    download.href = url;
-    download.setAttribute('download', filename);
-    download.setAttribute('type', 'application/json');
-    download.click();
+  const downloadImage = async (filename,orgname) => {
+    const url =`${process.env.PUBLIC_URL}/images/${filename}`;
+    const downloadLink = document.createElement('a');
+    downloadLink.href = url;
+    downloadLink.download = orgname; // 다운로드될 이미지 파일명
+    downloadLink.click();
 }
   const onInputHandler = (e) => {
     setContent(e.target.value);
@@ -72,6 +71,7 @@ const OneononeDetail = () => {
     axios
     .get(`/cs/inquiry/detail?num=${item}`)
     .then((res) => {
+      console.log(res.data);
       setData(res.data);
     })
     .catch((e) => {
@@ -99,7 +99,7 @@ const OneononeDetail = () => {
             <hr className="OD-title-line" />
             <div className="OD-content">{data.inqCon}</div>
             {data.inqOrgImg!==null&&<div className="OD-filename">
-            <span className="OD-file-title" >첨부파일:</span><span onClick={() => downloadImage(item.inqImg)}> {data.inqOrgImg}</span>
+            <span className="OD-file-title" >첨부파일:</span><span onClick={() => downloadImage(data.inqImg,data.inqOrgImg)}> {data.inqOrgImg}</span>
             </div>}
             {data.answerCon === null ? (
               <div className="OD_text_box">
@@ -143,7 +143,7 @@ const OneononeDetail = () => {
             <hr className="OD-title-line" />
             <div className="OD-content">{data.inqCon}</div>
             {data.inqOrgImg!==null&&<div className="OD-filename">
-            <span className="OD-file-title" >첨부파일:</span><span onClick={() => downloadImage(item.inqImg)}> {data.inqOrgImg}</span>
+            <span className="OD-file-title" >첨부파일:</span><span onClick={() => downloadImage(data.inqImg,data.inqOrgImg)}> {data.inqOrgImg}</span>
             </div>}
             <>
               <>
