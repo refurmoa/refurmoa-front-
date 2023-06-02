@@ -261,7 +261,7 @@ function PostDetail() {
   }
 
   // 입찰내역
-  const bidListMap = bidList.map((li, index) => (
+  const bidListMap = bidList?.map((li, index) => (
     <li className="PD-bid_list_line" key={index}>
       <span className="PD-bid_list_id">
         { login_id === "admin" || login_id === li.member_id ? li.member_id
