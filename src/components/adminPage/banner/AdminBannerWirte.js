@@ -17,6 +17,7 @@ const AdminBannerWirte = () => {
   const [bannerCom, setBannerCom] = useState();
   const [bannerPhone, setBannerPhone] = useState();
   const [bannerNotes, setBannerNotes] = useState();
+  const [bannerLocation, setBannerLocation] = useState("top");
 
   // 미리보기 이미지
   const setPreviewImg = (e) => {
@@ -59,6 +60,8 @@ const AdminBannerWirte = () => {
     formData.append("bann_ref", bannerNotes);
     formData.append("bann_start", new Date(startDate));
     formData.append("bann_end", new Date(endtDate));
+    formData.append("bann_location", bannerLocation);
+    console.log(bannerLocation);
 
     axios
       .post("/admin/banner/write", formData, {
@@ -66,9 +69,8 @@ const AdminBannerWirte = () => {
         "Content-Type": "multipart/form-data",
         },})
       .then((res) => {
-        if (res.data === 1) {
-          navigate("/admin/banner");
-        }
+        console.log(res);
+        navigate("/admin/banner");
       })
       .catch((e) => {
         console.error(e);
@@ -88,9 +90,9 @@ const AdminBannerWirte = () => {
             onChange={setPreviewImg}
           />
           <div className="ABMSelectLocation">
-            <select>
-              <option>&nbsp;메인배너</option>
-              <option>&nbsp;광고배너</option>
+            <select onChange={(e) => {setBannerLocation(e.target.value)}}>
+              <option value="top">&nbsp;메인배너</option>
+              <option value="bottom">&nbsp;광고배너</option>
             </select>
           </div>
         </div>

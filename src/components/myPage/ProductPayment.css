@@ -15,6 +15,7 @@ padding: 0;
 
 .marginzero {
   margin-left: 20px;
+  position: relative;
 }
 
 .productPay {
@@ -59,6 +60,8 @@ padding: 0;
   width: 340px;
   height: 30px;
   cursor: pointer;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .pricePay {
@@ -127,12 +130,13 @@ padding: 0;
   margin-top: 5px;
 }
 
-.payButtonPay{
+.payButtonPay {
   width: 96px;
   height: 35px;
   cursor: pointer;
   background: #514438;
   border-radius: 10px;
+  border: none;
 
   font-size: 18px;
   color: #FFFFFF;
@@ -146,6 +150,7 @@ padding: 0;
   
   background: #514438;
   border-radius: 10px;
+  border: none;
   cursor: pointer;
   font-size: 18px;
   color: #FFFFFF;
@@ -158,6 +163,7 @@ padding: 0;
   cursor: pointer;
   background: #514438;
   border-radius: 10px;
+  border: none;
 
   font-size: 18px;
   color: #FFFFFF;
@@ -175,3 +181,8 @@ padding: 0;
   color: #333333;
 }
 
+.mile > div {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
