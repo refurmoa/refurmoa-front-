@@ -1,19 +1,27 @@
 // 본인인증
 
-function SignVerification({ name, setName, phone, setPhone, certi, setCerti }) {
+function SignVerification({ update, name, setName, phone, setPhone, certi, setCerti, setPhoneChk }) {
 
     // 인증번호 전송
     const certifyClick = () => {
-
+        update !== null && update === true && setPhoneChk(true);
     }
 
     return ( <>
-        <div className="Sign_form_line">
-            <label className="Sign_form_text" htmlFor="name">이름</label>
-            <input className="Sign_input"
-                name="name" type="text" placeholder="이름" maxLength="10"
-                value={name} onChange={(e) => setName(e.target.value)} required />
-        </div>
+        { update !== null && update === true ?
+            <div className="Sign_form_line">
+                <label className="Sign_form_text" htmlFor="name">이름</label>
+                <input className="Sign_input" style={{border: '0'}}
+                    name="name" type="text" placeholder="이름" maxLength="10" value={name} readOnly />
+            </div>
+            : <div className="Sign_form_line">
+                <label className="Sign_form_text" htmlFor="name">이름</label>
+                <input className="Sign_input"
+                    name="name" type="text" placeholder="이름" maxLength="10"
+                    value={name} onChange={(e) => setName(e.target.value)} required />
+            </div>
+        }
+        
         <div className="Sign_form_line Sign_phone_line">
             <label className="Sign_form_text" htmlFor="phone">전화번호</label>
             <input className="Sign_input Sign_phone"

@@ -93,7 +93,7 @@ function ProductWrite() {
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
     setCate(e.target.value);
-    if (e.target.value === "furniture") {
+    if (e.target.value === "funiture") {
       setFuniture(true);
       setAppliance(false);
     } else if (e.target.value === "appliance") {
@@ -160,68 +160,60 @@ function ProductWrite() {
   /*===============================================*/
 
   const Product_write = (e) => {
+    const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
+    const formimg = new FormData();
 
-    if(defect_text===""){
-      alert("하자 정보를 입력해주세요.")
-      return false;
-    }
-    else{
-      const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
-      const formimg = new FormData();
-      
-      listFile.forEach((file) => {
-        formimg.append("uploadfiles", file)
-      });
-      console.log(listFile);
-      formData.append("main_image",mainFile);
-      formData.append("product_code",0);
-      formData.append("category_code",cate_code);
-      formData.append("category", code);
-      formData.append("deffect_image1","");
-      formData.append("deffect_image2","");
-      formData.append("deffect_image3","");
-      formData.append("prod_com", prod_com);
-      formData.append("prod_name",prod_name );
-      formData.append("prod_grade",prod_Grade );
-      formData.append("org_price", org_price);
-      formData.append("guarantee",guarantee );
-      formData.append("deffect_text", defect_text);
-      formData.append("reg_date",new Date() );
-      formData.append("prod_state",0);
-      formData.append("com_num",com_num);
-    
-      axios
-        .post("/prod/write", formData, {
-          headers: {
-          "Content-Type": "multipart/form-data",
-          },})
-        .then((res) => {
-          
-          const entries = Array.from(formimg.entries());
-          const formDataLength = entries.length;
-          console.log(formDataLength);
-          if(formDataLength!==0){
-          axios
-            .post("/prod/file", formimg)
-            .then((res) => {
-              console.log("uploadfile request");
-              alert("작성이 완료되었습니다!");
-              setFileDataList(res.data);
-              window.location.href="/prod";
-            })
-            .catch((e) => {
-              console.error(e);
-            });   
-          }  
-          else{
-            alert("작성이 완료되었습니다!");
-            window.location.href="/prod"
-          }
-        })
-        .catch((e) => {
-          console.error(e);
-        })
-      }
+    listFile.forEach((file) => {
+      formimg.append("uploadfiles", file)
+    });
+    console.log(listFile);
+    formData.append("main_image",mainFile);
+    formData.append("product_code",0);
+    formData.append("category_code",cate_code);
+    formData.append("category", code);
+    formData.append("deffect_image1","");
+    formData.append("deffect_image2","");
+    formData.append("deffect_image3","");
+    formData.append("prod_com", prod_com);
+    formData.append("prod_name",prod_name );
+    formData.append("prod_grade",prod_Grade );
+    formData.append("org_price", org_price);
+    formData.append("guarantee",guarantee );
+    formData.append("deffect_text", defect_text);
+    formData.append("reg_date",new Date() );
+    formData.append("prod_state",0);
+    formData.append("com_num",com_num);
+   
+    axios
+      .post("/prod/write", formData, {
+        headers: {
+        "Content-Type": "multipart/form-data",
+        },})
+      .then((res) => {
+        
+        const entries = Array.from(formimg.entries());
+        const formDataLength = entries.length;
+        console.log(formDataLength);
+        if(formDataLength!==0){
+        axios
+          .post("/prod/file", formimg)
+          .then((res) => {
+            console.log("uploadfile request");
+            alert("파일 등록이 완료되었습니다!");
+            setFileDataList(res.data);
+          })
+          .catch((e) => {
+            console.error(e);
+          });   
+        }  
+        else{
+          alert("작성이 완료되었습니다!");
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+     
   };
 
   return (
@@ -231,8 +223,7 @@ function ProductWrite() {
       <div className="PW_header">
         <div className="PW_title">상품 등록</div>
         <div className="PW_button">
-          <button className="PW_list_btn">
-            <a href ="/prod">목록</a></button>
+          <button className="PW_list_btn">목록</button>
           <button className="PW_wrie_btn" onClick={Product_write}>
             등록
           </button>
@@ -325,7 +316,7 @@ function ProductWrite() {
           <div className="PW_product_input_select">
             <select className="PW_category" onChange={chageCate}>
               <option>카테고리 선택</option>
-              <option value="furniture">가구</option>
+              <option value="funiture">가구</option>
               <option value="appliance">가전</option>
             </select>
             <select
@@ -342,9 +333,9 @@ function ProductWrite() {
               )}
               {funiture && (
                 <>
-                  <option value="furliving">거실&주방</option>
-                  <option value="furbed">침실 </option>
-                  <option value="furoffice">사무실</option>
+                  <option value="funliving">거실&주방</option>
+                  <option value="funbed">침실 </option>
+                  <option value="funoffice">사무실</option>
                 </>
               )}
             </select>

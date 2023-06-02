@@ -73,6 +73,9 @@ const Signup_input = (props) => { // props.id, props.name, props.phone
     } else if (password === "" || passwordChk === "") {
       alert("비밀번호를 입력해주세요!");
       return false;
+    } else if (!passwordRegex.test(password)) {
+      alert("비밀번호를 확인해주세요!");
+      return false;
     } else if (email === "" || domain === "") {
       alert("이메일 입력해주세요!");
       return false;
@@ -205,7 +208,7 @@ const Signup_input = (props) => { // props.id, props.name, props.phone
       {/* 주소 API */}
       <Modal style={{ overlay: { position: "fixed", backgroundColor: "rgba(0, 0, 0, 0.75)" },
         content: { position: "absolute", top: "25%", bottom: "40px", left: "40px", right: "40px",
-          width: "450px", height: "430px", border: "1px solid #ccc",padding: "20px" } }}
+          width: "450px", height: "430px", border: "1px solid #ccc", padding: "20px" } }}
         isOpen={modal} >
         <img className="Sign_modal_close" alt="창 닫기" src={cancel} onClick={closeModal} />
         { popup && <Post address={address} setAddress={setAddress} setMdoal={setModal} /> }

@@ -1,4 +1,5 @@
 // 관리자 페이지 - 메인
+
 import styled from 'styled-components'
 import axios from "axios";
 import React, { useEffect, useState } from 'react'
@@ -9,8 +10,6 @@ import { MyResponsivePie } from "./piechart.js";
 import TotalSalesChart from "./TotalSalesChart"
 import UnAnswered from "./UnAnswered";
 import AdminMemo from "./AdminMemo";
-
-
 
 import piedata  from "./data.json"
 

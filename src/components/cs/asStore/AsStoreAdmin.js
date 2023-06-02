@@ -225,6 +225,7 @@ function AsStoreWrite() {
                   placeholder="주소"
                   required={true}
                   value={store_addr}
+                  readOnly
                 />
               </div>
               <div className="AsStore_addr_logo">
@@ -280,7 +281,7 @@ function AsStoreWrite() {
                   type="text"
                   size="100"
                   maxLength="100"
-                  placeholder=" 상세 주소"
+                  placeholder="상세 주소"
                   value={store_detail}
                   onChange={(e) => setStore_detail(e.target.value)}
                 ></input>

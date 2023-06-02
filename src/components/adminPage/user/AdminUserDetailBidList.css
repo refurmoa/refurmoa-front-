@@ -160,7 +160,7 @@
 
 .AUDsearchboxbutton {
     position: relative;
-    background-image: url(../../../../public/images/prod/searchicon.png);
+    background-image: url(../../../images/search.png);
     border: none;
     width: 17px;
     height: 17px;
