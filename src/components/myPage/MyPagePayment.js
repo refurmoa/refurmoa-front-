@@ -4,151 +4,138 @@ import "./MyPagePayBid.css";
 import prod from "./mypageprod.json";
 import { ProductPayment } from "./ProductPayment";
 import MemberInfo from "./MemberInfo";
+import axios from "axios";
 
 const MyPage_detail = () => {
-  const [prodData, setProdData] = useState();
-
-  // const name = window.sessionStorage.getItem("name");
-  // const id = window.sessionStorage.getItem("id");
-
-  const postProdData = () => {
-    // axios
-    // .get(`/api/post/list`{
-    //     id:id
-    // .then((res) => {
-    //   const { data } = res;
-    //   setProdData(data);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    const data = prod.prodlist;
-    setProdData(data);
-  };
-
-  const day1Ref = useRef();
-  const day2Ref = useRef();
   const searchRef = useRef();
+  const startDateRef = useRef();
+  const endDateRef = useRef();
+  const [payData, setPayData] = useState();
 
   const [totalPageBid, setTotalPageBid] = useState(1);
   const [currentPageBid, setCurrentPageBid] = useState(1);
 
-  useEffect(() => {
-    // 입찰 리스트 조회
-    // setListBid();
+  const startDateHandler = () => {
+    if (endDateRef.current.value !== "") {
+      if (startDateRef.current.value > endDateRef.current.value) {
+        alert("시작날짜가 종료날짜보다 클 수 없습니다.");
+        startDateRef.current.value = "";
+        startDateRef.current.focus();
+      }
+    }
+  }
 
-    // 상품 개수 조회
-    pageCountBid();
-  }, []);
-
-  // 상품 목록 조회
-  const setListBid = () => {
-    // setInquiryList();
-  };
-
-  // 상품 전체 수 조회
-  const pageCountBid = () => {
-    setTotalPageBid(7);
-  };
-
-  const [searchDate1, setSearchDate1] = useState();
-  const [searchDate2, setSearchDate2] = useState();
-  console.log(searchDate1);
-  console.log(searchDate2);
-
-  const search_date = () => {
-    if (day1Ref.current.value === "" || day1Ref.current.value === undefined) {
-      alert("시작 날짜를 정해주세요!!");
-      day1Ref.current.focus();
+  const endDateHandler = () => {
+    if (startDateRef.current.value === "") {
+      startDateRef.current.focus();
+      return false;
+    } else if (startDateRef.current.value > endDateRef.current.value) {
+      alert("시작날짜가 종료날짜보다 클 수 없습니다.");
+      startDateRef.current.value = "";
+      startDateRef.current.focus();
       return false;
     }
-    if (day2Ref.current.value === "" || day2Ref.current.value === undefined) {
-      alert("끝 날짜를 정해주세요!!");
-      day2Ref.current.focus();
-      return false;
+
+    const requestData = {
+      member_id: sessionStorage.getItem("id"),
+      date_start: startDateRef.current.value,
+      date_end: endDateRef.current.value,
+      page: 0,
+      size: 16
     }
-    if (day1Ref.current.value > day2Ref.current.value) {
-      alert("날짜를 다시 설정해주세요!!!");
-      return false;
-    }
-    // axios
-    //   .post("/api/post/searchdate", {
-    //     day1: day1Ref.current.value,
-    //     day2: day2Ref.current.value,
-    //   })
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setProdData(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // const data = prod.prodlist;
-    // setProdbidlistData(data);
+    axios
+      .post("/mypage/payment/period", requestData)
+      .then((res) => {
+        const { data } = res;
+        setPayData(data.content);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
-  const search_product = (e) => {
+  const activeEnter = (e) => {
+    if(e.key === "Enter") {
+      searchHandler();
+    }
+  }
+  const searchHandler = () => {
     if (
       searchRef.current.value === "" ||
       searchRef.current.value === undefined
     ) {
-      alert("내용을 입력해주세요!!");
-      searchRef.current.focus();
-      return false;
+      window.location.reload();
     }
 
-    // axios
-    //   .post(`/admin/user/detail/search`{
-    //    search : e.target.value
-    // })
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setProdData(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-    // setProdData(data);
-  };
+    const requestData = { 
+      member_id: sessionStorage.getItem("id"),
+      search: searchRef.current.value,
+      page: 0,
+      size: 16
+    }
+
+    axios.post("/user/payment/search", requestData)
+    .then((res) => {
+      const { data } = res;
+      setPayData(data.content);
+    })
+    .error((e) => {
+      console.error(e);
+    })
+  }
+
+  const getpayData = () => {
+    const requestData = { 
+      member_id: sessionStorage.getItem("id"),
+      page: 0,
+      size: 16
+    }
+    console.log(requestData);
+    axios.post("/user/payment", requestData)
+    .then((res) => {
+      const { data } = res;
+      setPayData(data.content);
+    })
+  }
+
+  useEffect(() => {
+    getpayData();
+  }, [])
 
   return (
     <div>
       <MemberInfo />
-      <mid className="mid">
+      <div className="mid">
         <div className="payword">결제 내역</div>
         <input
           className="date"
           type="date"
-          ref={day1Ref}
-          onChange={(e) => setSearchDate1(e.target.value)}
+          ref={startDateRef}
+          onChange={() => startDateHandler()}
         ></input>
         ~
         <input
           className="date"
           type="date"
-          ref={day2Ref}
-          onChange={(e) => setSearchDate2(e.target.value)}
-        ></input>
-        <input
-          className="datesearchbutton"
-          type="button"
-          value=""
-          onClick={search_date}
+          ref={endDateRef}
+          onChange={() => endDateHandler()}
         ></input>
         <span>
-          <input className="searchboxpay" type="text" ref={searchRef}></input>
+          <span className="searchboxpay">
+            <input type="text" ref={searchRef} onKeyDown={(e) => {activeEnter(e)}} />
+          </span>
           <input
             className="searchboxbutton"
             type="button"
             value=""
-            onClick={search_product}
+            onClick={() => {searchHandler()}}
           ></input>
         </span>
-      </mid>
+      </div>
 
       <main className="flex_wrap">
-        {prod.prodlist.map((product) => {
-          return <ProductPayment product={product} />;
+        {prod.prodlist.map((product, index) => {
+          return <ProductPayment product={product} key={index} />;
         })}
       </main>
       {/* 페이지 출력 */}
