@@ -139,12 +139,14 @@ const GradeMileCoupon = () => {
         <VerticalLine />
         <MemberCouponBox>
           <CouponTitle>보유중인 쿠폰</CouponTitle>
+          <CouponContent>
           {membershipInfo?.coupon.map((data, index) => (
           <CouponDetailBox key={index}>
             <CouponName>{data.coupon_name}</CouponName>
             <CouponPoint>{data.sale_price}</CouponPoint>
           </CouponDetailBox>
           ))}
+          </CouponContent>
         </MemberCouponBox>
       </MemberGradeMileCouponBox>
     </MemberGradeMileCouponWrapper>
@@ -324,12 +326,30 @@ const CouponTitle = styled.div`
   color: #514438;
   margin-bottom: 15px;
 `;
-
+const CouponContent =styled.div`
+height: 90px;
+overflow-y: scroll;
+padding-right:5px;
+&::-webkit-scrollbar {
+  
+  width: 5px;
+}
+&::-webkit-scrollbar-thumb {
+  
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+&::-webkit-scrollbar-track {
+  background-color: white;
+}
+`
+ 
 const CouponDetailBox = styled.div`
   display: flex;
   justify-content: space-between;
   font-weight: 400;
   font-size: 15px;
+  
   margin-bottom: 5px;
   :last-child {
     margin: 0px;
