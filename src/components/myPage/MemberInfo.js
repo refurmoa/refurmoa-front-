@@ -43,7 +43,7 @@ const MemberInfo = () => {
 
   const getMemberInfo = () => {
     axios
-    .get(`/mypage/memberinfo?id=${window.sessionStorage.getItem("id")}`)
+    .post(`/mypage/memberinfo?id=${window.sessionStorage.getItem("id")}`)
     .then((res) => {
       console.log(res.data)
       setMemberInfo(dataProcess(res.data));

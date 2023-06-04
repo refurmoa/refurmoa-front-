@@ -116,7 +116,7 @@ const BookmarkList = () => {
   // 찜한상품 데이터 가져오기
   const getBookmarkData = () => {
     axios
-    .get(`/mypage/bookmark?id=${window.sessionStorage.getItem("id")}&search=${searchData} `)
+    .post(`/mypage/bookmark?id=${window.sessionStorage.getItem("id")}&search=${searchData} `)
     .then((res) => {
 
       console.log(res.data);
@@ -129,7 +129,7 @@ const BookmarkList = () => {
   }
   const getSearchData = () => {
     axios
-    .get(`/mypage/bookmark/search?id=${window.sessionStorage.getItem("id")}&search=${searchData}`)
+    .post(`/mypage/bookmark/search?id=${window.sessionStorage.getItem("id")}&search=${searchData}`)
     .then((res) => {
  
       setDataList(res.data);

@@ -74,7 +74,7 @@ const GradeMileCoupon = () => {
   const getMembershipInfo = () => {
  
     axios
-    .get(`/mypage/membership?id=${window.sessionStorage.getItem("id")}`)
+    .post(`/mypage/membership?id=${window.sessionStorage.getItem("id")}`)
     .then((res) => {
       console.log(res.data)
       setMembershipInfo(dataProcess(res.data));
