@@ -56,34 +56,34 @@ const BookmarkList = () => {
   };
 
   // 찜버튼
-  const likeHandler = (event, board_num) => {
+  const likeHandler = (event, data) => {
     event.stopPropagation(); // 이벤트 버블링 막기
-    const likerequest = { board_num: board_num, id: sessionStorage.getItem("id") };
-    console.log(likerequest);
-    // axios.post("/api/like", likerequest)
-    // .then((res) => {
-    //   console.log(res);
-    //   getBookmarkData();
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
+    if(window.confirm("찜을 취소하시겠습니까?")){
+      const likerequest = { boardNum: data.board_num, memberId: window.sessionStorage.getItem("id"), like: true };
+      axios.post("/post/like", likerequest)
+      .then((res) => {
+        getBookmarkData();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+    }else{
+      return false;
+    }
   };
 
   // 조회수 올리는 axios 요청 후 성공하면 상세페이지 넘어가기
   const prodDetailHandler = (board_num) => {
-    console.log("dd");
-    navigate(`/post/detail/${board_num}`);
-    // const readrequest = { board_num: board_num };
-    // axios.post("/api/plusreadcount", readrequest)
-    // .then((res) => {
-      //   // console.log(res);
-      //   navigate(`/post/detail/${board_num}`);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
+    const readrequest = { board_num: board_num };
+    axios.post("/post/readcount", readrequest)
+    .then((res) => {
+      navigate(`/post/detail/${board_num}`);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
   };
+
 
   // 검색기능
   const searchHandler = () => {
@@ -154,7 +154,7 @@ const BookmarkList = () => {
     }, 1000);
     return () => clearInterval(countdown);
   }, [today]);
-
+  
 
 
 
@@ -193,15 +193,15 @@ const BookmarkList = () => {
               )}
 
               {/* 찜 유무 */}
-              {data.like === 0 ? (
+              {data.like ? (
                 <StarIcon
-                  onClick={(event) => likeHandler(event, data.board_num)}
+                  onClick={(event) => likeHandler(event, data)}
                 >
                   <img src={star_icon_line} alt="staricon" />
                 </StarIcon>
               ) : (
                 <StarIcon
-                  onClick={(event) => likeHandler(event, data.board_num)}
+                  onClick={(event) => likeHandler(event, data)}
                 >
                   <img src={star_icon_filled} alt="staricon" />
                 </StarIcon>
@@ -400,10 +400,11 @@ const ProductBox = styled.div`
 const ImageBox = styled.div`
   width: 280px;
   height: 280px;
-  object-fit: cover;
+  
   position: relative;
 
   img {
+    object-fit: cover;
     width: 100%;
     height: 100%;
   }
