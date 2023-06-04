@@ -169,7 +169,7 @@ function PostWrite(props) {
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
     setCate(e.target.value);
-    if (e.target.value === "funiture") {
+    if (e.target.value === "furniture") {
       setFuniture(true);
       setAppliance(false);
     } else if (e.target.value === "appliance") {

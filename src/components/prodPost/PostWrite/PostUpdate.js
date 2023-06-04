@@ -585,9 +585,9 @@ function PostUpdate() {
               )}
               {funiture && (
                 <>
-                  <option value="funliving">거실&주방</option>
-                  <option value="funbed">침실 </option>
-                  <option value="funoffice">사무실</option>
+                  <option value="furliving">거실&주방</option>
+                  <option value="furbed">침실 </option>
+                  <option value="furoffice">사무실</option>
                 </>
               )}
             </select>
