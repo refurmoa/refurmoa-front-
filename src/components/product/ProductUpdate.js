@@ -53,13 +53,13 @@ function ProductUpdate() {
         console.log(res.data)
         const productData=res.data
         if (
-          productData.categoryCode === "funliving" ||
-          productData.categoryCode === "funbed" ||
-          productData.categoryCode === "funoffice"
+          productData.categoryCode === "furliving" ||
+          productData.categoryCode === "furbed" ||
+          productData.categoryCode === "furoffice"
         ) {
           setFuniture(true);
           setAppliance(false);
-          setCate("funiture");
+          setCate("furniture");
         } else {
           setFuniture(false);
           setAppliance(true);
@@ -163,7 +163,7 @@ function ProductUpdate() {
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
     setCate(e.target.value);
-    if (e.target.value === "funiture") {
+    if (e.target.value === "furniture") {
       setFuniture(true);
       setAppliance(false);
     } else if (e.target.value === "appliance") {
