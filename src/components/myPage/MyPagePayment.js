@@ -12,8 +12,23 @@ const MyPage_detail = () => {
   const endDateRef = useRef();
   const [payData, setPayData] = useState();
 
-  const [totalPageBid, setTotalPageBid] = useState(1);
-  const [currentPageBid, setCurrentPageBid] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageBeforeHandler = () => {
+    setCurrentPage(currentPage - 1)
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+  const pageNextHandler = () => {
+    setCurrentPage(currentPage + 1)
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
 
   const startDateHandler = () => {
     if (endDateRef.current.value !== "") {
@@ -38,6 +53,9 @@ const MyPage_detail = () => {
       startDateRef.current.focus();
       return false;
     }
+
+    // 페이지 초기화
+    setCurrentPage(1);
 
     const requestData = {
       member_id: sessionStorage.getItem("id"),
@@ -78,6 +96,9 @@ const MyPage_detail = () => {
       size: 10
     }
 
+    // 페이지 초기화
+    setCurrentPage(1);
+
     axios.post("/user/payment/search", requestData)
     .then((res) => {
       const { data } = res;
@@ -99,8 +120,8 @@ const MyPage_detail = () => {
     axios.post("/user/payment", requestData)
     .then((res) => {
       const { data } = res;
-      console.log(res);
       setPayData(data.content);
+      setTotalPage(data.totalPages);
     })
   }
 
@@ -141,31 +162,31 @@ const MyPage_detail = () => {
 
       <main className="flex_wrap">
         {payData?.map((item, index) => {
-          return <ProductPayment data={item} key={index} getData={getpayData} />;
+          return <ProductPayment data={item} key={index} getData={getpayData} stp={setTotalPage} />;
         })}
       </main>
       {/* 페이지 출력 */}
-      {totalPageBid > 1 && (
+      {totalPage > 1 && (
         <div className="PI-pagemp">
-          {currentPageBid === 1 ? (
+          {currentPage === 1 ? (
             <span className="PI-page_prev_graymp">&lt;</span>
           ) : (
             <span
               className="PI-page_prevmp"
-              onClick={() => setCurrentPageBid(currentPageBid - 1)}
+              onClick={() => pageBeforeHandler()}
             >
               &lt;
             </span>
           )}
-          <span className="PI-page_nowmp">{currentPageBid}</span>
+          <span className="PI-page_nowmp">{currentPage}</span>
           &nbsp;&nbsp;/&nbsp;&nbsp;
-          <span className="PI-page_totalmp">{totalPageBid}</span>
-          {currentPageBid === totalPageBid ? (
+          <span className="PI-page_totalmp">{totalPage}</span>
+          {currentPage === totalPage ? (
             <span className="PI-page_next_graymp">&gt;</span>
           ) : (
             <span
               className="PI-page_nextmp"
-              onClick={() => setCurrentPageBid(currentPageBid + 1)}
+              onClick={() => pageNextHandler()}
             >
               &gt;
             </span>

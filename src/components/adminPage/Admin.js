@@ -17,38 +17,21 @@ const Admin = () => {
   const navigate = useNavigate();
   const [adminInfoCount, setAdminInfoCount] = useState();
 
-  useEffect(()=>{
-    if(window.sessionStorage.getItem("id")!=="admin"){
-      navigate("/");
-    }
-  }, []);
-
-  const dummydata = {
-    "yet": 3,
-    "ingauction": 5,
-    "ingdirect": 5,
-    "waitpay": 3,
-    "prepare": 5,
-    "shipping": 3,
-    "completed": 6,
-    "productInquiry": 3,
-    "oneononeInquiry": 4,
-    "partnership": 5
-  }
-
   const getAdminInfo = () => {
-    // axios.get("/admin/info/count")
-    // .then((res) => {
-    //   const { data } = res;
-    //   setAdminInfoCount(data);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    setAdminInfoCount(dummydata)
+    axios.get("/admin/count")
+    .then((res) => {
+      const { data } = res;
+      setAdminInfoCount(data);
+    })
+    .catch((e) => {
+      console.error(e);
+    })
   }
 
   useEffect(() => {
+    if(window.sessionStorage.getItem("id")!=="admin"){
+      navigate("/");
+    }
     getAdminInfo();
   }, [])
 
@@ -62,14 +45,14 @@ const Admin = () => {
             <NavItem>판매중<SmallSpan>(경매)</SmallSpan><CountSpan> {adminInfoCount?.ingauction}</CountSpan></NavItem>
             <NavItem>판매중<SmallSpan>(즉시구매)</SmallSpan><CountSpan> {adminInfoCount?.ingdirect}</CountSpan></NavItem>
             <NavItem>입금대기<SmallSpan>(경매)</SmallSpan><CountSpan> {adminInfoCount?.waitpay}</CountSpan></NavItem>
-            <NavItem>상품준비중<CountRedSpan> {adminInfoCount?.prepare}</CountRedSpan></NavItem>
+            <NavItem>상품준비중<CountRedSpan state={adminInfoCount?.prepare}> {adminInfoCount?.prepare}</CountRedSpan></NavItem>
           </NavTopBox>
           <NavBottomBox>
-            <NavItem>배송중<CountRedSpan> {adminInfoCount?.shipping}</CountRedSpan></NavItem>
-            <NavItem>배송완료<CountSpan> {adminInfoCount?.completed}</CountSpan></NavItem>
-            <NavItem>상품문의<CountRedSpan> {adminInfoCount?.productInquiry}</CountRedSpan></NavItem>
-            <NavItem>1:1문의<CountRedSpan> {adminInfoCount?.oneononeInquiry}</CountRedSpan></NavItem>
-            <NavItem>제휴신청<CountSpan> {adminInfoCount?.partnership}</CountSpan></NavItem>
+            <NavItem>배송중<CountRedSpan state={adminInfoCount?.shipping}> {adminInfoCount?.shipping}</CountRedSpan></NavItem>
+            <NavItem>배송완료<CountRedSpan state={adminInfoCount?.completed}> {adminInfoCount?.completed}</CountRedSpan></NavItem>
+            <NavItem>상품문의<CountRedSpan state={adminInfoCount?.productInquiry}> {adminInfoCount?.productInquiry}</CountRedSpan></NavItem>
+            <NavItem>1:1문의<CountRedSpan state={adminInfoCount?.oneononeInquiry}> {adminInfoCount?.oneononeInquiry}</CountRedSpan></NavItem>
+            <NavItem>제휴신청<CountRedSpan state={adminInfoCount?.partnership}> {adminInfoCount?.partnership}</CountRedSpan></NavItem>
           </NavBottomBox>
         </InfoNavBox>
       </AdminInfoNavBox>
@@ -148,7 +131,7 @@ const CountRedSpan = styled.span`
   height: 25px;
   font-size: 20px;
   line-height: 25px;
-  color: #FF0000;
+  color: ${(props) => props.state === 0 ? "#000000" : "#FF0000"};
 `;
 
 const DailyAndCategorySalesBox = styled.div`
