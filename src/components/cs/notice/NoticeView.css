@@ -22,7 +22,7 @@
   border: 2px solid #c7b9ae;
 }
 .NV-board-wrap {
-  height: 725px;
+  min-height: 325px;
   margin-top: 25px;
 }
 .NV-title-wrap {
@@ -59,6 +59,7 @@
 }
 .NV-btn-wrap {
   margin: 0 auto;
+  text-align: center;
 }
 .NV-go-list-btn {
   font-size: 20px;
