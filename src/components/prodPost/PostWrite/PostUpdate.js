@@ -610,6 +610,7 @@ function PostUpdate() {
               maxLength="15"
               placeholder="제품회사명"
               value={prod_com}
+              onChange={(e) => setProd_com(e.target.value)}
             />
           </div>
           <div>
@@ -620,6 +621,7 @@ function PostUpdate() {
               maxLength="30"
               placeholder="제품명"
               value={prod_name}
+              onChange={(e) => setProd_name(e.target.value)}
             />
           </div>
         </div>
