@@ -151,7 +151,7 @@ const ProdPost = ({ filter, cp, stp }) => {
                 <img src={star_icon_line} alt="staricon" />
               </StarIcon>
             ) : (
-              <StarIcon onClick={(event) => likeHandler(event, data.board_num)}>
+              <StarIcon onClick={(event) => likeHandler(event, data)}>
                 <img src={star_icon_filled} alt="staricon" />
               </StarIcon>
             )}
