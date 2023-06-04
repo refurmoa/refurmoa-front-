@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { productList } from "./ProdcutList";
+import axios from "axios";
+
 
 const FindProduct = (props) => {
   // 데이터를 페이지 단위로 나누기 위한 변수들
@@ -8,43 +9,54 @@ const FindProduct = (props) => {
   const setProductname = props.setProductname;
   const setData = props.setData;
   const close_prod_modal = props.close_prod_modal;
+  const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
+  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
+
   const [dataList, setDataList] = useState([]);
 
   const setProductInfo = (item) => {
+    console.log(item);
     const product = item;
-    setProductname(product.prod_name);
+    setProductname(product.prodName);
     setData(product);
-    console.log(product);
+    
     close_prod_modal();
   };
-
+  const addComma = (price) => {
+    let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return returnString;
+  };
+  const setList = () => { 
+    axios
+      .get(` /post/prod-search?search=${searchProduct}&page=${currentPage}&size=10`)
+      .then((res) => {
+        console.log(res.data.content);
+        setDataList(res.data.content);
+        setTotalPage(res.data.totalPages);
+      })
+      .catch((e) => {
+       
+      })
+  }
   useEffect(() => {
-    setDataList(productList);
-  }, []);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
-
-  // 현재 페이지에 해당하는 데이터 추출
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = productList.slice(indexOfFirstItem, indexOfLastItem);
-
+    setList();
+  }, [currentPage])
+  const setCateDetail = (data) => {
+      switch(data){
+        case "appkitchen":return"주방"
+        case "applife":return"생활"
+        case "appelec":return"전자기기"
+        case "furliving":return"거실/주방"
+        case "furbed":return"침실"
+        case "furoffice":return"사무실"
+        default: break;
+      }
+    
+  }
   // 페이지 번호 클릭 이벤트 핸들러
   const handleClick = (e) => {
     setCurrentPage(Number(e.target.id));
   };
-
-  // 페이지 번호 버튼 생성
-  const pageNumbers = [];
-  for (let i = 1; i <= Math.ceil(productList.length / itemsPerPage); i++) {
-    pageNumbers.push(
-      <button key={i} id={i} onClick={handleClick}>
-        {i}
-      </button>
-    );
-  }
-
   // 조회수
   const readcountup = (e) => {};
 
@@ -69,19 +81,19 @@ const FindProduct = (props) => {
             </thead>
 
             <tbody>
-              {currentItems.map((item, index) => {
+              {dataList.map((item, index) => {
                 return (
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>
-                      <img src={item.image} className="FP_main_img" />
+                      <img src={`/images/prod/${item.mainImage}`} className="FP_main_img" />
                     </td>
-                    <td>{item.prod_com}</td>
-                    <td>{item.prod_name}</td>
-                    <td>{item.prod_grade}</td>
-                    <td>{item.category}</td>
-                    <td>{item.category_code}</td>
-                    <td>{item.org_price}</td>
+                    <td>{item.prodCom}</td>
+                    <td>{item.prodName}</td>
+                    <td>{item.prodGrade}</td>
+                    <td>{setCateDetail(item.category)}</td>
+                    <td>{item.productCode}</td>
+                    <td>{addComma(item.orgPrice)}</td>
                     <td>
                       <button
                         className="PW_company_choice"
@@ -97,25 +109,20 @@ const FindProduct = (props) => {
           </table>
         </div>
 
-        <div className="company-pagination">
-          <div>
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              {"<"}
-            </button>
-            {pageNumbers}
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={
-                currentPage === Math.ceil(productList.length / itemsPerPage)
-              }
-            >
-              {">"}
-            </button>
-          </div>
+        { totalPage > 1 &&
+        <div className="PI-page">
+          { currentPage === 0 ? <span className="PI-page_prev_gray">&lt;</span>
+            : <span className="PI-page_prev" onClick={() => setCurrentPage(currentPage-1)}>&lt;</span>
+          }
+          <span className="PI-page_now">{currentPage+1}</span>
+          &nbsp;&nbsp;/&nbsp;&nbsp;
+          <span className="PI-page_total">{totalPage}</span>
+          { currentPage+1 === totalPage ? <span className="PI-page_next_gray">&gt;</span>
+            : <span className="PI-page_next" onClick={() => setCurrentPage(currentPage+1)}>&gt;</span>
+          }
         </div>
+      }
+
       </div>
     </>
   );

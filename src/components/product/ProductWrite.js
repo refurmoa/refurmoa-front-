@@ -160,6 +160,12 @@ function ProductWrite() {
   /*===============================================*/
 
   const Product_write = (e) => {
+
+    if(defect_text===""){
+      alert("하자 정보가 비었습니다.");
+      return false;
+    }
+    else{
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     const formimg = new FormData();
 
@@ -201,6 +207,7 @@ function ProductWrite() {
             console.log("uploadfile request");
             alert("파일 등록이 완료되었습니다!");
             setFileDataList(res.data);
+            window.location.href="/prod";
           })
           .catch((e) => {
             console.error(e);
@@ -208,12 +215,13 @@ function ProductWrite() {
         }  
         else{
           alert("작성이 완료되었습니다!");
+          window.location.href="/prod";
         }
       })
       .catch((e) => {
         console.error(e);
       })
-     
+    }
   };
 
   return (
@@ -223,7 +231,7 @@ function ProductWrite() {
       <div className="PW_header">
         <div className="PW_title">상품 등록</div>
         <div className="PW_button">
-          <button className="PW_list_btn">목록</button>
+          <button className="PW_list_btn"><a href="/prod">목록</a></button>
           <button className="PW_wrie_btn" onClick={Product_write}>
             등록
           </button>
@@ -316,7 +324,7 @@ function ProductWrite() {
           <div className="PW_product_input_select">
             <select className="PW_category" onChange={chageCate}>
               <option>카테고리 선택</option>
-              <option value="funiture">가구</option>
+              <option value="furniture">가구</option>
               <option value="appliance">가전</option>
             </select>
             <select
@@ -333,9 +341,9 @@ function ProductWrite() {
               )}
               {funiture && (
                 <>
-                  <option value="funliving">거실&주방</option>
-                  <option value="funbed">침실 </option>
-                  <option value="funoffice">사무실</option>
+                  <option value="furliving">거실&주방</option>
+                  <option value="furbed">침실 </option>
+                  <option value="furoffice">사무실</option>
                 </>
               )}
             </select>
