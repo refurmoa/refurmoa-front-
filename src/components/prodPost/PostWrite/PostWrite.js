@@ -285,7 +285,7 @@ function PostWrite(props) {
     formData.append("org_price", org_price);
     formData.append("guarantee",guarantee );
     formData.append("deffect_text", defect_text);
-    formData.append("reg_date",reg_date);
+    formData.append("reg_date",new Date(reg_date));
     formData.append("prod_state",1);
     formData.append("com_num",com_num);
     formData.append("board_num", 0);
@@ -295,7 +295,7 @@ function PostWrite(props) {
     formData.append("del_price", del_price);
     formData.append("start_date",new Date(start_date) );
     formData.append("end_date", new Date(end_date));
-    formData.append("update_date", null);
+    formData.append("update_date", new Date());
     formData.append("as_date",as_date );
     formData.append("readCount",0);
     formData.append("deleteCheck",false);
