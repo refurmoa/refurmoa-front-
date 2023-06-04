@@ -26,6 +26,9 @@ const MyPage_detail = () => {
   }
 
   const endDateHandler = () => {
+    // 기간검색할 때 검색어 초기화
+    searchRef.current.value = "";
+
     if (startDateRef.current.value === "") {
       startDateRef.current.focus();
       return false;
@@ -41,7 +44,7 @@ const MyPage_detail = () => {
       date_start: startDateRef.current.value,
       date_end: endDateRef.current.value,
       page: 0,
-      size: 16
+      size: 10
     }
     axios
       .post("/mypage/payment/period", requestData)
@@ -60,26 +63,31 @@ const MyPage_detail = () => {
     }
   }
   const searchHandler = () => {
-    if (
-      searchRef.current.value === "" ||
-      searchRef.current.value === undefined
-    ) {
-      window.location.reload();
-    }
+    // 검색어 검색시 기간검색 초기화
+    startDateRef.current.value = "";
+    endDateRef.current.value = "";
+    
+    // if (
+    //   searchRef.current.value === "" ||
+    //   searchRef.current.value === undefined
+    // ) {
+    //   window.location.reload();
+    // }
 
     const requestData = { 
       member_id: sessionStorage.getItem("id"),
       search: searchRef.current.value,
       page: 0,
-      size: 16
+      size: 10
     }
 
     axios.post("/user/payment/search", requestData)
     .then((res) => {
       const { data } = res;
+      console.log(res);
       setPayData(data.content);
     })
-    .error((e) => {
+    .catch((e) => {
       console.error(e);
     })
   }
@@ -88,12 +96,13 @@ const MyPage_detail = () => {
     const requestData = { 
       member_id: sessionStorage.getItem("id"),
       page: 0,
-      size: 16
+      size: 10
     }
     console.log(requestData);
     axios.post("/user/payment", requestData)
     .then((res) => {
       const { data } = res;
+      console.log(res);
       setPayData(data.content);
     })
   }
@@ -134,8 +143,8 @@ const MyPage_detail = () => {
       </div>
 
       <main className="flex_wrap">
-        {prod.prodlist.map((product, index) => {
-          return <ProductPayment product={product} key={index} />;
+        {payData?.map((item, index) => {
+          return <ProductPayment data={item} key={index} />;
         })}
       </main>
       {/* 페이지 출력 */}

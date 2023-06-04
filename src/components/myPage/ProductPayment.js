@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import loadiconblack from "../../images/loadingiconblack.png";
 import loadiconred from "../../images/loadingiconred.png";
 
-export const ProductPayment = ({ product }) => {
+export const ProductPayment = ({ data }) => {
   const navigate = useNavigate();
 
   //props or location 사용
@@ -45,9 +45,9 @@ export const ProductPayment = ({ product }) => {
     <div className="productPay">
       <div className="imagePay">
         <div className="productcodePay">
-          {(product.pay_state > 2) ? (
+          {(data.pay_state > 2) ? (
             <>
-              {product.pay_num}
+              {data.pay_num}
             </>
           ) : (
             <>
@@ -56,75 +56,76 @@ export const ProductPayment = ({ product }) => {
           )}
         </div>
         <img
-          src={`/images/prod/${product.main_image}`}
+          src={`/images/prod/${data.main_image}`}
           alt="productimage"
-          onClick={() => onClick(product.board_num)}
+          onClick={() => onClick(data.board_num)}
         />
       </div>
       <div className="marginzero">
-        {product.pay_state === 0 ? (
+        {/* {data.pay_state === 0 ? (
           <div className="redcolorPay">
             <img src={loadiconred} alt=""></img>낙찰 - 결제전
           </div>
-        ) : product.pay_state === 1 ? (
+        ) :  */}
+        {data.pay_state === 1 ? (
           <div className="balckcolorPay">
             <img src={loadiconblack} alt=""></img>배송 준비중
           </div>
-        ) : product.pay_state === 2 ? (
+        ) : data.pay_state === 2 ? (
           <div className="balckcolorPay">
             <img src={loadiconblack} alt=""></img>배송 중
           </div>
-        ) : product.pay_state === 3 ? (
+        ) : data.pay_state === 3 ? (
           <div className="balckcolorPay">
             <img src={loadiconblack} alt=""></img>배송 완료
           </div>
         ) : (
           <div className="graycolorPay">구매확정</div>
         )}
-        <div className="com_namePay">{product.prod_com}</div>
+        <div className="com_namePay">{data.prod_com}</div>
         <div
           className="product_namePay"
-          onClick={() => onClick(product.board_num)}
+          onClick={() => onClick(data.board_num)}
         >
-          {product.prod_name}
+          {data.prod_name}
         </div>
 
         <div className="pricePay">
-          {product.pay_state === 0 ? (
+          {/* {data.pay_state === 0 ? (
             <div className="redcolormoneyPay">
-              {product.prod_price.toLocaleString("ko-KR")}원
+              {data.prod_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
             </div>
-          ) : (
+          ) : ( */}
             <div className="blackcolormoneyPay">
-              {product.prod_price.toLocaleString("ko-KR")}원
+              {data.prod_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원
             </div>
-          )}
+          {/* )} */}
         </div>
         <div className="mile">
-        {product.pay_state === 5 ? (
+        {data.pay_state === 5 ? (
             <>
-            마일리지 {(product.prod_price / 100).toLocaleString("ko-KR")}원 적립 완료
+            마일리지 {(data.prod_price / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 적립 완료
             </>
           ) : (
             <>
-            마일리지 {(product.prod_price / 100).toLocaleString("ko-KR")}원 적립 예정
+            마일리지 {(data.prod_price / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원 적립 예정
             </>
           )}
         </div>
 
         <div className="mile">
-          {product.pay_state === 0 ? (
+          {data.pay_state === 0 ? (
             <div>
               <input
                 className="payButtonPay"
                 type="button"
                 value="결제 하기"
-                onClick={() => pay(product.board_num, product.sell_type)}
+                onClick={() => pay(data.board_num, data.sell_type)}
               ></input>
             </div>
-          ) : product.pay_state === 1 && product.pay_cancle === 1 ? (
+          ) : data.pay_state === 1 && data.pay_cancle === 1 ? (
             <div>취소물품입니다.</div>
-          ) : product.pay_state === 1 ? (
+          ) : data.pay_state === 1 ? (
             <div>
               <div>
                 <input
@@ -137,34 +138,34 @@ export const ProductPayment = ({ product }) => {
                   className="inqButtonPay"
                   type="button"
                   value="배송 조회"
-                  onClick={() => delivery(product.board_num)}
-                  board_num={product.board_num}
+                  onClick={() => delivery(data.board_num)}
+                  board_num={data.board_num}
                 ></input>
               </div>
             </div>
-          ) : product.pay_state === 2 ? (
+          ) : data.pay_state === 2 ? (
             <div>
               <input
                 className="cancleButtonPay"
                 type="button"
                 value="결제 상세"
-                onClick={() => delivery(product.board_num)}
+                onClick={() => delivery(data.board_num)}
               ></input>
               <input
                   className="inqButtonPay"
                   type="button"
                   value="배송 조회"
-                  onClick={() => delivery(product.board_num)}
-                  board_num={product.board_num}
+                  onClick={() => delivery(data.board_num)}
+                  board_num={data.board_num}
                 ></input>
             </div>
-          ) : product.pay_state === 3 ? (
+          ) : data.pay_state === 3 ? (
             <div>
               <input
                 className="payButtonPay"
                 type="button"
                 value="결제 상세"
-                onClick={() => delivery(product.board_num)}
+                onClick={() => delivery(data.board_num)}
               ></input>
               <input
                 className="inqButtonPay"
@@ -179,7 +180,7 @@ export const ProductPayment = ({ product }) => {
                 className="payButtonPay"
                 type="button"
                 value="결제 상세"
-                onClick={() => delivery(product.board_num)}
+                onClick={() => delivery(data.board_num)}
               ></input>
             </div>
           )}
