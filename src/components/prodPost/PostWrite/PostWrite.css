@@ -196,6 +196,7 @@
   line-height: 45px;
   padding-left: 15px;
   margin-right: 15px;
+  margin-top: 2.5px;
   color: #666666;
 }
 .PW_detail_category {
@@ -209,6 +210,7 @@
   line-height: 45px;
   padding-left: 15px;
   margin-right: 15px;
+  margin-top: 2.5px;
   color: #666666;
 }
 .PW_produce_code {
@@ -494,4 +496,20 @@
   background-color: #fff;
   color: #514438;
   cursor: pointer;
+}
+.PW_product_input_select > select {
+  cursor: pointer;
+  -webkit-appearance:none; /* for chrome */
+  appearance:none;
+  color: rgba(81, 68, 56, 0.8);
+  background:url("../../../images/arrow_icon_brown-240.png") no-repeat 97% 50%/15px auto;
+}
+.PW_product_input_select > select:focus {
+  outline: 0;
+}
+.PW_product_input_select > select > option {
+  color: rgba(81, 68, 56, 0.8);
+}
+.FP_main_img{
+  width: 100px;
 }
