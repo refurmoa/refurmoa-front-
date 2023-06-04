@@ -62,7 +62,7 @@ const DailySalesChart = () => {
 export default DailySalesChart
 
 const BarChartWrapper = styled.div`
-  margin: 40px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
   width: 580px;
   height: 450px;
   position: relative;
