@@ -173,10 +173,9 @@ const PayDetail = () => {
           <PayCompleteBox>
             <PaySubComplete>결제 완료</PaySubComplete>
             <PayUserComplete>
-              {payDetailData?.buy_method === "simple" && "간편결제"}
               {payDetailData?.buy_method === "card" && "신용/체크"}
               {payDetailData?.buy_method === "phone" && "휴대폰결제"}
-              {payDetailData?.buy_method === "account" && "계좌이체"}
+              {payDetailData?.buy_method === "trans" && "계좌이체"}
               </PayUserComplete>
           </PayCompleteBox>
         </PayInfoBox>
