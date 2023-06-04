@@ -228,20 +228,34 @@ function ProductUpdate() {
     let str = value.replaceAll(",", "");
     setOrg_price(str);
   };
+  const Product_cancel=(e)=>{
+    if(window.confirm("취소하시겠습니까?"))
+    {
+      window.location.href="/prod";
+    }
+    else{
+      return false;
+    }
+  }
   /*===============================================*/
 
   const Product_write = (e) => {
+    if(defect_text===""){
+      alert("하자 정보가 비었습니다.");
+      return false;
+    }
+    else{
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     const formimg = new FormData();
-    console.log(mainFile);
+
     listFile.forEach((file) => {
       formimg.append("uploadfiles", file)
     });
     console.log(listFile);
     formData.append("main_image",mainFile);
     formData.append("product_code",product_code);
-    formData.append("category_code",cate_code);
-    formData.append("category", code);
+    formData.append("category_code",code);
+    formData.append("category", cate_code);
     formData.append("deffect_image1",defImg1);
     formData.append("deffect_image2",defImg2);
     formData.append("deffect_image3",defImg3);
@@ -272,6 +286,7 @@ function ProductUpdate() {
             console.log("uploadfile request");
             alert("파일 등록이 완료되었습니다!");
             setFileDataList(res.data);
+            window.location.href="/prod";
           })
           .catch((e) => {
             console.error(e);
@@ -279,12 +294,13 @@ function ProductUpdate() {
         }  
         else{
           alert("작성이 완료되었습니다!");
+          window.location.href="/prod";
         }
       })
       .catch((e) => {
         console.error(e);
       })
-     
+    }
   };
 
   return (
@@ -292,7 +308,7 @@ function ProductUpdate() {
       <div className="PW_header">
         <div className="PW_title">상품 수정</div>
         <div className="PW_button">
-          <button className="PW_list_btn">취소</button>
+          <button className="PW_list_btn" onClick={Product_cancel}>취소</button>
           <button className="PW_wrie_btn" onClick={Product_write}>
             수정
           </button>
@@ -385,7 +401,7 @@ function ProductUpdate() {
           <div className="PW_product_input_select">
             <select className="PW_category" value={cate} onChange={chageCate}>
               <option>카테고리 선택</option>
-              <option value="funiture">가구</option>
+              <option value="furniture">가구</option>
               <option value="appliance">가전</option>
             </select>
             <select
@@ -403,9 +419,9 @@ function ProductUpdate() {
               )}
               {funiture && (
                 <>
-                  <option value="funliving">거실&주방</option>
-                  <option value="funbed">침실 </option>
-                  <option value="funoffice">사무실</option>
+                  <option value="furliving">거실&주방</option>
+                  <option value="furbed">침실 </option>
+                  <option value="furoffice">사무실</option>
                 </>
               )}
             </select>
