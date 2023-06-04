@@ -204,7 +204,7 @@ function PostDetail() {
       alert("로그인 후 이용 가능합니다.");
       navigate("/login");
     } else {
-      const confirm = window.confirm(`${bidPrice.toLocaleString('ko-KR')}원에 입찰하시겠습니까?`);
+      const confirm = window.confirm(`${bidPrice?.toLocaleString('ko-KR')}원에 입찰하시겠습니까?`);
       if (confirm) {
         if (prodInfo.cur_price + prodInfo.unit_price == bidPrice) { // 입찰
           axios.post("/post/detail/bid/insert", {
@@ -265,7 +265,7 @@ function PostDetail() {
           : li.member_id.slice(0, 2) + "*".repeat(li.member_id.length-2) }
         { li.bid_auto && " [자동]" }
       </span>
-      <span className="PD-bid_list_price">{li.bid_price.toLocaleString('ko-KR')}원</span>
+      <span className="PD-bid_list_price">{li.bid_price?.toLocaleString('ko-KR')}원</span>
       <span className="PD-bid_list_date">{moment(li.bid_date).format("YYYY-MM-DD HH:mm:ss")}</span>
     </li>
   ));
@@ -322,12 +322,12 @@ function PostDetail() {
             <div className="PD-name">{prodInfo.prod_name}</div>
             <div className="PD-price">
               { prodInfo.sell_type === 2 ? 
-                <span className="PD-org_price_cancel">{prodInfo.org_price.toLocaleString('ko-KR')}원</span>
+                <span className="PD-org_price_cancel">{prodInfo?.org_price?.toLocaleString('ko-KR')}원</span>
                 : <span className="PD-price_text">
                     { state === 0 ? "경매시작가" : state === 1 ? "현재가" : "" }
                   </span>
               }
-              <span className="PD-price_num">{prodInfo.cur_price.toLocaleString('ko-KR')}</span>
+              <span className="PD-price_num">{prodInfo?.cur_price?.toLocaleString('ko-KR')}</span>
               <span className="PD-price_num_text">원</span>
             </div>
 
@@ -342,29 +342,29 @@ function PostDetail() {
               { prodInfo.sell_type !== 2 && <>
                   <li className="PD-main_info_text">
                     <span>원가</span>
-                    <span>{prodInfo.org_price.toLocaleString('ko-KR')}원</span>
+                    <span>{prodInfo?.org_price?.toLocaleString('ko-KR')}원</span>
                   </li>
                   <li className="PD-main_info_text">
                     <span>즉시구매가</span>
-                    <span>{prodInfo.direct_price.toLocaleString('ko-KR')}원</span>
+                    <span>{prodInfo?.direct_price?.toLocaleString('ko-KR')}원</span>
                   </li>
                   <li className="PD-main_info_text">
                     <span className="PD-main_info_text_gray">경매시작가</span>
-                    <span className="PD-main_info_text_gray">{prodInfo.auction_price.toLocaleString('ko-KR')}원</span>
+                    <span className="PD-main_info_text_gray">{prodInfo?.auction_price?.toLocaleString('ko-KR')}원</span>
                   </li>
                 </>
               }
               <li className="PD-main_info_text">
                 <span>보증서유무</span>
-                <span>{prodInfo.guarantee === 0 ? "없음" : "있음"}</span>
+                <span>{prodInfo?.guarantee === 0 ? "없음" : "있음"}</span>
               </li>
               <li className="PD-main_info_text">
                 <span>A/S</span>
-                <span>{prodInfo.as_date === 0 ? `A/S 불가` : `구매 후 ${prodInfo.as_date}년`}</span>
+                <span>{prodInfo?.as_date === 0 ? `A/S 불가` : `구매 후 ${prodInfo.as_date}년`}</span>
               </li>
               <li className="PD-main_info_text">
                 <span>배송설치비</span>
-                <span>{prodInfo.delivery_price === 0 ? "무료" : `${prodInfo.delivery_price.toLocaleString('ko-KR')}원`}</span>
+                <span>{prodInfo?.delivery_price === 0 ? "무료" : `${prodInfo?.delivery_price?.toLocaleString('ko-KR')}원`}</span>
                 <img className="PD-main_info_icon" alt="배송설치비 상세정보" src={info_icon_brown} onClick={InfoIconClick("delivery")}></img>
               </li>
             </ul>
@@ -385,7 +385,7 @@ function PostDetail() {
                 {getDday()}
                 <li className="PD-price_info_text">
                   <span>현재가</span>
-                  <span className="PD-current_price_num">{prodInfo.cur_price.toLocaleString('ko-KR')}</span>
+                  <span className="PD-current_price_num">{prodInfo?.cur_price?.toLocaleString('ko-KR')}</span>
                   <span className="PD-current_price_text">원</span>
                 </li>
                 <li className="PD-price_info_text">
@@ -424,7 +424,7 @@ function PostDetail() {
                 
                 { prodInfo.sell_type === 3 &&
                   <button className="PD-buy_btn_line" type="button" onClick={directBuy}>
-                    {prodInfo.direct_price.toLocaleString('ko-KR')}<span>원에</span> 즉시 구매<span>하기</span>
+                    {prodInfo?.direct_price?.toLocaleString('ko-KR')}<span>원에</span> 즉시 구매<span>하기</span>
                   </button>
                 }
               </div>
