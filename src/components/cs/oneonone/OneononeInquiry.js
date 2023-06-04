@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./OneononeInquiry.css";
-import OneononeData from "./OneononeData.json";
 import axios from "axios";
 import moment from "moment";
 

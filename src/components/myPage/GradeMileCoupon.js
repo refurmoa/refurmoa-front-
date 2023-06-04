@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
-// 더미데이터
-import infodata from "./grademilecoupon.json";
+
 
 // 이미지파일
 import infoicon from "../../images/info_icon_brown-240.png"
@@ -84,9 +83,7 @@ const GradeMileCoupon = () => {
       console.error(e);
     })
    
-    let data = infodata;
-    // console.log(data);
-  
+ 
   }
 
   useEffect(() => {

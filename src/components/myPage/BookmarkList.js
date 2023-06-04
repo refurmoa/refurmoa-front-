@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 // 시간계산 함수
 import { getDdayArray } from "../shared/Timer";
 
-// 더미데이터
-import productlist from "../shared/prod.json";
 
 // 이미지파일
 import timeicon from "../../images/time_icon.png";
