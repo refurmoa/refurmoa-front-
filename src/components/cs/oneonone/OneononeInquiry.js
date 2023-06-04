@@ -15,7 +15,7 @@ const InquiryList = () => {
   //목록 조회
   const setList = () => { 
     axios
-      .get(`/cs/inquiry?id=${loginid}&page=${currentPage}&size=10&sort=answerCon,ASC&sort=inqDate,ASC`)
+      .get(`/cs/inquiry?id=${loginid}&page=${currentPage}&size=15&sort=answerCon,ASC&sort=inqDate,ASC`)
       .then((res) => {
         setDataList(res.data.content);
         setTotalPage(res.data.totalPages); 
