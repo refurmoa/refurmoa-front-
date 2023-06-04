@@ -141,7 +141,7 @@ const MyPage_detail = () => {
 
       <main className="flex_wrap">
         {payData?.map((item, index) => {
-          return <ProductPayment data={item} key={index} />;
+          return <ProductPayment data={item} key={index} getData={getpayData} />;
         })}
       </main>
       {/* 페이지 출력 */}

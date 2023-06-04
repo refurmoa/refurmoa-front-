@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import loadiconblack from "../../images/loadingiconblack.png";
 import loadiconred from "../../images/loadingiconred.png";
 
-export const ProductPayment = ({ data }) => {
+export const ProductPayment = ({ data, getData }) => {
   const navigate = useNavigate();
 
   //props or location 사용
@@ -27,18 +27,25 @@ export const ProductPayment = ({ data }) => {
 
   const canclechange = () => {
     // axios
-    //   .get("/mypage/payment/cancle", {})
+    //   .post("/pay/cancel", {})
     //   .catch((e) => {
     //     console.error(e);
     //   });
   };
 
-  const prodstatechange = () => {
-    // axios
-    //   .get("/mypage/payment/final", {})
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
+  const prodstatechange = (productCode) => {
+    const requestDate = {
+      member_id: sessionStorage.getItem("id"),
+      product_code: productCode
+    }
+    axios
+      .post("/prod/change", requestDate)
+      .then((res) => {
+        getData();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   return (
@@ -123,7 +130,7 @@ export const ProductPayment = ({ data }) => {
                 onClick={() => pay(data.board_num, data.sell_type)}
               ></input>
             </div>
-          ) : data.pay_state === 1 && data.pay_cancle === 1 ? (
+          ) : data.pay_state === 1 && data.pay_cancel === true ? (
             <div>취소물품입니다.</div>
           ) : data.pay_state === 1 ? (
             <div>
@@ -171,7 +178,7 @@ export const ProductPayment = ({ data }) => {
                 className="inqButtonPay"
                 type="button"
                 value="구매 확정"
-                onClick={prodstatechange}
+                onClick={() => {prodstatechange(data.product_code)}}
               ></input>
             </div>
           ) : (
