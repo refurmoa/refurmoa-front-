@@ -238,8 +238,6 @@ function PostDetail() {
         }
       }
     }
-    
-    
   }
 
   // 즉시구매
@@ -247,8 +245,7 @@ function PostDetail() {
     if (login_id === null) {
       navigate("/login");
     } else {
-      navigate(`/post/pay/${board_num}?sell_type=${prodInfo.sell_type}`, {
-        // sell_type: prodInfo.sell_type
+      navigate(`/post/pay/${board_num}?sell_type=2`, {
       })
     }
   };
