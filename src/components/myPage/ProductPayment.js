@@ -39,7 +39,7 @@ export const ProductPayment = ({ data, getData }) => {
       product_code: productCode
     }
     axios
-      .post("/prod/change", requestDate)
+      .post("/user/payment/confirm", requestDate)
       .then((res) => {
         getData();
       })
