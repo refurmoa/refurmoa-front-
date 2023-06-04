@@ -59,7 +59,7 @@ export const MyResponsivePie = ({ data /* see data tab */ }) => (
 const CircleWrapper = styled.div`
   margin: 0px 0px 0px 0px;
   width: 580px;
-  height: 450px;
+  height: 450px; 
 `;
 
 const ChartTitleBox = styled.div`
