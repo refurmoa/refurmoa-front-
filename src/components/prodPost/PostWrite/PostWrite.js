@@ -677,6 +677,7 @@ function PostWrite(props) {
             end_date={end_date}
             onChangeUnit={onChangeUnit}
             as_date={as_date}
+            detailFile={detailFile}
             setDetailFile={setDetailFile}
             setStart_date={setStart_date}
             setEnd_date={setEnd_date}
@@ -695,6 +696,7 @@ function PostWrite(props) {
             unit_price={unit_price}
             del_price={del_price}
             start_date={start_date}
+            detailFile={detailFile}
             end_date={end_date}
             as_date={as_date}
             setDetailFile={setDetailFile}
@@ -711,6 +713,7 @@ function PostWrite(props) {
             onChangeDel={onChangeDel}
             setAs_date={setAs_date}
             setDetailFile={setDetailFile}
+            detailFile={detailFile}
             dir_price={dir_price}
             del_price={del_price}
             as_date={as_date}

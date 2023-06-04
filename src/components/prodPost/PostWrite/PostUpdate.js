@@ -12,6 +12,7 @@ import PostAuction from "./PostAuction";
 import PostDirect from "./PostDirect";
 import FindProduct from "./FindProduct";
 import { useParams } from "react-router-dom";
+import { format } from 'date-fns';
 
 function PostUpdate() {
   const board_num = useParams().board_num;
@@ -45,6 +46,9 @@ function PostUpdate() {
   const [prod_code, setProd_code] = useState(0)
   const[mainFile,setMainFile]=useState();
   const[detailFile,setDetailFile]=useState();
+  const [deffect1, setDeffect1] = useState("");
+  const [deffect2, setDeffect2] = useState("");
+  const [deffect3, setDeffect3] = useState("");
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
@@ -53,11 +57,10 @@ function PostUpdate() {
     console.log(board_num);
   
     axios
-      .get("/post/update/info", {
-        board_num: board_num,
-      })
+      .get(`/post/update/info?num=${board_num}`)
       .then((res) => {
-        setData(res.data);
+       
+        setData(res.data.prod);
         if (res.data.sell_type === "1") {
           setAuction(true);
           setDirect(false);
@@ -68,12 +71,16 @@ function PostUpdate() {
           setAuction(true);
           setDirect(true);
         }
+        const start=format(new Date(res.data.start_date), "yyyy-MM-dd'T'HH:mm");
+        const end=format(new Date(res.data.end_date), "yyyy-MM-dd'T'HH:mm");
         setDir_price(res.data.dir_price);
         setAuc_price(res.data.auc_price);
         setDel_price(res.data.del_price);
+        setUnit_price(res.data.unit_price);
         setAs_date(res.data.as_date);
-        setStart_date(res.data.start_date);
-        setEnd_date(res.data.end_date);
+        setStart_date(start);
+        setEnd_date(end);
+        setDetailFile(res.data.detail);
       })
       .catch((e) => {
         console.error(e);
@@ -111,10 +118,14 @@ function PostUpdate() {
       setAppliance(true);
       setCate("appliance");
     }
+    setDeffect1(productData.defectImage1);
+    setDeffect2(productData.defectImage2);
+    setDeffect3(productData.defectImage3);
+
     let imageUrlLists = [];
-    imageUrlLists.push(`/images/prod/${productData.defectImage1}`);
-    imageUrlLists.push(`/images/prod/${productData.defectImage2}`);
-    imageUrlLists.push(`/images/prod/${productData.defectImage3}`);
+    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage1}`);
+    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage2}`);
+    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage3}`);
     setReg_date(productData.regDate);
     setShowImages(imageUrlLists);
     setImg_con(true);
@@ -140,8 +151,8 @@ function PostUpdate() {
 
   /*===============================================*/
 
-  const [file, setFile] = useState(null);
-  const [listFile, setListfile] = useState();
+
+  const [listFile, setListfile] = useState([]);
   const [fileDataList, setFileDataList] = useState(); // 서버에 업로드 된 파일 리스트
 
   let [inputCount, setInputCount] = useState(0);
@@ -244,7 +255,6 @@ function PostUpdate() {
     reader.readAsDataURL(e.target.files[0]);
   };
   /*===============================================*/
-
   const handleAddImages = (event) => {
     setImg_con(true);
     const uploadFiles =Array.prototype.slice.call(event.target.files);
@@ -271,7 +281,6 @@ function PostUpdate() {
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
   };
-
   const addComma = (price) => {
     let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     return returnString;
@@ -322,9 +331,14 @@ function PostUpdate() {
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     const formimg = new FormData();
 
-    listFile.forEach((file) => {
-      formimg.append("uploadfiles", file)
-    });
+    console.log(listFile);
+    
+      listFile.forEach((file) => {
+        formimg.append("uploadfiles", file)
+      });
+    
+    
+    
     if(auction && !direct)setSell_type(1);
     else if(!auction && direct)setSell_type(2);
     else if(auction && direct)setSell_type(3);
@@ -335,26 +349,26 @@ function PostUpdate() {
     formData.append("product_code",prod_code);
     formData.append("category", cate_code);
     formData.append("category_code",code);
-    formData.append("deffect_image1","");
-    formData.append("deffect_image2","");
-    formData.append("deffect_image3","");
+    formData.append("deffect_image1",deffect1);
+    formData.append("deffect_image2",deffect2);
+    formData.append("deffect_image3",deffect3);
     formData.append("prod_com", prod_com);
     formData.append("prod_name",prod_name );
     formData.append("prod_grade",prod_Grade );
     formData.append("org_price", org_price);
     formData.append("guarantee",guarantee );
     formData.append("deffect_text", defect_text);
-    formData.append("reg_date",reg_date);
+    formData.append("reg_date",new Date(reg_date));
     formData.append("prod_state",1);
     formData.append("com_num",com_num);
-    formData.append("board_num", 0);
+    formData.append("board_num", board_num);
     formData.append("dir_price", dir_price);
     formData.append("auc_price",auc_price );
     formData.append("unit_price",unit_price );
     formData.append("del_price", del_price);
     formData.append("start_date",new Date(start_date) );
     formData.append("end_date", new Date(end_date));
-    formData.append("update_date", null);
+    formData.append("update_date", new Date());
     formData.append("as_date",as_date );
     formData.append("readCount",0);
     formData.append("deleteCheck",false);
@@ -739,8 +753,10 @@ function PostUpdate() {
             start_date={start_date}
             end_date={end_date}
             as_date={as_date}
+            setDetailFile={setDetailFile}
             setStart_date={setStart_date}
             setEnd_date={setEnd_date}
+            detailFile={detailFile}
           />
         )}
         {auction && direct && (
@@ -758,8 +774,10 @@ function PostUpdate() {
             start_date={start_date}
             end_date={end_date}
             as_date={as_date}
+            setDetailFile={setDetailFile}
             setStart_date={setStart_date}
             setEnd_date={setEnd_date}
+            detailFile={detailFile}
           />
         )}
         {!auction && direct && (
@@ -769,9 +787,12 @@ function PostUpdate() {
             onChangeAuc={onChangeAuc}
             onChangeDel={onChangeDel}
             setAs_date={setAs_date}
+            unit_price={unit_price}
             dir_price={dir_price}
             del_price={del_price}
             as_date={as_date}
+            setDetailFile={setDetailFile}
+            detailFile={detailFile}
           />
         )}
       </div>
