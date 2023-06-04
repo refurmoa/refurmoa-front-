@@ -1,23 +1,32 @@
 // 판매 결제 페이지
 
 import "./PostPay.css";
-import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import moment from "moment/moment";
 import PortonePay from "./PortonePay";
 import PayInfo from "./PayInfo";
 import search_icon from "../../images/search.png";
-import postPayinfo from "./postPayInfo.json";
-import userPayInfo from "./userPayInfo.json";
 
 
 function PostPay() {
     const navigate = useNavigate();
+    useEffect(() => {
+        if (sessionStorage.getItem("id") === null || board_num === null || sell_type === null) navigate(-1);
+    }, [])
+
     const board_num = useParams().board_num;
-    const sell_type = useParams().sell_type;
+    const location = useLocation();
+    const sell_type = new URLSearchParams(location.search).get('sell_type');
     const [pay_num, setPay_num] = useState();
-    const [payInfo, setPayInfo] = useState(postPayinfo); // 상품/판매 정보
-    const [userInfo, setUserInfo] = useState(userPayInfo); // 회원 정보
+    const [payInfo, setPayInfo] = useState({ // 상품/판매 정보
+        delivery_price: 0,
+        price: 0
+    });
+    const [userInfo, setUserInfo] = useState({ // 회원 정보
+        mile: 0
+    });
     const [totalPrice, setTotalPrice] = useState(0); // 총 결제 금액
     const [payForm, setPayForm] = useState({ // 배송 정보 입력 폼
         name: "",
@@ -36,8 +45,21 @@ function PostPay() {
 
     useEffect (() => {
         // 결제 정보 조회
-        // setPayInfo();
-        setPay_num(moment(new Date()).format("YYMMDDHHmmss")+"-"+payInfo.category_code+payInfo.product_code);
+        axios.get(`/pay/info?board_num=${board_num}&sell_type=${sell_type}`)
+            .then((res) => {
+                setPayInfo(res.data);
+                setPay_num(moment(new Date()).format("YYMMDDHHmmss") + "-" + res.data.category_code + res.data.product_code);
+            })
+            .catch((e) => {
+                // console.error(e);
+            })
+        axios.post("/pay/user", { memberId: sessionStorage.getItem("id") })
+            .then((res) => {
+                setUserInfo(res.data);
+            })
+            .catch((e) => {
+                // console.error(e);
+            })
     }, []);
 
     useEffect(() => {
