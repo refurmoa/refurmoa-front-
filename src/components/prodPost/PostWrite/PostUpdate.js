@@ -31,7 +31,6 @@ function PostUpdate() {
   const [del_price, setDel_price] = useState("");
   const [as_date, setAs_date] = useState("");
   const [guarantee, setGuarantee] = useState("");
-  const [sell_type, setSell_type] = useState("");
   const [auction, setAuction] = useState(false);
   const [direct, setDirect] = useState(false);
   const [defect_text, setDefect_text] = useState("");
@@ -40,66 +39,46 @@ function PostUpdate() {
   const [reg_date, setReg_date] = useState("");
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
-
+  const [img_con, setImg_con] = useState(false);
+  const [com_num, setCom_num] = useState();
+  const [sell_type, setSell_type] = useState(0);
+  const [prod_code, setProd_code] = useState(0)
+  const[mainFile,setMainFile]=useState();
+  const[detailFile,setDetailFile]=useState();
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
 
   useEffect(() => {
     console.log(board_num);
-    /*
+  
     axios
-      .get("/post/update", {
+      .get("/post/update/info", {
         board_num: board_num,
       })
-      .then((res) => {})
+      .then((res) => {
+        setData(res.data);
+        if (res.data.sell_type === "1") {
+          setAuction(true);
+          setDirect(false);
+        } else if (res.data.sell_type === "2") {
+          setAuction(false);
+          setDirect(true);
+        } else {
+          setAuction(true);
+          setDirect(true);
+        }
+        setDir_price(res.data.dir_price);
+        setAuc_price(res.data.auc_price);
+        setDel_price(res.data.del_price);
+        setAs_date(res.data.as_date);
+        setStart_date(res.data.start_date);
+        setEnd_date(res.data.end_date);
+      })
       .catch((e) => {
         console.error(e);
       });
-    */
-    const ex_data = {
-      product_code: "1",
-      com_num: "6",
-      category_code: "SF",
-      category: "funbed",
-      main_image: "",
-      prod_com: "에이스",
-      prod_name: "침대",
-      prod_grade: "S",
-      guarantee: false,
-      org_price: "3000000",
-      Deffect_text: "모서리 스크래치",
-      affect_text: "모서리 스크래치",
-      dir_price: "100000",
-      auc_price: "50000",
-      del_price: "10000",
-      as_date: "1",
-      start_date: "2023-03-12T19:30",
-      end_date: "2023-04-12T08:30",
-      sell_type: "3",
-      image: process.env.PUBLIC_URL + "/images/prod/image02.png",
-      deffect_image1: process.env.PUBLIC_URL + "/images/prod/image03.png",
-      deffect_image2: process.env.PUBLIC_URL + "/images/prod/image04.png",
-      deffect_image3: process.env.PUBLIC_URL + "/images/prod/image05.png",
-    };
-    setData(ex_data);
-    if (ex_data.sell_type === "1") {
-      setAuction(true);
-      setDirect(false);
-    } else if (ex_data.sell_type === "2") {
-      setAuction(false);
-      setDirect(true);
-    } else {
-      setAuction(true);
-      setDirect(true);
-    }
 
-    setDir_price(ex_data.dir_price);
-    setAuc_price(ex_data.auc_price);
-    setDel_price(ex_data.del_price);
-    setAs_date(ex_data.as_date);
-    setStart_date(ex_data.start_date);
-    setEnd_date(ex_data.end_date);
   }, []);
 
   /*===============================================*/
@@ -118,38 +97,42 @@ function PostUpdate() {
     setProd_Modal(false);
   };
   const setData = (productData) => {
+    setProd_code(productData.productCode);
     if (
-      productData.category === "funliving" ||
-      productData.category === "funbed" ||
-      productData.category === "funoffice"
+      productData.category === "furliving" ||
+      productData.category === "furbed" ||
+      productData.category === "furoffice"
     ) {
       setFuniture(true);
       setAppliance(false);
-      setCate("funiture");
+      setCate("furniture");
     } else {
       setFuniture(false);
       setAppliance(true);
       setCate("appliance");
     }
     let imageUrlLists = [];
-    imageUrlLists.push(productData.deffect_image1);
-    imageUrlLists.push(productData.deffect_image2);
-    imageUrlLists.push(productData.deffect_image3);
+    imageUrlLists.push(`/images/prod/${productData.defectImage1}`);
+    imageUrlLists.push(`/images/prod/${productData.defectImage2}`);
+    imageUrlLists.push(`/images/prod/${productData.defectImage3}`);
+    setReg_date(productData.regDate);
     setShowImages(imageUrlLists);
+    setImg_con(true);
     setCate_code(productData.category);
-    setCode(productData.category_code);
-    setSearchCompany(productData.com_num);
-    setProd_com(productData.prod_com);
-    setProd_name(productData.prod_name);
-    setOrg_price(productData.org_price);
-    setMainImg(productData.image);
-    if (productData.prod_grade === "S") onCHKS();
-    else if (productData.prod_grade === "A") onCHKA();
-    else if (productData.prod_grade === "B") onCHKB();
+    setCode(productData.categoryCode);
+    setCom_num(productData.com_num);
+    setSearchCompany(productData.com_name);
+    setProd_com(productData.prodCom);
+    setProd_name(productData.prodName);
+    setOrg_price(productData.orgPrice);
+    setMainImg(`/images/prod/${productData.mainImage}`);
+    if (productData.prodGrade === "S") onCHKS();
+    else if (productData.prodGrade === "A") onCHKA();
+    else if (productData.prodGrade === "B") onCHKB();
 
     setGuarantee(productData.guarantee);
-    setDefect_text(productData.Deffect_text);
-    setInputCount(productData.Deffect_text.length);
+    setDefect_text(productData.defectText);
+    setInputCount(productData.defectText.length);
   };
   /*===============================================*/
 
@@ -250,39 +233,44 @@ function PostUpdate() {
 
   const setPreviewImg = (e) => {
     var reader = new FileReader();
-    const uploadFiles = Array.prototype.slice.call(e.target.files); // 파일 이름을 배열 형태로 저장하는 객체
+    
     reader.onload = function (e) {
       setMainImg(e.target.result);
     };
-    uploadFiles.forEach((uploadFile) => {
-      console.log("bbb :" + uploadFile);
-      fileList.push(uploadFile); // 배열에 push
-    });
-
-    setListfile(fileList); // console.log("fileList=>" + fileList);
+    setMainFile(e.target.files[0]);
+    
+     // console.log("fileList=>" + fileList);
+    
     reader.readAsDataURL(e.target.files[0]);
   };
   /*===============================================*/
 
   const handleAddImages = (event) => {
+    setImg_con(true);
+    const uploadFiles =Array.prototype.slice.call(event.target.files);
+    uploadFiles.forEach((uploadFile) => {
+      console.log("bbb :" + uploadFile);
+      fileList.push(uploadFile); // 배열에 push
+      setListfile(list=>[...list,uploadFile]);
+    });
+   
     const imageLists = event.target.files;
     let imageUrlLists = [...showImages];
 
     for (let i = 0; i < imageLists.length; i++) {
       const currentImageUrl = URL.createObjectURL(imageLists[i]);
-
       imageUrlLists.push(currentImageUrl);
     }
 
     if (imageUrlLists.length > 3) {
       imageUrlLists = imageUrlLists.slice(0, 3);
     }
+    console.log(imageUrlLists);
     setShowImages(imageUrlLists);
   };
   const handleDeleteImage = (id) => {
     setShowImages(showImages.filter((_, index) => index !== id));
   };
-  /*===============================================*/
 
   const addComma = (price) => {
     let returnString = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -314,67 +302,106 @@ function PostUpdate() {
     let str = value.replaceAll(",", "");
     setDel_price(str);
   };
+  const Product_cancel=(e)=>{
+    if(window.confirm("취소하시겠습니까?"))
+    {
+      window.location.href="/post";
+    }
+    else{
+      return false;
+    }
+  }
   /*===============================================*/
 
-  const Product_write = (e) => {
+  const Post_write = () => {
+    if(defect_text===""){
+      alert("하자 정보가 비었습니다.");
+      return false;
+    }
+    else{
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
-    console.log("fileList=>" + listFile);
+    const formimg = new FormData();
 
     listFile.forEach((file) => {
-      formData.append("uploadfiles", file);
+      formimg.append("uploadfiles", file)
     });
+    if(auction && !direct)setSell_type(1);
+    else if(!auction && direct)setSell_type(2);
+    else if(auction && direct)setSell_type(3);
+  
+    formData.append("main_image",mainFile);
+    formData.append("detailFile",detailFile);
 
-    console.log(formData);
-    if (listFile.length === 0) {
-      alert("상품 사진을 하나 이상 등록해 주세요.");
-    }
-
+    formData.append("product_code",prod_code);
+    formData.append("category", cate_code);
+    formData.append("category_code",code);
+    formData.append("deffect_image1","");
+    formData.append("deffect_image2","");
+    formData.append("deffect_image3","");
+    formData.append("prod_com", prod_com);
+    formData.append("prod_name",prod_name );
+    formData.append("prod_grade",prod_Grade );
+    formData.append("org_price", org_price);
+    formData.append("guarantee",guarantee );
+    formData.append("deffect_text", defect_text);
+    formData.append("reg_date",reg_date);
+    formData.append("prod_state",1);
+    formData.append("com_num",com_num);
+    formData.append("board_num", 0);
+    formData.append("dir_price", dir_price);
+    formData.append("auc_price",auc_price );
+    formData.append("unit_price",unit_price );
+    formData.append("del_price", del_price);
+    formData.append("start_date",new Date(start_date) );
+    formData.append("end_date", new Date(end_date));
+    formData.append("update_date", null);
+    formData.append("as_date",as_date );
+    formData.append("readCount",0);
+    formData.append("deleteCheck",false);
+    formData.append("sell_type",sell_type);
+ 
     axios
-      .post("/product/update", {
-        CATEGORY_CODE: code,
-        CATEGORY: cate_code,
-        MAIN_IMAGE: main_Image,
-        PROD_COM: prod_com,
-        PROD_NAME: prod_name,
-        PROD_GRADE: prod_Grade,
-        ORG_PRICE: org_price,
-        GUARANTEE: guarantee,
-        DEFFECT_TEXT: defect_text,
-        DEFFECT_IMAGE1: showImages[0],
-        DEFFECT_IMAGE2: showImages[1],
-        DEFFECT_IMAGE3: showImages[2],
-        REG_DATE: new Date(),
-      })
+      .post("/post/write", formData, {
+        headers: {
+        "Content-Type": "multipart/form-data",
+        },})
       .then((res) => {
-        console.log(res);
-        console.log(res.data);
-        console.log("upload request");
+        
+        const entries = Array.from(formimg.entries());
+        const formDataLength = entries.length;
+        console.log(formDataLength);
+        if(formDataLength!==0){
+        axios
+          .post("/post/file", formimg)
+          .then((res) => {
+            console.log("uploadfile request");
+            alert("파일 등록이 완료되었습니다!");
+            setFileDataList(res.data);
+            window.location.href="/post";
+            
+          })
+          .catch((e) => {
+            console.error(e);
+          });   
+        }  
+        else{
+          alert("작성이 완료되었습니다!");
+          window.location.href="/post";
+        }
       })
       .catch((e) => {
         console.error(e);
       })
-      .then(() => {
-        // 동작 안되면 "/uploadfile" 로 수정하세요
-        axios
-          .post("/uploadfile", formData)
-          .then((res) => {
-            console.log("uploadfile request");
-            alert("작성이 완료되었습니다!");
-            setFileDataList(res.data);
-          })
-          .catch((e) => {
-            console.error(e);
-          });
-      });
+    }
+   
   };
-
   return (
     <div className="PW_form">
       <div className="PW_header">
         <div className="PR_title">판매글 작성</div>
         <div className="PW_button">
-          <button className="PW_list_btn">취소</button>
-          <button className="PW_wrie_btn" onClick={Product_write}>
+          <button className="PW_list_btn" onClick={Product_cancel}>취소</button>
+          <button className="PW_wrie_btn" onClick={Post_write}>
             수정
           </button>
         </div>
@@ -432,6 +459,8 @@ function PostUpdate() {
                     searchCompany={searchCompany}
                     setSearchCompany={setSearchCompany}
                     setProd_com={setProd_com}
+                    setCom_num={setCom_num}
+                    setData={setData}
                     close_modal={close_modal}
                   ></FindCompany>
                 )}

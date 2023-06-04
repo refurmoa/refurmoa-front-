@@ -172,11 +172,11 @@ function ProductWrite() {
     listFile.forEach((file) => {
       formimg.append("uploadfiles", file)
     });
-    console.log(listFile);
+
     formData.append("main_image",mainFile);
     formData.append("product_code",0);
-    formData.append("category_code",cate_code);
-    formData.append("category", code);
+    formData.append("category_code",code);
+    formData.append("category", cate_code);
     formData.append("deffect_image1","");
     formData.append("deffect_image2","");
     formData.append("deffect_image3","");
@@ -328,7 +328,7 @@ function ProductWrite() {
               <option value="appliance">가전</option>
             </select>
             <select
-              className="PW_detail_category"
+              className="PW_detail_category"      
               onChange={(e) => setCate_code(e.target.value)}
             >
               <option>세부 카테고리 선택</option>
@@ -350,7 +350,7 @@ function ProductWrite() {
             <input
               className="PW_produce_code"
               type="text"
-              placeholder="코드"
+              placeholder="코드"          
               onChange={(e) => setCode(e.target.value)}
             ></input>
           </div>

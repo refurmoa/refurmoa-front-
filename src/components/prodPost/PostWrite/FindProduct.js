@@ -28,7 +28,7 @@ const FindProduct = (props) => {
   };
   const setList = () => { 
     axios
-      .get(` /post/prod-search?search=${searchProduct}&page=${currentPage}&size=10`)
+      .get(`/post/prod-search?search=${searchProduct}&page=${currentPage}&size=10`)
       .then((res) => {
         console.log(res.data.content);
         setDataList(res.data.content);
