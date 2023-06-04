@@ -67,12 +67,9 @@ const MyPage_detail = () => {
     startDateRef.current.value = "";
     endDateRef.current.value = "";
     
-    // if (
-    //   searchRef.current.value === "" ||
-    //   searchRef.current.value === undefined
-    // ) {
-    //   window.location.reload();
-    // }
+    if ( searchRef.current.value === "" || searchRef.current.value === undefined ) {
+      return false;
+    }
 
     const requestData = { 
       member_id: sessionStorage.getItem("id"),
