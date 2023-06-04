@@ -34,7 +34,7 @@ function PostPay() {
         email: "",
         address : "",
         detail_address: "",
-        recipt_req: ""
+        receipt_req: ""
     });
     const [pay, setPay] = useState({ // 결제 정보
         coupon_num: 0,
@@ -45,21 +45,24 @@ function PostPay() {
 
     useEffect (() => {
         // 결제 정보 조회
-        axios.get(`/pay/info?board_num=${board_num}&sell_type=${sell_type}`)
+        axios
+            .get(`/pay/info?board_num=${board_num}&sell_type=${sell_type}`)
             .then((res) => {
                 setPayInfo(res.data);
                 setPay_num(moment(new Date()).format("YYMMDDHHmmss") + "-" + res.data.category_code + res.data.product_code);
             })
             .catch((e) => {
                 // console.error(e);
-            })
-        axios.post("/pay/user", { memberId: sessionStorage.getItem("id") })
+            });
+        axios
+            .post("/pay/user", { memberId: sessionStorage.getItem("id") })
             .then((res) => {
                 setUserInfo(res.data);
+                
             })
             .catch((e) => {
                 // console.error(e);
-            })
+            });
     }, []);
 
     useEffect(() => {
@@ -83,7 +86,7 @@ function PostPay() {
                 phone: "",
                 address : "",
                 detail_address: "",
-                recipt_req: ""
+                receipt_req: ""
             }));
         }
     };
@@ -115,7 +118,7 @@ function PostPay() {
         } else if (e.target.id === "pay_req") { // 배송 요청사항
             setPayForm((prevPayForm) => ({
                 ...prevPayForm,
-                recipt_req: e.target.value
+                receipt_req: e.target.value
             }));
         } else if (e.target.id === "pay_mile") { // 마일리지
             if (e.target.value <= userInfo.mile) {
@@ -238,7 +241,7 @@ function PostPay() {
                         <div className="PP-form">
                             <label htmlFor="pay_req">배송 요청사항</label>
                             <input type="text" id="pay_req" name="pay_req" maxLength="50" 
-                                value={payForm.recipt_req} onChange={handleForm} placeholder="요청사항을 입력하세요" />
+                                value={payForm.receipt_req} onChange={handleForm} placeholder="요청사항을 입력하세요" />
                         </div>
                     </div>
                 </span>

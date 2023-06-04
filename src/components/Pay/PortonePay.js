@@ -38,8 +38,32 @@ function PortonePay(props) {
       buyer_addr: props.payForm.address + props.payForm.detail_address // 구매자 주소
     }, function ({ success, error_msg }) { // 결제 결과 (callback)
         if (success) {
-          alert("결제되었습니다.");
-          navigate(`/payment/detail/${props.board_num}`);
+          const insertPaymentData = axios
+            .post("/pay", {
+                pay_num: props.pay_num,
+                member_id: sessionStorage.getItem("id"),
+                board_num: props.board_num,
+                product_code: props.payInfo.product_code,
+                prod_price: props.payInfo.price,
+                delivery_price: props.payInfo.delivery_price,
+                pay_price: props.totalPrice,
+                buy_method: props.pay.buy_method,
+                coupon_num: props.pay.coupon_num,
+                mile_use: props.pay.mile,
+                receipt_name: props.payForm.name,
+                receipt_phone: props.payForm.phone,
+                receipt_addr: props.payForm.address,
+                receipt_detail: props.payForm.detail_address,
+                receipt_req: props.payForm.receipt_req
+            })
+            .then(() => {
+              alert("결제되었습니다.");
+              navigate(`/payment/detail/${props.board_num}`);
+            })
+            .catch((e) => {
+              insertPaymentData();
+              // console.error(e);
+            });
         } else {
           console.log(error_msg);
           alert("결제를 실패하였습니다.");
