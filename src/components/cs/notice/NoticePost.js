@@ -50,6 +50,7 @@ const NoticePost = () => {
           className="NP-title-box"
           input
           type="text"
+          maxLength="50"
           placeholder="제목을 입력하세요"
         ></input>
         <textarea
@@ -57,7 +58,7 @@ const NoticePost = () => {
           className="NP-content"
           input
           type="text"
-          maxLength="1000"
+          maxLength="500"
           placeholder="내용을 입력하세요"
         />     
           <div className="NP-content-count">{inputCount} / 1000</div>     
