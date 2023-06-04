@@ -8,10 +8,12 @@ function PayInfo(props) {
         <InfoWrap>
             <Info>
                 <Image alt="상품 이미지" src={`/images/prod/${props.prod.main_image}`}/>
-                <NameWrap>
-                    <ComName>{props.prod.prod_com}</ComName>
-                    <Name>{props.prod.prod_name}</Name>
-                </NameWrap>
+                <NameContainer>
+                    <NameWrap>
+                        <ComName>{props.prod.prod_com}</ComName>
+                        <Name>{props.prod.prod_name}</Name>
+                    </NameWrap>
+                </NameContainer>
                 <PriceWrap>
                     <DeliPriceWrap>
                         <DeliIconWrap>
@@ -50,13 +52,23 @@ const Image = styled.img`
     object-position: center;
 `;
 
-const NameWrap = styled.span`
+const NameContainer = styled.span`
+    display: flex;
     float: left;
     width: 500px;
-    margin: 40px 0 0 50px;
+    height: 100%;
+    justify-content: center;
+    margin-left: 50px;
 `;
 
-const ComName = styled.span`
+const NameWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
+
+const ComName = styled.div`
+    width: 500px;
     height: 25px;
     font-size: 18px;
     line-height: 25px;

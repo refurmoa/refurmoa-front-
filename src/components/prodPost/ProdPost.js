@@ -158,6 +158,9 @@ const ProdPost = ({ filter, cp, stp }) => {
 
             {/* 판매완료 상품 어둡게 */}
             {data.prod_state === 2 && <DarkCover />}
+            {data.prod_state === 3 && <DarkCover />}
+            {data.prod_state === 4 && <DarkCover />}
+            {data.prod_state === 5 && <DarkCover />}
             {/* 판매완료(상품현황1이지만 경매종료일 지난) 상품 */}
             {(data.prod_state === 1) & (Date.parse(data.end_date) < today) ? (
               <DarkCover />

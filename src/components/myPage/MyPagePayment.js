@@ -12,8 +12,23 @@ const MyPage_detail = () => {
   const endDateRef = useRef();
   const [payData, setPayData] = useState();
 
-  const [totalPageBid, setTotalPageBid] = useState(1);
-  const [currentPageBid, setCurrentPageBid] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageBeforeHandler = () => {
+    setCurrentPage(currentPage - 1)
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+  const pageNextHandler = () => {
+    setCurrentPage(currentPage + 1)
+    window.scroll({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
 
   const startDateHandler = () => {
     if (endDateRef.current.value !== "") {
@@ -26,6 +41,9 @@ const MyPage_detail = () => {
   }
 
   const endDateHandler = () => {
+    // 기간검색할 때 검색어 초기화
+    searchRef.current.value = "";
+
     if (startDateRef.current.value === "") {
       startDateRef.current.focus();
       return false;
@@ -36,12 +54,15 @@ const MyPage_detail = () => {
       return false;
     }
 
+    // 페이지 초기화
+    setCurrentPage(1);
+
     const requestData = {
       member_id: sessionStorage.getItem("id"),
       date_start: startDateRef.current.value,
       date_end: endDateRef.current.value,
       page: 0,
-      size: 16
+      size: 10
     }
     axios
       .post("/mypage/payment/period", requestData)
@@ -60,26 +81,31 @@ const MyPage_detail = () => {
     }
   }
   const searchHandler = () => {
-    if (
-      searchRef.current.value === "" ||
-      searchRef.current.value === undefined
-    ) {
-      window.location.reload();
+    // 검색어 검색시 기간검색 초기화
+    startDateRef.current.value = "";
+    endDateRef.current.value = "";
+    
+    if ( searchRef.current.value === "" || searchRef.current.value === undefined ) {
+      return false;
     }
 
     const requestData = { 
       member_id: sessionStorage.getItem("id"),
       search: searchRef.current.value,
       page: 0,
-      size: 16
+      size: 10
     }
+
+    // 페이지 초기화
+    setCurrentPage(1);
 
     axios.post("/user/payment/search", requestData)
     .then((res) => {
       const { data } = res;
+      console.log(res);
       setPayData(data.content);
     })
-    .error((e) => {
+    .catch((e) => {
       console.error(e);
     })
   }
@@ -88,13 +114,14 @@ const MyPage_detail = () => {
     const requestData = { 
       member_id: sessionStorage.getItem("id"),
       page: 0,
-      size: 16
+      size: 10
     }
     console.log(requestData);
     axios.post("/user/payment", requestData)
     .then((res) => {
       const { data } = res;
       setPayData(data.content);
+      setTotalPage(data.totalPages);
     })
   }
 
@@ -134,32 +161,32 @@ const MyPage_detail = () => {
       </div>
 
       <main className="flex_wrap">
-        {prod.prodlist.map((product, index) => {
-          return <ProductPayment product={product} key={index} />;
+        {payData?.map((item, index) => {
+          return <ProductPayment data={item} key={index} getData={getpayData} stp={setTotalPage} />;
         })}
       </main>
       {/* 페이지 출력 */}
-      {totalPageBid > 1 && (
+      {totalPage > 1 && (
         <div className="PI-pagemp">
-          {currentPageBid === 1 ? (
+          {currentPage === 1 ? (
             <span className="PI-page_prev_graymp">&lt;</span>
           ) : (
             <span
               className="PI-page_prevmp"
-              onClick={() => setCurrentPageBid(currentPageBid - 1)}
+              onClick={() => pageBeforeHandler()}
             >
               &lt;
             </span>
           )}
-          <span className="PI-page_nowmp">{currentPageBid}</span>
+          <span className="PI-page_nowmp">{currentPage}</span>
           &nbsp;&nbsp;/&nbsp;&nbsp;
-          <span className="PI-page_totalmp">{totalPageBid}</span>
-          {currentPageBid === totalPageBid ? (
+          <span className="PI-page_totalmp">{totalPage}</span>
+          {currentPage === totalPage ? (
             <span className="PI-page_next_graymp">&gt;</span>
           ) : (
             <span
               className="PI-page_nextmp"
-              onClick={() => setCurrentPageBid(currentPageBid + 1)}
+              onClick={() => pageNextHandler()}
             >
               &gt;
             </span>
