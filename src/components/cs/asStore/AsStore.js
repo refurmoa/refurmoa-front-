@@ -163,6 +163,12 @@ const AsStore = () => {
   );
   // ====================================================================================================
   console.log(dataList);
+
+  function clickList(marker) {
+    setDataList(marker);
+    setData([marker[0].latitude, marker[0].longitude]);
+  }
+
   return (
     <div>
       <topbar className="astop">
@@ -255,7 +261,7 @@ const AsStore = () => {
                 {dataList.map((marker) => (
                   <div
                     className="asmiddlelist"
-                    onClick={() => setDataList([marker])}
+                    onClick={() => clickList([marker])}
                   >
                     <div className="asmiddlelisttop">
                       <div className="aslistname">{marker.storeName}</div>
