@@ -105,6 +105,7 @@ const NoticePost = () => {
           input
           type="text"
           placeholder="제목을 입력하세요"
+          maxLength="50"
           value={inq_title}
           onChangeCapture={(e) => setInq_title(e.target.value)}
         ></input>
@@ -113,7 +114,7 @@ const NoticePost = () => {
           className="OU-content"
           input
           type="text"
-          maxLength="1000"
+          maxLength="500"
           value={inq_con}
           onChangeCapture={(e) => setInq_con(e.target.value)}
           placeholder="내용을 입력하세요"

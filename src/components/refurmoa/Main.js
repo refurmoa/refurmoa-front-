@@ -11,8 +11,10 @@ import menuImage3 from "../../images/main_menu_image3.jpg";
 import data from "./MainItems.json";
 import axios from "axios";
 
-// axios 배너 data
-// 신상품/인기상품/마감임박상품 data
+// axios 메인배너/광고배너 data
+// 신상품 경매/즉시구매, 개수, 
+// 인기상품 조회수
+// 마감임박상품 data 경매
 // 조회수up
 // 판매완료 상품X
 function Main() {
@@ -57,6 +59,7 @@ function Main() {
         .catch((e) => {
         console.error(e);
         })
+        
         // 상품 타이머 > 1초마다 리렌더링
         const countdown = setInterval(() => {
             setNow(new Date().getTime());
@@ -127,15 +130,15 @@ function Main() {
                     <div className="M-item_name"><span>{list.prod_com}</span> {list.prod_name}</div>
                     <div className="M-item_price">
                         <span className="M-item_price_left">
-                            <div className="M-item_org_price">{list.orgPrice.toLocaleString('ko-KR')}</div>
+                            <div className="M-item_org_price">{list.orgPrice?.toLocaleString('ko-KR')}</div>
                             <div className="M-item_pay_price">
-                                {list.sell_type === 2 ? list.directPrice.toLocaleString('ko-KR'): list.curPrice.toLocaleString('ko-KR')}
+                                {list.sell_type === 2 ? list.directPrice?.toLocaleString('ko-KR'): list.curPrice?.toLocaleString('ko-KR')}
                             </div>
                         </span>
                         { list.sell_type === 3 &&
                             <span className="M-item_price_right">
                                 <div className="M-item_direct_price">즉시구매가</div>
-                                <div className="M-item_pay_price">{list.directPrice.toLocaleString('ko-KR')}</div>
+                                <div className="M-item_pay_price">{list.directPrice?.toLocaleString('ko-KR')}</div>
                             </span>
                         }
                     </div>
@@ -150,7 +153,7 @@ function Main() {
         <div className="M-banner">
             <svg className="M-banner_arrow M-banner_arrow_left" onClick={(e) => {handleMainBanner(e, "prev")}}
                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.67 0l2.83 2.829-9.339 9.175 9.339 9.167-2.83 2.829-12.17-11.996z"/></svg>
-            { mainBanner.map((banner, index) => (
+            { mainBanner?.map((banner, index) => (
                 <Link to={banner.bannLink} key={index}>
                     <img className={`M-banner_img ${index === mainBannerSlide && "M-banner_img_active"}`}
                         alt="메인배너이미지" src={`/images/banner/${banner.bannImage}`} />
@@ -185,9 +188,10 @@ function Main() {
         <div className="M-items_wrap">
             <div className="M-items_title">NEW ITEMS</div>
             <div className="M-items_list">
-                <ListScroll reverseScroll = { true }>
+                { newItemList.length <= 4 ? newItemList?.map((list) => printMap(list))
+                : <ListScroll reverseScroll = { true }>
                     {newItemList?.map((list) => printMap(list))}
-                </ListScroll>
+                </ListScroll> }
             </div>
         </div>
 
@@ -197,9 +201,10 @@ function Main() {
             <div className="M-items_wrap">
                 <div className="M-items_title">BEST ITEMS</div>
                 <div className="M-items_list">
-                    <ListScroll reverseScroll = { true }>
+                    { bestItemList.length <= 4 ? bestItemList?.map((list) => printMap(list))
+                    : <ListScroll reverseScroll = { true }>
                         {bestItemList?.map((list) => printMap(list))}
-                    </ListScroll>
+                    </ListScroll> }
                 </div>
             </div>
         </div>
@@ -208,16 +213,17 @@ function Main() {
         <div className="M-items_wrap">
             <div className="M-items_title">마감 임박 상품</div>
             <div className="M-items_list">
-                <ListScroll reverseScroll = { true }>
+                { deadlineItemList.length <= 4 ? deadlineItemList?.map((list) => printMap(list))
+                : <ListScroll reverseScroll = { true }>
                     {deadlineItemList?.map((list) => printMap(list))}
-                </ListScroll>
+                </ListScroll> }
             </div>
         </div>
 
         {/* 하단 광고 배너 */}
         <div className="M-ad_banner_wrap">
             <div className="M-ad_banner">
-                { adBanner.map((banner, index) => (
+                { adBanner?.map((banner, index) => (
                     <Link to={banner.bannLink} className="M-ad_banner_img_wrap" key={index}>
                         <img className="M-ad_banner_img" alt="광고배너이미지" src={`/images/banner/${banner.bannImage}`} />
                     </Link>

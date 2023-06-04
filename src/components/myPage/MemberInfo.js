@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import infodata from "./memberinfo.json";
 import { useNavigate } from "react-router-dom";
 
 // 이미지
@@ -8,6 +7,7 @@ import member from "../../images/member.png";
 import card from "../../images/card.png";
 import list from "../../images/list.png";
 import star from "../../images/star.png";
+import axios from "axios";
 
 const MemberInfo = () => {
   const navigate = useNavigate();
@@ -38,22 +38,19 @@ const MemberInfo = () => {
     // 세션에서 회원아이디 받아오기
     // let id = sessionStorage.getItem("id");
     // return data = { ...data, grade: grade, id: id};
-    let id = "leemoa";
     return (data = { ...data, grade: grade, id: sessionStorage.getItem("id") });
   };
 
   const getMemberInfo = () => {
-    const memberinforequest = { id: sessionStorage.getItem("id") };
-    // axios.post("/api/memberinfo", memberinforequest)
-    // .then((res) => {
-    //   const { data } = res;
-    //   setMemberInfo(dataProcess(data));
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    let data = infodata;
-    setMemberInfo(dataProcess(data));
+    axios
+    .post(`/mypage/memberinfo?id=${window.sessionStorage.getItem("id")}`)
+    .then((res) => {
+      setMemberInfo(dataProcess(res.data));
+    })
+    .catch((e) => {
+      console.error(e);
+    })
+   
     // console.log(data);
   };
 
@@ -98,7 +95,7 @@ const MemberInfo = () => {
             <ImgBox>
               <img src={card} alt="cardicon" />
             </ImgBox>
-            <CountBox>{memberInfo?.payandship}</CountBox>
+            <CountBox>{memberInfo?.order}</CountBox>
           </ImgAndCount>
         </PayAndShipBox>
         {/* 결제 · 배송 끝 */}

@@ -19,6 +19,15 @@ function PostAll(props) {
   const as_date = props.as_date;
   const setStart_date = props.setStart_date;
   const setEnd_date = props.setEnd_date;
+  const setDetailFile=props.setDetailFile;
+
+  const setPreviewImg = (e) => {
+    var reader = new FileReader();
+    setDetailFile(e.target.files[0]);
+    
+     // console.log("fileList=>" + fileList);
+    reader.readAsDataURL(e.target.files[0]);
+  };
   return (
     <>
       <div className="PW_product_category">
@@ -117,6 +126,7 @@ function PostAll(props) {
           id="input-file"
           accept="image/*"
           readonly
+          onChange={setPreviewImg}
         />
       </div>
     </>

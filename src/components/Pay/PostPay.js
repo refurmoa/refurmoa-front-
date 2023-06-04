@@ -1,38 +1,73 @@
 // 판매 결제 페이지
 
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
 import "./PostPay.css";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import moment from "moment/moment";
+import PortonePay from "./PortonePay";
 import PayInfo from "./PayInfo";
 import search_icon from "../../images/search.png";
-import postPayinfo from "./postPayInfo.json";
-import userPayInfo from "./userPayInfo.json";
 
 
 function PostPay() {
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (sessionStorage.getItem("id") === null || board_num === null || sell_type === null) navigate(-1);
+    }, [])
+
     const board_num = useParams().board_num;
-    const sell_type = useParams().sell_type;
-    const [payInfo, setPayInfo] = useState(postPayinfo); // 상품/판매 정보
-    const [userInfo, setUserInfo] = useState(userPayInfo); // 회원 정보
-    const [payCheck, setPayCheck] = useState("simple");
+    const location = useLocation();
+    const sell_type = new URLSearchParams(location.search).get('sell_type');
+    const [pay_num, setPay_num] = useState();
+    const [payInfo, setPayInfo] = useState({ // 상품/판매 정보
+        delivery_price: 0,
+        price: 0
+    });
+    const [userInfo, setUserInfo] = useState({ // 회원 정보
+        mile: 0
+    });
+    const [totalPrice, setTotalPrice] = useState(0); // 총 결제 금액
     const [payForm, setPayForm] = useState({ // 배송 정보 입력 폼
         name: "",
         phone: "",
+        email: "",
         address : "",
         detail_address: "",
-        recipt_req: ""
+        receipt_req: ""
     });
     const [pay, setPay] = useState({ // 결제 정보
         coupon_num: 0,
         coupon_price: 0,
         mile: 0,
-        buy_method: 0 // 결제수단 : 카드 card, 계좌이체 trans, 휴대폰결제 phone
+        buy_method: "card" // 결제수단 : 카드 card, 계좌이체 trans, 휴대폰결제 phone
     });
 
     useEffect (() => {
         // 결제 정보 조회
-        // setPayInfo();
+        axios
+            .get(`/pay/info?board_num=${board_num}&sell_type=${sell_type}`)
+            .then((res) => {
+                setPayInfo(res.data);
+                setPay_num(moment(new Date()).format("YYMMDDHHmmss") + "-" + res.data.category_code + res.data.product_code);
+            })
+            .catch((e) => {
+                // console.error(e);
+            });
+        axios
+            .post("/pay/user", { memberId: sessionStorage.getItem("id") })
+            .then((res) => {
+                setUserInfo(res.data);
+                
+            })
+            .catch((e) => {
+                // console.error(e);
+            });
     }, []);
+
+    useEffect(() => {
+        setTotalPrice(payInfo.price + payInfo.delivery_price - pay.coupon_price - pay.mile);
+    }, [payInfo, pay.coupon_price, pay.mile])
 
     // 배송 정보 동기화
     const deliSynchChange = (e) => {
@@ -51,7 +86,7 @@ function PostPay() {
                 phone: "",
                 address : "",
                 detail_address: "",
-                recipt_req: ""  
+                receipt_req: ""
             }));
         }
     };
@@ -76,7 +111,6 @@ function PostPay() {
         } else if (e.target.id === "pay_add") { // 배송지 주소
 
         } else if (e.target.id === "pay_add_detail") { // 배송지 상세주소
-
             setPayForm((prevPayForm) => ({
                 ...prevPayForm,
                 detail_address: e.target.value
@@ -84,25 +118,68 @@ function PostPay() {
         } else if (e.target.id === "pay_req") { // 배송 요청사항
             setPayForm((prevPayForm) => ({
                 ...prevPayForm,
-                recipt_req: e.target.value
+                receipt_req: e.target.value
             }));
-        } else if (e.target.id === "pay_mile") {
+        } else if (e.target.id === "pay_mile") { // 마일리지
+            if (e.target.value <= userInfo.mile) {
+                setPay((prevPay) => ({
+                    ...prevPay,
+                    mile: e.target.value
+                }));
+            }
+        } else if (e.target.name === "pay") { // 결제수단
             setPay((prevPay) => ({
                 ...prevPay,
-                mile: e.target.value
+                buy_method: e.target.value
             }));
         }
     }
 
-    // 주소 찾기
-    const searchAdd = () => {
-
-    }
+    // 주소 찾기 (카카오 API)
+    useEffect(() => {
+        const loadDaumPostcodeScript = () => {
+          return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = '//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js';
+            script.async = true;
+            script.onload = resolve;
+            script.onerror = reject;
+            document.body.appendChild(script);
+          });
+        };
+    
+        const initializeDaumPostcode = () => {
+          if (window.daum && window.daum.Postcode) {
+            window.searchAdd = () => {
+              new window.daum.Postcode({
+                oncomplete: function (data) {
+                    console.log(data.address);
+                    setPayForm((prevPayForm) => ({ ...prevPayForm, address: data.address }));
+                }
+              }).open();
+            };
+          }
+        };
+    
+        loadDaumPostcodeScript().then(initializeDaumPostcode);
+    }, []);
+    useEffect(() => {
+        if (payForm.address !== userInfo.address) {
+            setPayForm((prevPayForm) => ({ ...prevPayForm, detail_address: "" }));
+        }
+    }, [payForm.address]);
 
     // 쿠폰 선택
     const couponChoice = () => {
-
+        
     }
+
+    // 결제 취소
+    const payCancel = () => {
+        sell_type === 1 ? navigate(`/mypage/bidlist`)
+        : navigate(`/post/detail/${board_num}`);
+    }
+
 
     return (
         <div className="PP-_wrap">
@@ -149,7 +226,7 @@ function PostPay() {
                             <div className="PP-form_search_wrap">
                                 <input type="text" id="pay_add" name="pay_add" maxLength="50" 
                                     value={payForm.address} onChange={handleForm} placeholder="주소" disabled required />
-                                <img className="PP-search_icon" alt="주소 검색" src={search_icon} onClick={searchAdd} />
+                                <img className="PP-search_icon" alt="주소 검색" src={search_icon} onClick={window.searchAdd} />
                             </div>
                         </div>
                         <div className="PP-form">
@@ -164,7 +241,7 @@ function PostPay() {
                         <div className="PP-form">
                             <label htmlFor="pay_req">배송 요청사항</label>
                             <input type="text" id="pay_req" name="pay_req" maxLength="50" 
-                                value={payForm.recipt_req} onChange={handleForm} placeholder="요청사항을 입력하세요" />
+                                value={payForm.receipt_req} onChange={handleForm} placeholder="요청사항을 입력하세요" />
                         </div>
                     </div>
                 </span>
@@ -196,24 +273,52 @@ function PostPay() {
                 <div className="PP-pay_top">
                     <div className="PP-user_info_title">결제수단</div>
                     <span className="PP-pay_radio">
-                        <input type="radio" name="pay" id="pay_card" value="card" />
-                        <label htmlFor="pay_card">신용/체크</label>
+                        <input type="radio" name="pay" id="pay_method_card" value="card"
+                            checked={pay.buy_method === "card"} onChange={(e) => handleForm(e)} />
+                        <label htmlFor="pay_method_card">신용/체크</label>
                     </span>
                     <span className="PP-pay_radio">
-                        <input type="radio" name="pay" id="pay_simple" value="simple" />
-                        <label htmlFor="pay_simple">간편결제</label>
+                        <input type="radio" name="pay" id="pay_method_phone" value="phone"
+                            checked={pay.buy_method === "phone"} onChange={(e) => handleForm(e)} />
+                        <label htmlFor="pay_method_phone">휴대폰결제</label>
                     </span>
                     <span className="PP-pay_radio">
-                        <input type="radio" name="pay" id="pay_phone" value="phone" />
-                        <label htmlFor="pay_phone">휴대폰결제</label>
-                    </span>
-                    <span className="PP-pay_radio">
-                        <input type="radio" name="pay" id="pay_account" value="account" />
-                        <label htmlFor="account">계좌이체</label>
+                        <input type="radio" name="pay" id="pay_method_trans" value="trans"
+                            checked={pay.buy_method === "trans"} onChange={(e) => handleForm(e)} />
+                        <label htmlFor="pay_method_trans">계좌이체</label>
                     </span>
                 </div>
             </div>
-            
+
+            {/* 총 결제 가격 */}
+            <div className="PP-pay_price_wrap">
+                <div className="PP-pay_price_detail_wrap">
+                    <div className="PP-pay_price_detail_line">
+                        <span className="PP-price_detail_text">상품금액</span>
+                        <span className="PP-price_detail_price">{payInfo.price.toLocaleString('ko-KR')}원</span>
+                    </div>
+                    <div className="PP-pay_price_detail_line">
+                        <span className="PP-price_detail_text">배송설치비</span>
+                        <span className="PP-price_detail_price">{payInfo.delivery_price.toLocaleString('ko-KR')}원</span>
+                    </div>
+                    <div className="PP-pay_price_detail_line">
+                        <span className="PP-price_detail_text">할인금액</span>
+                        <span className="PP-price_detail_price">
+                            {(parseInt(pay.coupon_price, 10) + (pay.mile !== "" ? parseInt(pay.mile, 10) : 0)).toLocaleString('ko-KR')}원
+                        </span>
+                    </div>
+                </div>
+                <div className="PP-pay_total_price_wrap">
+                    <div className="PP-pay_total_price_text">총 결제금액</div>
+                    <div className="PP-pay_total_price">{totalPrice.toLocaleString('ko-KR')}원</div>
+                </div>
+            </div>
+
+            {/* 결제하기 (포트원 API) */}
+            <div className="PP-pay_btn_wrap">
+                <PortonePay payInfo={payInfo} payForm={payForm} pay={pay} board_num={board_num} pay_num={pay_num} totalPrice={totalPrice} />
+            </div>
+            <div className="PP-pay_cancel_btn" onClick={() => {payCancel()}}>취소</div>
         </div>
     );
 };

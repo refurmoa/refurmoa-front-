@@ -118,7 +118,7 @@ function FAQWrite() {
         <button className={category === 6 ? "active" : ""} onClick={() => setCatrgory(6)}>기타</button>
       </div>
       <div className="FAQ_Title_input">
-        <input placeholder="제목을 입력하세요" ref={titleRef} maxLength="20"/>
+        <input placeholder="제목을 입력하세요" ref={titleRef} maxLength="50"/>
       </div>
       <div className="FAQ_Text_input">
         <textarea className="FAQ_Text_content" type="text" placeholder="내용을 입력하세요." ref={contentRef} onChange={(e) => {setInputCount(e.target.value.length)}} maxLength="500"/>

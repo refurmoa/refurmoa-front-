@@ -10,10 +10,6 @@ input[type="number"]::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
 /* 판매 결제 페이지 wrap */
 .PP-_wrap {
     width: 1200px;
@@ -315,11 +311,12 @@ input[type="number"] {
 /* 결제 수단 선택 */
 .PP-pay_wrap {
     width: 1200px;
+    border-bottom: 3px solid rgba(185, 168, 154, 0.2);
 }
 
 .PP-pay_top {
     width: 1200px;
-    height: 90px;
+    height: 30px;
     margin: 30px;
 }
 
@@ -349,4 +346,99 @@ input[type="number"] {
     line-height: 30px;
     color: #514438;
     margin-left: 10px;
+}
+
+/* 총 결제 가격 */
+.PP-pay_price_wrap {
+    width: 1200px;
+}
+
+.PP-pay_price_detail_wrap {
+    width: 590px;
+    height: 155px;
+    box-sizing: border-box;
+    border-bottom: 3px solid rgba(185, 168, 154, 0.2);
+    align-items: center;
+    padding: 30px;
+}
+
+.PP-pay_price_detail_line {
+    width: 250px;
+    height: 25px;
+    margin-bottom: 10px;
+}
+
+.PP-price_detail_text {
+    float: left;
+    width: 90px;
+    height: 25px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+}
+
+.PP-price_detail_price {
+    float: right;
+    width: 150px;
+    height: 25px;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: right;
+}
+
+
+.PP-pay_total_price_wrap {
+    display: flex;
+    width: 310px;
+    height: 30px;
+    margin: 30px auto;
+}
+
+.PP-pay_total_price_text {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.PP-pay_total_price {
+    width: 200px;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 30px;
+    text-align: right;
+    color: #514438;
+}
+
+/* 결제하기 */
+.PP-pay_btn_wrap {
+    text-align: center;
+}
+
+.PP-pay_btn, .PP-pay_cancel_btn {
+    width: 590px;
+    height: 70px;
+    box-sizing: border-box;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 27px;
+    text-align: center;
+    color: #514438;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.PP-pay_btn {
+    border-width: 0;
+    background: rgba(185, 168, 154, 0.3);
+}
+
+.PP-pay_cancel_btn {
+    border: 2px solid rgba(185, 168, 154, 0.5);
+    background: #FFFFFF;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.PP-pay_btn:hover, .PP-pay_cancel_btn:hover {
+    border: 2px solid #514438;
 }

@@ -9,8 +9,7 @@ function Header() {
   const [ringlist, setRinglist] = useState(null); // 알림 리스트
   const [searchData, setSearchData] = useState(); // 검색어
   const [ringOpen, setRingOpen] = useState(false); // 알림창 열기
-  const [searchOpen, setSearchOpen] = useState(false); // 검색창 열기
-
+  const [searchOpen, setSearchOpen] = useState(false); // 검색창 열기  
   const linkStyle = (link) => {
     const startlink = new RegExp(`^${link}`);
     return currentPath === "/" ? "H-nav_main"
@@ -21,6 +20,10 @@ function Header() {
     // 알림 조회
     // setRinglist();
   }, [])
+  const logout = () => {
+    window.sessionStorage.clear("id")
+    window.location.reload();
+  }
 
   // 검색창
   const searchChange = () => {
@@ -99,7 +102,7 @@ function Header() {
                 </svg>
               }
             </span>
-            <span className="H-nav H_icon" onClick={() => {window.sessionStorage.clear("id");}}>
+            <span className="H-nav H_icon" onClick={() => {logout()}}>
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                 <path fill="#B9A89A" d="M16 10v-5l8 7-8 7v-5h-8v-4h8zm-16-8v20h14v-2h-12v-16h12v-2h-14z"/>
               </svg>

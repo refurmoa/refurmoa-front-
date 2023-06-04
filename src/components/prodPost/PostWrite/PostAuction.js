@@ -9,6 +9,7 @@ function PostAuction(props) {
   const onChangeDel = props.onChangeDel;
   const onChangeUnit = props.onChangeUnit;
   const setAs_date = props.setAs_date;
+  const setDetailFile=props.setDetailFile;
   const auc_price = props.auc_price;
   const unit_price=props.unit_price;
   const del_price = props.del_price;
@@ -17,6 +18,14 @@ function PostAuction(props) {
   const as_date = props.as_date;
   const setStart_date = props.setStart_date;
   const setEnd_date = props.setEnd_date;
+
+  const setPreviewImg = (e) => {
+    var reader = new FileReader();
+    setDetailFile(e.target.files[0]);
+    
+     // console.log("fileList=>" + fileList);
+    reader.readAsDataURL(e.target.files[0]);
+  };
   return (
     <>
       <div className="PW_product_category">
@@ -102,6 +111,7 @@ function PostAuction(props) {
           id="input-file"
           accept="image/*"
           readonly
+          onChange={setPreviewImg}
         />
       </div>
     </>

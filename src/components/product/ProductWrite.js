@@ -93,7 +93,7 @@ function ProductWrite() {
   const [appliance, setAppliance] = useState(false);
   const chageCate = (e) => {
     setCate(e.target.value);
-    if (e.target.value === "furniture") {
+    if (e.target.value === "funiture") {
       setFuniture(true);
       setAppliance(false);
     } else if (e.target.value === "appliance") {
@@ -162,66 +162,66 @@ function ProductWrite() {
   const Product_write = (e) => {
 
     if(defect_text===""){
-      alert("하자 정보를 입력해주세요.")
+      alert("하자 정보가 비었습니다.");
       return false;
     }
     else{
-      const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
-      const formimg = new FormData();
-      
-      listFile.forEach((file) => {
-        formimg.append("uploadfiles", file)
-      });
-      console.log(listFile);
-      formData.append("main_image",mainFile);
-      formData.append("product_code",0);
-      formData.append("category_code",cate_code);
-      formData.append("category", code);
-      formData.append("deffect_image1","");
-      formData.append("deffect_image2","");
-      formData.append("deffect_image3","");
-      formData.append("prod_com", prod_com);
-      formData.append("prod_name",prod_name );
-      formData.append("prod_grade",prod_Grade );
-      formData.append("org_price", org_price);
-      formData.append("guarantee",guarantee );
-      formData.append("deffect_text", defect_text);
-      formData.append("reg_date",new Date() );
-      formData.append("prod_state",0);
-      formData.append("com_num",com_num);
-    
-      axios
-        .post("/prod/write", formData, {
-          headers: {
-          "Content-Type": "multipart/form-data",
-          },})
-        .then((res) => {
-          
-          const entries = Array.from(formimg.entries());
-          const formDataLength = entries.length;
-          console.log(formDataLength);
-          if(formDataLength!==0){
-          axios
-            .post("/prod/file", formimg)
-            .then((res) => {
-              console.log("uploadfile request");
-              alert("작성이 완료되었습니다!");
-              setFileDataList(res.data);
-              window.location.href="/prod";
-            })
-            .catch((e) => {
-              console.error(e);
-            });   
-          }  
-          else{
-            alert("작성이 완료되었습니다!");
-            window.location.href="/prod"
-          }
-        })
-        .catch((e) => {
-          console.error(e);
-        })
-      }
+    const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
+    const formimg = new FormData();
+
+    listFile.forEach((file) => {
+      formimg.append("uploadfiles", file)
+    });
+
+    formData.append("main_image",mainFile);
+    formData.append("product_code",0);
+    formData.append("category_code",code);
+    formData.append("category", cate_code);
+    formData.append("deffect_image1","");
+    formData.append("deffect_image2","");
+    formData.append("deffect_image3","");
+    formData.append("prod_com", prod_com);
+    formData.append("prod_name",prod_name );
+    formData.append("prod_grade",prod_Grade );
+    formData.append("org_price", org_price);
+    formData.append("guarantee",guarantee );
+    formData.append("deffect_text", defect_text);
+    formData.append("reg_date",new Date() );
+    formData.append("prod_state",0);
+    formData.append("com_num",com_num);
+   
+    axios
+      .post("/prod/write", formData, {
+        headers: {
+        "Content-Type": "multipart/form-data",
+        },})
+      .then((res) => {
+        
+        const entries = Array.from(formimg.entries());
+        const formDataLength = entries.length;
+        console.log(formDataLength);
+        if(formDataLength!==0){
+        axios
+          .post("/prod/file", formimg)
+          .then((res) => {
+            console.log("uploadfile request");
+            alert("파일 등록이 완료되었습니다!");
+            setFileDataList(res.data);
+            window.location.href="/prod";
+          })
+          .catch((e) => {
+            console.error(e);
+          });   
+        }  
+        else{
+          alert("작성이 완료되었습니다!");
+          window.location.href="/prod";
+        }
+      })
+      .catch((e) => {
+        console.error(e);
+      })
+    }
   };
 
   return (
@@ -231,8 +231,7 @@ function ProductWrite() {
       <div className="PW_header">
         <div className="PW_title">상품 등록</div>
         <div className="PW_button">
-          <button className="PW_list_btn">
-            <a href ="/prod">목록</a></button>
+          <button className="PW_list_btn"><a href="/prod">목록</a></button>
           <button className="PW_wrie_btn" onClick={Product_write}>
             등록
           </button>
@@ -329,7 +328,7 @@ function ProductWrite() {
               <option value="appliance">가전</option>
             </select>
             <select
-              className="PW_detail_category"
+              className="PW_detail_category"      
               onChange={(e) => setCate_code(e.target.value)}
             >
               <option>세부 카테고리 선택</option>
@@ -351,7 +350,7 @@ function ProductWrite() {
             <input
               className="PW_produce_code"
               type="text"
-              placeholder="코드"
+              placeholder="코드"          
               onChange={(e) => setCode(e.target.value)}
             ></input>
           </div>

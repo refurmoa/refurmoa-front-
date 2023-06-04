@@ -10,7 +10,7 @@ import PostPage from "./components/prodPost/PostPage";
 import PostDetail from "./components/prodPost/PostDetail/PostDetail";
 import PostWrite from "./components/prodPost/PostWrite/PostWrite";
 import PostUpdate from "./components/prodPost/PostWrite/PostUpdate";
-// import PostPay from "./components/Pay/PostPay";
+import PostPay from "./components/Pay/PostPay";
 import PayDetail from "./components/Pay/PayDetail";
 import CsNavbar from "./components/cs/CsNavbar";
 import NoticeList from "./components/cs/notice/NoticeList";
@@ -53,11 +53,11 @@ function App() {
         <Route path="/post/write" element={<PostWrite />} />
         <Route path="/post/update/:board_num" element={<PostUpdate />} />
         <Route path="/post/detail/:board_num" element={<PostDetail />} />
-        {/* <Route path="/post/pay/:board_num" element={<PostPay />} /> */}
+        <Route path="/post/pay/:board_num" element={<PostPay />} />
         <Route path="/payment/detail/:board_num" element={<PayDetail />} />
         <Route element={<CsNavbar />}>
           <Route path="/cs/notice" element={<NoticeList />} />
-          <Route path="/cs/notice/detail/:noticeid" element={<NoticeView />} />
+          <Route path="/cs/notice/detail" element={<NoticeView />} />
           <Route path="/cs/notice/write" element={<NoticePost />} />
           <Route path="/cs/faq" element={<FAQ />} />
           <Route path="/cs/faq/write" element={<FAQWrite />} />
@@ -78,7 +78,10 @@ function App() {
           <Route path="/admin/user" element={<AdminUser />} />
           <Route path="/admin/user/detail" element={<AdminUserDetail />} />
           <Route path="/admin/partner" element={<AdminPartner />} />
-          <Route path="/admin/partner/detail" element={<AdminPartnerDetail />}/>
+          <Route
+            path="/admin/partner/detail"
+            element={<AdminPartnerDetail />}
+          />
           <Route path="/admin/banner" element={<AdminBanner />} />
           <Route path="/admin/banner/write" element={<AdminBannerWrite />} />
         </Route>

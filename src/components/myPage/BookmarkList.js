@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 // 시간계산 함수
 import { getDdayArray } from "../shared/Timer";
 
-// 더미데이터
-import productlist from "../shared/prod.json";
 
 // 이미지파일
 import timeicon from "../../images/time_icon.png";
@@ -21,6 +19,9 @@ const BookmarkList = () => {
   const navigate = useNavigate();
   const [bookmarkProd, setBookmarkProd] = useState();
   const [today, setToday] = useState(new Date().getTime()); // 현재날짜(ms) 구하기
+  const [searchData, setSearchData] = useState(""); // 검색어
+  const [dataList, setDataList] = useState([]);
+
 
   // 남은시간이 12시간보다 적을 경우
   const lessThanTwelve = (ms) => {
@@ -55,34 +56,34 @@ const BookmarkList = () => {
   };
 
   // 찜버튼
-  const likeHandler = (event, board_num) => {
+  const likeHandler = (event, data) => {
     event.stopPropagation(); // 이벤트 버블링 막기
-    const likerequest = { board_num: board_num, id: sessionStorage.getItem("id") };
-    console.log(likerequest);
-    // axios.post("/api/like", likerequest)
-    // .then((res) => {
-    //   console.log(res);
-    //   getBookmarkData();
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
+    if(window.confirm("찜을 취소하시겠습니까?")){
+      const likerequest = { boardNum: data.board_num, memberId: window.sessionStorage.getItem("id"), like: true };
+      axios.post("/post/like", likerequest)
+      .then((res) => {
+        getBookmarkData();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+    }else{
+      return false;
+    }
   };
 
   // 조회수 올리는 axios 요청 후 성공하면 상세페이지 넘어가기
   const prodDetailHandler = (board_num) => {
-    console.log("dd");
-    navigate(`/post/detail/${board_num}`);
-    // const readrequest = { board_num: board_num };
-    // axios.post("/api/plusreadcount", readrequest)
-    // .then((res) => {
-      //   // console.log(res);
-      //   navigate(`/post/detail/${board_num}`);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // });
+    const readrequest = { board_num: board_num };
+    axios.post("/post/readcount", readrequest)
+    .then((res) => {
+      navigate(`/post/detail/${board_num}`);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
   };
+
 
   // 검색기능
   const searchHandler = () => {
@@ -90,7 +91,8 @@ const BookmarkList = () => {
     if (searchRef.current.value === "") {
       return alert("검색어를 입력해 주세요.");
     }
-    const searchData = { searchword : searchRef.current.value, id: sessionStorage.getItem("id") }
+    
+   
     console.log(searchData);
     // axios.post("/api/searchbookmark", searchData)
     // .then((res) => {
@@ -102,28 +104,49 @@ const BookmarkList = () => {
     //   console.error(e);
     // })
   }
+
   // 엔터키
   const activeEnter = (e) => {
     if(e.key === "Enter") {
-      searchHandler();
+      getSearchData();
     }
   }
 
+
   // 찜한상품 데이터 가져오기
   const getBookmarkData = () => {
-    const datarequest = { id: sessionStorage.getItem("id") };
-    // axios.post("/api/bookmarkprod", datarequest)
-    // .then((res) => {
-    //   const { data } = res;
-    //   setBookmarkProd(data);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    const data = productlist;
-    setBookmarkProd(data);
-  };
+    axios
+    .post(`/mypage/bookmark?id=${window.sessionStorage.getItem("id")}&search=${searchData} `)
+    .then((res) => {
 
+      console.log(res.data);
+      setDataList(res.data);
+    
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+  }
+  const getSearchData = () => {
+    axios
+    .post(`/mypage/bookmark/search?id=${window.sessionStorage.getItem("id")}&search=${searchData}`)
+    .then((res) => {
+ 
+      setDataList(res.data);
+     
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+  }
+
+  // 페이지가 변경될 때마다 데이터 요청
+  useEffect(() => {  
+    // 검색상태가 아니고 하단의 ref를 만났을 때
+      getBookmarkData();
+      // 검색상태이고 하단의 ref를 만났을 때 
+  }, []);
+ 
   // 1초마다 리렌더링
   useEffect(() => {
     const countdown = setInterval(() => {
@@ -131,10 +154,8 @@ const BookmarkList = () => {
     }, 1000);
     return () => clearInterval(countdown);
   }, [today]);
+  
 
-  useEffect(() => {
-    getBookmarkData();
-  }, [bookmarkProd]);
 
 
   return (
@@ -143,7 +164,7 @@ const BookmarkList = () => {
         <TitleBox>찜한 상품</TitleBox>
         <SearchBar>
           <SearchInput>
-            <input type="text" ref={searchRef} onKeyDown={(e) => {activeEnter(e)}}/>
+            <input type="text" value={searchData} onChange ={(e)=> setSearchData(e.target.value)}onKeyDown={(e) => {activeEnter(e)}}/>
           </SearchInput>
           <SearchImg onClick={() => {searchHandler()}}>
             <img src={searchicon} alt="searchicon"/>
@@ -151,7 +172,7 @@ const BookmarkList = () => {
         </SearchBar>
       </TitleAndSearchBox>
       <BookmarkListBox>  
-        {bookmarkProd?.map((data) => (
+        {dataList?.map((data) => (
           <ProductBox
             key={data.board_num}
             onClick={() => prodDetailHandler(data.board_num)}
@@ -172,15 +193,15 @@ const BookmarkList = () => {
               )}
 
               {/* 찜 유무 */}
-              {data.like === 0 ? (
+              {data.like ? (
                 <StarIcon
-                  onClick={(event) => likeHandler(event, data.board_num)}
+                  onClick={(event) => likeHandler(event, data)}
                 >
                   <img src={star_icon_line} alt="staricon" />
                 </StarIcon>
               ) : (
                 <StarIcon
-                  onClick={(event) => likeHandler(event, data.board_num)}
+                  onClick={(event) => likeHandler(event, data)}
                 >
                   <img src={star_icon_filled} alt="staricon" />
                 </StarIcon>
@@ -257,16 +278,16 @@ const BookmarkList = () => {
                 {/* 경매 */}
                 {data.sell_type === 1 && (
                   <OriAndNowPriceBox>
-                    <span>{data.org_price.toLocaleString("ko-KR")}원</span>
-                    {data.cur_price.toLocaleString("ko-KR")}원
+                    <span>{data.orgPrice.toLocaleString("ko-KR")}원</span>
+                    {data.curPrice.toLocaleString("ko-KR")}원
                   </OriAndNowPriceBox>
                 )}
 
                 {/* 즉시구매 */}
                 {data.sell_type === 2 && (
                   <OriAndNowPriceBox>
-                    <span>{data.org_price.toLocaleString("ko-KR")}원</span>
-                    {data.direct_price.toLocaleString("ko-KR")}원
+                    <span>{data.orgPrice.toLocaleString("ko-KR")}원</span>
+                    {data.directPrice.toLocaleString("ko-KR")}원
                   </OriAndNowPriceBox>
                 )}
 
@@ -274,12 +295,12 @@ const BookmarkList = () => {
                 {data.sell_type === 3 && (
                   <>
                     <OriAndNowPriceBox>
-                      <span>{data.org_price.toLocaleString("ko-KR")}원</span>
-                      {data.cur_price.toLocaleString("ko-KR")}원
+                      <span>{data.orgPrice.toLocaleString("ko-KR")}원</span>
+                      {data.curPrice.toLocaleString("ko-KR")}원
                     </OriAndNowPriceBox>
                     <DirectPriceBox>
                       <span>즉시구매가</span>
-                      {data.direct_price.toLocaleString("ko-KR")}원
+                      {data.directPrice.toLocaleString("ko-KR")}원
                     </DirectPriceBox>
                   </>
                 )}
@@ -287,6 +308,7 @@ const BookmarkList = () => {
             </InfoBox>
           </ProductBox>
         ))}
+         
       </BookmarkListBox>
       </BookmarkListWrapper>
   )
@@ -378,10 +400,11 @@ const ProductBox = styled.div`
 const ImageBox = styled.div`
   width: 280px;
   height: 280px;
-
+  
   position: relative;
 
   img {
+    object-fit: cover;
     width: 100%;
     height: 100%;
   }

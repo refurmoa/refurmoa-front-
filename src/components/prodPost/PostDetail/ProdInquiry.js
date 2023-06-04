@@ -22,7 +22,7 @@ function ProdInquiry(props) {
   // 문의 글 목록 조회
   const setList = () => {
     axios
-      .get(`/post/detail/inquiry?board_num=1&page=${currentPage}&size=10`)
+      .get(`/post/detail/inquiry?board_num=${props.board_num}&page=${currentPage}&size=10`)
       .then((res) => {
         setInquiryList(res.data.content);
         setTotalPage(res.data.totalPages);

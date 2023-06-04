@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { getDdayArray } from "../shared/Timer";
 
 // 더미데이터
@@ -15,6 +15,8 @@ import star_icon_filled from "../../images/star_icon_filled-240.png";
 
 const ProdPost = ({ filter, cp, stp }) => {
   let searchword = useParams().search;
+  const location = useLocation();
+  const category = new URLSearchParams(location.search).get('category');
   const {selectedSellType, selectedCategory, selectedSellStatus, selectedOrderby} = filter;
   const navigate = useNavigate();
   const [prodData, setProdData] = useState();
@@ -53,10 +55,8 @@ const ProdPost = ({ filter, cp, stp }) => {
 
   // 찜버튼
   const likeHandler = (event, data) => {
-    console.log(data);
     event.stopPropagation(); // 이벤트 버블링 막기
     const likerequest = { boardNum: data.board_num, memberId: sessionStorage.getItem("id"), like: data.like };
-    console.log(likerequest);
     axios.post("/post/like", likerequest)
     .then((res) => {
       getProdData();
@@ -95,11 +95,13 @@ const ProdPost = ({ filter, cp, stp }) => {
       page: cp-1,
       size: 16
     }
+    console.log(requestData);
     axios.post(`/post?page=${cp-1}&size=16`, requestData)
     .then((res) => {
       const { data } = res;
       setProdData(data.content);
       stp(data.totalPages);
+      console.log(data.content);
     })
     .catch((e) => {
       console.error(e);

@@ -11,7 +11,14 @@ function PostDirect(props) {
   const dir_price = props.dir_price;
   const del_price = props.del_price;
   const as_date = props.as_date;
-
+  const setDetailFile=props.setDetailFile;
+  const setPreviewImg = (e) => {
+    var reader = new FileReader();
+    setDetailFile(e.target.files[0]);
+    
+     // console.log("fileList=>" + fileList);
+    reader.readAsDataURL(e.target.files[0]);
+  };
   return (
     <>
       <div className="PW_product_category">
@@ -63,6 +70,7 @@ function PostDirect(props) {
             id="input-file"
             accept="image/*"
             readonly
+            onChange={setPreviewImg}
           />
         </div>
       </div>

@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
-// 더미데이터
-import infodata from "./grademilecoupon.json";
 
 // 이미지파일
 import infoicon from "../../images/info_icon_brown-240.png"
@@ -10,6 +9,7 @@ import infoicon from "../../images/info_icon_brown-240.png"
 const GradeMileCoupon = () => {
 
   const [membershipInfo, setMembershipInfo] = useState();
+
 
   const dataProcess = (data) => {
     // 회원등급, 등급별 최대액수 데이터 가공
@@ -59,9 +59,9 @@ const GradeMileCoupon = () => {
     
     // 쿠폰 3자리마다 콤마
     let couponprice = data.coupon
-    for (let j=0; j < data.coupon.length; j++) {
-      couponprice[j].price = couponprice[j].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
+    // for (let j=0; j < data.coupon.length; j++) {
+    //   couponprice[j].price = couponprice[j].price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    // }
 
     let persent = Math.floor((data.membergrade.amount / max) * 100);
     data.membergrade = { ...data.membergrade, grade: grade, max: max, nextgrade: nextgrade, persent: persent};
@@ -72,18 +72,17 @@ const GradeMileCoupon = () => {
   }
 
   const getMembershipInfo = () => {
-    const membershiprequest = { id: sessionStorage.getItem("id") };
-    // axios.post("/api/membership", membershiprequest)
-    // .then((res) => {
-    //   const { data } = res;
-    //   setMembershipInfo(dataProcess(data));
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    let data = infodata;
-    // console.log(data);
-    setMembershipInfo(dataProcess(data));
+ 
+    axios
+    .post(`/mypage/membership?id=${window.sessionStorage.getItem("id")}`)
+    .then((res) => {
+      setMembershipInfo(dataProcess(res.data));
+    })
+    .catch((e) => {
+      console.error(e);
+    })
+   
+ 
   }
 
   useEffect(() => {
@@ -136,12 +135,14 @@ const GradeMileCoupon = () => {
         <VerticalLine />
         <MemberCouponBox>
           <CouponTitle>보유중인 쿠폰</CouponTitle>
+          <CouponContent>
           {membershipInfo?.coupon.map((data, index) => (
           <CouponDetailBox key={index}>
-            <CouponName>{data.name}</CouponName>
-            <CouponPoint>{data.price}</CouponPoint>
+            <CouponName>{data.coupon_name}</CouponName>
+            <CouponPoint>{data.sale_price}</CouponPoint>
           </CouponDetailBox>
           ))}
+          </CouponContent>
         </MemberCouponBox>
       </MemberGradeMileCouponBox>
     </MemberGradeMileCouponWrapper>
@@ -321,12 +322,30 @@ const CouponTitle = styled.div`
   color: #514438;
   margin-bottom: 15px;
 `;
-
+const CouponContent =styled.div`
+height: 90px;
+overflow-y: scroll;
+padding-right:5px;
+&::-webkit-scrollbar {
+  
+  width: 5px;
+}
+&::-webkit-scrollbar-thumb {
+  
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
+&::-webkit-scrollbar-track {
+  background-color: white;
+}
+`
+ 
 const CouponDetailBox = styled.div`
   display: flex;
   justify-content: space-between;
   font-weight: 400;
   font-size: 15px;
+  
   margin-bottom: 5px;
   :last-child {
     margin: 0px;

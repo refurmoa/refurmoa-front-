@@ -115,13 +115,12 @@
 }
 
 .M-items_list {
-    display: flex;
     width: 1370px;
     height: 480px;
 }
 
 .M-item_box {
-    flex-shrink: 0;
+    float: left;
     width: 300px;
     height: 450px;
     background: rgba(238, 238, 238, 0.3);

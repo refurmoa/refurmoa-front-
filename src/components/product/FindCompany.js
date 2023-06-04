@@ -65,7 +65,6 @@ const FindCompany = (props) => {
                 <th>제휴 대표명</th>
                 <th>제휴 연락처</th>
                 <th>제품수</th>
-
                 <th>&nbsp;</th>
               </tr>
             </thead>
