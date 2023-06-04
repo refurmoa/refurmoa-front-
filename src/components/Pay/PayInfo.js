@@ -7,7 +7,7 @@ function PayInfo(props) {
     return (
         <InfoWrap>
             <Info>
-                <Image alt="상품 이미지" src={`/images/${props.prod.main_image}`}/>
+                <Image alt="상품 이미지" src={`/images/prod/${props.prod.main_image}`}/>
                 <NameWrap>
                     <ComName>{props.prod.prod_com}</ComName>
                     <Name>{props.prod.prod_name}</Name>
