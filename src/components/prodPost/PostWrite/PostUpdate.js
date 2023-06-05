@@ -394,6 +394,7 @@ function PostUpdate() {
             
           })
           .catch((e) => {
+            alert("판매글 수정에 실패했습니다.");
             console.error(e);
           });   
         }  
@@ -403,6 +404,7 @@ function PostUpdate() {
         }
       })
       .catch((e) => {
+        alert("판매글 수정에 실패했습니다.");
         console.error(e);
       })
     }

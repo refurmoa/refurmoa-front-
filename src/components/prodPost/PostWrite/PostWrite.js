@@ -336,6 +336,7 @@ function PostWrite(props) {
             
           })
           .catch((e) => {
+            alert("판매글 등록에 실패했습니다.");
             console.error(e);
           });   
         }  
@@ -345,6 +346,7 @@ function PostWrite(props) {
         }
       })
       .catch((e) => {
+        alert("판매글 등록에 실패했습니다.");
         console.error(e);
       })
     }

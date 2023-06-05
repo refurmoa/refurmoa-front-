@@ -47,14 +47,14 @@
 }
 
 .NV-info {
-  float: left;
+  min-height: 400px;
   padding: 25px 20px;
 }
 
-.NV-img {
-  clear: both;
-  width: 695px;
-  margin: 35px auto 30px;
+.NV-img img {
+  width: 900px;
+  margin: 0 auto ;
+  margin-top: 20px;
   object-fit: contain;
 }
 .NV-btn-wrap {

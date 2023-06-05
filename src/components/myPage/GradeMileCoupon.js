@@ -9,8 +9,8 @@ import infoicon from "../../images/info_icon_brown-240.png"
 const GradeMileCoupon = () => {
 
   const [membershipInfo, setMembershipInfo] = useState();
-
-
+  const [isHovered, setIsHovered] = useState(false);
+  const [mileHovered, setMileHovered] = useState(false);
   const dataProcess = (data) => {
     // 회원등급, 등급별 최대액수 데이터 가공
     let grade = data.membergrade.grade;
@@ -96,7 +96,11 @@ const GradeMileCoupon = () => {
           <GradeTitleAndInfoBox>
             <GradeTitle>회원등급</GradeTitle>
             <GradeInfo>
-              <img src={infoicon} alt="gradeinfo" />
+              <img src={infoicon} alt="gradeinfo" onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}/>
+              {isHovered && 
+              <GradeInfoText > 회원 등급은 결제 금액에 따라 결정됩니다.</GradeInfoText>
+              }
             </GradeInfo>
           </GradeTitleAndInfoBox>
           <GradeBox>
@@ -120,7 +124,11 @@ const GradeMileCoupon = () => {
             <MileTitleAndInfoBox>
               <MileTitle>마일리지</MileTitle>
               <MileInfo>
-                <img src={infoicon} alt="gradeinfo" />
+                <img src={infoicon} alt="gradeinfo"onMouseEnter={() => setMileHovered(true)}
+                onMouseLeave={() => setMileHovered(false)}/>
+              {mileHovered && 
+              <MileInfoText > 마일리지는 총 결제 금액의 1%가 적립됩니다.</MileInfoText>
+              }
               </MileInfo>
             </MileTitleAndInfoBox>
             <MileAmount>{membershipInfo?.mile.amount}</MileAmount>
@@ -198,8 +206,17 @@ const GradeInfo = styled.div`
     width: 25px;
     height: 25px;
   }
+  position:relative;
 `;
-
+const GradeInfoText= styled.div`
+  float:right;
+  padding:10px;
+  width: 160px;
+  position:absolute;
+  top:0;
+  left:30px;
+  background-color: #EEEEEE;
+`;
 const GradeBox = styled.div``;
 
 const Grade = styled.div`
@@ -271,8 +288,17 @@ const MileInfo = styled.div`
     width: 25px;
     height: 25px;
   }
+  position:relative;
 `;
-
+const MileInfoText= styled.div`
+  float:right;
+  padding:10px;
+  width: 160px;
+  position:absolute;
+  top:0;
+  left:30px;
+  background-color: #EEEEEE;
+`;
 const MileAmount = styled.div`
   margin: 0px;
   height: 25px;
