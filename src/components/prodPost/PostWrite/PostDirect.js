@@ -29,7 +29,7 @@ function PostDirect(props) {
             className="PR_product_price_input"
             type="text"
             onChange={(e) => onChangeDir(e)}
-            value={addComma(dir_price) || ""}
+            value={dir_price===0?"":addComma(dir_price) }
           />
           원
         </div>
@@ -43,7 +43,7 @@ function PostDirect(props) {
             className="PR_product_price_input"
             type="text"
             onChange={(e) => onChangeDel(e)}
-            value={addComma(del_price) || ""}
+            value={del_price===0?"":addComma(del_price)}
           />
           원
         </div>

@@ -38,7 +38,7 @@ function PostAll(props) {
             className="PR_product_price_input"
             type="text"
             onChange={(e) => onChangeDir(e)}
-            value={addComma(dir_price) || ""}
+            value={dir_price===0?"":addComma(dir_price) }
           />
           원
         </div>
@@ -51,7 +51,7 @@ function PostAll(props) {
             className="PR_product_price_input"
             type="text"
             onChange={(e) => onChangeAuc(e)}
-            value={addComma(auc_price) || ""}
+            value={auc_price===0?"":addComma(auc_price)}
           />
           원
         </div>
@@ -64,7 +64,7 @@ function PostAll(props) {
             className="PR_product_price_input"
             type="text"
             onChange={(e) => onChangeUnit(e)}
-            value={addComma(unit_price) || ""}
+            value={unit_price===0?"":addComma(unit_price) }
           />
           원
         </div>
@@ -77,7 +77,7 @@ function PostAll(props) {
             className="PR_product_price_input"
             type="text"
             onChange={(e) => onChangeDel(e)}
-            value={addComma(del_price) || ""}
+            value={del_price===0?"":addComma(del_price)}
           />
           원
         </div>

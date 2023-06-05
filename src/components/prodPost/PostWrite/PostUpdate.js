@@ -25,19 +25,19 @@ function PostUpdate() {
   const [prod_com, setProd_com] = useState("");
   const [prod_name, setProd_name] = useState("");
   const [prod_Grade, setprod_Grade] = useState("");
-  const [org_price, setOrg_price] = useState("");
-  const [dir_price, setDir_price] = useState("");
-  const [unit_price, setUnit_price] = useState("");
-  const [auc_price, setAuc_price] = useState("");
-  const [del_price, setDel_price] = useState("");
+  const [org_price, setOrg_price] = useState(0);
+  const [dir_price, setDir_price] = useState(0);
+  const [unit_price, setUnit_price] = useState(0);
+  const [auc_price, setAuc_price] = useState(0);
+  const [del_price, setDel_price] = useState(0);
   const [as_date, setAs_date] = useState("");
   const [guarantee, setGuarantee] = useState("");
   const [auction, setAuction] = useState(false);
   const [direct, setDirect] = useState(false);
   const [defect_text, setDefect_text] = useState("");
   const [start_date, setStart_date] = useState("");
-  const [end_date, setEnd_date] = useState("");
-  const [reg_date, setReg_date] = useState("");
+  const [end_date, setEnd_date] = useState(null);
+  const [reg_date, setReg_date] = useState(null);
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
   const [img_con, setImg_con] = useState(false);
@@ -52,7 +52,11 @@ function PostUpdate() {
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
-
+  useEffect(()=>{
+    if(auction && !direct)setSell_type(1);
+    else if(!auction && direct)setSell_type(2);
+    else if(auction && direct)setSell_type(3);
+  },[auction,direct])
   useEffect(() => {
     console.log(board_num);
   
@@ -336,12 +340,7 @@ function PostUpdate() {
       listFile.forEach((file) => {
         formimg.append("uploadfiles", file)
       });
-    
-    
-    
-    if(auction && !direct)setSell_type(1);
-    else if(!auction && direct)setSell_type(2);
-    else if(auction && direct)setSell_type(3);
+  
   
     formData.append("main_image",mainFile);
     formData.append("detailFile",detailFile);
