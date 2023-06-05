@@ -6,16 +6,17 @@ import "./CouponList.css";
 import cancel from "../../images/cancel.png";
 import moment from "moment";
 const CouponList = (props) => {
-    const id=window.sessionStorage.getItem("id");
+    const id=props.id;
     const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
     const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
     const [couponList,setCouponList]=useState([]);//쿠폰 리스트
+    const state =props.state;
     const setPay=props.setPay;
     const pay=props.pay;
   // 쿠폰 찾기
     useEffect(()=> {
         axios
-        .get(`/pay/coupon?id=${window.sessionStorage.getItem("id")}&page=${currentPage-1}&size=10`)
+        .get(`/pay/coupon?id=${props.id}&page=${currentPage-1}&size=10`)
         .then((res) => {
             setCouponList(res.data.content);
             setTotalPage(res.data.totalPages);
@@ -47,7 +48,7 @@ const CouponList = (props) => {
             <tbody>
               {couponList.map((item, index) => {//쿠폰 정보
                 return (
-                  <tr key={index} onClick={()=>setCouponInfo(item)}>
+                  <tr key={index} onClick={()=>{state===1&&setCouponInfo(item)}}>
                     <td>{item.coupon_name}</td>
                     <td>{item.sale_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')} 원</td>
                     <td>{moment(item.valid_date).format("YYYY-MM-DD")}</td>

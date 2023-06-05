@@ -273,7 +273,7 @@ function PostPay() {
             {Modal &&
                 <div className="Coupon_modal_overlay">
                     <div className="Coupon_modal">
-                        <CouponFind pay={pay} setPay={setPay} setModal={setModal} />
+                        <CouponFind id={sessionStorage.getItem("id")}pay={pay} state={1} setPay={setPay} setModal={setModal} />
                     </div>
                 </div>
             }

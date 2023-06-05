@@ -5,7 +5,7 @@ import { AdminUserDetailPayList } from "./AdminUserDetailPayList";
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
-
+import CouponFind from "../../Pay/CouponlList";
 const AdminUserDetail = () => {
   const location = useLocation();
   const id = location.state.member_id;
@@ -13,7 +13,7 @@ const AdminUserDetail = () => {
   const [milePoint, setMilePoint] = useState(0);
   const [pageNum, setPageNum] = useState(0);
   const [cuList, setCuList] = useState(0);
-
+  const [Modal, setModal] = useState(false); // 쿠폰 찾기 모달
   const AUDCuList = () => {
     axios
       .post("/user/coupon", {
@@ -107,7 +107,7 @@ const AdminUserDetail = () => {
         </info>
         <div className="AUDLeftButton">
           <div>
-            <input type="button" value="쿠폰 내역" onClick={AUDCuList} />
+            <input type="button" value="쿠폰 내역" onClick={()=>setModal(true)} />
           </div>
           <div>
             <input type="button" value="쿠폰 등록" onClick={AUDCuInput} />
@@ -121,6 +121,14 @@ const AdminUserDetail = () => {
           <AdminUserDetailPayList setPageNum={setPageNum} id={id} />
         )}
       </right>
+         {/*쿠폰 모달*/}
+         {Modal &&
+                <div className="Coupon_modal_overlay">
+                    <div className="Coupon_modal">
+                        <CouponFind id={id} state={0} setModal={setModal} />
+                    </div>
+                </div>
+            }
     </div>
   );
 };
