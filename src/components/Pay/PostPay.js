@@ -8,7 +8,7 @@ import moment from "moment/moment";
 import PortonePay from "./PortonePay";
 import PayInfo from "./PayInfo";
 import search_icon from "../../images/search.png";
-
+import CouponFind from "./CouponlList";
 
 function PostPay() {
     const navigate = useNavigate();
@@ -37,11 +37,13 @@ function PostPay() {
         receipt_req: ""
     });
     const [pay, setPay] = useState({ // 결제 정보
-        coupon_num: 0,
-        coupon_price: 0,
         mile: 0,
+        coupon_num:0,
+        coupon_price:0,
         buy_method: "card" // 결제수단 : 카드 card, 계좌이체 trans, 휴대폰결제 phone
     });
+
+    const [Modal, setModal] = useState(false); // 쿠폰 찾기 모달
 
     useEffect (() => {
         // 결제 정보 조회
@@ -254,7 +256,7 @@ function PostPay() {
                     <span className="PP-pay_coupon_wrap">
                         <span className="PP-pay_user_title">쿠폰 사용</span>
                         <span className="PP-pay_user_use">{pay.coupon_price.toLocaleString('ko-KR')}&nbsp;원</span>
-                        <button className="PP-pay_coupon_button" onClick={couponChoice}>쿠폰 선택</button>
+                        <button className="PP-pay_coupon_button" onClick={() => {setModal(true)}}>쿠폰 선택</button>
                     </span>
                     <span className="PP-pay_mile_wrap">
                         <label className="PP-pay_user_title" htmlFor="pay_mile">마일리지 사용</label>
@@ -267,7 +269,14 @@ function PostPay() {
                     </span>
                 </div>
             </div>
-
+            {/*쿠폰 모달*/}
+            {Modal &&
+                <div className="Coupon_modal_overlay">
+                    <div className="Coupon_modal">
+                        <CouponFind id={sessionStorage.getItem("id")}pay={pay} state={1} setPay={setPay} setModal={setModal} />
+                    </div>
+                </div>
+            }
             {/* 결제 수단 선택 */}
             <div className="PP-pay_wrap">
                 <div className="PP-pay_top">
