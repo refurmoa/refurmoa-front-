@@ -97,22 +97,22 @@ const PayDetail = () => {
           <DeliveryTitle>배송지 정보</DeliveryTitle>
           <DeliveryInfoDetailBox>
             <DeliverySubTitle>수령인</DeliverySubTitle>
-            <DeliveryUserInfo>{payDetailData?.recipt_name}</DeliveryUserInfo>
+            <DeliveryUserInfo>{payDetailData?.receipt_name}</DeliveryUserInfo>
           </DeliveryInfoDetailBox>
           <DeliveryInfoDetailBox>
             <DeliverySubTitle>연락처</DeliverySubTitle>
-            <DeliveryUserInfo>{payDetailData?.recipt_phone}</DeliveryUserInfo>
+            <DeliveryUserInfo>{payDetailData?.receipt_phone}</DeliveryUserInfo>
           </DeliveryInfoDetailBox>
           <DeliveryInfoDetailBox>
             <DeliverySubTitleAddr>주소</DeliverySubTitleAddr>
             <UserAddrBox>
-              <DeliveryUserInfo>{payDetailData?.recipt_addr}</DeliveryUserInfo>
-              <DeliveryUserInfo>{payDetailData?.recipt_detail}</DeliveryUserInfo>
+              <DeliveryUserInfo>{payDetailData?.receipt_addr}</DeliveryUserInfo>
+              <DeliveryUserInfo>{payDetailData?.receipt_detail}</DeliveryUserInfo>
             </UserAddrBox>
           </DeliveryInfoDetailBox>
           <DeliveryInfoDetailBox>
             <DeliverySubTitleReq>배송 요청사항</DeliverySubTitleReq>
-            <DeliveryUserInfo>{payDetailData?.recipt_req}</DeliveryUserInfo>
+            <DeliveryUserInfo>{payDetailData?.receipt_req}</DeliveryUserInfo>
           </DeliveryInfoDetailBox>
         </DeliveryInfoBox>
         <PayInfoBox>
