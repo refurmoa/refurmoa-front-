@@ -277,7 +277,6 @@ function PostWrite(props) {
     console.log(sell_type);
     formData.append("main_image",mainFile);
     formData.append("detailFile",detailFile);
-
     formData.append("product_code",prod_code);
     formData.append("category", cate_code);
     formData.append("category_code",code);
@@ -297,12 +296,9 @@ function PostWrite(props) {
     formData.append("auc_price",auc_price );
     formData.append("unit_price",unit_price );
     formData.append("del_price", del_price);
-    formData.append("start_date",start_date===null?null:new Date(start_date));
-    formData.append("end_date",end_date===null?null:new Date(end_date));
-    formData.append("update_date", null);
+    if (start_date !== null) formData.append("start_date", new Date(start_date));
+    if (end_date !== null) formData.append("end_date", new Date(end_date));
     formData.append("as_date",as_date );
-    formData.append("readCount",0);
-    formData.append("deleteCheck",false);
     formData.append("sell_type",sell_type);
  
     axios
