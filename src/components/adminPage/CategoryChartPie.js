@@ -1,12 +1,52 @@
 import { ResponsivePie } from '@nivo/pie'
 import styled from 'styled-components';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
-export const MyResponsivePie = ({ data /* see data tab */ }) => (
+const CategoryChartPie = () => {
+  const [categoryData, setCategoryData] = useState();
+
+  const getCategoryData = () => {
+    axios.get("/admin/sales/category")
+    .then((res) => {
+      const { data } = res;
+      // 전체 매출 합계 계산
+      const totalSales = data.category_countList.reduce((sum, item) => sum + item.value, 0);
+
+      const categoryMap = {
+        appkitchen : '주방',
+        applife : '생활',
+        appelec : '전자기기',
+        furliving : '거실/주방',
+        furbed : '침실',
+        furoffice : '사무실',
+      };
+
+      // 비율로 변환된 데이터 생성
+      const ratioData = data.category_countList.map(item => ({
+        id: categoryMap[item.id], // 카테고리 한글로 변환
+        label: categoryMap[item.label], // 카테고리 한글로 변환
+        value: Math.round((item.value / totalSales) * 100), // 매출 비율 계산
+      }));
+      setCategoryData(ratioData);
+    })
+    .catch((e) => {
+      console.error(e);
+    })
+  }
+
+  useEffect(() => {
+    getCategoryData();
+  }, [])
+
+  return (
   <CircleWrapper>
     <ChartTitleBox>카테고리별 매출 비율</ChartTitleBox>
-    <div style={{ width: '460px', height: '300px'}}>
+    {categoryData !== undefined && (
+      <div style={{ width: '460px', height: '300px'}}>
       <ResponsivePie 
-        data={data}
+        data={categoryData}
         margin={{ top: 5, right: 160, bottom: 5, left: 5 }}
         innerRadius={0.2}
         padAngle={2}
@@ -53,8 +93,12 @@ export const MyResponsivePie = ({ data /* see data tab */ }) => (
         ]}
       />
     </div>
+      )}
   </CircleWrapper>
-)
+  )
+}
+
+export default CategoryChartPie
 
 const CircleWrapper = styled.div`
   margin: 0px 0px 0px 0px;
