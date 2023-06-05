@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { ComposedChart, Line, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import axios from 'axios';
-import { useEffect } from 'react';
-import { useState } from 'react';
 
 const DailySalesChart = () => {
   const [dailyData, setDailyData] = useState();
