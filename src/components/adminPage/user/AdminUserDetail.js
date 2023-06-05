@@ -29,7 +29,7 @@ const AdminUserDetail = () => {
         console.error(e);
       });
   };
-  console.log(cuList);
+ 
 
   const AUDCuInput = () => {
     // axios
@@ -53,9 +53,8 @@ const AdminUserDetail = () => {
         memberId: id,
       })
       .then((res) => {
-        const { data } = res; // data = res.data
-        setMilePoint(data[0].mile);
-        setUserdata(data[0]);
+        setMilePoint(res.data.mile);
+        setUserdata(res.data);
       })
       .catch((e) => {
         console.error(e);

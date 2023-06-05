@@ -50,9 +50,9 @@ const AdminNavi = () => {
                 </Link>
                 <Link className={`AN-nav AN-nav_${linkStyle("/admin")}`} to="/post/write">
                     판매등록
-                    <span className="AN-line"></span>
+                    <span className="AN-line"></span>  
                 </Link>
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin")}`} to="/cs/notice/write">
+                <Link className={`AN-nav AN-nav_${linkStyle("/admin")}`} state={{ PageState: 0 }} to="/cs/notice/write">
                     공지등록
                     <span className="AN-line"></span>
                 </Link>

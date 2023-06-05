@@ -16,7 +16,7 @@ const NoticeView = () => {
 
   console.log(ListDetail);
 
-  // 삭제
+  // 삭제하기
   const deleteList = () => {
     axios
       .post("/cs/notice/delete", {

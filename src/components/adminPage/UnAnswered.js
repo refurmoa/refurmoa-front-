@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useInView } from 'react-intersection-observer';
 
 // 더미데이터
-import unAnsweredWritings from "./UnAnswered.json";
 import { InView } from 'react-intersection-observer';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,15 +15,14 @@ const UnAnswered = () => {
 
 
   const getUnAnsweredData = () => {
-    // axios.get("/admin/unanswered")
-    // .then((res) => {
-    //   const { data } = res;
-    //   setUnAnsweredData(data.content);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    setUnAnsweredData(unAnsweredWritings);
+    axios.get("/admin/inq/unanswered")
+    .then((res) => {
+      const { data } = res;
+      setUnAnsweredData(data);
+    })
+    .catch((e) => {
+      console.error(e);
+    })
   }
 
   useEffect(() => {

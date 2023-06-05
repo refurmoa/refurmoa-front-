@@ -21,6 +21,17 @@ const FAQPOST = ({ logId, item }) => {
     })
   }
 
+  const readcount= (faq_num)=>{
+    console.log(faq_num);
+    axios.get(`/cs/faq/readcount?faq_num=${faq_num}`)
+    .then((res) => {
+      
+    })
+    .catch((e) => {
+      console.error(e);
+    })
+    setMode(false)
+  }
   useEffect(() => {
     setMode(true);
     if (item.faq_cate === 1) setCate("주문/결제");
@@ -43,7 +54,7 @@ const FAQPOST = ({ logId, item }) => {
                 <button className="FAQAdminUpdate">수정</button>
               </Link>
               <button className="FAQAdminDelete" onClick={() => {deleteHandler(item.faq_num)}}>삭제</button>
-              <img className="FAQArrowRotate" src={arrow} onClick={() => setMode(false)} alt="arrow" />
+              <img className="FAQArrowRotate" src={arrow} onClick={() =>readcount(item.faq_num)} alt="arrow" />
             </div>
           )}
           {!mode && (

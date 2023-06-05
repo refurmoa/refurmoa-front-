@@ -5,12 +5,12 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
 import DailySalesChart from "./DailySalesChart";
-import { MyResponsivePie } from "./piechart.js";
+import CategoryChartPie from "./CategoryChartPie.js";
 import TotalSalesChart from "./TotalSalesChart"
 import UnAnswered from "./UnAnswered";
 import AdminMemo from "./AdminMemo";
 
-import piedata  from "./data.json"
+
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const Admin = () => {
       <DailyAndCategorySalesBox> 
         <DailySalesChart />
         <CategoryChart>
-          <MyResponsivePie data={piedata} />
+          <CategoryChartPie />
         </CategoryChart>
       </DailyAndCategorySalesBox>
 

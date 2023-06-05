@@ -289,6 +289,7 @@ function ProductUpdate() {
             window.location.href="/prod";
           })
           .catch((e) => {
+            alert("상픔 수정에 실패했습니다.");
             console.error(e);
           });   
         }  
@@ -298,6 +299,7 @@ function ProductUpdate() {
         }
       })
       .catch((e) => {
+        alert("상픔 수정에 실패했습니다.");
         console.error(e);
       })
     }

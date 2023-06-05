@@ -25,7 +25,7 @@ function FAQ() {
 
   const getFaqList = () => {
     axios
-    .get(`/cs/faq?faq_cate=${category}&page=${currentPage-1}&size=15&sort=faqNum,desc`)
+    .get(`/cs/faq?faq_cate=${category}&page=${currentPage-1}&size=15&sort=readCount,desc`)
     .then((res) => {
       const { data } = res;
       setDataList(data.content);
@@ -50,7 +50,7 @@ function FAQ() {
   }
   const getSearchList = () => {
     axios
-    .get(`/cs/faq/search?search=${searchword}&faq_cate=${category}&page=${currentPage-1}&size=15&sort=faqNum,desc`)
+    .get(`/cs/faq/search?search=${searchword}&faq_cate=${category}&page=${currentPage-1}&size=15&sort=readCount,desc`)
     .then((res) => {
       const { data } = res;
       setDataList(data.content);

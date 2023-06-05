@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
@@ -9,6 +9,8 @@ import adminMemoDummyData from "./AdminMemo.json"
 import memoinputBtn from "../../images/memo_input_btn.png";
 
 const AdminMemo = () => {
+  const memoListRef = useRef();
+  const memoInputRef = useRef();
   const [adminMemoData, setAdminMemoData] = useState();
 
   const activeEnter = (e) => {
@@ -17,47 +19,51 @@ const AdminMemo = () => {
     }
   }
   const inputMemo = () => {
-    console.log("입력");
-    // axios.post("/admin/memo/input")
-    // .then((res) => {
-
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
+    axios.post("/admin/memo/write", { content: memoInputRef.current.value })
+    .then((res) => {
+      getAdminMemo();
+    })
+    .catch((e) => {
+      console.error(e);
+    })
+    memoInputRef.current.value = "";
   }
 
 
   const getAdminMemo = () => {
-    // axios.get("/admin/memo")
-    // .then((res) => {
-    //   const { data } = res;
-    //   setAdminMemoData(data.content);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    setAdminMemoData(adminMemoDummyData);
-
+    axios.get("/admin/memo")
+    .then((res) => {
+      const { data } = res;
+      setAdminMemoData(data);
+    })
+    .catch((e) => {
+      console.error(e);
+    })
   }
 
   useEffect(() => {
     getAdminMemo();
   }, [])
 
+  // memoData를 받아오면 스크롤 하단에서 시작
+  // useEffect(() => {
+  //   memoListRef.current.scrollTop = memoListRef.current.scrollHeight;
+  // }, [adminMemoData])
+
   return (
     <AdminMemeoWrapper>
       <TitleBox><span>MEMO</span></TitleBox>
-      <MemoListBox>
-        {/* 무한스크롤 */}
-        {adminMemoData?.map((item, index) => (
-          <MemoItem key={index}>{item.memo}</MemoItem>
-        ))}
-      </MemoListBox>
       <MemoInputBox>
-        <input type="text" onKeyDown={(e) => {activeEnter(e)}} />
+        <input type="text" ref={memoInputRef} onKeyDown={(e) => {activeEnter(e)}} />
         <img src={memoinputBtn} alt="memoinputbutton" onClick={() => {inputMemo()}}/>
       </MemoInputBox>
+      <MemoListBox ref={memoListRef}>
+        {/* 무한스크롤 */}
+        {adminMemoData?.map((item, index) => (
+          <MemoItem key={index}>{item.content}</MemoItem>
+        ))}
+      </MemoListBox>
+      
     </AdminMemeoWrapper>
   )
 }

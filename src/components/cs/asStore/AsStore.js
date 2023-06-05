@@ -48,7 +48,7 @@ const AsStore = () => {
       .get("/cs/as", {})
       .then((res) => {
         const { data } = res; // data = res.data
-        setDataList(data);
+        setDataList(data.content);
       })
       .catch((e) => {
         console.error(e);
@@ -60,16 +60,15 @@ const AsStore = () => {
   // 기업 filtering===============================================================================
   const [asComNum, setAsComNum] = useState();
   const [cityFirstWord, setCityFirstWord] = useState();
+  const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
+  const [currentPage, setCurrentPage] = useState(0); // 현재 페이지
 
   function searchCity(e) {
     axios
-      .post("/cs/as/search/city", {
-        storeAddr: e.target.value,
-        storeDetail: cityFirstWord,
-      })
+      .get(`/cs/as/search/city?storeAddr=${e.target.value}&storeDetail=${cityFirstWord}&page=${currentPage}&size=10`)
       .then((res) => {
         const { data } = res; // data = res.data
-        setDataList(data);
+        setDataList(data.content);
         handleCity(e);
         inputDefault();
       })
@@ -77,6 +76,8 @@ const AsStore = () => {
         console.error(e);
       });
   }
+
+
   useEffect(() => {
     setCityFirstWord(country.substr(0, 1));
   }, [country]);
@@ -107,12 +108,10 @@ const AsStore = () => {
 
   function searchCityText() {
     axios
-      .post("/cs/as/search/text", {
-        storeName: searchpartRef.current.value,
-      })
+    .get(`/cs/as/search/text?search=${searchpartRef.current.value}&page=${currentPage}&size=10`)
       .then((res) => {
         const { data } = res; // data = res.data
-        setDataList(data);
+        setDataList(data.content);
         selectDefault();
       })
       .catch((e) => {
@@ -162,7 +161,6 @@ const AsStore = () => {
     callback
   );
   // ====================================================================================================
-  console.log(dataList);
 
   function clickList(marker) {
     setDataList(marker);
