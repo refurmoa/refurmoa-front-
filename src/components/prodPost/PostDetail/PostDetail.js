@@ -421,7 +421,7 @@ function PostDetail() {
                     <img className="PD-bid_info_icon" alt="입찰방법" src={info_icon_brown} onClick={InfoIconClick("bid_info")}
                      onMouseEnter={() => setStateHovered(3)} onMouseLeave={() => setStateHovered(0)} />
                      { stateHovered === 3 &&
-                        <div className="PD_bid_info">
+                        <div className="PD-bid_info">
                           <br/>
                           자동 입찰<br/>
                             - 화살표를 클릭하여 원하시는 금액까지 미리 입찰금액을 설정(자동 입찰)할 수 있습니다.<br/>
@@ -499,7 +499,7 @@ function PostDetail() {
                   <img className="PD-main_info_icon" alt="하자정보" src={info_icon_brown} onClick={InfoIconClick("DefectInfo")}
                   onMouseEnter={() => setStateHovered(4)} onMouseLeave={() => setStateHovered(0)} />
                   { stateHovered === 4 &&
-                      <div className="PD_deffect_info">
+                      <div className="PD-defect_info">
                         사진은 실제와 차이가 있을 수 있습니다.<br/>
                         상품의 색상 및 상태는 모니터의 해상도에 따라 다소 차이가 날 수 있으며, 이로 인한 반품 및 환불은 불가합니다.
                       </div>
