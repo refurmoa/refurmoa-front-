@@ -5,10 +5,11 @@ import prod from "./mypageprod.json";
 import { ProductBidlist } from "./ProductBidlist";
 import MemberInfo from "./MemberInfo";
 import axios from "axios";
+import { months } from "moment";
 
 const MyPage_detail = () => {
   const [prodbidlistData, setProdData] = useState(prod.prodlist);
-
+  const [sel_month,setSel_month]=useState(3);
   const [totalPageBid, setTotalPageBid] = useState(1);
   const [currentPageBid, setCurrentPageBid] = useState(1);
 
@@ -91,6 +92,7 @@ const MyPage_detail = () => {
   };
 
   const searchMonth = (e) => {
+    setSel_month(e.target.value);//month 값 수정
     setProdData(
       prod.prodlist.filter(
         (li) =>
@@ -108,7 +110,7 @@ const MyPage_detail = () => {
       <mid className="mid">
         <div className="payword">입찰 내역</div>
         <radio className="radio">
-          <input type="radio" name="month" onClick={search_all}></input>
+          <input type="radio" name="month" onClick={search_all} defaultChecked></input>
           <label>전체</label>
 
           <input type="radio" name="month" onClick={search_ing}></input>
@@ -117,9 +119,9 @@ const MyPage_detail = () => {
           <input type="radio" name="month" onClick={search_done}></input>
           <label>종료</label>
         </radio>
-        <select className="option" onChange={(e) => searchMonth(e)}>
+        <select className="option" value={sel_month} onChange={(e) => searchMonth(e)}>
           <option value="48">개월 수</option>
-          <option value="3">3개월</option>
+          <option value="3" >3개월</option>
           <option value="6">6개월</option>
           <option value="12">12개월</option>
         </select>
