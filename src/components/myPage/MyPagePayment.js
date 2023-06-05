@@ -102,7 +102,6 @@ const MyPage_detail = () => {
     axios.post("/user/payment/search", requestData)
     .then((res) => {
       const { data } = res;
-      console.log(res);
       setPayData(data.content);
     })
     .catch((e) => {

@@ -11,7 +11,7 @@ function PayInfo(props) {
                 <NameContainer>
                     <NameWrap>
                         <ComName>{props.prod.prod_com}</ComName>
-                        <Name>[{props.prod.prod_grade}]{props.prod.prod_name}</Name>
+                        <Name>[{props.prod.prod_grade}급] {props.prod.prod_name}</Name>
                     </NameWrap>
                 </NameContainer>
                 <PriceWrap>
