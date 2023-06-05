@@ -29,7 +29,7 @@ const NoticeList = () => {
       });
   };
 
-  // 삭제
+  // 삭제하기
   const deleteList = (list) => {
     axios
       .post("/cs/notice/delete", {
