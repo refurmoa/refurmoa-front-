@@ -1,16 +1,16 @@
 // 개인정보 수정 페이지
 
-import "../../sign/Sign.css";
-import "../../sign/signin/Login.css";
-import "../../sign/signup/SignupInput.css";
+import "../sign/Sign.css";
+import "../sign/signin/Login.css";
+import "../sign/signup/SignupInput.css";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Modal from "react-modal";
-import SignVerification from "../../sign/SignVerification";
-import Post from "../../shared/FindAddress";
-import arrow_icon from "../../../images/arrow_icon_brown-240.png";
-import cancel from "../../../images/cancel.png";
+import SignVerification from "../sign/SignVerification";
+import Post from "../shared/FindAddress";
+import arrow_icon from "../../images/arrow_icon_brown-240.png";
+import cancel from "../../images/cancel.png";
 
 
 const User_update = () => {
