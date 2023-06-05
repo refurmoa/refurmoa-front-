@@ -56,7 +56,7 @@ const AdminNavi = () => {
                     공지등록
                     <span className="AN-line"></span>
                 </Link>
-                <Link className={`AN-nav AN-nav_${linkStyle("/admin")}`} to="/cs/inquiry">
+                <Link className={`AN-nav AN-nav_${linkStyle("/admin")}`} to="/cs/inquiry/write">
                     1:1 문의
                     <span className="AN-line"></span>
                 </Link>
