@@ -44,11 +44,13 @@ const NoticeView = () => {
           <span className="NV-date">{ListDetail.notiDate.substr(0, 10)}</span>
         </div>
         <hr className="NV-title-line" />
-        <div className="NV-info">{ListDetail.notiInf}</div>
-      </div>
-      <div className="NV-img">
+        <div className="NV-info">{ListDetail.notiInf}
+        <div className="NV-img">
         <img alt="" src={`/images/prod/${ListDetail.notiImage}`} />
+        </div>
+        </div>
       </div>
+      
       <div className="NV-btn-wrap">
         <span className="NV-go-list-btn" onClick={() => navigate(-1)}>
           목록
