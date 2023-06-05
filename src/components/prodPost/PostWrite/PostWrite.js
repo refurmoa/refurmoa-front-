@@ -25,18 +25,18 @@ function PostWrite(props) {
   const [prod_com, setProd_com] = useState("");
   const [prod_name, setProd_name] = useState("");
   const [prod_Grade, setprod_Grade] = useState("");
-  const [org_price, setOrg_price] = useState("");
-  const [dir_price, setDir_price] = useState("");
-  const [unit_price, setUnit_price] = useState("");
-  const [auc_price, setAuc_price] = useState("");
-  const [del_price, setDel_price] = useState("");
+  const [org_price, setOrg_price] = useState(0);
+  const [dir_price, setDir_price] = useState(0);
+  const [unit_price, setUnit_price] = useState(0);
+  const [auc_price, setAuc_price] = useState(0);
+  const [del_price, setDel_price] = useState(0);
   const [as_date, setAs_date] = useState("");
   const [guarantee, setGuarantee] = useState("");
   const [auction, setAuction] = useState(false);
   const [direct, setDirect] = useState(false);
   const [defect_text, setDefect_text] = useState("");
-  const [start_date, setStart_date] = useState("");
-  const [end_date, setEnd_date] = useState("");
+  const [start_date, setStart_date] = useState(null);
+  const [end_date, setEnd_date] = useState(null);
   const [reg_date, setReg_date] = useState("");
   const [prod_state, setProd_state] = useState("");
   const [showImages, setShowImages] = useState([]);
@@ -50,9 +50,15 @@ function PostWrite(props) {
   /*===============================================*/
   const [Productname, setProductname] = useState();
   const [searchProduct, setSearchProduct] = useState([]);
-
+  
   const [prod_popup, setProd_Popup] = useState(false);
   const [prod_modal, setProd_Modal] = useState(false);
+
+  useEffect(()=>{
+    if(auction && !direct)setSell_type(1);
+    else if(!auction && direct)setSell_type(2);
+    else if(auction && direct)setSell_type(3);
+  },[auction,direct])
   const Changeprod_PopUP = () => {
     setProd_Popup(true);
     setProd_Modal(true);
@@ -100,6 +106,7 @@ function PostWrite(props) {
     setInputCount(productData.defectText.length);
   };
   /*===============================================*/
+ 
 
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
 
@@ -266,10 +273,8 @@ function PostWrite(props) {
     listFile.forEach((file) => {
       formimg.append("uploadfiles", file)
     });
-    if(auction && !direct)setSell_type(1);
-    else if(!auction && direct)setSell_type(2);
-    else if(auction && direct)setSell_type(3);
-  
+   
+    console.log(sell_type);
     formData.append("main_image",mainFile);
     formData.append("detailFile",detailFile);
 
@@ -288,14 +293,13 @@ function PostWrite(props) {
     formData.append("reg_date",new Date(reg_date));
     formData.append("prod_state",1);
     formData.append("com_num",com_num);
-    formData.append("board_num", 0);
     formData.append("dir_price", dir_price);
     formData.append("auc_price",auc_price );
     formData.append("unit_price",unit_price );
     formData.append("del_price", del_price);
-    formData.append("start_date",new Date(start_date) );
-    formData.append("end_date", new Date(end_date));
-    formData.append("update_date", new Date());
+    formData.append("start_date",start_date===null?null:new Date(start_date));
+    formData.append("end_date",end_date===null?null:new Date(end_date));
+    formData.append("update_date", null);
     formData.append("as_date",as_date );
     formData.append("readCount",0);
     formData.append("deleteCheck",false);
