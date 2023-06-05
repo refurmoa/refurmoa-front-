@@ -57,7 +57,10 @@ function PostDetail() {
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
   const today = new Date();
-
+  const [stateHovered, setStateHovered] = useState(false);//등급 info
+  const [deliHovered, setDeliHovered] = useState(false);// 배송비 info
+  const [unitHovered, setUnitHovered] = useState(false);// 입찰단위가 info
+  const [deffetHovered, setDeffetHovered] = useState(false);// 하자 정보info
   // sell_type => 1 : 경매, 2 : 즉시구매, 3 : 경매+즉시구매
 
   useEffect (() => {
@@ -337,7 +340,23 @@ function PostDetail() {
               <li className="PD-main_info_text">
                 <span>상태</span>
                 <span>{prodInfo.prod_grade}급</span>
-                <img className="PD-main_info_icon" alt="상품 상태 상세정보" src={info_icon_brown} onClick={InfoIconClick("grade")}></img>
+                <img className="PD-main_info_icon" alt="상품 상태 상세정보" src={info_icon_brown} onClick={InfoIconClick("grade")}onMouseEnter={() => setStateHovered(true)}
+                onMouseLeave={() => setStateHovered(false)}></img>
+                {stateHovered&&(prodInfo.prod_grade==="S"?
+                <div className="PD_state_info">
+                  사용하지 않았거나 새 컨디션의 제품<br/><br/>
+                  전시상품급 신품에 가까운 상품<br/><br/>
+                  미세한 사용감만 있는 상태가 좋은 상품   
+                </div>:prodInfo.prod_grade==="A"? 
+                <div className="PD_state_info">
+                  생활 스크레치, 미세한 원단의 변색 등과 같은 약간의 사용 흔적이 있는 제품 <br/><br/>
+                  전체적으로 사용감은 있으나 상처나 얼룩이 적은 상품         
+                </div>:
+                <div className="PD_state_info">
+                  눈에 띄는 스크레치나 원단의 변색 등과 같은 사용 흔적이 있는 제품 <br/><br/>
+                  사용감이 있고 상처나 얼룩이 다소 보이지만 심하지 않은 상품
+                </div>)
+                }
               </li>
               { prodInfo.sell_type !== 2 && <>
                   <li className="PD-main_info_text">

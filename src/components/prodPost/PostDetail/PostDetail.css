@@ -175,6 +175,7 @@ a {
 .PD-main_info_text {
     height: 25px;
     margin-bottom: 15px;
+    position:relative;
 }
 
 .PD-main_info_text > span {
@@ -201,6 +202,15 @@ a {
     width: 25px;
     height: 25px;
     margin-top: 1px;
+}
+.PD_state_info{
+  padding:10px;
+  width: 300px;
+  position:absolute;
+  top:0;
+  left:220px;
+  background-color: #EEEEEE;
+  z-index: 10;
 }
 
 /* 시간/가격 정보 */
