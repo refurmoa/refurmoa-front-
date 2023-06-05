@@ -30,7 +30,6 @@ const FindProduct = (props) => {
     axios
       .get(`/post/prod-search?search=${searchProduct}&page=${currentPage}&size=10`)
       .then((res) => {
-        console.log(res.data.content);
         setDataList(res.data.content);
         setTotalPage(res.data.totalPages);
       })
