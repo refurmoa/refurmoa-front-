@@ -102,7 +102,6 @@ const MyPage_detail = () => {
     axios.post("/user/payment/search", requestData)
     .then((res) => {
       const { data } = res;
-      console.log(res);
       setPayData(data.content);
     })
     .catch((e) => {
@@ -116,7 +115,6 @@ const MyPage_detail = () => {
       page: 0,
       size: 10
     }
-    console.log(requestData);
     axios.post("/user/payment", requestData)
     .then((res) => {
       const { data } = res;

@@ -45,6 +45,7 @@ function PostDetail() {
   });
   const [bidList, setBidList] = useState([]); // 입찰 내역
   const [state, setState] = useState(); // 판매 상태 (0 : 판매예정, 1 : 판매중, 2 : 판매종료)
+  const [stateHovered, setStateHovered] = useState(0); // info icon 내용 (1 : 상품상태, 2 : 배송설치비, 3 : 입찰방법, 4 : 하자정보)
   const [bidPrice, setBidPrice] = useState(); // 입찰가
   const [countBid, setCountBid] = useState(0); // 입찰 수
   const [bidListState, setBidListState] = useState(false); // 입찰내역 열기/닫기
@@ -57,7 +58,7 @@ function PostDetail() {
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
   const today = new Date();
-
+  
   // sell_type => 1 : 경매, 2 : 즉시구매, 3 : 경매+즉시구매
 
   useEffect (() => {
@@ -337,7 +338,31 @@ function PostDetail() {
               <li className="PD-main_info_text">
                 <span>상태</span>
                 <span>{prodInfo.prod_grade}급</span>
-                <img className="PD-main_info_icon" alt="상품 상태 상세정보" src={info_icon_brown} onClick={InfoIconClick("grade")}></img>
+                <span className="PD-info_icon_wrap">
+                  <img className="PD-main_info_icon" alt="상품 상태 상세정보" src={info_icon_brown} onClick={InfoIconClick("grade")}
+                    onMouseEnter={() => setStateHovered(1)} onMouseLeave={() => setStateHovered(0)} />
+                  { stateHovered === 1 &&
+                    ( prodInfo.prod_grade === "S" ?
+                      <div className="PD-info_icon_text">
+                        <span className="PD-info_icon_text_left">-</span>
+                        <span className="PD-info_icon_text_right">사용하지 않았거나 미세한 사용감만 있는 상품</span>
+                        <span className="PD-info_icon_text_left">-</span>
+                        <span className="PD-info_icon_text_right">전시상품 등 신품에 가까운 상품</span>
+                      </div>
+                    : prodInfo.prod_grade === "A" ?
+                      <div className="PD-info_icon_text">
+                        <span className="PD-info_icon_text_left">-</span>
+                        <span className="PD-info_icon_text_right">생활 스크레치, 미세한 원단의 변색 등과 같은 약간의 사용 흔적이 있는 상품</span>
+                        <span className="PD-info_icon_text_left">-</span>
+                        <span className="PD-info_icon_text_right">전체적으로 사용감은 있으나 상처나 얼룩이 적은 상품</span>
+                      </div>
+                    : <div className="PD-info_icon_text">
+                        <span className="PD-info_icon_text_left">-</span>
+                        <span className="PD-info_icon_text_right">눈에 띄는 스크래치나 원단의 변색 등과 같은 사용 흔적이 있는 상품</span>
+                        <span className="PD-info_icon_text_left">-</span>
+                        <span className="PD-info_icon_text_right">사용감이 있고 상처나 얼룩이 다소 보이지만 심하지 않은 상품</span>
+                      </div> )}
+                </span>
               </li>
               { prodInfo.sell_type !== 2 && <>
                   <li className="PD-main_info_text">
@@ -365,7 +390,17 @@ function PostDetail() {
               <li className="PD-main_info_text">
                 <span>배송설치비</span>
                 <span>{prodInfo?.delivery_price === 0 ? "무료" : `${prodInfo?.delivery_price?.toLocaleString('ko-KR')}원`}</span>
-                <img className="PD-main_info_icon" alt="배송설치비 상세정보" src={info_icon_brown} onClick={InfoIconClick("delivery")}></img>
+                <span className="PD-info_icon_wrap">
+                  <img className="PD-main_info_icon" alt="배송설치비 상세정보" src={info_icon_brown} onClick={InfoIconClick("delivery")}
+                    onMouseEnter={() => setStateHovered(2)} onMouseLeave={() => setStateHovered(0)} />
+                  { stateHovered === 2 &&
+                    <div className="PD-info_icon_text">
+                      <span className="PD-info_icon_text_left">-</span>
+                      <span className="PD-info_icon_text_right">설치가 필요한 제품의 경우 미리 연락 후, 방문하여 설치해드립니다.</span>
+                      <span className="PD-info_icon_text_left">-</span>
+                      <span className="PD-info_icon_text_right">서울/경기 외 수도권, 지방 추가금 없음</span>
+                    </div> }
+                </span>
               </li>
             </ul>
             
@@ -389,9 +424,18 @@ function PostDetail() {
                   <span className="PD-current_price_text">원</span>
                 </li>
                 <li className="PD-price_info_text">
-                  <span>
+                  <span className="PD-bid_info_icon_wrap">
                     입찰가
-                    <img className="PD-bid_info_icon" alt="입찰방법" src={info_icon_brown} onClick={InfoIconClick("bid_info")}></img>
+                      <img className="PD-bid_info_icon" alt="입찰방법" src={info_icon_brown} onClick={InfoIconClick("bid_info")}
+                      onMouseEnter={() => setStateHovered(3)} onMouseLeave={() => setStateHovered(0)} />
+                      { stateHovered === 3 &&
+                        <div className="PD-info_icon_text PD-bid_info_icon_text">
+                          <div className="PD-bid_info_icon_text_right"><b>자동 입찰</b></div>
+                          <span className="PD-info_icon_text_left">-</span>
+                          <span className="PD-bid_info_icon_text_right">화살표를 클릭하여 원하시는 금액까지 미리 입찰금액을 설정(자동 입찰)할 수 있습니다.</span>
+                          <span className="PD-info_icon_text_left">-</span>
+                          <span className="PD-bid_info_icon_text_right">입찰 한도액을 미리 설정해 자동으로 입찰이 진행되는 입찰 방식으로 상대 입찰자가 없으면 한도액 내 최소금액으로 낙찰됩니다.</span>
+                        </div> }
                   </span>
                   <span className="PD-bid_price_wrap">
                     { bidPrice === prodInfo.cur_price + prodInfo.unit_price ? 
@@ -421,7 +465,6 @@ function PostDetail() {
                 { bidPrice !== prodInfo.direct_price &&
                   <button className="PD-buy_btn_filled" type="button" onClick={bidBuy}>입&nbsp;&nbsp;&nbsp;찰</button>
                 }
-                
                 { prodInfo.sell_type === 3 &&
                   <button className="PD-buy_btn_line" type="button" onClick={directBuy}>
                     {prodInfo?.direct_price?.toLocaleString('ko-KR')}<span>원에</span> 즉시 구매<span>하기</span>
@@ -429,7 +472,7 @@ function PostDetail() {
                 }
               </div>
 
-              <hr className="PD-info_line"></hr>
+              <hr className="PD-info_line" />
 
               {/* 입찰 내역 */}
               <div className={!bidListState ? "PD-bid_list_wrap_closed" : "PD-bid_list_wrap"}>
@@ -438,7 +481,7 @@ function PostDetail() {
                     입찰내역&nbsp;
                     <span>{`(${countBid}건)`}</span>
                     <img className={!bidListState ? "PD-arrow_icon_closed" : "PD-arrow_icon"}
-                      alt="입찰내역" src={arrow_icon_brown} onClick={bidListOut}></img>
+                      alt="입찰내역" src={arrow_icon_brown} onClick={bidListOut} />
                   </span>
                 </div>
                 { bidListState && ( countBid === 0 ?
@@ -461,7 +504,18 @@ function PostDetail() {
               <div className="PD-defect_wrap">
                 <div className="PD-defect_title_wrap">
                   <span className="PD-defect_title">하자정보</span>
-                  <img className="PD-main_info_icon" alt="하자정보" src={info_icon_brown} onClick={InfoIconClick("DefectInfo")}></img>
+                  <span className="PD-info_icon_wrap">
+                    <img className="PD-main_info_icon" alt="하자정보" src={info_icon_brown} onClick={InfoIconClick("DefectInfo")}
+                      onMouseEnter={() => setStateHovered(4)} onMouseLeave={() => setStateHovered(0)} />
+                    { stateHovered === 4 &&
+                      <div className="PD-info_icon_text">
+                        <span className="PD-info_icon_text_left">-</span>
+                        <span className="PD-info_icon_text_right">사진은 실제와 차이가 있을 수 있습니다.</span>
+                        <span className="PD-info_icon_text_left">-</span>
+                        <span className="PD-info_icon_text_right">상품의 색상 및 상태는 모니터의 해상도에 따라 다소 차이가 날 수 있으며, 이로 인한 반품 및 환불은 불가합니다.</span>
+                      </div> }
+                  </span>
+                  
                 </div>
                 { login_id === null ? <div className="PD-defect_content_notlogin">로그인 후 확인 가능합니다</div>
                   : <>

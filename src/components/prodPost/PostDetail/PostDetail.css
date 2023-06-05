@@ -197,11 +197,39 @@ a {
     color: #888888;
 }
 
+.PD-info_icon_wrap {
+    position: relative;
+    margin-top: 1.2px;
+}
+
 .PD-main_info_icon {
     width: 25px;
     height: 25px;
-    margin-top: 1px;
 }
+
+.PD-info_icon_text {
+    position: absolute;
+    top: 0;
+    left: 35px;
+    width: 310px;
+    font-size: 18px;
+    background-color: #f7f7f7;
+    padding: 10px 10px 10px 15px;
+    z-index: 1;
+}
+
+.PD-info_icon_text_left {
+    clear: both;
+    float: left;
+    width: 5px;
+    margin-right: 10px;
+}
+
+.PD-info_icon_text_right {
+    float: left;
+    width: 295px;
+}
+
 
 /* 시간/가격 정보 */
 .PD-price_info_wrap {
@@ -253,11 +281,25 @@ a {
     color: red;
 }
 
+.PD-bid_info_icon_wrap {
+    position: relative;
+}
+
 .PD-price_info_text .PD-bid_info_icon {
     position: absolute;
     margin: 2.5px 0 0 5px;
     width: 25px;
     height: 25px;
+}
+
+.PD-bid_info_icon_text {
+    left: 95px;
+    width: 420px;
+}
+
+.PD-bid_info_icon_text_right {
+    float: left;
+    width: 405px;
 }
 
 .PD-bid_price_wrap {

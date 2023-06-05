@@ -18,7 +18,6 @@ const PayDetail = () => {
   const apiKey = process.env.REACT_APP_SWEETTRACKER_API_KEY;
   const [payDetailData, setPayDetailData] = useState();
   const [trackingData, setTrackingData] = useState();
-  console.log(board_num);
 
   // 현재 위치 조회
   const trackingHandler = () => {
@@ -59,33 +58,26 @@ const PayDetail = () => {
 
   // 상품 결제상세 데이터 가져오기
   const getPayDetail = () => {
-    
-    // FIXME: 백엔드 구현 후 지우기
-    let paydata = detaildata;
-
-    // let paydata = null;
-    // 결제상세 정보 받아오기
-    // axios.post("/api/paydetail", board_num)
-    // .then((res) => {
-    //   paydata = res.data;
-    //   setPayDetailData(paydata);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    // 결제상세 정보에 송장번호(deli_num)이 있으면 배송상태 정보 받아와서 trackingData에 저장
-    // if(paydata.deli_num !== null) {
-    //   axios.get(`https://info.sweettracker.co.kr/api/v1/trackingInfo?t_code=04&t_invoice=${paydata.deli_num}&t_key=${apiKey}`)
-    // .then((res) => {
-    //   const { data } = res;
-    //   console.log(data);
-    //   setTrackingData(data);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-    // }
-  setPayDetailData(detaildata);
+    let data = null;
+    axios.post("/pay/detail", { board_num: board_num })
+    .then((res) => {
+      data = res.data;
+      setPayDetailData(data);
+      
+      if(data?.deli_num !== null) {
+        axios.get(`https://info.sweettracker.co.kr/api/v1/trackingInfo?t_code=04&t_invoice=${data?.deli_num}&t_key=${apiKey}`)
+        .then((res) => {
+          const { data } = res;
+          setTrackingData(data);
+        })
+        .catch((e) => {
+          console.error(e);
+        })
+      }
+    })
+    .catch((e) => {
+      console.error(e);
+    })
   }
 
   useEffect(() => {
@@ -99,52 +91,35 @@ const PayDetail = () => {
       <ProductCode>{payDetailData?.pay_num}</ProductCode>
     </MainTitleWrapper>
     {payDetailData && (<PayInfo prod={payDetailData} />)}
-    {/* <ProductInfoWrapper>
-      <ProductInfoBox>
-        <ProductInfoImageAndNameBox>
-          <ProductInfoImage>
-            {payDetailData && <img src={`/images/prod/${payDetailData.main_image}`} alt="productimage" />}
-          </ProductInfoImage>
-          <ProductInfoName>
-            <ProductCom>{payDetailData?.prod_com}</ProductCom>  
-            <ProductName>[{payDetailData?.prod_grade}급]{payDetailData?.prod_name}</ProductName>
-          </ProductInfoName>
-        </ProductInfoImageAndNameBox>
-        <ProductInfoPriceBox>
-          <ProductInfoDelivery><img src={deliveryIcon} alt="deliveryicon" />{payDetailData?.delivery_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</ProductInfoDelivery>
-          <ProductInfoPrce>{payDetailData?.prod_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</ProductInfoPrce>
-        </ProductInfoPriceBox>
-      </ProductInfoBox>
-    </ProductInfoWrapper> */}
     <DeliveryAndPayInfoWrapper>
       <DeliveryAndPayInfoBox>
         <DeliveryInfoBox>
           <DeliveryTitle>배송지 정보</DeliveryTitle>
           <DeliveryInfoDetailBox>
             <DeliverySubTitle>수령인</DeliverySubTitle>
-            <DeliveryUserInfo>{payDetailData?.recipt_name}</DeliveryUserInfo>
+            <DeliveryUserInfo>{payDetailData?.receipt_name}</DeliveryUserInfo>
           </DeliveryInfoDetailBox>
           <DeliveryInfoDetailBox>
             <DeliverySubTitle>연락처</DeliverySubTitle>
-            <DeliveryUserInfo>{payDetailData?.recipt_phone}</DeliveryUserInfo>
+            <DeliveryUserInfo>{payDetailData?.receipt_phone}</DeliveryUserInfo>
           </DeliveryInfoDetailBox>
           <DeliveryInfoDetailBox>
             <DeliverySubTitleAddr>주소</DeliverySubTitleAddr>
             <UserAddrBox>
-              <DeliveryUserInfo>{payDetailData?.recipt_addr}</DeliveryUserInfo>
-              <DeliveryUserInfo>{payDetailData?.recipt_detail}</DeliveryUserInfo>
+              <DeliveryUserInfo>{payDetailData?.receipt_addr}</DeliveryUserInfo>
+              <DeliveryUserInfo>{payDetailData?.receipt_detail}</DeliveryUserInfo>
             </UserAddrBox>
           </DeliveryInfoDetailBox>
           <DeliveryInfoDetailBox>
             <DeliverySubTitleReq>배송 요청사항</DeliverySubTitleReq>
-            <DeliveryUserInfo>{payDetailData?.recipt_req}</DeliveryUserInfo>
+            <DeliveryUserInfo>{payDetailData?.receipt_req}</DeliveryUserInfo>
           </DeliveryInfoDetailBox>
         </DeliveryInfoBox>
         <PayInfoBox>
           <PayTitle>결제 정보</PayTitle>
           <PayInfoDetailBox>
             <PaySubTitle>상품금액</PaySubTitle>
-            <PayUserInfo>{payDetailData?.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</PayUserInfo>
+            <PayUserInfo>{payDetailData?.prod_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</PayUserInfo>
           </PayInfoDetailBox>
           <PayInfoDetailBox>
             <PaySubTitle>배송설치비</PaySubTitle>
@@ -181,8 +156,8 @@ const PayDetail = () => {
         </PayInfoBox>
       </DeliveryAndPayInfoBox>
     </DeliveryAndPayInfoWrapper>
-    {/* 구매확정이 false이면 배송정보 렌더링 */}
-    {!payDetailData?.is_purchaseconfirm && (
+    {/* 송장번호가 있고 구매확정이 아닐때 렌더링 */}
+    {payDetailData?.deli_num !== null & payDetailData?.prod_state !== 5 ? (
       <TrackingWrapper>
       <TrackingTitleAndNumberBox>
         <TrackingTitle>배송 조회</TrackingTitle>
@@ -227,7 +202,7 @@ const PayDetail = () => {
       </TrackingStateBox>
       <TrackingNowLocationBtn onClick={() => {trackingHandler()}}><span>현재 위치 조회</span></TrackingNowLocationBtn>
     </TrackingWrapper>
-    )}
+    ) : (<></>)}
   </>
   )
 }
