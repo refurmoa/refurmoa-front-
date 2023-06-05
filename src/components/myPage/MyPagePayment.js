@@ -116,7 +116,6 @@ const MyPage_detail = () => {
       page: 0,
       size: 10
     }
-    console.log(requestData);
     axios.post("/user/payment", requestData)
     .then((res) => {
       const { data } = res;
