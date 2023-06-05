@@ -24,7 +24,7 @@ import OneononeUserpost from "./components/cs/oneonone/OneononeUserpost";
 import AsStore from "./components/cs/asStore/AsStore";
 import AsStoreAdmin from "./components/cs/asStore/AsStoreAdmin";
 import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
-import UserUpdate from "./components/myPage/userUpdate/UserUpdate";
+import UserUpdate from "./components/myPage/UserUpdate";
 import MyPagePayment from "./components/myPage/MyPagePayment";
 import MyPageBidlist from "./components/myPage/MyPageBidlist";
 import AdminNavi from "./components/adminPage/AdminNavi";
