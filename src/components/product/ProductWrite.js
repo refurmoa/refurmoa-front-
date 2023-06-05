@@ -205,11 +205,12 @@ function ProductWrite() {
           .post("/prod/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("파일 등록이 완료되었습니다!");
+            alert("상픔 등록이 완료되었습니다!");
             setFileDataList(res.data);
             window.location.href="/prod";
           })
           .catch((e) => {
+            alert("상픔 등록에 실패했습니다.");
             console.error(e);
           });   
         }  
@@ -219,6 +220,7 @@ function ProductWrite() {
         }
       })
       .catch((e) => {
+        alert("상픔 등록에 실패했습니다.");
         console.error(e);
       })
     }
