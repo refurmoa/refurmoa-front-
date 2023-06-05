@@ -39,15 +39,15 @@ const AdminBannerWirte = () => {
       return false;
     }
     if (bannerLink === "" || bannerLink === undefined) {
-      alert("배너 링크를 입력하세요!!!");
+      alert("배너 링크를 입력하세요.");
       return false;
     }
     if (bannerCom === "" || bannerCom === undefined) {
-      alert("업체명을 입력하세요!!!");
+      alert("업체명을 입력하세요.");
       return false;
     }
     if (bannerPhone === "" || bannerPhone === undefined) {
-      alert("연락처를 입력하세요!!!");
+      alert("연락처를 입력하세요.");
       return false;
     }
 
