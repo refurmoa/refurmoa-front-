@@ -29,7 +29,7 @@ const NoticePost = () => {
   }, []);
 
   const onFileUpload = (e) => {
-    // Array.prototype.slice.call() : 배열로 변경할 때 사용
+    // Array.prototype.slice.call() : 배열로 변경할 때 사용하기
     const uploadFiles = Array.prototype.slice.call(e.target.files);
     console.log("uploadFiles => " + uploadFiles);
     uploadFiles.forEach((uploadFile) => {

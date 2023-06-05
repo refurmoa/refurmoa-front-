@@ -48,7 +48,7 @@ const AsStore = () => {
       .get("/cs/as", {})
       .then((res) => {
         const { data } = res; // data = res.data
-        setDataList(data);
+        setDataList(data.content);
       })
       .catch((e) => {
         console.error(e);
@@ -162,7 +162,6 @@ const AsStore = () => {
     callback
   );
   // ====================================================================================================
-  console.log(dataList);
 
   function clickList(marker) {
     setDataList(marker);
