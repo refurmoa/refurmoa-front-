@@ -19,7 +19,7 @@ const NoticeList = () => {
   // 문의 글 목록 조회
   const NoticeList = () => {
     axios
-      .get(`/cs/notice?page=${currentPage - 1}&size=5`)
+      .get(`/cs/notice?page=${currentPage - 1}&size=10`)
       .then((res) => {
         setDataList(res.data.content);
         setTotalPage(res.data.totalPages);
@@ -30,14 +30,20 @@ const NoticeList = () => {
   };
 
   // 삭제
-  const deleteList = (e) => {
-    e.stopPropagation();
+  const deleteList = (list) => {
+    axios
+      .post("/cs/notice/delete", {
+        notiNum: list.notiNum,
+      })
+      .then(() => {
+        alert("삭제가 완료되었습니다.");
+        NoticeList();
+      })
+      .catch((e) => {
+        alert("실패하였습니다. 다시 시도해주세요.");
+        console.error(e);
+      });
   };
-
-  // // 문의 글 수 조회
-  // const pageCount = () => {
-  //   setTotalPage(5);
-  // }
 
   return (
     <span className="NL-wrap">
@@ -76,7 +82,10 @@ const NoticeList = () => {
                   >
                     수정
                   </Link>
-                  <span className="NL-list_btn" onClick={deleteList}>
+                  <span
+                    className="NL-list_btn"
+                    onClick={() => deleteList(list)}
+                  >
                     삭제
                   </span>
                 </span>

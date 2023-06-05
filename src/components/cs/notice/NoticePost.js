@@ -13,8 +13,9 @@ const NoticePost = () => {
   const fileList = [];
   const [notiTitle, setNotiTitle] = useState();
   const [notiText, setNotiText] = useState();
-  const today = new Date().toLocaleDateString();
+  const today = new Date();
   const [originfilename, setOriginalfilename] = useState();
+  const [notiNum, setNotiNum] = useState();
   console.log(location.state.ListDetail);
 
   useEffect(() => {
@@ -23,6 +24,7 @@ const NoticePost = () => {
       setNotiText(location.state.ListDetail.notiInf);
       setInputCount(location.state.ListDetail.notiInf.length);
       setOriginalfilename(location.state.ListDetail.notiImage);
+      setNotiNum(location.state.ListDetail.notiNum);
     }
   }, []);
 
@@ -76,6 +78,42 @@ const NoticePost = () => {
         })
         .then((res) => {
           alert("성공적으로 등록되었습니다.");
+          document.location.href = "/cs/notice";
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    }
+  };
+
+  const updateNotice = () => {
+    if (fileDataList === null) {
+      axios
+        .post("/cs/notice/update", {
+          notiNum: notiNum,
+          notiTitle: notiTitle,
+          notiInf: notiText,
+          notiDate: today,
+          notiImage: originfilename,
+        })
+        .then((res) => {
+          alert("성공적으로 수정되었습니다.");
+          document.location.href = "/cs/notice";
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+    } else {
+      axios
+        .post("/cs/notice/update", {
+          notiNum: notiNum,
+          notiTitle: notiTitle,
+          notiInf: notiText,
+          notiImage: fileDataList.storedfilename,
+          notiDate: today,
+        })
+        .then((res) => {
+          alert("성공적으로 수정되었습니다.");
           document.location.href = "/cs/notice";
         })
         .catch((e) => {
@@ -174,6 +212,9 @@ const NoticePost = () => {
             <div className="NP-content-count">{inputCount} / 1000</div>
             <div className="NP-box">
               <div className="NP-fileupload-wrap">
+                <div className="NP-fileupload-list">
+                  첨부파일 목록 : {originfilename}
+                </div>
                 <div className="NP_product_defect">
                   <input
                     type="file"
@@ -184,7 +225,6 @@ const NoticePost = () => {
                     readonly
                     onChange={onFileUpload}
                   />
-                  <a href="#">{originfilename}</a>
                 </div>
               </div>
             </div>
@@ -192,7 +232,7 @@ const NoticePost = () => {
               <Link to={`/cs/notice`}>
                 <button className="NP-cancle-btn">취소</button>
               </Link>
-              <button className="NP-upload-btn" onClick={insertNotice}>
+              <button className="NP-upload-btn" onClick={updateNotice}>
                 수정
               </button>
             </div>

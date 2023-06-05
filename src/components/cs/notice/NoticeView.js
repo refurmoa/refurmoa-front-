@@ -3,8 +3,9 @@ import React, { useEffect, useState } from "react";
 import "./NoticeView.css";
 import Data from "./Data.json";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
-import naver from "../../../images/iu.jpg";
+// import naver from "../../../images/iu.jpg";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const NoticeView = () => {
   const location = useLocation();
@@ -13,9 +14,22 @@ const NoticeView = () => {
 
   const navigate = useNavigate();
 
+  console.log(ListDetail);
+
   // 삭제
-  const deleteList = (e) => {
-    e.stopPropagation();
+  const deleteList = () => {
+    axios
+      .post("/cs/notice/delete", {
+        notiNum: ListDetail.notiNum,
+      })
+      .then(() => {
+        alert("삭제가 완료되었습니다.");
+        navigate(-1);
+      })
+      .catch((e) => {
+        alert("실패하였습니다. 다시 시도해주세요.");
+        console.error(e);
+      });
   };
 
   return (
@@ -31,6 +45,9 @@ const NoticeView = () => {
         </div>
         <hr className="NV-title-line" />
         <div className="NV-info">{ListDetail.notiInf}</div>
+      </div>
+      <div className="NV-img">
+        <img alt="" src={`/images/prod/${ListDetail.notiImage}`} />
       </div>
       <div className="NV-btn-wrap">
         <span className="NV-go-list-btn" onClick={() => navigate(-1)}>
