@@ -6,16 +6,16 @@ import styled from "styled-components";
 import search_icon from "../../../images/search.png";
 import orderList from "./AdminOrder.json";
 import axios from "axios";
-
+import moment from "moment";
 function AdminOrder() {
   const navigate = useNavigate();
-  const [orderlist, setOrderlist] = useState(orderList); // 주문 리스트
+  const [orderlist, setOrderlist] = useState([]); // 주문 리스트
   const [searchData, setSearchData] = useState(""); // 검색어
   const [inputNum, setInputNum] = useState(); // 송장번호 입력 폼 열기
   const [delinums, setDelinums] = useState([{}]); // 송장번호 입력 폼 내용
-  const [page, setPage] = useState(1); // 페이지
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
-
+  const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
+  const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
   // 주문 상태
   const state = [
     { id: 0,  name: "결제 전" },
@@ -25,35 +25,30 @@ function AdminOrder() {
   ]
 
   useEffect(() => {
-    // 주문 리스트 조회
-    // orderListup();
+    setCurrentPage(1);
+    orderListup();
+  }, [searchData]);
 
-    // 무한 스크롤
-    window.addEventListener("scroll", handleScroll); // 스크롤 이벤트 등록
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    }; // 스크롤 이벤트 제거
-  }, []);
-
+  useEffect(() => {  
+    orderListup();
+  }, [currentPage]);
   // 주문 리스트 조회
   const orderListup = () => {
-    if (isLoading) return;
-    setIsLoading(true);
-
-    try {
-      // axios
-      // setOrderlist();
-      // setPage((prevPage) => prevPage + 1);
-    } catch (e) {
-    } finally {
-      setIsLoading(false);
-    }
+      console.log(searchData);
+      axios
+      .get(`/admin/order?search=${searchData}&page=${currentPage-1}&size=10`)
+      .then((res) => {
+        setOrderlist(res.data.content);
+        setTotalPage(res.data.totalPages);
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   };
 
   // 주문 검색
   const searchOrder = () => {
-    // setOrderlist();
-    // searchData axios
+
   };
 
   // 송장 번호 입력
@@ -79,10 +74,7 @@ function AdminOrder() {
   }
 
   // 페이지가 변경될 때마다 데이터 요청
-  useEffect(() => {
-    orderListup();
-  }, [page]);
-
+ 
   // 스크롤 감지
   const handleScroll = () => {
     if (
@@ -91,8 +83,10 @@ function AdminOrder() {
     )
       orderListup();
   };
-
-
+  const setNavi =(item)=>{
+    if(item.deli_num==null)navigate(`/post/detail/${item.board_num}`);
+    else navigate(`/payment/detail/${item.board_num}`);
+  }
   return (
     <AdminOrderWrap>
       <TitleWrap>
@@ -115,13 +109,13 @@ function AdminOrder() {
         {orderlist.map((order, index) => (
           <Partner key={index}>
               { order.pay_num === null ? <PartnerInfo width={148}>-</PartnerInfo>
-                : <PartnerInfo width={148} pointer onClick={() => {navigate(`/payment/detail/${order.board_num}`);}}>
-                  {order.pay_date.replaceAll(/[-: ]/g, "").substring(2, 8) + order.pay_num}
+                : <PartnerInfo width={148} pointer onClick={() => {setNavi(order)}}>
+                  {order.pay_num.split('-', 1)}
                 </PartnerInfo>
               }
               <PartnerInfo width={118}>{order.product_code}</PartnerInfo>
-              <PartnerInfo width={98}>{order.recipt_name}</PartnerInfo>
-              <PartnerInfo width={163}>{order.recipt_phone}</PartnerInfo>
+              <PartnerInfo width={98}>{order.receipt_name}</PartnerInfo>
+              <PartnerInfo width={163}>{order.receipt_phone}</PartnerInfo>
               {order.deli_num !== null ? <PartnerInfo width={173}>{order.deli_num}</PartnerInfo>
                 : (
                   inputNum !== index ? <PartnerInfo width={173} line pointer onClick={() => {setInputNum(index)}}>입력</PartnerInfo>
@@ -136,10 +130,38 @@ function AdminOrder() {
                 )
               }
               <PartnerInfo width={103} red={order.state}>{state.find((item) => item.id === order.state).name}</PartnerInfo>
-              <PartnerInfo width={195} right>{order.pay_date}</PartnerInfo>
+              <PartnerInfo width={195} right>{moment(order.pay_date).format("YYYY-MM-DD HH:mm:ss")}</PartnerInfo>
           </Partner>
         ))}
       </TableWrap>
+      {/* 페이지 출력 */}
+      {totalPage > 1 && (
+        <div className="NL-page">
+          {currentPage === 1 ? (
+            <span className="NL-page_prev_gray">&lt;</span>
+          ) : (
+            <span
+              className="NL-page_prev"
+              onClick={() => setCurrentPage(currentPage - 1)}
+            >
+              &lt;
+            </span>
+          )}
+          <span className="NL-page_now">{currentPage}</span>
+          &nbsp;&nbsp;/&nbsp;&nbsp;
+          <span className="NL-page_total">{totalPage}</span>
+          {currentPage === totalPage ? (
+            <span className="NL-page_next_gray">&gt;</span>
+          ) : (
+            <span
+              className="NL-page_next"
+              onClick={() => setCurrentPage(currentPage + 1)}
+            >
+              &gt;
+            </span>
+          )}
+        </div>
+      )}
     </AdminOrderWrap>
   );
 }
@@ -223,7 +245,7 @@ const PartnerInfo = styled.span`
   line-height: 30px;
   text-align: center;
   text-decoration: ${props => props.line && 'underline'};
-  color: ${props => props.red === 0 && 'red'};
+  color: ${props => props.red === 1 && 'red'};
   border-right: ${props => props.right ? '0' : '2px solid rgba(185, 168, 154, 0.5)'};
   padding: 0 25px;
   overflow: hidden;
