@@ -1,6 +1,7 @@
 // 개인정보 수정 페이지
 
 import "../../sign/Sign.css";
+import "../../sign/signin/Login.css";
 import "../../sign/signup/SignupInput.css";
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -19,8 +20,8 @@ const User_update = () => {
   const [id, setId] = useState("");
   const [member_id, setMember_id] = useState("");
   const [name, setName] = useState("");
+  const [prev_phone, setPrev_phone] = useState("");
   const [phone, setPhone] = useState("");
-  const [changePhone, setChangePhone] = useState("");
   const [password, setPassword] = useState("");
   const [passwordChk, setPasswordChk] = useState("");
   const [email, setEmail] = useState("");
@@ -31,8 +32,9 @@ const User_update = () => {
   const [birth, setBirth] = useState("");
   const [accept_alarm, setAccept_alarm] = useState(true);
   const [accept_location, setAccept_location] = useState(true);
-  const [certi, setCerti] = useState(); // 본인인증
-  const [phoneChk, setPhoneChk] = useState();
+  const [phone_modal, setPhone_modal] = useState(false);
+  const [certiChk, setCertiChk] = useState(false); // 본인인증 요청
+  const [certi, setCerti] = useState(false); // 본인인증 확인
 
   const [domainSelect, setDomainSelect] = useState("write"); // 도메인 선택
   const [domainSelectOn, setDomainSelectOn] = useState(false); // 도메인 선택 열기/닫기
@@ -50,14 +52,14 @@ const User_update = () => {
       setId(location.state.id);
     }
   }, []);
-      
+
   useEffect(() => {
     axios
       .post("/user/info", { memberId: id })
       .then((res) => {
         setMember_id(res.data.memberId);
         setName(res.data.name);
-        setPhone(res.data.phone);
+        setPrev_phone(res.data.phone);
         setEmail(res.data.email.split("@")[0]);
         setDomain(res.data.email.split("@")[1]);
         setPrev_address(res.data.address);
@@ -71,12 +73,6 @@ const User_update = () => {
         // console.error(e);
       });
   }, [id]);
-
-  // 전화번호 변경
-  useEffect(() => {
-    if (phoneChk && changePhone !== "")
-      setPhone(changePhone);
-  }, [phoneChk])
 
   // 주소 변경(상세주소 clear)
   useEffect(() => {
@@ -100,35 +96,19 @@ const User_update = () => {
 
   /*========================== */
 
-  // 본인인증 API 모달
-  const [Phone_popup, setPhone_Popup] = useState(false);
-  const [Phone_modal, setPhone_Modal] = useState(false);
-  const Phone_ChangePopUP = () => {
-    setPhone_Popup(true);
-    setPhone_Modal(true);
-  };
-  const Phone_close_modal = () => {
-    setPhone_Popup(false);
-    setPhone_Modal(false);
-  };
-
-  /*========================== */
-
   // 전화번호 변경
   const phoneClick = () => {
-    if (name === "") {
-      alert("이름을 입력해주세요");
-      return false;
-    } else if (phone === "") {
+    if (phone === "") {
       alert("전화번호를 입력해주세요");
-      return false;
-    } else if (certi === "") {
-      alert("인증번호를 입력해주세요");
-      return false;
+    } else {
+      setCertiChk(true);
     }
-
-    Phone_close_modal();
   }
+  useEffect(() => {
+    if (certi && phone !== "")
+      setPrev_phone(phone);
+      setPhone_modal(false);
+  }, [certi])
 
   // 개인정보 수정 axios
   const onClick = () => {
@@ -158,7 +138,7 @@ const User_update = () => {
             memberId: id,
             password: password,
             name: name,
-            phone: phone,
+            phone: prev_phone,
             email: email + "@" + domain,
             address: address,
             detailAddress: address_detail,
@@ -213,7 +193,6 @@ const User_update = () => {
     }
   }
 
-
   // const onChangePassword = (e) => {
   //   const passwordRegex =
   //     /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
@@ -239,6 +218,7 @@ const User_update = () => {
   //   }
   // };
 
+
   return (
     <div className="Sign_wrap Signup_Input_wrap">
       <div className="Sign_header Signup_header" style={{ marginBottom: '60px' }}>회원정보 수정</div>
@@ -251,8 +231,8 @@ const User_update = () => {
       <div className="Signup_form_line_long Signup_check_line">
         <label className="Sign_form_text" htmlFor="phone">전화번호</label>
         <input className="Sign_input_long Singup_input_none"
-          name="phone" type="text" value={phone} readOnly required />
-        <span className="Sign_phone_btn Signup_input_check" onClick={Phone_ChangePopUP}>번호 변경</span>
+          name="phone" type="text" value={prev_phone} readOnly required />
+        <span className="Sign_phone_btn Signup_input_check" onClick={() => {setPhone_modal(true);}}>번호 변경</span>
       </div>
       <div className="Signup_form_line_long">
         <label className="Sign_form_text" htmlFor="name">아이디</label>
@@ -322,20 +302,18 @@ const User_update = () => {
       </div>
 
       {/* 본인인증 모달 */}
-      <Modal style={{ overlay: { position: "fixed", backgroundColor: "rgba(0, 0, 0, 0.75)" },
-        content: { position: "absolute", top: "10%", bottom: "40px", overflow: "hidden", left: "40px", right: "40px",
-          width: "800px", height: "670px", border: "1px solid #ccc", borderRadius: "30px", padding: "20px" } }}
-        isOpen={Phone_modal} >
-        <img className="Sign_modal_close" alt="창 닫기" src={cancel} onClick={Phone_close_modal} />
-        { Phone_popup && (
-          <div className="Sign_wrap Signup_Phone_wrap">
-            <div className="Sign_header Signup_header" style={{ marginBottom: '60px' }}>회원가입</div>
-            <SignVerification update={true} name={name} phone={changePhone} setPhone={setChangePhone}
-              certi={certi} setCerti={setCerti} phoneChk={phoneChk} setPhoneChk={setPhoneChk} />
-            <div className="Sign_btn" onClick={phoneClick}>변경</div>
+      { phone_modal &&
+        <div className="Login_modal_overlay">
+          <div className="Login_modal">
+            <div className="Login_find_wrap">
+              <div className="Sign_header Signup_header" style={{ marginBottom: '60px' }}>전화번호 변경</div>
+              <SignVerification update={true} name={name} setName={setName} phone={phone} setPhone={setPhone} setCerti={setCerti} certiChk={certiChk} setCertiChk={setCertiChk} />
+              <div className="Sign_btn" onClick={() => phoneClick()}>변경</div>
+              <img className="Sign_modal_close" alt="창 닫기" src={cancel} onClick={() => {setPhone_modal(false);}} />
+            </div>
           </div>
-        )}
-      </Modal>
+        </div>
+      }
 
       {/* 주소 API */}
       <Modal style={{ overlay: { position: "fixed", backgroundColor: "rgba(0, 0, 0, 0.75)" },

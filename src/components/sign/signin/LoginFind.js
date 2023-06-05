@@ -4,29 +4,30 @@ import React, { useState } from "react";
 import axios from "axios";
 import SignVerification from "../SignVerification";
 import cancel from "../../../images/cancel.png";
+import { useEffect } from "react";
 
 const LoginFind = (props) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [certi, setCerti] = useState("");
+  const [certiChk, setCertiChk] = useState(false);
+  const [certi, setCerti] = useState(false);
+
+  useEffect(() => {
+    if (certi) props.modal === "id" ? findID() : findPW();
+  }, [certi]);
   
   // ID, PW 찾기 버튼 클릭 시
   const findLogin = () => {
     if (props.modal === "pw" && id === "") {
       alert("아이디를 입력해주세요");
-      return false;
     } else if (name === "") {
       alert("이름을 입력해주세요");
-      return false;
     } else if (phone === "") {
       alert("전화번호를 입력해주세요");
-      return false;
-    } else if (certi === "") {
-      alert("인증번호를 입력해주세요");
-      return false;
+    } else {
+      setCertiChk(true);
     }
-    props.modal === "id" ? findID() : findPW();
   }
 
   // ID, PW 찾기 성공 팝업 창
@@ -120,7 +121,7 @@ const LoginFind = (props) => {
             value={id} onChange={(e) => setId(e.target.value)} required />
         </div>
       }
-      <SignVerification name={name} setName={setName} phone={phone} setPhone={setPhone} certi={certi} setCerti={setCerti} />
+      <SignVerification name={name} setName={setName} phone={phone} setPhone={setPhone} setCerti={setCerti} certiChk={certiChk} setCertiChk={setCertiChk} />
       <div className="Sign_btn Login_btn" onClick={() => {findLogin()}}>{props.modal === "id" ? "아이디 찾기" : "비밀번호 찾기"}</div>
       <img className="Sign_modal_close" alt="창 닫기" src={cancel} onClick={() => {props.setModal(false);}} />
     </div>
