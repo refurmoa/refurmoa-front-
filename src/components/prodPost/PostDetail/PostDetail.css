@@ -631,18 +631,18 @@ a {
 }
 
 /* info icon 내용 */
-.PD_state_info {
-    padding:10px;
-    width: 300px;
-    position:absolute;
-    top:0;
+.PD-state_info {
+    position: absolute;
+    top: 0;
     left:220px;
-    background-color:#e9e9e9;
-    z-index: 10;
+    width: 300px;
     color: #514438;
+    background-color:#e9e9e9;
+    padding: 10px;
+    z-index: 10;
 }
 
-.PD_deli_info {
+.PD-deli_info {
     padding:10px;
     width: 400px;
     position:absolute;
@@ -653,7 +653,7 @@ a {
     color: #514438;
 }
 
-.PD_bid_info {
+.PD-bid_info {
     padding:10px;
     width: 400px;
     position:absolute;
@@ -665,7 +665,7 @@ a {
     font-size: 15px;
 }
 
-.PD_deffect_info {
+.PD-deffect_info {
     padding:10px;
     width: 400px;
     position:absolute;
