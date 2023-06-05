@@ -11,7 +11,7 @@ function PayInfo(props) {
                 <NameContainer>
                     <NameWrap>
                         <ComName>{props.prod.prod_com}</ComName>
-                        <Name>{props.prod.prod_name}</Name>
+                        <Name>[{props.prod.prod_grade}]{props.prod.prod_name}</Name>
                     </NameWrap>
                 </NameContainer>
                 <PriceWrap>
@@ -21,7 +21,7 @@ function PayInfo(props) {
                         </DeliIconWrap>
                         {props.prod.delivery_price.toLocaleString('ko-KR')}
                     </DeliPriceWrap>
-                    <Price>{props.prod.price.toLocaleString('ko-KR')}원</Price>
+                    <Price>{props.prod.prod_price.toLocaleString('ko-KR')}원</Price>
                 </PriceWrap>
             </Info>
         </InfoWrap>
