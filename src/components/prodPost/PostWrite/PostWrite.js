@@ -53,12 +53,14 @@ function PostWrite(props) {
   
   const [prod_popup, setProd_Popup] = useState(false);
   const [prod_modal, setProd_Modal] = useState(false);
-
+ /*===============================================*///sell_type 설정
   useEffect(()=>{
     if(auction && !direct)setSell_type(1);
     else if(!auction && direct)setSell_type(2);
     else if(auction && direct)setSell_type(3);
   },[auction,direct])
+
+  /*===============================================*///modal 설정
   const Changeprod_PopUP = () => {
     setProd_Popup(true);
     setProd_Modal(true);
@@ -67,6 +69,7 @@ function PostWrite(props) {
     setProd_Popup(false);
     setProd_Modal(false);
   };
+   /*===============================================*///modal 설정
   const setData = (productData) => {
     setProd_code(productData.productCode);
     if (
@@ -106,8 +109,19 @@ function PostWrite(props) {
     setInputCount(productData.defectText.length);
   };
   /*===============================================*/
- 
-
+  //목록 클릭시 데이터 저장
+  useEffect(()=>{
+    if(code_param!==null){
+      console.log(code_param);
+        axios
+          .get(`/post/write/prod?prod=${code_param}`)
+          .then((res) => {
+            setData(res.data);     
+          })
+          .catch((e) => {       
+          })     
+    }
+  },[])
   /*=================샘플 데이터 이미지는 백엔드에서=========================*/
 
   /*===============================================*/
