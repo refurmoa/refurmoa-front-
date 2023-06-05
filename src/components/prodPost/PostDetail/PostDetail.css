@@ -175,7 +175,6 @@ a {
 .PD-main_info_text {
     height: 25px;
     margin-bottom: 15px;
-    position: relative;
 }
 
 .PD-main_info_text > span {
@@ -198,10 +197,37 @@ a {
     color: #888888;
 }
 
+.PD-info_icon_wrap {
+    position: relative;
+    margin-top: 1.2px;
+}
+
 .PD-main_info_icon {
     width: 25px;
     height: 25px;
-    margin-top: 1px;
+}
+
+.PD-info_icon_text {
+    position: absolute;
+    top: 0;
+    left: 35px;
+    width: 310px;
+    font-size: 18px;
+    background-color: #f7f7f7;
+    padding: 10px 10px 10px 15px;
+    z-index: 1;
+}
+
+.PD-info_icon_text_left {
+    clear: both;
+    float: left;
+    width: 5px;
+    margin-right: 10px;
+}
+
+.PD-info_icon_text_right {
+    float: left;
+    width: 295px;
 }
 
 
@@ -214,7 +240,6 @@ a {
 .PD-price_info_text {
     height: 30px;
     margin-bottom: 20px;
-    position: relative;
 }
 
 .PD-price_info_text > span:first-child {
@@ -256,11 +281,25 @@ a {
     color: red;
 }
 
+.PD-bid_info_icon_wrap {
+    position: relative;
+}
+
 .PD-price_info_text .PD-bid_info_icon {
     position: absolute;
     margin: 2.5px 0 0 5px;
     width: 25px;
     height: 25px;
+}
+
+.PD-bid_info_icon_text {
+    left: 95px;
+    width: 420px;
+}
+
+.PD-bid_info_icon_text_right {
+    float: left;
+    width: 405px;
 }
 
 .PD-bid_price_wrap {
@@ -628,51 +667,4 @@ a {
 .PD-detail_image {
     width: 1200px;
     object-fit: contain;
-}
-
-/* info icon 내용 */
-.PD-state_info {
-    position: absolute;
-    top: 0;
-    left:220px;
-    width: 300px;
-    color: #514438;
-    background-color:#e9e9e9;
-    padding: 10px;
-    z-index: 10;
-}
-
-.PD-deli_info {
-    padding:10px;
-    width: 400px;
-    position:absolute;
-    top:0;
-    left:240px;
-    background-color: #e9e9e9;
-    z-index: 10;
-    color: #514438;
-}
-
-.PD-bid_info {
-    padding:10px;
-    width: 400px;
-    position:absolute;
-    top:0;
-    left:100px;
-    background-color: #e9e9e9;
-    z-index: 10;
-    color: #514438;
-    font-size: 15px;
-}
-
-.PD-deffect_info {
-    padding:10px;
-    width: 400px;
-    position:absolute;
-    top:0;
-    left:130px;
-    background-color: #e9e9e9;
-    z-index: 10;
-    color: #514438;
-    font-size: 15px;
 }
