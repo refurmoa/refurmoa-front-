@@ -19,7 +19,7 @@ const NoticeList = () => {
   // 문의 글 목록 조회
   const NoticeList = () => {
     axios
-      .get(`/cs/notice?page=${currentPage - 1}&size=10`)
+      .get(`/cs/notice?page=${currentPage - 1}&size=10&sort=notiNum,desc`)
       .then((res) => {
         setDataList(res.data.content);
         setTotalPage(res.data.totalPages);
