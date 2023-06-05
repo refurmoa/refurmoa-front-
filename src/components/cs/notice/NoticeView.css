@@ -22,7 +22,7 @@
   border: 2px solid #c7b9ae;
 }
 .NV-board-wrap {
-  min-height: 325px;
+  min-height: 25px;
   margin-top: 25px;
 }
 .NV-title-wrap {
@@ -90,4 +90,8 @@
   border-radius: 10px;
   color: #514438;
   cursor: pointer;
+}
+
+.NV-img {
+  text-align: center;
 }

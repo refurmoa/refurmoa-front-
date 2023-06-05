@@ -73,6 +73,7 @@
   font-size: 18px;
   line-height: 30px;
   color: #514438;
+  cursor: pointer;
 }
 
 .NL-list_btn:first-child {
