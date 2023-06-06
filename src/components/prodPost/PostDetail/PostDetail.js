@@ -93,6 +93,7 @@ function PostDetail() {
         boardNum: board_num
     })
       .then((res) => {
+        console.log(res.data);
         setProdInfo(res.data);
         setBidPrice(res.data.cur_price + res.data.unit_price);
         setStart(new Date(res.data.start_date));
@@ -523,14 +524,14 @@ function PostDetail() {
                     {prodInfo.defect_image1 !== null &&
                       <div className="PD-defect_image_wrap">
                         <img className="PD-defect_image"
-                          alt="하자이미지1" src={`/images/${prodInfo.defect_image1}`} onClick={() =>{imageViewChange(1)}}></img>
+                          alt="하자이미지1" src={`/images/prod/${prodInfo.defect_image1}`} onClick={() =>{imageViewChange(1)}}></img>
                         { prodInfo.defect_image2 === null ? <span className="PD-noImage">no<br/>image</span>
                           : <img className="PD-defect_image"
-                              alt="하자이미지2" src={`/images/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(2)}}></img>
+                              alt="하자이미지2" src={`/images/prod/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(2)}}></img>
                         }
-                        { prodInfo.defect_image3 === null ? <span className="PD-noImage">no<br/>image</span>
+                        { prodInfo.defect_image3 === null? <span className="PD-noImage">no<br/>image</span>
                           : <img className="PD-defect_image"
-                              alt="하자이미지3" src={`/images/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(3)}}></img>
+                              alt="하자이미지3" src={`/images/prod/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(3)}}></img>
                         }
                       </div>
                     }
@@ -538,13 +539,13 @@ function PostDetail() {
                       <div className="PD-defect_image_modal_wrap" onClick={() =>{imageViewChange(4)}}>
                         { imageView === 1 ?
                           <img className="PD-defect_image_modal"
-                            alt="하자이미지1" src={`/images/${prodInfo.defect_image1}`} onClick={() =>{imageViewChange(1)}}></img>
+                            alt="하자이미지1" src={`/images/prod/${prodInfo.defect_image1}`} onClick={() =>{imageViewChange(1)}}></img>
                           : imageView === 2 ?
                           <img className="PD-defect_image_modal"
-                            alt="하자이미지2" src={`/images/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(2)}}></img>
+                            alt="하자이미지2" src={`/images/prod/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(2)}}></img>
                           : imageView === 3 &&
                           <img className="PD-defect_image_modal"
-                            alt="하자이미지3" src={`/images/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(3)}}></img>
+                            alt="하자이미지3" src={`/images/prod/${prodInfo.defect_image2}`} onClick={() =>{imageViewChange(3)}}></img>
                         }
                       </div>
                     }

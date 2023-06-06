@@ -177,9 +177,6 @@ function ProductWrite() {
     formData.append("product_code",0);
     formData.append("category_code",code);
     formData.append("category", cate_code);
-    formData.append("deffect_image1","");
-    formData.append("deffect_image2","");
-    formData.append("deffect_image3","");
     formData.append("prod_com", prod_com);
     formData.append("prod_name",prod_name );
     formData.append("prod_grade",prod_Grade );
