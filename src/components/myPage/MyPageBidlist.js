@@ -72,6 +72,12 @@ function MyPageBidList() {
     }
   };
 
+  // 결제하기 이동
+  const movePay = (e, list) => {
+    e.stopPropagation();
+    navigate(`/post/pay/${list.board_num}?sell_type=1`);
+  }
+
 
   return (
     <>
@@ -115,13 +121,17 @@ function MyPageBidList() {
             <ListWrap key={list.board_num} onClick={() => navigate(`/post/detail/${list.board_num}`)}>
               <MainImage>
                 <img alt={list.prod_name} src={`/images/prod/${list.main_image}`} />
-                { moment(list.end_date).isBefore(moment()) && (
-                  list.bid_price < list.cur_price ? <ImageBlackWrap color={'#D4B2B2'}>패찰</ImageBlackWrap>
-                  : list.bid_price > list.cur_price ? <ImageBlackWrap color={'#D4B2B2'}>낙찰취소</ImageBlackWrap>
-                  : <ImageBlackWrap color={'#B2D4C1'}><div>낙찰</div></ImageBlackWrap> )}
+                { moment(list.end_date).isBefore(moment()) && <ImageBlackWrap /> }
+                { list.state === 1 && <PayButton onClick={(e) => movePay(e, list)}>결제하기</PayButton> }
               </MainImage>
               <ListTextWrap>
-                {runningTimer(moment(list.end_date))}
+                <ListTop>
+                  {runningTimer(moment(list.end_date))}
+                    { moment(list.end_date).isBefore(moment()) && (
+                      list.bid_price < list.cur_price ? <StatusLine color={'#B9A89A'}>패찰</StatusLine>
+                    : list.bid_price > list.cur_price ? <StatusLine color={'#B9A89A'}>낙찰 취소</StatusLine>
+                    : <StatusLine color={'#7D9E8C'}>낙찰</StatusLine> )}
+                </ListTop>
                 <ProdCom>{list.prod_com}</ProdCom>
                 <ProdName>{list.prod_name}</ProdName>
                 <BidCount>경매참여자 : {list.bid_count}명</BidCount>
@@ -141,9 +151,8 @@ function MyPageBidList() {
         </BidList>
       </Wrapper>
 
-
       {/* 페이지 */}
-      { totalPage > 0 &&
+      { totalPage > 1 &&
         <PageWrap>
           { currentPage === 1 ? <Page prev gray>&lt;</Page>
             : <Page prev onClick={() => setCurrentPage(currentPage-1)}>&lt;</Page> }
@@ -152,7 +161,6 @@ function MyPageBidList() {
             : <Page next onClick={() => setCurrentPage(currentPage+1)}>&gt;</Page> }
         </PageWrap>
       }
-
     </>
   );
 };
@@ -289,22 +297,23 @@ const ImageBlackWrap = styled.div`
   top: 0; left: 0;
   width: 200px;
   height: 200px;
-  font-weight: bold;
-  font-size: 30px;
-  line-height: 200px;
-  text-align: center;
-  color: #D4B2B2;
   background-color: rgba(0, 0, 0, 0.4);
+`;
 
-  div {
-    position: absolute;
-    top: 10px; left: 10px;
-    width: 180px;
-    height: 180px;
-    box-sizing: border-box;
-    line-height: 180px;
-    color: #D4FBE5;
-    border: 3px solid #FFFFFF;
+const PayButton = styled.div`
+  position: absolute;
+  top: 85px; left: 60px;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  color: #FFFFFF;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+  :hover {
+    background-color: #AAAAAA44;
   }
 `;
 
@@ -313,6 +322,11 @@ const ListTextWrap = styled.span`
   float: right;
   width: 340px;
   height: 200px;
+`;
+
+const ListTop = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 const TimerWrap = styled.div`
@@ -331,6 +345,14 @@ const Timer = styled.div`
   line-height: 20px;
   color: ${(props) => props.color};
   margin: 0 0 0 7px;
+`;
+
+const StatusLine = styled.div`
+  width: 100px;
+  font-weight: bold;
+  text-align: right;
+  color: ${(props) => props.color};
+  margin: 0 5px 0 0;
 `;
 
 const ProdCom = styled.div`
