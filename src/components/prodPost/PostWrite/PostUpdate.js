@@ -140,7 +140,7 @@ function PostUpdate() {
     setProd_com(productData.prodCom);
     setProd_name(productData.prodName);
     setOrg_price(productData.orgPrice);
-    setMainImg(`/images/prod/${productData.mainImage}`);
+    setMainImg(`${process.env.PUBLIC_URL}/images/prod/${productData.mainImage}`);
     if (productData.prodGrade === "S") onCHKS();
     else if (productData.prodGrade === "A") onCHKA();
     else if (productData.prodGrade === "B") onCHKB();
