@@ -1,117 +1,183 @@
 import "./Header.css";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ReactComponent as Logo } from "../../images/logo-header.svg";
+import styled from "styled-components";
+import { useRef } from "react";
 
 function Header() {
-  const login_id = window.sessionStorage.getItem("id");
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
-  const [ringlist, setRinglist] = useState(null); // 알림 리스트
+  const navigate = useNavigate();
+  const searchRef = useRef();
+
+  // const login_id = window.sessionStorage.getItem("id");
   const [searchData, setSearchData] = useState(); // 검색어
-  const [ringOpen, setRingOpen] = useState(false); // 알림창 열기
-  const [searchOpen, setSearchOpen] = useState(false); // 검색창 열기  
-  const linkStyle = (link) => {
-    const startlink = new RegExp(`^${link}`);
-    return currentPath === "/" ? "H-nav_main"
-    : startlink.test(currentPath) ? "H-nav_active" : "";
-  }
+  const [loginState, setLoginState] = useState();
 
   useEffect(() => {
-    // 알림 조회
-    // setRinglist();
-  }, [])
-  const logout = () => {
-    window.sessionStorage.clear("id")
+    if (sessionStorage.getItem("id") === null) {
+      setLoginState("not"); // 비로그인
+    } else if (sessionStorage.getItem("id") !== null) {
+      if (sessionStorage.getItem("id") === "admin") {
+        setLoginState("admin"); // 관리자
+      } else {
+        setLoginState("user"); // 유저
+      }
+    }
+  }, [sessionStorage.getItem("id")])
+
+  // 검색기능
+  const searchHandler = () => {
+    // console.log(searchRef.current.value);
+    if (searchRef.current.value === "") {
+      return alert("검색어를 입력해 주세요.");
+    }
+    navigate(`/post/${searchRef.current.value}`)
+  }
+
+  // 엔터키
+  const activeEnter = (e) => {
+    if(e.key === "Enter") {
+      searchHandler();
+    }
+  }
+
+  const logoHandler = () => {
+    searchRef.current.value = "";
+    navigate("/");
+  }
+
+  const logoutHandler = () => {
+    sessionStorage.clear("id");
     window.location.reload();
   }
 
-  // 검색창
-  const searchChange = () => {
-    if (!searchOpen) setSearchOpen(true);
-    else search();
-  }
-
-  // 검색
-  const search = () => {
-
-  }
-
-
   return (
-    <div className="H-wrap">
-      <svg className="H-top_line"><rect className="H-line_box" /></svg>
-      <svg className="H-top_shape" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0H223L156.852 86H49.6112L0 0Z" fill="#B9A89A"/>
-      </svg>
-      <Link to="/" onClick={() => setCurrentPath("/")}><Logo /></Link>
-
-      <div className="H-nav_wrap">
-        <span className="H-nav_left">
-          <span className="H-nav H_icon H-search" onClick={() => {searchChange()}}>
-            
-            {searchOpen &&
-              <input type="text" id="search" name="search" maxLength="20"
-              value={searchData} onChange={(e) => setSearchData(e.target.value)}
-              onKeyDown={(e) => {if (e.key === 'Enter') search();}} />
-            }
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-              <path fill="#B9A89A" d="M23.809 21.646l-6.205-6.205c1.167-1.605 1.857-3.579 1.857-5.711 0-5.365-4.365-9.73-9.731-9.73-5.365 0-9.73 4.365-9.73 9.73 0 5.366 4.365 9.73 9.73 9.73 2.034 0 3.923-.627 5.487-1.698l6.238 6.238 2.354-2.354zm-20.955-11.916c0-3.792 3.085-6.877 6.877-6.877s6.877 3.085 6.877 6.877-3.085 6.877-6.877 6.877c-3.793 0-6.877-3.085-6.877-6.877z"/>
+    <HeaderWrapper>
+      <Navbar>
+        <SearchBar>
+          <SearchImg onClick={() => {searchHandler()}}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24">
+              <path fill="#999999" d="M23.822 20.88l-6.353-6.354c.93-1.465 1.467-3.2 1.467-5.059.001-5.219-4.247-9.467-9.468-9.467s-9.468 4.248-9.468 9.468c0 5.221 4.247 9.469 9.468 9.469 1.768 0 3.421-.487 4.839-1.333l6.396 6.396 3.119-3.12zm-20.294-11.412c0-3.273 2.665-5.938 5.939-5.938 3.275 0 5.94 2.664 5.94 5.938 0 3.275-2.665 5.939-5.94 5.939-3.274 0-5.939-2.664-5.939-5.939z"/>
             </svg>
-          </span>
-          <Link className={`H-nav H_text ${linkStyle("/post")}`}
-              to="/post" onClick={() => setCurrentPath("/post")}>
-              order
-          </Link>
-          <Link className={`H-nav H_text ${linkStyle("/about")}`}
-              to="/about" onClick={() => setCurrentPath("/about")}>
-              about
-          </Link>
-          <Link className={`H-nav H_text ${linkStyle("/cs")}`}
-              to="/cs/notice" onClick={() => setCurrentPath("/cs")}>
-              c/s
-          </Link>
-        </span>
-        <span className="H-nav_right">
-          { login_id === null ? <>
-            <Link className={`H-nav H_text ${linkStyle("/login")}`}
-              to="/login" onClick={() => setCurrentPath("/login")}>
-              login
-            </Link>
-            <Link className={`H-nav H_text ${linkStyle("/signup")}`}
-                to="/signup" onClick={() => setCurrentPath("/signup")}>
-                join
-            </Link>
-            </> : <>
-            { login_id === "admin" ?
-              <Link className={`H-nav H_text ${linkStyle("/admin")}`}
-                to="/admin" onClick={() => setCurrentPath("/admin")}>
-                admin
-              </Link>
-              : <Link className={`H-nav H_text ${linkStyle("/mypage")}`}
-                to="/mypage" onClick={() => setCurrentPath("/mypage")}>
-                mypage
-              </Link> }
-            
-            <span className="H-nav H_icon" onClick={() => {setRingOpen(true)}}>
-              { ringlist !== null ?
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                  <path fill="#514438" d="M15.137 3.945c-.644-.374-1.042-1.07-1.041-1.82v-.003c.001-1.172-.938-2.122-2.096-2.122s-2.097.95-2.097 2.122v.003c.001.751-.396 1.446-1.041 1.82-4.667 2.712-1.985 11.715-6.862 13.306v1.749h20v-1.749c-4.877-1.591-2.195-10.594-6.863-13.306zm-3.137-2.945c.552 0 1 .449 1 1 0 .552-.448 1-1 1s-1-.448-1-1c0-.551.448-1 1-1zm3 20c0 1.598-1.392 3-2.971 3s-3.029-1.402-3.029-3h6zm5.778-11.679c.18.721.05 1.446-.304 2.035l.97.584c.504-.838.688-1.869.433-2.892-.255-1.024-.9-1.848-1.739-2.351l-.582.97c.589.355 1.043.934 1.222 1.654zm.396-4.346l-.597.995c1.023.616 1.812 1.623 2.125 2.874.311 1.251.085 2.51-.53 3.534l.994.598c.536-.892.835-1.926.835-3-.001-1.98-1.01-3.909-2.827-5.001zm-16.73 2.692l-.582-.97c-.839.504-1.484 1.327-1.739 2.351-.255 1.023-.071 2.053.433 2.892l.97-.584c-.354-.588-.484-1.314-.304-2.035.179-.72.633-1.299 1.222-1.654zm-4.444 2.308c0 1.074.299 2.108.835 3l.994-.598c-.615-1.024-.841-2.283-.53-3.534.312-1.251 1.101-2.258 2.124-2.873l-.597-.995c-1.817 1.092-2.826 3.021-2.826 5z"/>
-                </svg>
-                : <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                  <path fill="#B9A89A" d="M15.137 3.945c-.644-.374-1.042-1.07-1.041-1.82v-.003c.001-1.172-.938-2.122-2.096-2.122s-2.097.95-2.097 2.122v.003c.001.751-.396 1.446-1.041 1.82-4.667 2.712-1.985 11.715-6.862 13.306v1.749h20v-1.749c-4.877-1.591-2.195-10.594-6.863-13.306zm-3.137-2.945c.552 0 1 .449 1 1 0 .552-.448 1-1 1s-1-.448-1-1c0-.551.448-1 1-1zm3 20c0 1.598-1.392 3-2.971 3s-3.029-1.402-3.029-3h6z"/>
-                </svg>
-              }
-            </span>
-            <span className="H-nav H_icon" onClick={() => {logout()}}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-                <path fill="#B9A89A" d="M16 10v-5l8 7-8 7v-5h-8v-4h8zm-16-8v20h14v-2h-12v-16h12v-2h-14z"/>
-              </svg>
-            </span>
-          </> }
-        </span>
-      </div>
-    </div>
+          </SearchImg>
+          <SearchInput>
+            <input type="search" ref={searchRef} value={searchData} onChange ={(e)=> setSearchData(e.target.value)} onKeyDown={(e) => {activeEnter(e)}}/>
+          </SearchInput>
+          
+        </SearchBar>
+        <Logo onClick={() => {logoHandler()}}/>
+        <ProductAndCsAndLoginBox>
+          <ProductBox onClick={() => {navigate("/post")}}>상품</ProductBox>
+          <CSBox onClick={() => {navigate("/cs/notice")}}>고객센터</CSBox>
+          {/* 비로그인 */}
+          {loginState === "not" && (
+            <LoginBox onClick={() => {navigate("/login")}}>로그인</LoginBox>
+          )}
+          {/* 로그인(유저) */}
+          {loginState === "user" && (
+            <>
+              <MypageBox onClick={() => {navigate("/mypage")}}>마이페이지</MypageBox>
+              <LoginBox onClick={() => {logoutHandler()}}>로그아웃</LoginBox>
+            </>
+          )}
+          {/* 로그인(관리자) */}
+          {loginState === "admin" && (
+            <>
+              <MypageBox onClick={() => {navigate("/admin")}}>관리자페이지</MypageBox>
+              <LoginBox onClick={() => {logoutHandler()}}>로그아웃</LoginBox>
+            </>
+          )}
+        </ProductAndCsAndLoginBox>
+      </Navbar>
+    </HeaderWrapper>
   )
 }
 
 export default Header;
+
+const HeaderWrapper = styled.div`
+  width: 100%;
+  height: 110px;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  z-index: 100;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid #B9A89A;
+`;
+
+const Navbar = styled.div`
+  width: 85%;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-between;
+  svg {
+    margin-top: 15px;
+    cursor: pointer;
+  }
+`;
+
+// 검색창
+const SearchBar = styled.div`
+  margin: 0px;
+  width: 320px;
+  height: 30px;
+  border-bottom: 1px solid #999999;
+  display: flex;
+`;
+const SearchInput = styled.div`
+  width: 84%;
+  height: 75%;
+  margin: 1px 5px 0px 15px;
+  input {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+  }
+  input:focus {
+    outline: none;
+  }
+`;
+const SearchImg = styled.div`
+  margin: 5px 0px 0px 10px;
+  width: 17px;
+  height: 17px;
+  svg {
+    margin-top: 0px;
+    width: 100%;
+    height: 100%;
+    color: #999999;
+  }
+`;
+
+const ProductAndCsAndLoginBox = styled.div`
+  display: flex;
+  margin: 0px;
+  justify-content: space-between;
+`;
+
+const ProductBox = styled.div`
+  margin: 0px 15px 0px 0px;
+  color: #999999;
+  cursor: pointer;
+`;
+
+const CSBox = styled.div`
+  margin: 0px 15px 0px 0px;
+  color: #999999;
+  cursor: pointer;
+`;
+
+const MypageBox = styled.div`
+  margin: 0px 15px 0px 0px;
+  color: #999999;
+  cursor: pointer;
+`;
+
+const LoginBox = styled.div`
+  margin: 0px;
+  color: #999999;
+  cursor: pointer;
+`;
