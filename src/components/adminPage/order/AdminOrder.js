@@ -52,17 +52,23 @@ function AdminOrder() {
 
 
   // 송장 번호 등록
-  const delinumInput = (num,deli_num) => {
-    axios
-      .post(`/admin/pay/delinum?num=${num}&deli_num=${deli_num}`)
-      .then((res) => {
-        setDeliNum();//임시저장된 송장번호 초기화
-        orderListup();//다시 리스트 불러옴
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-    
+  const delinumInput = (num,deli_num) => {    
+        if (deli_num !== "") {
+          const requestData = {
+            payNum: num,
+            deli_num: deli_num,
+          }
+          axios.post("/admin/pay/delinum", requestData)
+          .then(() => {
+            orderListup();
+            setInputNum();
+          })
+          .catch((e) => {
+            console.error(e);
+          })
+        } else {
+          alert("송장번호를 입력해주세요");
+        }
   }
 
   
