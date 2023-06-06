@@ -19,9 +19,9 @@ function PayInfo(props) {
                         <DeliIconWrap>
                             <DeliIcon alt="배송설치비" src={delivery_icon}/>
                         </DeliIconWrap>
-                        {props.prod.delivery_price.toLocaleString('ko-KR')}
+                        {props.prod?.delivery_price?.toLocaleString('ko-KR')}
                     </DeliPriceWrap>
-                    <Price>{props.prod.prod_price.toLocaleString('ko-KR')}원</Price>
+                    <Price>{props.prod?.prod_price?.toLocaleString('ko-KR')}원</Price>
                 </PriceWrap>
             </Info>
         </InfoWrap>
