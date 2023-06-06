@@ -1,71 +1,79 @@
-{
-    "prodlist" : [
-      {
-        "board_num": 1,
-        "pay_num": 202306021234,
-        "sell_type": 1,
-        "main_image": "image10.png",
-        "prod_com": "제휴회사명",
-        "prod_name": "제품이름",
-        "prod_price": 190000,
-        "pay_price": 170000,
-        "pay_state": 0,
-        "pay_cancle": 1
-      },
-      {
-        "board_num": 2,
-        "pay_num": 202306021234,
-        "sell_type": 2,
-        "main_image": "image10.png",
-        "prod_com": "제휴회사명",
-        "prod_name": "제품이름",
-        "prod_price": 190000,
-        "pay_price": 170000,
-        "pay_state": 1
-      },
-      {
-        "board_num": 3,
-        "pay_num": 202306021234,
-        "sell_type": 3,
-        "main_image": "image10.png",
-        "prod_com": "제휴회사명",
-        "prod_name": "제품이름",
-        "prod_price": 190000,
-        "pay_price": 170000,
-        "pay_state": 2
-      },
-      {
-        "board_num": 4,
-        "pay_num": 202306021234,
-        "sell_type": 1,
-        "main_image": "image10.png",
-        "prod_com": "제휴회사명",
-        "prod_name": "제품이름",
-        "prod_price": 190000,
-        "pay_price": 170000,
-        "pay_state": 3
-      },
-      {
-        "board_num": 5,
-        "pay_num": 202306021234,
-        "sell_type": 1,
-        "main_image": "image10.png",
-        "prod_com": "제휴회사명",
-        "prod_name": "제품이름",
-        "prod_price": 190000,
-        "pay_price": 170000,
-        "pay_state": 4
-      },
-      {
-        "board_num": 6,
-        "pay_num": 202306021234,
-        "sell_type": 2,
-        "main_image": "image10.png",
-        "prod_com": "제휴회사명",
-        "prod_name": "제품이름",
-        "prod_price": 190000,
-        "pay_price": 170000,
-        "pay_state": 4
-      }
-    ]
-  }
+[
+  {
+		"board_num": 1,
+		"main_image": "example.jpg",
+		"start_date": "2023-05-10",
+		"end_date": "2023-06-06 23:00:00",
+		"prod_com": "제휴회사명",
+		"prod_name": "제품이름제품이름제품이름제품이름제품이름제품이름제품이름제품",
+		"cur_price": 60000,
+		"bid_price": 60000,
+		"bid_count": 3
+	},
+  {
+		"board_num": 3,
+		"main_image": "example.jpg",
+		"start_date": "2023-05-10",
+		"end_date": "2023-06-03",
+		"prod_com": "제휴회사명",
+		"prod_name": "제품이름",
+		"cur_price": 60000,
+		"bid_price": 70000,
+		"bid_count": 3
+	},
+  {
+		"board_num": 5,
+		"main_image": "example.jpg",
+		"start_date": "2023-05-10",
+		"end_date": "2023-06-03",
+		"prod_com": "제휴회사명",
+		"prod_name": "제품이름",
+		"cur_price": 70000,
+		"bid_price": 60000,
+		"bid_count": 3
+	},
+  {
+		"board_num": 6,
+		"main_image": "example.jpg",
+		"start_date": "2023-05-10",
+		"end_date": "2023-06-03",
+		"prod_com": "제휴회사명",
+		"prod_name": "제품이름",
+		"cur_price": 50000,
+		"bid_price": 60000,
+		"bid_count": 3
+	},
+  {
+		"board_num": 9,
+		"main_image": "example.jpg",
+		"start_date": "2023-05-10",
+		"end_date": "2023-06-03",
+		"prod_com": "제휴회사명",
+		"prod_name": "제품이름",
+		"cur_price": 60000,
+		"bid_price": 60000,
+		"bid_count": 3
+	},
+  {
+		"board_num": 8,
+		"main_image": "example.jpg",
+		"start_date": "2023-05-10",
+		"end_date": "2023-06-10",
+		"prod_com": "제휴회사명",
+		"prod_name": "제품이름",
+		"cur_price": 60000,
+		"bid_price": 60000,
+		"bid_count": 3
+	},
+  {
+		"board_num": 10,
+		"main_image": "example.jpg",
+		"start_date": "2023-05-10",
+		"end_date": "2023-06-10",
+		"prod_com": "제휴회사명",
+		"prod_name": "제품이름",
+		"cur_price": 60000,
+		"bid_price": 60000,
+		"bid_count": 3
+	}
+]

@@ -95,7 +95,7 @@
 .BN_banner_img img {
   width: 385px;
   height: 100px;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 .BN_banner_info {
