@@ -186,7 +186,7 @@ const ProductList = () => {
             {applianceState && (
               <>
                 <CategoryDetailSpan active={selectedCategory === "app"} onClick={()=>{categoryHandler("app")}}>가전 전체</CategoryDetailSpan>
-                <CategoryDetailSpan active={selectedCategory === "appkiechen"} onClick={()=>{categoryHandler("appkitchen")}}>주방</CategoryDetailSpan>
+                <CategoryDetailSpan active={selectedCategory === "appkitchen"} onClick={()=>{categoryHandler("appkitchen")}}>주방</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "applife"} onClick={()=>{categoryHandler("applife")}}>생활</CategoryDetailSpan>
                 <CategoryDetailSpan active={selectedCategory === "appelec"} onClick={()=>{categoryHandler("appelec")}}>전자기기</CategoryDetailSpan>
               </>
