@@ -1,10 +1,15 @@
 /* 메인 페이지 */
 
+
+/* 메인 wrapper */
+.M-wrapper {
+    margin-top: -40px;
+}
 /* 메인 배너 이미지 */
 .M-banner {
     position: relative;
     width: 100%;
-    height: 500px;
+    height: 800px;
     overflow: hidden;
 }
 
@@ -13,7 +18,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 500px;
+    height: 100%;
     opacity: 0;
     transition: opacity 1s ease-in-out;
     object-fit: cover;
@@ -27,7 +32,7 @@
 
 .M-banner_arrow {
     position: absolute;
-    top: 215px;
+    top: 365px;
     width: 70px;
     height: 70px;
     fill: #FFFFFF;
@@ -96,6 +101,11 @@
     text-align: center;
     color: #555555;
     background: rgba(255, 255, 255, 0.6);
+}
+
+/* 신상품 */
+.M-new_items_wrap {
+    margin-top: 80px;
 }
 
 /* 상품 리스트 */
@@ -289,6 +299,7 @@
     width: 100%;
     height: 250px;
     margin-top: 100px;
+    margin-bottom: -150px;
 }
 
 .M-ad_banner {
