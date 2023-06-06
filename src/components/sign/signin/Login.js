@@ -6,10 +6,6 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Find from "./LoginFind";
-import naver from "../../../images/naver_logo-150.png";
-import kakao from "../../../images/kakao_logo-150.png";
-import google from "../../../images/google_logo-150.png";
-
 function Login() {
   const navigate = useNavigate();
   const [id, setId] = useState();
@@ -49,22 +45,6 @@ function Login() {
         // console.error(e);
       });
   };
-
-  // API URL
-  const naver_api_url =
-    "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=" +
-    process.env.REACT_APP_NAVER_CLIENT_ID +
-    "&redirect_uri=" +
-    encodeURI(process.env.REACT_APP_NAVER_CALLBACK_URI) +
-    "&state=" +
-    Math.random().toString(36).substr(3, 14);
-
-  const kakao_api_url = `https://kauth.kakao.com/oauth/authorize?client_id=${
-    process.env.REACT_APP_KAKAO_REST_API_KEY
-  }&redirect_uri=${encodeURI(
-    process.env.REACT_APP_KAKAO_CALLBACK_URI
-  )}&response_type=code`;
-
 
   return (
     <div className="Sign_wrap Login_wrap">
@@ -113,18 +93,7 @@ function Login() {
         </div>
       }
 
-      {/* 소셜 로그인 */}
-      <div className="Sign_social Login_social">
-        <Link to={naver_api_url} className="Sign_social_btn">
-          <img className="Sign_social_logo" src={naver} alt="naver" />
-        </Link>
-        <Link to={kakao_api_url} className="Sign_social_btn">
-            <img className="Sign_social_logo" src={kakao} alt="kakao" />
-        </Link>
-        <Link to="" className="Sign_social_btn">
-        <img className="Sign_social_logo" src={google} alt="google" />
-        </Link>
-      </div>
+     
     </div>
   );
 }

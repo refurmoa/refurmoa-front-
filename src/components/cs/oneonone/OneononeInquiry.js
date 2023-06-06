@@ -5,6 +5,10 @@ import axios from "axios";
 import moment from "moment";
 
 const InquiryList = () => {
+  const failResponse=()=>{
+      alert("로그인 이후에 이용해주세요.");
+      window.location.href="/"
+  }
   const loginid = window.sessionStorage.getItem("id"); // 세션 ID
   const [dataList, setDataList] = useState([]);
   const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
@@ -47,6 +51,7 @@ const InquiryList = () => {
   };
 
   return (
+    window.sessionStorage.getItem("id")===null?failResponse():(
     <>
       <span className="OI-table">
         <div className="OI-header">
@@ -151,6 +156,7 @@ const InquiryList = () => {
 
       </span>
     </>
+    )
   );
 };
 

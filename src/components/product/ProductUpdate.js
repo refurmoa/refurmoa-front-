@@ -73,7 +73,7 @@ function ProductUpdate() {
         setOrg_price(productData.orgPrice);
         console.log(productData.mainImage)
         setMaindata(productData.mainImage);
-        setMainImg(`${process.env.PUBLIC_URL}/images/${productData.mainImage}`);
+        setMainImg(`${process.env.PUBLIC_URL}/images/prod/${productData.mainImage}`);
         setMainFile(new Blob());
         setDeffect1(productData.defectImage1);
         setDeffect2(productData.defectImage2);
@@ -284,7 +284,7 @@ function ProductUpdate() {
           .post("/prod/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("파일 등록이 완료되었습니다!");
+            alert("수정이 완료되었습니다!");
             setFileDataList(res.data);
             window.location.href="/prod";
           })
@@ -294,7 +294,7 @@ function ProductUpdate() {
           });   
         }  
         else{
-          alert("작성이 완료되었습니다!");
+          alert("수정이 완료되었습니다!");
           window.location.href="/prod";
         }
       })

@@ -60,6 +60,7 @@ const ProductList = () => {
     axios
       .get(`/prod?search=${searchRef.current.value.trim()}&category=${selectedCategory}&status=${selectedSellStatus}&page=${currentPage}&size=12`)
       .then((res) => {
+        console.log(res.data.content)
         setProdData(setStatusData(res.data.content));
         setTotalPage(res.data.totalPages);
       })
@@ -146,7 +147,7 @@ const ProductList = () => {
         break;
         default: break;
       }
-      data[i].regDate=moment(data[i].regDate).format("YYYY-MM-DD HH:mm:ss")
+      data[i].regDate=moment(data[i].reg_date).format("YYYY-MM-DD")
     }
     return data;
   }
@@ -156,10 +157,12 @@ const ProductList = () => {
     console.log(product_code);
     axios.get(`/prod/delete?product_code=${product_code}`)
     .then((res) => {
-      console.log(res.data);
+      alert("삭제가 완료되었습니다.");
+      window.location.reload();
     })
     .catch((e) => {
       console.error(e);
+      alert("삭제에 실패했습니다.");
     })
   };
 
@@ -242,7 +245,7 @@ const ProductList = () => {
                     <ProductState>
                       <img src={loadingicon} alt="loadingicon" />{data.sell_status}
                     </ProductState>
-                    <ProductDate>{moment(data.regDate).format("YYYY-MM-DD")} 입고</ProductDate>
+                    <ProductDate>{data.regDate} 입고</ProductDate>
                   </ProductStateAndDateBox>
                   <ProductComBox>
                     {data.prod_com}
