@@ -5,18 +5,8 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import ListScroll from "react-scroll-horizontal";
 import { getDdayArray } from "../shared/Timer";
-import menuImage1 from "../../images/main_menu_image1.jpg";
-import menuImage2 from "../../images/main_menu_image2.jpg";
-import menuImage3 from "../../images/main_menu_image3.jpg";
-import data from "./MainItems.json";
 import axios from "axios";
 
-// axios 메인배너/광고배너 data
-// 신상품 경매/즉시구매, 개수, 
-// 인기상품 조회수
-// 마감임박상품 data 경매
-// 조회수up
-// 판매완료 상품X
 function Main() {
     const navigate = useNavigate();
     const [mainBanner, setMainBanner] = useState([]); // 메인 배너 data
@@ -25,8 +15,6 @@ function Main() {
     const [deadlineItemList, setDeadlineItemList] = useState([]); // 마감임박상품 data
     const [adBanner, setAdBanner] = useState([]); // 광고 배너 data
     const [mainBannerSlide, setMainBannerSlide] = useState(0); // 현재 메인 배너(슬라이드)
-    const [adBannerSlide, setAdBannerSlide] = useState(0); // 현재 광고 배너(슬라이드)
-    const [menuHover, setMenuHover] = useState(0); // 카테고리 이름 출력
     const [now, setNow] = useState(new Date().getTime()); // 현재 날짜(ms)
 
     useEffect(() => {
@@ -148,7 +136,7 @@ function Main() {
     }
     
 
-    return ( <>
+    return ( <div className="M-wrapper">
         {/* 메인 배너 */}
         <div className="M-banner">
             <svg className="M-banner_arrow M-banner_arrow_left" onClick={(e) => {handleMainBanner(e, "prev")}}
@@ -163,35 +151,16 @@ function Main() {
                 xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><path d="M7.33 24l-2.83-2.829 9.339-9.175-9.339-9.167 2.83-2.829 12.17 11.996z"/></svg>
         </div>
 
-        {/* 메뉴 */}
-        <div className="M-order_menu_back">
-            <div className="M-order_menu_wrap">
-                <span className="M-order_menu" onMouseEnter={() => {setMenuHover(1)}} onMouseLeave={() => {setMenuHover(0)}}>
-                    <img className="M-order_menu_img" alt="all" src={menuImage1} />
-                    { menuHover === 1 &&
-                        <Link to="/post?category=all" className="M-order_menu_text">all</Link> }
-                </span>
-                <span className="M-order_menu" onMouseEnter={() => {setMenuHover(2)}} onMouseLeave={() => {setMenuHover(0)}}>
-                    <img className="M-order_menu_img" alt="appliance" src={menuImage2} />
-                    { menuHover === 2 &&
-                        <Link to="/post?category=appliance" className="M-order_menu_text">appliance</Link> }
-                </span>
-                <span className="M-order_menu" onMouseEnter={() => {setMenuHover(3)}} onMouseLeave={() => {setMenuHover(0)}}>
-                    <img className="M-order_menu_img" alt="furniture" src={menuImage3} />
-                    { menuHover === 3 &&
-                        <Link to="/post?category=furniture" className="M-order_menu_text">furniture</Link> }
-                </span>
-            </div>
-        </div>
-
         {/* NEW ITEMS */}
-        <div className="M-items_wrap">
-            <div className="M-items_title">NEW ITEMS</div>
-            <div className="M-items_list">
-                { newItemList.length <= 4 ? newItemList?.map((list) => printMap(list))
-                : <ListScroll reverseScroll = { true }>
-                    {newItemList?.map((list) => printMap(list))}
-                </ListScroll> }
+        <div className="M-new_items_wrap">
+            <div className="M-items_wrap">
+                <div className="M-items_title">NEW ITEMS</div>
+                <div className="M-items_list">
+                    { newItemList.length <= 4 ? newItemList?.map((list) => printMap(list))
+                    : <ListScroll reverseScroll = { true }>
+                        {newItemList?.map((list) => printMap(list))}
+                    </ListScroll> }
+                </div>
             </div>
         </div>
 
@@ -231,7 +200,7 @@ function Main() {
             </div>
         </div>
         
-    </> )
+    </div> )
 };
 
 export default Main;
