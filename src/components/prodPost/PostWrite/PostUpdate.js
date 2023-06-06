@@ -46,9 +46,9 @@ function PostUpdate() {
   const [prod_code, setProd_code] = useState(0)
   const[mainFile,setMainFile]=useState();
   const[detailFile,setDetailFile]=useState();
-  const [deffect1, setDeffect1] = useState("");
-  const [deffect2, setDeffect2] = useState("");
-  const [deffect3, setDeffect3] = useState("");
+  const [deffect1, setDeffect1] = useState();
+  const [deffect2, setDeffect2] = useState();
+  const [deffect3, setDeffect3] = useState();
   let now = new Date();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
