@@ -60,6 +60,7 @@ const ProductList = () => {
     axios
       .get(`/prod?search=${searchRef.current.value.trim()}&category=${selectedCategory}&status=${selectedSellStatus}&page=${currentPage}&size=12`)
       .then((res) => {
+        console.log(res.data.content)
         setProdData(setStatusData(res.data.content));
         setTotalPage(res.data.totalPages);
       })
@@ -146,7 +147,7 @@ const ProductList = () => {
         break;
         default: break;
       }
-      data[i].regDate=moment(data[i].regDate).format("YYYY-MM-DD HH:mm:ss")
+      data[i].regDate=moment(data[i].reg_date).format("YYYY-MM-DD")
     }
     return data;
   }
@@ -242,7 +243,7 @@ const ProductList = () => {
                     <ProductState>
                       <img src={loadingicon} alt="loadingicon" />{data.sell_status}
                     </ProductState>
-                    <ProductDate>{moment(data.regDate).format("YYYY-MM-DD")} 입고</ProductDate>
+                    <ProductDate>{data.regDate} 입고</ProductDate>
                   </ProductStateAndDateBox>
                   <ProductComBox>
                     {data.prod_com}
