@@ -118,3 +118,4 @@ function SignVerification({ update, name, setName, phone, setPhone, setCerti, ce
 }
 
 export default SignVerification;
+
