@@ -220,7 +220,7 @@ function PostDetail() {
           })
           .then(() => {
             alert("입찰되었습니다.");
-            getPost();
+            window.location.reload();
           })
           .catch((e) => {
             alert("입찰에 실패하였습니다. 다시 시도해주세요.");
@@ -235,7 +235,7 @@ function PostDetail() {
           })
           .then(() => {
             alert("자동입찰되었습니다.");
-            getPost();
+            window.location.reload();
           })
           .catch((e) => {
             alert("입찰에 실패하였습니다. 다시 시도해주세요.");
