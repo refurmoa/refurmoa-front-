@@ -14,7 +14,7 @@ const AdminUserDetail = () => {
   const [pageNum, setPageNum] = useState(0);
   const [cuList, setCuList] = useState(0);
   const [Modal, setModal] = useState(false); // 쿠폰 찾기 모달
- 
+  const [couponModal, setCouponModal] = useState(false); // 쿠폰 찾기 모달
   const AUDCuInput = () => {
     // axios
     //   .post(`/admin/user/detail/coupon/insert`{
@@ -92,9 +92,9 @@ const AdminUserDetail = () => {
         <div className="AUDLeftButton">
           <div>
             <input type="button" value="쿠폰 내역" onClick={()=>setModal(true)} />
-          </div>
+          </div>setCouponModal
           <div>
-            <input type="button" value="쿠폰 등록" onClick={AUDCuInput} />
+            <input type="button" value="쿠폰 등록" onClick={()=>setCouponModal(true)} />
           </div>
         </div>
       </left>
@@ -112,8 +112,16 @@ const AdminUserDetail = () => {
                         <CouponFind id={id} state={0} setModal={setModal} />
                     </div>
                 </div>
-            }
-    </div>
+          }
+          {/*쿠폰 모달*/}
+          {couponModal &&
+                  <div className="Coupon_modal_overlay">
+                      <div className="Coupon_modal">
+                          <CouponFind id={id} setCouponModal={setCouponModal} />
+                      </div>
+                  </div>
+          }
+      </div>
   );
 };
 export default AdminUserDetail;
