@@ -157,10 +157,12 @@ const ProductList = () => {
     console.log(product_code);
     axios.get(`/prod/delete?product_code=${product_code}`)
     .then((res) => {
-      console.log(res.data);
+      alert("삭제가 완료되었습니다.");
+      window.location.reload();
     })
     .catch((e) => {
       console.error(e);
+      alert("삭제에 실패했습니다.");
     })
   };
 
