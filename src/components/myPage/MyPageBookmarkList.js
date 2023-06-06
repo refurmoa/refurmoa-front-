@@ -6,7 +6,9 @@ import GradeMileCoupon from "./GradeMileCoupon";
 import BookmarkList from "./BookmarkList";
 
 const MyPageBookmarkList = () => {
-  
+  useEffect(()=>{
+    if(window.sessionStorage.getItem("id")==null)window.location.href="/";
+  },[])
   return (
     <>
     {/* 개인정보(수정), 결제·배송, 입찰 내역, 찜한 상품 */}

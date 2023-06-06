@@ -63,6 +63,7 @@ const BookmarkList = () => {
       axios.post("/post/like", likerequest)
       .then((res) => {
         getBookmarkData();
+        window.location.reload();
       })
       .catch((e) => {
         console.error(e);
