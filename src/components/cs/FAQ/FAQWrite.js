@@ -98,6 +98,7 @@ function FAQWrite() {
       setCatrgory(item.faq_cate);
       titleRef.current.value = item.faq_title;
       contentRef.current.value = item.faq_content;
+      setInputCount(item.faq_content.length);
     } else {
       setFormState("등록");
     }
