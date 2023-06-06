@@ -237,16 +237,16 @@ const ProdPost = ({ filter, cp, stp }) => {
               {/* 경매 */}
               {data.sell_type === 1 && (
                 <OriAndNowPriceBox>
-                  <span>{data.org_price.toLocaleString("ko-KR")}원</span>
-                  {data.cur_price.toLocaleString("ko-KR")}원
+                  <span>{data.org_price?.toLocaleString("ko-KR")}원</span>
+                  {data.cur_price?.toLocaleString("ko-KR")}원
                 </OriAndNowPriceBox>
               )}
 
               {/* 즉시구매 */}
               {data.sell_type === 2 && (
                 <OriAndNowPriceBox>
-                  <span>{data.org_price.toLocaleString("ko-KR")}원</span>
-                  {data.direct_price.toLocaleString("ko-KR")}원
+                  <span>{data.org_price?.toLocaleString("ko-KR")}원</span>
+                  {data.direct_price?.toLocaleString("ko-KR")}원
                 </OriAndNowPriceBox>
               )}
 
@@ -254,12 +254,12 @@ const ProdPost = ({ filter, cp, stp }) => {
               {data.sell_type === 3 && (
                 <>
                   <OriAndNowPriceBox>
-                    <span>{data.org_price.toLocaleString("ko-KR")}원</span>
-                    {data.cur_price.toLocaleString("ko-KR")}원
+                    <span>{data.org_price?.toLocaleString("ko-KR")}원</span>
+                    {data.cur_price?.toLocaleString("ko-KR")}원
                   </OriAndNowPriceBox>
                   <DirectPriceBox>
                     <span>즉시구매가</span>
-                    {data.direct_price.toLocaleString("ko-KR")}원
+                    {data.direct_price?.toLocaleString("ko-KR")}원
                   </DirectPriceBox>
                 </>
               )}
