@@ -51,7 +51,7 @@ function PostWrite(props) {
   const [deffect3, setDeffect3] = useState();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
-  const [Productname, setProductname] = useState();
+  const [Productname, setProductname] = useState("");
   const [searchProduct, setSearchProduct] = useState([]);
   
   const [prod_popup, setProd_Popup] = useState(false);
@@ -497,7 +497,7 @@ function PostWrite(props) {
                 {prod_popup && (
                   <FindProduct
                     setMainImg={setMainImg}
-                    searchProduct={searchProduct}
+                    searchProduct={Productname}
                     setProductname={setProductname}
                     setData={setData}
                     close_prod_modal={close_prod_modal}
