@@ -388,7 +388,7 @@ function PostUpdate() {
           .post("/post/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("파일 등록이 완료되었습니다!");
+            alert("판매글 수정이 완료되었습니다!");
             setFileDataList(res.data);
             window.location.href="/post";
             
@@ -399,7 +399,7 @@ function PostUpdate() {
           });   
         }  
         else{
-          alert("작성이 완료되었습니다!");
+          alert("판매글 수정이 완료되었습니다!");
           window.location.href="/post";
         }
       })

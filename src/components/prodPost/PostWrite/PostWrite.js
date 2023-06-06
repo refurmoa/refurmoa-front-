@@ -86,9 +86,9 @@ function PostWrite(props) {
       setCate("appliance");
     }
     let imageUrlLists = [];
-    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/prod/${productData.defectImage1}`);
-    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/prod/${productData.defectImage2}`);
-    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/prod/${productData.defectImage3}`);
+    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage1}`);
+    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage2}`);
+    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage3}`);
     setReg_date(productData.regDate);
     setShowImages(imageUrlLists);
     setImg_con(true);
@@ -331,7 +331,7 @@ function PostWrite(props) {
           .post("/post/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("파일 등록이 완료되었습니다!");
+            alert("판매글 등록이 완료되었습니다!");
             setFileDataList(res.data);
             window.location.href="/post";
             

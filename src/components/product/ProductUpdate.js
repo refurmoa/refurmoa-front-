@@ -83,9 +83,9 @@ function ProductUpdate() {
         setDefImg1(productData.defectImage1);
         setDefImg2(productData.defectImage2);
         setDefImg3(productData.defectImage3);
-        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/prod/${productData.defectImage1}`);
-        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/prod/${productData.defectImage2}`);
-        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/prod/${productData.defectImage3}`);
+        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage1}`);
+        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage2}`);
+        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage3}`);
         setShowImages(imageUrlLists);
         if (productData.prodGrade === "S") onCHKS();
         else if (productData.prodGrade === "A") onCHKA();
@@ -284,7 +284,7 @@ function ProductUpdate() {
           .post("/prod/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("파일 등록이 완료되었습니다!");
+            alert("수정이 완료되었습니다!");
             setFileDataList(res.data);
             window.location.href="/prod";
           })
@@ -294,7 +294,7 @@ function ProductUpdate() {
           });   
         }  
         else{
-          alert("작성이 완료되었습니다!");
+          alert("수정이 완료되었습니다!");
           window.location.href="/prod";
         }
       })
