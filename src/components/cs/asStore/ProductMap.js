@@ -44,14 +44,11 @@ export const ProductMap = ({ markers, data, currLocation, asComNum }) => {
       // iwContent.append(companyName, time, monthlyWage);
 
       let content =
-        "<div>" +
-        "    <div>" +
-        `        <h3>${markers.storeName}</h3>` +
-        `        <div>${markers.storeAddr}${markers.storeDetail}</div>` +
-        `        <div>${markers.storePhone}</div>` +
-        "    </div>" +
-        "    <div>" +
-        "</div>";
+        `<div style="padding: 10px;">` +
+        `      <h3>${markers.storeName}</h3>` +
+        `      <div>${markers.storeAddr}${markers.storeDetail}</div>` +
+        `      <div>${markers.storePhone}</div>` +
+        `</div>`;
 
       const InfoWindow = new kakao.maps.InfoWindow({
         content: content,

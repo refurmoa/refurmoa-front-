@@ -183,7 +183,8 @@ select:required:invalid{
 }
 
 .aslistname {
-    height: 25px;
+    width: 170px;
+    /* height: 25px; */
     font-weight: 700;
     font-size: 20px;
     line-height: 25px;
@@ -262,3 +263,10 @@ select:required:invalid{
     text-align: center;
     margin-top: 50px;
 }
+
+.asmiddleinput input::placeholder {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 35px;
+    color: rgba(185, 168, 154, 0.6);
+  }
