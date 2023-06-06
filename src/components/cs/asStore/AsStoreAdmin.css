@@ -95,6 +95,12 @@
   border-radius: 5px;
   margin-right: 10px;
 }
+.AsStore_addr_input input::placeholder {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 35px;
+  color: rgba(185, 168, 154, 0.6);
+}
 .AsStore_addr_input input {
   height: 33px;
   border-radius: 5px;
@@ -135,6 +141,12 @@
   color: #000000;
   border: none;
   outline: none !important;
+}
+.AsStore_addr_detail_form input::placeholder {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 35px;
+  color: rgba(185, 168, 154, 0.6);
 }
 .AsStore_regi_btn button {
   width: 80px;
@@ -181,7 +193,7 @@
   border: none;
 }
 select:required:invalid{
-  color: #b9a89a;
+  color: rgba(185, 168, 154, 0.6);
 }
 option{
   color:black;
@@ -193,7 +205,7 @@ option[value=""][disabled] {
   float: right;
   width: 416px;
   height: 36px;
-  border: 2px solid rgba(185, 168, 154, 0.3);
+  border: 2px solid rgba(185, 168, 154, 0.6);
   border-radius: 30px;
   padding: 0 20px;
 }
@@ -209,6 +221,12 @@ option[value=""][disabled] {
   color: #000000;
   border: none;
   outline: none !important;
+}
+.AsStore_Name_find input::placeholder {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 35px;
+  color: rgba(185, 168, 154, 0.6);
 }
 .AsStore_Post_List {
   width: 860px;
