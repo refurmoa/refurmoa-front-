@@ -13,12 +13,11 @@ function AdminOrder() {
   const [searchData, setSearchData] = useState(""); // 검색어
   const [inputNum, setInputNum] = useState(); // 송장번호 입력 폼 열기
   const [delinums, setDelinums] = useState([{}]); // 송장번호 입력 폼 내용
-  const [isLoading, setIsLoading] = useState(false); // 로딩 상태
   const [totalPage, setTotalPage] = useState(1); // 총 페이지 수
   const [currentPage, setCurrentPage] = useState(1); // 현재 페이지
+  const [deliNum,setDeliNum]=useState();
   // 주문 상태
   const state = [
-    { id: 0,  name: "결제 전" },
     { id: 1,  name: "상품 준비중" },
     { id: 2,  name: "배송 중" },
     { id: 3,  name: "배송 완료" }
@@ -28,13 +27,13 @@ function AdminOrder() {
     setCurrentPage(1);
     orderListup();
   }, [searchData]);
-
+  // 페이지가 변경될 때마다 데이터 요청
   useEffect(() => {  
     orderListup();
   }, [currentPage]);
   // 주문 리스트 조회
   const orderListup = () => {
-      console.log(searchData);
+     
       axios
       .get(`/admin/order?search=${searchData}&page=${currentPage-1}&size=10`)
       .then((res) => {
@@ -51,38 +50,22 @@ function AdminOrder() {
 
   };
 
-  // 송장 번호 입력
-  const inputChange = (pay_num, event) => {
-    const newInputs = { ...delinums, [pay_num]: event.target.value };
-    setDelinums(newInputs);
-  }
 
   // 송장 번호 등록
-  const delinumInput = (pay_num) => {
-    const newOrderlist = orderlist.map((order) => {
-      if (order.pay_num === pay_num) {
-        const p_num = order.pay_num;
-        const d_num = delinums[pay_num];
-  
-        // axios : p_num, d_num 보내기
-  
-        return { ...order, deli_num: d_num };
-      }
-      return order;
-    });
-    setOrderlist(newOrderlist);
+  const delinumInput = (num,deli_num) => {
+    axios
+      .post(`/admin/pay/delinum?num=${num}&deli_num=${deli_num}`)
+      .then((res) => {
+        setDeliNum();//임시저장된 송장번호 초기화
+        orderListup();//다시 리스트 불러옴
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+    
   }
 
-  // 페이지가 변경될 때마다 데이터 요청
- 
-  // 스크롤 감지
-  const handleScroll = () => {
-    if (
-      window.innerHeight + window.scrollY >= document.body.offsetHeight &&
-      !isLoading
-    )
-      orderListup();
-  };
+  
   const setNavi =(item)=>{
     if(item.deli_num==null)navigate(`/post/detail/${item.board_num}`);
     else navigate(`/payment/detail/${item.board_num}`);
@@ -120,11 +103,11 @@ function AdminOrder() {
                 : (
                   inputNum !== index ? <PartnerInfo width={173} line pointer onClick={() => {setInputNum(index)}}>입력</PartnerInfo>
                   : inputNum === index &&
-                  <DeliNumForm type="text" id="delinum" name="delinum" maxlength="20" value={delinums[order.pay_num] || ''} required
-                    onChange={(event) => inputChange(order.pay_num, event)}
+                  <DeliNumForm type="text" id="delinum" name="delinum" maxlength="20" value={deliNum|| ''} required
+                    onChange={(event) => setDeliNum(event.target.value)}
                     onKeyDown={(e) => {
                       if (e.key === 'Enter')
-                        delinumInput(order.pay_num);
+                        delinumInput(order.num,deliNum);
                     }}
                   />
                 )
