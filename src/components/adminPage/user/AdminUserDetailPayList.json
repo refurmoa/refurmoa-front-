@@ -1,5 +1,6 @@
 [
   {
+    "product_code": 12,
     "member_id": "leemoa",
     "board_num": 1,
     "main_image": "image01.png",
@@ -11,6 +12,7 @@
     "sell_status": 0
   },
   {
+    "product_code": 13,
     "member_id": "leemoa",
     "board_num": 2,
     "main_image": "image02.png",
@@ -22,6 +24,7 @@
     "sell_status": 1
   },
   {
+    "product_code": 14,
     "member_id": "leemoa",
     "board_num": 3,
     "main_image": "image03.png",
@@ -34,6 +37,7 @@
     "deli_num": 12345678
   },
   {
+    "product_code": 15,
     "member_id": "leemoa",
     "board_num": 4,
     "main_image": "image04.png",
@@ -46,6 +50,7 @@
     "deli_num": 12345678
   },
   {
+    "product_code": 16,
     "member_id": "leemoa",
     "board_num": 5,
     "main_image": "image05.png",
@@ -57,6 +62,7 @@
     "sell_status": 4
   },
   {
+    "product_code": 17,
     "member_id": "leemoa",
     "board_num": 6,
     "main_image": "image06.png",
@@ -68,6 +74,7 @@
     "sell_status": 0
   },
   {
+    "product_code": 18,
     "member_id": "leemoa",
     "board_num": 7,
     "main_image": "image07.png",
@@ -79,6 +86,7 @@
     "sell_status": 1
   },
   {
+    "product_code": 19,
     "member_id": "leemoa",
     "board_num": 8,
     "main_image": "image08.png",
@@ -91,6 +99,7 @@
     "deli_num": 12345678
   },
   {
+    "product_code": 20,
     "member_id": "leemoa",
     "board_num": 9,
     "main_image": "image09.png",
@@ -103,6 +112,7 @@
     "deli_num": 12345678
   },
   {
+    "product_code": 21,
     "member_id": "leemoa",
     "board_num": 6,
     "main_image": "image06.png",

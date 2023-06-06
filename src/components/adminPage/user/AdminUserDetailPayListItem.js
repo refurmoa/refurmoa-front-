@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
+import axios from 'axios';
 
 // 이미지파일
 import cancelicon from "../../../images/cancel.png";
@@ -45,17 +46,19 @@ const AdminUserDetailPayListItem = ({ data, index, getPayList }) => {
 
 	// 결제취소
 	const payCancelHandler = (data) => {
-    const requestData = { id: data.member_id, board_num: data.board_num }
+    console.log(data.member_id);
     if (window.confirm("결제 취소하시겠습니까?")) {
-      console.log("결제취소");
-      // axios.post("/api/admin/paycancel", requestData)
-      // .then((res) => {
-      //   alert("주문 취소되었습니다.");
-      //   getPayList();
-      // })
-      // .catch((e) => {
-      //   console.error(e);
-      // })
+      axios.post("/pay/cancel",{ 
+        memberId: data.member_id,
+        productCode: data.product_code,
+      })
+      .then((res) => {
+        alert("주문 취소되었습니다.");
+        getPayList();
+      })
+      .catch((e) => {
+        console.error(e);
+      })
     }
 	}
 
