@@ -269,14 +269,16 @@ function PostPay() {
                     </span>
                 </div>
             </div>
+
             {/*쿠폰 모달*/}
             {Modal &&
                 <div className="Coupon_modal_overlay">
                     <div className="Coupon_modal">
-                        <CouponFind id={sessionStorage.getItem("id")}pay={pay} state={1} setPay={setPay} setModal={setModal} />
+                        <CouponFind id={sessionStorage.getItem("id")} pay={pay} state={1} setPay={setPay} setModal={setModal} />
                     </div>
                 </div>
             }
+
             {/* 결제 수단 선택 */}
             <div className="PP-pay_wrap">
                 <div className="PP-pay_top">

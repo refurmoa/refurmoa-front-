@@ -8,7 +8,8 @@
 		"prod_name": "제품이름제품이름제품이름제품이름제품이름제품이름제품이름제품",
 		"cur_price": 60000,
 		"bid_price": 60000,
-		"bid_count": 3
+		"bid_count": 3,
+		"state": 0
 	},
   {
 		"board_num": 3,
@@ -19,7 +20,8 @@
 		"prod_name": "제품이름",
 		"cur_price": 60000,
 		"bid_price": 70000,
-		"bid_count": 3
+		"bid_count": 3,
+		"state": 1
 	},
   {
 		"board_num": 5,
@@ -30,7 +32,8 @@
 		"prod_name": "제품이름",
 		"cur_price": 70000,
 		"bid_price": 60000,
-		"bid_count": 3
+		"bid_count": 3,
+		"state": 0
 	},
   {
 		"board_num": 6,
@@ -41,7 +44,8 @@
 		"prod_name": "제품이름",
 		"cur_price": 50000,
 		"bid_price": 60000,
-		"bid_count": 3
+		"bid_count": 3,
+		"state": 0
 	},
   {
 		"board_num": 9,
@@ -52,7 +56,8 @@
 		"prod_name": "제품이름",
 		"cur_price": 60000,
 		"bid_price": 60000,
-		"bid_count": 3
+		"bid_count": 3,
+		"state": 0
 	},
   {
 		"board_num": 8,
@@ -63,7 +68,8 @@
 		"prod_name": "제품이름",
 		"cur_price": 60000,
 		"bid_price": 60000,
-		"bid_count": 3
+		"bid_count": 3,
+		"state": 0
 	},
   {
 		"board_num": 10,
@@ -74,6 +80,7 @@
 		"prod_name": "제품이름",
 		"cur_price": 60000,
 		"bid_price": 60000,
-		"bid_count": 3
+		"bid_count": 3,
+		"state": 0
 	}
 ]
