@@ -9,7 +9,6 @@ import loadiconred from "../../images/loadingiconred.png";
 
 export const ProductPayment = ({ data, getData }) => {
   const navigate = useNavigate();
-  console.log(data);
 
   //props or location 사용
   const onClick = (board_num) => {
@@ -34,7 +33,8 @@ export const ProductPayment = ({ data, getData }) => {
       })
       .then((res) => {
         alert("결제 취소되었습니다.");
-      })
+        ProductPayment()  
+       })
       .catch((e) => {
         console.error(e);
       })
@@ -50,6 +50,7 @@ export const ProductPayment = ({ data, getData }) => {
       .post("/user/payment/confirm", requestDate)
       .then((res) => {
         getData();
+        ProductPayment() 
       })
       .catch((e) => {
         console.error(e);
