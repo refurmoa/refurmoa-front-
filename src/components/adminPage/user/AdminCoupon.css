@@ -1,0 +1,108 @@
+.Coupon_regi_modal_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  
+  .Coupon_regi_modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 80%;
+    max-height: 90%;
+    z-index: 1;
+  }
+.Coupon_regi_wrap {
+    position: relative;
+    padding: 30px 40px;
+    background: #ffffff;
+    border-radius: 30px;
+  }
+.Coupon_regi_Title{
+  height: 34px;
+  width:400px;
+  font-weight: 600;
+  font-size: 25px;
+  line-height: 34px;
+  text-align: center;
+  color: rgba(81, 68, 56, 0.6);
+  margin-bottom: 35px;
+}
+.Coupon_regi_content {
+    width: 400px;
+    height: 40px;
+    margin-bottom: 35px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    color:  rgba(81, 68, 56, 0.6);
+  }
+  
+.Coupon_name{
+    width: 100px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: left;
+    color:   #514438;
+    float: left;
+    margin-right: 20px;
+}
+.Coupon_name_input{
+    width: 280px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    border: none;
+    float: left;
+    border-bottom: 2px solid ;
+    color:  #514438;
+}
+.Coupon_price_input{
+    float: left;
+    width: 240px;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: right;
+    border: none;
+    padding: 0 5px;
+    border-bottom: 2px solid ;
+    margin-right: 10px;
+    color:   #514438;
+}
+.Coupon_won{
+    text-align: left;
+    float: right;
+    color:   #514438;
+    line-height: 40px;
+}
+.Coupon_regi_button{
+    cursor: pointer;
+}
+.Coupon_regi_button {
+    width: 200px;
+    height: 30px;
+    font-weight: 500;
+    font-size: 25px;
+    line-height: 30px;
+    color: #ffffff;
+    text-align: center;
+    border-width: 0;
+    border-radius: 40px;
+    background: #b9a89a;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.Coupon_regi_button:hover {
+    opacity: 0.8;
+    transition: 0.7s;
+}
