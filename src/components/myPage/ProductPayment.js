@@ -25,12 +25,20 @@ export const ProductPayment = ({ data, getData }) => {
     navigate(`/payment/detail/${board_num}`);
   };
 
-  const canclechange = () => {
-    // axios
-    //   .post("/pay/cancel", {})
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
+  const canclechange = (productCode) => {
+    if (window.confirm("결제 취소하시겠습니까?")) {
+      axios.post("/pay/cancel",{ 
+        payNum: data.pay_num,
+        productCode: productCode,
+      })
+      .then((res) => {
+        alert("결제 취소되었습니다.");
+        ProductPayment()  
+       })
+      .catch((e) => {
+        console.error(e);
+      })
+    }
   };
 
   const prodstatechange = (productCode) => {
@@ -42,6 +50,7 @@ export const ProductPayment = ({ data, getData }) => {
       .post("/user/payment/confirm", requestDate)
       .then((res) => {
         getData();
+        ProductPayment() 
       })
       .catch((e) => {
         console.error(e);
@@ -139,7 +148,7 @@ export const ProductPayment = ({ data, getData }) => {
                   className="cancleButtonPay"
                   type="button"
                   value="결제 취소"
-                  onClick={canclechange}
+                  onClick={() => {canclechange(data.product_code)}}
                 ></input>
                 <input
                   className="inqButtonPay"

@@ -11,7 +11,7 @@ const AdminUserDetailPayListItem = ({ data, index, getPayList }) => {
 	const navigate = useNavigate();
 	const apiKey = process.env.REACT_APP_SWEETTRACKER_API_KEY;
 	const [invoiceInputState, setInvoiceInputState] = useState(false);
-
+  console.log("dddddddddd", data);
 	// 입찰취소
 	const bidCancelHandler = (data) => {
     const requestData = { id: data.member_id, board_num: data.board_num }
@@ -46,14 +46,13 @@ const AdminUserDetailPayListItem = ({ data, index, getPayList }) => {
 
 	// 결제취소
 	const payCancelHandler = (data) => {
-    console.log(data.member_id);
     if (window.confirm("결제 취소하시겠습니까?")) {
       axios.post("/pay/cancel",{ 
-        memberId: data.member_id,
+        payNum: data.pay_num,
         productCode: data.product_code,
       })
       .then((res) => {
-        alert("주문 취소되었습니다.");
+        alert("결제 취소되었습니다.");
         getPayList();
       })
       .catch((e) => {
@@ -64,17 +63,17 @@ const AdminUserDetailPayListItem = ({ data, index, getPayList }) => {
 
 	// 구매확정
 	const purchaseConfirmHandler = (data) => {
-    const requestData = { id: data.member_id, board_num: data.board_num }
+    const requestData = { id: data.member_id, product_code: data.product_code }
     if (window.confirm("구매 확정 하시겠습니까?")) {
       console.log("구매확정");
-      // axios.post("/api/admin/purchaseconfirm", requestData)
-      // .then((res) => {
-      //   alert("구매 확정되었습니다.");
-      //   getPayList();
-      // })
-      // .catch((e) => {
-      //   console.error(e);
-      // })
+      axios
+      .post("/user/payment/confirm", requestData)
+      .then((res) => {
+        getPayList();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
     }
   }
 
@@ -88,19 +87,17 @@ const AdminUserDetailPayListItem = ({ data, index, getPayList }) => {
     if(e.key === "Enter") {
 			if (invoiceRef.current.value !== "") {
 				const requestData = {
-					board_num: data.board_num,
-					invoice: invoiceRef.current.value
+					payNum: data.pay_num,
+					deli_num: invoiceRef.current.value
 				}
-				// axios.post("/api/admin/addinvoice", requestData)
-				// .then((res) => {
-				// 	getPayList();
-				// })
-				// .catch((e) => {
-				// 	console.error(e);
-				// })
-				console.log(requestData);
+				axios.post("/admin/pay/delinum", requestData)
+				.then(() => {
+					getPayList();
+				})
+				.catch((e) => {
+					console.error(e);
+				})
 				setInvoiceInputState(false);
-				getPayList();
 			} else {
 				alert("송장번호를 입력해주세요");
 			}
@@ -149,36 +146,36 @@ const AdminUserDetailPayListItem = ({ data, index, getPayList }) => {
 			<PayListItemInner>
 				<ButtonBox>
 					{/* 입금대기 */}
-					{((data.sell_status === 0) & (data.sell_type === 1)) ? (
+					{((data.pay_state === 0) & (data.sell_type === 1)) ? (
 					<><Button possible onClick={() => {bidCancelHandler(data)}}>입찰 취소</Button>
 					<Button>배송 조회</Button>
 					<Button>송장 입력</Button>
 					<Button>구매 확정</Button></>) : (<></>)}
-					{((data.sell_status === 0) & (data.sell_type === 2)) ? (
+					{((data.pay_state === 0) & (data.sell_type === 2)) ? (
 					<><Button possible onClick={() => {orderCancelHandler(data)}}>주문 취소</Button>
 					<Button>배송 조회</Button>
 					<Button>송장 입력</Button>
 					<Button>구매 확정</Button></>) : (<></>)}
 					{/* 상품준비중 */}
-					{data.sell_status === 1 && (
+					{data.pay_state === 1 && (
 					<><Button possible onClick={() => {payCancelHandler(data)}}>결제 취소</Button>
 					<Button>배송 조회</Button>
 					<Button possible onClick={() => {invoiceBtnHandler()}}>송장 입력</Button>
 					<Button>구매 확정</Button></>)}
 					{/* 배송중 */}
-					{data.sell_status === 2 && (
+					{data.pay_state === 2 && (
 					<><Button>결제 취소</Button>
 					<Button possible onClick={() => {trackingHandler(data)}}>배송 조회</Button>
 					<Button>송장 입력</Button>
 					<Button>구매 확정</Button></>)}
 					{/* 배송완료 */}
-					{data.sell_status === 3 && (
+					{data.pay_state === 3 && (
 					<><Button>결제 취소</Button>
 					<Button possible onClick={() => {trackingHandler(data)}}>배송 조회</Button>
 					<Button>송장 입력</Button>
 					<Button possible onClick={() => {purchaseConfirmHandler(data)}}>구매 확정</Button></>)}
 					{/* 구매확정 */}
-					{data.sell_status === 4 && (
+					{data.pay_state === 4 && (
 					<><Button>결제 취소</Button>
 					<Button>배송 조회</Button>
 					<Button>송장 입력</Button>
@@ -190,11 +187,11 @@ const AdminUserDetailPayListItem = ({ data, index, getPayList }) => {
 					<PaynumAndSellstatusAndPriceBox>
 						<PaynumAndsellstatusBox>
 						<Paynum>{data.pay_num}</Paynum>
-							{data.sell_status === 0 && (<SellStatus textcolor="red">입금대기</SellStatus>)}
-							{data.sell_status === 1 && (<SellStatus textcolor="red">상품준비중</SellStatus>)}
-							{data.sell_status === 2 && (<SellStatus textcolor="green">배송중</SellStatus>)}
-							{data.sell_status === 3 && (<SellStatus textcolor="green">배송완료</SellStatus>)}
-							{data.sell_status === 4 && (<SellStatus textcolor="black">구매확정</SellStatus>)}
+							{data.pay_state === 0 && (<SellStatus textcolor="red">입금대기</SellStatus>)}
+							{data.pay_state === 1 && (<SellStatus textcolor="red">상품준비중</SellStatus>)}
+							{data.pay_state === 2 && (<SellStatus textcolor="green">배송중</SellStatus>)}
+							{data.pay_state === 3 && (<SellStatus textcolor="green">배송완료</SellStatus>)}
+							{data.pay_state === 4 && (<SellStatus textcolor="black">구매확정</SellStatus>)}
 						</PaynumAndsellstatusBox>
 						<SelltypeAndPriceBox>
 						<Selltype>{data.sell_type === 1 ? "경매" : "즉시구매"}</Selltype>
@@ -206,7 +203,7 @@ const AdminUserDetailPayListItem = ({ data, index, getPayList }) => {
 					</InfoBox>
 				</ItemInfoBox>
 			</PayListItemInner>
-			{data.sell_status === 1 && (
+			{data.pay_state === 1 && (
 			<InvoiceInputBox state={invoiceInputState}>
 				<input type="text" ref={invoiceRef} onKeyDown={(e) => {activeEnter(e, data)}}/>
 				<InvoiceCancelBtn onClick={() => {setInvoiceInputState(false)}}><img src={cancelicon} alt="cancel" /></InvoiceCancelBtn>

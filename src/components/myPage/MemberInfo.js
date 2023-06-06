@@ -51,8 +51,8 @@ const MemberInfo = () => {
       console.error(e);
     })
    
-    // console.log(data);
   };
+  console.log(memberInfo);
 
   useEffect(() => {
     getMemberInfo();

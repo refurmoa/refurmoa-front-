@@ -48,18 +48,16 @@ export const AdminUserDetailPayList = ({ setPageNum, id }) => {
   };
 
   const getPayList = () => {
-    const requestData = { id: id }
-    // axios.post("/api/admin/paylist", requestData)
-    // .then((res) => {
-    //   const { data } = res;
-    //   setPayListData(data);
-    // })
-    // .catch((e) => {
-    //   console.error(e);
-    // })
-
-    // 백엔드구현후 지우기
-    setPayListData(dummydata);
+    const requestData = { 
+      member_id: id,
+      page: 0,
+      size: 10
+    }
+    axios.post("/user/payment", requestData)
+    .then((res) => {
+      const { data } = res;
+      setPayListData(data.content);
+    })
   }
 
   useEffect(() => {

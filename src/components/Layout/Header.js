@@ -48,7 +48,7 @@ function Header() {
 
   const logoutHandler = () => {
     sessionStorage.clear("id");
-    window.location.reload();
+    navigate('/');
   }
 
   return (
