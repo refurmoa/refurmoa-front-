@@ -14,23 +14,7 @@ const AdminUserDetail = () => {
   const [pageNum, setPageNum] = useState(0);
   const [cuList, setCuList] = useState(0);
   const [Modal, setModal] = useState(false); // 쿠폰 찾기 모달
-  const AUDCuList = () => {
-    axios
-      .post("/user/coupon", {
-        memberId: id,
-      })
-      .then((res) => {
-        const { data } = res;
-        console.log(data);
-        console.log(id);
-        setCuList(data);
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  };
  
-
   const AUDCuInput = () => {
     // axios
     //   .post(`/admin/user/detail/coupon/insert`{
