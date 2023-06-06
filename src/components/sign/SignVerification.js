@@ -5,7 +5,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 
 
-function SignVerification({ update, name, setName, phone, setPhone, setCerti, certiChk, setCertiChk, setPhoneChk }) {
+function SignVerification({ update, name, setName, phone, setPhone, setCerti, certiChk, setCertiChk, findLogin,setPhoneChk }) {
 
     const firebaseConfig = {
         apiKey: "AIzaSyDRGfVURrcwZODaqG-OatKqqH1DRcKSYpE",
@@ -102,7 +102,8 @@ function SignVerification({ update, name, setName, phone, setPhone, setCerti, ce
         </div>
         <div className="Sign_form_line Sign_phone_line">
             <input className="Sign_input"
-                name="authCode" type="text" placeholder="인증번호 입력" maxLength="6" required />
+                name="authCode" type="text" placeholder="인증번호 입력" maxLength="6" 
+                onKeyDown={(e) => {e.key === 'Enter' && findLogin()}} required />
         </div>
         <div className="Sign_indivation">
             <span className="Sign_indivation_left">∙</span>

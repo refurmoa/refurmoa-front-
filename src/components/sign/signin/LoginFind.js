@@ -121,7 +121,7 @@ const LoginFind = (props) => {
             value={id} onChange={(e) => setId(e.target.value)} required />
         </div>
       }
-      <SignVerification name={name} setName={setName} phone={phone} setPhone={setPhone} setCerti={setCerti} certiChk={certiChk} setCertiChk={setCertiChk} />
+      <SignVerification name={name} setName={setName} phone={phone} setPhone={setPhone} setCerti={setCerti} findLogin={findLogin}certiChk={certiChk} setCertiChk={setCertiChk} />
       <div className="Sign_btn Login_btn" onClick={() => {findLogin()}}>{props.modal === "id" ? "아이디 찾기" : "비밀번호 찾기"}</div>
       <img className="Sign_modal_close" alt="창 닫기" src={cancel} onClick={() => {props.setModal(false);}} />
     </div>
