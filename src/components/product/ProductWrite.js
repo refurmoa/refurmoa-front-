@@ -174,7 +174,6 @@ function ProductWrite() {
     });
 
     formData.append("main_image",mainFile);
-    formData.append("product_code",0);
     formData.append("category_code",code);
     formData.append("category", cate_code);
     formData.append("prod_com", prod_com);

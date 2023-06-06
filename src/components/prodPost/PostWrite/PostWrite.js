@@ -46,6 +46,9 @@ function PostWrite(props) {
   const [prod_code, setProd_code] = useState(0)
   const[mainFile,setMainFile]=useState();
   const[detailFile,setDetailFile]=useState();
+  const [deffect1, setDeffect1] = useState();
+  const [deffect2, setDeffect2] = useState();
+  const [deffect3, setDeffect3] = useState();
   var fileList = []; // 업로드 할 파일 리스트 저장
   /*===============================================*/
   const [Productname, setProductname] = useState();
@@ -71,6 +74,7 @@ function PostWrite(props) {
   };
    /*===============================================*///modal 설정
   const setData = (productData) => {
+    console.log(productData);
     setProd_code(productData.productCode);
     if (
       productData.category === "furliving" ||
@@ -86,9 +90,12 @@ function PostWrite(props) {
       setCate("appliance");
     }
     let imageUrlLists = [];
-    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage1}`);
-    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage2}`);
-    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage3}`);
+    imageUrlLists.push(`/images/prod/${productData.defectImage1}`);
+    imageUrlLists.push(`/images/prod/${productData.defectImage2}`);
+    imageUrlLists.push(`/images/prod/${productData.defectImage3}`);
+    setDeffect1(productData.defectImage1);
+    setDeffect2(productData.defectImage2);
+    setDeffect3(productData.defectImage3);
     setReg_date(productData.regDate);
     setShowImages(imageUrlLists);
     setImg_con(true);
@@ -99,7 +106,7 @@ function PostWrite(props) {
     setProd_com(productData.prodCom);
     setProd_name(productData.prodName);
     setOrg_price(productData.orgPrice);
-    setMainImg(`${process.env.PUBLIC_URL}/images/prod/${productData.mainImage}`);
+    setMainImg(`/images/prod/${productData.mainImage}`);
     if (productData.prodGrade === "S") onCHKS();
     else if (productData.prodGrade === "A") onCHKA();
     else if (productData.prodGrade === "B") onCHKB();
@@ -296,6 +303,9 @@ function PostWrite(props) {
     formData.append("product_code",prod_code);
     formData.append("category", cate_code);
     formData.append("category_code",code);
+    if(deffect1!==null)formData.append("deffect_image1",deffect1);
+    if(deffect2!==null)formData.append("deffect_image2",deffect2);
+    if(deffect3!==null)formData.append("deffect_image3",deffect3);
     formData.append("prod_com", prod_com);
     formData.append("prod_name",prod_name );
     formData.append("prod_grade",prod_Grade );
