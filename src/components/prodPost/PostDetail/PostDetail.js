@@ -85,6 +85,10 @@ function PostDetail() {
     }
   }, [inViewBid]);
 
+  useEffect(() => { // 판매 상테
+    setState(end < today ? 2 : start > today ? 0 : 1);
+  }, [start, end])
+
   // 상품 정보 조회
   const getPost = () => {
     axios
@@ -98,7 +102,6 @@ function PostDetail() {
         setBidPrice(res.data.cur_price + res.data.unit_price);
         setStart(new Date(res.data.start_date));
         setEnd(new Date(res.data.end_date));
-        setState(end-today < 1 ? 2 : start-today > 1 ? 0 : 1);
       })
       .catch((e) => {
         // console.error(e);
