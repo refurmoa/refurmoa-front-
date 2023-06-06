@@ -80,13 +80,13 @@ function PostDetail() {
   }, []);
 
   useEffect(() => { // 페이징
-    if ((inViewBid) && (bidListState)) { // 입찰내역
+    if ((inViewBid) && (bidListState)) // 입찰내역
       getBidList();
-    }
   }, [inViewBid]);
 
   useEffect(() => { // 판매 상테
-    setState(end < today ? 2 : start > today ? 0 : 1);
+    if (prodInfo.sell_type === 2) setState(1);
+    else setState(end < today ? 2 : start > today ? 0 : 1);
   }, [start, end])
 
   // 상품 정보 조회
@@ -97,7 +97,6 @@ function PostDetail() {
         boardNum: board_num
     })
       .then((res) => {
-        console.log(res.data);
         setProdInfo(res.data);
         setBidPrice(res.data.cur_price + res.data.unit_price);
         setStart(new Date(res.data.start_date));
