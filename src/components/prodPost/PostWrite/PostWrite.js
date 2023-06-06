@@ -90,15 +90,15 @@ function PostWrite(props) {
       setCate("appliance");
     }
     let imageUrlLists = [];
-    imageUrlLists.push(`/images/prod/${productData.defectImage1}`);
-    imageUrlLists.push(`/images/prod/${productData.defectImage2}`);
-    imageUrlLists.push(`/images/prod/${productData.defectImage3}`);
+    if(productData.defectImage1!==null)imageUrlLists.push(`/images/prod/${productData.defectImage1}`);
+    if(productData.defectImage2!==null)imageUrlLists.push(`/images/prod/${productData.defectImage2}`);
+    if(productData.defectImage3!==null)imageUrlLists.push(`/images/prod/${productData.defectImage3}`);
     setDeffect1(productData.defectImage1);
     setDeffect2(productData.defectImage2);
     setDeffect3(productData.defectImage3);
     setReg_date(productData.regDate);
     setShowImages(imageUrlLists);
-    setImg_con(true);
+    if(imageUrlLists.length!==0)setImg_con(true);
     setCate_code(productData.category);
     setCode(productData.categoryCode);
     setCom_num(productData.com_num);
@@ -645,7 +645,7 @@ function PostWrite(props) {
         <div className="PW_product_defect">
           {img_con && (
             <div className="PW_product_imgList">
-              {showImages.map((image, id) => (
+              {showImages?.map((image, id) => (
                 <div key={id}>
                   <img
                     className="PW_defect_img"

@@ -53,9 +53,9 @@ function ProductUpdate() {
         console.log(res.data)
         const productData=res.data
         if (
-          productData.categoryCode === "furliving" ||
-          productData.categoryCode === "furbed" ||
-          productData.categoryCode === "furoffice"
+          productData.category === "furliving" ||
+          productData.category === "furbed" ||
+          productData.category === "furoffice"
         ) {
           setFuniture(true);
           setAppliance(false);
@@ -65,8 +65,8 @@ function ProductUpdate() {
           setAppliance(true);
           setCate("appliance");
         }
-        setCate_code(productData.categoryCode);
-        setCode(productData.category);
+        setCate_code(productData.category);
+        setCode(productData.categoryCode);
     
         setProd_com(productData.prodCom);
         setProd_name(productData.prodName);

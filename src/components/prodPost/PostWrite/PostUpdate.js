@@ -127,9 +127,9 @@ function PostUpdate() {
     setDeffect3(productData.defectImage3);
 
     let imageUrlLists = [];
-    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage1}`);
-    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage2}`);
-    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage3}`);
+    imageUrlLists.push(`/images/prod/${productData.defectImage1}`);
+    imageUrlLists.push(`/images/prod/${productData.defectImage2}`);
+    imageUrlLists.push(`/images/prod/${productData.defectImage3}`);
     setReg_date(productData.regDate);
     setShowImages(imageUrlLists);
     setImg_con(true);
@@ -140,7 +140,7 @@ function PostUpdate() {
     setProd_com(productData.prodCom);
     setProd_name(productData.prodName);
     setOrg_price(productData.orgPrice);
-    setMainImg(`${process.env.PUBLIC_URL}/images/prod/${productData.mainImage}`);
+    setMainImg(`/images/prod/${productData.mainImage}`);
     if (productData.prodGrade === "S") onCHKS();
     else if (productData.prodGrade === "A") onCHKA();
     else if (productData.prodGrade === "B") onCHKB();
