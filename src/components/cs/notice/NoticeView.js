@@ -47,10 +47,10 @@ const NoticeView = () => {
         <div className="NV-info">{ListDetail.notiInf}
         <div className="NV-img">
         <img alt="" src={`/images/prod/${ListDetail.notiImage}`} />
+        </div>
+        </div>
       </div>
-      </div>
-      </div>
-        
+      
       <div className="NV-btn-wrap">
         <span className="NV-go-list-btn" onClick={() => navigate(-1)}>
           목록
