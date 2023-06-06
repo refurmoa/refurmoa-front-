@@ -24,9 +24,9 @@ import OneononeUserpost from "./components/cs/oneonone/OneononeUserpost";
 import AsStore from "./components/cs/asStore/AsStore";
 import AsStoreAdmin from "./components/cs/asStore/AsStoreAdmin";
 import MyPageBookmarkList from "./components/myPage/MyPageBookmarkList";
-import UserUpdate from "./components/myPage/userUpdate/UserUpdate";
+import UserUpdate from "./components/myPage/UserUpdate";
 import MyPagePayment from "./components/myPage/MyPagePayment";
-import MyPageBidlist from "./components/myPage/MyPageBidlist";
+import MyPageBidList from "./components/myPage/MyPageBidList";
 import AdminNavi from "./components/adminPage/AdminNavi";
 import Admin from "./components/adminPage/Admin";
 import AdminOrder from "./components/adminPage/order/AdminOrder";
@@ -71,7 +71,7 @@ function App() {
         <Route path="/user/update" element={<UserUpdate />} />
         <Route path="/mypage" element={<MyPageBookmarkList />} />
         <Route path="/mypage/payment" element={<MyPagePayment />} />
-        <Route path="/mypage/bidlist" element={<MyPageBidlist />} />
+        <Route path="/mypage/bidlist" element={<MyPageBidList />} />
         <Route element={<AdminNavi />}>
           <Route path="/admin" element={<Admin />} />
           <Route path="/admin/order" element={<AdminOrder />} />
