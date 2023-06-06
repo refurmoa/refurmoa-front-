@@ -86,9 +86,9 @@ function PostWrite(props) {
       setCate("appliance");
     }
     let imageUrlLists = [];
-    imageUrlLists.push(`/images/prod/${productData.defectImage1}`);
-    imageUrlLists.push(`/images/prod/${productData.defectImage2}`);
-    imageUrlLists.push(`/images/prod/${productData.defectImage3}`);
+    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage1}`);
+    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage2}`);
+    imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage3}`);
     setReg_date(productData.regDate);
     setShowImages(imageUrlLists);
     setImg_con(true);
@@ -99,7 +99,7 @@ function PostWrite(props) {
     setProd_com(productData.prodCom);
     setProd_name(productData.prodName);
     setOrg_price(productData.orgPrice);
-    setMainImg(`/images/prod/${productData.mainImage}`);
+    setMainImg(`${process.env.PUBLIC_URL}/images/prod/${productData.mainImage}`);
     if (productData.prodGrade === "S") onCHKS();
     else if (productData.prodGrade === "A") onCHKA();
     else if (productData.prodGrade === "B") onCHKB();
@@ -112,7 +112,7 @@ function PostWrite(props) {
   //목록 클릭시 데이터 저장
   useEffect(()=>{
     if(code_param!==null){
-      console.log(code_param);
+     
         axios
           .get(`/post/write/prod?prod=${code_param}`)
           .then((res) => {
@@ -220,7 +220,7 @@ function PostWrite(props) {
     setImg_con(true);
     const uploadFiles =Array.prototype.slice.call(event.target.files);
     uploadFiles.forEach((uploadFile) => {
-      console.log("bbb :" + uploadFile);
+
       fileList.push(uploadFile); // 배열에 push
       setListfile(list=>[...list,uploadFile]);
     });
@@ -236,7 +236,6 @@ function PostWrite(props) {
     if (imageUrlLists.length > 3) {
       imageUrlLists = imageUrlLists.slice(0, 3);
     }
-    console.log(imageUrlLists);
     setShowImages(imageUrlLists);
   };
   const handleDeleteImage = (id) => {
@@ -280,6 +279,10 @@ function PostWrite(props) {
       alert("하자 정보가 비었습니다.");
       return false;
     }
+    if(detailFile===null){
+      alert("상세 정보 이미지가 비었습니다.");
+      return false;
+    }
     else{
     const formData = new FormData(); // <form></form> 형식의 데이터를 전송하기 위해 주로 사용.
     const formimg = new FormData();
@@ -287,8 +290,7 @@ function PostWrite(props) {
     listFile.forEach((file) => {
       formimg.append("uploadfiles", file)
     });
-   
-    console.log(sell_type);
+
     formData.append("main_image",mainFile);
     formData.append("detailFile",detailFile);
     formData.append("product_code",prod_code);
@@ -324,13 +326,12 @@ function PostWrite(props) {
         
         const entries = Array.from(formimg.entries());
         const formDataLength = entries.length;
-        console.log(formDataLength);
         if(formDataLength!==0){
         axios
           .post("/post/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("파일 등록이 완료되었습니다!");
+            alert("판매글 등록이 완료되었습니다!");
             setFileDataList(res.data);
             window.location.href="/post";
             
@@ -642,7 +643,7 @@ function PostWrite(props) {
                   <img
                     className="PW_defect_img"
                     src={image}
-                    alt={`${image}-${id}`}
+                    alt={alt_img}
                     onClick={() => handleDeleteImage(id)}
                   />
                 </div>

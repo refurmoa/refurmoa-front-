@@ -204,7 +204,6 @@ function ProductWrite() {
         axios
           .post("/prod/file", formimg)
           .then((res) => {
-            console.log("uploadfile request");
             alert("상픔 등록이 완료되었습니다!");
             setFileDataList(res.data);
             window.location.href="/prod";

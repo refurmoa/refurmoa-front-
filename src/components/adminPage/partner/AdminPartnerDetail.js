@@ -22,6 +22,17 @@ const AdminPartnerDetail = () => {
         setData(res.data);
       });
   },[partner])
+  const patnerState=(item)=>{
+    if(item===1){
+      if(window.confirm("신청을 승인하시겠습니까?"))APDChange()
+      else return false;
+    }
+    else{
+      if(window.confirm("제휴를 종료하시겠습니까?"))APDChange()
+      else return false;
+    }
+  }
+
   const APDChange = () => {
     const num=partner.com_num
     axios
@@ -30,22 +41,6 @@ const AdminPartnerDetail = () => {
         setData(res.data);
       });
   };
-  
-  // const [partnerdata, setPartnerdata] = useState();
-  const getUserData = () => {
-    // axios
-    //   .get(`/admin/partner/detail`{
-    //   com_name : com_name
-    // })
-    //   .then((res) => {
-    //     const { data } = res;
-    //     setPartnerdata(data);
-    //   })
-    //   .catch((e) => {
-    //     console.error(e);
-    //   });
-  };
-
   const [Partner_popup, setPartnerPopup] = useState(false);
   const [Partner_modal, setPartnerModal] = useState(false);
   const Partner_ChangePopUP = () => {
@@ -78,7 +73,7 @@ const AdminPartnerDetail = () => {
           {data.com_status === 0 ? (
             <div>
               <div>
-                <input type="button" value="신청 승인" onClick={APDChange} />
+                <input type="button" value="신청 승인" onClick={()=>patnerState(1)} />
               </div>
             </div>
           ) : data.com_status === 1 ? (
@@ -127,7 +122,7 @@ const AdminPartnerDetail = () => {
                 </Modal>
               </div>
               <div>
-                <input type="button" value="제휴 종료" onClick={APDChange} />
+                <input type="button" value="제휴 종료" onClick={()=>patnerState(2)} />
               </div>
             </div>
           ) : (

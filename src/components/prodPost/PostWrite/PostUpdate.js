@@ -140,7 +140,7 @@ function PostUpdate() {
     setProd_com(productData.prodCom);
     setProd_name(productData.prodName);
     setOrg_price(productData.orgPrice);
-    setMainImg(`/images/prod/${productData.mainImage}`);
+    setMainImg(`${process.env.PUBLIC_URL}/images/prod/${productData.mainImage}`);
     if (productData.prodGrade === "S") onCHKS();
     else if (productData.prodGrade === "A") onCHKA();
     else if (productData.prodGrade === "B") onCHKB();
@@ -388,7 +388,7 @@ function PostUpdate() {
           .post("/post/file", formimg)
           .then((res) => {
             console.log("uploadfile request");
-            alert("파일 등록이 완료되었습니다!");
+            alert("판매글 수정이 완료되었습니다!");
             setFileDataList(res.data);
             window.location.href="/post";
             
@@ -399,7 +399,7 @@ function PostUpdate() {
           });   
         }  
         else{
-          alert("작성이 완료되었습니다!");
+          alert("판매글 수정이 완료되었습니다!");
           window.location.href="/post";
         }
       })

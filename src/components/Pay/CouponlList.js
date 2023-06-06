@@ -18,8 +18,13 @@ const CouponList = (props) => {
         axios
         .get(`/pay/coupon?id=${props.id}&page=${currentPage-1}&size=10`)
         .then((res) => {
-            setCouponList(res.data.content);
-            setTotalPage(res.data.totalPages);
+            if(res.data.content.length===0){
+              alert("쿠폰이 존재하지 않습니다.")
+              props.setModal(false);
+            }else{
+              setCouponList(res.data.content);
+              setTotalPage(res.data.totalPages);
+            }
         })
         .catch((e) => {
             console.error(e);
