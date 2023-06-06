@@ -133,6 +133,7 @@ const SearchInput = styled.div`
   input {
     width: 100%;
     height: 100%;
+    font-size: 15px;
     box-sizing: border-box;
     border: none;
   }
