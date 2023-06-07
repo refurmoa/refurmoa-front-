@@ -93,7 +93,8 @@ function AdminUser() {
             쿠폰
           </TableTitle>
         </TableTitleWrap>
-        {userlist.map((user, index) => (
+        {userlist.map((user, index) => user.member_ID!=="admin"&&(
+          
           <User key={index}>
             <Link
               to={`/admin/user/detail`}
@@ -108,7 +109,7 @@ function AdminUser() {
                 {grade.find((g) => g.id === user.grade).name}
               </UserInfo>
               <UserInfo width={133} align="right">
-                {user.mile.toLocaleString("ko-KR")}원
+                {user.mile.toLocaleString("ko-KR")}
               </UserInfo>
               <UserInfo width={55} align="right" right>
                 {user.cnt.toLocaleString("ko-KR")}개

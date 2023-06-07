@@ -83,9 +83,9 @@ function ProductUpdate() {
         setDefImg1(productData.defectImage1);
         setDefImg2(productData.defectImage2);
         setDefImg3(productData.defectImage3);
-        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage1}`);
-        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage2}`);
-        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/${productData.defectImage3}`);
+        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/prod/${productData.defectImage1}`);
+        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/prod/${productData.defectImage2}`);
+        imageUrlLists.push(`${process.env.PUBLIC_URL}/images/prod/${productData.defectImage3}`);
         setShowImages(imageUrlLists);
         if (productData.prodGrade === "S") onCHKS();
         else if (productData.prodGrade === "A") onCHKA();
