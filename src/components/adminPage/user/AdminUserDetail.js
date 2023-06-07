@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import axios from "axios";
 import CouponFind from "../../Pay/CouponlList";
+import AdminCoupon from "./AdminCoupon";
 const AdminUserDetail = () => {
   const location = useLocation();
   const id = location.state.member_id;
@@ -92,7 +93,7 @@ const AdminUserDetail = () => {
         <div className="AUDLeftButton">
           <div>
             <input type="button" value="쿠폰 내역" onClick={()=>setModal(true)} />
-          </div>setCouponModal
+          </div>
           <div>
             <input type="button" value="쿠폰 등록" onClick={()=>setCouponModal(true)} />
           </div>
@@ -117,7 +118,7 @@ const AdminUserDetail = () => {
           {couponModal &&
                   <div className="Coupon_modal_overlay">
                       <div className="Coupon_modal">
-                          <CouponFind id={id} setCouponModal={setCouponModal} />
+                          <AdminCoupon id={id} setCouponModal={setCouponModal} />
                       </div>
                   </div>
           }
