@@ -341,9 +341,9 @@ function ProductUpdate() {
                 },
                 content: {
                   position: "absolute",
-                  top: "10%",
+                  top: "20%",
                   width: "900px",
-                  height: "700px",
+                  height: "600px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",
@@ -358,11 +358,7 @@ function ProductUpdate() {
               }}
               isOpen={modal}
             >
-              <div className="close_modal">
-                <button onClick={close_modal}>
-                  <b>X</b>
-                </button>
-              </div>
+             
               <div className="PW_company_modal">
                 {popup && (
                   <FindCompany

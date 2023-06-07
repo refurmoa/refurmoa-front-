@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import cancel from "../../../images/cancel.png";
 
 const FindProduct = (props) => {
   // 데이터를 페이지 단위로 나누기 위한 변수들
@@ -121,7 +121,7 @@ const FindProduct = (props) => {
           }
         </div>
       }
-
+         <img className="Sign_modal_close" alt="창 닫기" src={cancel} onClick={() => {props.close_prod_modal();}} />
       </div>
     </>
   );
