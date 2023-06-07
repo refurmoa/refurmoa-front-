@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { dataList } from "./companyData";
 import axios from "axios";
+import cancel from "../../images/cancel.png";
 const FindCompany = (props) => {
   // 데이터를 페이지 단위로 나누기 위한 변수들
   const searchCompany = props.searchCompany;
@@ -108,6 +107,7 @@ const FindCompany = (props) => {
         </div>
       }
         </div>
+        <img className="Sign_modal_close" alt="창 닫기" src={cancel} onClick={() => {props.close_modal();}} />
       </div>
     </>
   );

@@ -48,11 +48,11 @@ const ProductList = () => {
       setFurnitureState(true);
     }
   }
-
+  
   useEffect(() => {
     // 필터조건이 바뀔때마다 데이터에 axios 요청
     getProdData();
-  }, [selectedCategory, selectedSellStatus, currentPage]);
+  }, [currentPage]);
 
   // 상품 리스트 axios
   const getProdData = () => {
@@ -70,6 +70,11 @@ const ProductList = () => {
         // console.error(e);
       })
   };
+  useEffect(() => {
+    // 필터조건이 바뀔때마다 데이터에 axios 요청
+    setCurrentPage(0)
+    getProdData();
+  }, [selectedCategory, selectedSellStatus]);
 
   // 엔터키
   const activeEnter = (e) => {
@@ -239,7 +244,7 @@ const ProductList = () => {
             <ProductMiddle>
               <ProductMiddleInner onClick={() => {detailHandler(data)}}>
                 <ProductMainImg>
-                  <img src={`/images/prod/${data.main_image}`} alt="productmain" />
+                  <img src={`${process.env.PUBLIC_URL}/images/prod/${data.main_image}`} alt="productmain" />
                 </ProductMainImg>
                 <ProductInfoBox>
                   <ProductStateAndDateBox>
@@ -266,9 +271,9 @@ const ProductList = () => {
                   <ProductGuarantee>{data.guarantee  ? "보증서 있음" : "보증서 없음"}</ProductGuarantee>
                 </ProductDeffectAndGuaranteeBox>
                 <ProductDeffectText>{data.defect_text}</ProductDeffectText>
-                {data.defect_image1 && <ProductDeffectImg><img src={`/images/prod/${data.defect_image1}`} alt="defect1"/></ProductDeffectImg>}
-                {data.defect_image2 && <ProductDeffectImg><img src={`/images/prod/${data.defect_image2}`} alt="defect2"/></ProductDeffectImg>}
-                {data.defect_image3 && <ProductDeffectImg><img src={`/images/prod/${data.defect_image3}`} alt="defect3"/></ProductDeffectImg>}
+                {data.defect_image1 && <ProductDeffectImg><img src={`${process.env.PUBLIC_URL}/images/prod/${data.defect_image1}`} alt="defect1"/></ProductDeffectImg>}
+                {data.defect_image2 && <ProductDeffectImg><img src={`${process.env.PUBLIC_URL}/images/prod/${data.defect_image2}`} alt="defect2"/></ProductDeffectImg>}
+                {data.defect_image3  && <ProductDeffectImg><img src={`${process.env.PUBLIC_URL}/images/prod/${data.defect_image3}`} alt="defect3"/></ProductDeffectImg>}
               </ProductBottomInner>
             </ProductBottom>
           </ProductItem>

@@ -394,9 +394,9 @@ function PostWrite(props) {
                 },
                 content: {
                   position: "absolute",
-                  top: "15%",
-                  width: "700px",
-                  height: "610px",
+                  top: "20%",
+                  width: "900px",
+                  height: "600px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",
@@ -407,11 +407,7 @@ function PostWrite(props) {
               }}
               isOpen={modal}
             >
-              <div className="close_modal">
-                <button onClick={close_modal}>
-                  <b>X</b>
-                </button>
-              </div>
+             
               <div className="PW_company_modal">
                 {popup && (
                   <FindCompany
@@ -471,9 +467,9 @@ function PostWrite(props) {
                 },
                 content: {
                   position: "absolute",
-                  top: "10%",
+                  top: "20%",
                   width: "1100px",
-                  height: "660px",
+                  height: "600px",
                   left: "40px",
                   right: "40px",
                   bottom: "40px",
@@ -488,11 +484,6 @@ function PostWrite(props) {
               }}
               isOpen={prod_modal}
             >
-              <div className="close_modal">
-                <button onClick={close_prod_modal}>
-                  <b>X</b>
-                </button>
-              </div>
               <div className="PW_company_modal">
                 {prod_popup && (
                   <FindProduct
