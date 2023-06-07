@@ -239,7 +239,7 @@ const ProductList = () => {
             <ProductMiddle>
               <ProductMiddleInner onClick={() => {detailHandler(data)}}>
                 <ProductMainImg>
-                  <img src={`/images/prod/${data.main_image}`} alt="productmain" />
+                  <img src={`${process.env.PUBLIC_URL}/images/prod/${data.main_image}`} alt="productmain" />
                 </ProductMainImg>
                 <ProductInfoBox>
                   <ProductStateAndDateBox>
@@ -266,9 +266,9 @@ const ProductList = () => {
                   <ProductGuarantee>{data.guarantee  ? "보증서 있음" : "보증서 없음"}</ProductGuarantee>
                 </ProductDeffectAndGuaranteeBox>
                 <ProductDeffectText>{data.defect_text}</ProductDeffectText>
-                {data.defect_image1 && <ProductDeffectImg><img src={`/images/prod/${data.defect_image1}`} alt="defect1"/></ProductDeffectImg>}
-                {data.defect_image2 && <ProductDeffectImg><img src={`/images/prod/${data.defect_image2}`} alt="defect2"/></ProductDeffectImg>}
-                {data.defect_image3 && <ProductDeffectImg><img src={`/images/prod/${data.defect_image3}`} alt="defect3"/></ProductDeffectImg>}
+                {data.defect_image1!=="null" && <ProductDeffectImg><img src={`${process.env.PUBLIC_URL}/images/prod/${data.defect_image1}`} alt="defect1"/></ProductDeffectImg>}
+                {data.defect_image2!=="null"  && <ProductDeffectImg><img src={`${process.env.PUBLIC_URL}/images/prod/${data.defect_image2}`} alt="defect2"/></ProductDeffectImg>}
+                {data.defect_image3 !=="null" && <ProductDeffectImg><img src={`${process.env.PUBLIC_URL}/images/prod/${data.defect_image3}`} alt="defect3"/></ProductDeffectImg>}
               </ProductBottomInner>
             </ProductBottom>
           </ProductItem>
