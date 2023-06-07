@@ -10,15 +10,18 @@ const FAQPOST = ({ logId, item }) => {
   const [mode, setMode] = useState(true);
 
   const deleteHandler = (faq_num) => {
+    if(window.confirm("삭제 하시겠습니까?")){
     axios.get(`/cs/faq/delete?faq_num=${faq_num}`)
     .then((res) => {
       if (res.data === 1) {
+
         window.location.reload();
       }
     })
     .catch((e) => {
       console.error(e);
     })
+  }
   }
 
   const readcount= (faq_num)=>{
@@ -41,7 +44,7 @@ const FAQPOST = ({ logId, item }) => {
     else if (item.faq_cate === 5) setCate("경매/낙찰");
     else if (item.faq_cate === 6) setCate("기타");
   }, [item]);
-
+  
   return (
     <>
       {logId === "admin" ? (
@@ -66,7 +69,7 @@ const FAQPOST = ({ logId, item }) => {
                   <button className="FAQAdminUpdate">수정</button>
                 </Link>
                 <button className="FAQAdminDelete">삭제</button>
-                <img className="FAQArrow" src={arrow} onClick={() => setMode(true)} alt="arrow" />
+                <img className="FAQArrow" src={arrow} onClick={() =>deleteHandler(item.faq_num)} alt="arrow" />
               </div>
 
               <div className="FAQ_content">

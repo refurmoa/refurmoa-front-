@@ -86,7 +86,8 @@ function PostDetail() {
   }, [inViewBid]);
 
   useEffect(() => { // 판매 상테
-    setState(end < today ? 2 : start > today ? 0 : 1);
+    if (prodInfo.sell_type === 2) setState(1);
+    else setState(end < today ? 2 : start > today ? 0 : 1);
   }, [start, end])
 
   // 상품 정보 조회
