@@ -48,11 +48,11 @@ const ProductList = () => {
       setFurnitureState(true);
     }
   }
-
+  
   useEffect(() => {
     // 필터조건이 바뀔때마다 데이터에 axios 요청
     getProdData();
-  }, [selectedCategory, selectedSellStatus, currentPage]);
+  }, [currentPage]);
 
   // 상품 리스트 axios
   const getProdData = () => {
@@ -60,7 +60,6 @@ const ProductList = () => {
     axios
       .get(`/prod?search=${searchRef.current.value.trim()}&category=${selectedCategory}&status=${selectedSellStatus}&page=${currentPage}&size=12`)
       .then((res) => {
-        setCurrentPage(0)
         console.log(res.data.content)
         setProdData(setStatusData(res.data.content));
         setTotalPage(res.data.totalPages);
@@ -70,6 +69,11 @@ const ProductList = () => {
         // console.error(e);
       })
   };
+  useEffect(() => {
+    // 필터조건이 바뀔때마다 데이터에 axios 요청
+    setCurrentPage(0)
+    getProdData();
+  }, [selectedCategory, selectedSellStatus]);
 
   // 엔터키
   const activeEnter = (e) => {
