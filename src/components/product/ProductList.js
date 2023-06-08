@@ -177,9 +177,7 @@ const ProductList = () => {
   const detailHandler = (data) => {
     if (data.sell_status === "게시 전") {
       navigate(`/post/write?product_code=${data.product_code}`);
-    } else {
-      navigate(`/post/detail/${data.product_code}`);
-    }
+    } 
   }
 
 

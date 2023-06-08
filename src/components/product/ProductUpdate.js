@@ -287,6 +287,7 @@ function ProductUpdate() {
             alert("수정이 완료되었습니다!");
             setFileDataList(res.data);
             window.location.href="/prod";
+            
           })
           .catch((e) => {
             alert("상픔 수정에 실패했습니다.");
@@ -296,6 +297,7 @@ function ProductUpdate() {
         else{
           alert("수정이 완료되었습니다!");
           window.location.href="/prod";
+          
         }
       })
       .catch((e) => {

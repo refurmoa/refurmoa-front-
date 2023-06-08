@@ -95,6 +95,8 @@
 .FAQPostTitle {
   width: 630px;
   float: left;
+  text-overflow:ellipsis;
+  overflow: hidden;
   font-weight: 500;
   font-size: 20px;
   line-height: 60px;
@@ -181,6 +183,7 @@
 }
 .FAQAdminTitle {
   width: 460px;
+  overflow: hidden;
   float: left;
   font-weight: 500;
   font-size: 20px;
@@ -188,6 +191,7 @@
   margin-right: 87px;
   color: #000000;
   cursor: pointer;
+  text-overflow:ellipsis;
 }
 .FAQAdminUpdate {
   width: 34px;

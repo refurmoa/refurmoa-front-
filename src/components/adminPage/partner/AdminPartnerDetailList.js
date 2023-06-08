@@ -21,7 +21,7 @@ export const AdminPartnerDetailList = (props) => {
     .get(`/admin/partner/prod?com_num=${num}&search=${searchData}&page=${page}&size=15`)
     .then((res) => {
       const { data } = res;
-      
+      console.log(res.data);
       setPartnerlist([...partnerlist, ...data.content]);
       setPage((page) => page+1);
     })

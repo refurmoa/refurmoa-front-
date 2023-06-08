@@ -13,8 +13,8 @@ function PortonePay(props) {
       return false;
     }
 
-    const IMP = window.IMP;
-    IMP.init('imp36704883'); // 가맹점 식별코드
+    // const IMP = window.IMP;
+    // IMP.init('imp36704883'); // 가맹점 식별코드
 
     // // 결제정보 사전 검증
     // axios.post("https://api.iamport.kr/payments/prepare", {
@@ -26,19 +26,20 @@ function PortonePay(props) {
     // });
 
     // 결제창 호출
-    IMP.request_pay({
-      pg: 'kcp.INIpayTest',
-      pay_method: props.pay.buy_method, // 결제수단
-      merchant_uid: props.pay_num, // 주문번호
-      name: props.payInfo.prod_name, // 주문명
-      amount: props.totalPrice, // 결제금액
-      buyer_name: props.payForm.name, // 구매자 이름
-      buyer_tel: props.payForm.phone, // 구매자 전화번호
-      buyer_email: props.payForm.email, // 구매자 이메일
-      buyer_addr: props.payForm.address + props.payForm.detail_address // 구매자 주소
-    }, function ({ success, error_msg }) { // 결제 결과 (callback)
-        if (success) {
-          const insertPaymentData = axios
+    // IMP.request_pay({
+    //   pg: 'kcp.INIpayTest',
+    //   pay_method: props.pay.buy_method, // 결제수단
+    //   merchant_uid: props.pay_num, // 주문번호
+    //   name: props.payInfo.prod_name, // 주문명
+    //   amount: props.totalPrice, // 결제금액
+    //   buyer_name: props.payForm.name, // 구매자 이름
+    //   buyer_tel: props.payForm.phone, // 구매자 전화번호
+    //   buyer_email: props.payForm.email, // 구매자 이메일
+    //   buyer_addr: props.payForm.address + props.payForm.detail_address // 구매자 주소
+    // }, function ({ success, error_msg }) { // 결제 결과 (callback)
+    //     if (success) {
+    //       const insertPaymentData = 
+          axios
             .post("/pay", {
                 pay_num: props.pay_num,
                 member_id: sessionStorage.getItem("id"),
@@ -61,15 +62,15 @@ function PortonePay(props) {
               navigate(`/payment/detail/${props.board_num}`);
             })
             .catch((e) => {
-              insertPaymentData();
+              // insertPaymentData();
               // console.error(e);
             });
-        } else {
-          console.log(error_msg);
-          alert("결제를 실패하였습니다.");
-          navigate(`/post/detail/${props.board_num}`);
-        }
-    });
+    //     } else {
+    //       console.log(error_msg);
+    //       alert("결제를 실패하였습니다.");
+    //       navigate(`/post/detail/${props.board_num}`);
+    //     }
+    // });
   }
 
   return (<button className="PP-pay_btn" onClick={onClickPayment}>결제하기</button>);
