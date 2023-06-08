@@ -68,8 +68,8 @@ const FAQPOST = ({ logId, item }) => {
                 <Link to="/cs/faq/update" state={{ item: item }}>
                   <button className="FAQAdminUpdate">수정</button>
                 </Link>
-                <button className="FAQAdminDelete">삭제</button>
-                <img className="FAQArrow" src={arrow} onClick={() =>deleteHandler(item.faq_num)} alt="arrow" />
+                <button className="FAQAdminDelete"  onClick={() => {deleteHandler(item.faq_num)}}>삭제</button>
+                <img className="FAQArrow" src={arrow} onClick={() =>setMode(true)} alt="arrow" />
               </div>
 
               <div className="FAQ_content">

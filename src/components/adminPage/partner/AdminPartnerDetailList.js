@@ -103,7 +103,7 @@ export const AdminPartnerDetailList = (props) => {
           {partnerlist.map((partnerlist) => (
             <bottom className="APDBidList">
               <img
-                src={`${process.env.PUBLIC_URL}/images/${partnerlist.mainImage}`}
+                src={`${process.env.PUBLIC_URL}/images/prod/${partnerlist.mainImage}`}
                 alt=""
                 onClick={onClick}
               />

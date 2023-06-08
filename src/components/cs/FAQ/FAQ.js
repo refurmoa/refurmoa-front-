@@ -78,6 +78,7 @@ function FAQ() {
 
   
   return (
+    <>
     <div className="FAQ-List-form">
       {logId === "admin" ? (
         <div className="FAQTitle">
@@ -120,25 +121,26 @@ function FAQ() {
 
       {/* 총 페이지 수가 1보다 클 때 */}
       {totalPage > 1 && (
-        <div className="NL-page">
-          {currentPage === 1 ? (
-            <span className="NL-page_prev_gray">&lt;</span>
-          ) : (
-            <span className="NL-page_prev" onClick={() => setCurrentPage(currentPage - 1)}>&lt;</span>
-          )}
+      <div className="NL-page">
+        {currentPage === 1 ? (
+          <span className="NL-page_prev_gray">&lt;</span>
+        ) : (
+          <span className="NL-page_prev" onClick={() => setCurrentPage(currentPage - 1)}>&lt;</span>
+        )}
 
-          <span className="NL-page_now">{currentPage}</span>
-          &nbsp;&nbsp;/&nbsp;&nbsp;
-          <span className="NL-page_total">{totalPage}</span>
+        <span className="NL-page_now">{currentPage}</span>
+        &nbsp;&nbsp;/&nbsp;&nbsp;
+        <span className="NL-page_total">{totalPage}</span>
 
-          {currentPage === totalPage ? (
-            <span className="NL-page_next_gray">&gt;</span>
-          ) : (
-            <span className="NL-page_next" onClick={() => setCurrentPage(currentPage + 1)}>&gt;</span>
-          )}
-        </div>
-      )}
+        {currentPage === totalPage ? (
+          <span className="NL-page_next_gray">&gt;</span>
+        ) : (
+          <span className="NL-page_next" onClick={() => setCurrentPage(currentPage + 1)}>&gt;</span>
+        )}
+      </div>
+    )}
     </div>
+    </>
   );
 }
 export default FAQ;
