@@ -60,6 +60,7 @@ const ProductList = () => {
     axios
       .get(`/prod?search=${searchRef.current.value.trim()}&category=${selectedCategory}&status=${selectedSellStatus}&page=${currentPage}&size=12`)
       .then((res) => {
+        setCurrentPage(0)
         console.log(res.data.content)
         setProdData(setStatusData(res.data.content));
         setTotalPage(res.data.totalPages);
