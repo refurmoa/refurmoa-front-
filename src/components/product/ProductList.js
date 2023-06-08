@@ -78,7 +78,10 @@ const ProductList = () => {
 
   // 엔터키
   const activeEnter = (e) => {
-    if(e.key === "Enter") getProdData();
+    if(e.key === "Enter") {
+      setCurrentPage(0)
+      getProdData();
+    }
   }
 
   const addComma = (price) => {
