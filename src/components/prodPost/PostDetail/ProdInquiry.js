@@ -127,9 +127,9 @@ function ProdInquiry(props) {
         </td>
         <td className={ props.login_id === "admin" || props.login_id === li.member_id ? "PI-title" : li.secret ? "PI-title_lock" : "PI-title"}>
           { props.login_id === "admin" || props.login_id === li.member_id ? li.title : li.secret && "비밀글입니다." }
-          { li.secret ? 
+          { li.secret &&
             <img className="PI-lock_icon" alt="비밀글" src={lock_icon}></img>
-            : li.title
+         
           }
           <span className="PI-id_wrap">
             { props.login_id === "admin" || props.login_id === li.member_id ? <span className="PI-id">{li.member_id}</span>

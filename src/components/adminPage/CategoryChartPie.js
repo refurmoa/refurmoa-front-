@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { useState } from 'react';
-
+import Data from "./data.json";
 const CategoryChartPie = () => {
   const [categoryData, setCategoryData] = useState();
-
+  console.log(Data);
   const getCategoryData = () => {
     axios.get("/admin/sales/category")
     .then((res) => {
@@ -46,7 +46,7 @@ const CategoryChartPie = () => {
     {categoryData !== undefined && (
       <div style={{ width: '460px', height: '300px'}}>
       <ResponsivePie 
-        data={categoryData}
+        data={Data}
         margin={{ top: 5, right: 160, bottom: 5, left: 5 }}
         innerRadius={0.2}
         padAngle={2}
